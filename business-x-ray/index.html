@@ -345,6 +345,8 @@ const LESSONS = [
   {id:'prompts',    group:'Run Your X-Ray',  name:'Key Prompts',          icon:''},
   {id:'assets-score',group:'Run Your X-Ray', name:'Reading Your Scorecard',icon:''},
   {id:'ready',      group:'Run Your X-Ray',  name:"You're Ready",         icon:''},
+  {id:'workshop-xray', group:'Workshop Replays', name:'Day 1 — Business X-Ray', icon:''},
+  {id:'workshop-assets', group:'Workshop Replays', name:'Day 2 — Digital Assets', icon:''},
 ];
 
 // ========== STATE ==========
@@ -418,9 +420,11 @@ const TIERS = {
   saas:{ip:'critical',brand:'important',market:'critical',product:'critical',systems:'critical',culture:'important',funding:'critical'},
   service:{ip:'important',brand:'important',market:'important',product:'critical',systems:'critical',culture:'important',funding:'secondary'},
   creator:{ip:'critical',brand:'critical',market:'critical',product:'important',systems:'important',culture:'secondary',funding:'secondary'},
+  company:{ip:'critical',brand:'critical',market:'critical',product:'critical',systems:'critical',culture:'critical',funding:'important'},
+  exit:{ip:'critical',brand:'important',market:'important',product:'critical',systems:'critical',culture:'critical',funding:'critical'},
 };
 
-const ARCHETYPES = [{id:'coach',label:'Coach / Consultant'},{id:'course',label:'Course Creator'},{id:'agency',label:'Agency'},{id:'saas',label:'SaaS'},{id:'service',label:'Service Provider'},{id:'creator',label:'Creator'}];
+const ARCHETYPES = [{id:'coach',label:'Coach / Consultant'},{id:'course',label:'Course Creator'},{id:'agency',label:'Agency'},{id:'saas',label:'SaaS'},{id:'service',label:'Service Provider'},{id:'creator',label:'Creator'},{id:'company',label:'Company / Scale-up'},{id:'exit',label:'Exit Ready'}];
 
 const ASSETS = [
   {num:1,name:'Content',cat:'ip',desc:'Your library of text, video, and audio content — blog posts, YouTube videos, podcast episodes, social posts, PDFs, and newsletters that build credibility and attract clients at scale.',green:'Professional production. Systematic repurposing. 100+ pieces. Gets shared. Evergreen.',yellow:'Exists but owner-made and inconsistent. No repurposing. Sporadic posting.',red:'No content library. Relies on word-of-mouth or paid ads.',rty:['Collate assets into one named folder','Record 3-5 phone videos answering common questions','Publish a 5-10 page PDF explaining core ideas'],ytg:['Hire video production for monthly sessions','Work with ghostwriter to turn content into a book','Build systematic repurposing workflow'],effort:'Red\u2192Yellow: 1-2 weekends. Yellow\u2192Green: 3-6 months.',deps:'Raw material for everything. Feeds Methodology, Channels, Systems, Gifts, Product for Prospects.',leverage:'Without a content library, every new relationship requires you to personally show up. Content works 24/7 — attracting, educating, and pre-selling without you in the room.'},
@@ -573,6 +577,8 @@ function renderLesson(id) {
     case 'asset-map': html += renderAssetMap(); break;
     case 'assets-score': html += renderAssetsScore(); break;
     case 'ready': html += renderReady(); break;
+    case 'workshop-xray': html += renderWorkshopXray(); break;
+    case 'workshop-assets': html += renderWorkshopAssets(); break;
   }
 
   html += `</div>` + renderLessonFooter(id) + `</div>`;
@@ -1618,6 +1624,64 @@ function renderReady() {
     <p style="font-size:15px;color:var(--text-muted);margin-bottom:16px">Go to the <a href="#" onclick="goToLesson('prompts');return false" style="color:var(--accent);text-decoration:underline">Key Prompts</a> page, copy the Full X-Ray prompt, and paste it into Claude.</p>
     <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px">Questions? Email <a href="mailto:rashid@thepeakperformer.io" style="color:var(--accent)">rashid@thepeakperformer.io</a> or message on <a href="https://substack.com/@chiefleverageofficer" style="color:var(--accent)" target="_blank">Substack</a></p>
   </div>`;
+}
+
+function renderWorkshopReplay(title, subtitle, videoId, topics) {
+  const hasVideo = videoId && videoId !== 'COMING_SOON';
+  const videoEmbed = hasVideo
+    ? `<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius-lg);margin-bottom:32px;border:1px solid var(--border)">
+        <iframe src="https://www.youtube.com/embed/${videoId}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+      </div>`
+    : `<div style="background:var(--surface-2);border:2px dashed var(--border-2);border-radius:var(--radius-lg);padding:48px;text-align:center;margin-bottom:32px">
+        <div style="font-size:40px;margin-bottom:12px">&#127909;</div>
+        <p style="font-size:17px;font-weight:600;margin-bottom:4px">Workshop Recording Coming Soon</p>
+        <p style="color:var(--text-muted);font-size:14px">This recording will be available after the live workshop.</p>
+      </div>`;
+
+  const topicsList = topics.map(t =>
+    `<div style="display:flex;align-items:start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--accent);font-size:14px;margin-top:2px">&#9656;</span>
+      <div><strong style="font-size:14px">${t.title}</strong><p style="color:var(--text-muted);font-size:13px;margin-top:2px">${t.desc}</p></div>
+    </div>`
+  ).join('');
+
+  return `<h2>${title}</h2>
+  <p class="subtitle">${subtitle}</p></div>
+  <div class="spacer"></div>
+  ${videoEmbed}
+  <h3 style="margin-bottom:16px">What's Covered</h3>
+  <div class="card" style="margin-bottom:32px">${topicsList}</div>
+  <div class="callout"><strong>This is a bonus resource.</strong> The course above teaches you everything you need. The workshop replay lets you watch Rashid walk through the skill live with real businesses and answer questions from participants.</div>`;
+}
+
+function renderWorkshopXray() {
+  return renderWorkshopReplay(
+    'Workshop Day 1 — Business X-Ray',
+    'Live walkthrough: running the Business X-Ray skill on a real business, interpreting diagrams, and Q&A.',
+    'COMING_SOON',
+    [
+      {title:'Running the Full X-Ray', desc:'Watch the skill interview a real business owner and generate diagrams in real-time.'},
+      {title:'Reading Your Business Map', desc:'How to interpret the 7 columns and spot gaps immediately.'},
+      {title:'Bow-Tie Funnel Walkthrough', desc:'Understanding your customer journey from stranger to repeat buyer.'},
+      {title:'Swim Lanes & Annotations', desc:'Seeing who does what and where the bottlenecks are.'},
+      {title:'Live Q&A', desc:'Participants ask questions about their own X-Ray results.'}
+    ]
+  );
+}
+
+function renderWorkshopAssets() {
+  return renderWorkshopReplay(
+    'Workshop Day 2 — Digital Assets',
+    'Live walkthrough: scoring your 24 Digital Assets, understanding your Leverage Score, and building your Roadmap.',
+    'COMING_SOON',
+    [
+      {title:'The 24 Digital Assets Framework', desc:'What each asset is, why it matters, and how to score yourself honestly.'},
+      {title:'Reading Your Scorecard', desc:'How to interpret Red/Yellow/Green scores and what they mean for your business.'},
+      {title:'Leverage Score Deep Dive', desc:'What your overall score tells you about business independence.'},
+      {title:'Building Your Roadmap', desc:'Prioritising what to fix first based on impact and effort.'},
+      {title:'Live Q&A', desc:'Participants get feedback on their asset scores and roadmap priorities.'}
+    ]
+  );
 }
 
 function initAssetsScoreUI(){
