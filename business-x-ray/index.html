@@ -357,6 +357,7 @@ const LESSONS = [
   {id:'prompts',    group:'Run Your X-Ray',  name:'Key Prompts',          icon:''},
   {id:'assets-score',group:'Run Your X-Ray', name:'Reading Your Scorecard',icon:''},
   {id:'ready',      group:'Run Your X-Ray',  name:"You're Ready",         icon:''},
+  {id:'next-step',  group:'Run Your X-Ray',  name:'Your Next Step',       icon:''},
   {id:'workshop-xray', group:'Workshop Replays', name:'Day 1 — Business X-Ray', icon:''},
   {id:'workshop-assets', group:'Workshop Replays', name:'Day 2 — Digital Assets', icon:''},
 ];
@@ -597,6 +598,7 @@ function renderLesson(id) {
     case 'asset-map': html += renderAssetMap(); break;
     case 'assets-score': html += renderAssetsScore(); break;
     case 'ready': html += renderReady(); break;
+    case 'next-step': html += renderNextStep(); break;
     case 'workshop-xray': html += renderWorkshopXray(); break;
     case 'workshop-assets': html += renderWorkshopAssets(); break;
   }
@@ -1429,7 +1431,14 @@ function renderSynthesis() {
     `<div style="padding:10px 14px;border-radius:8px;background:var(--surface-2);font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-size:11px">&#9679;</span>${item}</div>`).join('')}
   </div>
 
-  <div class="callout" style="border-left:3px solid var(--accent)"><strong>You now know the complete methodology.</strong> The next lesson gives you the exact prompts to start your X-Ray session with Claude. Everything you learned here is what Claude will generate &mdash; and now you'll recognize every diagram it produces.</div>`;
+  <div class="callout" style="border-left:3px solid var(--accent)"><strong>You now know the complete methodology.</strong> The next lesson gives you the exact prompts to start your X-Ray session with Claude. Everything you learned here is what Claude will generate &mdash; and now you'll recognize every diagram it produces.</div>
+
+  <div style="background:var(--surface-2);border-radius:var(--radius-lg);padding:28px;margin-top:32px;text-align:center">
+    <p style="font-size:15px;font-weight:600;margin-bottom:8px">Enjoying the course so far?</p>
+    <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:16px">We'd love to hear what you think. A quick testimonial (text or video) helps other business owners decide if the X-Ray is right for them.</p>
+    <a href="TESTIMONIAL_FORM_URL" target="_blank" style="display:inline-block;background:var(--accent);color:#0a0a0a;font-weight:700;padding:10px 24px;border-radius:var(--radius);text-decoration:none;font-size:14px">Share Your Experience</a>
+    <p style="font-size:12px;color:var(--text-dim);margin-top:10px">Takes less than 2 minutes</p>
+  </div>`;
 }
 
 // ===== LESSON: KEY PROMPTS =====
@@ -1660,10 +1669,10 @@ function renderReady() {
       <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:12px">Take your Roadmap and start building. The skill includes an <strong>Implementation Router</strong> that classifies each item (AI Employee, Integration, Digital Asset, or Process Change) and creates a week-by-week Build Plan.</p>
       <p style="font-size:13px;color:var(--text-dim)">Prompt: "Let's start building from my roadmap"</p>
     </div>
-    <div class="card" style="border-left:3px solid var(--ann-orange);padding:24px">
+    <div class="card" style="border-left:3px solid var(--ann-orange);padding:24px;cursor:pointer" onclick="goToLesson('next-step')">
       <h4 style="margin-bottom:8px;color:var(--ann-orange)">Implement Together</h4>
-      <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:12px">Want help building these out? Work with Rashid directly to implement your Roadmap items &mdash; build the AI employees, set up the automations, close the digital asset gaps, and watch your Leverage Score climb.</p>
-      <p style="font-size:13px;color:var(--text-dim)">Email rashid@thepeakperformer.io</p>
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:12px">Want Rashid to help you build your first AI Employee based on your X-Ray results? Join the live cohort and get guided implementation &mdash; plus an exclusive X-Ray buyer discount.</p>
+      <p style="font-size:13px;color:var(--ann-orange);font-weight:600">See Your Next Step &rarr;</p>
     </div>
   </div>
 
@@ -1673,6 +1682,50 @@ function renderReady() {
     <p style="font-size:20px;font-weight:700;margin-bottom:8px;color:var(--accent)">Ready to start?</p>
     <p style="font-size:15px;color:var(--text-muted);margin-bottom:16px">Go to the <a href="#" onclick="goToLesson('prompts');return false" style="color:var(--accent);text-decoration:underline">Key Prompts</a> page, copy the Full X-Ray prompt, and paste it into Claude.</p>
     <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px">Questions? Email <a href="mailto:rashid@thepeakperformer.io" style="color:var(--accent)">rashid@thepeakperformer.io</a> or message on <a href="https://substack.com/@chiefleverageofficer" style="color:var(--accent)" target="_blank">Substack</a></p>
+  </div>`;
+}
+
+function renderNextStep() {
+  return `<h2 style="color:var(--accent)">Your Next Step</h2>
+  <p class="subtitle">You've seen the gaps. Here's how to close them.</p></div>
+  <div class="spacer"></div>
+
+  <p style="font-size:16px;line-height:1.7;margin-bottom:12px">The X-Ray diagnosed your business. You can see exactly where bottlenecks live, which processes eat your time, and where AI could take over.</p>
+  <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:32px">But seeing the gaps and <em>closing</em> them are two different things. Building AI employees that actually work &mdash; ones that handle real tasks autonomously, not just answer questions &mdash; requires the right infrastructure designed around <strong>your</strong> business.</p>
+
+  <div style="background:var(--surface-2);border:2px solid var(--accent-border);border-radius:var(--radius-lg);padding:28px;margin-bottom:32px">
+    <h3 style="margin-bottom:12px;color:var(--accent)">Your First AI Employee</h3>
+    <p style="font-size:15px;line-height:1.7;margin-bottom:20px">A live cohort where Rashid helps you build your first working AI Employee &mdash; based on the gaps your X-Ray uncovered.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
+      ${[
+        'Walk away with a <strong>working AI Employee</strong> handling a real process in your business',
+        'Get your <strong>Claude Code workspace</strong> set up with skills, workflows, and agents tailored to you',
+        'Learn the <strong>architecture</strong> so you can build your second, third, and fourth AI Employee on your own'
+      ].map(b=>`<div style="display:flex;gap:10px;align-items:start"><span style="color:var(--accent);font-size:18px;line-height:1">&#10003;</span><span style="font-size:14px;line-height:1.6;color:var(--text-muted)">${b}</span></div>`).join('')}
+    </div>
+    <a href="https://gamma.app/docs/Your-First-AI-Employee-Turn-Your-20Month-AI-Subscription-Into-a-1-zjpt06bsvvo3gz3" target="_blank" style="display:inline-block;background:var(--accent);color:#0a0a0a;font-weight:700;padding:12px 28px;border-radius:var(--radius);text-decoration:none;font-size:15px">See Full Details &rarr;</a>
+  </div>
+
+  <div style="background:linear-gradient(135deg, rgba(74,222,128,0.08), rgba(74,222,128,0.02));border:2px solid var(--accent);border-radius:var(--radius-lg);padding:28px;margin-bottom:24px;text-align:center">
+    <p style="font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:8px;font-weight:600">X-Ray Buyer Exclusive</p>
+    <p style="font-size:18px;font-weight:700;margin-bottom:12px">$297 off with your discount code</p>
+    <div style="display:inline-flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 20px;margin-bottom:12px;cursor:pointer" onclick="navigator.clipboard.writeText('XRAYUPGRADE');this.querySelector('.copy-label').textContent='Copied!';setTimeout(()=>this.querySelector('.copy-label').textContent='Click to copy',2000)">
+      <code style="font-size:20px;font-weight:700;letter-spacing:2px;color:var(--accent)">XRAYUPGRADE</code>
+      <span class="copy-label" style="font-size:12px;color:var(--text-dim)">Click to copy</span>
+    </div>
+    <p style="font-size:13px;color:var(--text-dim);margin-top:8px">Apply this code at checkout on the registration page</p>
+  </div>
+
+  <p style="font-size:13px;color:var(--text-dim);text-align:center;margin-bottom:32px">Cohorts run periodically. Visit the page above to see current availability and join the waitlist.</p>
+
+  <div style="border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:32px">
+    <h4 style="margin-bottom:8px">Know someone who'd benefit from the X-Ray?</h4>
+    <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:16px">Become an affiliate and earn <strong>30% of every sale</strong> you refer. Share your link, and when someone purchases the Business X-Ray through it, you get paid.</p>
+    <a href="AFFILIATE_SIGNUP_URL" target="_blank" style="display:inline-block;border:1px solid var(--accent);color:var(--accent);font-weight:600;padding:10px 24px;border-radius:var(--radius);text-decoration:none;font-size:14px">Apply to Be an Affiliate &rarr;</a>
+  </div>
+
+  <div style="text-align:center;padding:24px;background:var(--surface-2);border-radius:var(--radius-lg)">
+    <p style="font-size:13px;color:var(--text-dim)">Questions? Email <a href="mailto:rashid@thepeakperformer.io" style="color:var(--accent)">rashid@thepeakperformer.io</a></p>
   </div>`;
 }
 
