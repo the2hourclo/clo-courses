@@ -659,7 +659,7 @@ function renderSetup() {
       <strong>New to Claude Code?</strong> Watch the video walkthrough first \u2014 it covers installing Claude Code, setting up your workspace, and running your first skill. The Business Starter Kit gives you a ready-made project folder with the <code>.claude/skills/</code> structure already set up.
     </div>
     <div style="display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap">
-      <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);color:var(--text-muted);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s"><span style="color:#FF0000;font-size:16px">\u25B6</span> Watch: Claude Code for Business (YouTube)</a>
+      <a href="https://youtu.be/P9LXcBEpD7w" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);color:var(--text-muted);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s"><span style="color:#FF0000;font-size:16px">\u25B6</span> Watch: Claude Code for Business (YouTube)</a>
       <a href="https://github.com/Rashid-CLO/claude-code-business-starter-kit" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);color:var(--text-muted);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s"><span style="font-size:16px">\uD83D\uDCC2</span> Business Starter Kit (GitHub)</a>
     </div>
     <p style="color:var(--text-dim);font-size:12px;margin-bottom:24px;margin-top:-16px">Already have Claude Code installed and a <code>.claude/skills/</code> folder? Skip straight to Step 3.</p>
@@ -753,6 +753,10 @@ function renderWhyMap() {
   return `<h2>Why Map Your Business</h2>
   <p class="subtitle">You can't fix what you can't see. The Business X-Ray makes the invisible visible.</p></div>
   <div class="spacer"></div>
+
+  <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius-lg);margin-bottom:32px;border:1px solid var(--border)">
+    <iframe src="https://www.youtube.com/embed/TAfp9wGPegI" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+  </div>
 
   <h3 style="margin-bottom:16px">The Real Problem</h3>
   <p style="font-size:16px;margin-bottom:12px">Right now, your entire business lives in your head. You know roughly what happens, roughly where things slow down, roughly what you'd delegate if you could explain it.</p>
@@ -1381,6 +1385,12 @@ function renderSynthesis() {
   <p class="subtitle">You've learned every piece of the Business X-Ray. Here's how they connect into one complete workflow.</p></div>
   <div class="spacer"></div>
 
+  <h3 style="margin-bottom:12px">Watch a Live Walkthrough</h3>
+  <p style="color:var(--text-muted);margin-bottom:16px">Before we break down each step, watch Rashid run a complete Business X-Ray from start to finish:</p>
+  <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius-lg);margin-bottom:32px">
+    <iframe src="https://www.youtube.com/embed/DjmZ9vQDLy0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+  </div>
+
   <h3 style="margin-bottom:12px">The Complete X-Ray Workflow</h3>
   <p style="font-size:16px;margin-bottom:12px">When you run a Business X-Ray with Claude, here's exactly what happens &mdash; step by step. Every diagram you learned about in this course gets generated in one session.</p>
 
@@ -1435,9 +1445,26 @@ function renderSynthesis() {
 
   <div style="background:var(--surface-2);border-radius:var(--radius-lg);padding:28px;margin-top:32px;text-align:center">
     <p style="font-size:15px;font-weight:600;margin-bottom:8px">Enjoying the course so far?</p>
-    <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:16px">We'd love to hear what you think. A quick testimonial (text or video) helps other business owners decide if the X-Ray is right for them.</p>
-    <a href="TESTIMONIAL_FORM_URL" target="_blank" style="display:inline-block;background:var(--accent);color:#0a0a0a;font-weight:700;padding:10px 24px;border-radius:var(--radius);text-decoration:none;font-size:14px">Share Your Experience</a>
-    <p style="font-size:12px;color:var(--text-dim);margin-top:10px">Takes less than 2 minutes</p>
+    <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:16px">We'd love to hear what you think. A quick testimonial helps other business owners decide if the X-Ray is right for them.</p>
+    <div style="text-align:left;max-width:520px;margin:0 auto 20px">
+      <p style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text)">Record a Loom or write your answers to these:</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+        <div style="display:flex;gap:10px;align-items:baseline;padding:8px 12px;background:var(--surface-1);border-radius:6px;font-size:13px;color:var(--text-muted);line-height:1.5"><span style="color:var(--accent);font-weight:700;flex-shrink:0">1.</span>What does your business do?</div>
+        <div style="display:flex;gap:10px;align-items:baseline;padding:8px 12px;background:var(--surface-1);border-radius:6px;font-size:13px;color:var(--text-muted);line-height:1.5"><span style="color:var(--accent);font-weight:700;flex-shrink:0">2.</span>Biggest challenge before the X-Ray?</div>
+        <div style="display:flex;gap:10px;align-items:baseline;padding:8px 12px;background:var(--surface-1);border-radius:6px;font-size:13px;color:var(--text-muted);line-height:1.5"><span style="color:var(--accent);font-weight:700;flex-shrink:0">3.</span>What surprised you most about your results?</div>
+        <div style="display:flex;gap:10px;align-items:baseline;padding:8px 12px;background:var(--surface-1);border-radius:6px;font-size:13px;color:var(--text-muted);line-height:1.5"><span style="color:var(--accent);font-weight:700;flex-shrink:0">4.</span>First thing you fixed or built?</div>
+        <div style="display:flex;gap:10px;align-items:baseline;padding:8px 12px;background:var(--surface-1);border-radius:6px;font-size:13px;color:var(--text-muted);line-height:1.5"><span style="color:var(--accent);font-weight:700;flex-shrink:0">5.</span>How has your business changed?</div>
+        <div style="display:flex;gap:10px;align-items:baseline;padding:8px 12px;background:var(--surface-1);border-radius:6px;font-size:13px;color:var(--text-muted);line-height:1.5"><span style="color:var(--accent);font-weight:700;flex-shrink:0">6.</span>Where would you be without the X-Ray?</div>
+        <div style="display:flex;gap:10px;align-items:baseline;padding:8px 12px;background:var(--surface-1);border-radius:6px;font-size:13px;color:var(--text-muted);line-height:1.5"><span style="color:var(--accent);font-weight:700;flex-shrink:0">7.</span>What would you tell someone thinking about it?</div>
+      </div>
+    </div>
+    <div style="background:var(--surface-1);border:1px solid var(--accent)44;border-radius:var(--radius);padding:16px;margin:0 auto 16px;max-width:400px;text-align:left">
+      <p style="font-size:13px;font-weight:600;color:var(--accent);margin-bottom:6px">Record a video testimonial &amp; get:</p>
+      <p style="font-size:14px;font-weight:600;margin-bottom:4px">A free 15-minute strategy call with Rashid</p>
+      <p style="font-size:12px;color:var(--text-dim)">We'll review your X-Ray results together and map your next move.</p>
+    </div>
+    <a href="https://the2hourman.notion.site/31b4289667b8801387dec44cb1438e3c?pvs=105" target="_blank" style="display:inline-block;background:var(--accent);color:#0a0a0a;font-weight:700;padding:10px 24px;border-radius:var(--radius);text-decoration:none;font-size:14px">Share Your Experience</a>
+    <p style="font-size:12px;color:var(--text-dim);margin-top:10px">Text testimonials welcome too &mdash; video unlocks the bonus call</p>
   </div>`;
 }
 
