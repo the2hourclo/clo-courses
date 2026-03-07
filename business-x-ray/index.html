@@ -1742,7 +1742,7 @@ function renderNextStep() {
   </div>`;
 }
 
-function renderWorkshopReplay(title, subtitle, videoId, topics) {
+function renderWorkshopReplay(title, subtitle, videoId, topics, liveSession) {
   const hasVideo = videoId && videoId !== 'COMING_SOON';
   const videoEmbed = hasVideo
     ? `<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius-lg);margin-bottom:32px;border:1px solid var(--border)">
@@ -1754,6 +1754,19 @@ function renderWorkshopReplay(title, subtitle, videoId, topics) {
         <p style="color:var(--text-muted);font-size:14px">This recording will be available after the live workshop.</p>
       </div>`;
 
+  const liveSessionHtml = liveSession ? `<div style="background:linear-gradient(135deg, rgba(121,234,32,.08), rgba(121,234,32,.03));border:1px solid var(--accent-border);border-radius:var(--radius-lg);padding:24px;margin-bottom:32px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite"></div>
+      <span style="font-size:14px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px">Live Workshop</span>
+    </div>
+    <p style="font-size:18px;font-weight:700;margin-bottom:4px">${liveSession.date}</p>
+    <p style="color:var(--text-muted);font-size:14px;margin-bottom:20px">Join live for Q&A and watch Rashid walk through real examples.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="${liveSession.calUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent);color:var(--bg);border-radius:var(--radius);font-size:14px;font-weight:700;text-decoration:none;transition:opacity .2s" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">&#128197; Add to Google Calendar</a>
+      <a href="${liveSession.meetUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--surface-2);color:var(--text);border:1px solid var(--border-2);border-radius:var(--radius);font-size:14px;font-weight:600;text-decoration:none;transition:border-color .2s" onmouseover="this.style.borderColor='var(--accent-border)'" onmouseout="this.style.borderColor='var(--border-2)'">&#127902; Join Google Meet</a>
+    </div>
+  </div>` : '';
+
   const topicsList = topics.map(t =>
     `<div style="display:flex;align-items:start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)">
       <span style="color:var(--accent);font-size:14px;margin-top:2px">&#9656;</span>
@@ -1764,6 +1777,7 @@ function renderWorkshopReplay(title, subtitle, videoId, topics) {
   return `<h2>${title}</h2>
   <p class="subtitle">${subtitle}</p></div>
   <div class="spacer"></div>
+  ${liveSessionHtml}
   ${videoEmbed}
   <h3 style="margin-bottom:16px">What's Covered</h3>
   <div class="card" style="margin-bottom:32px">${topicsList}</div>
@@ -1781,7 +1795,8 @@ function renderWorkshopXray() {
       {title:'Bow-Tie Funnel Walkthrough', desc:'Understanding your customer journey from stranger to repeat buyer.'},
       {title:'Swim Lanes & Annotations', desc:'Seeing who does what and where the bottlenecks are.'},
       {title:'Live Q&A', desc:'Participants ask questions about their own X-Ray results.'}
-    ]
+    ],
+    {date:'Monday, March 23 · 10:00 AM EST', calUrl:'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Business+X-Ray+Workshop+Day+1&dates=20260323T150000Z/20260323T170000Z&details=Live+workshop+with+Rashid.+Join+here:+https://meet.google.com/pou-rxrm-mgh&location=https://meet.google.com/pou-rxrm-mgh', meetUrl:'https://meet.google.com/pou-rxrm-mgh'}
   );
 }
 
@@ -1796,7 +1811,8 @@ function renderWorkshopAssets() {
       {title:'Leverage Score Deep Dive', desc:'What your overall score tells you about business independence.'},
       {title:'Building Your Roadmap', desc:'Prioritising what to fix first based on impact and effort.'},
       {title:'Live Q&A', desc:'Participants get feedback on their asset scores and roadmap priorities.'}
-    ]
+    ],
+    {date:'Tuesday, March 24 · 10:00 AM EST', calUrl:'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Business+X-Ray+Workshop+Day+2+-+Digital+Assets&dates=20260324T150000Z/20260324T170000Z&details=Live+workshop+with+Rashid.+Join+here:+https://meet.google.com/pou-rxrm-mgh&location=https://meet.google.com/pou-rxrm-mgh', meetUrl:'https://meet.google.com/pou-rxrm-mgh'}
   );
 }
 
