@@ -1742,7 +1742,7 @@ function renderNextStep() {
   </div>`;
 }
 
-function renderWorkshopReplay(title, subtitle, videoId, topics, liveSession) {
+function renderWorkshopReplay(title, subtitle, videoId, topics, workshopDate, workshopTime, meetLink) {
   const hasVideo = videoId && videoId !== 'COMING_SOON';
   const videoEmbed = hasVideo
     ? `<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius-lg);margin-bottom:32px;border:1px solid var(--border)">
@@ -1750,22 +1750,11 @@ function renderWorkshopReplay(title, subtitle, videoId, topics, liveSession) {
       </div>`
     : `<div style="background:var(--surface-2);border:2px dashed var(--border-2);border-radius:var(--radius-lg);padding:48px;text-align:center;margin-bottom:32px">
         <div style="font-size:40px;margin-bottom:12px">&#127909;</div>
-        <p style="font-size:17px;font-weight:600;margin-bottom:4px">Workshop Recording Coming Soon</p>
-        <p style="color:var(--text-muted);font-size:14px">This recording will be available after the live workshop.</p>
+        <p style="font-size:17px;font-weight:600;margin-bottom:4px">Live Workshop</p>
+        <p style="color:var(--text-muted);font-size:14px;margin-bottom:4px"><strong>${workshopDate}</strong> at <strong>${workshopTime}</strong></p>
+        <a href="${meetLink}" target="_blank" style="display:inline-block;margin-top:12px;padding:12px 32px;background:var(--accent);color:var(--bg);border-radius:var(--radius);font-weight:600;font-size:15px;text-decoration:none">Join Workshop &rarr;</a>
+        <p style="color:var(--text-dim);font-size:12px;margin-top:12px">Recording will be posted here after the live session.</p>
       </div>`;
-
-  const liveSessionHtml = liveSession ? `<div style="background:linear-gradient(135deg, rgba(121,234,32,.08), rgba(121,234,32,.03));border:1px solid var(--accent-border);border-radius:var(--radius-lg);padding:24px;margin-bottom:32px">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-      <div style="width:10px;height:10px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite"></div>
-      <span style="font-size:14px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px">Live Workshop</span>
-    </div>
-    <p style="font-size:18px;font-weight:700;margin-bottom:4px">${liveSession.date}</p>
-    <p style="color:var(--text-muted);font-size:14px;margin-bottom:20px">Join live for Q&A and watch Rashid walk through real examples.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <a href="${liveSession.calUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent);color:var(--bg);border-radius:var(--radius);font-size:14px;font-weight:700;text-decoration:none;transition:opacity .2s" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">&#128197; Add to Google Calendar</a>
-      <a href="${liveSession.meetUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--surface-2);color:var(--text);border:1px solid var(--border-2);border-radius:var(--radius);font-size:14px;font-weight:600;text-decoration:none;transition:border-color .2s" onmouseover="this.style.borderColor='var(--accent-border)'" onmouseout="this.style.borderColor='var(--border-2)'">&#127902; Join Google Meet</a>
-    </div>
-  </div>` : '';
 
   const topicsList = topics.map(t =>
     `<div style="display:flex;align-items:start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)">
@@ -1777,7 +1766,6 @@ function renderWorkshopReplay(title, subtitle, videoId, topics, liveSession) {
   return `<h2>${title}</h2>
   <p class="subtitle">${subtitle}</p></div>
   <div class="spacer"></div>
-  ${liveSessionHtml}
   ${videoEmbed}
   <h3 style="margin-bottom:16px">What's Covered</h3>
   <div class="card" style="margin-bottom:32px">${topicsList}</div>
@@ -1796,7 +1784,9 @@ function renderWorkshopXray() {
       {title:'Swim Lanes & Annotations', desc:'Seeing who does what and where the bottlenecks are.'},
       {title:'Live Q&A', desc:'Participants ask questions about their own X-Ray results.'}
     ],
-    {date:'Monday, March 23 · 10:00 AM EST', calUrl:'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Business+X-Ray+Workshop+Day+1&dates=20260323T150000Z/20260323T170000Z&details=Live+workshop+with+Rashid.+Join+here:+https://meet.google.com/pou-rxrm-mgh&location=https://meet.google.com/pou-rxrm-mgh', meetUrl:'https://meet.google.com/pou-rxrm-mgh'}
+    'March 23, 2026',
+    '10:00 AM ET',
+    'https://meet.google.com/pou-rxrm-mgh'
   );
 }
 
@@ -1812,7 +1802,9 @@ function renderWorkshopAssets() {
       {title:'Building Your Roadmap', desc:'Prioritising what to fix first based on impact and effort.'},
       {title:'Live Q&A', desc:'Participants get feedback on their asset scores and roadmap priorities.'}
     ],
-    {date:'Tuesday, March 24 · 10:00 AM EST', calUrl:'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Business+X-Ray+Workshop+Day+2+-+Digital+Assets&dates=20260324T150000Z/20260324T170000Z&details=Live+workshop+with+Rashid.+Join+here:+https://meet.google.com/pou-rxrm-mgh&location=https://meet.google.com/pou-rxrm-mgh', meetUrl:'https://meet.google.com/pou-rxrm-mgh'}
+    'March 24, 2026',
+    '10:00 AM ET',
+    'https://meet.google.com/pou-rxrm-mgh'
   );
 }
 
