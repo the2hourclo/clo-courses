@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLO Skill Roadmap</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0d0d0d;--surface:#131313;--surface-2:#181818;--surface-3:#1f1f1f;
+--border:#1e1e1e;--border-2:#2a2a2a;--border-3:#333;
+--text:#e4e5ef;--text-muted:#9ea3ba;--text-dim:#4a4d60;
+--accent:#79EA20;--accent-dim:rgba(121,234,32,.12);--accent-border:rgba(121,234,32,.35);
+--radius:8px;--radius-lg:12px;
+}
+html{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;display:flex;flex-direction:column}
+
+/* ── Course Nav ── */
+.course-nav{background:#0a0a0a;border-bottom:1px solid var(--border-2);padding:0 32px;display:flex;align-items:center;gap:0;height:44px;flex-shrink:0}
+.course-nav-brand{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.5px;margin-right:24px;text-transform:uppercase}
+.course-nav a{display:flex;align-items:center;height:44px;padding:0 16px;font-size:13px;font-weight:500;color:var(--text-muted);text-decoration:none;border-bottom:2px solid transparent;transition:all .2s}
+.course-nav a:hover{color:var(--text);background:rgba(255,255,255,.03)}
+.course-nav a.active{color:var(--text);border-bottom-color:var(--accent)}
+
+/* ── Header ── */
+.header{border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.header-left{display:flex;align-items:center;gap:12px}
+.header-icon{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--bg)}
+.header h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
+.header h1 span{color:var(--text-muted);font-weight:400;font-size:15px;margin-left:8px}
+
+/* ── Hero ── */
+.hero{padding:48px 32px 32px;max-width:900px;margin:0 auto;width:100%;text-align:center}
+.hero h2{font-size:32px;font-weight:700;letter-spacing:-.5px;margin-bottom:12px}
+.hero p{color:var(--text-muted);font-size:16px;max-width:640px;margin:0 auto 32px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:16px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 24px;min-width:140px;text-align:center}
+.stat-num{font-size:28px;font-weight:700;color:var(--accent);line-height:1}
+.stat-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);margin-top:4px}
+.stat.released .stat-num{color:#22c55e}
+.stat.progress .stat-num{color:#f59e0b}
+.stat.planned .stat-num{color:#3b82f6}
+
+/* ── Embed Container ── */
+.embed-section{padding:0 32px 32px;max-width:1100px;margin:0 auto;width:100%}
+.embed-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.embed-header h3{font-size:18px;font-weight:600}
+.embed-link{font-size:13px;color:var(--accent);text-decoration:none;transition:opacity .2s}
+.embed-link:hover{opacity:.8}
+.embed-wrapper{border:1px solid var(--border-2);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface)}
+.embed-wrapper iframe{width:100%;height:600px;border:none;filter:invert(1) hue-rotate(180deg);-webkit-filter:invert(1) hue-rotate(180deg)}
+
+/* ── Feature Request ── */
+.request-section{padding:32px;max-width:900px;margin:0 auto;width:100%;text-align:center}
+.request-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;margin-bottom:32px}
+.request-card h3{font-size:20px;font-weight:600;margin-bottom:8px}
+.request-card p{color:var(--text-muted);font-size:14px;margin-bottom:20px}
+.request-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--accent);color:var(--bg);font-size:14px;font-weight:600;border:none;border-radius:var(--radius);cursor:pointer;text-decoration:none;transition:opacity .2s}
+.request-btn:hover{opacity:.9}
+
+/* ── Footer ── */
+.footer{padding:24px 32px;border-top:1px solid var(--border);text-align:center;color:var(--text-dim);font-size:12px;margin-top:auto}
+
+/* ── Mobile ── */
+@media(max-width:768px){
+  .course-nav{padding:0 16px}
+  .hero{padding:32px 16px 24px}
+  .hero h2{font-size:24px}
+  .stats{gap:8px}
+  .stat{min-width:100px;padding:12px 16px}
+  .stat-num{font-size:22px}
+  .embed-section{padding:0 16px 24px}
+  .embed-wrapper iframe{height:500px}
+  .request-section{padding:24px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- COURSE NAV -->
+<div class="course-nav">
+  <span class="course-nav-brand">CLO Courses</span>
+  <a href="claude-code-101.html">Claude Code 101</a>
+  <a href="business-x-ray.html">Business X-Ray</a>
+  <a href="roadmap.html" class="active">Roadmap</a>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="header-icon">R</div>
+    <h1>Skill Roadmap <span>/ What's coming next</span></h1>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h2>CLO Skill Roadmap</h2>
+  <p>See what skills are live, what's being built, and what's planned. Vote on what matters most to you.</p>
+
+  <div class="stats">
+    <div class="stat released">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Released</div>
+    </div>
+    <div class="stat progress">
+      <div class="stat-num">1</div>
+      <div class="stat-label">In Progress</div>
+    </div>
+    <div class="stat planned">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Planned</div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTION EMBED -->
+<div class="embed-section">
+  <div class="embed-header">
+    <h3>Full Roadmap</h3>
+    <a href="https://the2hourman.notion.site/93c0aa14308f4da1aa51cb59b24ffd24" target="_blank" class="embed-link">Open in Notion &rarr;</a>
+  </div>
+  <div class="embed-wrapper">
+    <iframe src="https://the2hourman.notion.site/ebd/93c0aa14308f4da1aa51cb59b24ffd24?v=31c4289667b880d8a44f000c74ac3cb0" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- FEATURE REQUEST -->
+<div class="request-section">
+  <div class="request-card">
+    <h3>Want a skill that doesn't exist yet?</h3>
+    <p>Tell us what you need. The most requested skills get built first.</p>
+    <a href="https://the2hourman.notion.site/93c0aa14308f4da1aa51cb59b24ffd24" target="_blank" class="request-btn">Submit a Request &rarr;</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  CLO-OS &mdash; AI-Powered Business Operating System
+</div>
+
+</body>
+</html>
