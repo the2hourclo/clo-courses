@@ -143,6 +143,14 @@ code{background:var(--surface-3);padding:2px 6px;border-radius:4px;font-size:13p
 .install-screenshot{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:12px 0 16px;max-width:720px}
 .install-screenshot img{width:100%;display:block;cursor:zoom-in}
 
+/* SAMPLE PROMPTS PANEL — copy-paste rows per workflow */
+.sample-prompts .prompt-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.sample-prompts .sp-row{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;transition:border-color .15s}
+.sample-prompts .sp-row:hover{border-color:var(--accent-border)}
+.sample-prompts .sp-text{flex:1;font-size:13px;line-height:1.5;color:var(--text);font-family:inherit}
+.sample-prompts .sp-copy{flex-shrink:0;font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);cursor:pointer;font-weight:500;transition:all .15s}
+.sample-prompts .sp-copy:hover{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+
 /* INSTALL STEP PLACEHOLDER (L4-L6) */
 .install-step{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
 .install-step:last-child{border-bottom:none}
@@ -993,6 +1001,112 @@ function glyphTriggers(wtu, argOn, preset, presetName){
 // ========================================================================
 // LESSON CONTENT
 // ========================================================================
+
+// Reusable sample-prompts panel — covers all 7 workflows. Injected into
+// L5 (install-cc) and L6 (install-web) trigger steps so users have
+// copy-paste prompts for every feature the skill exposes.
+const SAMPLE_PROMPTS = `
+<div class="sample-prompts" style="margin-top:24px">
+  <h3 style="margin-bottom:6px">Sample prompts &mdash; one for every workflow</h3>
+  <p style="color:var(--text-muted);font-size:14px;margin-bottom:20px">Copy any of these and paste into your Claude session. Each group triggers a different workflow inside the skill.</p>
+
+  <div style="display:grid;grid-template-columns:1fr;gap:12px">
+
+    <div class="card" style="background:var(--surface-2);padding:16px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="width:26px;height:26px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">1</span>
+        <strong style="font-size:14px;letter-spacing:0.2px"><code>create-skill</code></strong>
+        <span style="color:var(--text-dim);font-size:13px">&mdash; scaffold a new skill from scratch</span>
+      </div>
+      <div class="prompt-list">
+        <div class="sp-row"><span class="sp-text">"Create a skill that turns my meeting notes into clean action items."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Build a skill for writing weekly investor updates in my voice."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"I want a skill that reviews my code changes before I commit."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--surface-2);padding:16px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="width:26px;height:26px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">2</span>
+        <strong style="font-size:14px;letter-spacing:0.2px"><code>validate-skill</code></strong>
+        <span style="color:var(--text-dim);font-size:13px">&mdash; 60-point compliance check</span>
+      </div>
+      <div class="prompt-list">
+        <div class="sp-row"><span class="sp-text">"Validate my newsletter-writer skill."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Run a compliance check on the skill at .claude/skills/code-review/."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Check my skill against the 60-point rubric and tell me what's missing."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--surface-2);padding:16px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="width:26px;height:26px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">3</span>
+        <strong style="font-size:14px;letter-spacing:0.2px"><code>test-skill</code></strong>
+        <span style="color:var(--text-dim);font-size:13px">&mdash; run evals, Mode A (quick) or Mode B (parallel subagents)</span>
+      </div>
+      <div class="prompt-list">
+        <div class="sp-row"><span class="sp-text">"Test my summarize-email skill with 10 realistic prompts."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Run evals on the carousel skill in parallel (Mode B)."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Benchmark the content-writer skill against a baseline output."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--surface-2);padding:16px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="width:26px;height:26px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">4</span>
+        <strong style="font-size:14px;letter-spacing:0.2px"><code>audit-library</code></strong>
+        <span style="color:var(--text-dim);font-size:13px">&mdash; find skill-soup across your library</span>
+      </div>
+      <div class="prompt-list">
+        <div class="sp-row"><span class="sp-text">"Audit my whole skill library and flag duplicates and orphans."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Scan .claude/skills/ and show me where skills overlap."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Find trigger collisions and missing delegation across my skills."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--surface-2);padding:16px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="width:26px;height:26px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">5</span>
+        <strong style="font-size:14px;letter-spacing:0.2px"><code>upgrade-skill</code></strong>
+        <span style="color:var(--text-dim);font-size:13px">&mdash; route-fix and restructure existing skills</span>
+      </div>
+      <div class="prompt-list">
+        <div class="sp-row"><span class="sp-text">"Upgrade my content-writer skill to delegate to writing-voice properly."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"My old blogging skill doesn't chain. Fix its routing."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"This skill got too big. Help me split it into a clean layout."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--surface-2);padding:16px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="width:26px;height:26px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">6</span>
+        <strong style="font-size:14px;letter-spacing:0.2px"><code>retrospective</code></strong>
+        <span style="color:var(--text-dim);font-size:13px">&mdash; self-heal when a skill gets it wrong</span>
+      </div>
+      <div class="prompt-list">
+        <div class="sp-row"><span class="sp-text">"That skill got it wrong. Let's fix it together."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Run a retrospective on this session. The write skill misfired."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Patch my SKILL.md based on the correction I just made."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--surface-2);padding:16px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="width:26px;height:26px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">7</span>
+        <strong style="font-size:14px;letter-spacing:0.2px"><code>optimize-description</code></strong>
+        <span style="color:var(--text-dim);font-size:13px">&mdash; tune trigger accuracy so the skill fires when it should</span>
+      </div>
+      <div class="prompt-list">
+        <div class="sp-row"><span class="sp-text">"My skill isn't firing reliably. Improve its description."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Tune the description of my lead-magnet skill for better routing."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+        <div class="sp-row"><span class="sp-text">"Why doesn't my skill trigger when I say 'clean up this email'? Optimize the triggers."</span><button class="sp-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent.replace(/^&quot;|&quot;$/g,''));this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',1500)">Copy</button></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+`;
+
 const LESSON_CONTENT = {};
 
 LESSON_CONTENT['welcome'] = `
@@ -1506,15 +1620,13 @@ LESSON_CONTENT['install-cc'] = `
   <div class="step-num">5</div>
   <div class="step-body">
     <h4>Trigger the skill</h4>
-    <p>Start a new Claude Code session in the project. Try one of:</p>
-    <div class="code-block">"Create a skill for writing daily standup summaries."
-"Validate the carousel skill."
-"Audit my skill library for overlap."</div>
-    <p>Claude's router reads the description in <code>SKILL.md</code>, matches it to your request, and loads the toolkit. You'll know it worked once Claude starts walking you through the <code>create-skill</code> workflow.</p>
+    <p>Start a new Claude Code session in the project and paste any prompt from the panel below. Claude's router reads the description in <code>SKILL.md</code>, matches it to your request, and loads the right workflow. You'll know it worked once Claude starts walking you through a workflow step-by-step.</p>
   </div>
 </div>
 
-<div class="callout">
+${SAMPLE_PROMPTS}
+
+<div class="callout" style="margin-top:24px">
   <strong>That's it.</strong> No plugin install, no restart, no settings toggle. The skill is just a folder of markdown and Claude reads it.
 </div>
 `;
@@ -1559,16 +1671,14 @@ LESSON_CONTENT['install-web'] = `
   <div class="step-num">4</div>
   <div class="step-body">
     <h4>Enable and invoke</h4>
-    <p>Toggle the skill ON. Open any conversation and say something that matches the skill's description:</p>
-    <div class="code-block">"Create a skill for writing daily standup summaries."
-"Validate the carousel skill."
-"Audit my skill library for overlap."</div>
-    <p>Claude's router reads the description and auto-invokes the skill, so you don't need to reference it manually. Plan availability: <strong>Free, Pro, Max, Team, Enterprise</strong>.</p>
+    <p>Toggle the skill ON. Open any conversation and paste any prompt from the panel below. Claude's router reads the description and auto-invokes the skill, so you don't need to reference it manually. Plan availability: <strong>Free, Pro, Max, Team, Enterprise</strong>.</p>
     <div class="screenshot-placeholder" data-label="Screenshot: skill enabled + first invocation">Screenshot pending &mdash; Skills list with toggle on, followed by chat</div>
   </div>
 </div>
 
-<h3>Alternative: Project Knowledge (for project-scoped use)</h3>
+${SAMPLE_PROMPTS}
+
+<h3 style="margin-top:32px">Alternative: Project Knowledge (for project-scoped use)</h3>
 <p>If you want the skill files available only inside one specific Project chat (not auto-invoking globally):</p>
 <ol>
   <li>Go to <code>claude.ai/projects</code> &rarr; <strong>New Project</strong>.</li>
