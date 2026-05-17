@@ -121,6 +121,7 @@ const PRODUCT = {
   name: 'CLO Community',
   store_id: 10600,
   product_id: 926993,
+  variant_id: 1457440,
   checkout_url: 'https://chiefleverageofficer.lemonsqueezy.com/checkout/buy/14c15890-c46a-4ab8-ab8d-9e56cd04d38a',
   skillstack_slug: 'clo-community'
 };
@@ -187,9 +188,12 @@ async function validateLicense(licenseKey) {
       return { ok: false, reason: 'invalid', message: data.error || 'Invalid license key.' };
     }
 
-    // Cross-check it's for THIS product
+    // Cross-check it's for THIS product AND variant
     if (data.meta?.store_id !== PRODUCT.store_id || data.meta?.product_id !== PRODUCT.product_id) {
       return { ok: false, reason: 'wrong_product', message: 'This license is for a different product.' };
+    }
+    if (PRODUCT.variant_id && data.meta?.variant_id !== PRODUCT.variant_id) {
+      return { ok: false, reason: 'wrong_variant', message: 'This license is for a different subscription tier.' };
     }
 
     // Status check — subscription cancelled = no access
