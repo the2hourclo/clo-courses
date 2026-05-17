@@ -33,12 +33,9 @@ body{min-height:100vh;padding:48px 24px}
 .container{max-width:1100px;margin:0 auto}
 
 /* ── BRAND HEADER ── */
-.brand-header{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:48px}
-.brand-mark{width:52px;height:52px;display:flex;align-items:center;justify-content:center}
-.brand-mark img{width:100%;height:100%;object-fit:contain;filter:invert(1) brightness(1.2)}
-.brand-text{font-size:17px;font-weight:700;letter-spacing:-.3px;color:var(--text)}
-.brand-text-sub{color:var(--text-dim);font-weight:500;margin-left:4px}
-@media(max-width:640px){.brand-header{margin-bottom:32px}.brand-text{font-size:15px}body{padding:32px 16px}}
+.brand-header{display:flex;align-items:center;justify-content:center;margin-bottom:48px}
+.brand-logo{width:180px;height:auto;display:block;border-radius:6px}
+@media(max-width:640px){.brand-header{margin-bottom:32px}.brand-logo{width:150px}body{padding:32px 16px}}
 
 /* ── LOCK / EXPIRED SCREEN ── */
 .lock-screen{max-width:480px;margin:0 auto;padding:32px;text-align:center}
@@ -85,9 +82,8 @@ body{min-height:100vh;padding:48px 24px}
 .copy-btn:hover{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-border)}
 .copy-btn.copied{background:var(--accent);color:var(--bg);border-color:var(--accent)}
 .card-visual-logo{font-size:30px;font-weight:700;color:var(--accent);letter-spacing:-1px}
-.card-visual-img{width:84px;height:84px;object-fit:contain;display:block;filter:invert(1) brightness(1.2);margin-bottom:8px}
-.card-visual-wordmark{font-size:13px;font-weight:700;color:var(--text);text-align:center;letter-spacing:.3px;line-height:1.3}
-.card-visual-wordmark-sub{display:block;font-size:11px;font-weight:500;color:var(--text-dim);margin-top:4px;letter-spacing:0}
+.card-visual-img{width:150px;height:150px;object-fit:contain;display:block;border-radius:6px}
+.card-visual-sub{margin-top:10px;font-size:11px;color:var(--text-dim);font-weight:500;letter-spacing:.3px}
 .card-visual-sub{margin-top:14px;font-size:12px;color:var(--text-dim);font-weight:500}
 .card-action{font-size:17px;font-weight:600;margin-bottom:10px;color:var(--text);line-height:1.4}
 .card-action .pill{color:var(--accent)}
@@ -227,8 +223,7 @@ async function validateLicense(licenseKey) {
 function renderLocked(errorMessage) {
   app.innerHTML = `
     <div class="brand-header">
-      <div class="brand-mark"><img src="assets/clo-logo.png" alt="CLO"></div>
-      <div class="brand-text">Chief Leverage Officer<span class="brand-text-sub"> · Community</span></div>
+      <img class="brand-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
     </div>
     <div class="lock-screen">
       <div class="lock-screen-icon">🔒</div>
@@ -283,8 +278,7 @@ async function handleUnlock(e) {
 function renderExpired() {
   app.innerHTML = `
     <div class="brand-header">
-      <div class="brand-mark"><img src="assets/clo-logo.png" alt="CLO"></div>
-      <div class="brand-text">Chief Leverage Officer<span class="brand-text-sub"> · Community</span></div>
+      <img class="brand-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
     </div>
     <div class="lock-screen">
       <div class="lock-screen-icon">⏱</div>
@@ -303,8 +297,7 @@ function renderExpired() {
 function renderUnlocked(licenseKey) {
   app.innerHTML = `
     <div class="brand-header">
-      <div class="brand-mark"><img src="assets/clo-logo.png" alt="CLO"></div>
-      <div class="brand-text">Chief Leverage Officer<span class="brand-text-sub"> · Community</span></div>
+      <img class="brand-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
     </div>
 
     <div class="intro">
@@ -323,8 +316,8 @@ function renderUnlocked(licenseKey) {
       <div class="card">
         <div class="card-num">1</div>
         <div class="card-visual">
-          <img class="card-visual-img" src="assets/clo-logo.png" alt="CLO">
-          <div class="card-visual-wordmark">Chief Leverage Officer<span class="card-visual-wordmark-sub">Community · hosted on Polynet</span></div>
+          <img class="card-visual-img" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
+          <div class="card-visual-sub">Community · hosted on Polynet</div>
         </div>
         <div class="card-action">Join the <a href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank">Chief Leverage Officers community</a></div>
         <div class="card-caption">Once you're in, <strong style="color:var(--text)">watch the onboarding module</strong> in Polynet — it'll walk you through getting started with Claude Code before you install anything.</div>
