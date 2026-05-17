@@ -84,6 +84,18 @@ body{min-height:100vh;padding:48px 24px}
 .card-visual-logo{font-size:30px;font-weight:700;color:var(--accent);letter-spacing:-1px}
 .card-visual-img{width:150px;height:150px;object-fit:contain;display:block;border-radius:6px}
 .card-visual-sub{margin-top:10px;font-size:11px;color:var(--text-dim);font-weight:500;letter-spacing:.3px}
+
+/* ── POLYNET COMMUNITY PREVIEW (card 1) ── */
+.polynet-card{padding:0;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);position:relative;display:flex;flex-direction:column;align-items:stretch;text-align:left}
+.polynet-card .card-num{top:-14px;left:50%;transform:translateX(-50%)}
+.polynet-preview{padding:24px 22px 18px;display:flex;flex-direction:column;align-items:flex-start}
+.polynet-logo{width:56px;height:56px;object-fit:contain;border-radius:8px;background:var(--surface-2);padding:6px;margin-bottom:14px;border:1px solid var(--border-2)}
+.polynet-name{font-size:17px;font-weight:700;color:var(--text);margin-bottom:2px;line-height:1.2}
+.polynet-handle{font-size:12px;color:var(--text-dim);margin-bottom:14px}
+.polynet-mission{font-size:13px;color:var(--text-muted);line-height:1.55;margin-bottom:18px;font-style:normal}
+.polynet-cta{display:block;width:100%;padding:13px;background:#fff;color:#000;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;text-align:center;transition:opacity .2s}
+.polynet-cta:hover{opacity:.88}
+.polynet-footer{margin-top:12px;font-size:11px;color:var(--text-dim);text-align:center;width:100%}
 .card-visual-sub{margin-top:14px;font-size:12px;color:var(--text-dim);font-weight:500}
 .card-action{font-size:17px;font-weight:600;margin-bottom:10px;color:var(--text);line-height:1.4}
 .card-action .pill{color:var(--accent)}
@@ -313,14 +325,17 @@ function renderUnlocked(licenseKey) {
 
     <div class="cards">
 
-      <div class="card">
+      <div class="card polynet-card">
         <div class="card-num">1</div>
-        <div class="card-visual">
-          <img class="card-visual-img" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
-          <div class="card-visual-sub">Community · hosted on Polynet</div>
+        <div class="polynet-preview">
+          <img class="polynet-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
+          <div class="polynet-name">Chief Leverage Officers</div>
+          <div class="polynet-handle">c/chief-leverage-officers</div>
+          <p class="polynet-mission">Mission: Build digital assets and employ AI Employees to do 80-90% of the work for us.</p>
+          <a class="polynet-cta" href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank">Enter community</a>
+          <div class="polynet-footer">Powered by Polynet</div>
         </div>
-        <div class="card-action">Join the <a href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank">Chief Leverage Officers community</a></div>
-        <div class="card-caption">Once you're in, <strong style="color:var(--text)">watch the onboarding module</strong> in Polynet — it'll walk you through getting started with Claude Code before you install anything.</div>
+        <div class="card-caption" style="padding:0 22px 22px;text-align:center">Once you're in, <strong style="color:var(--text)">watch the onboarding module</strong> to get started with Claude Code.</div>
       </div>
 
       <div class="card">
