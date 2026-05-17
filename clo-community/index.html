@@ -33,8 +33,9 @@ body{min-height:100vh;padding:48px 24px}
 .container{max-width:1100px;margin:0 auto}
 
 /* ── BRAND HEADER ── */
-.brand-header{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:48px}
-.brand-mark{width:40px;height:40px;background:var(--accent);color:var(--bg);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;letter-spacing:-.3px}
+.brand-header{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:48px}
+.brand-mark{width:52px;height:52px;display:flex;align-items:center;justify-content:center}
+.brand-mark img{width:100%;height:100%;object-fit:contain;filter:invert(1) brightness(1.2)}
 .brand-text{font-size:17px;font-weight:700;letter-spacing:-.3px;color:var(--text)}
 .brand-text-sub{color:var(--text-dim);font-weight:500;margin-left:4px}
 @media(max-width:640px){.brand-header{margin-bottom:32px}.brand-text{font-size:15px}body{padding:32px 16px}}
@@ -223,7 +224,7 @@ async function validateLicense(licenseKey) {
 function renderLocked(errorMessage) {
   app.innerHTML = `
     <div class="brand-header">
-      <div class="brand-mark">CLO</div>
+      <div class="brand-mark"><img src="assets/clo-logo.png" alt="CLO"></div>
       <div class="brand-text">Chief Leverage Officer<span class="brand-text-sub"> · Community</span></div>
     </div>
     <div class="lock-screen">
@@ -279,7 +280,7 @@ async function handleUnlock(e) {
 function renderExpired() {
   app.innerHTML = `
     <div class="brand-header">
-      <div class="brand-mark">CLO</div>
+      <div class="brand-mark"><img src="assets/clo-logo.png" alt="CLO"></div>
       <div class="brand-text">Chief Leverage Officer<span class="brand-text-sub"> · Community</span></div>
     </div>
     <div class="lock-screen">
@@ -299,7 +300,7 @@ function renderExpired() {
 function renderUnlocked(licenseKey) {
   app.innerHTML = `
     <div class="brand-header">
-      <div class="brand-mark">CLO</div>
+      <div class="brand-mark"><img src="assets/clo-logo.png" alt="CLO"></div>
       <div class="brand-text">Chief Leverage Officer<span class="brand-text-sub"> · Community</span></div>
     </div>
 
@@ -319,6 +320,16 @@ function renderUnlocked(licenseKey) {
       <div class="card">
         <div class="card-num">1</div>
         <div class="card-visual">
+          <div class="card-visual-logo">Polynet</div>
+          <div class="card-visual-sub">Chief Leverage Officers</div>
+        </div>
+        <div class="card-action">Join the <a href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank">Chief Leverage Officers community</a></div>
+        <div class="card-caption">Once you're in, <strong style="color:var(--text)">watch the onboarding module</strong> in Polynet — it'll walk you through getting started with Claude Code before you install anything.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-num">2</div>
+        <div class="card-visual">
           <div class="card-visual-label">In Claude Code, run:</div>
           <code><span id="cmd1">/plugin marketplace add https://github.com/SkillStacks/skillstack.git</span><button class="copy-btn" data-copy-target="cmd1">Copy</button></code>
           <code><span id="cmd2">/plugin install ${PRODUCT.skillstack_slug}@skillstack-marketplace</span><button class="copy-btn" data-copy-target="cmd2">Copy</button></code>
@@ -327,16 +338,6 @@ function renderUnlocked(licenseKey) {
         </div>
         <div class="card-action">Install <span class="pill">clo-community</span> in Claude Code</div>
         <div class="card-caption">Run these commands, paste your license when /activate-license prompts you.</div>
-      </div>
-
-      <div class="card">
-        <div class="card-num">2</div>
-        <div class="card-visual">
-          <div class="card-visual-logo">Polynet</div>
-          <div class="card-visual-sub">Chief Leverage Officers</div>
-        </div>
-        <div class="card-action">Join the <a href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank">Chief Leverage Officers community</a></div>
-        <div class="card-caption">Where I post updates, host live calls, and other members share what's working.</div>
       </div>
 
       <div class="card">
