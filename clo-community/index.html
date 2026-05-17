@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to the Chief Leverage Officer's Community</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fafaf7;
+  --surface:#ffffff;
+  --green-card:#d4f0c8;
+  --green-card-border:#a8d090;
+  --green-accent:#4a8a2e;
+  --green-cta:#5cb33e;
+  --green-cta-hover:#4a9a2e;
+  --text:#1a1a1a;
+  --text-muted:#555;
+  --text-dim:#888;
+  --border:#e5e5e0;
+  --radius:12px;
+  --radius-sm:8px;
+}
+html{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;padding:48px 24px}
+
+.container{max-width:1100px;margin:0 auto}
+
+.intro{text-align:center;margin-bottom:48px}
+.intro-thanks{font-size:16px;color:var(--text-muted);margin-bottom:16px}
+.intro-thanks strong{color:var(--text);font-weight:600}
+.intro h1{font-size:36px;font-weight:700;letter-spacing:-.5px;line-height:1.2}
+
+@media(max-width:640px){
+  .intro h1{font-size:28px}
+  body{padding:32px 16px}
+}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px}
+@media(max-width:900px){.cards{grid-template-columns:1fr;gap:16px}}
+
+.card{background:var(--green-card);border:1px solid var(--green-card-border);border-radius:var(--radius);padding:32px 24px;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+.card-num{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--green-card);border:1px solid var(--green-card-border);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--text)}
+.card-visual{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;margin-bottom:20px;width:100%;min-height:180px;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:13px;color:var(--text-muted)}
+.card-visual-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);margin-bottom:8px}
+.card-visual code{display:block;font-family:'SF Mono','Monaco','Consolas',monospace;font-size:11px;color:var(--green-accent);background:#f5f5f0;padding:8px 10px;border-radius:4px;margin:2px 0;width:100%;text-align:left;word-break:break-all}
+.card-visual-logo{font-size:32px;font-weight:700;color:var(--green-accent);letter-spacing:-1px}
+.card-visual-icon{font-size:48px;line-height:1}
+.card-action{font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)}
+.card-action a{color:var(--green-accent);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.card-action a:hover{color:var(--green-cta-hover)}
+.card-caption{font-size:14px;font-style:italic;color:var(--text-muted);line-height:1.5}
+
+.body-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;margin-bottom:32px}
+.body-block-headline{font-weight:700;color:var(--text);text-align:center;margin-bottom:20px;font-size:18px}
+.body-block p{margin-bottom:16px;color:var(--text);font-size:15px;line-height:1.7}
+.body-block p:last-child{margin-bottom:0}
+.body-block strong{color:var(--text);font-weight:700}
+
+.cta-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:24px}
+.cta{padding:14px 28px;border-radius:var(--radius-sm);font-size:15px;font-weight:600;text-decoration:none;display:inline-block;transition:all .2s;cursor:pointer;border:2px solid var(--green-cta)}
+.cta-outline{background:transparent;color:var(--text)}
+.cta-outline:hover{background:var(--surface)}
+.cta-solid{background:var(--green-cta);color:#fff;border-color:var(--green-cta)}
+.cta-solid:hover{background:var(--green-cta-hover);border-color:var(--green-cta-hover)}
+
+.footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim)}
+.footer a{color:var(--green-accent);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="intro">
+    <div class="intro-thanks">Welcome to <strong>the Chief Leverage Officer's Community</strong>.</div>
+    <h1>Just a few steps to get you onboarded.</h1>
+  </div>
+
+  <div class="cards">
+
+    <!-- STEP 1 — Install clo-community -->
+    <div class="card">
+      <div class="card-num">1</div>
+      <div class="card-visual">
+        <div class="card-visual-label">In Claude Code</div>
+        <code>/plugin marketplace add</code>
+        <code>https://github.com/SkillStacks/skillstack.git</code>
+        <code>/plugin install clo-community</code>
+        <code>/activate-license</code>
+      </div>
+      <div class="card-action">Install <a href="https://the2hourclo.github.io/activate/?product=clo-community">clo-community in Claude Code</a></div>
+      <div class="card-caption">The plugin that powers your workspace — writing system, business x-ray, copywriter, and all the meta tools.</div>
+    </div>
+
+    <!-- STEP 2 — Join Polynet -->
+    <div class="card">
+      <div class="card-num">2</div>
+      <div class="card-visual">
+        <div class="card-visual-logo">Polynet</div>
+        <div style="margin-top:8px;font-size:12px;color:var(--text-dim)">Chief Leverage Officers</div>
+      </div>
+      <div class="card-action">Join the <a href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank">Chief Leverage Officers community</a></div>
+      <div class="card-caption">Where I post updates, host live calls, and other members share what's working.</div>
+    </div>
+
+    <!-- STEP 3 — Run /onboard -->
+    <div class="card">
+      <div class="card-num">3</div>
+      <div class="card-visual">
+        <div class="card-visual-label">In Claude Code</div>
+        <code>onboard me</code>
+        <div style="margin-top:12px;font-size:12px;color:var(--text-dim);text-align:left;width:100%">Scaffolds your workspace, runs your Business X-Ray, fills in your digital assets, builds your first AI Employee.</div>
+      </div>
+      <div class="card-action">Run <a href="#">/onboard in Claude Code</a></div>
+      <div class="card-caption">Takes ~30 minutes. End state: a workspace that's actually configured for YOUR business.</div>
+    </div>
+
+  </div>
+
+  <div class="body-block">
+    <div class="body-block-headline">Once you're done with these 3 steps, you've officially been onboarded.</div>
+    <p>Next step is <strong>booking your onboarding call with me (Rashid)</strong>, where we'll visually map out your business, identify the bottleneck slowing growth, and assemble a 90-day plan of action — which Digital Assets to build first, which AI Employees to deploy, and which workflows to compound on.</p>
+    <p>So we can leverage our time best before the call, you'll do an <strong>AI-Assisted Guided Audit of Your Business</strong> using the Business X-Ray skill. That way we walk into the call with your bottlenecks already surfaced and your highest-leverage projects already mapped — instead of spending the first 30 minutes on background. We get straight to building your roadmap.</p>
+    <p>This takes about 30 minutes of your time. Set it aside, run through it, then book the call. If you get stuck or have questions, message me in the Polynet community.</p>
+    <div class="cta-row">
+      <a class="cta cta-outline" href="#">Run the Business X-Ray Audit</a>
+      <a class="cta cta-solid" href="#">Book Your Onboarding Call</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    Questions? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a>
+  </div>
+
+</div>
+
+</body>
+</html>
