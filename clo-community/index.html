@@ -85,7 +85,8 @@ body{min-height:100vh;padding:48px 24px}
 .copy-btn:hover{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-border)}
 .copy-btn.copied{background:var(--accent);color:var(--bg);border-color:var(--accent)}
 .card-visual-logo{font-size:30px;font-weight:700;color:var(--accent);letter-spacing:-1px}
-.card-visual-sub{margin-top:8px;font-size:12px;color:var(--text-dim)}
+.card-visual-img{width:96px;height:96px;border-radius:18px;object-fit:contain;display:block}
+.card-visual-sub{margin-top:14px;font-size:12px;color:var(--text-dim);font-weight:500}
 .card-action{font-size:17px;font-weight:600;margin-bottom:10px;color:var(--text);line-height:1.4}
 .card-action .pill{color:var(--accent)}
 .card-action a{color:var(--accent);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
@@ -320,8 +321,8 @@ function renderUnlocked(licenseKey) {
       <div class="card">
         <div class="card-num">1</div>
         <div class="card-visual">
-          <div class="card-visual-logo">Polynet</div>
-          <div class="card-visual-sub">Chief Leverage Officers</div>
+          <img class="card-visual-img" src="assets/polynet-logo.png" alt="Polynet">
+          <div class="card-visual-sub">Chief Leverage Officers on Polynet</div>
         </div>
         <div class="card-action">Join the <a href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank">Chief Leverage Officers community</a></div>
         <div class="card-caption">Once you're in, <strong style="color:var(--text)">watch the onboarding module</strong> in Polynet — it'll walk you through getting started with Claude Code before you install anything.</div>
