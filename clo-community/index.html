@@ -137,6 +137,12 @@ const app = document.getElementById('app');
   const urlParams = new URLSearchParams(window.location.search);
   let licenseKey = urlParams.get('license_key');
 
+  // Visual preview bypass — skips LS validation, renders unlocked state with dummy key.
+  // Use: ?preview=YES (case-sensitive). For design review only — does NOT test the real flow.
+  if (urlParams.get('preview') === 'YES') {
+    return renderUnlocked('PREVIEW-MODE-FAKE-KEY-XXXX-XXXXXXXXXXXX');
+  }
+
   if (!licenseKey) {
     licenseKey = localStorage.getItem(STORAGE_KEY);
   }
