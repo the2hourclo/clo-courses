@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1212,96 +1212,300 @@
 <!-- ══ SIDEBAR ══ -->
 <nav class="sidebar">
   <div class="sidebar-section">
+    <div class="sidebar-section-title">Get Set Up</div>
+    <div class="nav-item" data-section="setup" onclick="goTo('setup')">
+      <div class="nav-num">1</div> Install & Setup
+    </div>
+  </div>
+  <div class="sidebar-section">
     <div class="sidebar-section-title">Start Here (Optional)</div>
     <div class="nav-item" data-section="basics-terminal" onclick="goTo('basics-terminal')">
-      <div class="nav-num">1</div> Terminal
+      <div class="nav-num">2</div> Terminal
     </div>
     <div class="nav-item" data-section="basics-git" onclick="goTo('basics-git')">
-      <div class="nav-num">2</div> GitHub & Git
+      <div class="nav-num">3</div> GitHub & Git
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-title">Part 1: What Claude Code Is</div>
     <div class="nav-item active" data-section="intro" onclick="goTo('intro')">
-      <div class="nav-num">3</div> What Is Claude Code?
+      <div class="nav-num">4</div> What Is Claude Code?
     </div>
     <div class="nav-item" data-section="environments" onclick="goTo('environments')">
-      <div class="nav-num">4</div> Where It Lives
+      <div class="nav-num">5</div> Where It Lives
     </div>
     <div class="nav-item" data-section="agentic-loop" onclick="goTo('agentic-loop')">
-      <div class="nav-num">5</div> How It Thinks
+      <div class="nav-num">6</div> How It Thinks
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-title">Part 2: Built-in Foundation</div>
     <div class="nav-item" data-section="tools" onclick="goTo('tools')">
-      <div class="nav-num">6</div> Built-in Tools
+      <div class="nav-num">7</div> Built-in Tools
     </div>
     <div class="nav-item" data-section="permissions" onclick="goTo('permissions')">
-      <div class="nav-num">7</div> Permission System
+      <div class="nav-num">8</div> Permission System
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-title">Part 3: Memory</div>
     <div class="nav-item" data-section="claude-md" onclick="goTo('claude-md')">
-      <div class="nav-num">8</div> CLAUDE.md
+      <div class="nav-num">9</div> CLAUDE.md
     </div>
     <div class="nav-item" data-section="memory-hierarchy" onclick="goTo('memory-hierarchy')">
-      <div class="nav-num">9</div> Memory Hierarchy
+      <div class="nav-num">10</div> Memory Hierarchy
     </div>
     <div class="nav-item" data-section="context" onclick="goTo('context')">
-      <div class="nav-num">10</div> Context Window
+      <div class="nav-num">11</div> Context Window
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-title">Part 4: Skills</div>
     <div class="nav-item" data-section="skills-intro" onclick="goTo('skills-intro')">
-      <div class="nav-num">11</div> What Is a Skill?
+      <div class="nav-num">12</div> What Is a Skill?
     </div>
     <div class="nav-item" data-section="skill-invocation" onclick="goTo('skill-invocation')">
-      <div class="nav-num">12</div> How Skills Trigger
+      <div class="nav-num">13</div> How Skills Trigger
     </div>
     <div class="nav-item" data-section="first-skill" onclick="goTo('first-skill')">
-      <div class="nav-num">13</div> Build Your First Skill
+      <div class="nav-num">14</div> Build Your First Skill
     </div>
     <div class="nav-item" data-section="skill-builder" onclick="goTo('skill-builder')">
-      <div class="nav-num">14</div> Skill Builder
+      <div class="nav-num">15</div> Skill Builder
     </div>
     <div class="nav-item" data-section="skill-deep-dive" onclick="goTo('skill-deep-dive')">
-      <div class="nav-num">15</div> Skill Deep Dive
+      <div class="nav-num">16</div> Skill Deep Dive
     </div>
     <div class="nav-item" data-section="skill-routing" onclick="goTo('skill-routing')">
-      <div class="nav-num">16</div> Routing & Scaling
+      <div class="nav-num">17</div> Routing & Scaling
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-title">Part 5: Extending</div>
     <div class="nav-item" data-section="subagents" onclick="goTo('subagents')">
-      <div class="nav-num">17</div> Sub-Agents
+      <div class="nav-num">18</div> Sub-Agents
     </div>
     <div class="nav-item" data-section="mcp" onclick="goTo('mcp')">
-      <div class="nav-num">18</div> MCP Connections
+      <div class="nav-num">19</div> MCP Connections
     </div>
     <div class="nav-item" data-section="hooks" onclick="goTo('hooks')">
-      <div class="nav-num">19</div> Hooks
+      <div class="nav-num">20</div> Hooks
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-title">Part 6: Complete Picture</div>
     <div class="nav-item" data-section="lifecycle" onclick="goTo('lifecycle')">
-      <div class="nav-num">21</div> Full Lifecycle
+      <div class="nav-num">22</div> Full Lifecycle
     </div>
     <div class="nav-item" data-section="in-action" onclick="goTo('in-action')">
-      <div class="nav-num">22</div> Everything in Action
+      <div class="nav-num">23</div> Everything in Action
     </div>
     <div class="nav-item" data-section="reference" onclick="goTo('reference')">
-      <div class="nav-num">23</div> Quick Reference
+      <div class="nav-num">24</div> Quick Reference
     </div>
   </div>
 </nav>
 
 <!-- ══ MAIN CONTENT ══ -->
 <main class="main">
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SECTION 0: SETUP                       -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="setup">
+  <div class="section-badge">Get Set Up</div>
+  <h2>Install & Setup</h2>
+  <p class="section-subtitle">Everything you need to install before Claude Code can do real work in your business. About 15 minutes start to finish.</p>
+
+  <div class="callout callout-info" style="margin-bottom: 16px;">
+    <strong>What you're about to do:</strong> Install Claude Code on your computer, set up your workspace from the CLO-OS starter template, and run your first command. By the end, Claude will be sitting inside your project ready to map your business.
+  </div>
+
+  <div class="card">
+    <div class="card-title">Prerequisites Checklist</div>
+    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">Five things to install. Each one is free or covered by your Claude subscription.</p>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="padding: 12px; background: var(--bg-code); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 12px;">
+        <div style="font-size: 20px;">&#9989;</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; color: var(--text); font-size: 14px;">Claude subscription (Pro, Max, or Teams)</div>
+          <div style="font-size: 12px; color: var(--text-dim); margin-top: 2px;">Required to use Claude Code. Sign up at <a href="https://claude.ai" target="_blank" style="color: var(--accent);">claude.ai</a></div>
+        </div>
+      </div>
+      <div style="padding: 12px; background: var(--bg-code); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 12px;">
+        <div style="font-size: 20px;">&#9989;</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; color: var(--text); font-size: 14px;">VS Code (free editor)</div>
+          <div style="font-size: 12px; color: var(--text-dim); margin-top: 2px;">Download at <a href="https://code.visualstudio.com/" target="_blank" style="color: var(--accent);">code.visualstudio.com</a> — install with default options</div>
+        </div>
+      </div>
+      <div style="padding: 12px; background: var(--bg-code); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 12px;">
+        <div style="font-size: 20px;">&#9989;</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; color: var(--text); font-size: 14px;">Claude Code extension for VS Code</div>
+          <div style="font-size: 12px; color: var(--text-dim); margin-top: 2px;">Inside VS Code: press <code>Ctrl+Shift+X</code> (Win) or <code>Cmd+Shift+X</code> (Mac) → search <strong>"Claude Code"</strong> → click Install → reload when prompted</div>
+        </div>
+      </div>
+      <div style="padding: 12px; background: var(--bg-code); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 12px;">
+        <div style="font-size: 20px;">&#9989;</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; color: var(--text); font-size: 14px;">Git</div>
+          <div style="font-size: 12px; color: var(--text-dim); margin-top: 2px;">Download at <a href="https://git-scm.com/" target="_blank" style="color: var(--accent);">git-scm.com</a>. Verify by opening a terminal and running <code>git --version</code></div>
+        </div>
+      </div>
+      <div style="padding: 12px; background: var(--bg-code); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 12px;">
+        <div style="font-size: 20px;">&#9989;</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; color: var(--text); font-size: 14px;">GitHub CLI (<code>gh</code>)</div>
+          <div style="font-size: 12px; color: var(--text-dim); margin-top: 2px;">Download at <a href="https://cli.github.com/" target="_blank" style="color: var(--accent);">cli.github.com</a>. After install, run <code>gh auth login</code> to connect your GitHub account</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-tip" style="margin-top: 14px;">
+      <strong>Don't know what a terminal is?</strong> Skip to the <a href="#" onclick="goTo('basics-terminal'); return false;" style="color: var(--accent); text-decoration: underline;">Terminal</a> and <a href="#" onclick="goTo('basics-git'); return false;" style="color: var(--accent); text-decoration: underline;">GitHub & Git</a> sections first, then come back here.
+    </div>
+  </div>
+
+  <div class="card" style="border-color: var(--accent); background: linear-gradient(135deg, rgba(121,234,32,0.05), var(--bg-card));">
+    <div class="card-title" style="color: var(--accent);">&#9889; Quick Install with Claude (Recommended)</div>
+    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">Open Claude Code in any parent folder (like <code>~/Documents</code> or <code>~/Desktop</code>), then paste the prompt below. Claude will install the GitHub CLI, log you in, create your private workspace from the template, set up the update remote, and verify everything &mdash; all in one shot.</p>
+    <div class="card" style="background: var(--bg-code); margin: 12px 0 8px; position: relative; padding: 16px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim);">Paste this into Claude Code</span>
+        <button onclick="navigator.clipboard.writeText(this.closest('.card').querySelector('pre').textContent); this.textContent='Copied!'; setTimeout(()=&gt;this.textContent='Copy',2000)" style="font-size: 11px; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); color: var(--text-muted); cursor: pointer;">Copy</button>
+      </div>
+      <pre style="white-space: pre-wrap; font-size: 13px; line-height: 1.6; color: var(--text); padding: 12px; background: var(--bg); border-radius: 6px; border: 1px solid var(--border); margin: 0; font-family: 'SF Mono', Monaco, Consolas, monospace;">Set up my CLO-OS workspace from the clo-starter template.
+
+1. Check if the GitHub CLI (gh) is installed. If not, install it:
+   - Windows: winget install --id GitHub.cli
+   - macOS: brew install gh
+   - Linux: see https://cli.github.com/
+
+2. Run "gh auth status". If I'm not logged in, run "gh auth login" with the browser flow.
+
+3. Create my workspace from the template:
+   gh repo create clo-workspace --template the2hourclo/clo-starter --private --clone
+   If "clo-workspace" already exists on my GitHub, ask me for a different name.
+
+4. cd into the new clo-workspace folder.
+
+5. Add the template as an upstream remote so future updates flow in:
+   git remote add template https://github.com/the2hourclo/clo-starter.git
+   git fetch template
+
+6. Verify .claude/ landed at the root. Run: ls -la .claude/skills/
+   Show me the output and confirm I see all 9 folders:
+   business-x-ray, install-skill, meta-create-agent, meta-create-command,
+   meta-create-hook, meta-create-mcp, meta-create-plugin, meta-create-skill,
+   retrospective. If any are missing, STOP and tell me.
+
+7. Bootstrap my memory with 5 quick questions, one at a time, saving each
+   answer before the next:
+   a) What's my full name and what should you call me? (user memory)
+   b) What timezone am I in? (user memory)
+   c) What are the top 3 things I'll use Claude for here? (project memory)
+   d) Concise or detailed responses? Casual or formal tone? (feedback memory)
+   e) Any tools or external docs to note? (reference memory)
+
+8. Open the workspace in VS Code: code .
+
+9. Tell me to type "Run my Business X-Ray" once Claude Code reopens.</pre>
+    </div>
+    <p style="font-size: 12px; color: var(--text-dim); margin: 4px 0 0;">Claude walks you through each step, runs a quick memory interview so it knows who you are from session one, and lands you in the workspace. About 5 minutes.</p>
+  </div>
+
+  <div style="text-align: center; margin: 20px 0; color: var(--text-dim); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">— or install manually —</div>
+
+  <div class="card">
+    <div class="card-title">Step 1 — Get Your Workspace from the Template</div>
+    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">The <strong>CLO-OS starter</strong> is a pre-built workspace with the Business X-Ray skill, meta skills, and folder structure already configured. You'll create your own copy of it.</p>
+    <ol style="padding-left: 22px; font-size: 14px; color: var(--text-muted); line-height: 1.7;">
+      <li>Go to <a href="https://github.com/the2hourclo/clo-starter" target="_blank" style="color: var(--accent);">github.com/the2hourclo/clo-starter</a> (Rashid will email you the invite)</li>
+      <li>Click the green <strong>"Use this template"</strong> button → <strong>"Create a new repository"</strong></li>
+      <li>Owner: your GitHub username. Name: <code>clo-workspace</code> (or anything you want). Visibility: <strong>Private</strong></li>
+      <li>Click <strong>"Create repository"</strong></li>
+    </ol>
+    <div class="callout callout-info" style="margin-top: 12px;">
+      <strong>What just happened:</strong> You made your own copy of the starter. It's independent — Rashid can't see what you do in it, and any updates he ships flow in only when you ask.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Step 2 — Clone It to Your Computer</div>
+    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">"Clone" = download the workspace from GitHub onto your computer. Open a terminal and run:</p>
+    <div style="padding: 14px; background: var(--bg-code); border-radius: var(--radius-sm); font-family: 'SF Mono', Monaco, monospace; font-size: 13px; color: var(--green); margin-bottom: 10px;">
+      gh repo clone your-username/clo-workspace<br>
+      cd clo-workspace
+    </div>
+    <p style="font-size: 13px; color: var(--text-dim);">Replace <code>your-username</code> with your actual GitHub username. <code>cd</code> means "change directory" — like opening that folder.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Step 3 — Open It in Claude Code</div>
+    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">From inside the workspace folder, launch VS Code:</p>
+    <div style="padding: 14px; background: var(--bg-code); border-radius: var(--radius-sm); font-family: 'SF Mono', Monaco, monospace; font-size: 13px; color: var(--green); margin-bottom: 10px;">
+      code .
+    </div>
+    <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 12px;">The dot means "this folder." When VS Code asks "Do you trust the authors?" click <strong>Yes, I trust the authors</strong>.</p>
+    <div class="callout callout-warning">
+      <strong>Critical:</strong> VS Code must open the <code>clo-workspace</code> folder DIRECTLY, not a parent folder. If skills, MCPs, or routing don't work later, this is almost always why.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Step 4 — Connect to the Template for Future Updates</div>
+    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">This lets you pull new skills and improvements Rashid ships to the starter. Run it once:</p>
+    <div style="padding: 14px; background: var(--bg-code); border-radius: var(--radius-sm); font-family: 'SF Mono', Monaco, monospace; font-size: 13px; color: var(--green); margin-bottom: 10px;">
+      git remote add template https://github.com/the2hourclo/clo-starter.git<br>
+      git fetch template
+    </div>
+    <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 10px;"><strong>Plain English:</strong> You just told git "remember this other repo called <code>template</code> — it's where my updates come from."</p>
+    <div class="table-wrap" style="margin-top: 12px;">
+      <table>
+        <thead><tr><th>Folder</th><th>Updated by template pulls?</th></tr></thead>
+        <tbody>
+          <tr><td><code>.claude/skills/</code></td><td><span class="tag tag-green">Yes — Rashid's shared skills</span></td></tr>
+          <tr><td><code>CLAUDE.md</code></td><td><span class="tag tag-green">Yes — routing updates</span></td></tr>
+          <tr><td><code>clients/</code></td><td><span class="tag tag-red">Never — YOUR work</span></td></tr>
+          <tr><td><code>content/</code></td><td><span class="tag tag-red">Never — YOUR work</span></td></tr>
+          <tr><td><code>research/</code></td><td><span class="tag tag-red">Never — YOUR work</span></td></tr>
+          <tr><td><code>diagrams/</code></td><td><span class="tag tag-red">Never — YOUR work</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-info" style="margin-top: 12px;">
+      <strong>Automatic check:</strong> The bundled <code>CLAUDE.md</code> tells Claude to check for template updates before any major task. You don't have to remember.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Step 5 — Open Claude Code & Run Your First Command</div>
+    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">In VS Code, press <code>Ctrl+L</code> (or click the Claude icon in the sidebar) to open the Claude Code panel.</p>
+    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">Type:</p>
+    <div style="padding: 14px; background: var(--bg-code); border-radius: var(--radius-sm); font-family: 'SF Mono', Monaco, monospace; font-size: 14px; color: var(--accent); margin-bottom: 10px;">
+      Run my Business X-Ray
+    </div>
+    <p style="font-size: 13px; color: var(--text-dim);">Claude will walk you through a guided interview. At the end you'll have a Business Map (.drawio), Bow-Tie Funnel, Process Swimlanes, and a prioritized list of where AI can take over real work.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Optional — Connect External Tools (MCP)</div>
+    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">If you want Claude to read/write to Notion, scrape the web with Firecrawl, or pull YouTube data:</p>
+    <div style="padding: 14px; background: var(--bg-code); border-radius: var(--radius-sm); font-family: 'SF Mono', Monaco, monospace; font-size: 13px; color: var(--green); margin-bottom: 10px;">
+      cp .mcp.json.example .mcp.json
+    </div>
+    <p style="font-size: 13px; color: var(--text-dim);">Edit <code>.mcp.json</code> with your API keys, then restart Claude Code. You can also just ask Claude: <em>"Connect Notion via MCP"</em> and it walks you through it.</p>
+  </div>
+
+  <div class="callout callout-success" style="margin-top: 20px;">
+    <strong>You're set up.</strong> Now you can either keep learning how Claude Code works (recommended for first-timers) or jump straight to using it. The next sections explain how Claude thinks, how skills work, and how to extend the system.
+  </div>
+
+  <div class="nav-buttons">
+    <div></div>
+    <button class="btn btn-primary" onclick="goTo('basics-terminal')">Next: Terminal Basics &rarr;</button>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════ -->
 <!-- SECTION 1: WHAT IS CLAUDE CODE?        -->
@@ -5592,7 +5796,7 @@ You are a senior code reviewer. When invoked:
   </div>
 
   <div class="nav-buttons">
-    <div></div>
+    <button class="btn" onclick="goTo('setup')">&larr; Previous</button>
     <button class="btn btn-primary" onclick="goTo('basics-git')">Next: GitHub & Git &rarr;</button>
   </div>
 </div>
@@ -5602,12 +5806,12 @@ You are a senior code reviewer. When invoked:
 
 <!-- ══ JAVASCRIPT ══ -->
 <script>
-const sections = ['basics-terminal','basics-git','intro','environments','agentic-loop','tools','permissions','claude-md','memory-hierarchy','context','skills-intro','skill-invocation','first-skill','skill-builder','skill-deep-dive','skill-routing','subagents','mcp','hooks','lifecycle','in-action','reference'];
+const sections = ['setup','basics-terminal','basics-git','intro','environments','agentic-loop','tools','permissions','claude-md','memory-hierarchy','context','skills-intro','skill-invocation','first-skill','skill-builder','skill-deep-dive','skill-routing','subagents','mcp','hooks','lifecycle','in-action','reference'];
 let currentSection = 'intro';
 
 // Fix progress bar on load
-document.getElementById('progress-text').textContent = '3 of ' + sections.length;
-document.getElementById('progress-fill').style.width = (3 / sections.length * 100) + '%';
+document.getElementById('progress-text').textContent = '4 of ' + sections.length;
+document.getElementById('progress-fill').style.width = (4 / sections.length * 100) + '%';
 
 function goTo(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));

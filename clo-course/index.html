@@ -23,6 +23,7 @@ body{display:flex;flex-direction:column}
 <div class="course-nav">
   <span class="course-nav-brand">Chief Leverage Officer</span>
   <a data-page="business-x-ray" class="active">Business X-Ray</a>
+  <a data-page="meta-skill" data-src="../meta-create-skill/index.html">Meta Skill</a>
   <a data-page="claude-code-101">Claude Code 101</a>
   <a data-page="roadmap">Roadmap</a>
 </div>
@@ -39,7 +40,7 @@ tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     tabs.forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
-    frame.src = tab.dataset.page + '.html';
+    frame.src = tab.dataset.src || tab.dataset.page + '.html';
   });
 });
 
