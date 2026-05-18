@@ -6,55 +6,253 @@
 <title>Chief Leverage Officer — Course Portal</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden;background:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-.course-nav{background:#0a0a0a;border-bottom:1px solid #2a2a2a;padding:0 32px;display:flex;align-items:center;gap:0;height:44px;flex-shrink:0}
-.course-nav-brand{font-size:13px;font-weight:700;color:#79EA20;letter-spacing:.5px;margin-right:24px;text-transform:uppercase}
+:root{
+  --bg:#0a0a0a;
+  --surface:#131313;
+  --surface-2:#181818;
+  --border:#1e1e1e;
+  --border-2:#2a2a2a;
+  --text:#e4e5ef;
+  --text-muted:#9ea3ba;
+  --text-dim:#4a4d60;
+  --accent:#79EA20;
+  --accent-dim:rgba(121,234,32,.08);
+  --accent-border:rgba(121,234,32,.35);
+  --red:#f87171;
+  --red-bg:rgba(248,113,113,.08);
+  --red-border:rgba(248,113,113,.3);
+  --radius:8px;
+}
+html,body{height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--text)}
+body{overflow:hidden;display:flex;flex-direction:column}
+body.locked{overflow:auto;justify-content:center;align-items:center;padding:48px 24px}
+
+/* ── NAV ── */
+.course-nav{background:var(--bg);border-bottom:1px solid var(--border-2);padding:0 32px;display:flex;align-items:center;gap:0;height:44px;flex-shrink:0}
+.course-nav-brand{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.5px;margin-right:24px;text-transform:uppercase}
 .course-nav a{display:flex;align-items:center;height:44px;padding:0 16px;font-size:13px;font-weight:500;color:#a0a4b8;text-decoration:none;border-bottom:2px solid transparent;transition:all .2s;cursor:pointer}
-.course-nav a:hover{color:#e2e4eb;background:rgba(255,255,255,.03)}
-.course-nav a.active{color:#e2e4eb;border-bottom-color:#79EA20}
+.course-nav a:hover{color:var(--text);background:rgba(255,255,255,.03)}
+.course-nav a.active{color:var(--text);border-bottom-color:var(--accent)}
+.course-nav-spacer{flex:1}
+.course-nav-signout{background:none;border:1px solid var(--border-2);color:var(--text-dim);font-size:11px;font-weight:600;padding:6px 10px;border-radius:4px;cursor:pointer;transition:all .15s;font-family:inherit}
+.course-nav-signout:hover{color:var(--text);border-color:var(--accent-border)}
 .frame-wrap{flex:1;overflow:hidden}
 .frame-wrap iframe{width:100%;height:100%;border:0}
-body{display:flex;flex-direction:column}
 @media(max-width:768px){.course-nav{padding:0 12px}.course-nav-brand{margin-right:12px;font-size:11px}.course-nav a{padding:0 10px;font-size:12px}}
+
+/* ── LOCK SCREEN ── */
+.lock-screen{max-width:480px;width:100%;text-align:center}
+.lock-screen-icon{font-size:48px;margin-bottom:16px;line-height:1}
+.lock-screen h1{font-size:26px;font-weight:700;letter-spacing:-.5px;margin-bottom:12px}
+.lock-screen .lead{color:var(--text-muted);font-size:15px;margin-bottom:32px;line-height:1.6}
+.lock-form{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px;text-align:left}
+.lock-form label{display:block;font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.lock-form input{width:100%;padding:12px 14px;border:1px solid var(--border-2);border-radius:var(--radius);font-size:14px;font-family:'SF Mono','Monaco','Consolas',monospace;color:var(--text);background:var(--surface-2);outline:none;transition:border-color .2s}
+.lock-form input:focus{border-color:var(--accent-border)}
+.lock-form input::placeholder{color:var(--text-dim)}
+.lock-form button{width:100%;padding:14px;background:var(--accent);color:var(--bg);border:none;border-radius:var(--radius);font-size:15px;font-weight:700;cursor:pointer;margin-top:12px;transition:opacity .2s;font-family:inherit}
+.lock-form button:hover{opacity:.9}
+.lock-form button:disabled{opacity:.4;cursor:not-allowed}
+.lock-error{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red);padding:10px 14px;border-radius:var(--radius);font-size:13px;margin-top:12px;display:none}
+.lock-error.show{display:block}
+.lock-hint{font-size:13px;color:var(--text-dim);margin-top:14px;text-align:center}
+.lock-hint a{color:var(--accent);text-decoration:none;font-weight:600}
+.cta-renew{display:inline-block;padding:13px 26px;background:var(--accent);color:var(--bg);border-radius:var(--radius);text-decoration:none;font-size:14px;font-weight:700}
+.cta-renew:hover{opacity:.9}
+
+/* ── LOADING ── */
+.loading{display:flex;justify-content:center;align-items:center;height:100%;color:var(--text-muted);font-size:14px}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border-2);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin-right:10px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
-<div class="course-nav">
-  <span class="course-nav-brand">Chief Leverage Officer</span>
-  <a data-page="business-x-ray" class="active">Business X-Ray</a>
-  <a data-page="meta-skill" data-src="../meta-create-skill/index.html">Meta Skill</a>
-  <a data-page="claude-code-101">Claude Code 101</a>
-  <a data-page="roadmap">Roadmap</a>
-</div>
-
-<div class="frame-wrap">
-  <iframe id="courseFrame" src="business-x-ray.html"></iframe>
+<div id="app">
+  <div class="loading"><span class="spinner"></span>Verifying access…</div>
 </div>
 
 <script>
-const tabs = document.querySelectorAll('.course-nav a[data-page]');
-const frame = document.getElementById('courseFrame');
+// ══════════════════════════════════════════════════════
+// CONFIG — must match clo-community onboarding page
+// ══════════════════════════════════════════════════════
+const PRODUCT = {
+  store_id: 10600,
+  product_id: 926993,
+  variant_id: 1457440,
+  checkout_url: 'https://chiefleverageofficer.lemonsqueezy.com/checkout/buy/14c15890-c46a-4ab8-ab8d-9e56cd04d38a',
+  onboarding_url: '../clo-community/'
+};
+const STORAGE_KEY = 'clo_community_license';
+const app = document.getElementById('app');
 
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    frame.src = tab.dataset.src || tab.dataset.page + '.html';
-  });
-});
+(async function init() {
+  const urlParams = new URLSearchParams(window.location.search);
 
-// Support deep-linking via hash
-if (location.hash) {
-  const page = location.hash.slice(1);
-  const match = document.querySelector(`[data-page="${page}"]`);
-  if (match) { match.click(); }
+  // Visual preview bypass (matches onboarding page)
+  if (urlParams.get('preview') === 'YES') {
+    return renderPortal();
+  }
+
+  let licenseKey = urlParams.get('license_key') || localStorage.getItem(STORAGE_KEY);
+
+  if (!licenseKey) {
+    return renderLocked();
+  }
+
+  const result = await validateLicense(licenseKey);
+  if (!result.ok) {
+    localStorage.removeItem(STORAGE_KEY);
+    if (result.reason === 'expired') return renderExpired();
+    return renderLocked(result.message);
+  }
+
+  localStorage.setItem(STORAGE_KEY, licenseKey);
+  if (urlParams.has('license_key')) {
+    history.replaceState(null, '', window.location.pathname + window.location.hash);
+  }
+  renderPortal();
+})();
+
+// ══════════════════════════════════════════════════════
+// LICENSE VALIDATION — identical to onboarding page
+// ══════════════════════════════════════════════════════
+async function validateLicense(licenseKey) {
+  try {
+    const res = await fetch('https://api.lemonsqueezy.com/v1/licenses/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ license_key: licenseKey })
+    });
+    const data = await res.json();
+    if (!data.valid) {
+      const status = data.license_key?.status;
+      if (status === 'expired' || status === 'disabled' || status === 'inactive') {
+        return { ok: false, reason: 'expired' };
+      }
+      return { ok: false, reason: 'invalid', message: data.error || 'Invalid license key.' };
+    }
+    if (data.meta?.store_id !== PRODUCT.store_id || data.meta?.product_id !== PRODUCT.product_id) {
+      return { ok: false, reason: 'wrong_product', message: 'This license is for a different product.' };
+    }
+    if (PRODUCT.variant_id && data.meta?.variant_id !== PRODUCT.variant_id) {
+      return { ok: false, reason: 'wrong_variant', message: 'This license is for a different subscription tier.' };
+    }
+    if (data.license_key?.status && data.license_key.status !== 'active') {
+      return { ok: false, reason: 'expired' };
+    }
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, reason: 'network', message: 'Could not reach the license server. Check your connection.' };
+  }
 }
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    history.replaceState(null, '', '#' + tab.dataset.page);
+
+// ══════════════════════════════════════════════════════
+// LOCKED STATE
+// ══════════════════════════════════════════════════════
+function renderLocked(errorMessage) {
+  document.body.classList.add('locked');
+  app.innerHTML = `
+    <div class="lock-screen">
+      <div class="lock-screen-icon">🔒</div>
+      <h1>Chief Leverage Officer Course Portal</h1>
+      <p class="lead">Enter your license key to unlock the course library.</p>
+      <form class="lock-form" id="unlockForm">
+        <label for="licenseInput">License key</label>
+        <input type="text" id="licenseInput" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" required autofocus>
+        <button type="submit" id="unlockBtn">Unlock Portal</button>
+        <div class="lock-error ${errorMessage ? 'show' : ''}" id="lockError">${errorMessage || ''}</div>
+      </form>
+      <div class="lock-hint">Find your license key in your purchase confirmation email.</div>
+      <div class="lock-hint">No license yet? <a href="${PRODUCT.checkout_url}" target="_blank">Join the community →</a></div>
+    </div>
+  `;
+  document.getElementById('unlockForm').addEventListener('submit', handleUnlock);
+}
+
+async function handleUnlock(e) {
+  e.preventDefault();
+  const licenseKey = document.getElementById('licenseInput').value.trim();
+  const errorEl = document.getElementById('lockError');
+  const btn = document.getElementById('unlockBtn');
+  if (!licenseKey) return;
+  btn.disabled = true; btn.textContent = 'Verifying…'; errorEl.classList.remove('show');
+  const result = await validateLicense(licenseKey);
+  if (!result.ok) {
+    btn.disabled = false; btn.textContent = 'Unlock Portal';
+    errorEl.textContent = result.reason === 'expired'
+      ? 'This license has expired. Renew your subscription to regain access.'
+      : (result.message || 'Could not verify license. Check the key and try again.');
+    errorEl.classList.add('show');
+    return;
+  }
+  localStorage.setItem(STORAGE_KEY, licenseKey);
+  document.body.classList.remove('locked');
+  renderPortal();
+}
+
+// ══════════════════════════════════════════════════════
+// EXPIRED STATE
+// ══════════════════════════════════════════════════════
+function renderExpired() {
+  document.body.classList.add('locked');
+  app.innerHTML = `
+    <div class="lock-screen">
+      <div class="lock-screen-icon">⏱</div>
+      <h1>Your subscription has ended</h1>
+      <p class="lead">This license is no longer active. Renew to regain access to the course portal and the clo-community plugin.</p>
+      <a href="${PRODUCT.checkout_url}" target="_blank" class="cta-renew">Renew Subscription</a>
+      <div class="lock-hint" style="margin-top:32px">Already renewed? <a href="javascript:location.reload()">Reload page</a></div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════════════════
+// PORTAL — unlocked state, course tabs + iframe
+// ══════════════════════════════════════════════════════
+function renderPortal() {
+  document.body.classList.remove('locked');
+  app.innerHTML = `
+    <div class="course-nav">
+      <span class="course-nav-brand">Chief Leverage Officer</span>
+      <a data-page="community" data-src="../clo-community/" class="active">Community</a>
+      <a data-page="business-x-ray">Business X-Ray</a>
+      <a data-page="meta-skill" data-src="../meta-create-skill/index.html">Meta Skill</a>
+      <a data-page="claude-code-101">Claude Code 101</a>
+      <a data-page="roadmap">Roadmap</a>
+      <span class="course-nav-spacer"></span>
+      <button class="course-nav-signout" onclick="signOut()">Sign out</button>
+    </div>
+    <div class="frame-wrap">
+      <iframe id="courseFrame" src="../clo-community/"></iframe>
+    </div>
+  `;
+  wireTabs();
+}
+
+function wireTabs() {
+  const tabs = document.querySelectorAll('.course-nav a[data-page]');
+  const frame = document.getElementById('courseFrame');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      frame.src = tab.dataset.src || tab.dataset.page + '.html';
+      history.replaceState(null, '', '#' + tab.dataset.page);
+    });
   });
-});
+  if (location.hash) {
+    const page = location.hash.slice(1);
+    const match = document.querySelector(`[data-page="${page}"]`);
+    if (match) match.click();
+  }
+}
+
+function signOut() {
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
 </script>
+
 </body>
 </html>
