@@ -161,9 +161,9 @@ const app = document.getElementById('app');
   const urlParams = new URLSearchParams(window.location.search);
   let licenseKey = urlParams.get('license_key');
 
-  // Visual preview bypass — design review only, skips LS validation
-  if (urlParams.get('preview') === 'YES') {
-    return renderUnlocked('PREVIEW-MODE-FAKE-KEY-XXXX-XXXXXXXXXXXX');
+  // TEMP 2026-05-28: license gate disabled — change `true` back to `urlParams.get('preview') === 'YES'` to re-enable
+  if (true) {
+    return renderUnlocked('TEMP-OPEN-ACCESS-XXXX-XXXX-XXXXXXXXXXXX');
   }
 
   if (!licenseKey) {

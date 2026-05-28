@@ -93,8 +93,8 @@ const app = document.getElementById('app');
 (async function init() {
   const urlParams = new URLSearchParams(window.location.search);
 
-  // Visual preview bypass (matches onboarding page)
-  if (urlParams.get('preview') === 'YES') {
+  // TEMP 2026-05-28: license gate disabled — change `true` back to `urlParams.get('preview') === 'YES'` to re-enable
+  if (true) {
     return renderPortal();
   }
 
