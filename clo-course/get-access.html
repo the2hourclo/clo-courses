@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Access — Install the CLO-OS Plugins &amp; Skills</title>
+<meta name="description" content="A simple, guided setup to get the CLO-OS plugins and skills running inside VS Code. No terminal required, no coding.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c0d0c;
+  --surface:#131413;
+  --surface-2:#191a19;
+  --surface-3:#202220;
+  --border:#1e201e;
+  --border-2:#2a2c2a;
+  --text:#e7e9e4;
+  --text-muted:#9ea3a0;
+  --text-dim:#5c605c;
+  --accent:#79EA20;
+  --accent-dim:rgba(121,234,32,.08);
+  --accent-dim-2:rgba(121,234,32,.14);
+  --accent-border:rgba(121,234,32,.35);
+  --accent-text:#bff58a;
+  --blue:#5b9bff;
+  --blue-bg:rgba(91,155,255,.1);
+  --orange:#f5a623;
+  --orange-bg:rgba(245,166,35,.1);
+  --green:#4ade80;
+  --green-bg:rgba(74,222,128,.1);
+  --radius:9px;
+  --radius-lg:14px;
+  --font-display:'Bricolage Grotesque',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-body:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'SF Mono','Monaco','Consolas',monospace;
+}
+html{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;
+  background:
+    radial-gradient(900px 500px at 50% -200px,rgba(121,234,32,.07),transparent 70%),
+    var(--bg);
+}
+.wrap{padding:0 20px 90px}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--font-mono);font-size:.9em;background:var(--surface-2);border:1px solid var(--border-2);border-radius:4px;padding:1px 6px;color:var(--accent-text)}
+strong{font-weight:700}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.rise{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.05s}.d2{animation-delay:.12s}.d3{animation-delay:.19s}.d4{animation-delay:.26s}
+
+/* ── HERO ── */
+.brand-header{display:flex;align-items:center;justify-content:center;padding:42px 0 26px}
+.brand-logo{width:96px;height:auto;display:block;border-radius:6px}
+.hero{text-align:center;margin-bottom:26px}
+.hero .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);padding:5px 13px;border-radius:30px;margin-bottom:18px}
+.hero h1{font-family:var(--font-display);font-size:40px;font-weight:700;letter-spacing:-1px;line-height:1.08;margin-bottom:14px}
+.hero .lead{font-size:16.5px;color:var(--text-muted);max-width:600px;margin:0 auto;line-height:1.6}
+.reassure{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.reassure span{font-size:12.5px;font-weight:600;color:var(--text-muted);background:var(--surface);border:1px solid var(--border-2);padding:7px 13px;border-radius:30px;display:inline-flex;align-items:center;gap:6px}
+@media(max-width:640px){.hero h1{font-size:30px}.brand-header{padding:30px 0 20px}}
+
+/* ── CARD ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px}
+.card-title{font-family:var(--font-display);font-size:19px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:9px;letter-spacing:-.2px}
+.card p{color:var(--text-muted);font-size:14.5px;margin-bottom:10px}
+.card p:last-child{margin-bottom:0}
+.card strong{color:var(--text)}
+
+/* ── INTRO CHECKLIST ── */
+.checklist{list-style:none;padding:0;margin:6px 0 0}
+.checklist li{display:flex;align-items:flex-start;gap:11px;padding:8px 0;font-size:14.5px;color:var(--text-muted);border-bottom:1px solid var(--border)}
+.checklist li:last-child{border-bottom:none}
+.checklist .chk{flex-shrink:0;width:22px;height:22px;border-radius:7px;background:var(--accent-dim-2);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;margin-top:1px}
+.checklist strong{color:var(--text)}
+
+/* ── COMMAND LINES ── */
+.cmd-line{display:flex;align-items:center;gap:10px;background:#070807;border:1px solid var(--border-2);border-radius:var(--radius);padding:11px 13px;margin:9px 0;font-family:var(--font-mono);font-size:13.5px;color:var(--accent);overflow-x:auto}
+.cmd-text{flex:1;white-space:pre}
+.copy-cmd{flex-shrink:0;font-size:11px;font-weight:700;padding:5px 11px;border-radius:6px;border:1px solid var(--border-2);background:var(--surface);color:var(--text-muted);cursor:pointer;transition:all .15s;font-family:var(--font-body)}
+.copy-cmd:hover{border-color:var(--accent-border);color:var(--accent);background:var(--accent-dim)}
+.copy-cmd.copied{background:var(--accent);color:#0a0a0a;border-color:var(--accent)}
+
+/* ── PREREQ ROWS ── */
+.prereq{padding:12px 14px;background:var(--surface-2);border-radius:var(--radius);display:flex;align-items:flex-start;gap:12px}
+.prereq + .prereq{margin-top:10px}
+.prereq .tick{font-size:18px;line-height:1.4}
+.prereq-title{font-weight:700;color:var(--text);font-size:14px}
+.prereq-sub{font-size:12.5px;color:var(--text-dim);margin-top:2px}
+.pill{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:5px;background:var(--orange-bg);color:var(--orange);margin-left:6px;vertical-align:middle}
+
+/* ── CALLOUTS ── */
+.callout{padding:13px 16px;border-radius:var(--radius);margin:13px 0 0;font-size:13.5px;line-height:1.6;border-left:3px solid}
+.callout strong{color:inherit}
+.callout-info{background:var(--blue-bg);border-color:var(--blue);color:#c3d8ff}
+.callout-tip{background:var(--green-bg);border-color:var(--green);color:#bbf3cf}
+.callout-warning{background:var(--orange-bg);border-color:var(--orange);color:#ffe0b0}
+
+/* ── KEYBOARD ── */
+.kbd{display:inline-block;font-family:var(--font-mono);font-size:11px;line-height:1;padding:3px 6px;border-radius:5px;background:#070807;border:1px solid var(--border-2);border-bottom-width:2px;color:var(--text)}
+
+/* ── AI GUIDE PROMPT ── */
+.ai-card{background:linear-gradient(135deg,var(--accent-dim-2),var(--surface) 60%);border:1px solid var(--accent-border);border-radius:var(--radius-lg);padding:22px;margin-bottom:16px}
+.ai-card .card-title{color:var(--accent-text)}
+.ai-prompt{position:relative;background:#070807;border:1px solid var(--border-2);border-radius:var(--radius);margin-top:12px}
+.ai-prompt pre{white-space:pre-wrap;word-break:break-word;font-family:var(--font-mono);font-size:12px;line-height:1.6;color:var(--text);padding:16px 16px 14px;margin:0}
+.ai-prompt .copy-prompt{position:absolute;top:10px;right:10px;font-size:11px;font-weight:800;padding:7px 13px;border-radius:7px;border:1px solid var(--accent-border);background:var(--accent);color:#0a0a0a;cursor:pointer;transition:all .15s;font-family:var(--font-body)}
+.ai-prompt .copy-prompt:hover{opacity:.9}
+.ai-prompt .copy-prompt.copied{background:#070807;color:var(--accent);border-color:var(--accent)}
+
+/* ── PATH FORK ── */
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+@media(max-width:640px){.fork{grid-template-columns:1fr}}
+.fork-card{display:flex;flex-direction:column;gap:9px;padding:18px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border-2);text-decoration:none;transition:all .15s}
+.fork-card:hover{border-color:var(--accent-border);background:var(--surface-2);text-decoration:none;transform:translateY(-2px)}
+.fork-card.alt{background:linear-gradient(135deg,var(--accent-dim-2),var(--surface) 72%);border-color:var(--accent-border)}
+.fork-ic{font-size:24px;line-height:1}
+.fork-tx{font-size:13px;color:var(--text-muted);line-height:1.5}
+.fork-tx strong{display:block;font-family:var(--font-display);font-size:16px;color:var(--text);margin-bottom:3px;font-weight:700;letter-spacing:-.2px}
+.fork-go{font-size:12.5px;font-weight:800;color:var(--accent);margin-top:auto}
+[id]{scroll-margin-top:96px}
+
+/* ── STICKY PROGRESS TRACKER ── */
+.tracker{position:sticky;top:0;z-index:40;margin:0 -20px 18px;padding:14px 20px;background:rgba(12,13,12,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-2)}
+.tracker-inner{max-width:760px;margin:0 auto}
+.tracker-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.tracker-label{font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:-.2px;display:flex;align-items:center;gap:8px}
+.tracker-count{font-size:13px;color:var(--text-muted);font-weight:600}
+.tracker-count b{color:var(--accent);font-size:15px}
+.tracker-seg{display:flex;gap:5px}
+.tseg{flex:1;height:7px;border-radius:5px;background:var(--surface-3);overflow:hidden;position:relative}
+.tseg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--accent),#a6f659);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.tseg.on::after{transform:scaleX(1)}
+.tracker-reset{margin-top:8px;text-align:right}
+.tracker-reset button{background:none;border:0;color:var(--text-dim);font-size:11.5px;cursor:pointer;font-family:var(--font-body);text-decoration:underline}
+.tracker-reset button:hover{color:var(--text-muted)}
+
+/* ── METHOD TOGGLE ── */
+.method-wrap{text-align:center;margin:4px 0 16px}
+.method-toggle{display:inline-flex;gap:4px;background:var(--surface-2);border:1px solid var(--border-2);border-radius:11px;padding:4px}
+.method-btn{appearance:none;border:0;background:transparent;color:var(--text-muted);font-family:var(--font-body);font-size:13px;font-weight:700;padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+.method-btn:hover{color:var(--text)}
+.method-btn.active{background:var(--accent);color:#0a0a0a}
+.method-note{font-size:12.5px;color:var(--text-dim);margin:8px 0 0}
+.m-terminal{display:none}
+body.show-terminal .m-vscode{display:none}
+body.show-terminal .m-terminal{display:block}
+
+/* ── STEP ACCORDION ── */
+.step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:12px;overflow:hidden;transition:border-color .2s}
+.step[open]{border-color:var(--border-2)}
+.step.done{border-color:rgba(121,234,32,.22)}
+.step-sum{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:17px 20px;user-select:none}
+.step-sum::-webkit-details-marker{display:none}
+.step-sum:hover{background:var(--surface-2)}
+.step-check{flex-shrink:0;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:15px;font-weight:800;background:var(--surface-3);border:1px solid var(--border-2);color:var(--text-muted);transition:all .25s}
+.step[open] .step-check{background:var(--accent-dim-2);border-color:var(--accent-border);color:var(--accent)}
+.step.done .step-check{background:var(--accent);border-color:var(--accent);color:#0a0a0a}
+.step.done .step-check .num{display:none}
+.step-check .tick{display:none}
+.step.done .step-check .tick{display:block;font-size:15px}
+.step-titles{flex:1;min-width:0}
+.step-t{display:block;font-family:var(--font-display);font-size:16.5px;font-weight:700;color:var(--text);letter-spacing:-.2px;line-height:1.25}
+.step.done .step-t{color:var(--text-muted)}
+.step-sub{display:block;font-size:12.5px;color:var(--text-dim);margin-top:2px}
+.step-meta{flex-shrink:0;display:flex;align-items:center;gap:12px}
+.time{font-size:11px;font-weight:700;color:var(--text-dim);background:var(--surface-2);border:1px solid var(--border-2);padding:3px 9px;border-radius:20px;white-space:nowrap}
+.step.done .time{display:none}
+.done-flag{display:none;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent)}
+.step.done .done-flag{display:inline}
+.chev{color:var(--text-dim);font-size:13px;transition:transform .25s;font-family:var(--font-mono)}
+.step[open] .chev{transform:rotate(180deg)}
+.step-content{padding:2px 20px 20px;border-top:1px solid var(--border)}
+.step-content > p:first-child{margin-top:14px}
+
+/* done button */
+.done-btn{margin-top:18px;width:100%;padding:13px;border-radius:var(--radius);border:1px solid var(--accent-border);background:var(--accent-dim);color:var(--accent);font-family:var(--font-body);font-size:14px;font-weight:800;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.done-btn:hover{background:var(--accent-dim-2)}
+.step.done .done-btn{background:transparent;color:var(--text-dim);border-color:var(--border-2);font-weight:600}
+
+/* ── SUB-STEP ── */
+.substep{display:flex;gap:13px;padding:5px 0 3px}
+.substep-badge{flex-shrink:0;width:24px;height:24px;border-radius:7px;background:var(--surface-3);border:1px solid var(--border-2);color:var(--accent);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;font-family:var(--font-display)}
+.substep-body{flex:1;font-size:14px;color:var(--text-muted);line-height:1.55}
+.substep-body strong{color:var(--text)}
+.tag-tab{display:inline-flex;align-items:center;font-size:12px;font-weight:800;padding:1px 8px;border-radius:6px;background:var(--accent-dim-2);color:var(--accent-text);border:1px solid var(--accent-border);white-space:nowrap}
+.tag-click{display:inline-flex;align-items:center;font-size:12px;font-weight:800;padding:1px 8px;border-radius:6px;background:#070807;border:1px solid var(--border-2);color:var(--text)}
+.indent{margin-left:37px}
+
+/* ── UI MOCKUP: Manage Plugins ── */
+.uimock{border:1px solid var(--border-2);border-radius:11px;overflow:hidden;margin:12px 0;background:var(--surface-2);box-shadow:0 14px 40px rgba(0,0,0,.45)}
+.uimock-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#0b0c0b;border-bottom:1px solid var(--border-2)}
+.uimock-bar .ttl{font-size:12.5px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:7px}
+.uimock-bar .ttl::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.uimock-bar .x{color:var(--text-dim);font-size:15px;line-height:1}
+.uimock-tabs{display:flex;padding:0 10px;background:#0b0c0b;border-bottom:1px solid var(--border-2)}
+.uimock-tab{padding:9px 15px;font-size:12.5px;font-weight:700;color:var(--text-dim);border-bottom:2px solid transparent}
+.uimock-tab.on{color:var(--accent);border-bottom-color:var(--accent)}
+.uimock-body{padding:14px}
+.uimock-search{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#070807;border:1px solid var(--border-2);border-radius:7px;color:var(--text-dim);font-size:12.5px;margin-bottom:10px}
+.uimock-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;background:#070807;border:1px solid var(--border-2);border-radius:7px}
+.uimock-row .nm{font-size:13px;font-weight:800;color:var(--text)}
+.uimock-row .ds{font-size:11.5px;color:var(--text-dim);margin-top:2px}
+.uimock-pill{flex-shrink:0;font-size:11.5px;font-weight:800;padding:6px 16px;border-radius:6px;background:var(--accent);color:#0a0a0a}
+.uimock-add{display:flex;gap:8px;align-items:center}
+.uimock-add .inp{flex:1;min-width:0;padding:9px 12px;background:#070807;border:1px solid var(--accent-border);border-radius:7px;color:var(--accent-text);font-family:var(--font-mono);font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.uimock-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--text-dim);margin-bottom:8px}
+.uimock-cap{font-size:11.5px;color:var(--text-dim);text-align:center;padding:9px 14px;background:#0b0c0b;border-top:1px solid var(--border-2)}
+.uimock-cap strong{color:var(--accent-text)}
+/* scope menu mock */
+.scopemock{border:1px solid var(--border-2);border-radius:11px;overflow:hidden;margin:12px 0;background:var(--surface-2);box-shadow:0 14px 40px rgba(0,0,0,.45)}
+.scopemock-h{padding:11px 14px;font-size:12.5px;font-weight:800;color:var(--text);background:#0b0c0b;border-bottom:1px solid var(--border-2)}
+.scope-opt{display:flex;align-items:center;gap:11px;padding:11px 14px;font-size:12.5px;border-bottom:1px solid var(--border)}
+.scope-opt:last-child{border-bottom:0}
+.scope-opt.pick{background:var(--accent-dim)}
+.scope-opt .dot{width:15px;height:15px;border-radius:50%;border:2px solid var(--text-dim);flex-shrink:0}
+.scope-opt.pick .dot{border-color:var(--accent);background:radial-gradient(circle,#0a0a0a 0 30%,var(--accent) 38%)}
+.scope-opt .lbl{font-weight:800;color:var(--text)}
+.scope-opt .sub{color:var(--text-dim);margin-left:4px}
+.scope-opt .rec{margin-left:auto;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#0a0a0a;background:var(--accent);padding:3px 8px;border-radius:5px}
+
+/* ── SCREENSHOT (real only) ── */
+.shot{margin:13px 0 2px}
+.shot img{display:block;width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--border-2)}
+.shot figcaption{font-size:12.5px;color:var(--text-dim);margin-top:8px;line-height:1.5}
+.shot figcaption strong{color:var(--text-muted)}
+
+/* ── PHASES TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+.tbl th{text-align:left;padding:10px 12px;background:var(--surface-2);border-bottom:1px solid var(--border-2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text-muted);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td strong{color:var(--text)}
+
+/* ── FINISH BANNER ── */
+.finish{display:none;text-align:center;padding:34px 26px;margin:8px 0 20px;background:linear-gradient(135deg,var(--accent-dim-2),var(--surface));border:1px solid var(--accent-border);border-radius:var(--radius-lg)}
+.finish.show{display:block;animation:rise .5s ease both}
+.finish-emoji{font-size:42px;line-height:1;margin-bottom:10px}
+.finish-h{font-family:var(--font-display);font-size:26px;font-weight:800;color:var(--accent-text);letter-spacing:-.4px;margin-bottom:8px}
+.finish-p{font-size:14.5px;color:var(--text-muted);max-width:460px;margin:0 auto;line-height:1.6}
+
+/* ── SECTION RULE ── */
+.section-rule{display:flex;align-items:center;gap:14px;margin:30px 4px 10px;color:var(--text-dim);font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}
+.section-rule::before,.section-rule::after{content:'';height:1px;background:var(--border);flex:1}
+
+/* ── FAQ ── */
+.faq{border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.faq details{border-bottom:1px solid var(--border)}
+.faq details:last-child{border-bottom:none}
+.faq summary{cursor:pointer;padding:14px 18px;font-size:14.5px;font-weight:700;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--surface)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--accent);font-size:18px;font-weight:700;flex-shrink:0}
+.faq details[open] summary::after{content:'\2212'}
+.faq summary:hover{background:var(--surface-2)}
+.faq .faq-body{padding:0 18px 16px;font-size:13.5px;color:var(--text-muted);line-height:1.65}
+
+/* ── FOOTER ── */
+.footer{text-align:center;margin-top:38px;padding-top:22px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="brand-header rise">
+    <img class="brand-logo" src="../clo-community/assets/clo-logo-full.png" alt="Chief Leverage Officer" onerror="this.style.display='none'">
+  </div>
+
+  <!-- HERO -->
+  <div class="hero rise d1">
+    <div class="eyebrow">&#128273; Get Access</div>
+    <h1>Let's get your AI&nbsp;Employee running</h1>
+    <p class="lead">Six small steps, all inside VS Code &mdash; no terminal required, no coding. Tick each one off as you go. If you ever get stuck, Claude itself will walk you through it.</p>
+    <div class="reassure">
+      <span>&#9201;&#65039; ~20 minutes</span>
+      <span>&#9989; 6 simple steps</span>
+      <span>&#129302; Claude helps if stuck</span>
+    </div>
+  </div>
+
+  <!-- PATH FORK -->
+  <div class="fork rise d2">
+    <a class="fork-card" href="#step1">
+      <span class="fork-ic">&#128075;</span>
+      <span class="fork-tx"><strong>New to Claude Code?</strong>Start at Step&nbsp;1 &mdash; we'll get it installed first. Everything after that is guided.</span>
+      <span class="fork-go">Start with Step 1 &rarr;</span>
+    </a>
+    <a class="fork-card alt" href="#shortcut">
+      <span class="fork-ic">&#9889;</span>
+      <span class="fork-tx"><strong>Already use Claude Code?</strong>Skip the manual steps &mdash; let Claude install the rest for you.</span>
+      <span class="fork-go">Jump to the shortcut &rarr;</span>
+    </a>
+  </div>
+
+  <!-- STICKY PROGRESS TRACKER -->
+  <div class="tracker">
+    <div class="tracker-inner">
+      <div class="tracker-top">
+        <span class="tracker-label">&#128640; Your setup progress</span>
+        <span class="tracker-count"><b id="doneCount">0</b> of 6 done</span>
+      </div>
+      <div class="tracker-seg" id="trackerSeg">
+        <div class="tseg" data-d="1"></div><div class="tseg" data-d="2"></div><div class="tseg" data-d="3"></div>
+        <div class="tseg" data-d="4"></div><div class="tseg" data-d="5"></div><div class="tseg" data-d="6"></div>
+      </div>
+      <div class="tracker-reset"><button onclick="resetProgress()">Reset progress</button></div>
+    </div>
+  </div>
+
+  <!-- METHOD TOGGLE -->
+  <div class="method-wrap">
+    <div class="method-toggle" role="tablist" aria-label="Choose install method">
+      <button class="method-btn active" id="mb-vscode" onclick="setMethod('vscode')">&#128421;&#65039; VS Code (click)</button>
+      <button class="method-btn" id="mb-terminal" onclick="setMethod('terminal')">&#9000;&#65039; Terminal (type)</button>
+    </div>
+    <div class="method-note m-vscode">Recommended &mdash; you click through the Claude Code panel. Steps 3 &amp; 5 match this.</div>
+    <div class="method-note m-terminal">For the command-line crowd &mdash; you type into the <code>claude</code> terminal. Steps 3 &amp; 5 match this.</div>
+  </div>
+
+  <!-- ═══════════════ STEP 1 ═══════════════ -->
+  <details class="step" id="step1" data-step="1" open>
+    <summary class="step-sum">
+      <span class="step-check"><span class="num">1</span><span class="tick">&#10003;</span></span>
+      <span class="step-titles"><span class="step-t">Install Claude Code</span><span class="step-sub">Get the editor + extension running</span></span>
+      <span class="step-meta"><span class="time">~8 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+    </summary>
+    <div class="step-content">
+      <p>This is the one part you set up by hand &mdash; and once Claude Code is running, Claude can do almost everything after this <em>for</em> you. Three quick things:</p>
+
+      <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Have a Claude subscription</strong> (Pro, Max, or Teams) &mdash; this powers Claude Code. Sign up at <a href="https://claude.ai" target="_blank">claude.ai</a> if you don't have one yet.</div></div>
+
+      <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Install VS Code</strong> &mdash; the free editor you'll work in. Download it from <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a> and run the installer with the default options.</div></div>
+
+      <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Add the Claude Code extension &amp; sign in.</strong> Open VS Code, open the <strong>Extensions</strong> panel (<span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span> / <span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span>), search <strong>"Claude Code"</strong>, and click <strong>Install</strong> on the first result by Anthropic. Then click the <strong>Spark icon (&#10022;)</strong> top-right to open the panel and <strong>sign in</strong> with your Claude account.</div></div>
+
+      <figure class="shot">
+        <img src="assets/get-access/02-claude-code-extension.png" alt="Installing the Claude Code extension in VS Code" onerror="this.closest('figure').style.display='none'">
+        <figcaption><strong>What you'll see:</strong> search <strong>"Claude Code"</strong> in the Extensions panel and click <strong>Install</strong> on the first result by Anthropic.</figcaption>
+      </figure>
+
+      <div class="callout callout-tip"><strong>That's the only manual install.</strong> One more tool (Node.js) is needed later &mdash; but you don't install it yourself. In Step&nbsp;3, Claude sets it up for you from the terminal.</div>
+      <div class="callout callout-info"><strong>Already use Claude Code?</strong> If the extension is installed and you're signed in, tick this and jump to Step&nbsp;3.</div>
+      <button class="done-btn" onclick="markDone(1)"><span class="dlabel">Mark step done</span></button>
+    </div>
+  </details>
+
+  <!-- ═══════════════ AI SHORTCUT (usable once Claude Code is installed) ═══════════════ -->
+  <div class="ai-card" id="shortcut">
+    <div class="card-title">&#9889; Got Claude Code open? Let Claude do the rest</div>
+    <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude installs Node.js for you, runs every command it can in the terminal, and only asks you to do something by hand when it truly can't (like pasting your license key). It fixes any errors as they come up. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
+    <div class="ai-prompt">
+      <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
+      <pre>I want to install the CLO-OS Community plugin in Claude Code, and I'd like you to do as much of it for me as you can — using the terminal where possible — and only ask me to do something by hand when you truly can't. Verify each part worked and tell me the result before moving on.
+
+1. NODE.JS — Run `node --version` in the terminal. If it's missing or older than v18, install the latest LTS for me (winget on Windows, Homebrew on macOS, or the right package manager for my system) and confirm it works.
+
+2. SKILLSTACK (the system that delivers the plugin) — Try to add and install it from the terminal:
+   claude plugin marketplace add https://github.com/SkillStacks/skillstack.git
+   claude plugin install skillstack@skillstack-marketplace --scope user
+   If the terminal can't do it on my version, tell me the exact slash commands to type in the chat instead (/plugin marketplace add … then /plugin install …) and wait.
+
+3. LICENSE — Tell me when you're ready and I'll paste my Lemon Squeezy license key. Then activate it (run the /activate-license flow, or use the SkillStack tools if you have them). Note the storefront and commands it resolves to.
+
+4. CLO-COMMUNITY — Add my clo-os storefront and install the clo-community plugin (try the terminal first with `claude plugin …`; fall back to telling me the slash commands).
+
+5. RELOAD &amp; ONBOARD — Reload plugins, then kick off onboarding by running "onboard me".
+
+Rules: you can't type slash commands into the chat box for me — when a step needs that, give me the exact thing to paste and wait. Do everything else yourself. After each step, confirm it worked or show me the error and the fix. Start now with step 1 (Node.js).</pre>
+    </div>
+    <div class="callout callout-tip" style="margin-top:14px">Rather do it by hand? Just keep following Steps&nbsp;2&ndash;6 below &mdash; each is short, and you can tick them off as you go.</div>
+  </div>
+
+  <!-- ═══════════════ STEP 2 ═══════════════ -->
+  <details class="step" id="step2" data-step="2">
+    <summary class="step-sum">
+      <span class="step-check"><span class="num">2</span><span class="tick">&#10003;</span></span>
+      <span class="step-titles"><span class="step-t">Find your license key</span><span class="step-sub">It's in your Lemon Squeezy email</span></span>
+      <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+    </summary>
+    <div class="step-content">
+      <p>When you subscribed through <strong>Lemon Squeezy</strong>, you were issued a license key &mdash; a line of letters and numbers like this:</p>
+      <div class="cmd-line"><span class="cmd-text" style="color:var(--text-dim)">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</span></div>
+      <p style="margin-top:14px">Two places to find it:</p>
+      <div class="prereq"><div style="flex:1"><div class="prereq-title">&#9993;&#65039; Your purchase email</div><div class="prereq-sub">Lemon Squeezy emailed you a receipt right after you bought (from <code>noreply@lemonsqueezy.com</code>). Your key is printed inside. Can't find it? Check spam, or search your inbox for <strong>"Chief Leverage Officer"</strong> or <strong>"license"</strong>.</div></div></div>
+      <div class="prereq"><div style="flex:1"><div class="prereq-title">&#128273; The "My Orders" page</div><div class="prereq-sub">Go to <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">app.lemonsqueezy.com/my-orders</a>, enter the email you bought with, and click the magic link. Open your order &mdash; the key (with a copy button) is right there. You can also renew or manage your subscription here.</div></div></div>
+      <div class="callout callout-tip"><strong>Copy it somewhere handy.</strong> You'll paste it once, in Step&nbsp;4. The same key works on every computer you use.</div>
+      <button class="done-btn" onclick="markDone(2)"><span class="dlabel">Mark step done</span></button>
+    </div>
+  </details>
+
+  <!-- ═══════════════ STEP 3 ═══════════════ -->
+  <details class="step" id="step3" data-step="3">
+    <summary class="step-sum">
+      <span class="step-check"><span class="num">3</span><span class="tick">&#10003;</span></span>
+      <span class="step-titles"><span class="step-t">Add SkillStack</span><span class="step-sub">The delivery system for paid plugins &mdash; one time</span></span>
+      <span class="step-meta"><span class="time">~3 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+    </summary>
+    <div class="step-content">
+      <p><strong>What SkillStack is:</strong> the secure marketplace that delivers paid Claude Code plugins. You install it <strong>once, ever</strong> &mdash; after that, one login covers every CLO-OS plugin you own.</p>
+
+      <div class="callout callout-tip"><strong>Let Claude install Node.js first.</strong> SkillStack needs Node.js to deliver the plugin &mdash; but you don't have to. Open the Claude Code panel (Spark icon &#10022;) and paste this; Claude checks for Node and installs it from the terminal if it's missing:<div class="cmd-line" style="margin-top:8px"><span class="cmd-text">Check if Node.js v18+ is installed by running node --version, and if it's missing or older, install the latest LTS for me and confirm it works.</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>Then carry on below. <span style="color:var(--text-dim)">(Manual fallback: install the <strong>LTS</strong> build from <a href="https://nodejs.org" target="_blank">nodejs.org</a> and restart VS Code.)</span></div>
+
+      <!-- VS CODE -->
+      <div class="m-vscode">
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the Claude Code panel.</strong> Click the <strong>Spark icon (&#10022;)</strong> in the top-right of VS Code (it shows when a file is open), or <strong>"&#10022; Claude Code"</strong> in the bottom status bar. <span style="color:var(--text-dim)">(Shortcut: <span class="kbd">Ctrl</span>+<span class="kbd">Esc</span> / <span class="kbd">Cmd</span>+<span class="kbd">Esc</span>.)</span></div></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Open the plugin manager.</strong> In the chat box, type <code>/plugin</code> &mdash; a menu pops up. <strong>Click <span class="tag-click">Manage Plugins</span></strong> (don't just press Enter). It opens with two tabs.</div></div>
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Open the <span class="tag-tab">Marketplaces</span> tab</strong> and paste this into the "add a marketplace" box, then add it:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">https://github.com/SkillStacks/skillstack.git</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="uimock indent">
+          <div class="uimock-bar"><span class="ttl">Manage plugins</span><span class="x">&times;</span></div>
+          <div class="uimock-tabs"><span class="uimock-tab">Plugins</span><span class="uimock-tab on">Marketplaces</span></div>
+          <div class="uimock-body"><div class="uimock-label">Add a marketplace</div><div class="uimock-add"><span class="inp">https://github.com/SkillStacks/skillstack.git</span><span class="uimock-pill">Add</span></div></div>
+          <div class="uimock-cap">Paste the URL &rarr; click <strong>Add</strong></div>
+        </div>
+        <div class="substep"><div class="substep-badge">4</div><div class="substep-body"><strong>Switch to the <span class="tag-tab">Plugins</span> tab</strong>, find <strong>skillstack</strong>, and click <strong>Install</strong>.</div></div>
+        <div class="uimock indent">
+          <div class="uimock-bar"><span class="ttl">Manage plugins</span><span class="x">&times;</span></div>
+          <div class="uimock-tabs"><span class="uimock-tab on">Plugins</span><span class="uimock-tab">Marketplaces</span></div>
+          <div class="uimock-body"><div class="uimock-search">&#128269; Search plugins&hellip;</div><div class="uimock-row"><div><div class="nm">skillstack</div><div class="ds">Securely installs &amp; licenses paid plugins</div></div><span class="uimock-pill">Install</span></div></div>
+          <div class="uimock-cap">Find <strong>skillstack</strong> &rarr; click <strong>Install</strong></div>
+        </div>
+        <div class="substep"><div class="substep-badge">5</div><div class="substep-body"><strong>Choose where to install</strong> &mdash; pick <strong>Install for you</strong> so it works in every project.</div></div>
+        <div class="scopemock indent">
+          <div class="scopemock-h">Where should this plugin be installed?</div>
+          <div class="scope-opt pick"><span class="dot"></span><span><span class="lbl">Install for you</span><span class="sub">&mdash; all your projects</span></span><span class="rec">Pick this</span></div>
+          <div class="scope-opt"><span class="dot"></span><span><span class="lbl">Install for this project</span><span class="sub">&mdash; shared with collaborators</span></span></div>
+          <div class="scope-opt"><span class="dot"></span><span><span class="lbl">Install locally</span><span class="sub">&mdash; only this folder</span></span></div>
+        </div>
+        <div class="callout callout-warning" style="margin-top:14px"><strong>A banner will ask you to restart Claude Code &mdash; that's expected.</strong> Click it, or type <code>/reload-plugins</code>. (If stuck: <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> / <span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> &rarr; <strong>"Reload Window."</strong>)</div>
+        <div class="callout callout-tip"><strong>Prefer typing?</strong> Paste these two into the chat instead (pick "Install for you" when asked):<div class="cmd-line" style="margin-top:8px"><span class="cmd-text">/plugin marketplace add https://github.com/SkillStacks/skillstack.git</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/plugin install skillstack@skillstack-marketplace</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
+      </div>
+
+      <!-- TERMINAL -->
+      <div class="m-terminal">
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the terminal</strong> &mdash; in VS Code press <span class="kbd">Ctrl</span>+<span class="kbd">`</span> (backtick, top-left of your keyboard), then start Claude Code:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">claude</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Add SkillStack and install it</strong> &mdash; choose <strong>"Install for you"</strong> when it asks about scope:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">/plugin marketplace add https://github.com/SkillStacks/skillstack.git</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-line indent"><span class="cmd-text">/plugin install skillstack@skillstack-marketplace</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Load it:</strong></div></div>
+        <div class="cmd-line indent"><span class="cmd-text">/reload-plugins</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+      </div>
+
+      <button class="done-btn" onclick="markDone(3)"><span class="dlabel">Mark step done</span></button>
+    </div>
+  </details>
+
+  <!-- ═══════════════ STEP 4 ═══════════════ -->
+  <details class="step" id="step4" data-step="4">
+    <summary class="step-sum">
+      <span class="step-check"><span class="num">4</span><span class="tick">&#10003;</span></span>
+      <span class="step-titles"><span class="step-t">Activate your license</span><span class="step-sub">Paste your key once</span></span>
+      <span class="step-meta"><span class="time">~1 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+    </summary>
+    <div class="step-content">
+      <p>Now hand SkillStack your key. In the same Claude session (panel or terminal), type:</p>
+      <div class="cmd-line"><span class="cmd-text">/activate-license</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+      <p style="margin-top:10px">When it asks for your key, <strong>paste the license key from Step&nbsp;2</strong> and press Enter. It points your computer at the SkillStack registry (automatic), confirms your key, recognizes it belongs to <strong>clo-community</strong>, and <strong>prints the exact two commands</strong> you'll use in Step&nbsp;5.</p>
+      <div class="callout callout-info"><strong>Subscription license:</strong> access stays active while your subscription is, and every update ships to you automatically. One key activates one plugin &mdash; any other CLO-OS plugin comes with its own key that links to the same login.</div>
+      <button class="done-btn" onclick="markDone(4)"><span class="dlabel">Mark step done</span></button>
+    </div>
+  </details>
+
+  <!-- ═══════════════ STEP 5 ═══════════════ -->
+  <details class="step" id="step5" data-step="5">
+    <summary class="step-sum">
+      <span class="step-check"><span class="num">5</span><span class="tick">&#10003;</span></span>
+      <span class="step-titles"><span class="step-t">Install clo-community</span><span class="step-sub">The actual skill library</span></span>
+      <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+    </summary>
+    <div class="step-content">
+      <p>Step&nbsp;4 just printed two commands tailored to your account &mdash; <strong>use the ones it gave you</strong> (they'll look like the ones here).</p>
+
+      <!-- VS CODE -->
+      <div class="m-vscode">
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the plugin manager again</strong> &mdash; type <code>/plugin</code> and <strong>click <span class="tag-click">Manage Plugins</span></strong> (same as Step&nbsp;3).</div></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong><span class="tag-tab">Marketplaces</span> tab</strong> &rarr; paste your storefront URL (the one <code>/activate-license</code> printed &mdash; like the line below) and add it:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">https://store.skillstack.sh/s/the2hourclo/clo-os/marketplace.json</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong><span class="tag-tab">Plugins</span> tab</strong> &rarr; find <strong>clo-community</strong> &rarr; click <strong>Install</strong> &rarr; <strong>Install for you</strong>.</div></div>
+        <div class="uimock indent">
+          <div class="uimock-bar"><span class="ttl">Manage plugins</span><span class="x">&times;</span></div>
+          <div class="uimock-tabs"><span class="uimock-tab on">Plugins</span><span class="uimock-tab">Marketplaces</span></div>
+          <div class="uimock-body"><div class="uimock-search">&#128269; Search plugins&hellip;</div><div class="uimock-row"><div><div class="nm">clo-community</div><div class="ds">The CLO-OS Community Bundle &mdash; full skill library</div></div><span class="uimock-pill">Install</span></div></div>
+          <div class="uimock-cap">Find <strong>clo-community</strong> &rarr; <strong>Install</strong> &rarr; <strong>Install for you</strong></div>
+        </div>
+        <div class="callout callout-warning" style="margin-top:14px"><strong>Restart when the banner appears</strong> (or type <code>/reload-plugins</code>) to finish loading clo-community.</div>
+        <div class="callout callout-tip"><strong>Prefer typing?</strong> Paste the two commands <code>/activate-license</code> printed straight into the chat:<div class="cmd-line" style="margin-top:8px"><span class="cmd-text">/plugin marketplace add https://store.skillstack.sh/s/the2hourclo/clo-os/marketplace.json</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/plugin install clo-community@clo-os</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
+      </div>
+
+      <!-- TERMINAL -->
+      <div class="m-terminal">
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body">Back in the same <code>claude</code> terminal, run the two commands it printed (like these) &mdash; choose <strong>"Install for you"</strong>:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">/plugin marketplace add https://store.skillstack.sh/s/the2hourclo/clo-os/marketplace.json</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-line indent"><span class="cmd-text">/plugin install clo-community@clo-os</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Load it:</strong></div></div>
+        <div class="cmd-line indent"><span class="cmd-text">/reload-plugins</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="callout callout-warning"><strong>Use the exact commands <code>/activate-license</code> printed</strong> &mdash; they're tailored to your account. The ones above are just what they look like.</div>
+      </div>
+
+      <div class="callout callout-tip"><strong>Turn on auto-updates</strong> (recommended): type <code>/plugin</code> &rarr; <strong>Manage Plugins</strong> &rarr; <strong>Marketplaces</strong> tab &rarr; select the CLO-OS storefront &rarr; <strong>Enable auto-update</strong>.</div>
+      <button class="done-btn" onclick="markDone(5)"><span class="dlabel">Mark step done</span></button>
+    </div>
+  </details>
+
+  <!-- ═══════════════ STEP 6 ═══════════════ -->
+  <details class="step" id="step6" data-step="6">
+    <summary class="step-sum">
+      <span class="step-check"><span class="num">6</span><span class="tick">&#10003;</span></span>
+      <span class="step-titles"><span class="step-t">Onboard &mdash; build your first AI Employee</span><span class="step-sub">The fun part</span></span>
+      <span class="step-meta"><span class="time">~20 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+    </summary>
+    <div class="step-content">
+      <p>In your Claude session (panel or terminal), simply type:</p>
+      <div class="cmd-line"><span class="cmd-text">onboard me</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+      <p style="margin-top:10px">The plugin runs a guided, five-phase setup &mdash; you just answer its questions:</p>
+      <table class="tbl">
+        <thead><tr><th>Phase</th><th>What happens</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Scaffold</strong></td><td>Builds your workspace folders and settings</td></tr>
+          <tr><td><strong>2. Business X-Ray</strong></td><td>Maps your business and finds where AI can take over real work</td></tr>
+          <tr><td><strong>3. Digital Assets</strong></td><td>Interviews you for your voice, look, audience &amp; methodology</td></tr>
+          <tr><td><strong>4. Connect tools</strong></td><td>Wires up the apps you use (Notion, etc.)</td></tr>
+          <tr><td><strong>5. First skill</strong></td><td>Builds a custom skill aimed at your #1 bottleneck</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12.5px;color:var(--text-dim);margin-top:10px">Takes ~20&ndash;30 minutes. End state: a workspace built around <strong>your</strong> business, with your first AI Employee already running.</p>
+      <button class="done-btn" onclick="markDone(6)"><span class="dlabel">Mark step done</span></button>
+    </div>
+  </details>
+
+  <!-- FINISH BANNER -->
+  <div class="finish" id="finish">
+    <div class="finish-emoji">&#127881;</div>
+    <div class="finish-h">You're all set up!</div>
+    <div class="finish-p">The full CLO-OS skill library is live inside Claude Code, and your workspace is built around your business. Welcome aboard.</div>
+  </div>
+
+  <!-- ═══ STUCK? AI DEBUG ═══ -->
+  <div class="section-rule">If something goes wrong</div>
+
+  <div class="ai-card">
+    <div class="card-title">&#129302; Stuck? Ask Claude to fix it</div>
+    <p>Fastest fix is to let Claude diagnose it live. <strong>Copy this, paste it into Claude Code, and add what you saw</strong> where it says <code>[describe...]</code>.</p>
+    <div class="ai-prompt">
+      <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
+      <pre>I'm installing the CLO-OS Community plugin in Claude Code and I'm stuck.
+
+Here's what happened: [describe the error or what you see on screen].
+
+Please help me fix it. Background on how this install works:
+- It uses SkillStack to deliver the plugin. I add the SkillStack marketplace (https://github.com/SkillStacks/skillstack.git), install the "skillstack" plugin, run /activate-license with my Lemon Squeezy license key, then install "clo-community@clo-os".
+- Node.js (v18+) is required because the plugin is delivered as an npm package.
+
+Check anything you can — run node --version, look at my ~/.npmrc for the @skillstack registry line and auth token, and check whether the marketplace was added and the plugin is enabled (I can open it by typing /plugin and clicking "Manage Plugins"). Then explain the problem in plain English and give me the exact steps to fix it. You can't type slash commands for me, so tell me what to type and wait.</pre>
+    </div>
+  </div>
+
+  <!-- COMMON FIXES -->
+  <div class="card">
+    <div class="card-title">Common fixes</div>
+    <table class="tbl">
+      <thead><tr><th>What you see</th><th>The fix</th></tr></thead>
+      <tbody>
+        <tr><td>A new command doesn't appear</td><td>You skipped a reload. Type <code>/reload-plugins</code>, or reload the window (<span class="kbd">Ctrl/Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> &rarr; "Reload Window").</td></tr>
+        <tr><td>Install fails mentioning <code>npm</code> or <code>node</code></td><td>Node.js isn't installed (Step&nbsp;1, item&nbsp;4). Install the <strong>LTS</strong> build from <a href="https://nodejs.org" target="_blank">nodejs.org</a>, restart VS Code, retry.</td></tr>
+        <tr><td>A <strong>403</strong> error on install</td><td>Your license isn't activated for this plugin yet. Run <code>/activate-license</code> again, paste your key, then retry.</td></tr>
+        <tr><td>"Key bound to other plugin"</td><td>That key is for a different product &mdash; each key activates one plugin. Re-check the key in your Lemon Squeezy email.</td></tr>
+        <tr><td>"Expired" or "Revoked"</td><td>Your subscription lapsed. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">My Orders</a>, then run <code>/activate-license</code> again.</td></tr>
+        <tr><td>Skills don't show up after install</td><td>Close VS Code, delete the folder <code>~/.claude/plugins/cache</code>, reopen, and install again.</td></tr>
+        <tr><td><code>/plugin</code> not recognized</td><td>Claude Code is outdated. Update the extension (Extensions panel &rarr; Claude Code &rarr; update), reload, retry.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-info">Still stuck after the AI prompt? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a> &mdash; or for plugin-delivery issues, <a href="mailto:support@skillstack.sh">support@skillstack.sh</a>.</div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section-rule">FAQ</div>
+  <div class="faq">
+    <details><summary>Do I need to know how to code?</summary><div class="faq-body">No. You copy a few short commands into a chat box and click "Install." If you can copy and paste, you can do this &mdash; and the <strong>"Let Claude install it"</strong> prompt up top will walk you through it.</div></details>
+    <details><summary>Why install SkillStack first, then clo-community?</summary><div class="faq-body">SkillStack is the secure delivery system for paid plugins &mdash; like the app store. You add it once; it checks your license and hands you the exact commands to install clo-community. Two installs, one time.</div></details>
+    <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Yes. The same key activates on every computer you use &mdash; run <code>/activate-license</code> and paste it on each one. No new key per device.</div></details>
+    <details><summary>Why does it need Node.js?</summary><div class="faq-body">SkillStack delivers the plugin as a secure npm package, and Node.js (which includes <code>npm</code>) downloads it. Install once from <a href="https://nodejs.org" target="_blank">nodejs.org</a> and never touch it again.</div></details>
+    <details><summary>How do updates work?</summary><div class="faq-body">On a subscription, every update ships automatically &mdash; especially with auto-update on (Step&nbsp;5 tip). To apply updates manually any time, run <code>/skillstack:update-plugins</code>.</div></details>
+    <details><summary>What if my subscription lapses?</summary><div class="faq-body">Access pauses until you renew. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">Lemon Squeezy &rarr; My Orders</a>, then run <code>/activate-license</code> again.</div></details>
+    <details><summary>I already use Claude Code &mdash; can I skip ahead?</summary><div class="faq-body">Yes. If the extension and Node.js are installed, tick Step&nbsp;1 and jump to <strong>Step&nbsp;3</strong>.</div></details>
+    <details><summary>Is the Terminal method different from VS Code?</summary><div class="faq-body">Same result, same commands &mdash; just a different place to type them. The <strong>VS Code</strong> way is click-based and friendly; <strong>Terminal</strong> is for command-line folks. Use the toggle at the top to switch.</div></details>
+  </div>
+
+  <div class="footer">Questions? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a></div>
+
+</div>
+</div>
+
+<script>
+var STEPS = 6, KEY = 'clo_get_access_done_v1';
+function loadDone(){ try { return new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch(e){ return new Set(); } }
+function saveDone(s){ try { localStorage.setItem(KEY, JSON.stringify([].slice.call(s))); } catch(e){} }
+var done = loadDone();
+
+function render(){
+  document.getElementById('doneCount').textContent = done.size;
+  for (var i=1; i<=STEPS; i++){
+    var el = document.getElementById('step'+i);
+    var seg = document.querySelector('.tseg[data-d="'+i+'"]');
+    var on = done.has(i);
+    if (el) {
+      el.classList.toggle('done', on);
+      var lbl = el.querySelector('.dlabel');
+      if (lbl) lbl.textContent = on ? '✓ Done — tap to undo' : 'Mark step done';
+    }
+    if (seg) seg.classList.toggle('on', on);
+  }
+  document.getElementById('finish').classList.toggle('show', done.size === STEPS);
+}
+
+function markDone(n){
+  if (done.has(n)) {
+    done.delete(n);
+  } else {
+    done.add(n);
+    var cur = document.getElementById('step'+n);
+    if (cur) cur.open = false;
+    if (done.size === STEPS) {
+      saveDone(done); render();
+      var fin = document.getElementById('finish');
+      if (fin) setTimeout(function(){ fin.scrollIntoView({behavior:'smooth', block:'center'}); }, 150);
+      return;
+    }
+    // open the next not-yet-done step
+    for (var k=1; k<=STEPS; k++){
+      var idx = ((n - 1 + k) % STEPS) + 1;
+      if (!done.has(idx)) {
+        var nx = document.getElementById('step'+idx);
+        if (nx) { nx.open = true; setTimeout((function(e){ return function(){ e.scrollIntoView({behavior:'smooth', block:'start'}); }; })(nx), 150); }
+        break;
+      }
+    }
+  }
+  saveDone(done); render();
+}
+
+function resetProgress(){ done = new Set(); saveDone(done); render();
+  for (var i=1;i<=STEPS;i++){ var el=document.getElementById('step'+i); if(el) el.open=(i===1); }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// On load: open the first incomplete step, collapse the rest
+(function initOpen(){
+  var firstOpen = null;
+  for (var i=1;i<=STEPS;i++){ if(!done.has(i)){ firstOpen = i; break; } }
+  if (firstOpen === null) firstOpen = 0; // all done
+  for (var j=1;j<=STEPS;j++){ var el=document.getElementById('step'+j); if(el) el.open=(j===firstOpen); }
+  render();
+})();
+
+// Copy a single command line
+function copyCmd(btn){
+  var text = btn.parentElement.querySelector('.cmd-text').textContent.trim();
+  navigator.clipboard.writeText(text).then(function(){
+    var o = btn.textContent; btn.textContent='Copied!'; btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent=o; btn.classList.remove('copied'); }, 1500);
+  });
+}
+// Copy a full AI prompt
+function copyPrompt(btn){
+  var text = btn.parentElement.querySelector('pre').textContent.trim();
+  navigator.clipboard.writeText(text).then(function(){
+    var o = btn.textContent; btn.textContent='Copied!'; btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent=o; btn.classList.remove('copied'); }, 1600);
+  });
+}
+// VS Code / Terminal toggle
+function setMethod(m){
+  document.body.classList.toggle('show-terminal', m === 'terminal');
+  var vb=document.getElementById('mb-vscode'), tb=document.getElementById('mb-terminal');
+  if(vb) vb.classList.toggle('active', m==='vscode');
+  if(tb) tb.classList.toggle('active', m==='terminal');
+}
+</script>
+</body>
+</html>
