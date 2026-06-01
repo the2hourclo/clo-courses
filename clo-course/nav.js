@@ -7,7 +7,8 @@
 window.CLO_PRODUCTS = {
   clo: {
     brand: 'Chief Leverage Officer',
-    title: 'Chief Leverage Officer — Course Portal',
+    title: 'Chief Leverage Officer — Wiki',
+    tierBadge: { label: 'Full Access', star: true },
     storageKey: 'clo_community_license',
     pluginName: 'clo-community',
     license: { store_id: 10600, product_id: 926993, variant_id: 1457440 },
@@ -45,8 +46,9 @@ window.CLO_PRODUCTS = {
     ]
   },
   aieb: {
-    brand: 'AI Employee Builder',
-    title: 'AI Employee Builder — Course Portal',
+    brand: 'Chief Leverage Officer',
+    title: 'Chief Leverage Officer — AI Employee Builder',
+    tierBadge: { label: 'AI Employee Builder', star: false },
     storageKey: 'aieb_license',
     pluginName: 'ai-employee-builder',
     // TODO: fill AIEB's real Lemon Squeezy IDs before re-enabling the license gate

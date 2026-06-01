@@ -90,7 +90,7 @@
   function renderLock(msg) {
     lockShell(
       '<div class="clo-lock-icon">🔒</div>' +
-      '<h1>' + P.brand + ' Course Portal</h1>' +
+      '<h1>' + P.brand + ' Wiki</h1>' +
       '<p class="clo-lock-lead">Enter your license key to unlock the course library.</p>' +
       '<form class="clo-lock-form" id="cloUnlock">' +
         '<label for="cloKey">License key</label>' +
@@ -171,12 +171,22 @@
         }).join('') + '</div>';
     }).join('');
 
+    // tier badge next to the wordmark — constant CLO brand, swappable tier (AI Employee Builder ↔ ★ Full Access)
+    var tb = P.tierBadge;
+    var tierStyle = 'display:inline-flex;align-items:center;margin-left:4px;font-size:11px;font-weight:800;letter-spacing:.2px;padding:3px 9px;border-radius:99px;white-space:nowrap;';
+    var tierHtml = tb
+      ? '<span class="clo-tier" style="' + tierStyle + (tb.star
+          ? 'color:#0a0a0a;background:var(--accent);border:1px solid var(--accent);'
+          : 'color:var(--text-300);background:var(--bg-100);border:1px solid var(--border-100);') + '">'
+        + (tb.star ? '★ ' : '') + tb.label + '</span>'
+      : '';
+
     var shell = document.createElement('div');
     shell.className = 'clo-shell';
     shell.innerHTML =
       '<header class="clo-topbar">' +
         '<button class="clo-hamburger" id="cloHam" aria-label="Toggle navigation">' + ICON.menu + '</button>' +
-        '<a class="clo-logo" href="' + resolveHref(HOME) + '"><img src="' + LOGO + '" alt="' + P.brand + '"><span>' + P.brand + '</span></a>' +
+        '<a class="clo-logo" href="' + resolveHref(HOME) + '"><img src="' + LOGO + '" alt="' + P.brand + '"><span>' + P.brand + '</span></a>' + tierHtml +
         '<button class="clo-search-trigger" id="cloSearchBtn" aria-label="Search">' + ICON.search + '<span class="s-label">Search…</span><span class="kbd">⌘K</span></button>' +
         '<span class="clo-topbar-spacer"></span>' +
         '<a class="clo-topbar-link" href="' + resolveHref(P.community.url) + '"' + ext + '>' + P.community.label + '</a>' +
