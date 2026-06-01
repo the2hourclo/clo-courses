@@ -60,6 +60,11 @@ a{color:inherit}
 .clo-nav-item:hover{background:rgba(255,255,255,.03);color:var(--text-100)}
 .clo-nav-item.active{background:var(--accent-dim-2);color:var(--accent);
   text-shadow:-.2px 0 0 currentColor,.2px 0 0 currentColor}
+/* collapsible course (click the row to fold/unfold its lessons) */
+.clo-nav-item.has-sub{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.clo-chev{width:16px;height:16px;flex-shrink:0;opacity:.65;transition:transform .2s}
+.clo-coursewrap.collapsed .clo-chev{transform:rotate(-90deg)}
+.clo-coursewrap.collapsed .clo-sublist{display:none}
 /* nested lesson rail under the active course */
 .clo-sublist{margin:2px 0 6px;padding-left:8px;border-left:1px solid var(--border-100)}
 .clo-sublabel{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-500);padding:8px 10px 3px}
@@ -71,9 +76,7 @@ body.clo-course .header{display:none}
 body.clo-course .sidebar,body.clo-course #sidebar{display:none}
 body.clo-course .app{display:block;overflow:visible;height:auto;min-height:0;flex:none}
 body.clo-course .main,body.clo-course #main{overflow:visible;max-width:none;padding:0;margin:0;width:auto;height:auto;flex:none}
-body.clo-course .clo-toc{display:none}
-body.clo-course .clo-body{grid-template-columns:var(--sidebar-w) minmax(0,1fr)}
-@media(max-width:1024px){body.clo-course .clo-body{grid-template-columns:1fr}}
+/* course pages now use the default 3-zone grid so the "On this page" TOC shows too */
 
 /* ──── CONTENT ──── */
 .clo-content{min-width:0;padding:var(--sp-7) var(--sp-7) var(--sp-8)}
@@ -177,7 +180,11 @@ body.clo-course .clo-body{grid-template-columns:var(--sidebar-w) minmax(0,1fr)}
 .clo-search-result{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:var(--radius);text-decoration:none;cursor:pointer}
 .clo-search-result.active,.clo-search-result:hover{background:var(--accent-dim)}
 .clo-search-result .r-title{font-size:var(--t-small);font-weight:600;color:var(--text-100)}
-.clo-search-result .r-group{font-size:12px;color:var(--text-400)}
+.clo-search-result .r-meta{display:flex;align-items:center;gap:8px;margin-top:3px;min-width:0}
+.r-type{flex-shrink:0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 6px;border-radius:5px;background:var(--bg-200);color:var(--text-400);border:1px solid var(--border-200)}
+.r-type.r-page{color:var(--accent);border-color:var(--accent-border);background:var(--accent-dim)}
+.r-type.r-lesson{color:var(--info);border-color:rgba(59,130,246,.3);background:var(--info-bg)}
+.r-sub{font-size:12px;color:var(--text-400);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .clo-search-empty{padding:24px;text-align:center;color:var(--text-400);font-size:var(--t-small)}
 
 /* ════════ LICENSE LOCK / EXPIRED SCREEN ════════ */
@@ -197,6 +204,36 @@ body.clo-course .clo-body{grid-template-columns:var(--sidebar-w) minmax(0,1fr)}
 .clo-lock-err.show{display:block}
 .clo-lock-hint{font-size:13px;color:var(--text-500);margin-top:14px}
 .clo-lock-hint a{color:var(--accent);text-decoration:none;font-weight:600}
+
+/* ════════ ONBOARDING CHECKLIST WIDGET (bottom-right) ════════ */
+.clo-onb{position:fixed;right:20px;bottom:20px;z-index:150;font-family:var(--font-body)}
+.clo-onb-launch{display:flex;align-items:center;gap:9px;padding:10px 14px;border-radius:var(--radius-full);
+  border:1px solid var(--accent-border);background:var(--bg-100);color:var(--text-100);font:700 13px/1 var(--font-body);
+  cursor:pointer;box-shadow:0 8px 24px -8px rgba(0,0,0,.6);transition:transform .15s,box-shadow .15s}
+.clo-onb-launch:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px rgba(0,0,0,.75)}
+.clo-onb-ico{font-size:15px;line-height:1}
+.clo-onb-count{font:700 11px/1 var(--font-mono);color:var(--accent-ink);background:var(--accent);border-radius:var(--radius-full);padding:3px 7px}
+.clo-onb-panel{position:absolute;right:0;bottom:calc(100% + 10px);width:300px;background:var(--bg-100);
+  border:1px solid var(--border-200);border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:0 16px 44px -12px rgba(0,0,0,.7);display:none}
+.clo-onb.open .clo-onb-panel{display:block}
+.clo-onb-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px}
+.clo-onb-title{font-size:14px;font-weight:700;color:var(--text-100)}
+.clo-onb-x{background:none;border:0;color:var(--text-400);font-size:20px;line-height:1;cursor:pointer;padding:0 2px}
+.clo-onb-x:hover{color:var(--text-100)}
+.clo-onb-bar{height:4px;background:var(--bg-300);margin:0 16px 8px;border-radius:var(--radius-full);overflow:hidden}
+.clo-onb-bar span{display:block;height:100%;background:var(--accent);border-radius:var(--radius-full);transition:width .3s}
+.clo-onb-item{display:flex;align-items:flex-start;gap:10px;padding:9px 16px;transition:background .12s}
+.clo-onb-item:hover{background:rgba(255,255,255,.03)}
+.clo-onb-check{flex-shrink:0;width:20px;height:20px;margin-top:1px;border-radius:6px;border:1.5px solid var(--border-300);
+  background:transparent;color:var(--accent-ink);font-size:12px;font-weight:800;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .15s}
+.clo-onb-item.done .clo-onb-check{background:var(--accent);border-color:var(--accent)}
+.clo-onb-link{text-decoration:none;flex:1;min-width:0}
+.clo-onb-step{display:block;font-size:13px;font-weight:600;color:var(--text-100)}
+.clo-onb-item.done .clo-onb-step{color:var(--text-400);text-decoration:line-through}
+.clo-onb-hint{display:block;font-size:11.5px;color:var(--text-400);margin-top:1px;line-height:1.4}
+@media(max-width:640px){.clo-onb{right:12px;bottom:12px}.clo-onb-panel{width:min(86vw,300px)}}
 
 /* ════════ RESPONSIVE ════════ */
 @media(max-width:1280px){

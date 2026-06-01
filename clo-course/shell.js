@@ -20,7 +20,8 @@
 
   var ICON = {
     search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
-    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>'
+    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
+    chev: '<svg class="clo-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>'
   };
 
   // Every portal page lives one level under the repo root → prefix '../' to root-relative hrefs.
@@ -158,10 +159,15 @@
     var sidebar = P.nav.map(function (g) {
       return '<div class="clo-nav-group"><div class="clo-nav-grouplabel">' + g.group + '</div>' +
         g.items.map(function (it) {
-          var a = '<a class="clo-nav-item' + (it.page === PAGE ? ' active' : '') + '" href="' + resolveHref(it.href) + '">' + it.label + '</a>';
-          // nest the active course's lessons under it (Claude-Docs expanded-section style)
-          if (it.page === PAGE && lessons && lessons.length) a += renderLessons(lessons);
-          return a;
+          var isActive = it.page === PAGE;
+          // active course with lessons → a collapsible group (click the row to fold/unfold)
+          if (isActive && lessons && lessons.length) {
+            return '<div class="clo-coursewrap">' +
+              '<a class="clo-nav-item active has-sub" href="' + resolveHref(it.href) + '"><span>' + it.label + '</span>' + ICON.chev + '</a>' +
+              renderLessons(lessons) +
+            '</div>';
+          }
+          return '<a class="clo-nav-item' + (isActive ? ' active' : '') + '" href="' + resolveHref(it.href) + '">' + it.label + '</a>';
         }).join('') + '</div>';
     }).join('');
 
@@ -198,12 +204,23 @@
     function closeNav() { sb.classList.remove('open'); scrim.classList.remove('open'); }
     ham.addEventListener('click', function () { sb.classList.toggle('open'); scrim.classList.toggle('open'); });
     scrim.addEventListener('click', closeNav);
-    sb.addEventListener('click', function (e) { if (e.target.classList.contains('clo-nav-item') && !e.target.classList.contains('clo-sublesson')) closeNav(); });
+    sb.addEventListener('click', function (e) {
+      var subToggle = e.target.closest('.has-sub');
+      if (subToggle) { e.preventDefault(); subToggle.parentElement.classList.toggle('collapsed'); return; } // fold/unfold the course
+      var item = e.target.closest('.clo-nav-item');
+      if (item && !item.classList.contains('clo-sublesson')) closeNav();
+    });
 
     if (MODE === 'course' && lessons) wireLessons();
+    // honor a #lesson deep-link on load (so cross-course search jumps land on the right lesson)
+    if (MODE === 'course' && location.hash) {
+      var lid = location.hash.slice(1), gn = window.CLO_COURSE_GOTO_NAME || 'goToLesson';
+      if (lessons && lessons.some(function (l) { return l.id === lid; }) && typeof window[gn] === 'function') window[gn](lid);
+    }
     enhanceCodeBlocks(MODE === 'course' ? null : doc); // course pages keep their own code styling
-    initSearch(flat);
-    if (MODE !== 'course' && window.CLO_TOC) window.CLO_TOC.build(doc);
+    initSearch();
+    buildOnboarding();
+    if (window.CLO_TOC) window.CLO_TOC.build(inner); // "On this page" on every page (incl. course lessons)
   }
 
   // ── course-mode lesson rail (renders the page's own LESSONS in the shared sidebar) ──
@@ -226,6 +243,7 @@
       var orig = window[gname];
       window[gname] = function (id) {
         orig(id); markLesson(id); window.scrollTo(0, 0);
+        if (window.CLO_TOC) window.CLO_TOC.build(document.getElementById('cloInner')); // refresh "On this page" for the new lesson
         var sb = document.getElementById('cloSidebar'), sc = document.getElementById('cloScrim');
         if (sb) sb.classList.remove('open'); if (sc) sc.classList.remove('open');
       };
@@ -261,14 +279,41 @@
     });
   }
 
-  // ════════ SEARCH (⌘K — Phase 1: nav index) ════════
-  function initSearch(flat) {
+  // ════════ SEARCH (⌘K — pages + the current course's lessons + this page's sections) ════════
+  function activeCourseLabel() {
+    var found = '';
+    P.nav.forEach(function (g) { g.items.forEach(function (it) { if (it.page === PAGE) found = it.label; }); });
+    return found;
+  }
+  function searchItems() {
+    var items = [];
+    P.nav.forEach(function (g) { g.items.forEach(function (it) {
+      items.push({ type: 'Page', label: it.label, sub: it.group, keywords: it.keywords || [], act: { href: resolveHref(it.href) } });
+    }); });
+    // every course's lessons (global) — same-course lessons swap in place; others deep-link to their page
+    (window.CLO_LESSON_INDEX || []).forEach(function (c) {
+      var sameCourse = c.page === PAGE, gname = window.CLO_COURSE_GOTO_NAME || 'goToLesson';
+      c.lessons.forEach(function (l) {
+        var act = sameCourse ? { lesson: l.id, gname: gname } : { href: resolveHref(c.href) + '#' + l.id };
+        items.push({ type: 'Lesson', label: l.name, sub: c.label + (l.group ? ' · ' + l.group : ''), keywords: [], act: act });
+      });
+    });
+    var inner = document.getElementById('cloInner');
+    if (inner) {
+      [].slice.call(inner.querySelectorAll('h2[id], h3[id]')).filter(function (h) { return h.offsetParent !== null; }).forEach(function (h) {
+        var t = (h.firstChild && h.firstChild.textContent ? h.firstChild.textContent : h.textContent).trim();
+        if (t) items.push({ type: 'Section', label: t, sub: 'On this page', keywords: [], act: { anchor: h.id } });
+      });
+    }
+    return items;
+  }
+  function initSearch() {
     var overlay = document.createElement('div');
     overlay.className = 'clo-search-overlay';
     overlay.innerHTML =
       '<div class="clo-search-panel">' +
         '<div class="clo-search-head">' + ICON.search +
-          '<input class="clo-search-input" id="cloQ" placeholder="Search the portal…" autocomplete="off">' +
+          '<input class="clo-search-input" id="cloQ" placeholder="Search pages, lessons, sections…" autocomplete="off">' +
           '<span class="clo-search-esc">ESC</span></div>' +
         '<div class="clo-search-results" id="cloRes"></div>' +
       '</div>';
@@ -276,55 +321,99 @@
     var q = overlay.querySelector('#cloQ'), res = overlay.querySelector('#cloRes'), sel = 0, shown = [];
 
     function score(it, tokens) {
-      var label = it.label.toLowerCase(), group = it.group.toLowerCase();
-      var kw = (it.keywords || []).join(' ').toLowerCase();
-      var hay = label + ' ' + group + ' ' + kw;
-      var hit = '';
+      var hay = (it.label + ' ' + (it.sub || '') + ' ' + (it.keywords || []).join(' ')).toLowerCase();
       for (var i = 0; i < tokens.length; i++) { if (hay.indexOf(tokens[i]) === -1) return null; }
-      var t = tokens[0], s;
-      if (label.indexOf(t) === 0) s = 100;
-      else if (label.indexOf(t) > -1) s = 80;
-      else if ((' ' + kw + ' ').indexOf(' ' + t) > -1) { s = 60; hit = matchKw(it, t); }
-      else if (kw.indexOf(t) > -1) { s = 50; hit = matchKw(it, t); }
-      else if (group.indexOf(t) > -1) s = 30;
-      else s = 10;
-      return { it: it, s: s, hit: hit };
+      var label = it.label.toLowerCase(), kw = (it.keywords || []).join(' ').toLowerCase(), t = tokens[0], s;
+      if (label.indexOf(t) === 0) s = 100; else if (label.indexOf(t) > -1) s = 80;
+      else if ((' ' + kw + ' ').indexOf(' ' + t) > -1) s = 60; else if (kw.indexOf(t) > -1) s = 50;
+      else s = 20;
+      s += it.type === 'Page' ? 3 : it.type === 'Lesson' ? 2 : 0; // tie-break: pages > lessons > sections
+      return { it: it, s: s };
     }
-    function matchKw(it, t) {
-      var found = (it.keywords || []).filter(function (k) { return k.toLowerCase().indexOf(t) > -1; })[0];
-      return found ? 'matches “' + found + '”' : '';
+    function go(it) {
+      close();
+      if (!it) return;
+      var a = it.act;
+      if (a.lesson) { var f = window[a.gname]; if (typeof f === 'function') f(a.lesson); }
+      else if (a.anchor) { var el = document.getElementById(a.anchor); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
+      else if (a.href) { location.href = a.href; }
     }
     function render() {
-      var term = q.value.trim().toLowerCase();
-      if (!term) { shown = flat.map(function (it) { return { it: it, hit: '' }; }); }
-      else {
-        var toks = term.split(/\s+/);
-        shown = flat.map(function (it) { return score(it, toks); }).filter(Boolean)
-          .sort(function (a, b) { return b.s - a.s; });
-      }
+      var term = q.value.trim().toLowerCase(), all = searchItems();
+      if (!term) shown = all.map(function (it) { return { it: it }; });
+      else { var toks = term.split(/\s+/); shown = all.map(function (it) { return score(it, toks); }).filter(Boolean).sort(function (a, b) { return b.s - a.s; }); }
       sel = 0;
       res.innerHTML = shown.length
         ? shown.map(function (x, i) {
             var it = x.it;
-            return '<a class="clo-search-result' + (i === 0 ? ' active' : '') + '" href="' + resolveHref(it.href) + '">' +
-              '<span class="r-title">' + it.label + '</span><span class="r-group">' + it.group + (x.hit ? ' · ' + x.hit : '') + '</span></a>';
+            return '<div class="clo-search-result' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '">' +
+              '<span class="r-title">' + it.label + '</span>' +
+              '<span class="r-meta"><span class="r-type r-' + it.type.toLowerCase() + '">' + it.type + '</span>' + (it.sub ? '<span class="r-sub">' + it.sub + '</span>' : '') + '</span></div>';
           }).join('')
         : '<div class="clo-search-empty">No matches.</div>';
     }
     function open() { overlay.classList.add('open'); q.value = ''; render(); q.focus(); }
     function close() { overlay.classList.remove('open'); }
+    function paint() { res.querySelectorAll('.clo-search-result').forEach(function (r, i) { r.classList.toggle('active', i === sel); }); }
+    function scrollSel() { var el = res.querySelector('.clo-search-result.active'); if (el) el.scrollIntoView({ block: 'nearest' }); }
 
     document.getElementById('cloSearchBtn').addEventListener('click', open);
     document.addEventListener('keydown', function (e) {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); overlay.classList.contains('open') ? close() : open(); }
       if (!overlay.classList.contains('open')) return;
       if (e.key === 'Escape') close();
-      if (e.key === 'ArrowDown') { e.preventDefault(); sel = Math.min(sel + 1, shown.length - 1); paint(); }
-      if (e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(sel - 1, 0); paint(); }
-      if (e.key === 'Enter' && shown[sel]) { location.href = resolveHref(shown[sel].it.href); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); sel = Math.min(sel + 1, shown.length - 1); paint(); scrollSel(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(sel - 1, 0); paint(); scrollSel(); }
+      else if (e.key === 'Enter') { e.preventDefault(); go(shown[sel] && shown[sel].it); }
     });
-    function paint() { res.querySelectorAll('.clo-search-result').forEach(function (r, i) { r.classList.toggle('active', i === sel); }); }
     q.addEventListener('input', render);
+    res.addEventListener('click', function (e) { var r = e.target.closest('.clo-search-result'); if (r) go(shown[+r.dataset.idx] && shown[+r.dataset.idx].it); });
     overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+  }
+
+  // ════════ ONBOARDING CHECKLIST WIDGET (bottom-right) ════════
+  function buildOnboarding() {
+    var steps = P.onboarding || [];
+    if (!steps.length) return;
+    var KEY = STORAGE_KEY + '_onb', done = {};
+    try { done = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { done = {}; }
+    function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
+    function count() { var n = 0; steps.forEach(function (s, i) { if (done[i]) n++; }); return n; }
+
+    var w = document.createElement('div');
+    w.className = 'clo-onb';
+    function render() {
+      var n = count(), total = steps.length, all = n === total;
+      w.innerHTML =
+        '<button class="clo-onb-launch" id="cloOnbLaunch" aria-label="Quick start">' +
+          '<span class="clo-onb-ico">' + (all ? '✓' : '🚀') + '</span>' +
+          '<span class="clo-onb-txt">' + (all ? "You're all set" : 'Getting started') + '</span>' +
+          '<span class="clo-onb-count">' + n + '/' + total + '</span>' +
+        '</button>' +
+        '<div class="clo-onb-panel">' +
+          '<div class="clo-onb-head"><span class="clo-onb-title">Quick start</span>' +
+            '<button class="clo-onb-x" id="cloOnbX" aria-label="Minimize">&times;</button></div>' +
+          '<div class="clo-onb-bar"><span style="width:' + Math.round(n / total * 100) + '%"></span></div>' +
+          steps.map(function (s, i) {
+            return '<div class="clo-onb-item' + (done[i] ? ' done' : '') + '">' +
+              '<button class="clo-onb-check" data-check="' + i + '" aria-label="Toggle done">' + (done[i] ? '✓' : '') + '</button>' +
+              '<a class="clo-onb-link" href="' + resolveHref(s.href) + '"' + (/^https?:/.test(s.href) ? ' target="_blank" rel="noopener"' : '') + '>' +
+                '<span class="clo-onb-step">' + s.label + '</span>' +
+                (s.hint ? '<span class="clo-onb-hint">' + s.hint + '</span>' : '') +
+              '</a></div>';
+          }).join('') +
+        '</div>';
+      w.querySelector('#cloOnbLaunch').addEventListener('click', function () { w.classList.toggle('open'); });
+      var x = w.querySelector('#cloOnbX'); if (x) x.addEventListener('click', function () { w.classList.remove('open'); });
+      w.querySelectorAll('.clo-onb-check').forEach(function (b) {
+        b.addEventListener('click', function (e) {
+          e.preventDefault(); e.stopPropagation();
+          var i = +b.dataset.check; done[i] = !done[i]; save();
+          var wasOpen = w.classList.contains('open'); render(); if (wasOpen) w.classList.add('open');
+        });
+      });
+    }
+    render();
+    document.body.appendChild(w);
   }
 })();
