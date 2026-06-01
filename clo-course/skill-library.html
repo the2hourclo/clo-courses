@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Library — Course Portal</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
+<style>
+  /* coming-soon pill + card treatment, scoped to this page (no design-system class exists yet) */
+  .soon-pill{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);padding:2px 8px;border-radius:99px;white-space:nowrap}
+  .card.is-soon{cursor:default}
+  .card.is-soon:hover{border-color:var(--border-100);box-shadow:none;transform:none}
+  .card[id]{scroll-margin-top:84px}
+  .card-title.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+</style>
+</head>
+<body hidden data-page="skill-library">
+
+<div id="doc-content">
+  <div class="clo-hero">
+    <div class="eyebrow">Skill Library</div>
+    <h1>Courses for every skill you've unlocked.</h1>
+    <p>Your membership includes the full library of Skill Systems I use in my own business. These guided courses walk you through each one — install it, wire it to your digital assets, and put it to work. Rolling out now, with new courses added every month.</p>
+  </div>
+
+  <div class="callout callout--tip">
+    <svg class="callout-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+    <div>These skills already ship in your plugin — you can use one right now by saying its trigger in Claude Code (e.g. <strong>"write my newsletter"</strong>). These courses add the guided walkthrough for each.</div>
+  </div>
+
+  <h2 id="courses">The skills</h2>
+  <div class="card-grid">
+
+    <div class="card is-soon" id="newsletter">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+      <div class="card-title row"><span>Newsletter</span><span class="soon-pill">Soon</span></div>
+      <div class="card-desc">Turn a raw idea or transcript into a full newsletter in your voice — the writing chain runs logic → voice → humanize → format, end to end.</div>
+    </div>
+
+    <div class="card is-soon" id="youtube">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg></div>
+      <div class="card-title row"><span>YouTube</span><span class="soon-pill">Soon</span></div>
+      <div class="card-desc">The full video workflow — research, titles, thumbnails, hooks, and scripts, voice-matched to you and tuned to your channel.</div>
+    </div>
+
+    <div class="card is-soon" id="carousel">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="4" width="10" height="16" rx="2"/><path d="M4 7v10M20 7v10"/></svg></div>
+      <div class="card-title row"><span>Carousel</span><span class="soon-pill">Soon</span></div>
+      <div class="card-desc">Build visual HTML carousels with custom SVG diagrams and charts — voice and humanize built in, ready to publish.</div>
+    </div>
+
+    <div class="card is-soon" id="copywriter">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
+      <div class="card-title row"><span>Copywriter</span><span class="soon-pill">Soon</span></div>
+      <div class="card-desc">The campaign system — Blueprint → Promotion → Offer → Emails — plus welcome emails, sales bullets, and a VSL orchestrator.</div>
+    </div>
+
+  </div>
+
+  <h2 id="whats-next">What's coming</h2>
+  <p>The library grows every month. The <a href="roadmap.html">Roadmap</a> shows what's live, what's being built, and what's planned — and you can vote on what gets a guided course next.</p>
+  <div class="callout callout--info">
+    <svg class="callout-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+    <div>Don't see a skill you want covered? Drop a request in the community — the link's in the top bar — and it'll show up on the Roadmap to vote on.</div>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
+</body>
+</html>

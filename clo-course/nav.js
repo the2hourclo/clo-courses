@@ -31,7 +31,15 @@ window.CLO_PRODUCTS = {
         { label: 'Claude Code 101', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['fundamentals','basics','tools','skills','agents','hooks','mcp','terminal','commands','slash commands','subagents','context','memory','getting started'] },
         { label: 'Skill Systems', page: 'meta-skill', href: 'meta-create-skill/index.html', keywords: ['create skill','build skill','make a skill','meta','capture','automate','skill system','authoring','new skill'] }
       ]},
-      { group: 'Resources', items: [
+      // ── Premium section: CLO-only. AIEB never gets this block, so it stays the base tier.
+      //    When a skill course is built, swap its placeholder href (anchor on the library page)
+      //    for its real page + give it a `page` key so it highlights as active.
+      { group: 'Skill Library', items: [
+        { label: 'Overview', page: 'skill-library', href: 'clo-course/skill-library.html', keywords: ['skill library','skills','premium','library','included','pro','what you get','newsletter','youtube','carousel','copywriter'] },
+        { label: 'Newsletter', href: 'clo-course/skill-library.html#newsletter', keywords: ['write','newsletter','writing chain','voice','email','substack'] },
+        { label: 'YouTube', href: 'clo-course/skill-library.html#youtube', keywords: ['youtube','video','titles','thumbnails','hooks','scripts','channel'] },
+        { label: 'Carousel', href: 'clo-course/skill-library.html#carousel', keywords: ['carousel','slides','instagram','visual','svg','charts'] },
+        { label: 'Copywriter', href: 'clo-course/skill-library.html#copywriter', keywords: ['copywriter','campaign','offer','sales','emails','vsl','bullets'] },
         { label: 'Roadmap', page: 'roadmap', href: 'clo-course/roadmap.html', keywords: ['release','status','planned','in progress','request','vote','upcoming','feature request','whats next','coming soon'] }
       ]}
     ]
