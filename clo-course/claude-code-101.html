@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claude Code 101 - Interactive Learning Guide</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
 <style>
   :root {
     --bg: #0F0F0F;
@@ -1194,7 +1196,7 @@
   }
 </style>
 </head>
-<body>
+<body hidden data-page="claude-code-101" data-shell="course">
 
 <!-- ══ HEADER ══ -->
 <div class="header">
@@ -6442,5 +6444,38 @@ document.addEventListener('keydown', (e) => {
 });
 </script>
 
+<!-- Shared portal shell (Claude-Docs chrome). Mirrors this page's sections into the shared sidebar; content + JS untouched. -->
+<script>
+window.CLO_COURSE_LESSONS=[
+  {id:'setup',group:'Get Set Up',name:'Install & Setup'},
+  {id:'basics-terminal',group:'Start Here (Optional)',name:'Terminal'},
+  {id:'basics-git',group:'Start Here (Optional)',name:'GitHub & Git'},
+  {id:'intro',group:'Part 1: What Claude Code Is',name:'What Is Claude Code?'},
+  {id:'environments',group:'Part 1: What Claude Code Is',name:'Where It Lives'},
+  {id:'agentic-loop',group:'Part 1: What Claude Code Is',name:'How It Thinks'},
+  {id:'tools',group:'Part 2: Built-in Foundation',name:'Built-in Tools'},
+  {id:'permissions',group:'Part 2: Built-in Foundation',name:'Permission System'},
+  {id:'claude-md',group:'Part 3: Memory',name:'CLAUDE.md'},
+  {id:'memory-hierarchy',group:'Part 3: Memory',name:'Memory Hierarchy'},
+  {id:'context',group:'Part 3: Memory',name:'Context Window'},
+  {id:'skills-intro',group:'Part 4: Skills',name:'What Is a Skill?'},
+  {id:'skill-invocation',group:'Part 4: Skills',name:'How Skills Trigger'},
+  {id:'first-skill',group:'Part 4: Skills',name:'Build Your First Skill'},
+  {id:'skill-builder',group:'Part 4: Skills',name:'Skill Builder'},
+  {id:'skill-deep-dive',group:'Part 4: Skills',name:'Skill Deep Dive'},
+  {id:'skill-routing',group:'Part 4: Skills',name:'Routing & Scaling'},
+  {id:'subagents',group:'Part 5: Extending',name:'Sub-Agents'},
+  {id:'mcp',group:'Part 5: Extending',name:'MCP Connections'},
+  {id:'hooks',group:'Part 5: Extending',name:'Hooks'},
+  {id:'lifecycle',group:'Part 6: Complete Picture',name:'Full Lifecycle'},
+  {id:'in-action',group:'Part 6: Complete Picture',name:'Everything in Action'},
+  {id:'reference',group:'Part 6: Complete Picture',name:'Quick Reference'}
+];
+window.CLO_COURSE_GOTO_NAME='goTo';
+window.CLO_CURRENT_LESSON=(typeof currentSection!=='undefined')?currentSection:'intro';
+</script>
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
 </body>
 </html>

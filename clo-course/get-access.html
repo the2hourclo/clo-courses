@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get Access — Install the CLO-OS Plugins &amp; Skills</title>
 <meta name="description" content="A simple, guided setup to get the CLO-OS plugins and skills running inside VS Code. No terminal required, no coding.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -43,7 +42,7 @@ body{min-height:100vh;
     radial-gradient(900px 500px at 50% -200px,rgba(121,234,32,.07),transparent 70%),
     var(--bg);
 }
-.wrap{padding:0 20px 90px}
+.wrap{padding:0}
 .container{max-width:760px;margin:0 auto}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -262,9 +261,9 @@ body.show-terminal .m-terminal{display:block}
 .footer{text-align:center;margin-top:38px;padding-top:22px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim)}
 </style>
 </head>
-<body>
+<body hidden data-page="get-access">
 <div class="wrap">
-<div class="container">
+<div class="container" id="doc-content">
 
   <!-- HEADER -->
   <div class="brand-header rise">
@@ -352,25 +351,29 @@ body.show-terminal .m-terminal{display:block}
   <!-- ═══════════════ AI SHORTCUT (usable once Claude Code is installed) ═══════════════ -->
   <div class="ai-card" id="shortcut">
     <div class="card-title">&#9889; Got Claude Code open? Let Claude do the rest</div>
-    <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude installs Node.js for you, runs every command it can in the terminal, and only asks you to do something by hand when it truly can't (like pasting your license key). It fixes any errors as they come up. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
+    <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude does the whole install itself, and if it ever hits something only you can do (paste your key, click a button), it walks you through it one clear step at a time. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
     <div class="ai-prompt">
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
-      <pre>I want to install the CLO-OS Community plugin in Claude Code, and I'd like you to do as much of it for me as you can — using the terminal where possible — and only ask me to do something by hand when you truly can't. Verify each part worked and tell me the result before moving on.
+      <pre>You are setting up the CLO-OS Community plugin in my Claude Code for me. Do as much of this yourself as you possibly can — run the commands, install what's needed, check the results — and only hand a task to me when it's genuinely impossible for you to do it. My job should be near zero: ideally I only paste my license key and click a button or two. Verify every step actually worked before moving to the next.
 
-1. NODE.JS — Run `node --version` in the terminal. If it's missing or older than v18, install the latest LTS for me (winget on Windows, Homebrew on macOS, or the right package manager for my system) and confirm it works.
+MY SETUP — read carefully: I'm in the Claude Code VS Code extension. You CANNOT type slash commands into my chat for me. When something can ONLY be done by me (a slash command, or a click), do NOT just dump a command and assume it ran — give me a clear, numbered "do this" with the exact text to paste or the exact thing to click, then STOP and wait for me to confirm. In the extension the plugin manager is a clickable panel: I open it by typing /plugin and then CLICKING "Manage Plugins" (it has a Plugins tab and a Marketplaces tab). Prefer guiding me through that panel with simple clicks over slash commands.
 
-2. SKILLSTACK (the system that delivers the plugin) — Try to add and install it from the terminal:
+Your standing rule for the whole process: try to do it yourself in the terminal first. If a terminal command fails, errors, or isn't available on my version, DON'T get stuck or make me debug — switch to the simplest path for me: walk me through the VS Code Manage Plugins panel step by step (or give me one exact line to paste), wait, and verify it worked. Always favor the option that needs the least from me.
+
+1. NODE.JS — Run `node --version` yourself. If it's missing or older than v18, install the latest LTS for me (winget on Windows, Homebrew on macOS, or the right package manager for my OS) and confirm it works. Don't make me install anything you can install.
+
+2. SKILLSTACK (the system that delivers the plugin) — First try it yourself in the terminal:
    claude plugin marketplace add https://github.com/SkillStacks/skillstack.git
    claude plugin install skillstack@skillstack-marketplace --scope user
-   If the terminal can't do it on my version, tell me the exact slash commands to type in the chat instead (/plugin marketplace add … then /plugin install …) and wait.
+   If that fails or isn't available, switch me to the VS Code panel: "type /plugin and click Manage Plugins" → Marketplaces tab → add https://github.com/SkillStacks/skillstack.git → Plugins tab → find "skillstack" → Install → choose "Install for you" → reload. Walk me one click at a time and wait.
 
-3. LICENSE — Tell me when you're ready and I'll paste my Lemon Squeezy license key. Then activate it (run the /activate-license flow, or use the SkillStack tools if you have them). Note the storefront and commands it resolves to.
+3. LICENSE — Tell me when you're ready and I'll paste my Lemon Squeezy license key. Then activate it yourself (the /activate-license flow, or the SkillStack tools if you have them). Note the storefront URL and the two install commands it resolves to.
 
-4. CLO-COMMUNITY — Add my clo-os storefront and install the clo-community plugin (try the terminal first with `claude plugin …`; fall back to telling me the slash commands).
+4. CLO-COMMUNITY — Install it. Try the terminal yourself first (claude plugin marketplace add <the clo-os storefront URL> then claude plugin install clo-community@clo-os --scope user). If that can't run, switch me to the VS Code panel the same way: /plugin → Manage Plugins → Marketplaces tab → add the clo-os storefront URL → Plugins tab → find "clo-community" → Install → "Install for you" → reload. One step at a time, and verify.
 
-5. RELOAD &amp; ONBOARD — Reload plugins, then kick off onboarding by running "onboard me".
+5. RELOAD & CONFIRM — Reload plugins so clo-community is active, then confirm to me that it's installed and enabled.
 
-Rules: you can't type slash commands into the chat box for me — when a step needs that, give me the exact thing to paste and wait. Do everything else yourself. After each step, confirm it worked or show me the error and the fix. Start now with step 1 (Node.js).</pre>
+After each step, tell me plainly whether it worked, or show me the error and exactly how you're fixing it. Start now with step 1.</pre>
     </div>
     <div class="callout callout-tip" style="margin-top:14px">Rather do it by hand? Just keep following Steps&nbsp;2&ndash;6 below &mdash; each is short, and you can tick them off as you go.</div>
   </div>
@@ -683,5 +686,8 @@ function setMethod(m){
   if(tb) tb.classList.toggle('active', m==='terminal');
 }
 </script>
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
 </body>
 </html>

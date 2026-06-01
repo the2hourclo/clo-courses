@@ -127,6 +127,59 @@ body{min-height:100vh;padding:48px 24px}
 .loading-screen{text-align:center;padding:128px 32px;color:var(--text-muted)}
 .spinner{display:inline-block;width:24px;height:24px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:16px}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ════════ ONBOARDING — STEP CHECKLIST ════════ */
+.intro-sub{color:var(--text-muted);font-size:15px;margin-top:14px;max-width:520px;margin-left:auto;margin-right:auto}
+
+/* license ticket */
+.license-ticket{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,var(--surface-2),var(--surface));border:1px solid var(--accent-border);border-radius:14px;padding:18px 22px;margin-bottom:36px;position:relative;overflow:hidden;opacity:0;transform:translateY(14px);animation:rise .55s cubic-bezier(.2,.7,.2,1) .05s forwards}
+.license-ticket::before{content:'';position:absolute;inset:0;background:radial-gradient(140% 120% at 0% 0%,var(--accent-dim),transparent 55%);pointer-events:none}
+.license-ticket-icon{flex-shrink:0;width:48px;height:48px;border-radius:12px;background:var(--accent-dim-2);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;color:var(--accent)}
+.license-ticket-icon svg{width:24px;height:24px}
+.license-ticket-body{flex:1;min-width:0;position:relative;z-index:1}
+.license-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent-text);margin-bottom:5px}
+.license-key{font-family:'SF Mono','Monaco','Consolas',monospace;font-size:13.5px;color:var(--text);word-break:break-all;font-weight:600;line-height:1.4}
+.license-note{font-size:12px;color:var(--text-muted);margin-top:6px}
+.license-ticket .copy-btn{position:static;transform:none;flex-shrink:0;align-self:center;font-size:12px;padding:9px 16px;border-radius:8px;z-index:1}
+@media(max-width:640px){.license-ticket{flex-direction:column;align-items:flex-start;text-align:left}.license-ticket .copy-btn{width:100%}}
+
+/* steps grid */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px}
+@media(max-width:900px){.steps{grid-template-columns:1fr}}
+.step{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px 24px;display:flex;flex-direction:column;opacity:0;transform:translateY(18px);animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i)*.12s + .15s);transition:border-color .25s,transform .25s,box-shadow .25s}
+.step:hover{border-color:var(--accent-border);transform:translateY(-4px);box-shadow:0 16px 40px -16px rgba(121,234,32,.3)}
+@keyframes rise{to{opacity:1;transform:none}}
+.step-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.step-icon{width:60px;height:60px;border-radius:16px;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;color:var(--accent);transition:transform .25s,background .25s}
+.step:hover .step-icon{transform:scale(1.06) rotate(-3deg);background:var(--accent-dim-2)}
+.step-icon svg{width:30px;height:30px}
+.step-num{font-size:13px;font-weight:800;color:var(--accent-text);background:var(--accent-dim);border:1px solid var(--accent-border);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.step-title{font-size:19px;font-weight:700;letter-spacing:-.3px;margin-bottom:9px;color:var(--text)}
+.step-desc{font-size:13.5px;color:var(--text-muted);line-height:1.6;margin-bottom:20px;flex:1}
+
+/* polynet community preview (step 1) */
+.pn-embed{display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--border-2);border-radius:10px;padding:11px 13px;margin-bottom:14px}
+.pn-logo{width:42px;height:42px;border-radius:9px;background:#0a0a0a;border:1px solid var(--border-2);padding:5px;object-fit:contain;flex-shrink:0}
+.pn-name{font-size:14px;font-weight:700;color:var(--text);line-height:1.2}
+.pn-handle{font-size:11.5px;color:var(--text-dim);margin-top:3px}
+.pn-footer{font-size:11px;color:var(--text-dim);text-align:center;margin-top:12px;letter-spacing:.3px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:filter .2s,box-shadow .2s,transform .15s,border-color .2s,background .2s;width:100%;font-family:inherit}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:var(--bg)}
+.btn-primary:hover{filter:brightness(1.08);box-shadow:0 8px 22px -8px rgba(121,234,32,.55)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--border-2)}
+.btn-ghost:hover{border-color:var(--accent-border);background:var(--surface-2)}
+
+/* install prompt box */
+.prompt-box{background:#080808;border:1px solid var(--border-2);border-radius:10px;padding:14px;margin-top:auto}
+.prompt-box code{display:block;font-family:'SF Mono','Monaco','Consolas',monospace;font-size:11.5px;line-height:1.65;color:var(--accent-text);white-space:pre-wrap;word-break:break-word;margin-bottom:12px}
+.copy-btn.block{position:static;transform:none;width:100%;padding:11px;font-size:13px;border-radius:8px}
+
+/* closing block buttons */
+.body-block .btn-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
+.body-block .btn-row .btn{width:auto;flex:1;min-width:200px}
 </style>
 </head>
 <body>
@@ -314,56 +367,77 @@ function renderUnlocked(licenseKey) {
 
     <div class="intro">
       <div class="intro-thanks">Welcome to <strong>the Chief Leverage Officer's Community</strong>.</div>
-      <h1>Just a few steps to get you onboarded.</h1>
+      <h1>Three steps and you're in.</h1>
+      <p class="intro-sub">Knock them out in order — about 10 minutes start to finish.</p>
     </div>
 
-    <div class="cards">
+    <div class="license-ticket">
+      <div class="license-ticket-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M11.4 11.6 21 2"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+      </div>
+      <div class="license-ticket-body">
+        <div class="license-label">Your license key</div>
+        <div class="license-key" id="licenseDisplay">${licenseKey}</div>
+        <div class="license-note">Keep this handy — it unlocks the portal and activates the plugin. It's already built into step 2 and 3 below.</div>
+      </div>
+      <button class="copy-btn" data-copy-target="licenseDisplay">Copy key</button>
+    </div>
 
-      <div class="card polynet-card">
-        <div class="card-num">1</div>
-        <div class="polynet-preview">
-          <img class="polynet-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
-          <div class="polynet-name">Chief Leverage Officers</div>
-          <div class="polynet-handle">c/chief-leverage-officers</div>
-          <p class="polynet-mission">Mission: Build digital assets and employ AI Employees to do 80-90% of the work for us.</p>
-          <a class="polynet-cta" href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank">Enter community</a>
-          <div class="polynet-footer">Powered by Polynet</div>
+    <div class="steps">
+
+      <div class="step" style="--i:0">
+        <div class="step-head">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span class="step-num">1</span>
         </div>
-        <div class="card-caption" style="padding:0 22px 22px;text-align:center">Say hello, then <strong style="color:var(--text)">head to the Course Portal</strong> to get set up.</div>
+        <h2 class="step-title">Join the community</h2>
+        <div class="pn-embed">
+          <img class="pn-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
+          <div>
+            <div class="pn-name">Chief Leverage Officers</div>
+            <div class="pn-handle">c/chief-leverage-officers</div>
+          </div>
+        </div>
+        <p class="step-desc">Build digital assets and employ AI Employees to do 80–90% of the work for you. Say hello — this is where you'll ask questions as you go.</p>
+        <a class="btn btn-primary" href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank" rel="noopener">Enter community →</a>
+        <div class="pn-footer">Powered by Polynet</div>
       </div>
 
-      <div class="card">
-        <div class="card-num">2</div>
-        <div class="card-visual">
-          <div class="card-visual-label">Your license key</div>
-          <code><span id="licenseDisplay">${licenseKey}</span><button class="copy-btn" data-copy-target="licenseDisplay">Copy</button></code>
-          <div class="card-visual-sub" style="line-height:1.5;margin-top:12px">Paste this to unlock the Course Portal.</div>
+      <div class="step" style="--i:1">
+        <div class="step-head">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <span class="step-num">2</span>
         </div>
-        <div class="card-action">Get access to the <a href="../clo-course/">Course Portal →</a></div>
-        <div class="card-caption">Open the portal and enter the license key above.</div>
+        <h2 class="step-title">Open the Course Portal</h2>
+        <p class="step-desc">Every lesson, setup walkthrough, and your Business X-Ray — all in one place. This link unlocks it with your key automatically.</p>
+        <a class="btn btn-primary" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}" target="_blank" rel="noopener">Open the portal →</a>
       </div>
 
-      <div class="card">
-        <div class="card-num">3</div>
-        <div class="card-visual">
-          <div class="card-visual-label">Inside the Portal</div>
-          <div class="card-visual-logo" style="font-size:22px">Set up &amp; <span style="color:var(--text)">/onboard</span></div>
-          <div class="card-visual-sub" style="line-height:1.5">Follow the setup module to install Claude Code + the clo-community plugin, then run /onboard.</div>
+      <div class="step" style="--i:2">
+        <div class="step-head">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <span class="step-num">3</span>
         </div>
-        <div class="card-action">Start <span class="pill">onboarding</span></div>
-        <div class="card-caption">Takes ~30 minutes. End state: a workspace configured for YOUR business.</div>
+        <h2 class="step-title">Install on Claude Code</h2>
+        <p class="step-desc">The install guide has a ready-made prompt that walks Claude Code through the whole setup, one step at a time. Your key's already built in.</p>
+        <a class="btn btn-primary" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}#get-access" target="_blank" rel="noopener">Open the install guide →</a>
       </div>
 
     </div>
 
     <div class="body-block">
-      <div class="body-block-headline">Once you're through these 3 steps, you're officially onboarded.</div>
-      <p>Everything you need lives in the <strong>Course Portal</strong> — setting up Claude Code, installing the clo-community plugin, and running <strong>/onboard</strong> to scaffold a workspace built around your business.</p>
-      <p>From there, run your <strong>Business X-Ray</strong>: an AI-assisted guided audit that maps your business, surfaces the bottleneck slowing growth, and lays out your highest-leverage projects — which Digital Assets to build first and which AI Employees to deploy.</p>
-      <p>Work through it at your own pace. If you get stuck or have questions, message me in the Polynet community.</p>
-      <div class="cta-row">
-        <a class="cta cta-outline" href="../clo-course/#business-x-ray">Run the Business X-Ray Audit</a>
-        <a class="cta cta-solid" href="../clo-course/" style="font-weight:700">Open the Course Portal →</a>
+      <div class="body-block-headline">That's it — you're officially onboarded. 🎉</div>
+      <p>Once Claude Code is set up, your first move is the <strong>Business X-Ray</strong>: an AI-assisted guided audit that maps your business, surfaces the bottleneck slowing growth, and lays out your highest-leverage projects — which Digital Assets to build first and which AI Employees to deploy.</p>
+      <p>Work through it at your own pace. Stuck or have a question? Drop it in the Polynet community and I'll jump in.</p>
+      <div class="btn-row">
+        <a class="btn btn-ghost" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}#business-x-ray" target="_blank" rel="noopener">Run the Business X-Ray</a>
+        <a class="btn btn-primary" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}" target="_blank" rel="noopener">Open the Course Portal →</a>
       </div>
     </div>
 

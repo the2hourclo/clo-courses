@@ -1,0 +1,87 @@
+/* ============================================================
+   tokens.css — CLO Course Portal design system (single source of truth)
+   Claude-Docs STRUCTURE, CLO dark + green SKIN. System fonts (no webfonts).
+   Linked by every portal page. New layered tokens + legacy aliases so
+   existing page CSS keeps resolving with zero find-replace.
+   ============================================================ */
+:root{
+  /* ── SURFACE LAYERS (000 brightest card → 400 deepest page) ── */
+  --bg-000:#1c201b;   /* raised card / hover surface */
+  --bg-100:#161916;   /* card / panel */
+  --bg-200:#121512;   /* sidebar, secondary panels */
+  --bg-300:#0e110e;   /* content surface */
+  --bg-400:#0b0d0b;   /* page background (canonical) */
+  --bg-code:#0a0c0a;  /* code well — always its own darkest surface */
+
+  /* ── TEXT LAYERS (100 strongest → 500 faintest) ── */
+  --text-100:#e9eae6;
+  --text-200:#c8cabf;
+  --text-300:#9ea3ba;
+  --text-400:#6c7184;
+  --text-500:#4a4d60;
+
+  /* ── BORDERS (hue-tinted hairlines) ── */
+  --border-100:#1c201c;
+  --border-200:#262b26;
+  --border-300:#333833;
+
+  /* ── ACCENT (CLO green — reserved for active states + primary CTA) ── */
+  --accent:#79EA20;
+  --accent-hover:#8af23a;
+  --accent-ink:#0a0c0a;
+  --accent-dim:rgba(121,234,32,.10);
+  --accent-dim-2:rgba(121,234,32,.16);
+  --accent-border:rgba(121,234,32,.35);
+  --accent-ring:rgba(121,234,32,.45);
+
+  /* ── SEMANTIC (callouts / scores / annotations — defined ONCE) ── */
+  --note:#9ea3ba;     --note-bg:rgba(158,163,186,.08);
+  --tip:#79EA20;      --tip-bg:rgba(121,234,32,.10);
+  --warn:#f59e0b;     --warn-bg:rgba(245,158,11,.10);
+  --danger:#f87171;   --danger-bg:rgba(248,113,113,.10);
+  --info:#3b82f6;     --info-bg:rgba(59,130,246,.10);
+  --score-green:#4ade80; --score-yellow:#fde68a; --score-red:#f87171;
+  --ann-red:#FF6B6B; --ann-orange:#FFA500; --ann-green:#90EE90; --ann-purple:#9370DB;
+
+  /* ── RADIUS (inline / control / container) ── */
+  --radius-sm:6px;
+  --radius:12px;
+  --radius-lg:16px;
+  --radius-full:9999px;
+
+  /* ── SPACING ── */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px;
+  --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px;
+
+  /* ── LAYOUT ── */
+  --topbar-h:60px;
+  --sidebar-w:280px;
+  --toc-w:240px;
+  --content-max:760px;
+  --container-max:1500px;
+
+  /* ── TYPE (system fonts — DECIDED: no webfonts) ── */
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --font-display:var(--font-body);
+  --font-mono:'SF Mono','Monaco','Consolas',ui-monospace,monospace;
+  --t-eyebrow:12px; --t-h1:30px; --t-h2:22px; --t-h3:18px;
+  --t-body:16px; --t-small:14px; --t-code:13.5px;
+  --lh-body:1.6; --lh-tight:1.25;
+
+  /* ── ELEVATION (rings, not shadows) ── */
+  --ring:0 0 0 1px var(--border-100);
+  --ring-focus:0 0 0 2px var(--accent-ring);
+
+  /* ════ LEGACY ALIASES — keep existing page CSS resolving ════ */
+  --bg:var(--bg-400);
+  --surface:var(--bg-100);
+  --surface-2:var(--bg-000);
+  --surface-3:var(--bg-000);
+  --border:var(--border-100);
+  --border-2:var(--border-200);
+  --border-3:var(--border-300);
+  --text:var(--text-100);
+  --text-muted:var(--text-300);
+  --text-dim:var(--text-500);
+  --red:var(--danger); --red-bg:var(--danger-bg); --red-border:rgba(248,113,113,.3);
+}

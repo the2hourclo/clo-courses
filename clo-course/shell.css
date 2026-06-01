@@ -1,0 +1,223 @@
+/* ============================================================
+   shell.css — Claude-Docs-style chrome for the CLO portal (CLO skin)
+   Top bar + left sidebar + content + right "On this page" TOC,
+   plus component classes (cards, callouts, code blocks, buttons),
+   search modal, and the license lock screen. Vanilla, no build.
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg-400);color:var(--text-100);font-family:var(--font-body);font-size:var(--t-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{min-height:100vh}
+body[hidden]{display:none}
+a{color:inherit}
+::selection{background:var(--accent-dim-2)}
+
+/* scroll offset so anchored headings clear the sticky top bar */
+:is(h1,h2,h3,h4)[id]{scroll-margin-top:calc(var(--topbar-h) + 16px)}
+
+/* ════════ TOP BAR ════════ */
+.clo-topbar{position:sticky;top:0;z-index:100;height:var(--topbar-h);display:flex;align-items:center;gap:var(--sp-4);
+  padding:0 var(--sp-5);background:rgba(11,13,11,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border-200)}
+.clo-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.clo-logo img{height:26px;width:auto;display:block}
+.clo-logo span{font-size:13px;font-weight:700;letter-spacing:.3px;color:var(--text-100)}
+.clo-search-trigger{display:flex;align-items:center;gap:10px;height:36px;padding:0 12px;min-width:200px;
+  background:var(--bg-200);border:1px solid var(--border-200);border-radius:var(--radius);color:var(--text-400);
+  font:500 var(--t-small)/1 var(--font-body);cursor:pointer;transition:border-color .15s,color .15s}
+.clo-search-trigger:hover{border-color:var(--border-300);color:var(--text-300)}
+.clo-search-trigger svg{width:15px;height:15px;flex-shrink:0}
+.clo-search-trigger .kbd{margin-left:auto;font:600 11px/1 var(--font-mono);color:var(--text-500);
+  border:1px solid var(--border-200);border-radius:5px;padding:3px 6px}
+.clo-topbar-spacer{flex:1}
+.clo-topbar-link{display:inline-flex;align-items:center;font-size:13px;font-weight:600;color:var(--accent);
+  text-decoration:none;padding:7px 12px;border-radius:var(--radius);transition:background .15s}
+.clo-topbar-link:hover{background:var(--accent-dim)}
+.clo-signout{background:none;border:1px solid var(--border-200);color:var(--text-400);font:600 12px/1 var(--font-body);
+  padding:8px 12px;border-radius:var(--radius);cursor:pointer;transition:color .15s,border-color .15s}
+.clo-signout:hover{color:var(--text-100);border-color:var(--accent-border)}
+.clo-hamburger{display:none;background:none;border:1px solid var(--border-200);border-radius:var(--radius);
+  color:var(--text-200);width:36px;height:36px;cursor:pointer;align-items:center;justify-content:center}
+.clo-hamburger svg{width:18px;height:18px}
+
+/* ════════ 3-ZONE BODY GRID ════════ */
+.clo-body{max-width:var(--container-max);margin:0 auto;display:grid;
+  grid-template-columns:var(--sidebar-w) minmax(0,1fr) var(--toc-w);align-items:start}
+
+/* ──── SIDEBAR ──── */
+.clo-sidebar{position:sticky;top:var(--topbar-h);height:calc(100vh - var(--topbar-h));overflow-y:auto;
+  padding:var(--sp-5) var(--sp-3) var(--sp-6) var(--sp-5);border-right:1px solid var(--border-100);background:var(--bg-200)}
+/* thin, subtle scrollbars on the rails (Claude-Docs style) */
+.clo-sidebar,.clo-toc{scrollbar-width:thin;scrollbar-color:var(--border-300) transparent}
+.clo-sidebar::-webkit-scrollbar,.clo-toc::-webkit-scrollbar{width:8px}
+.clo-sidebar::-webkit-scrollbar-track,.clo-toc::-webkit-scrollbar-track{background:transparent}
+.clo-sidebar::-webkit-scrollbar-thumb,.clo-toc::-webkit-scrollbar-thumb{background:var(--border-300);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+.clo-sidebar:hover::-webkit-scrollbar-thumb,.clo-toc:hover::-webkit-scrollbar-thumb{background:var(--text-500)}
+.clo-nav-group{margin-bottom:var(--sp-5)}
+.clo-nav-grouplabel{font-size:var(--t-eyebrow);font-weight:700;letter-spacing:1.1px;text-transform:uppercase;
+  color:var(--text-500);padding:0 10px;margin-bottom:var(--sp-2)}
+.clo-nav-item{display:block;font-size:var(--t-small);color:var(--text-300);text-decoration:none;
+  padding:7px 10px;border-radius:var(--radius);transition:background .12s,color .12s}
+.clo-nav-item:hover{background:rgba(255,255,255,.03);color:var(--text-100)}
+.clo-nav-item.active{background:var(--accent-dim-2);color:var(--accent);
+  text-shadow:-.2px 0 0 currentColor,.2px 0 0 currentColor}
+/* nested lesson rail under the active course */
+.clo-sublist{margin:2px 0 6px;padding-left:8px;border-left:1px solid var(--border-100)}
+.clo-sublabel{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-500);padding:8px 10px 3px}
+.clo-sublesson{font-size:13px;padding:6px 10px}
+
+/* ════════ COURSE MODE — neutralize a host SPA's own layout so the shell owns the chrome ════════ */
+body.clo-course{display:block}
+body.clo-course .header{display:none}
+body.clo-course .sidebar,body.clo-course #sidebar{display:none}
+body.clo-course .app{display:block;overflow:visible;height:auto;min-height:0;flex:none}
+body.clo-course .main,body.clo-course #main{overflow:visible;max-width:none;padding:0;margin:0;width:auto;height:auto;flex:none}
+body.clo-course .clo-toc{display:none}
+body.clo-course .clo-body{grid-template-columns:var(--sidebar-w) minmax(0,1fr)}
+@media(max-width:1024px){body.clo-course .clo-body{grid-template-columns:1fr}}
+
+/* ──── CONTENT ──── */
+.clo-content{min-width:0;padding:var(--sp-7) var(--sp-7) var(--sp-8)}
+.clo-content-inner{max-width:var(--content-max);margin:0 auto}
+.clo-breadcrumb{font-size:var(--t-eyebrow);font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--text-400);margin-bottom:var(--sp-3)}
+.clo-breadcrumb .sep{color:var(--text-500);margin:0 6px}
+
+/* doc typography */
+#doc-content h1{font-family:var(--font-display);font-size:var(--t-h1);font-weight:800;letter-spacing:-.02em;
+  line-height:1.15;color:var(--text-100);margin-bottom:var(--sp-4)}
+#doc-content h2{font-size:var(--t-h2);font-weight:700;letter-spacing:-.01em;color:var(--text-100);
+  margin:var(--sp-7) 0 var(--sp-3)}
+#doc-content h3{font-size:var(--t-h3);font-weight:600;color:var(--text-100);margin:var(--sp-6) 0 var(--sp-2)}
+#doc-content p{color:var(--text-300);margin:0 0 var(--sp-4);line-height:var(--lh-body)}
+#doc-content ul,#doc-content ol{color:var(--text-300);margin:0 0 var(--sp-4) var(--sp-5);line-height:var(--lh-body)}
+#doc-content li{margin-bottom:var(--sp-2)}
+#doc-content a:not(.btn):not(.card){color:var(--text-200);font-weight:600;text-decoration:none;
+  border-bottom:1px solid var(--border-300);transition:border-color .15s}
+#doc-content a:not(.btn):not(.card):hover{border-bottom-color:var(--accent)}
+#doc-content strong{color:var(--text-100);font-weight:700}
+#doc-content :not(pre)>code{font:500 var(--t-code)/1.5 var(--font-mono);background:rgba(158,163,186,.10);
+  color:var(--text-200);border-radius:var(--radius-sm);padding:2px 7px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* heading anchor on hover */
+.clo-anchor{opacity:0;margin-left:8px;color:var(--text-500);text-decoration:none;font-weight:400;border:0;transition:opacity .15s}
+:is(h2,h3):hover .clo-anchor{opacity:1}
+
+/* ──── RIGHT TOC ──── */
+.clo-toc{position:sticky;top:var(--topbar-h);height:calc(100vh - var(--topbar-h));overflow-y:auto;
+  padding:var(--sp-7) var(--sp-5) var(--sp-6) var(--sp-3)}
+.clo-toc-title{font-size:var(--t-small);font-weight:600;color:var(--text-400);margin-bottom:var(--sp-3)}
+.clo-toc a{display:block;font-size:var(--t-small);color:var(--text-400);text-decoration:none;
+  padding:5px 0 5px 12px;border-left:2px solid transparent;transition:color .12s,border-color .12s;line-height:1.4}
+.clo-toc a:hover{color:var(--text-200)}
+.clo-toc a.active{color:var(--accent);border-left-color:var(--accent)}
+.clo-toc a.lvl-3{padding-left:24px;font-size:13px}
+.clo-toc:empty,.clo-toc-empty{display:none}
+
+/* ════════ COMPONENTS ════════ */
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:var(--radius);
+  font:700 var(--t-small)/1 var(--font-body);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:filter .2s,box-shadow .2s,border-color .2s,background .2s}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{filter:brightness(1.08);box-shadow:0 8px 22px -8px var(--accent-ring)}
+.btn-ghost{background:transparent;color:var(--text-100);border-color:var(--border-200)}
+.btn-ghost:hover{border-color:var(--accent-border);background:var(--bg-000)}
+
+/* cards + grid */
+.card-grid{display:grid;gap:var(--sp-4);grid-template-columns:repeat(2,1fr);margin:var(--sp-5) 0}
+@media(max-width:640px){.card-grid{grid-template-columns:1fr}}
+.card{display:flex;flex-direction:column;gap:8px;background:var(--bg-100);border:1px solid var(--border-100);
+  border-radius:var(--radius-lg);padding:var(--sp-5);text-decoration:none;box-shadow:0 0 0 2px transparent;
+  transition:box-shadow .18s,border-color .18s,transform .18s}
+.card:hover{border-color:var(--accent-border);box-shadow:0 0 0 2px var(--accent-border);transform:translateY(-2px)}
+.card-icon{width:40px;height:40px;border-radius:12px;background:var(--accent-dim);border:1px solid var(--accent-border);
+  display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:4px}
+.card-icon svg{width:22px;height:22px}
+.card-title{font-size:var(--t-body);font-weight:700;color:var(--text-100)}
+.card-desc{font-size:var(--t-small);color:var(--text-300);line-height:1.5}
+
+/* callouts */
+.callout{display:flex;gap:12px;border-radius:var(--radius-lg);padding:14px 18px;margin:var(--sp-4) 0;
+  border:1px solid var(--border-200);background:var(--note-bg);font-size:var(--t-small);color:var(--text-200);line-height:1.55}
+.callout-ico{flex-shrink:0;width:20px;height:20px;color:var(--note)}
+.callout--tip{background:var(--tip-bg);border-color:var(--accent-border)} .callout--tip .callout-ico{color:var(--tip)}
+.callout--warn{background:var(--warn-bg);border-color:rgba(245,158,11,.3)} .callout--warn .callout-ico{color:var(--warn)}
+.callout--danger{background:var(--danger-bg);border-color:rgba(248,113,113,.3)} .callout--danger .callout-ico{color:var(--danger)}
+.callout--info{background:var(--info-bg);border-color:rgba(59,130,246,.3)} .callout--info .callout-ico{color:var(--info)}
+
+/* code blocks (shell-wrapped) */
+.clo-codeblock{position:relative;background:var(--bg-code);border:1px solid var(--border-100);border-radius:var(--radius-lg);
+  margin:var(--sp-4) 0;overflow:hidden}
+.clo-codeblock .clo-code-lang{position:absolute;top:8px;left:14px;font:600 var(--t-eyebrow)/1 var(--font-mono);
+  color:var(--text-400);text-transform:uppercase;letter-spacing:.5px}
+.clo-codeblock pre{margin:0;padding:34px 16px 16px;overflow-x:auto}
+.clo-codeblock code{font:400 var(--t-code)/1.7 var(--font-mono);color:var(--text-200)}
+.clo-code-copy{position:absolute;top:6px;right:6px;background:var(--bg-200);border:1px solid var(--border-200);
+  color:var(--text-300);font:600 11px/1 var(--font-body);padding:6px 10px;border-radius:8px;cursor:pointer;transition:all .15s}
+.clo-code-copy:hover{color:var(--accent);border-color:var(--accent-border)}
+.clo-code-copy.copied{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+/* hero (home) */
+.clo-hero{margin-bottom:var(--sp-6)}
+.clo-hero .eyebrow{font-size:var(--t-eyebrow);font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.clo-hero h1{font-family:var(--font-display);font-size:38px;font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--text-100);margin-bottom:12px}
+.clo-hero p{font-size:17px;color:var(--text-300);max-width:600px;line-height:1.55}
+
+/* ════════ SEARCH MODAL ════════ */
+.clo-search-overlay{position:fixed;inset:0;z-index:200;display:none;padding:14vh 16px 16px;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.clo-search-overlay.open{display:block}
+.clo-search-panel{max-width:560px;margin:0 auto;background:var(--bg-100);border:1px solid var(--border-200);
+  border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.7)}
+.clo-search-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border-100)}
+.clo-search-head svg{width:18px;height:18px;color:var(--text-400);flex-shrink:0}
+.clo-search-input{flex:1;background:none;border:0;outline:none;color:var(--text-100);font:500 16px/1 var(--font-body)}
+.clo-search-input::placeholder{color:var(--text-500)}
+.clo-search-esc{font:600 11px/1 var(--font-mono);color:var(--text-500);border:1px solid var(--border-200);border-radius:5px;padding:4px 7px}
+.clo-search-results{max-height:50vh;overflow-y:auto;padding:8px}
+.clo-search-result{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:var(--radius);text-decoration:none;cursor:pointer}
+.clo-search-result.active,.clo-search-result:hover{background:var(--accent-dim)}
+.clo-search-result .r-title{font-size:var(--t-small);font-weight:600;color:var(--text-100)}
+.clo-search-result .r-group{font-size:12px;color:var(--text-400)}
+.clo-search-empty{padding:24px;text-align:center;color:var(--text-400);font-size:var(--t-small)}
+
+/* ════════ LICENSE LOCK / EXPIRED SCREEN ════════ */
+.clo-lock{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:48px 24px}
+.clo-lock-card{max-width:480px;width:100%;text-align:center}
+.clo-lock-icon{font-size:48px;margin-bottom:16px;line-height:1}
+.clo-lock-card h1{font-size:26px;font-weight:700;letter-spacing:-.5px;margin-bottom:12px;color:var(--text-100)}
+.clo-lock-lead{color:var(--text-300);font-size:15px;margin-bottom:32px;line-height:1.6}
+.clo-lock-form{background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;text-align:left}
+.clo-lock-form label{display:block;font-size:12px;font-weight:600;color:var(--text-300);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.clo-lock-form input{width:100%;padding:12px 14px;border:1px solid var(--border-200);border-radius:var(--radius);font:14px/1 var(--font-mono);color:var(--text-100);background:var(--bg-200);outline:none;transition:border-color .2s}
+.clo-lock-form input:focus{border-color:var(--accent-border)}
+.clo-lock-form button{width:100%;padding:14px;background:var(--accent);color:var(--accent-ink);border:none;border-radius:var(--radius);font:700 15px/1 var(--font-body);cursor:pointer;margin-top:12px;transition:opacity .2s}
+.clo-lock-form button:hover{opacity:.9}
+.clo-lock-form button:disabled{opacity:.4;cursor:not-allowed}
+.clo-lock-err{background:var(--danger-bg);border:1px solid rgba(248,113,113,.3);color:var(--danger);padding:10px 14px;border-radius:var(--radius);font-size:13px;margin-top:12px;display:none}
+.clo-lock-err.show{display:block}
+.clo-lock-hint{font-size:13px;color:var(--text-500);margin-top:14px}
+.clo-lock-hint a{color:var(--accent);text-decoration:none;font-weight:600}
+
+/* ════════ RESPONSIVE ════════ */
+@media(max-width:1280px){
+  .clo-body{grid-template-columns:var(--sidebar-w) minmax(0,1fr)}
+  .clo-toc{display:none}
+}
+@media(max-width:1024px){
+  .clo-body{grid-template-columns:1fr}
+  .clo-hamburger{display:flex}
+  .clo-sidebar{position:fixed;top:var(--topbar-h);left:0;z-index:90;width:min(86vw,320px);
+    transform:translateX(-100%);transition:transform .25s ease;box-shadow:0 0 60px rgba(0,0,0,.6)}
+  .clo-sidebar.open{transform:none}
+  .clo-content{padding:var(--sp-6) var(--sp-5) var(--sp-7)}
+  .clo-scrim{position:fixed;inset:var(--topbar-h) 0 0;background:rgba(0,0,0,.5);z-index:80;display:none}
+  .clo-scrim.open{display:block}
+}
+@media(max-width:640px){
+  .clo-topbar{padding:0 var(--sp-4);gap:var(--sp-3)}
+  .clo-search-trigger{min-width:0;width:36px;padding:0;justify-content:center}
+  .clo-search-trigger .s-label,.clo-search-trigger .kbd{display:none}
+  .clo-logo span{display:none}
+  .clo-content{padding:var(--sp-5) var(--sp-4) var(--sp-6)}
+  .clo-hero h1{font-size:30px}
+}

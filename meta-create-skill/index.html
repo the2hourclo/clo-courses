@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meta Create Skill — The Production Skill-Authoring Toolkit</title>
+<link rel="stylesheet" href="../clo-course/tokens.css">
+<link rel="stylesheet" href="../clo-course/shell.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -385,7 +387,7 @@ svg text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 }
 </style>
 </head>
-<body>
+<body hidden data-page="meta-skill" data-shell="course">
 
 <div class="header">
   <div class="header-left">
@@ -4033,5 +4035,10 @@ window.addEventListener('hashchange', () => {
   if(id && LESSONS.find(l=>l.id===id)) goToLesson(id);
 });
 </script>
+<!-- Shared portal shell (Claude-Docs chrome). Mirrors this SPA's lessons into the shared sidebar; content + JS untouched. Shared files live in ../clo-course/. -->
+<script>window.CLO_COURSE_LESSONS=(typeof LESSONS!=='undefined')?LESSONS:null;window.CLO_COURSE_GOTO_NAME='goToLesson';window.CLO_CURRENT_LESSON=(typeof state!=='undefined'&&state)?state.currentLesson:null;</script>
+<script src="../clo-course/nav.js"></script>
+<script src="../clo-course/toc.js"></script>
+<script src="../clo-course/shell.js"></script>
 </body>
 </html>

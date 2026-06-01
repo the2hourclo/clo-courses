@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Business X-Ray Skill — Interactive Course</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -309,7 +311,7 @@ svg text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 
 </style>
 </head>
-<body>
+<body hidden data-page="business-x-ray" data-shell="course">
 
 <!-- HEADER -->
 <div class="header">
@@ -1939,5 +1941,10 @@ function init(){
 // Boot after DOM
 init();
 </script>
+<!-- Shared portal shell (Claude-Docs chrome). Bridges this SPA's lessons into the shared sidebar; content + SVGs + JS untouched. -->
+<script>window.CLO_COURSE_LESSONS=(typeof LESSONS!=='undefined')?LESSONS:null;window.CLO_COURSE_GOTO_NAME='goToLesson';window.CLO_CURRENT_LESSON=(typeof state!=='undefined'&&state)?state.currentLesson:null;</script>
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
 </body>
 </html>
