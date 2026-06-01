@@ -317,12 +317,6 @@ function renderUnlocked(licenseKey) {
       <h1>Just a few steps to get you onboarded.</h1>
     </div>
 
-    <div class="license-display-card">
-      <span class="license-display-card-label">Your license:</span>
-      <span class="license-display-card-value" id="licenseDisplay">${licenseKey}</span>
-      <button class="copy-btn" data-copy-target="licenseDisplay" style="position:static;transform:none">Copy</button>
-    </div>
-
     <div class="cards">
 
       <div class="card polynet-card">
@@ -335,46 +329,41 @@ function renderUnlocked(licenseKey) {
           <a class="polynet-cta" href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank">Enter community</a>
           <div class="polynet-footer">Powered by Polynet</div>
         </div>
-        <div class="card-caption" style="padding:0 22px 22px;text-align:center">Once you're in, <strong style="color:var(--text)">watch the onboarding module</strong> to get started with Claude Code.</div>
+        <div class="card-caption" style="padding:0 22px 22px;text-align:center">Say hello, then <strong style="color:var(--text)">head to the Course Portal</strong> to get set up.</div>
       </div>
 
       <div class="card">
         <div class="card-num">2</div>
         <div class="card-visual">
-          <div class="card-visual-label">In Claude Code, run:</div>
-          <code><span id="cmd1">/plugin marketplace add https://github.com/SkillStacks/skillstack.git</span><button class="copy-btn" data-copy-target="cmd1">Copy</button></code>
-          <code><span id="cmd2">/plugin install ${PRODUCT.skillstack_slug}@skillstack-marketplace</span><button class="copy-btn" data-copy-target="cmd2">Copy</button></code>
-          <code><span id="cmd3">/restart</span><button class="copy-btn" data-copy-target="cmd3">Copy</button></code>
-          <code><span id="cmd4">/activate-license</span><button class="copy-btn" data-copy-target="cmd4">Copy</button></code>
+          <div class="card-visual-label">Your license key</div>
+          <code><span id="licenseDisplay">${licenseKey}</span><button class="copy-btn" data-copy-target="licenseDisplay">Copy</button></code>
+          <div class="card-visual-sub" style="line-height:1.5;margin-top:12px">Paste this to unlock the Course Portal.</div>
         </div>
-        <div class="card-action">Install <span class="pill">clo-community</span> in Claude Code</div>
-        <div class="card-caption">Run these commands, paste your license when /activate-license prompts you.</div>
+        <div class="card-action">Get access to the <a href="../clo-course/">Course Portal →</a></div>
+        <div class="card-caption">Open the portal and enter the license key above.</div>
       </div>
 
       <div class="card">
         <div class="card-num">3</div>
         <div class="card-visual">
-          <div class="card-visual-label">Once installed, run:</div>
-          <code><span id="cmd5">onboard me</span><button class="copy-btn" data-copy-target="cmd5">Copy</button></code>
-          <div style="margin-top:12px;font-size:12px;color:var(--text-dim);text-align:left;width:100%;line-height:1.5">Scaffolds your workspace, runs your Business X-Ray, fills in your digital assets, builds your first AI Employee.</div>
+          <div class="card-visual-label">Inside the Portal</div>
+          <div class="card-visual-logo" style="font-size:22px">Set up &amp; <span style="color:var(--text)">/onboard</span></div>
+          <div class="card-visual-sub" style="line-height:1.5">Follow the setup module to install Claude Code + the clo-community plugin, then run /onboard.</div>
         </div>
-        <div class="card-action">Run <span class="pill">/onboard</span> in Claude Code</div>
+        <div class="card-action">Start <span class="pill">onboarding</span></div>
         <div class="card-caption">Takes ~30 minutes. End state: a workspace configured for YOUR business.</div>
       </div>
 
     </div>
 
     <div class="body-block">
-      <div class="body-block-headline">Once you're done with these 3 steps, you've officially been onboarded.</div>
-      <p>Next step is <strong>booking your onboarding call with me (Rashid)</strong>, where we'll visually map out your business, identify the bottleneck slowing growth, and assemble a 90-day plan of action — which Digital Assets to build first, which AI Employees to deploy, and which workflows to compound on.</p>
-      <p>So we can leverage our time best before the call, you'll do an <strong>AI-Assisted Guided Audit of Your Business</strong> using the Business X-Ray skill. That way we walk into the call with your bottlenecks already surfaced and your highest-leverage projects already mapped — instead of spending the first 30 minutes on background. We get straight to building your roadmap.</p>
-      <p>This takes about 30 minutes of your time. Set it aside, run through it, then book the call. If you get stuck or have questions, message me in the Polynet community.</p>
+      <div class="body-block-headline">Once you're through these 3 steps, you're officially onboarded.</div>
+      <p>Everything you need lives in the <strong>Course Portal</strong> — setting up Claude Code, installing the clo-community plugin, and running <strong>/onboard</strong> to scaffold a workspace built around your business.</p>
+      <p>From there, run your <strong>Business X-Ray</strong>: an AI-assisted guided audit that maps your business, surfaces the bottleneck slowing growth, and lays out your highest-leverage projects — which Digital Assets to build first and which AI Employees to deploy.</p>
+      <p>Work through it at your own pace. If you get stuck or have questions, message me in the Polynet community.</p>
       <div class="cta-row">
         <a class="cta cta-outline" href="../clo-course/#business-x-ray">Run the Business X-Ray Audit</a>
-        <a class="cta cta-solid" href="#">Book Your Onboarding Call</a>
-      </div>
-      <div class="cta-row" style="margin-top:14px">
-        <a class="cta cta-outline" href="../clo-course/" style="font-weight:700">Open the full Course Portal →</a>
+        <a class="cta cta-solid" href="../clo-course/" style="font-weight:700">Open the Course Portal →</a>
       </div>
     </div>
 
