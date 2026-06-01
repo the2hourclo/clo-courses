@@ -57,14 +57,14 @@ window.CLO_PRODUCTS = {
     community: { url: 'https://www.polynet.ai/c/ai-employee-builders', label: 'Community ↗', external: true },
     onboarding: [
       { label: 'Join the community', href: 'https://www.polynet.ai/c/ai-employee-builders', hint: 'Meet the other builders' },
-      { label: 'Get access & install', href: 'aieb-course/get-access.html', hint: 'Set up Claude Code + the plugin' },
+      { label: 'Get access & install', href: 'clo-course/get-access-aieb.html', hint: 'Set up Claude Code + the plugin' },
       { label: 'Run your Business X-Ray', href: 'clo-course/business-x-ray.html', hint: 'Find your highest-leverage build' },
       { label: 'Build your first Skill System', href: 'meta-create-skill/index.html', hint: 'Ship a skill that chains' }
     ],
     nav: [
       { group: 'Get Started', items: [
         { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
-        { label: 'Get Access', page: 'get-access', href: 'aieb-course/get-access.html', keywords: ['install','setup','claude code','plugin','license','activate','skillstack','onboard','getting started','first steps'] }
+        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','plugin','license','activate','skillstack','onboard','getting started','first steps'] }
       ]},
       { group: 'Courses', items: [
         { label: 'Claude Code 101', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['fundamentals','basics','tools','skills','agents','hooks','mcp','terminal','commands','subagents'] },

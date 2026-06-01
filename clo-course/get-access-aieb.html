@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Access — Install the AI Employee Builder Plugin</title>
+<title>Get Access — Install the AI Employee Builder</title>
 <meta name="description" content="A simple, guided setup to get the AI Employee Builder plugin running inside VS Code. No terminal required, no coding.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -43,7 +42,7 @@ body{min-height:100vh;
     radial-gradient(900px 500px at 50% -200px,rgba(121,234,32,.07),transparent 70%),
     var(--bg);
 }
-.wrap{padding:0 20px 90px}
+.wrap{padding:0}
 .container{max-width:760px;margin:0 auto}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -262,9 +261,9 @@ body.show-terminal .m-terminal{display:block}
 .footer{text-align:center;margin-top:38px;padding-top:22px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim)}
 </style>
 </head>
-<body>
+<body hidden data-page="get-access">
 <div class="wrap">
-<div class="container">
+<div class="container" id="doc-content">
 
   <!-- HEADER -->
   <div class="brand-header rise">
@@ -275,7 +274,7 @@ body.show-terminal .m-terminal{display:block}
   <div class="hero rise d1">
     <div class="eyebrow">&#128273; Get Access</div>
     <h1>Let's get your AI&nbsp;Employee Builder running</h1>
-    <p class="lead">Six small steps, all inside VS Code &mdash; no terminal required, no coding. By the end you'll have the builder toolkit installed and your first custom skill running. Tick each step off as you go &mdash; and if you ever get stuck, Claude itself will walk you through it.</p>
+    <p class="lead">Six small steps, all inside VS Code &mdash; no terminal required, no coding. Tick each one off as you go. If you ever get stuck, Claude itself will walk you through it.</p>
     <div class="reassure">
       <span>&#9201;&#65039; ~20 minutes</span>
       <span>&#9989; 6 simple steps</span>
@@ -339,7 +338,7 @@ body.show-terminal .m-terminal{display:block}
       <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Add the Claude Code extension &amp; sign in.</strong> Open VS Code, open the <strong>Extensions</strong> panel (<span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span> / <span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span>), search <strong>"Claude Code"</strong>, and click <strong>Install</strong> on the first result by Anthropic. Then click the <strong>Spark icon (&#10022;)</strong> top-right to open the panel and <strong>sign in</strong> with your Claude account.</div></div>
 
       <figure class="shot">
-        <img src="../clo-course/assets/get-access/02-claude-code-extension.png" alt="Installing the Claude Code extension in VS Code" onerror="this.closest('figure').style.display='none'">
+        <img src="assets/get-access/02-claude-code-extension.png" alt="Installing the Claude Code extension in VS Code" onerror="this.closest('figure').style.display='none'">
         <figcaption><strong>What you'll see:</strong> search <strong>"Claude Code"</strong> in the Extensions panel and click <strong>Install</strong> on the first result by Anthropic.</figcaption>
       </figure>
 
@@ -352,25 +351,29 @@ body.show-terminal .m-terminal{display:block}
   <!-- ═══════════════ AI SHORTCUT (usable once Claude Code is installed) ═══════════════ -->
   <div class="ai-card" id="shortcut">
     <div class="card-title">&#9889; Got Claude Code open? Let Claude do the rest</div>
-    <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude installs Node.js for you, runs every command it can in the terminal, and only asks you to do something by hand when it truly can't (like pasting your license key). It fixes any errors as they come up. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
+    <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude does the whole install itself, and if it ever hits something only you can do (paste your key, click a button), it walks you through it one clear step at a time. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
     <div class="ai-prompt">
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
-      <pre>I want to install the AI Employee Builder plugin in Claude Code, and I'd like you to do as much of it for me as you can — using the terminal where possible — and only ask me to do something by hand when you truly can't. Verify each part worked and tell me the result before moving on.
+      <pre>You are setting up the AI Employee Builder plugin in my Claude Code for me. Do as much of this yourself as you possibly can — run the commands, install what's needed, check the results — and only hand a task to me when it's genuinely impossible for you to do it. My job should be near zero: ideally I only paste my license key and click a button or two. Verify every step actually worked before moving to the next.
 
-1. NODE.JS — Run `node --version` in the terminal. If it's missing or older than v18, install the latest LTS for me (winget on Windows, Homebrew on macOS, or the right package manager for my system) and confirm it works.
+MY SETUP — read carefully: I'm in the Claude Code VS Code extension. You CANNOT type slash commands into my chat for me. When something can ONLY be done by me (a slash command, or a click), do NOT just dump a command and assume it ran — give me a clear, numbered "do this" with the exact text to paste or the exact thing to click, then STOP and wait for me to confirm. In the extension the plugin manager is a clickable panel: I open it by typing /plugin and then CLICKING "Manage Plugins" (it has a Plugins tab and a Marketplaces tab). Prefer guiding me through that panel with simple clicks over slash commands.
 
-2. SKILLSTACK (the system that delivers the plugin) — Try to add and install it from the terminal:
+Your standing rule for the whole process: try to do it yourself in the terminal first. If a terminal command fails, errors, or isn't available on my version, DON'T get stuck or make me debug — switch to the simplest path for me: walk me through the VS Code Manage Plugins panel step by step (or give me one exact line to paste), wait, and verify it worked. Always favor the option that needs the least from me.
+
+1. NODE.JS — Run `node --version` yourself. If it's missing or older than v18, install the latest LTS for me (winget on Windows, Homebrew on macOS, or the right package manager for my OS) and confirm it works. Don't make me install anything you can install.
+
+2. SKILLSTACK (the system that delivers the plugin) — First try it yourself in the terminal:
    claude plugin marketplace add https://github.com/SkillStacks/skillstack.git
    claude plugin install skillstack@skillstack-marketplace --scope user
-   If the terminal can't do it on my version, tell me the exact slash commands to type in the chat instead (/plugin marketplace add … then /plugin install …) and wait.
+   If that fails or isn't available, switch me to the VS Code panel: "type /plugin and click Manage Plugins" → Marketplaces tab → add https://github.com/SkillStacks/skillstack.git → Plugins tab → find "skillstack" → Install → choose "Install for you" → reload. Walk me one click at a time and wait.
 
-3. LICENSE — Tell me when you're ready and I'll paste my Lemon Squeezy license key. Then activate it (run the /activate-license flow, or use the SkillStack tools if you have them). Note the storefront and commands it resolves to.
+3. LICENSE — Tell me when you're ready and I'll paste my Lemon Squeezy license key. Then activate it yourself (the /activate-license flow, or the SkillStack tools if you have them). Note the storefront URL and the two install commands it resolves to.
 
-4. AI-EMPLOYEE-BUILDER — Add my clo-os storefront and install the ai-employee-builder plugin (try the terminal first with `claude plugin …`; fall back to telling me the slash commands).
+4. AI-EMPLOYEE-BUILDER — Install it. Try the terminal yourself first (claude plugin marketplace add <the clo-os storefront URL> then claude plugin install ai-employee-builder@clo-os --scope user). If that can't run, switch me to the VS Code panel the same way: /plugin → Manage Plugins → Marketplaces tab → add the clo-os storefront URL → Plugins tab → find "ai-employee-builder" → Install → "Install for you" → reload. One step at a time, and verify.
 
-5. RELOAD &amp; ONBOARD — Reload plugins, then kick off onboarding by running "onboard me".
+5. RELOAD & CONFIRM — Reload plugins so ai-employee-builder is active, then confirm to me that it's installed and enabled.
 
-Rules: you can't type slash commands into the chat box for me — when a step needs that, give me the exact thing to paste and wait. Do everything else yourself. After each step, confirm it worked or show me the error and the fix. Start now with step 1 (Node.js).</pre>
+After each step, tell me plainly whether it worked, or show me the error and exactly how you're fixing it. Start now with step 1.</pre>
     </div>
     <div class="callout callout-tip" style="margin-top:14px">Rather do it by hand? Just keep following Steps&nbsp;2&ndash;6 below &mdash; each is short, and you can tick them off as you go.</div>
   </div>
@@ -386,7 +389,8 @@ Rules: you can't type slash commands into the chat box for me — when a step ne
       <p>When you subscribed through <strong>Lemon Squeezy</strong>, you were issued a license key &mdash; a line of letters and numbers like this:</p>
       <div class="cmd-line"><span class="cmd-text" style="color:var(--text-dim)">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</span></div>
       <p style="margin-top:14px">Two places to find it:</p>
-      <div class="prereq"><div style="flex:1"><div class="prereq-title">&#9993;&#65039; Your purchase email</div><div class="prereq-sub">Lemon Squeezy emailed you a receipt right after you bought (from <code>noreply@lemonsqueezy.com</code>). Your key is printed inside. Can't find it? Check spam, or search your inbox for <strong>"AI Employee Builder"</strong> or <strong>"license"</strong>.</div></div></div>
+      <div class="callout callout-tip" style="margin:0 0 12px"><strong>Got your key in an email from Rashid?</strong> (e.g. a free-access invite.) Use that key &mdash; skip the two lookups below and head to Step&nbsp;3.</div>
+      <div class="prereq"><div style="flex:1"><div class="prereq-title">&#9993;&#65039; Your purchase email</div><div class="prereq-sub">Lemon Squeezy emailed you a receipt right after you bought (from <code>noreply@lemonsqueezy.com</code>). Your key is printed inside. Can't find it? Check spam, or search your inbox for <strong>"Chief Leverage Officer"</strong> or <strong>"license"</strong>.</div></div></div>
       <div class="prereq"><div style="flex:1"><div class="prereq-title">&#128273; The "My Orders" page</div><div class="prereq-sub">Go to <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">app.lemonsqueezy.com/my-orders</a>, enter the email you bought with, and click the magic link. Open your order &mdash; the key (with a copy button) is right there. You can also renew or manage your subscription here.</div></div></div>
       <div class="callout callout-tip"><strong>Copy it somewhere handy.</strong> You'll paste it once, in Step&nbsp;4. The same key works on every computer you use.</div>
       <button class="done-btn" onclick="markDone(2)"><span class="dlabel">Mark step done</span></button>
@@ -502,7 +506,7 @@ Rules: you can't type slash commands into the chat box for me — when a step ne
         <div class="callout callout-warning"><strong>Use the exact commands <code>/activate-license</code> printed</strong> &mdash; they're tailored to your account. The ones above are just what they look like.</div>
       </div>
 
-      <div class="callout callout-tip"><strong>Turn on auto-updates</strong> (recommended): type <code>/plugin</code> &rarr; <strong>Manage Plugins</strong> &rarr; <strong>Marketplaces</strong> tab &rarr; select the CLO-OS storefront &rarr; <strong>Enable auto-update</strong>. <span style="color:var(--text-dim)">(ai-employee-builder also auto-updates itself at session start, so you stay on the latest build either way.)</span></div>
+      <div class="callout callout-tip"><strong>Turn on auto-updates</strong> (recommended): type <code>/plugin</code> &rarr; <strong>Manage Plugins</strong> &rarr; <strong>Marketplaces</strong> tab &rarr; select the CLO-OS storefront &rarr; <strong>Enable auto-update</strong>.</div>
       <button class="done-btn" onclick="markDone(5)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -511,7 +515,7 @@ Rules: you can't type slash commands into the chat box for me — when a step ne
   <details class="step" id="step6" data-step="6">
     <summary class="step-sum">
       <span class="step-check"><span class="num">6</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Onboard &mdash; set up &amp; build your first skill</span><span class="step-sub">The fun part</span></span>
+      <span class="step-titles"><span class="step-t">Onboard &mdash; build your first skill</span><span class="step-sub">The fun part</span></span>
       <span class="step-meta"><span class="time">~10 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
@@ -521,11 +525,11 @@ Rules: you can't type slash commands into the chat box for me — when a step ne
       <table class="tbl">
         <thead><tr><th>Phase</th><th>What happens</th></tr></thead>
         <tbody>
-          <tr><td><strong>1. Scaffold</strong></td><td>Sets up your authoring folders (<code>.claude/skills</code>, <code>agents</code>, <code>commands</code>, <code>hooks</code>) and writes a workspace guide with a build-your-first-skill primer</td></tr>
-          <tr><td><strong>2. Build your first skill</strong></td><td>Optionally maps your business with a Business X-Ray to find the highest-leverage thing to automate &mdash; then creates your first custom skill and tests it</td></tr>
+          <tr><td><strong>1. Scaffold</strong></td><td>Sets up your authoring folders (<code>.claude/skills</code>, <code>agents</code>, <code>commands</code>, <code>hooks</code>) and a workspace guide</td></tr>
+          <tr><td><strong>2. Build your first skill</strong></td><td>Optionally maps your business with a Business X-Ray to find the highest-leverage thing to automate, then creates your first custom skill and tests it</td></tr>
         </tbody>
       </table>
-      <p style="font-size:12.5px;color:var(--text-dim);margin-top:10px">Takes ~10 minutes. End state: your authoring workspace is set up, your first custom skill is built and running &mdash; and you know exactly how to build more (just say <code>create a skill for X</code> anytime).</p>
+      <p style="font-size:12.5px;color:var(--text-dim);margin-top:10px">Takes ~10 minutes. End state: your authoring workspace is set up and your first custom skill is built and running &mdash; plus you know exactly how to build more (just say <code>create a skill for X</code> anytime).</p>
       <button class="done-btn" onclick="markDone(6)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -571,7 +575,7 @@ Check anything you can — run node --version, look at my ~/.npmrc for the @skil
       <thead><tr><th>What you see</th><th>The fix</th></tr></thead>
       <tbody>
         <tr><td>A new command doesn't appear</td><td>You skipped a reload. Type <code>/reload-plugins</code>, or reload the window (<span class="kbd">Ctrl/Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> &rarr; "Reload Window").</td></tr>
-        <tr><td>Install fails mentioning <code>npm</code> or <code>node</code></td><td>Node.js isn't installed (Step&nbsp;3). Install the <strong>LTS</strong> build from <a href="https://nodejs.org" target="_blank">nodejs.org</a>, restart VS Code, retry.</td></tr>
+        <tr><td>Install fails mentioning <code>npm</code> or <code>node</code></td><td>Node.js isn't installed (Step&nbsp;1, item&nbsp;4). Install the <strong>LTS</strong> build from <a href="https://nodejs.org" target="_blank">nodejs.org</a>, restart VS Code, retry.</td></tr>
         <tr><td>A <strong>403</strong> error on install</td><td>Your license isn't activated for this plugin yet. Run <code>/activate-license</code> again, paste your key, then retry.</td></tr>
         <tr><td>"Key bound to other plugin"</td><td>That key is for a different product &mdash; each key activates one plugin. Re-check the key in your Lemon Squeezy email.</td></tr>
         <tr><td>"Expired" or "Revoked"</td><td>Your subscription lapsed. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">My Orders</a>, then run <code>/activate-license</code> again.</td></tr>
@@ -587,10 +591,9 @@ Check anything you can — run node --version, look at my ~/.npmrc for the @skil
   <div class="faq">
     <details><summary>Do I need to know how to code?</summary><div class="faq-body">No. You copy a few short commands into a chat box and click "Install." If you can copy and paste, you can do this &mdash; and the <strong>"Let Claude install it"</strong> prompt up top will walk you through it.</div></details>
     <details><summary>Why install SkillStack first, then ai-employee-builder?</summary><div class="faq-body">SkillStack is the secure delivery system for paid plugins &mdash; like the app store. You add it once; it checks your license and hands you the exact commands to install ai-employee-builder. Two installs, one time.</div></details>
-    <details><summary>What do I actually get with this plugin?</summary><div class="faq-body">The AI Employee Builder is the <strong>authoring toolkit</strong> &mdash; the meta-tools that build <em>your</em> skills, agents, hooks, commands, and MCP connections, plus a Business X-Ray to find where to start and a retrospective tool that improves your skills over time. It doesn't come with a pre-made content library; it's the kit you use to build your own AI Employees.</div></details>
     <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Yes. The same key activates on every computer you use &mdash; run <code>/activate-license</code> and paste it on each one. No new key per device.</div></details>
     <details><summary>Why does it need Node.js?</summary><div class="faq-body">SkillStack delivers the plugin as a secure npm package, and Node.js (which includes <code>npm</code>) downloads it. Install once from <a href="https://nodejs.org" target="_blank">nodejs.org</a> and never touch it again.</div></details>
-    <details><summary>How do updates work?</summary><div class="faq-body">On a subscription, every update ships automatically &mdash; ai-employee-builder also refreshes itself at session start. To apply updates manually any time, run <code>/skillstack:update-plugins</code>.</div></details>
+    <details><summary>How do updates work?</summary><div class="faq-body">On a subscription, every update ships automatically &mdash; especially with auto-update on (Step&nbsp;5 tip). To apply updates manually any time, run <code>/skillstack:update-plugins</code>.</div></details>
     <details><summary>What if my subscription lapses?</summary><div class="faq-body">Access pauses until you renew. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">Lemon Squeezy &rarr; My Orders</a>, then run <code>/activate-license</code> again.</div></details>
     <details><summary>I already use Claude Code &mdash; can I skip ahead?</summary><div class="faq-body">Yes. If the extension and Node.js are installed, tick Step&nbsp;1 and jump to <strong>Step&nbsp;3</strong>.</div></details>
     <details><summary>Is the Terminal method different from VS Code?</summary><div class="faq-body">Same result, same commands &mdash; just a different place to type them. The <strong>VS Code</strong> way is click-based and friendly; <strong>Terminal</strong> is for command-line folks. Use the toggle at the top to switch.</div></details>
@@ -687,5 +690,8 @@ function setMethod(m){
   if(tb) tb.classList.toggle('active', m==='terminal');
 }
 </script>
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
 </body>
 </html>
