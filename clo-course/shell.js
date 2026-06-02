@@ -12,7 +12,7 @@
   var GATE_OPEN = true;
 
   var params = new URLSearchParams(location.search);
-  var PRODUCT_KEY = params.get('product') === 'aieb' ? 'aieb' : 'clo';
+  var PRODUCT_KEY = (params.get('product') === 'aieb' || document.body.getAttribute('data-product') === 'aieb') ? 'aieb' : 'clo';
   var P = window.CLO_PRODUCTS[PRODUCT_KEY];
   var STORAGE_KEY = P.storageKey;
   var PAGE = document.body.getAttribute('data-page') || 'home';
