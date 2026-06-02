@@ -205,6 +205,11 @@ const PRODUCT = {
 };
 const STORAGE_KEY = 'clo_community_license';
 
+// Community swaps to AI Employee Builders when the onboarding is opened with ?product=aieb
+const COMMUNITY = new URLSearchParams(location.search).get('product') === 'aieb'
+  ? { name: 'AI Employee Builders', handle: 'c/ai-employee-builders', url: 'https://www.polynet.ai/c/ai-employee-builders' }
+  : { name: 'Chief Leverage Officers', handle: 'c/chief-leverage-officers', url: 'https://www.polynet.ai/c/chief-leverage-officers' };
+
 // ══════════════════════════════════════════════════════
 // INIT — runs on every page load
 // ══════════════════════════════════════════════════════
@@ -396,12 +401,12 @@ function renderUnlocked(licenseKey) {
         <div class="pn-embed">
           <img class="pn-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
           <div>
-            <div class="pn-name">Chief Leverage Officers</div>
-            <div class="pn-handle">c/chief-leverage-officers</div>
+            <div class="pn-name">${COMMUNITY.name}</div>
+            <div class="pn-handle">${COMMUNITY.handle}</div>
           </div>
         </div>
         <p class="step-desc">Build digital assets and employ AI Employees to do 80–90% of the work for you. Say hello — this is where you'll ask questions as you go.</p>
-        <a class="btn btn-primary" href="https://www.polynet.ai/c/chief-leverage-officers" target="_blank" rel="noopener">Enter community →</a>
+        <a class="btn btn-primary" href="${COMMUNITY.url}" target="_blank" rel="noopener">Enter community →</a>
         <div class="pn-footer">Powered by Polynet</div>
       </div>
 

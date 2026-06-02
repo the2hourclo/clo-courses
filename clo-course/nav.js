@@ -8,7 +8,6 @@ window.CLO_PRODUCTS = {
   clo: {
     brand: 'Chief Leverage Officer',
     title: 'Chief Leverage Officer — Wiki',
-    tierBadge: { label: 'Full Access', star: true },
     storageKey: 'clo_community_license',
     pluginName: 'clo-community',
     license: { store_id: 10600, product_id: 926993, variant_id: 1457440 },
