@@ -155,7 +155,6 @@
     P.nav.forEach(function (g) { g.items.forEach(function (it) { flat.push(Object.assign({ group: g.group }, it)); }); });
     var active = flat.filter(function (it) { return it.page === PAGE; })[0];
 
-    var ext = P.community.external ? ' target="_blank" rel="noopener"' : '';
     var sidebar = P.nav.map(function (g) {
       return '<div class="clo-nav-group"><div class="clo-nav-grouplabel">' + g.group + '</div>' +
         g.items.map(function (it) {
@@ -189,7 +188,6 @@
         '<a class="clo-logo" href="' + resolveHref(HOME) + '"><img src="' + LOGO + '" alt="' + P.brand + '"><span>' + P.brand + '</span></a>' + tierHtml +
         '<button class="clo-search-trigger" id="cloSearchBtn" aria-label="Search">' + ICON.search + '<span class="s-label">Search…</span><span class="kbd">⌘K</span></button>' +
         '<span class="clo-topbar-spacer"></span>' +
-        '<a class="clo-topbar-link" href="' + resolveHref(P.community.url) + '"' + ext + '>' + P.community.label + '</a>' +
         '<button class="clo-signout" id="cloSignout">Sign out</button>' +
       '</header>' +
       '<div class="clo-scrim" id="cloScrim"></div>' +
