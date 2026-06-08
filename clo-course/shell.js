@@ -143,6 +143,23 @@
     return out;
   }
 
+  // Keep in-body content links inside the current product. CLO is a no-op (links authored for clo);
+  // in AIEB mode, remap the CLO get-access page to its AIEB twin and carry ?product=aieb on local .html links
+  // so a buyer never clicks through from the AIEB portal into the CLO install flow.
+  function rewriteContentLinks(scope) {
+    if (PRODUCT_KEY !== 'aieb' || !scope) return;
+    scope.querySelectorAll('a[href]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (!href || /^(https?:|mailto:|tel:|#|javascript:)/.test(href)) return; // external/anchor — leave alone
+      if (!/\.html(\?|#|$)/.test(href)) return;                                  // only local .html pages
+      href = href.replace('get-access.html', 'get-access-aieb.html');           // CLO install page → AIEB twin
+      var hash = '', q = href, hi = href.indexOf('#');
+      if (hi > -1) { hash = href.slice(hi); q = href.slice(0, hi); }
+      if (!/[?&]product=/.test(q)) q += (q.indexOf('?') > -1 ? '&' : '?') + 'product=aieb';
+      a.setAttribute('href', q + hash);
+    });
+  }
+
   function buildShell() {
     var MODE = document.body.getAttribute('data-shell') || 'doc';
     var lessons = window.CLO_COURSE_LESSONS || null;
@@ -202,7 +219,7 @@
     var inner = shell.querySelector('#cloInner');
     if (active && PAGE !== 'home')
       inner.insertAdjacentHTML('beforeend', '<div class="clo-breadcrumb">' + active.group + '<span class="sep">/</span>' + active.label + '</div>');
-    if (doc) { doc.hidden = false; inner.appendChild(doc); }
+    if (doc) { doc.hidden = false; inner.appendChild(doc); rewriteContentLinks(doc); }
 
     document.body.hidden = false;
 
