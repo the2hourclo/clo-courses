@@ -223,10 +223,10 @@ function wikiHref(key, hash){
   if (IS_AIEB) parts.push('product=aieb');
   return '../clo-course/' + (parts.length ? '?' + parts.join('&') : '') + (hash || '');
 }
-// install guide: AIEB gets its dedicated onboarding page (AIEB prompt + key auto-fill); CLO keeps the wiki's Get Access
+// install guide: each product opens its own get-access page at the copy-paste shortcut prompt
 function installGuideHref(key){
-  if (IS_AIEB) return '../clo-course/get-access-aieb.html' + (key ? '?license_key=' + encodeURIComponent(key) : '') + '#shortcut';
-  return wikiHref(key, '#get-access');
+  const page = IS_AIEB ? 'get-access-aieb.html' : 'get-access.html';
+  return '../clo-course/' + page + (key ? '?license_key=' + encodeURIComponent(key) : '') + '#shortcut';
 }
 
 // ══════════════════════════════════════════════════════
