@@ -354,7 +354,7 @@ body.show-terminal .m-terminal{display:block}
     <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude does the whole install itself, and if it ever hits something only you can do (paste your key, click a button), it walks you through it one clear step at a time. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
     <div class="ai-prompt">
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
-      <pre id="aiPrompt">You are setting up the CLO-OS Community plugin in my Claude Code for me. Do as much of this yourself as you possibly can — run the commands, install what's needed, check the results — and only hand a task to me when it's genuinely impossible for you to do it. My job should be near zero: ideally I only paste my license key and click a button or two. Verify every step actually worked before moving to the next.
+      <pre>You are setting up the CLO-OS Community plugin in my Claude Code for me. Do as much of this yourself as you possibly can — run the commands, install what's needed, check the results — and only hand a task to me when it's genuinely impossible for you to do it. My job should be near zero: ideally I only paste my license key and click a button or two. Verify every step actually worked before moving to the next.
 
 MY SETUP — read carefully: I'm in the Claude Code VS Code extension. You CANNOT type slash commands into my chat for me. When something can ONLY be done by me (a slash command, or a click), do NOT just dump a command and assume it ran — give me a clear, numbered "do this" with the exact text to paste or the exact thing to click, then STOP and wait for me to confirm. In the extension the plugin manager is a clickable panel: I open it by typing /plugin and then CLICKING "Manage Plugins" (it has a Plugins tab and a Marketplaces tab). Prefer guiding me through that panel with simple clicks over slash commands.
 
@@ -387,8 +387,7 @@ After each step, tell me plainly whether it worked, or show me the error and exa
     </summary>
     <div class="step-content">
       <p>When you subscribed through <strong>Lemon Squeezy</strong>, you were issued a license key &mdash; a line of letters and numbers like this:</p>
-      <div class="cmd-line"><span class="cmd-text js-key-text" style="color:var(--text-dim)">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</span><button class="copy-cmd js-key-copy" onclick="copyCmd(this)" hidden>Copy</button></div>
-      <div class="callout callout-tip js-key-note" hidden style="margin-top:10px">&#9989; <strong>That's your real license key</strong> &mdash; filled in from your invite link. Copy it now; you'll paste it in Step&nbsp;4. (No need to dig through email.)</div>
+      <div class="cmd-line"><span class="cmd-text" style="color:var(--text-dim)">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</span></div>
       <p style="margin-top:14px">Two places to find it:</p>
       <div class="callout callout-tip" style="margin:0 0 12px"><strong>Got your key in an email from Rashid?</strong> (e.g. a free-access invite.) Use that key &mdash; skip the two lookups below and head to Step&nbsp;3.</div>
       <div class="prereq"><div style="flex:1"><div class="prereq-title">&#9993;&#65039; Your purchase email</div><div class="prereq-sub">Lemon Squeezy emailed you a receipt right after you bought (from <code>noreply@lemonsqueezy.com</code>). Your key is printed inside. Can't find it? Check spam, or search your inbox for <strong>"Chief Leverage Officer"</strong> or <strong>"license"</strong>.</div></div></div>
@@ -465,7 +464,6 @@ After each step, tell me plainly whether it worked, or show me the error and exa
     <div class="step-content">
       <p>Now hand SkillStack your key. In the same Claude session (panel or terminal), type:</p>
       <div class="cmd-line"><span class="cmd-text">/activate-license</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <div class="js-key-only" hidden><p style="margin-top:10px">When it asks, paste <strong>your key</strong>:</p><div class="cmd-line"><span class="cmd-text js-key-text">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</span><button class="copy-cmd js-key-copy" onclick="copyCmd(this)">Copy</button></div></div>
       <p style="margin-top:10px">When it asks for your key, <strong>paste the license key from Step&nbsp;2</strong> and press Enter. It points your computer at the SkillStack registry (automatic), confirms your key, recognizes it belongs to <strong>clo-community</strong>, and <strong>prints the exact two commands</strong> you'll use in Step&nbsp;5.</p>
       <div class="callout callout-info"><strong>Subscription license:</strong> access stays active while your subscription is, and every update ships to you automatically. One key activates one plugin &mdash; any other CLO-OS plugin comes with its own key that links to the same login.</div>
       <button class="done-btn" onclick="markDone(4)"><span class="dlabel">Mark step done</span></button>
@@ -687,23 +685,6 @@ function setMethod(m){
   if(vb) vb.classList.toggle('active', m==='vscode');
   if(tb) tb.classList.toggle('active', m==='terminal');
 }
-
-// ── Auto-fill the license key from the invite link (?license_key= or ?key=) ──
-// Pre-fills Step 2 + Step 4 with the member's real key (instead of the XXXX placeholder)
-// and splices it into the "Let Claude do the rest" shortcut prompt. No key in the URL → placeholders stay as-is.
-(function fillLicenseKey(){
-  var p = new URLSearchParams(location.search);
-  var key = (p.get('license_key') || p.get('key') || '').trim();
-  if (!key) return;
-  document.querySelectorAll('.js-key-text').forEach(function(el){ el.textContent = key; el.style.color = 'var(--accent)'; });
-  document.querySelectorAll('.js-key-copy').forEach(function(b){ b.hidden = false; });
-  document.querySelectorAll('.js-key-only, .js-key-note').forEach(function(el){ el.hidden = false; });
-  var pre = document.getElementById('aiPrompt');
-  if (pre) pre.textContent = pre.textContent.replace(
-    "Tell me when you're ready and I'll paste my Lemon Squeezy license key.",
-    "My Lemon Squeezy license key is " + key + "."
-  );
-})();
 </script>
 <script src="nav.js"></script>
 <script src="toc.js"></script>
