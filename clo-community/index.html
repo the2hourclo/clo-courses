@@ -215,12 +215,18 @@ const BRAND_LOGO = IS_AIEB ? 'assets/community-robot.png' : 'assets/clo-logo-ful
 const BRAND_ALT = IS_AIEB ? 'AI Employee Builders' : 'Chief Leverage Officer';
 const WELCOME_NAME = IS_AIEB ? 'AI Employee Builders' : "the Chief Leverage Officer's Community";
 // thread ?product=aieb through the wiki links so they stay in AIEB mode
-const WIKI_QS = IS_AIEB ? '&product=aieb' : '';
+// Build portal links that carry the real license key ONLY when we actually have one
+// (never the temp-open placeholder), and stay in AIEB mode via product=aieb.
+function wikiHref(key, hash){
+  const parts = [];
+  if (key) parts.push('license_key=' + encodeURIComponent(key));
+  if (IS_AIEB) parts.push('product=aieb');
+  return '../clo-course/' + (parts.length ? '?' + parts.join('&') : '') + (hash || '');
+}
 // install guide: AIEB gets its dedicated onboarding page (AIEB prompt + key auto-fill); CLO keeps the wiki's Get Access
 function installGuideHref(key){
-  return IS_AIEB
-    ? `../clo-course/get-access-aieb.html?license_key=${encodeURIComponent(key)}#shortcut`
-    : `../clo-course/?license_key=${encodeURIComponent(key)}#get-access`;
+  if (IS_AIEB) return '../clo-course/get-access-aieb.html' + (key ? '?license_key=' + encodeURIComponent(key) : '') + '#shortcut';
+  return wikiHref(key, '#get-access');
 }
 
 // ══════════════════════════════════════════════════════
@@ -232,9 +238,10 @@ const app = document.getElementById('app');
   const urlParams = new URLSearchParams(window.location.search);
   let licenseKey = urlParams.get('license_key');
 
-  // TEMP 2026-05-28: license gate disabled — change `true` back to `urlParams.get('preview') === 'YES'` to re-enable
+  // TEMP 2026-05-28: license gate disabled — change `true` back to `urlParams.get('preview') === 'YES'` to re-enable.
+  // Pass the real key through if the invite link carries one; otherwise render with no key (no fake placeholder).
   if (true) {
-    return renderUnlocked('TEMP-OPEN-ACCESS-XXXX-XXXX-XXXXXXXXXXXX');
+    return renderUnlocked(licenseKey || localStorage.getItem(STORAGE_KEY) || '');
   }
 
   if (!licenseKey) {
@@ -389,6 +396,7 @@ function renderUnlocked(licenseKey) {
       <p class="intro-sub">Knock them out in order — about 10 minutes start to finish.</p>
     </div>
 
+    ${licenseKey ? `
     <div class="license-ticket">
       <div class="license-ticket-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M11.4 11.6 21 2"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
@@ -399,7 +407,7 @@ function renderUnlocked(licenseKey) {
         <div class="license-note">Keep this handy — it unlocks the portal and activates the plugin. It's already built into step 2 and 3 below.</div>
       </div>
       <button class="copy-btn" data-copy-target="licenseDisplay">Copy key</button>
-    </div>
+    </div>` : ''}
 
     <div class="steps">
 
@@ -431,8 +439,8 @@ function renderUnlocked(licenseKey) {
           <span class="step-num">2</span>
         </div>
         <h2 class="step-title">Open the Wiki</h2>
-        <p class="step-desc">Every lesson, setup walkthrough, and your Business X-Ray — all in one place. This link unlocks it with your key automatically.</p>
-        <a class="btn btn-primary" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}${WIKI_QS}" target="_blank" rel="noopener">Open the portal →</a>
+        <p class="step-desc">Every lesson, setup walkthrough, and your Business X-Ray — all in one place. Open it any time.</p>
+        <a class="btn btn-primary" href="${wikiHref(licenseKey)}" target="_blank" rel="noopener">Open the portal →</a>
       </div>
 
       <div class="step" style="--i:2">
@@ -443,7 +451,7 @@ function renderUnlocked(licenseKey) {
           <span class="step-num">3</span>
         </div>
         <h2 class="step-title">Install on Claude Code</h2>
-        <p class="step-desc">The install guide has a ready-made prompt that walks Claude Code through the whole setup, one step at a time. Your key's already built in.</p>
+        <p class="step-desc">The install guide has a ready-made prompt that walks Claude Code through the whole setup, one step at a time. <strong>Grab your license key from your purchase confirmation email</strong> and paste it when the guide asks.</p>
         <a class="btn btn-primary" href="${installGuideHref(licenseKey)}" target="_blank" rel="noopener">Open the install guide →</a>
       </div>
 
@@ -453,10 +461,6 @@ function renderUnlocked(licenseKey) {
       <div class="body-block-headline">That's it — you're officially onboarded. 🎉</div>
       <p>Once Claude Code is set up, your first move is the <strong>Business X-Ray</strong>: an AI-assisted guided audit that maps your business, surfaces the bottleneck slowing growth, and lays out your highest-leverage projects — which Digital Assets to build first and which AI Employees to deploy.</p>
       <p>Work through it at your own pace. Stuck or have a question? Drop it in the Polynet community and I'll jump in.</p>
-      <div class="btn-row">
-        <a class="btn btn-ghost" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}${WIKI_QS}#business-x-ray" target="_blank" rel="noopener">Run the Business X-Ray</a>
-        <a class="btn btn-primary" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}${WIKI_QS}" target="_blank" rel="noopener">Open the Wiki →</a>
-      </div>
     </div>
 
     <div class="footer">
