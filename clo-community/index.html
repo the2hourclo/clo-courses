@@ -396,18 +396,15 @@ function renderUnlocked(licenseKey) {
       <p class="intro-sub">Knock them out in order — about 10 minutes start to finish.</p>
     </div>
 
-    ${licenseKey ? `
     <div class="license-ticket">
       <div class="license-ticket-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M11.4 11.6 21 2"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
       </div>
       <div class="license-ticket-body">
         <div class="license-label">Your license key</div>
-        <div class="license-key" id="licenseDisplay">${licenseKey}</div>
-        <div class="license-note">Keep this handy — it unlocks the portal and activates the plugin. It's already built into step 2 and 3 below.</div>
+        <div class="license-note" style="margin-top:4px">You'll need it in Step&nbsp;3. Find it in your <strong>Lemon Squeezy purchase confirmation email</strong> — or anytime at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">app.lemonsqueezy.com/my-orders</a>.</div>
       </div>
-      <button class="copy-btn" data-copy-target="licenseDisplay">Copy key</button>
-    </div>` : ''}
+    </div>
 
     <div class="steps">
 
@@ -440,7 +437,7 @@ function renderUnlocked(licenseKey) {
         </div>
         <h2 class="step-title">Open the Wiki</h2>
         <p class="step-desc">Every lesson, setup walkthrough, and your Business X-Ray — all in one place. Open it any time.</p>
-        <a class="btn btn-primary" href="${wikiHref(licenseKey)}" target="_blank" rel="noopener">Open the portal →</a>
+        <a class="btn btn-primary" href="${wikiHref()}" target="_blank" rel="noopener">Open the portal →</a>
       </div>
 
       <div class="step" style="--i:2">
@@ -452,7 +449,7 @@ function renderUnlocked(licenseKey) {
         </div>
         <h2 class="step-title">Install on Claude Code</h2>
         <p class="step-desc">The install guide has a ready-made prompt that walks Claude Code through the whole setup, one step at a time. <strong>Grab your license key from your purchase confirmation email</strong> and paste it when the guide asks.</p>
-        <a class="btn btn-primary" href="${installGuideHref(licenseKey)}" target="_blank" rel="noopener">Open the install guide →</a>
+        <a class="btn btn-primary" href="${installGuideHref()}" target="_blank" rel="noopener">Open the install guide →</a>
       </div>
 
     </div>
