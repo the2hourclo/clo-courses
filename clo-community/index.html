@@ -206,9 +206,22 @@ const PRODUCT = {
 const STORAGE_KEY = 'clo_community_license';
 
 // Community swaps to AI Employee Builders when the onboarding is opened with ?product=aieb
-const COMMUNITY = new URLSearchParams(location.search).get('product') === 'aieb'
+const IS_AIEB = new URLSearchParams(location.search).get('product') === 'aieb';
+const COMMUNITY = IS_AIEB
   ? { name: 'AI Employee Builders', handle: 'c/ai-employee-builders', url: 'https://www.polynet.ai/c/ai-employee-builders' }
   : { name: 'Chief Leverage Officers', handle: 'c/chief-leverage-officers', url: 'https://www.polynet.ai/c/chief-leverage-officers' };
+// aieb branding: robot profile photo as the top logo + community badge, AIEB welcome line
+const BRAND_LOGO = IS_AIEB ? 'assets/community-robot.png' : 'assets/clo-logo-full.png';
+const BRAND_ALT = IS_AIEB ? 'AI Employee Builders' : 'Chief Leverage Officer';
+const WELCOME_NAME = IS_AIEB ? 'AI Employee Builders' : "the Chief Leverage Officer's Community";
+// thread ?product=aieb through the wiki links so they stay in AIEB mode
+const WIKI_QS = IS_AIEB ? '&product=aieb' : '';
+// install guide: AIEB gets its dedicated onboarding page (AIEB prompt + key auto-fill); CLO keeps the wiki's Get Access
+function installGuideHref(key){
+  return IS_AIEB
+    ? `../clo-course/get-access-aieb.html?license_key=${encodeURIComponent(key)}#shortcut`
+    : `../clo-course/?license_key=${encodeURIComponent(key)}#get-access`;
+}
 
 // ══════════════════════════════════════════════════════
 // INIT — runs on every page load
@@ -367,11 +380,11 @@ function renderExpired() {
 function renderUnlocked(licenseKey) {
   app.innerHTML = `
     <div class="brand-header">
-      <img class="brand-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
+      <img class="brand-logo" src="${BRAND_LOGO}" alt="${BRAND_ALT}">
     </div>
 
     <div class="intro">
-      <div class="intro-thanks">Welcome to <strong>the Chief Leverage Officer's Community</strong>.</div>
+      <div class="intro-thanks">Welcome to <strong>${WELCOME_NAME}</strong>.</div>
       <h1>Three steps and you're in.</h1>
       <p class="intro-sub">Knock them out in order — about 10 minutes start to finish.</p>
     </div>
@@ -399,7 +412,7 @@ function renderUnlocked(licenseKey) {
         </div>
         <h2 class="step-title">Join the community</h2>
         <div class="pn-embed">
-          <img class="pn-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
+          <img class="pn-logo" src="${BRAND_LOGO}" alt="${COMMUNITY.name}">
           <div>
             <div class="pn-name">${COMMUNITY.name}</div>
             <div class="pn-handle">${COMMUNITY.handle}</div>
@@ -419,7 +432,7 @@ function renderUnlocked(licenseKey) {
         </div>
         <h2 class="step-title">Open the Wiki</h2>
         <p class="step-desc">Every lesson, setup walkthrough, and your Business X-Ray — all in one place. This link unlocks it with your key automatically.</p>
-        <a class="btn btn-primary" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}" target="_blank" rel="noopener">Open the portal →</a>
+        <a class="btn btn-primary" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}${WIKI_QS}" target="_blank" rel="noopener">Open the portal →</a>
       </div>
 
       <div class="step" style="--i:2">
@@ -431,7 +444,7 @@ function renderUnlocked(licenseKey) {
         </div>
         <h2 class="step-title">Install on Claude Code</h2>
         <p class="step-desc">The install guide has a ready-made prompt that walks Claude Code through the whole setup, one step at a time. Your key's already built in.</p>
-        <a class="btn btn-primary" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}#get-access" target="_blank" rel="noopener">Open the install guide →</a>
+        <a class="btn btn-primary" href="${installGuideHref(licenseKey)}" target="_blank" rel="noopener">Open the install guide →</a>
       </div>
 
     </div>
@@ -441,8 +454,8 @@ function renderUnlocked(licenseKey) {
       <p>Once Claude Code is set up, your first move is the <strong>Business X-Ray</strong>: an AI-assisted guided audit that maps your business, surfaces the bottleneck slowing growth, and lays out your highest-leverage projects — which Digital Assets to build first and which AI Employees to deploy.</p>
       <p>Work through it at your own pace. Stuck or have a question? Drop it in the Polynet community and I'll jump in.</p>
       <div class="btn-row">
-        <a class="btn btn-ghost" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}#business-x-ray" target="_blank" rel="noopener">Run the Business X-Ray</a>
-        <a class="btn btn-primary" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}" target="_blank" rel="noopener">Open the Wiki →</a>
+        <a class="btn btn-ghost" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}${WIKI_QS}#business-x-ray" target="_blank" rel="noopener">Run the Business X-Ray</a>
+        <a class="btn btn-primary" href="../clo-course/?license_key=${encodeURIComponent(licenseKey)}${WIKI_QS}" target="_blank" rel="noopener">Open the Wiki →</a>
       </div>
     </div>
 
