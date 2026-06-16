@@ -371,7 +371,11 @@ Your standing rule for the whole process: try to do it yourself in the terminal 
 
 4. CLO-COMMUNITY — Install it. Try the terminal yourself first (claude plugin marketplace add <the clo-os storefront URL> then claude plugin install clo-community@clo-os --scope user). If that can't run, switch me to the VS Code panel the same way: /plugin → Manage Plugins → Marketplaces tab → add the clo-os storefront URL → Plugins tab → find "clo-community" → Install → "Install for you" → reload. One step at a time, and verify.
 
-5. RELOAD & CONFIRM — Reload plugins so clo-community is active, then confirm to me that it's installed and enabled.
+   HOW THIS PLUGIN ARRIVES (handle these known snags so you don't stall): the clo-community npm package is only a tiny metadata stub — the real skills download from a short-lived git URL with a one-time token in it. Two things to watch for, and how to handle each WITHOUT making me debug:
+   • If a safety/security check BLOCKS the git clone because the URL has a token in it, do NOT retry it or try to route around the block. Stop, hand me that ONE exact command in a code block, tell me to paste it into my own terminal, then wait and verify — that single paste is safe for me to run.
+   • After install, confirm the plugin folder actually holds its skill files — not a ~1 KB stub, and not sitting inside a folder literally named "unknown". If the content landed under an "unknown" folder, move it into the correct versioned plugin folder (the path the registry looks for, like …/clo-community/<version>/) and reload so Claude Code can find the skills.
+
+5. RELOAD & CONFIRM — Reload plugins so clo-community is active, then confirm to me that it's installed and enabled (its skills and commands show up). If you see a "duplicate hooks file detected" message, it's a known, non-blocking warning from the plugin — note it and keep going; it doesn't stop anything.
 
 After each step, tell me plainly whether it worked, or show me the error and exactly how you're fixing it. Start now with step 1.</pre>
     </div>
@@ -560,6 +564,11 @@ Please help me fix it. Background on how this install works:
 - It uses SkillStack to deliver the plugin. I add the SkillStack marketplace (https://github.com/SkillStacks/skillstack.git), install the "skillstack" plugin, run /activate-license with my Lemon Squeezy license key, then install "clo-community@clo-os".
 - Node.js (v18+) is required because the plugin is delivered as an npm package.
 
+Known snags that have hit this install before — check whether any match:
+- The clo-community npm package is just a small stub; the real skills come from a short-lived git URL with a one-time token. If a clone with a token in the URL got blocked by a safety check, give me the one exact command to paste into my own terminal and verify it — don't keep retrying it yourself.
+- The skills can land in a folder named "unknown" instead of the versioned plugin folder. If so, move them into the versioned path the registry expects and reload.
+- A "duplicate hooks file detected" warning is known and non-blocking — it doesn't stop the install.
+
 Check anything you can — run node --version, look at my ~/.npmrc for the @skillstack registry line and auth token, and check whether the marketplace was added and the plugin is enabled (I can open it by typing /plugin and clicking "Manage Plugins"). Then explain the problem in plain English and give me the exact steps to fix it. You can't type slash commands for me, so tell me what to type and wait.</pre>
     </div>
   </div>
@@ -576,6 +585,9 @@ Check anything you can — run node --version, look at my ~/.npmrc for the @skil
         <tr><td>"Key bound to other plugin"</td><td>That key is for a different product &mdash; each key activates one plugin. Re-check the key in your Lemon Squeezy email.</td></tr>
         <tr><td>"Expired" or "Revoked"</td><td>Your subscription lapsed. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">My Orders</a>, then run <code>/activate-license</code> again.</td></tr>
         <tr><td>Skills don't show up after install</td><td>Close VS Code, delete the folder <code>~/.claude/plugins/cache</code>, reopen, and install again.</td></tr>
+        <tr><td>Install finishes but skills are missing, or you see a folder named <code>unknown</code></td><td>The content landed in the wrong folder. Paste the <strong>"Stuck?" prompt</strong> above and ask Claude to move it from the <code>unknown</code> folder into the versioned plugin path the registry expects, then reload.</td></tr>
+        <tr><td>A clone or download is <strong>blocked</strong> / warns about a token in the URL</td><td>Expected &mdash; the plugin's skills ship from a one-time tokenized git URL. Paste the exact command Claude hands you into your own terminal, then let Claude verify.</td></tr>
+        <tr><td><code>duplicate hooks file detected</code></td><td>Known, non-blocking warning &mdash; the plugin lists its hooks twice. It doesn't break the install; continue.</td></tr>
         <tr><td><code>/plugin</code> not recognized</td><td>Claude Code is outdated. Update the extension (Extensions panel &rarr; Claude Code &rarr; update), reload, retry.</td></tr>
       </tbody>
     </table>
