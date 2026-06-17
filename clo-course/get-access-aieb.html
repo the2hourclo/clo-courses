@@ -525,12 +525,13 @@ After each step, tell me plainly whether it worked, or show me the error and exa
     <div class="step-content">
       <p>In your Claude session (panel or terminal), simply type:</p>
       <div class="cmd-line"><span class="cmd-text">onboard me</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <p style="margin-top:10px">The plugin runs a guided, two-phase setup &mdash; you just answer its questions:</p>
+      <p style="margin-top:10px">The plugin runs a guided, three-phase setup &mdash; you just answer its questions:</p>
       <table class="tbl">
         <thead><tr><th>Phase</th><th>What happens</th></tr></thead>
         <tbody>
           <tr><td><strong>1. Scaffold</strong></td><td>Sets up your authoring folders (<code>.claude/skills</code>, <code>agents</code>, <code>commands</code>, <code>hooks</code>) and a workspace guide</td></tr>
-          <tr><td><strong>2. Build your first skill</strong></td><td>Optionally maps your business with a Business X-Ray to find the highest-leverage thing to automate, then creates your first custom skill and tests it</td></tr>
+          <tr><td><strong>2. Map your business</strong></td><td>Lays out the rooms of your business &mdash; marketing, sales, delivery &mdash; as department folders plus a business map, so every AI Employee you build has a clear place to work and read from</td></tr>
+          <tr><td><strong>3. Build your first skill</strong></td><td>X-rays those rooms to find the highest-leverage thing to automate, then creates your first custom skill and tests it</td></tr>
         </tbody>
       </table>
       <p style="font-size:12.5px;color:var(--text-dim);margin-top:10px">Takes ~10 minutes. End state: your authoring workspace is set up and your first custom skill is built and running &mdash; plus you know exactly how to build more (just say <code>create a skill for X</code> anytime).</p>
