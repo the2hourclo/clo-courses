@@ -1,0 +1,353 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+  html,body{margin:0;padding:0;background:#0F0F0F;}
+  .canvas{width:1600px;height:900px;position:relative;overflow:hidden;}
+  text{user-select:none;}
+</style></head><body>
+<div class="canvas">
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgb(121,234,32)" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="rgb(121,234,32)" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="rgb(121,234,32)" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgb(121,234,32)" stop-opacity="0.06"/>
+      <stop offset="70%" stop-color="rgb(121,234,32)" stop-opacity="0.01"/>
+      <stop offset="100%" stop-color="rgb(121,234,32)" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dotgrid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="18" r="1.1" fill="rgba(255,255,255,0.05)"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0F0F0F"/>
+  <rect width="1600" height="900" fill="url(#dotgrid)"/>
+
+  <!-- ===================== TITLE ===================== -->
+  <text x="80" y="78" font-family="Excalifont" font-size="46" fill="#FFFFFF">Hooks · automatic reactions to events</text>
+  <text x="80" y="116" font-family="Excalifont" font-size="22" fill="#9aa0a6">Automatic actions that fire at set moments. No asking, no babysitting.</text>
+
+  <!-- ===================== ROBOT (canonical full, holding draft) ===================== -->
+  <g transform="translate(290,560) scale(0.34)">
+<g transform="translate(-929,-541)"><!-- ANTENNA -->
+  <g>
+    <line x1="900" y1="220" x2="900" y2="178" stroke="rgb(240,240,245)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="900" cy="170" r="10" fill="rgb(121,234,32)" stroke="rgb(15,15,15)" stroke-width="1.5"/>
+    <circle cx="900" cy="170" r="17" stroke="rgba(121,234,32,0.45)" stroke-width="1.5" fill="none"/>
+    <circle cx="900" cy="170" r="24" stroke="rgba(121,234,32,0.20)" stroke-width="1.5" fill="none"/>
+  </g>
+  <!-- HEAD -->
+  <g>
+    <rect x="816" y="220" width="168" height="170" rx="22" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3.4"/>
+    <rect x="804" y="278" width="14" height="40" rx="4" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <rect x="982" y="278" width="14" height="40" rx="4" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="808" y1="288" x2="814" y2="288" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="808" y1="298" x2="814" y2="298" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="808" y1="308" x2="814" y2="308" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="986" y1="288" x2="992" y2="288" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="986" y1="298" x2="992" y2="298" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="986" y1="308" x2="992" y2="308" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <circle cx="828" cy="232" r="2.5" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="972" cy="232" r="2.5" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="828" cy="378" r="2.5" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="972" cy="378" r="2.5" fill="rgba(121,234,32,0.7)"/>
+  </g>
+  <!-- NECK -->
+  <g>
+    <rect x="872" y="390" width="56" height="26" rx="6" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="884" y1="395" x2="884" y2="411" stroke="rgba(240,240,245,0.5)" stroke-width="1.5"/>
+    <line x1="916" y1="395" x2="916" y2="411" stroke="rgba(240,240,245,0.5)" stroke-width="1.5"/>
+  </g>
+  <!-- TORSO -->
+  <g>
+    <rect x="794" y="416" width="212" height="316" rx="18" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3.4"/>
+    <circle cx="808" cy="430" r="2.8" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="992" cy="430" r="2.8" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="808" cy="718" r="2.8" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="992" cy="718" r="2.8" fill="rgba(121,234,32,0.7)"/>
+  </g>
+  <!-- VISOR with EYES -->
+  <g>
+    <rect x="836" y="258" width="128" height="86" rx="8" fill="rgb(8,8,8)" stroke="rgb(121,234,32)" stroke-width="2.4"/>
+    <circle cx="876" cy="301" r="18" fill="url(#eyeGlow)"/>
+    <circle cx="876" cy="301" r="11" fill="rgb(121,234,32)" opacity="0.32"/>
+    <circle cx="876" cy="301" r="8" fill="rgb(121,234,32)" stroke="rgb(8,8,8)" stroke-width="1.4"/>
+    <circle cx="876" cy="301" r="3" fill="rgb(8,8,8)"/>
+    <circle cx="874" cy="298" r="1.6" fill="rgba(255,255,255,0.9)"/>
+    <circle cx="924" cy="301" r="18" fill="url(#eyeGlow)"/>
+    <circle cx="924" cy="301" r="11" fill="rgb(121,234,32)" opacity="0.32"/>
+    <circle cx="924" cy="301" r="8" fill="rgb(121,234,32)" stroke="rgb(8,8,8)" stroke-width="1.4"/>
+    <circle cx="924" cy="301" r="3" fill="rgb(8,8,8)"/>
+    <circle cx="922" cy="298" r="1.6" fill="rgba(255,255,255,0.9)"/>
+  </g>
+  <!-- ARMS -->
+  <g>
+    <line x1="794" y1="459" x2="725" y2="540" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="725" y1="550" x2="680" y2="608" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="794" y1="459" x2="725" y2="540" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="725" y1="550" x2="680" y2="608" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="794" cy="448" r="14" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="794" cy="448" r="5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <circle cx="725" cy="540" r="12" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="725" cy="540" r="4" fill="rgb(121,234,32)" opacity="0.7"/>
+    <line x1="1006" y1="459" x2="1078" y2="528" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="1078" y1="538" x2="1186" y2="600" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="1006" y1="459" x2="1078" y2="528" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="1078" y1="538" x2="1186" y2="600" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="1006" cy="448" r="14" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="1006" cy="448" r="5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <circle cx="1078" cy="528" r="12" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="1078" cy="528" r="4" fill="rgb(121,234,32)" opacity="0.7"/>
+  </g>
+  <!-- LEFT HAND (gripper) -->
+  <g>
+    <circle cx="682" cy="610" r="14" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="2.6"/>
+    <circle cx="682" cy="610" r="5" fill="rgba(121,234,32,0.35)" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+    <g stroke="rgb(240,240,245)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 670 600 Q 660 596, 654 599 L 658 605"/>
+      <path d="M 668 612 Q 656 612, 650 612 L 656 614"/>
+      <path d="M 670 622 Q 660 624, 654 622 L 658 618"/>
+    </g>
+  </g>
+  <!-- RIGHT HAND (USB port) -->
+  <g>
+    <rect x="1170" y="588" width="34" height="26" rx="13" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="2.6"/>
+    <line x1="1180" y1="590" x2="1180" y2="612" stroke="rgba(240,240,245,0.7)" stroke-width="1.4"/>
+    <circle cx="1175" cy="601" r="2.6" fill="rgba(121,234,32,0.7)"/>
+    <rect x="1188" y="595" width="20" height="13" rx="2" fill="rgb(8,8,8)" stroke="rgb(121,234,32)" stroke-width="2"/>
+    <line x1="1192" y1="598" x2="1192" y2="605" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+    <line x1="1196" y1="598" x2="1196" y2="605" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+    <line x1="1200" y1="598" x2="1200" y2="605" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+    <line x1="1204" y1="598" x2="1204" y2="605" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+  </g>
+  <!-- LEGS + FEET -->
+  <g>
+    <line x1="852" y1="734" x2="846" y2="816" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="846" y1="828" x2="846" y2="892" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="852" y1="734" x2="846" y2="816" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="846" y1="828" x2="846" y2="892" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="846" cy="822" r="13" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="846" cy="822" r="4.5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <rect x="816" y="894" width="60" height="22" rx="6" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="824" y1="906" x2="868" y2="906" stroke="rgba(121,234,32,0.5)" stroke-width="2"/>
+    <line x1="948" y1="734" x2="954" y2="816" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="954" y1="828" x2="954" y2="892" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="948" y1="734" x2="954" y2="816" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="954" y1="828" x2="954" y2="892" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="954" cy="822" r="13" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="954" cy="822" r="4.5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <rect x="924" y="894" width="60" height="22" rx="6" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="932" y1="906" x2="976" y2="906" stroke="rgba(121,234,32,0.5)" stroke-width="2"/>
+  </g>
+  <!-- CLAUDE CODE chest panel -->
+  <g>
+    <rect x="806" y="450" width="188" height="186" rx="10" fill="rgb(8,8,8)" stroke="#d97757" stroke-width="2.8"/>
+    <line x1="806" y1="486" x2="994" y2="486" stroke="#d97757" stroke-width="1" opacity="0.45"/>
+    <circle cx="824" cy="468" r="4" fill="#d97757" opacity="0.9"/>
+    <circle cx="840" cy="468" r="4" fill="#d97757" opacity="0.5"/>
+    <circle cx="856" cy="468" r="4" fill="#d97757" opacity="0.5"/>
+    <text x="820" y="516" font-family="Consolas, monospace" font-size="15" fill="rgb(121,234,32)">&gt; CLAUDE CODE</text>
+    <text x="820" y="540" font-family="Consolas, monospace" font-size="15" fill="rgba(121,234,32,0.55)">  watching events…</text>
+  </g>
+  <!-- TOOLBELT -->
+  <g>
+    <rect x="772" y="688" width="256" height="40" rx="4" fill="rgb(28,22,18)" stroke="rgb(240,240,245)" stroke-width="2.6"/>
+    <line x1="780" y1="698" x2="1020" y2="698" stroke="rgba(240,240,245,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+    <line x1="780" y1="718" x2="1020" y2="718" stroke="rgba(240,240,245,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+    <g stroke="rgb(240,240,245)" stroke-width="2" fill="rgb(15,12,10)">
+      <rect x="780" y="688" width="44" height="46" rx="3"/>
+      <rect x="828" y="688" width="44" height="46" rx="3"/>
+      <rect x="876" y="688" width="44" height="46" rx="3"/>
+      <rect x="924" y="688" width="44" height="46" rx="3"/>
+      <rect x="976" y="688" width="44" height="46" rx="3"/>
+    </g>
+    <g>
+      <path d="M 779 632 L 786 626 L 786 646 L 779 640 Z" fill="#fbbf24" stroke="rgb(240,240,245)" stroke-width="1.5" stroke-linejoin="round"/>
+      <rect x="786" y="624" width="36" height="22" rx="3" fill="#fbbf24" stroke="rgb(240,240,245)" stroke-width="1.6"/>
+      <line x1="789" y1="630" x2="819" y2="630" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+      <rect x="797" y="646" width="10" height="44" rx="2" fill="#a16207" stroke="rgb(240,240,245)" stroke-width="1.4"/>
+      <line x1="798" y1="660" x2="806" y2="660" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+      <line x1="798" y1="672" x2="806" y2="672" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+    </g>
+    <g>
+      <rect x="836" y="630" width="40" height="56" rx="3" fill="rgb(220,220,220)" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="834" y="628" width="40" height="56" rx="3" fill="#059669" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="832" y="626" width="40" height="56" rx="3" fill="#10b981" stroke="rgb(240,240,245)" stroke-width="1.6"/>
+      <line x1="838" y1="626" x2="838" y2="682" stroke="rgba(15,15,15,0.45)" stroke-width="1.6"/>
+      <rect x="843" y="638" width="24" height="3" rx="1" fill="rgba(255,255,255,0.85)"/>
+      <line x1="843" y1="648" x2="864" y2="648" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <line x1="843" y1="654" x2="860" y2="654" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <text x="852" y="673" text-anchor="middle" font-family="Excalifont" font-size="13" font-weight="800" fill="white" letter-spacing="1">.md</text>
+    </g>
+    <g>
+      <path d="M 880 624 L 880 644 L 894 644 L 894 632 L 906 632 L 906 644 L 920 644 L 920 624 L 906 624 L 906 626 L 894 626 L 894 624 Z" fill="#3b82f6" stroke="rgb(240,240,245)" stroke-width="1.6" stroke-linejoin="round"/>
+      <rect x="893" y="644" width="14" height="46" rx="2" fill="#3b82f6" stroke="rgb(240,240,245)" stroke-width="1.5"/>
+      <line x1="896" y1="656" x2="904" y2="656" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+      <line x1="896" y1="668" x2="904" y2="668" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+      <line x1="896" y1="680" x2="904" y2="680" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+    </g>
+    <g>
+      <rect x="932" y="630" width="40" height="56" rx="3" fill="rgb(220,220,220)" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="930" y="628" width="40" height="56" rx="3" fill="#7c3aed" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="928" y="626" width="40" height="56" rx="3" fill="#a855f7" stroke="rgb(240,240,245)" stroke-width="1.6"/>
+      <line x1="934" y1="626" x2="934" y2="682" stroke="rgba(15,15,15,0.45)" stroke-width="1.6"/>
+      <rect x="939" y="638" width="24" height="3" rx="1" fill="rgba(255,255,255,0.85)"/>
+      <line x1="939" y1="648" x2="960" y2="648" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <line x1="939" y1="654" x2="956" y2="654" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <text x="948" y="673" text-anchor="middle" font-family="Excalifont" font-size="13" font-weight="800" fill="white" letter-spacing="1">.md</text>
+    </g>
+    <g>
+      <path d="M 980 624 L 1020 624 L 1018 646 L 982 646 Z" fill="#ef4444" stroke="rgb(240,240,245)" stroke-width="1.5" stroke-linejoin="round"/>
+      <line x1="987" y1="626" x2="987" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="994" y1="626" x2="994" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="1000" y1="626" x2="1000" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="1007" y1="626" x2="1007" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="1014" y1="626" x2="1014" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <rect x="982" y="646" width="36" height="9" fill="rgb(180,180,180)" stroke="rgb(240,240,245)" stroke-width="1.3"/>
+      <circle cx="990" cy="650.5" r="1.2" fill="rgba(15,15,15,0.6)"/>
+      <circle cx="1010" cy="650.5" r="1.2" fill="rgba(15,15,15,0.6)"/>
+      <rect x="990" y="655" width="20" height="35" rx="3" fill="#92400e" stroke="rgb(240,240,245)" stroke-width="1.4"/>
+    </g>
+  </g>
+  </g>
+  </g>
+
+  <!-- ===================== DRAFT card (held in left hand) ===================== -->
+  <g transform="rotate(-6 175 470)">
+    <rect x="120" y="420" width="110" height="120" rx="8" fill="#16202C" stroke="rgb(240,240,245)" stroke-width="2.2"/>
+    <text x="175" y="446" text-anchor="middle" font-family="Excalifont" font-size="16" fill="#c8cad8">DRAFT</text>
+    <line x1="132" y1="456" x2="218" y2="456" stroke="rgba(240,240,245,0.30)" stroke-width="1"/>
+    <line x1="134" y1="472" x2="214" y2="472" stroke="rgba(240,240,245,0.55)" stroke-width="2"/>
+    <line x1="134" y1="486" x2="206" y2="486" stroke="rgba(240,240,245,0.45)" stroke-width="2"/>
+    <line x1="134" y1="500" x2="214" y2="500" stroke="rgba(240,240,245,0.45)" stroke-width="2"/>
+    <line x1="134" y1="514" x2="190" y2="514" stroke="rgba(240,240,245,0.45)" stroke-width="2"/>
+  </g>
+
+  <!-- ===================== GREEN CALLOUT (the WHEN -> WHAT -> DO idea) ===================== -->
+  <g>
+    <rect x="250" y="178" width="318" height="118" rx="12" fill="rgba(121,234,32,0.07)" stroke="rgb(121,234,32)" stroke-width="2"/>
+    <text x="266" y="208" font-family="Excalifont" font-size="18" fill="rgb(121,234,32)">WHEN  before finishing</text>
+    <text x="266" y="240" font-family="Excalifont" font-size="18" fill="#c8cad8">WHAT  review this draft</text>
+    <text x="266" y="272" font-family="Excalifont" font-size="18" fill="#c8cad8">DO    rewrite if it's robotic</text>
+    <!-- pointer from callout to robot head -->
+    <path d="M 280 296 C 262 330, 244 354, 232 384" fill="none" stroke="rgb(121,234,32)" stroke-width="2.2" stroke-dasharray="6 5"/>
+    <polygon points="228,398 226,378 240,388" fill="rgb(121,234,32)"/>
+  </g>
+
+  <!-- ===================== HEADER above belt ===================== -->
+  <text x="900" y="320" text-anchor="middle" font-family="Excalifont" font-size="22" fill="rgb(121,234,32)">5 HOOK EVENTS · IN LIFECYCLE ORDER  →</text>
+
+  <!-- ===================== "fires automatically" dashed drop arrows ===================== -->
+  <text x="900" y="362" text-anchor="middle" font-family="Excalifont" font-size="17" fill="#9aa0a6">fires automatically · no asking</text>
+  <g stroke="rgb(121,234,32)" stroke-width="2.4" stroke-dasharray="7 6" fill="none">
+    <line x1="520" y1="378" x2="520" y2="468"/>
+    <line x1="700" y1="378" x2="700" y2="468"/>
+    <line x1="880" y1="378" x2="880" y2="468"/>
+    <line x1="1060" y1="378" x2="1060" y2="468"/>
+    <line x1="1240" y1="378" x2="1240" y2="468"/>
+  </g>
+  <g fill="rgb(121,234,32)">
+    <polygon points="520,482 511,464 529,464"/>
+    <polygon points="700,482 691,464 709,464"/>
+    <polygon points="880,482 871,464 889,464"/>
+    <polygon points="1060,482 1051,464 1069,464"/>
+    <polygon points="1240,482 1231,464 1249,464"/>
+  </g>
+
+  <!-- ===================== STATIONS (numbered) ===================== -->
+  <g font-family="Excalifont">
+    <!-- 1 PrePrompt -->
+    <circle cx="520" cy="510" r="24" fill="rgb(8,8,8)" stroke="rgb(121,234,32)" stroke-width="2.6"/>
+    <text x="520" y="519" text-anchor="middle" font-size="24" fill="rgb(121,234,32)">1</text>
+    <!-- 2 SessionStart -->
+    <circle cx="700" cy="510" r="24" fill="rgb(8,8,8)" stroke="rgb(121,234,32)" stroke-width="2.6"/>
+    <text x="700" y="519" text-anchor="middle" font-size="24" fill="rgb(121,234,32)">2</text>
+    <!-- 3 PreTool -->
+    <circle cx="880" cy="510" r="24" fill="rgb(8,8,8)" stroke="rgb(121,234,32)" stroke-width="2.6"/>
+    <text x="880" y="519" text-anchor="middle" font-size="24" fill="rgb(121,234,32)">3</text>
+    <!-- 4 PostTool -->
+    <circle cx="1060" cy="510" r="24" fill="rgb(8,8,8)" stroke="rgb(121,234,32)" stroke-width="2.6"/>
+    <text x="1060" y="519" text-anchor="middle" font-size="24" fill="rgb(121,234,32)">4</text>
+    <!-- 5 Stop -->
+    <circle cx="1240" cy="510" r="24" fill="rgb(8,8,8)" stroke="rgb(121,234,32)" stroke-width="2.6"/>
+    <text x="1240" y="519" text-anchor="middle" font-size="24" fill="rgb(121,234,32)">5</text>
+  </g>
+
+  <!-- ===================== CONVEYOR BELT ===================== -->
+  <g>
+    <!-- belt body -->
+    <rect x="430" y="560" width="900" height="46" rx="6" fill="rgb(24,24,24)" stroke="rgb(240,240,245)" stroke-width="2.4"/>
+    <!-- belt tread marks -->
+    <g stroke="rgba(240,240,245,0.18)" stroke-width="2">
+      <line x1="470" y1="560" x2="458" y2="606"/>
+      <line x1="540" y1="560" x2="528" y2="606"/>
+      <line x1="610" y1="560" x2="598" y2="606"/>
+      <line x1="680" y1="560" x2="668" y2="606"/>
+      <line x1="750" y1="560" x2="738" y2="606"/>
+      <line x1="820" y1="560" x2="808" y2="606"/>
+      <line x1="890" y1="560" x2="878" y2="606"/>
+      <line x1="960" y1="560" x2="948" y2="606"/>
+      <line x1="1030" y1="560" x2="1018" y2="606"/>
+      <line x1="1100" y1="560" x2="1088" y2="606"/>
+      <line x1="1170" y1="560" x2="1158" y2="606"/>
+      <line x1="1240" y1="560" x2="1228" y2="606"/>
+      <line x1="1310" y1="560" x2="1298" y2="606"/>
+    </g>
+    <!-- belt rollers -->
+    <circle cx="446" cy="583" r="17" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="2.4"/>
+    <circle cx="446" cy="583" r="5" fill="rgba(121,234,32,0.55)"/>
+    <circle cx="1314" cy="583" r="17" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="2.4"/>
+    <circle cx="1314" cy="583" r="5" fill="rgba(121,234,32,0.55)"/>
+    <!-- direction arrow on belt -->
+    <line x1="430" y1="636" x2="1300" y2="636" stroke="rgba(121,234,32,0.45)" stroke-width="2" stroke-dasharray="10 8"/>
+    <polygon points="1320,636 1300,628 1300,644" fill="rgba(121,234,32,0.6)"/>
+  </g>
+
+  <!-- ===================== STATION LABELS (under belt) ===================== -->
+  <g font-family="Excalifont">
+    <rect x="448" y="660" width="144" height="34" rx="6" fill="rgba(121,234,32,0.07)" stroke="rgba(121,234,32,0.55)" stroke-width="1.6"/>
+    <text x="520" y="683" text-anchor="middle" font-size="17" fill="#c8cad8">PrePrompt</text>
+
+    <rect x="628" y="660" width="144" height="34" rx="6" fill="rgba(121,234,32,0.07)" stroke="rgba(121,234,32,0.55)" stroke-width="1.6"/>
+    <text x="700" y="683" text-anchor="middle" font-size="17" fill="#c8cad8">SessionStart</text>
+
+    <rect x="808" y="660" width="144" height="34" rx="6" fill="rgba(121,234,32,0.07)" stroke="rgba(121,234,32,0.55)" stroke-width="1.6"/>
+    <text x="880" y="683" text-anchor="middle" font-size="17" fill="#c8cad8">PreTool</text>
+
+    <rect x="988" y="660" width="144" height="34" rx="6" fill="rgba(121,234,32,0.07)" stroke="rgba(121,234,32,0.55)" stroke-width="1.6"/>
+    <text x="1060" y="683" text-anchor="middle" font-size="17" fill="#c8cad8">PostTool</text>
+
+    <rect x="1168" y="660" width="144" height="34" rx="6" fill="rgba(121,234,32,0.07)" stroke="rgba(121,234,32,0.55)" stroke-width="1.6"/>
+    <text x="1240" y="683" text-anchor="middle" font-size="17" fill="#c8cad8">Stop</text>
+  </g>
+
+  <!-- ===================== SHIPPED scale (right end) ===================== -->
+  <g>
+    <!-- finished item riding off the belt -->
+    <g transform="translate(1372,548)">
+      <rect x="0" y="0" width="44" height="50" rx="5" fill="#16202C" stroke="rgb(121,234,32)" stroke-width="2.2"/>
+      <line x1="8" y1="14" x2="36" y2="14" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+      <line x1="8" y1="24" x2="32" y2="24" stroke="rgba(240,240,245,0.5)" stroke-width="1.6"/>
+      <line x1="8" y1="34" x2="36" y2="34" stroke="rgba(240,240,245,0.5)" stroke-width="1.6"/>
+    </g>
+    <!-- scale base -->
+    <g>
+      <line x1="1394" y1="606" x2="1394" y2="660" stroke="rgb(240,240,245)" stroke-width="3"/>
+      <rect x="1352" y="660" width="84" height="14" rx="4" fill="rgb(24,24,24)" stroke="rgb(240,240,245)" stroke-width="2.2"/>
+      <!-- check seal -->
+      <circle cx="1394" cy="708" r="26" fill="rgba(121,234,32,0.10)" stroke="rgb(121,234,32)" stroke-width="2.6"/>
+      <path d="M 1382 708 L 1391 718 L 1408 698" fill="none" stroke="rgb(121,234,32)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="1394" y="760" text-anchor="middle" font-family="Excalifont" font-size="20" fill="rgb(121,234,32)">SHIPPED</text>
+  </g>
+
+  <!-- ===================== FOOTER ===================== -->
+  <line x1="80" y1="828" x2="1520" y2="828" stroke="rgba(255,255,255,0.12)" stroke-width="1.4"/>
+  <text x="80" y="862" font-family="Excalifont" font-size="18" fill="#9aa0a6">+ 9 more events (SessionEnd, SubagentStop, PreCompact…). Every checkpoint has a hook.</text>
+</svg>
+</div>
+</body>
+</html>

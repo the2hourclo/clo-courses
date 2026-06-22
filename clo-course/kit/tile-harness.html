@@ -1,0 +1,249 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+  html,body{margin:0;padding:0;background:#0F0F0F;}
+  .card{width:480px;height:480px;position:relative;overflow:hidden;background:#0F0F0F;}
+  .svgwrap{width:480px;height:432px;position:absolute;top:0;left:0;}
+  .strip{position:absolute;left:0;bottom:0;width:480px;height:48px;
+    display:flex;align-items:center;justify-content:center;
+    border-top:1px solid rgba(255,255,255,0.10);background:#0F0F0F;}
+  .strip span{font-family:'Excalifont';font-size:26px;color:rgb(121,234,32);letter-spacing:0.5px;}
+  text{user-select:none;}
+</style></head><body>
+<div class="card">
+  <div class="svgwrap">
+  <svg width="480" height="432" viewBox="772 660 256 104" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+
+    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgb(121,234,32)" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="rgb(121,234,32)" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="rgb(121,234,32)" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgb(121,234,32)" stop-opacity="0.06"/>
+      <stop offset="70%" stop-color="rgb(121,234,32)" stop-opacity="0.01"/>
+      <stop offset="100%" stop-color="rgb(121,234,32)" stop-opacity="0"/>
+    </radialGradient>
+      <pattern id="dotgrid" width="36" height="36" patternUnits="userSpaceOnUse">
+        <circle cx="18" cy="18" r="1.1" fill="rgba(255,255,255,0.05)"/>
+      </pattern>
+    </defs>
+    <rect x="-2000" y="-2000" width="6000" height="6000" fill="#0F0F0F"/>
+    <rect x="-2000" y="-2000" width="6000" height="6000" fill="url(#dotgrid)"/>
+<g transform="translate(929,541) scale(1)">
+<g transform="translate(-929,-541)"><!-- ANTENNA -->
+  <g>
+    <line x1="900" y1="220" x2="900" y2="178" stroke="rgb(240,240,245)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="900" cy="170" r="10" fill="rgb(121,234,32)" stroke="rgb(15,15,15)" stroke-width="1.5"/>
+    <circle cx="900" cy="170" r="17" stroke="rgba(121,234,32,0.45)" stroke-width="1.5" fill="none"/>
+    <circle cx="900" cy="170" r="24" stroke="rgba(121,234,32,0.20)" stroke-width="1.5" fill="none"/>
+  </g>
+
+  <!-- HEAD -->
+  <g>
+    <rect x="816" y="220" width="168" height="170" rx="22" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3.4"/>
+    <rect x="804" y="278" width="14" height="40" rx="4" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <rect x="982" y="278" width="14" height="40" rx="4" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="808" y1="288" x2="814" y2="288" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="808" y1="298" x2="814" y2="298" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="808" y1="308" x2="814" y2="308" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="986" y1="288" x2="992" y2="288" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="986" y1="298" x2="992" y2="298" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="986" y1="308" x2="992" y2="308" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <circle cx="828" cy="232" r="2.5" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="972" cy="232" r="2.5" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="828" cy="378" r="2.5" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="972" cy="378" r="2.5" fill="rgba(121,234,32,0.7)"/>
+  </g>
+
+  <!-- NECK -->
+  <g>
+    <rect x="872" y="390" width="56" height="26" rx="6" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="884" y1="395" x2="884" y2="411" stroke="rgba(240,240,245,0.5)" stroke-width="1.5"/>
+    <line x1="916" y1="395" x2="916" y2="411" stroke="rgba(240,240,245,0.5)" stroke-width="1.5"/>
+  </g>
+
+  <!-- TORSO -->
+  <g>
+    <rect x="794" y="416" width="212" height="316" rx="18" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3.4"/>
+    <circle cx="808" cy="430" r="2.8" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="992" cy="430" r="2.8" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="808" cy="718" r="2.8" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="992" cy="718" r="2.8" fill="rgba(121,234,32,0.7)"/>
+  </g>
+
+  <!-- ===== VISOR with EYES (clean — brain is exploded out to the right) ===== -->
+  <g>
+    <!-- visor frame -->
+    <rect x="836" y="258" width="128" height="86" rx="8" fill="rgb(8,8,8)" stroke="rgb(121,234,32)" stroke-width="2.4"/>
+
+    <!-- LEFT EYE -->
+    <circle cx="876" cy="301" r="18" fill="url(#eyeGlow)"/>
+    <circle cx="876" cy="301" r="11" fill="rgb(121,234,32)" opacity="0.32"/>
+    <circle cx="876" cy="301" r="8" fill="rgb(121,234,32)" stroke="rgb(8,8,8)" stroke-width="1.4"/>
+    <circle cx="876" cy="301" r="3" fill="rgb(8,8,8)"/>
+    <circle cx="874" cy="298" r="1.6" fill="rgba(255,255,255,0.9)"/>
+
+    <!-- RIGHT EYE -->
+    <circle cx="924" cy="301" r="18" fill="url(#eyeGlow)"/>
+    <circle cx="924" cy="301" r="11" fill="rgb(121,234,32)" opacity="0.32"/>
+    <circle cx="924" cy="301" r="8" fill="rgb(121,234,32)" stroke="rgb(8,8,8)" stroke-width="1.4"/>
+    <circle cx="924" cy="301" r="3" fill="rgb(8,8,8)"/>
+    <circle cx="922" cy="298" r="1.6" fill="rgba(255,255,255,0.9)"/>
+  </g>
+
+  <!-- ===== ARMS ===== -->
+  <g>
+    <line x1="794" y1="459" x2="725" y2="540" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="725" y1="550" x2="680" y2="608" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="794" y1="459" x2="725" y2="540" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="725" y1="550" x2="680" y2="608" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+
+    <circle cx="794" cy="448" r="14" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="794" cy="448" r="5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <circle cx="725" cy="540" r="12" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="725" cy="540" r="4" fill="rgb(121,234,32)" opacity="0.7"/>
+
+    <line x1="1006" y1="459" x2="1078" y2="528" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="1078" y1="538" x2="1186" y2="600" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="1006" y1="459" x2="1078" y2="528" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="1078" y1="538" x2="1186" y2="600" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+
+    <circle cx="1006" cy="448" r="14" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="1006" cy="448" r="5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <circle cx="1078" cy="528" r="12" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="1078" cy="528" r="4" fill="rgb(121,234,32)" opacity="0.7"/>
+  </g>
+
+  <!-- ===== LEFT HAND (gripper holding map) ===== -->
+  <g>
+    <circle cx="682" cy="610" r="14" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="2.6"/>
+    <circle cx="682" cy="610" r="5" fill="rgba(121,234,32,0.35)" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+    <g stroke="rgb(240,240,245)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 670 600 Q 660 596, 654 599 L 658 605"/>
+      <path d="M 668 612 Q 656 612, 650 612 L 656 614"/>
+      <path d="M 670 622 Q 660 624, 654 622 L 658 618"/>
+    </g>
+  </g>
+
+  <!-- ===== RIGHT HAND (USB port) ===== -->
+  <g>
+    <rect x="1170" y="588" width="34" height="26" rx="13" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="2.6"/>
+    <line x1="1180" y1="590" x2="1180" y2="612" stroke="rgba(240,240,245,0.7)" stroke-width="1.4"/>
+    <circle cx="1175" cy="601" r="2.6" fill="rgba(121,234,32,0.7)"/>
+    <rect x="1188" y="595" width="20" height="13" rx="2" fill="rgb(8,8,8)" stroke="rgb(121,234,32)" stroke-width="2"/>
+    <line x1="1192" y1="598" x2="1192" y2="605" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+    <line x1="1196" y1="598" x2="1196" y2="605" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+    <line x1="1200" y1="598" x2="1200" y2="605" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+    <line x1="1204" y1="598" x2="1204" y2="605" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+  </g>
+
+  <!-- ===== LEGS + FEET ===== -->
+  <g>
+    <line x1="852" y1="734" x2="846" y2="816" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="846" y1="828" x2="846" y2="892" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="852" y1="734" x2="846" y2="816" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="846" y1="828" x2="846" y2="892" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="846" cy="822" r="13" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="846" cy="822" r="4.5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <rect x="816" y="894" width="60" height="22" rx="6" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="824" y1="906" x2="868" y2="906" stroke="rgba(121,234,32,0.5)" stroke-width="2"/>
+
+    <line x1="948" y1="734" x2="954" y2="816" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="954" y1="828" x2="954" y2="892" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="948" y1="734" x2="954" y2="816" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="954" y1="828" x2="954" y2="892" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="954" cy="822" r="13" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="954" cy="822" r="4.5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <rect x="924" y="894" width="60" height="22" rx="6" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="932" y1="906" x2="976" y2="906" stroke="rgba(121,234,32,0.5)" stroke-width="2"/>
+  </g>
+
+  <!-- ===== CLAUDE CODE chest panel ===== -->
+  <g>
+    <rect x="806" y="450" width="188" height="186" rx="10" fill="rgb(8,8,8)" stroke="#d97757" stroke-width="2.8"/>
+    <line x1="806" y1="486" x2="994" y2="486" stroke="#d97757" stroke-width="1" opacity="0.45"/>
+    <circle cx="824" cy="468" r="4" fill="#d97757" opacity="0.9"/>
+    <circle cx="840" cy="468" r="4" fill="#d97757" opacity="0.5"/>
+    <circle cx="856" cy="468" r="4" fill="#d97757" opacity="0.5"/>
+    
+    
+    
+  </g>
+
+  <!-- ===== TOOLBELT ===== -->
+  <g>
+    <rect x="772" y="688" width="256" height="40" rx="4" fill="rgb(28,22,18)" stroke="rgb(240,240,245)" stroke-width="2.6"/>
+    <line x1="780" y1="698" x2="1020" y2="698" stroke="rgba(240,240,245,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+    <line x1="780" y1="718" x2="1020" y2="718" stroke="rgba(240,240,245,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+    <g stroke="rgb(240,240,245)" stroke-width="2" fill="rgb(15,12,10)">
+      <rect x="780" y="688" width="44" height="46" rx="3"/>
+      <rect x="828" y="688" width="44" height="46" rx="3"/>
+      <rect x="876" y="688" width="44" height="46" rx="3"/>
+      <rect x="924" y="688" width="44" height="46" rx="3"/>
+      <rect x="976" y="688" width="44" height="46" rx="3"/>
+    </g>
+    <g>
+      <path d="M 779 632 L 786 626 L 786 646 L 779 640 Z" fill="#fbbf24" stroke="rgb(240,240,245)" stroke-width="1.5" stroke-linejoin="round"/>
+      <rect x="786" y="624" width="36" height="22" rx="3" fill="#fbbf24" stroke="rgb(240,240,245)" stroke-width="1.6"/>
+      <line x1="789" y1="630" x2="819" y2="630" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+      <rect x="797" y="646" width="10" height="44" rx="2" fill="#a16207" stroke="rgb(240,240,245)" stroke-width="1.4"/>
+      <line x1="798" y1="660" x2="806" y2="660" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+      <line x1="798" y1="672" x2="806" y2="672" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+    </g>
+    <g>
+      <rect x="836" y="630" width="40" height="56" rx="3" fill="rgb(220,220,220)" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="834" y="628" width="40" height="56" rx="3" fill="#059669" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="832" y="626" width="40" height="56" rx="3" fill="#10b981" stroke="rgb(240,240,245)" stroke-width="1.6"/>
+      <line x1="838" y1="626" x2="838" y2="682" stroke="rgba(15,15,15,0.45)" stroke-width="1.6"/>
+      <rect x="843" y="638" width="24" height="3" rx="1" fill="rgba(255,255,255,0.85)"/>
+      <line x1="843" y1="648" x2="864" y2="648" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <line x1="843" y1="654" x2="860" y2="654" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <text x="852" y="673" text-anchor="middle" font-family="Excalifont" font-size="13" font-weight="800" fill="white" letter-spacing="1">.md</text>
+    </g>
+    <g>
+      <path d="M 880 624 L 880 644 L 894 644 L 894 632 L 906 632 L 906 644 L 920 644 L 920 624 L 906 624 L 906 626 L 894 626 L 894 624 Z" fill="#3b82f6" stroke="rgb(240,240,245)" stroke-width="1.6" stroke-linejoin="round"/>
+      <rect x="893" y="644" width="14" height="46" rx="2" fill="#3b82f6" stroke="rgb(240,240,245)" stroke-width="1.5"/>
+      <line x1="896" y1="656" x2="904" y2="656" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+      <line x1="896" y1="668" x2="904" y2="668" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+      <line x1="896" y1="680" x2="904" y2="680" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+    </g>
+    <g>
+      <rect x="932" y="630" width="40" height="56" rx="3" fill="rgb(220,220,220)" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="930" y="628" width="40" height="56" rx="3" fill="#7c3aed" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="928" y="626" width="40" height="56" rx="3" fill="#a855f7" stroke="rgb(240,240,245)" stroke-width="1.6"/>
+      <line x1="934" y1="626" x2="934" y2="682" stroke="rgba(15,15,15,0.45)" stroke-width="1.6"/>
+      <rect x="939" y="638" width="24" height="3" rx="1" fill="rgba(255,255,255,0.85)"/>
+      <line x1="939" y1="648" x2="960" y2="648" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <line x1="939" y1="654" x2="956" y2="654" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <text x="948" y="673" text-anchor="middle" font-family="Excalifont" font-size="13" font-weight="800" fill="white" letter-spacing="1">.md</text>
+    </g>
+    <g>
+      <path d="M 980 624 L 1020 624 L 1018 646 L 982 646 Z" fill="#ef4444" stroke="rgb(240,240,245)" stroke-width="1.5" stroke-linejoin="round"/>
+      <line x1="987" y1="626" x2="987" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="994" y1="626" x2="994" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="1000" y1="626" x2="1000" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="1007" y1="626" x2="1007" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="1014" y1="626" x2="1014" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <rect x="982" y="646" width="36" height="9" fill="rgb(180,180,180)" stroke="rgb(240,240,245)" stroke-width="1.3"/>
+      <circle cx="990" cy="650.5" r="1.2" fill="rgba(15,15,15,0.6)"/>
+      <circle cx="1010" cy="650.5" r="1.2" fill="rgba(15,15,15,0.6)"/>
+      <rect x="990" y="655" width="20" height="35" rx="3" fill="#92400e" stroke="rgb(240,240,245)" stroke-width="1.4"/>
+    </g>
+    <!-- automatic-check badge (harness = the checks that hold the tools) -->
+    <g>
+      <circle cx="898" cy="708" r="20" fill="url(#eyeGlow)"/>
+      <circle cx="898" cy="708" r="13" fill="rgb(121,234,32)" stroke="rgb(8,8,8)" stroke-width="2"/>
+      <path d="M 891 708 L 896 713 L 906 702" fill="none" stroke="rgb(8,8,8)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+  </g>
+
+  </g>
+</g>
+  </svg>
+  </div>
+  <div class="strip"><span>Harness</span></div>
+</div>
+</body></html>

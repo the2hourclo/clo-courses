@@ -18,6 +18,15 @@
 .cc-dl{font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid var(--accent-border);border-radius:var(--radius-sm);padding:7px 14px;background:var(--accent-dim)}
 .cc-dl:hover{background:var(--accent-dim-2);text-decoration:none}
 
+/* embedded robot-anchored kit visuals (rendered PNGs on #0F0F0F) */
+.cc-viz{margin:var(--sp-4) 0;border:1px solid var(--border-200);border-radius:var(--radius-lg);overflow:hidden;background:#0F0F0F}
+.cc-viz img{display:block;width:100%;height:auto}
+.cc-viz figcaption{font-size:12.5px;color:var(--text-400);padding:9px 15px;border-top:1px solid var(--border-100);background:var(--bg-200)}
+/* zoomed robot-part tile, floated beside a concept section */
+.cc-tile{float:right;width:148px;height:148px;margin:2px 0 14px 20px;border:1px solid var(--border-200);border-radius:var(--radius);overflow:hidden;background:#0F0F0F}
+.cc-tile img{display:block;width:100%;height:100%;object-fit:cover}
+@media(max-width:640px){.cc-tile{float:none;width:128px;height:128px;margin:0 0 12px}}
+
 /* concept sections */
 .cc-h{display:flex;align-items:center;gap:12px;scroll-margin-top:90px}
 .cc-ico{flex-shrink:0;width:46px;height:46px;border-radius:12px;background:var(--accent-dim-2);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;font-size:24px}
@@ -138,16 +147,13 @@
 
   <h2 id="how-it-thinks">How it thinks <span class="cc-sub">&mdash; the worker in motion</span></h2>
   <p>Claude Code isn't autocomplete. It works in a <b>loop</b>, like a good new hire: read the situation, do the task, check its own work, adjust &mdash; until it's actually done.</p>
-  <div class="cc-loop">
-    <div class="cc-loop-step"><div class="n">1 · Gather</div><div class="t">Read the situation</div><div class="d">Opens the right files, your memory, your rules &mdash; gets context first.</div></div>
-    <div class="cc-loop-arrow">&rarr;</div>
-    <div class="cc-loop-step"><div class="n">2 · Act</div><div class="t">Do the task</div><div class="d">Edits files, runs the work, drafts the output.</div></div>
-    <div class="cc-loop-arrow">&rarr;</div>
-    <div class="cc-loop-step"><div class="n">3 · Verify</div><div class="t">Check its own work</div><div class="d">Runs the tests / re-reads the result, and loops back if it's not right.</div></div>
-  </div>
+  <figure class="cc-viz">
+    <img src="kit/kit-loop.png" alt="The agentic loop: Gather (read the situation) then Act (do the task) then Verify (check its own work), looping back until the work is actually right, then Done." loading="lazy">
+  </figure>
   <p style="font-size:14px;color:var(--text-300)">And you're never locked out: you can <b>interrupt, steer, or add context</b> mid-task at any time.</p>
   <details class="cc-deep"><summary>Go deeper: staying in control (permissions)</summary>
     <div class="cc-deepbody">
+      <figure class="cc-viz"><img src="kit/kit-permissions.png" alt="It pauses before a risky action: is this already approved or clearly safe? If yes it proceeds; if no it stops and asks you, with Deny / Allow once / Always allow." loading="lazy"></figure>
       <p>It never does anything risky without asking. Before an action, it checks: <b>is this already approved or clearly safe?</b> If yes, it proceeds; if not, it stops and asks you &mdash; <span class="cc-mono">Deny</span> · <span class="cc-mono">Allow once</span> · <span class="cc-mono">Always allow</span>. Pick "always" and it remembers, so you're not asked again.</p>
       <h4>The 5 permission modes</h4>
       <ul>
@@ -164,6 +170,7 @@
   <section>
     <h2 id="memory" class="cc-h"><span class="cc-ico">🧠</span> Memory <span class="cc-sub">&mdash; the brain</span></h2>
     <div class="cc-cbody">
+      <div class="cc-tile"><img src="kit/tile-memory.png" alt="Zoom on the robot's head and glowing eyes — its memory." loading="lazy"></div>
       <p><b>What it is.</b> It remembers your business &mdash; your voice, your rules, your facts &mdash; in plain text files (CLAUDE.md and MEMORY.md). The brain in the robot's head.</p>
       <p><b>Why you use it.</b> So it never starts from scratch. It works like someone who already knows how your business runs, instead of a stranger you re-brief every time.</p>
       <div class="cc-eg">Try it: <code>remember that my brand voice is calm and plain, never hypey</code> &mdash; and it'll hold that from then on.</div>
@@ -187,6 +194,7 @@
   <section>
     <h2 id="routing" class="cc-h"><span class="cc-ico">🗺️</span> Routing <span class="cc-sub">&mdash; the map it carries</span></h2>
     <div class="cc-cbody">
+      <div class="cc-tile"><img src="kit/tile-routing.png" alt="Zoom on the CLAUDE.md map the robot holds — its routing." loading="lazy"></div>
       <p><b>What it is.</b> The same CLAUDE.md is also a <b>map</b> of your business &mdash; where things live and which skill to use for what. The map in the robot's hand.</p>
       <p><b>Why you use it.</b> So it goes straight to the right place instead of guessing. Give your AI a map and it navigates; leave it without one and it wanders.</p>
       <div class="cc-eg">Set up for you during onboarding, and it grows as you build &mdash; each new skill adds a line to the map.</div>
@@ -208,6 +216,7 @@
   <section>
     <h2 id="skills" class="cc-h"><span class="cc-ico">🛠️</span> Skills <span class="cc-sub">&mdash; the tools on its belt</span></h2>
     <div class="cc-cbody">
+      <div class="cc-tile"><img src="kit/tile-skills.png" alt="Zoom on the robot's toolbelt of skills." loading="lazy"></div>
       <p><b>What it is.</b> A skill is a task you've trained it to do the same way every time &mdash; draft a newsletter, write a proposal, prep for a call. Your know-how, captured once.</p>
       <p><b>Why you use it.</b> Reusable and consistent. Instead of re-explaining the job, you say one phrase and it runs your exact process.</p>
       <div class="cc-eg">Try it: <code>create a skill that drafts a proposal from my call notes</code></div>
@@ -230,6 +239,7 @@
   <section>
     <h2 id="harness" class="cc-h"><span class="cc-ico">🪢</span> Harness <span class="cc-sub">&mdash; the belt that keeps it reliable</span></h2>
     <div class="cc-cbody">
+      <div class="cc-tile"><img src="kit/tile-harness.png" alt="Zoom on the robot's belt with an automatic check — its harness." loading="lazy"></div>
       <p><b>What it is.</b> A harness is an <b>automatic check</b> that runs every time a skill does its job &mdash; catching a slip before it ever reaches you. The belt strapping everything in place.</p>
       <p><b>Why you use it.</b> Reliability. A skill can quietly drift or forget its own rule; a harness catches that automatically, so you can trust the output without re-reading it.</p>
       <div class="cc-eg">Try it: <code>harden this skill so it never goes off-brand</code> &mdash; it adds a check that runs on every draft.</div>
@@ -248,11 +258,13 @@
   <section>
     <h2 id="connections" class="cc-h"><span class="cc-ico">📡</span> Connections <span class="cc-sub">&mdash; the antenna (MCP)</span></h2>
     <div class="cc-cbody">
+      <div class="cc-tile"><img src="kit/tile-connections.png" alt="Zoom on the robot's antenna — its connections to your tools." loading="lazy"></div>
       <p><b>What it is.</b> Links to your other tools &mdash; Notion, Gmail, your calendar, your CRM. The antenna that reaches the outside world. (The techy name is "MCP.")</p>
       <p><b>Why you use it.</b> So it does the work <b>where your work lives</b>, not just talks about it &mdash; reading your tasks, sending your emails, updating your docs.</p>
       <div class="cc-eg">Try it: <code>connect my Notion so you can read and update my tasks</code></div>
       <details class="cc-deep"><summary>Go deeper: "USB ports for your AI"</summary>
         <div class="cc-deepbody">
+          <figure class="cc-viz"><img src="kit/kit-mcp.png" alt="The robot's antenna and USB port connect out to Notion, Gmail, Calendar and your CRM — one plug per tool." loading="lazy"></figure>
           <p>Think of each connection as a <b>USB port</b> &mdash; plug in a service and your AI gets new abilities for it. Connecting is three steps and you don't touch any config:</p>
           <ul>
             <li><b>Ask</b> &mdash; "connect me to Notion"</li>
@@ -273,6 +285,7 @@
       <div class="cc-eg">Try it: <code>create an agent that researches these 10 competitors and reports back</code></div>
       <details class="cc-deep"><summary>Go deeper: contractors with their own desk</summary>
         <div class="cc-deepbody">
+          <figure class="cc-viz"><img src="kit/kit-subagents.png" alt="An orchestrator robot dispatches several specialist robots, each with its own desk (context), who do their part and report back one clean summary." loading="lazy"></figure>
           <p>The key idea: each agent gets its <b>own context window</b> &mdash; its own desk. All the files it digs through stay on <em>its</em> desk; only the <b>summary</b> comes back to you. That keeps your main conversation clean and fast.</p>
           <p>There are ready-made helpers you'll see it use automatically:</p>
           <ul>
@@ -294,6 +307,7 @@
       <div class="cc-eg">Try it: <code>create a hook that checks every draft before it's saved</code></div>
       <details class="cc-deep"><summary>Go deeper: WHEN → WHAT → DO</summary>
         <div class="cc-deepbody">
+          <figure class="cc-viz"><img src="kit/kit-hooks.png" alt="Hooks fire automatically at set moments across the lifecycle — PrePrompt, SessionStart, PreTool, PostTool, Stop — like a conveyor belt of checkpoints." loading="lazy"></figure>
           <p>Every hook is three parts: <b>WHEN</b> (an event, like "before a file is written") &rarr; <b>WHAT</b> (which thing it watches) &rarr; <b>DO</b> (run a script, ask Claude a yes/no, or spawn a reviewer). They run outside the conversation, so they cost zero of your working memory.</p>
           <p><b>The best move:</b> build a quality inspector right into a skill. Example &mdash; a write-email skill with a hook that says: <em>"before finishing, review this email. Does it sound like a real person, not AI? If it's robotic, rewrite it."</em> You only ever see the polished version.</p>
           <p>There are 14 events in total (session start/end, before/after a tool runs, on completion, and more) &mdash; but you'll mostly meet them through skills, not by wiring them by hand.</p>
@@ -319,14 +333,9 @@
 
   <h2 id="lifecycle">How it all fits together</h2>
   <p>One prompt sets the whole worker in motion &mdash; every part you just met plays its role, in order:</p>
-  <div class="cc-flow">
-    <div class="cc-flow-step"><div><b>Session starts</b> — it reads your CLAUDE.md (memory + map + rules).</div></div>
-    <div class="cc-flow-step"><div><b>You give a prompt</b> — routing picks the right skill for the job.</div></div>
-    <div class="cc-flow-step"><div><b>The loop runs</b> — gather &rarr; act &rarr; verify, asking permission before anything risky.</div></div>
-    <div class="cc-flow-step"><div><b>Helpers if needed</b> — it sends agents off to do self-contained work and report back.</div></div>
-    <div class="cc-flow-step"><div><b>The harness / hooks check it</b> — an automatic quality gate before you ever see the result.</div></div>
-    <div class="cc-flow-step"><div><b>Done</b> — you get the finished work, not a play-by-play.</div></div>
-  </div>
+  <figure class="cc-viz">
+    <img src="kit/kit-lifecycle.png" alt="One prompt fires the six parts in order: session starts (reads CLAUDE.md), you prompt (routing picks the skill), the loop runs (gather/act/verify, asking permission), helpers if needed (agents), the harness and hooks check it, done." loading="lazy">
+  </figure>
   <p style="font-size:14px;color:var(--text-300)"><b>The one-liner:</b> Memory = what it knows · Skills = what it does · Hooks &amp; the harness = what happens before and after.</p>
 
   <h2 id="cheatsheet">Cheat sheet &amp; best practices</h2>

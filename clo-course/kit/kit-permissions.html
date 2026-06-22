@@ -1,0 +1,302 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+  html,body{margin:0;padding:0;background:#0F0F0F;}
+  .canvas{width:1600px;height:900px;position:relative;overflow:hidden;}
+  text{user-select:none;}
+</style></head><body>
+<div class="canvas">
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgb(121,234,32)" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="rgb(121,234,32)" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="rgb(121,234,32)" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgb(121,234,32)" stop-opacity="0.06"/>
+      <stop offset="70%" stop-color="rgb(121,234,32)" stop-opacity="0.01"/>
+      <stop offset="100%" stop-color="rgb(121,234,32)" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dotgrid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="18" r="1.1" fill="rgba(255,255,255,0.05)"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0F0F0F"/>
+  <rect width="1600" height="900" fill="url(#dotgrid)"/>
+  <circle cx="245" cy="540" r="300" fill="url(#halo)"/>
+
+  <!-- TITLE -->
+  <text x="800" y="62" text-anchor="middle" font-family="Excalifont" font-size="46" fill="#FFFFFF">It never does anything risky without asking</text>
+  <text x="800" y="100" text-anchor="middle" font-family="Excalifont" font-size="21" fill="#9aa0a6">Before any action it checks if it is safe or already approved. If not, it stops and asks</text>
+
+  <!-- ===================== ROBOT (canonical, full, hand raised) ===================== -->
+  <!-- "STOP" pause bubble near the raised right hand -->
+  <g transform="translate(252,548) scale(0.26)">
+<g transform="translate(-929,-541)"><!-- ANTENNA -->
+  <g>
+    <line x1="900" y1="220" x2="900" y2="178" stroke="rgb(240,240,245)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="900" cy="170" r="10" fill="rgb(121,234,32)" stroke="rgb(15,15,15)" stroke-width="1.5"/>
+    <circle cx="900" cy="170" r="17" stroke="rgba(121,234,32,0.45)" stroke-width="1.5" fill="none"/>
+    <circle cx="900" cy="170" r="24" stroke="rgba(121,234,32,0.20)" stroke-width="1.5" fill="none"/>
+  </g>
+  <!-- HEAD -->
+  <g>
+    <rect x="816" y="220" width="168" height="170" rx="22" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3.4"/>
+    <rect x="804" y="278" width="14" height="40" rx="4" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <rect x="982" y="278" width="14" height="40" rx="4" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="808" y1="288" x2="814" y2="288" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="808" y1="298" x2="814" y2="298" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="808" y1="308" x2="814" y2="308" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="986" y1="288" x2="992" y2="288" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="986" y1="298" x2="992" y2="298" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <line x1="986" y1="308" x2="992" y2="308" stroke="rgba(121,234,32,0.6)" stroke-width="2"/>
+    <circle cx="828" cy="232" r="2.5" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="972" cy="232" r="2.5" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="828" cy="378" r="2.5" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="972" cy="378" r="2.5" fill="rgba(121,234,32,0.7)"/>
+  </g>
+  <!-- NECK -->
+  <g>
+    <rect x="872" y="390" width="56" height="26" rx="6" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="884" y1="395" x2="884" y2="411" stroke="rgba(240,240,245,0.5)" stroke-width="1.5"/>
+    <line x1="916" y1="395" x2="916" y2="411" stroke="rgba(240,240,245,0.5)" stroke-width="1.5"/>
+  </g>
+  <!-- TORSO -->
+  <g>
+    <rect x="794" y="416" width="212" height="316" rx="18" fill="rgb(22,22,22)" stroke="rgb(240,240,245)" stroke-width="3.4"/>
+    <circle cx="808" cy="430" r="2.8" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="992" cy="430" r="2.8" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="808" cy="718" r="2.8" fill="rgba(121,234,32,0.7)"/>
+    <circle cx="992" cy="718" r="2.8" fill="rgba(121,234,32,0.7)"/>
+  </g>
+  <!-- VISOR with EYES -->
+  <g>
+    <rect x="836" y="258" width="128" height="86" rx="8" fill="rgb(8,8,8)" stroke="rgb(121,234,32)" stroke-width="2.4"/>
+    <circle cx="876" cy="301" r="18" fill="url(#eyeGlow)"/>
+    <circle cx="876" cy="301" r="11" fill="rgb(121,234,32)" opacity="0.32"/>
+    <circle cx="876" cy="301" r="8" fill="rgb(121,234,32)" stroke="rgb(8,8,8)" stroke-width="1.4"/>
+    <circle cx="876" cy="301" r="3" fill="rgb(8,8,8)"/>
+    <circle cx="874" cy="298" r="1.6" fill="rgba(255,255,255,0.9)"/>
+    <circle cx="924" cy="301" r="18" fill="url(#eyeGlow)"/>
+    <circle cx="924" cy="301" r="11" fill="rgb(121,234,32)" opacity="0.32"/>
+    <circle cx="924" cy="301" r="8" fill="rgb(121,234,32)" stroke="rgb(8,8,8)" stroke-width="1.4"/>
+    <circle cx="924" cy="301" r="3" fill="rgb(8,8,8)"/>
+    <circle cx="922" cy="298" r="1.6" fill="rgba(255,255,255,0.9)"/>
+  </g>
+  <!-- ARMS — LEFT down at side; RIGHT raised (palm up / pausing) -->
+  <g>
+    <!-- left arm: down at side -->
+    <line x1="794" y1="459" x2="725" y2="540" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="725" y1="550" x2="700" y2="640" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="794" y1="459" x2="725" y2="540" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="725" y1="550" x2="700" y2="640" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="794" cy="448" r="14" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="794" cy="448" r="5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <circle cx="725" cy="540" r="12" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="725" cy="540" r="4" fill="rgb(121,234,32)" opacity="0.7"/>
+
+    <!-- right arm: RAISED — upper arm out, forearm up so the hand is high (the pause gesture) -->
+    <line x1="1006" y1="459" x2="1086" y2="430" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="1086" y1="430" x2="1112" y2="320" stroke="rgb(240,240,245)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="1006" y1="459" x2="1086" y2="430" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="1086" y1="430" x2="1112" y2="320" stroke="rgba(121,234,32,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="1006" cy="448" r="14" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="1006" cy="448" r="5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <circle cx="1086" cy="430" r="12" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="1086" cy="430" r="4" fill="rgb(121,234,32)" opacity="0.7"/>
+  </g>
+  <!-- LEFT HAND (gripper, lowered) -->
+  <g>
+    <circle cx="702" cy="642" r="14" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="2.6"/>
+    <circle cx="702" cy="642" r="5" fill="rgba(121,234,32,0.35)" stroke="rgb(121,234,32)" stroke-width="1.4"/>
+    <g stroke="rgb(240,240,245)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 690 632 Q 680 628, 674 631 L 678 637"/>
+      <path d="M 688 644 Q 676 644, 670 644 L 676 646"/>
+      <path d="M 690 654 Q 680 656, 674 654 L 678 650"/>
+    </g>
+  </g>
+  <!-- RIGHT HAND (raised, open palm = STOP) -->
+  <g>
+    <circle cx="1114" cy="308" r="15" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="2.8"/>
+    <circle cx="1114" cy="308" r="6" fill="rgba(121,234,32,0.4)" stroke="rgb(121,234,32)" stroke-width="1.6"/>
+    <!-- open fingers fanning up -->
+    <g stroke="rgb(240,240,245)" stroke-width="6" fill="none" stroke-linecap="round">
+      <line x1="1100" y1="298" x2="1094" y2="270"/>
+      <line x1="1110" y1="294" x2="1108" y2="262"/>
+      <line x1="1120" y1="294" x2="1124" y2="262"/>
+      <line x1="1129" y1="298" x2="1138" y2="272"/>
+    </g>
+  </g>
+  <!-- LEGS + FEET -->
+  <g>
+    <line x1="852" y1="734" x2="846" y2="816" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="846" y1="828" x2="846" y2="892" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="852" y1="734" x2="846" y2="816" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="846" y1="828" x2="846" y2="892" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="846" cy="822" r="13" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="846" cy="822" r="4.5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <rect x="816" y="894" width="60" height="22" rx="6" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="824" y1="906" x2="868" y2="906" stroke="rgba(121,234,32,0.5)" stroke-width="2"/>
+    <line x1="948" y1="734" x2="954" y2="816" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="954" y1="828" x2="954" y2="892" stroke="rgb(240,240,245)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="948" y1="734" x2="954" y2="816" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="954" y1="828" x2="954" y2="892" stroke="rgba(121,234,32,0.3)" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="954" cy="822" r="13" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <circle cx="954" cy="822" r="4.5" fill="rgb(121,234,32)" opacity="0.7"/>
+    <rect x="924" y="894" width="60" height="22" rx="6" fill="rgb(15,15,15)" stroke="rgb(240,240,245)" stroke-width="3"/>
+    <line x1="932" y1="906" x2="976" y2="906" stroke="rgba(121,234,32,0.5)" stroke-width="2"/>
+  </g>
+  <!-- CLAUDE CODE chest panel -->
+  <g>
+    <rect x="806" y="450" width="188" height="186" rx="10" fill="rgb(8,8,8)" stroke="#d97757" stroke-width="2.8"/>
+    <line x1="806" y1="486" x2="994" y2="486" stroke="#d97757" stroke-width="1" opacity="0.45"/>
+    <circle cx="824" cy="468" r="4" fill="#d97757" opacity="0.9"/>
+    <circle cx="840" cy="468" r="4" fill="#d97757" opacity="0.5"/>
+    <circle cx="856" cy="468" r="4" fill="#d97757" opacity="0.5"/>
+    <text x="820" y="516" font-family="Consolas, monospace" font-size="15" fill="rgb(121,234,32)">&gt; hold on…</text>
+    <text x="820" y="540" font-family="Consolas, monospace" font-size="15" fill="rgba(121,234,32,0.55)">  checking first</text>
+  </g>
+  <!-- TOOLBELT -->
+  <g>
+    <rect x="772" y="688" width="256" height="40" rx="4" fill="rgb(28,22,18)" stroke="rgb(240,240,245)" stroke-width="2.6"/>
+    <line x1="780" y1="698" x2="1020" y2="698" stroke="rgba(240,240,245,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+    <line x1="780" y1="718" x2="1020" y2="718" stroke="rgba(240,240,245,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+    <g stroke="rgb(240,240,245)" stroke-width="2" fill="rgb(15,12,10)">
+      <rect x="780" y="688" width="44" height="46" rx="3"/>
+      <rect x="828" y="688" width="44" height="46" rx="3"/>
+      <rect x="876" y="688" width="44" height="46" rx="3"/>
+      <rect x="924" y="688" width="44" height="46" rx="3"/>
+      <rect x="976" y="688" width="44" height="46" rx="3"/>
+    </g>
+    <g>
+      <path d="M 779 632 L 786 626 L 786 646 L 779 640 Z" fill="#fbbf24" stroke="rgb(240,240,245)" stroke-width="1.5" stroke-linejoin="round"/>
+      <rect x="786" y="624" width="36" height="22" rx="3" fill="#fbbf24" stroke="rgb(240,240,245)" stroke-width="1.6"/>
+      <line x1="789" y1="630" x2="819" y2="630" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+      <rect x="797" y="646" width="10" height="44" rx="2" fill="#a16207" stroke="rgb(240,240,245)" stroke-width="1.4"/>
+      <line x1="798" y1="660" x2="806" y2="660" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+      <line x1="798" y1="672" x2="806" y2="672" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+    </g>
+    <g>
+      <rect x="836" y="630" width="40" height="56" rx="3" fill="rgb(220,220,220)" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="834" y="628" width="40" height="56" rx="3" fill="#059669" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="832" y="626" width="40" height="56" rx="3" fill="#10b981" stroke="rgb(240,240,245)" stroke-width="1.6"/>
+      <line x1="838" y1="626" x2="838" y2="682" stroke="rgba(15,15,15,0.45)" stroke-width="1.6"/>
+      <rect x="843" y="638" width="24" height="3" rx="1" fill="rgba(255,255,255,0.85)"/>
+      <line x1="843" y1="648" x2="864" y2="648" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <line x1="843" y1="654" x2="860" y2="654" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <text x="852" y="673" text-anchor="middle" font-family="Excalifont" font-size="13" font-weight="800" fill="white" letter-spacing="1">.md</text>
+    </g>
+    <g>
+      <path d="M 880 624 L 880 644 L 894 644 L 894 632 L 906 632 L 906 644 L 920 644 L 920 624 L 906 624 L 906 626 L 894 626 L 894 624 Z" fill="#3b82f6" stroke="rgb(240,240,245)" stroke-width="1.6" stroke-linejoin="round"/>
+      <rect x="893" y="644" width="14" height="46" rx="2" fill="#3b82f6" stroke="rgb(240,240,245)" stroke-width="1.5"/>
+      <line x1="896" y1="656" x2="904" y2="656" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+      <line x1="896" y1="668" x2="904" y2="668" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+      <line x1="896" y1="680" x2="904" y2="680" stroke="rgba(15,15,15,0.5)" stroke-width="1"/>
+    </g>
+    <g>
+      <rect x="932" y="630" width="40" height="56" rx="3" fill="rgb(220,220,220)" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="930" y="628" width="40" height="56" rx="3" fill="#7c3aed" stroke="rgb(15,15,15)" stroke-width="0.6"/>
+      <rect x="928" y="626" width="40" height="56" rx="3" fill="#a855f7" stroke="rgb(240,240,245)" stroke-width="1.6"/>
+      <line x1="934" y1="626" x2="934" y2="682" stroke="rgba(15,15,15,0.45)" stroke-width="1.6"/>
+      <rect x="939" y="638" width="24" height="3" rx="1" fill="rgba(255,255,255,0.85)"/>
+      <line x1="939" y1="648" x2="960" y2="648" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <line x1="939" y1="654" x2="956" y2="654" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <text x="948" y="673" text-anchor="middle" font-family="Excalifont" font-size="13" font-weight="800" fill="white" letter-spacing="1">.md</text>
+    </g>
+    <g>
+      <path d="M 980 624 L 1020 624 L 1018 646 L 982 646 Z" fill="#ef4444" stroke="rgb(240,240,245)" stroke-width="1.5" stroke-linejoin="round"/>
+      <line x1="987" y1="626" x2="987" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="994" y1="626" x2="994" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="1000" y1="626" x2="1000" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="1007" y1="626" x2="1007" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <line x1="1014" y1="626" x2="1014" y2="645" stroke="rgba(15,15,15,0.4)" stroke-width="1"/>
+      <rect x="982" y="646" width="36" height="9" fill="rgb(180,180,180)" stroke="rgb(240,240,245)" stroke-width="1.3"/>
+      <circle cx="990" cy="650.5" r="1.2" fill="rgba(15,15,15,0.6)"/>
+      <circle cx="1010" cy="650.5" r="1.2" fill="rgba(15,15,15,0.6)"/>
+      <rect x="990" y="655" width="20" height="35" rx="3" fill="#92400e" stroke="rgb(240,240,245)" stroke-width="1.4"/>
+    </g>
+  </g>
+  </g>
+  </g>
+
+  <!-- "STOP" speech tag beside the raised hand (hand is at world ~300,487) -->
+  <g transform="translate(412,430)">
+    <rect x="-62" y="-26" width="124" height="46" rx="10" fill="rgb(18,18,18)" stroke="rgb(121,234,32)" stroke-width="2.2"/>
+    <text x="0" y="6" text-anchor="middle" font-family="Excalifont" font-size="24" fill="rgb(121,234,32)">one sec…</text>
+    <path d="M -52 14 L -82 50 L -38 26 Z" fill="rgb(18,18,18)" stroke="rgb(121,234,32)" stroke-width="2.2"/>
+  </g>
+
+  <!-- ===================== FLOW ===================== -->
+
+  <!-- ACTION card -->
+  <g transform="translate(470,420)">
+    <rect x="0" y="0" width="200" height="92" rx="10" fill="rgb(20,20,22)" stroke="rgb(240,240,245)" stroke-width="2.4"/>
+    <text x="100" y="30" text-anchor="middle" font-family="Excalifont" font-size="19" fill="#c8cad8">it wants to</text>
+    <text x="100" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="20" fill="rgb(121,234,32)">edit checkout.js</text>
+    <text x="100" y="83" text-anchor="middle" font-family="Excalifont" font-size="18" fill="#c8cad8">an action that touches your files</text>
+  </g>
+
+  <!-- arrow ACTION -> diamond -->
+  <path d="M 670 466 C 720 466, 740 466, 778 466" fill="none" stroke="rgb(240,240,245)" stroke-width="2.6"/>
+  <polygon points="796,466 770,457 770,475" fill="rgb(240,240,245)"/>
+
+  <!-- DECISION diamond -->
+  <g transform="translate(900,466)">
+    <polygon points="0,-78 150,0 0,78 -150,0" fill="rgba(121,234,32,0.08)" stroke="rgb(121,234,32)" stroke-width="2.6"/>
+    <text x="0" y="-12" text-anchor="middle" font-family="Excalifont" font-size="20" fill="rgb(121,234,32)">already approved</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Excalifont" font-size="20" fill="rgb(121,234,32)">or clearly safe?</text>
+  </g>
+
+  <!-- GREEN branch (yes) up/right -->
+  <path d="M 1050 408 C 1130 360, 1180 322, 1240 300" fill="none" stroke="rgb(121,234,32)" stroke-width="2.8" stroke-dasharray="9 7"/>
+  <polygon points="1258,294 1228,292 1240,312" fill="rgb(121,234,32)"/>
+  <text x="1095" y="350" text-anchor="middle" font-family="Excalifont" font-size="19" fill="rgb(121,234,32)">yes</text>
+  <text x="1118" y="374" text-anchor="middle" font-family="Excalifont" font-size="19" fill="rgb(121,234,32)">it just proceeds</text>
+
+  <!-- green check end node -->
+  <g transform="translate(1310,288)">
+    <circle cx="0" cy="0" r="34" fill="rgba(121,234,32,0.14)" stroke="rgb(121,234,32)" stroke-width="3"/>
+    <path d="M -15 2 L -5 14 L 17 -12" fill="none" stroke="rgb(121,234,32)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="1310" y="346" text-anchor="middle" font-family="Excalifont" font-size="17" fill="#c8cad8">done, no interruption</text>
+
+  <!-- ORANGE branch (no) down/right -->
+  <path d="M 1050 524 C 1120 568, 1160 600, 1210 624" fill="none" stroke="#d97757" stroke-width="2.8" stroke-dasharray="9 7"/>
+  <polygon points="1228,632 1198,624 1206,644" fill="#d97757"/>
+  <text x="1090" y="576" text-anchor="middle" font-family="Excalifont" font-size="19" fill="#d97757">no</text>
+  <text x="1126" y="600" text-anchor="middle" font-family="Excalifont" font-size="19" fill="#d97757">it stops and asks you</text>
+
+  <!-- PERMISSION DIALOG card -->
+  <g transform="translate(1248,628)">
+    <rect x="0" y="0" width="300" height="186" rx="12" fill="rgb(14,16,14)" stroke="rgb(121,234,32)" stroke-width="2.6"/>
+    <!-- title bar -->
+    <rect x="0" y="0" width="300" height="36" rx="12" fill="rgb(20,24,20)"/>
+    <rect x="0" y="22" width="300" height="14" fill="rgb(20,24,20)"/>
+    <circle cx="20" cy="18" r="5" fill="#d97757"/>
+    <text x="40" y="24" font-family="Excalifont" font-size="16" fill="#c8cad8">permission needed</text>
+    <!-- quoted action -->
+    <text x="20" y="64" font-family="Excalifont" font-size="15" fill="#9aa0a6">Allow this action?</text>
+    <rect x="18" y="74" width="264" height="34" rx="6" fill="rgb(8,10,8)" stroke="rgba(121,234,32,0.4)" stroke-width="1.4"/>
+    <text x="32" y="96" font-family="Consolas, monospace" font-size="16" fill="rgb(121,234,32)">edit checkout.js</text>
+    <!-- buttons row -->
+    <g font-family="Excalifont" font-size="15">
+      <rect x="18" y="128" width="68" height="38" rx="7" fill="none" stroke="#9aa0a6" stroke-width="1.8"/>
+      <text x="52" y="152" text-anchor="middle" fill="#c8cad8">Deny</text>
+
+      <rect x="94" y="128" width="92" height="38" rx="7" fill="none" stroke="#9aa0a6" stroke-width="1.8"/>
+      <text x="140" y="152" text-anchor="middle" fill="#c8cad8">Allow once</text>
+
+      <rect x="194" y="128" width="92" height="38" rx="7" fill="rgb(121,234,32)" stroke="rgb(121,234,32)" stroke-width="2.2"/>
+      <text x="240" y="152" text-anchor="middle" fill="#0a0c0a">Always allow</text>
+    </g>
+  </g>
+
+  <!-- muted note under dialog -->
+  <text x="1398" y="840" text-anchor="middle" font-family="Excalifont" font-size="16" fill="#9aa0a6">Pick "Always allow" and it remembers, so you're not asked again</text>
+
+  <!-- robot caption -->
+  <text x="252" y="846" text-anchor="middle" font-family="Excalifont" font-size="19" fill="#c8cad8">it pauses before it acts</text>
+
+</svg></div></body></html>
