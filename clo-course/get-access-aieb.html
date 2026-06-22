@@ -362,12 +362,12 @@ Your standing rule: use the simplest path. Try terminal commands when they are a
 
 1. NODE.JS - Run `node --version`. If Node is missing or older than v18, install the latest LTS for me with the right package manager for my OS, then confirm `node --version` works.
 
-2. THIN PLUGIN SHELL - Install the free AI Employee Builder MCP shell. It contains only stubs and the MCP proxy, not the paid skill bodies. Try the terminal first:
+2. THIN PLUGIN SHELL - Install the free AI Employee Builder shell. It contains setup guidance and the MCP proxy, not the paid skill bodies. Try the terminal first:
    claude plugin marketplace add https://github.com/the2hourclo/aieb-thin-plugin
-   claude plugin install ai-employee-builder-mcp@aieb-thin-plugin --scope user
-   If that fails, walk me through `/plugin` -&gt; Manage Plugins -&gt; Marketplaces -&gt; add the GitHub marketplace -&gt; Plugins -&gt; install `ai-employee-builder-mcp` -&gt; choose "Install for you" -&gt; reload.
+   claude plugin install ai-employee-builder@aieb-thin-plugin --scope user
+   If that fails, walk me through `/plugin` -&gt; Manage Plugins -&gt; Marketplaces -&gt; add the GitHub marketplace -&gt; Plugins -&gt; install `ai-employee-builder` -&gt; choose "Install for you" -&gt; reload.
 
-3. LICENSE - Ask me to paste my Lemon Squeezy license key. Put it into the plugin MCP config as `AIEB_LICENSE_KEY`. The MCP URLs should be:
+3. SETUP - Run `/setup-aieb`. Ask me to paste my Lemon Squeezy license key when needed. The command should write the local MCP config with:
    AIEB_MCP_URL=https://aieb-gated-mcp.vercel.app/mcp
    AIEB_ACTIVATE_URL=https://aieb-gated-mcp.vercel.app/activate
 
@@ -415,14 +415,14 @@ After each step, tell me whether it worked, or show the error and exactly how yo
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the plugin manager.</strong> In Claude Code, type <code>/plugin</code>, then click <strong><span class="tag-click">Manage Plugins</span></strong>.</div></div>
         <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Open the <span class="tag-tab">Marketplaces</span> tab</strong> and add the public thin-shell marketplace:</div></div>
         <div class="cmd-line indent"><span class="cmd-text">https://github.com/the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Switch to <span class="tag-tab">Plugins</span></strong>, install <strong>ai-employee-builder-mcp</strong>, choose <strong>Install for you</strong>, then reload Claude Code.</div></div>
-        <div class="callout callout-tip"><strong>Prefer typing?</strong><div class="cmd-line" style="margin-top:8px"><span class="cmd-text">/plugin marketplace add https://github.com/the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/plugin install ai-employee-builder-mcp@aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/reload-plugins</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Switch to <span class="tag-tab">Plugins</span></strong>, install <strong>ai-employee-builder</strong>, choose <strong>Install for you</strong>, then reload Claude Code.</div></div>
+        <div class="callout callout-tip"><strong>Prefer typing?</strong><div class="cmd-line" style="margin-top:8px"><span class="cmd-text">/plugin marketplace add https://github.com/the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/plugin install ai-employee-builder@aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/reload-plugins</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
       </div>
       <div class="m-terminal">
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open Claude Code in a terminal</strong>, then add and install the public thin shell:</div></div>
         <div class="cmd-line indent"><span class="cmd-text">claude</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
         <div class="cmd-line indent"><span class="cmd-text">/plugin marketplace add https://github.com/the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="cmd-line indent"><span class="cmd-text">/plugin install ai-employee-builder-mcp@aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-line indent"><span class="cmd-text">/plugin install ai-employee-builder@aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
         <div class="cmd-line indent"><span class="cmd-text">/reload-plugins</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
       </div>
       <button class="done-btn" onclick="markDone(3)"><span class="dlabel">Mark step done</span></button>
@@ -437,10 +437,9 @@ After each step, tell me whether it worked, or show the error and exactly how yo
       <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
-      <p>The shell connects to the hosted MCP server. Add your Lemon Squeezy key to its MCP config so the proxy can activate this computer and check your subscription.</p>
-      <div class="cmd-line"><span class="cmd-text">AIEB_MCP_URL=https://aieb-gated-mcp.vercel.app/mcp</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <div class="cmd-line"><span class="cmd-text">AIEB_ACTIVATE_URL=https://aieb-gated-mcp.vercel.app/activate</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <div class="cmd-line"><span class="cmd-text">AIEB_LICENSE_KEY=your Lemon Squeezy license key</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+      <p>The shell connects to the hosted MCP server. Run the setup command and paste your Lemon Squeezy key when Claude asks.</p>
+      <div class="cmd-line"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+      <p style="margin-top:10px">The command writes the MCP config with <code>AIEB_MCP_URL</code>, <code>AIEB_ACTIVATE_URL</code>, and your local <code>AIEB_LICENSE_KEY</code>.</p>
       <div class="callout callout-info"><strong>Subscription license:</strong> access stays active while your subscription is active. If the subscription is cancelled or expires, the MCP stops returning paid instructions.</div>
       <button class="done-btn" onclick="markDone(4)"><span class="dlabel">Mark step done</span></button>
     </div>
@@ -456,7 +455,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <div class="step-content">
       <p>Reload Claude Code, then ask it to fetch one AIEB skill through the MCP server. The first call activates this computer and stores a local instance ID.</p>
       <div class="cmd-line"><span class="cmd-text">Use the aieb MCP get_skill tool to fetch meta-create-skill with path SKILL.md, then summarize what it returned.</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <div class="callout callout-tip"><strong>What success looks like:</strong> Claude can see the skill instructions, but your local plugin folder still contains only lightweight stubs and the proxy script.</div>
+      <div class="callout callout-tip"><strong>What success looks like:</strong> Claude can see the skill instructions, but your local plugin folder still contains only setup guidance and the proxy script.</div>
       <div class="callout callout-warning"><strong>If it fails:</strong> check that Node.js is installed, the license key is pasted correctly, and the key belongs to AI Employee Builders. Do not try to bypass the license gate.</div>
       <button class="done-btn" onclick="markDone(5)"><span class="dlabel">Mark step done</span></button>
     </div>
@@ -521,7 +520,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 Here's what happened: [describe the error or what you see on screen].
 
 Please help me fix it. Background on how this install works:
-- The local plugin is a thin shell. It should contain stubs plus a Node.js MCP proxy, not the paid skill bodies.
+- The local plugin is a thin shell. It should contain setup guidance plus a Node.js MCP proxy, not the paid skill bodies.
 - The paid AIEB instructions come from https://aieb-gated-mcp.vercel.app/mcp through the `get_skill` MCP tool.
 - The proxy activates my Lemon Squeezy license through https://aieb-gated-mcp.vercel.app/activate, stores a local instance ID, then sends both the license key and instance ID on MCP calls.
 - Do not use SkillStack for this AIEB install. That was the old delivery path.
