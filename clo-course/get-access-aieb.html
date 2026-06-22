@@ -354,36 +354,30 @@ body.show-terminal .m-terminal{display:block}
     <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude does the whole install itself, and if it ever hits something only you can do (paste your key, click a button), it walks you through it one clear step at a time. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
     <div class="ai-prompt">
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
-      <pre>You are setting up the AI Employee Builder plugin in my Claude Code for me. Do as much of this yourself as you possibly can — run the commands, install what's needed, check the results — and only hand a task to me when it's genuinely impossible for you to do it. My job should be near zero: ideally I only paste my license key and click a button or two. Verify every step actually worked before moving to the next.
+      <pre>You are setting up AI Employee Builder in my Claude Code for me. The new setup uses a free thin plugin shell plus a hosted licensed MCP server. Do as much as you can yourself, verify every step, and only hand work to me when Claude Code requires a human click, slash command, or license-key paste.
 
-MY SETUP — read carefully: I'm in the Claude Code VS Code extension. You CANNOT type slash commands into my chat for me. When something can ONLY be done by me (a slash command, or a click), do NOT just dump a command and assume it ran — give me a clear, numbered "do this" with the exact text to paste or the exact thing to click, then STOP and wait for me to confirm. In the extension the plugin manager is a clickable panel: I open it by typing /plugin and then CLICKING "Manage Plugins" (it has a Plugins tab and a Marketplaces tab). Prefer guiding me through that panel with simple clicks over slash commands.
+MY SETUP - read carefully: I'm in the Claude Code VS Code extension. You CANNOT type slash commands into my chat for me. When something can ONLY be done by me, give me a short numbered "do this" instruction with the exact text to paste or exact thing to click, then STOP and wait for me to confirm.
 
-Your standing rule for the whole process: try to do it yourself in the terminal first. If a terminal command fails, errors, or isn't available on my version, DON'T get stuck or make me debug — switch to the simplest path for me: walk me through the VS Code Manage Plugins panel step by step (or give me one exact line to paste), wait, and verify it worked. Always favor the option that needs the least from me.
+Your standing rule: use the simplest path. Try terminal commands when they are available. If they fail or my version does not support them, switch to the VS Code Manage Plugins panel and guide me one click at a time.
 
-1. NODE.JS — Run `node --version` yourself. If it's missing or older than v18, install the latest LTS for me (winget on Windows, Homebrew on macOS, or the right package manager for my OS) and confirm it works. Don't make me install anything you can install.
+1. NODE.JS - Run `node --version`. If Node is missing or older than v18, install the latest LTS for me with the right package manager for my OS, then confirm `node --version` works.
 
-2. SKILLSTACK (the system that delivers the plugin) — First try it yourself in the terminal:
-   claude plugin marketplace add https://github.com/SkillStacks/skillstack.git
-   claude plugin install skillstack@skillstack-marketplace --scope user
-   If that fails or isn't available, switch me to the VS Code panel: "type /plugin and click Manage Plugins" → Marketplaces tab → add https://github.com/SkillStacks/skillstack.git → Plugins tab → find "skillstack" → Install → choose "Install for you" → reload. Walk me one click at a time and wait.
+2. THIN PLUGIN SHELL - Install the free AI Employee Builder MCP shell. It contains only stubs and the MCP proxy, not the paid skill bodies. Try the terminal first:
+   claude plugin marketplace add https://github.com/the2hourclo/aieb-thin-plugin
+   claude plugin install ai-employee-builder-mcp@aieb-thin-plugin --scope user
+   If that fails, walk me through `/plugin` -&gt; Manage Plugins -&gt; Marketplaces -&gt; add the GitHub marketplace -&gt; Plugins -&gt; install `ai-employee-builder-mcp` -&gt; choose "Install for you" -&gt; reload.
 
-3. LICENSE — Tell me when you're ready and I'll paste my Lemon Squeezy license key. Then activate it yourself (the /activate-license flow, or the SkillStack tools if you have them). Note the storefront URL and the two install commands it resolves to.
+3. LICENSE - Ask me to paste my Lemon Squeezy license key. Put it into the plugin MCP config as `AIEB_LICENSE_KEY`. The MCP URLs should be:
+   AIEB_MCP_URL=https://aieb-gated-mcp.vercel.app/mcp
+   AIEB_ACTIVATE_URL=https://aieb-gated-mcp.vercel.app/activate
 
-4. AI-EMPLOYEE-BUILDER — Install it. Try the terminal yourself first (claude plugin marketplace add <the clo-os storefront URL> then claude plugin install ai-employee-builder@clo-os --scope user). If that can't run, switch me to the VS Code panel the same way: /plugin → Manage Plugins → Marketplaces tab → add the clo-os storefront URL → Plugins tab → find "ai-employee-builder" → Install → "Install for you" → reload. One step at a time, and verify.
+4. ACTIVATE &amp; TEST - Start or reload Claude Code so the MCP proxy runs. On first use it should call the `/activate` endpoint, bind this computer to the license, store a local Lemon Squeezy instance ID, and then call the hosted MCP with both the license key and instance ID. Test by asking for one AIEB skill through the `get_skill` MCP tool, for example `meta-create-skill` with path `SKILL.md`.
 
-   HOW THIS PLUGIN ARRIVES (handle these known snags so you don't stall): the ai-employee-builder npm package is only a tiny metadata stub — the real skills download from a short-lived git URL with a one-time token in it. Two things to watch for, and how to handle each WITHOUT making me debug:
-   • If a safety/security check BLOCKS the git clone because the URL has a token in it, do NOT retry it or try to route around the block. Stop, hand me that ONE exact command in a code block, tell me to paste it into my own terminal, then wait and verify — that single paste is safe for me to run.
-   • After install, confirm the plugin folder actually holds its skill files — not a ~1 KB stub, and not sitting inside a folder literally named "unknown". If the content landed under an "unknown" folder, move it into the correct versioned plugin folder (the path the registry looks for, like …/ai-employee-builder/<version>/) and reload so Claude Code can find the skills.
-   • BACKUP (only if the install fails with an HTTP 500 "Worker threw exception" from the npm registry at mcp.skillstack.sh — a known, temporary SkillStack server issue): DON'T keep retrying npm. Use this git-clone fallback — it bypasses npm entirely and still respects my license (SkillStack's own one-time token does the download):
-     (a) Call the skillstack_install tool with plugin_slug "the2hourclo-ai-employee-builder" and my license key. It returns clone_url, ref, and plugin_path. (If it says license_required, run skillstack_activate with the same plugin_slug + key first, then retry.)
-     (b) IMMEDIATELY clone — the token in clone_url expires within minutes: git clone --depth 1 --branch &lt;ref&gt; "&lt;clone_url&gt;" "&lt;a temp folder&gt;". If it fails with an auth/403 error the token expired — re-run skillstack_install for a fresh URL and clone again right away.
-     (c) In the clone, open .claude-plugin/marketplace.json and change the top-level "name" from "clo-os" to "clo-os-bypass" (so it doesn't clash with my storefront marketplace).
-     (d) Run: claude plugin marketplace add "&lt;that folder&gt;"  then  claude plugin install ai-employee-builder@clo-os-bypass --scope user.
-     (e) Reload and confirm the skills are present (not a stub). This installs the real files without ever touching npm.
+5. CONFIRM - Confirm the local plugin is only a thin shell and that the paid instructions are fetched from the MCP server at runtime. If the license is invalid, expired, cancelled, or for the wrong product, tell me plainly and show the renewal/help response instead of trying to bypass it.
 
-5. RELOAD & CONFIRM — Reload plugins so ai-employee-builder is active, then confirm to me that it's installed and enabled (its skills and commands show up). If you see a "duplicate hooks file detected" message, it's a known, non-blocking warning from the plugin — note it and keep going; it doesn't stop anything.
+Important: Do not use SkillStack for this AIEB install. SkillStack was the old delivery path. The current path is thin plugin shell + hosted LemonSqueezy-gated MCP.
 
-After each step, tell me plainly whether it worked, or show me the error and exactly how you're fixing it. Start now with step 1.</pre>
+After each step, tell me whether it worked, or show the error and exactly how you're fixing it. Start now with step 1.</pre>
     </div>
     <div class="callout callout-tip" style="margin-top:14px">Rather do it by hand? Just keep following Steps&nbsp;2&ndash;6 below &mdash; each is short, and you can tick them off as you go.</div>
   </div>
@@ -411,55 +405,26 @@ After each step, tell me plainly whether it worked, or show me the error and exa
   <details class="step" id="step3" data-step="3">
     <summary class="step-sum">
       <span class="step-check"><span class="num">3</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Add SkillStack</span><span class="step-sub">The delivery system for paid plugins &mdash; one time</span></span>
+      <span class="step-titles"><span class="step-t">Install the MCP shell</span><span class="step-sub">A free local wrapper, not the paid skill bodies</span></span>
       <span class="step-meta"><span class="time">~3 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
-      <p><strong>What SkillStack is:</strong> the secure marketplace that delivers paid Claude Code plugins. You install it <strong>once, ever</strong> &mdash; after that, one login covers every CLO-OS plugin you own.</p>
-
-      <div class="callout callout-tip"><strong>Let Claude install Node.js first.</strong> SkillStack needs Node.js to deliver the plugin &mdash; but you don't have to. Open the Claude Code panel (Spark icon &#10022;) and paste this; Claude checks for Node and installs it from the terminal if it's missing:<div class="cmd-line" style="margin-top:8px"><span class="cmd-text">Check if Node.js v18+ is installed by running node --version, and if it's missing or older, install the latest LTS for me and confirm it works.</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>Then carry on below. <span style="color:var(--text-dim)">(Manual fallback: install the <strong>LTS</strong> build from <a href="https://nodejs.org" target="_blank">nodejs.org</a> and restart VS Code.)</span></div>
-
-      <!-- VS CODE -->
+      <p><strong>What you are installing:</strong> a tiny local shell that gives Claude the AIEB skill names and connects to the hosted MCP. The valuable instructions stay on the server and load only after your license is checked.</p>
+      <div class="callout callout-tip"><strong>Let Claude check Node.js first.</strong> The local MCP proxy runs with Node.js. Paste this into Claude Code if you want it to check for you:<div class="cmd-line" style="margin-top:8px"><span class="cmd-text">Check if Node.js v18+ is installed by running node --version, and if it is missing or older, install the latest LTS for me and confirm it works.</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
       <div class="m-vscode">
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the Claude Code panel.</strong> Click the <strong>Spark icon (&#10022;)</strong> in the top-right of VS Code (it shows when a file is open), or <strong>"&#10022; Claude Code"</strong> in the bottom status bar. <span style="color:var(--text-dim)">(Shortcut: <span class="kbd">Ctrl</span>+<span class="kbd">Esc</span> / <span class="kbd">Cmd</span>+<span class="kbd">Esc</span>.)</span></div></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Open the plugin manager.</strong> In the chat box, type <code>/plugin</code> &mdash; a menu pops up. <strong>Click <span class="tag-click">Manage Plugins</span></strong> (don't just press Enter). It opens with two tabs.</div></div>
-        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Open the <span class="tag-tab">Marketplaces</span> tab</strong> and paste this into the "add a marketplace" box, then add it:</div></div>
-        <div class="cmd-line indent"><span class="cmd-text">https://github.com/SkillStacks/skillstack.git</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="uimock indent">
-          <div class="uimock-bar"><span class="ttl">Manage plugins</span><span class="x">&times;</span></div>
-          <div class="uimock-tabs"><span class="uimock-tab">Plugins</span><span class="uimock-tab on">Marketplaces</span></div>
-          <div class="uimock-body"><div class="uimock-label">Add a marketplace</div><div class="uimock-add"><span class="inp">https://github.com/SkillStacks/skillstack.git</span><span class="uimock-pill">Add</span></div></div>
-          <div class="uimock-cap">Paste the URL &rarr; click <strong>Add</strong></div>
-        </div>
-        <div class="substep"><div class="substep-badge">4</div><div class="substep-body"><strong>Switch to the <span class="tag-tab">Plugins</span> tab</strong>, find <strong>skillstack</strong>, and click <strong>Install</strong>.</div></div>
-        <div class="uimock indent">
-          <div class="uimock-bar"><span class="ttl">Manage plugins</span><span class="x">&times;</span></div>
-          <div class="uimock-tabs"><span class="uimock-tab on">Plugins</span><span class="uimock-tab">Marketplaces</span></div>
-          <div class="uimock-body"><div class="uimock-search">&#128269; Search plugins&hellip;</div><div class="uimock-row"><div><div class="nm">skillstack</div><div class="ds">Securely installs &amp; licenses paid plugins</div></div><span class="uimock-pill">Install</span></div></div>
-          <div class="uimock-cap">Find <strong>skillstack</strong> &rarr; click <strong>Install</strong></div>
-        </div>
-        <div class="substep"><div class="substep-badge">5</div><div class="substep-body"><strong>Choose where to install</strong> &mdash; pick <strong>Install for you</strong> so it works in every project.</div></div>
-        <div class="scopemock indent">
-          <div class="scopemock-h">Where should this plugin be installed?</div>
-          <div class="scope-opt pick"><span class="dot"></span><span><span class="lbl">Install for you</span><span class="sub">&mdash; all your projects</span></span><span class="rec">Pick this</span></div>
-          <div class="scope-opt"><span class="dot"></span><span><span class="lbl">Install for this project</span><span class="sub">&mdash; shared with collaborators</span></span></div>
-          <div class="scope-opt"><span class="dot"></span><span><span class="lbl">Install locally</span><span class="sub">&mdash; only this folder</span></span></div>
-        </div>
-        <div class="callout callout-warning" style="margin-top:14px"><strong>A banner will ask you to restart Claude Code &mdash; that's expected.</strong> Click it, or type <code>/reload-plugins</code>. (If stuck: <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> / <span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> &rarr; <strong>"Reload Window."</strong>)</div>
-        <div class="callout callout-tip"><strong>Prefer typing?</strong> Paste these two into the chat instead (pick "Install for you" when asked):<div class="cmd-line" style="margin-top:8px"><span class="cmd-text">/plugin marketplace add https://github.com/SkillStacks/skillstack.git</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/plugin install skillstack@skillstack-marketplace</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the plugin manager.</strong> In Claude Code, type <code>/plugin</code>, then click <strong><span class="tag-click">Manage Plugins</span></strong>.</div></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Open the <span class="tag-tab">Marketplaces</span> tab</strong> and add the public thin-shell marketplace:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">https://github.com/the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Switch to <span class="tag-tab">Plugins</span></strong>, install <strong>ai-employee-builder-mcp</strong>, choose <strong>Install for you</strong>, then reload Claude Code.</div></div>
+        <div class="callout callout-tip"><strong>Prefer typing?</strong><div class="cmd-line" style="margin-top:8px"><span class="cmd-text">/plugin marketplace add https://github.com/the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/plugin install ai-employee-builder-mcp@aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/reload-plugins</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
       </div>
-
-      <!-- TERMINAL -->
       <div class="m-terminal">
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the terminal</strong> &mdash; in VS Code press <span class="kbd">Ctrl</span>+<span class="kbd">`</span> (backtick, top-left of your keyboard), then start Claude Code:</div></div>
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open Claude Code in a terminal</strong>, then add and install the public thin shell:</div></div>
         <div class="cmd-line indent"><span class="cmd-text">claude</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Add SkillStack and install it</strong> &mdash; choose <strong>"Install for you"</strong> when it asks about scope:</div></div>
-        <div class="cmd-line indent"><span class="cmd-text">/plugin marketplace add https://github.com/SkillStacks/skillstack.git</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="cmd-line indent"><span class="cmd-text">/plugin install skillstack@skillstack-marketplace</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Load it:</strong></div></div>
+        <div class="cmd-line indent"><span class="cmd-text">/plugin marketplace add https://github.com/the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-line indent"><span class="cmd-text">/plugin install ai-employee-builder-mcp@aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
         <div class="cmd-line indent"><span class="cmd-text">/reload-plugins</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
       </div>
-
       <button class="done-btn" onclick="markDone(3)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -468,14 +433,15 @@ After each step, tell me plainly whether it worked, or show me the error and exa
   <details class="step" id="step4" data-step="4">
     <summary class="step-sum">
       <span class="step-check"><span class="num">4</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Activate your license</span><span class="step-sub">Paste your key once</span></span>
-      <span class="step-meta"><span class="time">~1 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+      <span class="step-titles"><span class="step-t">Add your license to MCP</span><span class="step-sub">Paste your key once</span></span>
+      <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
-      <p>Now hand SkillStack your key. In the same Claude session (panel or terminal), type:</p>
-      <div class="cmd-line"><span class="cmd-text">/activate-license</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <p style="margin-top:10px">When it asks for your key, <strong>paste the license key from Step&nbsp;2</strong> and press Enter. It points your computer at the SkillStack registry (automatic), confirms your key, recognizes it belongs to <strong>ai-employee-builder</strong>, and <strong>prints the exact two commands</strong> you'll use in Step&nbsp;5.</p>
-      <div class="callout callout-info"><strong>Subscription license:</strong> access stays active while your subscription is, and every update ships to you automatically. One key activates one plugin &mdash; any other CLO-OS plugin comes with its own key that links to the same login.</div>
+      <p>The shell connects to the hosted MCP server. Add your Lemon Squeezy key to its MCP config so the proxy can activate this computer and check your subscription.</p>
+      <div class="cmd-line"><span class="cmd-text">AIEB_MCP_URL=https://aieb-gated-mcp.vercel.app/mcp</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+      <div class="cmd-line"><span class="cmd-text">AIEB_ACTIVATE_URL=https://aieb-gated-mcp.vercel.app/activate</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+      <div class="cmd-line"><span class="cmd-text">AIEB_LICENSE_KEY=your Lemon Squeezy license key</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+      <div class="callout callout-info"><strong>Subscription license:</strong> access stays active while your subscription is active. If the subscription is cancelled or expires, the MCP stops returning paid instructions.</div>
       <button class="done-btn" onclick="markDone(4)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -484,39 +450,14 @@ After each step, tell me plainly whether it worked, or show me the error and exa
   <details class="step" id="step5" data-step="5">
     <summary class="step-sum">
       <span class="step-check"><span class="num">5</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Install ai-employee-builder</span><span class="step-sub">The authoring toolkit</span></span>
+      <span class="step-titles"><span class="step-t">Test the hosted skill</span><span class="step-sub">Make sure AIEB loads from MCP</span></span>
       <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
-      <p>Step&nbsp;4 just printed two commands tailored to your account &mdash; <strong>use the ones it gave you</strong> (they'll look like the ones here).</p>
-
-      <!-- VS CODE -->
-      <div class="m-vscode">
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the plugin manager again</strong> &mdash; type <code>/plugin</code> and <strong>click <span class="tag-click">Manage Plugins</span></strong> (same as Step&nbsp;3).</div></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong><span class="tag-tab">Marketplaces</span> tab</strong> &rarr; paste your storefront URL (the one <code>/activate-license</code> printed &mdash; like the line below) and add it:</div></div>
-        <div class="cmd-line indent"><span class="cmd-text">https://store.skillstack.sh/s/the2hourclo/clo-os/marketplace.json</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong><span class="tag-tab">Plugins</span> tab</strong> &rarr; find <strong>ai-employee-builder</strong> &rarr; click <strong>Install</strong> &rarr; <strong>Install for you</strong>.</div></div>
-        <div class="uimock indent">
-          <div class="uimock-bar"><span class="ttl">Manage plugins</span><span class="x">&times;</span></div>
-          <div class="uimock-tabs"><span class="uimock-tab on">Plugins</span><span class="uimock-tab">Marketplaces</span></div>
-          <div class="uimock-body"><div class="uimock-search">&#128269; Search plugins&hellip;</div><div class="uimock-row"><div><div class="nm">ai-employee-builder</div><div class="ds">The authoring toolkit &mdash; build your own skills, agents &amp; hooks</div></div><span class="uimock-pill">Install</span></div></div>
-          <div class="uimock-cap">Find <strong>ai-employee-builder</strong> &rarr; <strong>Install</strong> &rarr; <strong>Install for you</strong></div>
-        </div>
-        <div class="callout callout-warning" style="margin-top:14px"><strong>Restart when the banner appears</strong> (or type <code>/reload-plugins</code>) to finish loading ai-employee-builder.</div>
-        <div class="callout callout-tip"><strong>Prefer typing?</strong> Paste the two commands <code>/activate-license</code> printed straight into the chat:<div class="cmd-line" style="margin-top:8px"><span class="cmd-text">/plugin marketplace add https://store.skillstack.sh/s/the2hourclo/clo-os/marketplace.json</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/plugin install ai-employee-builder@clo-os</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
-      </div>
-
-      <!-- TERMINAL -->
-      <div class="m-terminal">
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body">Back in the same <code>claude</code> terminal, run the two commands it printed (like these) &mdash; choose <strong>"Install for you"</strong>:</div></div>
-        <div class="cmd-line indent"><span class="cmd-text">/plugin marketplace add https://store.skillstack.sh/s/the2hourclo/clo-os/marketplace.json</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="cmd-line indent"><span class="cmd-text">/plugin install ai-employee-builder@clo-os</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Load it:</strong></div></div>
-        <div class="cmd-line indent"><span class="cmd-text">/reload-plugins</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="callout callout-warning"><strong>Use the exact commands <code>/activate-license</code> printed</strong> &mdash; they're tailored to your account. The ones above are just what they look like.</div>
-      </div>
-
-      <div class="callout callout-tip"><strong>Turn on auto-updates</strong> (recommended): type <code>/plugin</code> &rarr; <strong>Manage Plugins</strong> &rarr; <strong>Marketplaces</strong> tab &rarr; select the CLO-OS storefront &rarr; <strong>Enable auto-update</strong>.</div>
+      <p>Reload Claude Code, then ask it to fetch one AIEB skill through the MCP server. The first call activates this computer and stores a local instance ID.</p>
+      <div class="cmd-line"><span class="cmd-text">Use the aieb MCP get_skill tool to fetch meta-create-skill with path SKILL.md, then summarize what it returned.</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+      <div class="callout callout-tip"><strong>What success looks like:</strong> Claude can see the skill instructions, but your local plugin folder still contains only lightweight stubs and the proxy script.</div>
+      <div class="callout callout-warning"><strong>If it fails:</strong> check that Node.js is installed, the license key is pasted correctly, and the key belongs to AI Employee Builders. Do not try to bypass the license gate.</div>
       <button class="done-btn" onclick="markDone(5)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -575,20 +516,17 @@ After each step, tell me plainly whether it worked, or show me the error and exa
     <p>Fastest fix is to let Claude diagnose it live. <strong>Copy this, paste it into Claude Code, and add what you saw</strong> where it says <code>[describe...]</code>.</p>
     <div class="ai-prompt">
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
-      <pre>I'm installing the AI Employee Builder plugin in Claude Code and I'm stuck.
+      <pre>I'm installing the AI Employee Builder MCP shell in Claude Code and I'm stuck.
 
 Here's what happened: [describe the error or what you see on screen].
 
 Please help me fix it. Background on how this install works:
-- It uses SkillStack to deliver the plugin. I add the SkillStack marketplace (https://github.com/SkillStacks/skillstack.git), install the "skillstack" plugin, run /activate-license with my Lemon Squeezy license key, then install "ai-employee-builder@clo-os".
-- Node.js (v18+) is required because the plugin is delivered as an npm package.
+- The local plugin is a thin shell. It should contain stubs plus a Node.js MCP proxy, not the paid skill bodies.
+- The paid AIEB instructions come from https://aieb-gated-mcp.vercel.app/mcp through the `get_skill` MCP tool.
+- The proxy activates my Lemon Squeezy license through https://aieb-gated-mcp.vercel.app/activate, stores a local instance ID, then sends both the license key and instance ID on MCP calls.
+- Do not use SkillStack for this AIEB install. That was the old delivery path.
 
-Known snags that have hit this install before — check whether any match:
-- The ai-employee-builder npm package is just a small stub; the real skills come from a short-lived git URL with a one-time token. If a clone with a token in the URL got blocked by a safety check, give me the one exact command to paste into my own terminal and verify it — don't keep retrying it yourself.
-- The skills can land in a folder named "unknown" instead of the versioned plugin folder. If so, move them into the versioned path the registry expects and reload.
-- A "duplicate hooks file detected" warning is known and non-blocking — it doesn't stop the install.
-
-Check anything you can — run node --version, look at my ~/.npmrc for the @skillstack registry line and auth token, and check whether the marketplace was added and the plugin is enabled (I can open it by typing /plugin and clicking "Manage Plugins"). Then explain the problem in plain English and give me the exact steps to fix it. You can't type slash commands for me, so tell me what to type and wait.</pre>
+Check anything you can: Node.js version, whether the thin plugin is installed, whether `.mcp.json` has AIEB_MCP_URL, AIEB_ACTIVATE_URL, and AIEB_LICENSE_KEY, and whether the aieb MCP server is visible. Then explain the problem in plain English and give me the exact next step. If Claude Code needs me to type a slash command or paste a license key, tell me exactly what to do and wait.</pre>
     </div>
   </div>
 
@@ -599,29 +537,28 @@ Check anything you can — run node --version, look at my ~/.npmrc for the @skil
       <thead><tr><th>What you see</th><th>The fix</th></tr></thead>
       <tbody>
         <tr><td>A new command doesn't appear</td><td>You skipped a reload. Type <code>/reload-plugins</code>, or reload the window (<span class="kbd">Ctrl/Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> &rarr; "Reload Window").</td></tr>
-        <tr><td>Install fails mentioning <code>npm</code> or <code>node</code></td><td>Node.js isn't installed (Step&nbsp;1, item&nbsp;4). Install the <strong>LTS</strong> build from <a href="https://nodejs.org" target="_blank">nodejs.org</a>, restart VS Code, retry.</td></tr>
-        <tr><td>A <strong>403</strong> error on install</td><td>Your license isn't activated for this plugin yet. Run <code>/activate-license</code> again, paste your key, then retry.</td></tr>
+        <tr><td>Install fails mentioning <code>node</code></td><td>Node.js isn't installed. Install the <strong>LTS</strong> build from <a href="https://nodejs.org" target="_blank">nodejs.org</a>, restart VS Code, retry.</td></tr>
+        <tr><td>The MCP says <strong>401</strong> or unauthorized</td><td>Check that <code>AIEB_LICENSE_KEY</code> is present, the key belongs to AI Employee Builders, and the subscription is active.</td></tr>
         <tr><td>"Key bound to other plugin"</td><td>That key is for a different product &mdash; each key activates one plugin. Re-check the key in your Lemon Squeezy email.</td></tr>
-        <tr><td>"Expired" or "Revoked"</td><td>Your subscription lapsed. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">My Orders</a>, then run <code>/activate-license</code> again.</td></tr>
-        <tr><td>Skills don't show up after install</td><td>Close VS Code, delete the folder <code>~/.claude/plugins/cache</code>, reopen, and install again.</td></tr>
-        <tr><td>Install finishes but skills are missing, or you see a folder named <code>unknown</code></td><td>The content landed in the wrong folder. Paste the <strong>"Stuck?" prompt</strong> above and ask Claude to move it from the <code>unknown</code> folder into the versioned plugin path the registry expects, then reload.</td></tr>
-        <tr><td>A clone or download is <strong>blocked</strong> / warns about a token in the URL</td><td>Expected &mdash; the plugin's skills ship from a one-time tokenized git URL. Paste the exact command Claude hands you into your own terminal, then let Claude verify.</td></tr>
-        <tr><td><code>duplicate hooks file detected</code></td><td>Known, non-blocking warning &mdash; the plugin lists its hooks twice. It doesn't break the install; continue.</td></tr>
+        <tr><td>"Expired" or "Revoked"</td><td>Your subscription lapsed. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">My Orders</a>, then reload Claude Code and try the MCP call again.</td></tr>
+        <tr><td>Skills don't show up after install</td><td>Reload Claude Code. If the plugin is installed but the MCP is missing, check the plugin's <code>.mcp.json</code> config.</td></tr>
+        <tr><td>The local plugin folder looks tiny</td><td>That is expected. The local plugin is only the shell; paid skill instructions load from the hosted MCP.</td></tr>
+        <tr><td>The MCP activates once, then fails on another machine</td><td>The license may have reached its activation limit. Manage the order in Lemon Squeezy or email support.</td></tr>
         <tr><td><code>/plugin</code> not recognized</td><td>Claude Code is outdated. Update the extension (Extensions panel &rarr; Claude Code &rarr; update), reload, retry.</td></tr>
       </tbody>
     </table>
-    <div class="callout callout-info">Still stuck after the AI prompt? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a> &mdash; or for plugin-delivery issues, <a href="mailto:support@skillstack.sh">support@skillstack.sh</a>.</div>
+    <div class="callout callout-info">Still stuck after the AI prompt? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a>.</div>
   </div>
 
   <!-- FAQ -->
   <div class="section-rule">FAQ</div>
   <div class="faq">
     <details><summary>Do I need to know how to code?</summary><div class="faq-body">No. You copy a few short commands into a chat box and click "Install." If you can copy and paste, you can do this &mdash; and the <strong>"Let Claude install it"</strong> prompt up top will walk you through it.</div></details>
-    <details><summary>Why install SkillStack first, then ai-employee-builder?</summary><div class="faq-body">SkillStack is the secure delivery system for paid plugins &mdash; like the app store. You add it once; it checks your license and hands you the exact commands to install ai-employee-builder. Two installs, one time.</div></details>
-    <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Yes. The same key activates on every computer you use &mdash; run <code>/activate-license</code> and paste it on each one. No new key per device.</div></details>
-    <details><summary>Why does it need Node.js?</summary><div class="faq-body">SkillStack delivers the plugin as a secure npm package, and Node.js (which includes <code>npm</code>) downloads it. Install once from <a href="https://nodejs.org" target="_blank">nodejs.org</a> and never touch it again.</div></details>
-    <details><summary>How do updates work?</summary><div class="faq-body">On a subscription, every update ships automatically &mdash; especially with auto-update on (Step&nbsp;5 tip). To apply updates manually any time, run <code>/skillstack:update-plugins</code>.</div></details>
-    <details><summary>What if my subscription lapses?</summary><div class="faq-body">Access pauses until you renew. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">Lemon Squeezy &rarr; My Orders</a>, then run <code>/activate-license</code> again.</div></details>
+    <details><summary>Why install a thin plugin plus MCP?</summary><div class="faq-body">The thin plugin gives Claude Code the local skill names and a proxy. The paid instructions stay on the hosted MCP server, so your subscription can be checked at runtime and updates can ship without reinstalling the whole skill library.</div></details>
+    <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Your license activates a limited number of machines according to the Lemon Squeezy license settings. The MCP binds each computer through a local activation instance so the key cannot be shared endlessly.</div></details>
+    <details><summary>Why does it need Node.js?</summary><div class="faq-body">The local MCP proxy is a small Node.js script. It activates your license, stores the local instance ID, and forwards requests to the hosted MCP server.</div></details>
+    <details><summary>How do updates work?</summary><div class="faq-body">Most AIEB skill updates happen on the MCP server. You get the latest instructions automatically the next time Claude calls <code>get_skill</code>. You only reinstall the plugin when the local shell itself changes.</div></details>
+    <details><summary>What if my subscription lapses?</summary><div class="faq-body">Access pauses until you renew. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">Lemon Squeezy &rarr; My Orders</a>, then reload Claude Code and try the MCP call again.</div></details>
     <details><summary>I already use Claude Code &mdash; can I skip ahead?</summary><div class="faq-body">Yes. If the extension and Node.js are installed, tick Step&nbsp;1 and jump to <strong>Step&nbsp;3</strong>.</div></details>
     <details><summary>Is the Terminal method different from VS Code?</summary><div class="faq-body">Same result, same commands &mdash; just a different place to type them. The <strong>VS Code</strong> way is click-based and friendly; <strong>Terminal</strong> is for command-line folks. Use the toggle at the top to switch.</div></details>
   </div>
