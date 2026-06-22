@@ -29,6 +29,66 @@
 .cc-eg code{font-family:var(--font-mono);font-size:.92em;background:var(--bg-code);border:1px solid var(--border-200);border-radius:5px;padding:2px 7px;color:var(--accent)}
 .cc-eg b{color:var(--text-100)}
 
+/* go-deeper collapsible */
+.cc-deep{margin-top:14px;border:1px solid var(--border-100);border-radius:var(--radius);background:var(--bg-200);overflow:hidden}
+.cc-deep>summary{cursor:pointer;padding:11px 15px;font-size:13px;font-weight:700;color:var(--accent);list-style:none;user-select:none}
+.cc-deep>summary::-webkit-details-marker{display:none}
+.cc-deep>summary::before{content:'▸ ';font-family:var(--font-mono)}
+.cc-deep[open]>summary::before{content:'▾ '}
+.cc-deep>summary:hover{background:var(--bg-000)}
+.cc-deepbody{padding:4px 16px 16px;border-top:1px solid var(--border-100)}
+.cc-deepbody p{font-size:14px;color:var(--text-200);line-height:1.6;margin:10px 0}
+.cc-deepbody b{color:var(--text-100)}
+.cc-deepbody h4{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--text-400);margin:16px 0 6px}
+.cc-deepbody ul{margin:6px 0;padding-left:20px}
+.cc-deepbody li{font-size:14px;color:var(--text-200);line-height:1.55;margin:5px 0}
+.cc-deepbody code,.cc-mono{font-family:var(--font-mono);font-size:.9em;background:var(--bg-code);border:1px solid var(--border-200);border-radius:5px;padding:1px 6px;color:var(--accent-text,#bff58a)}
+
+/* before / after */
+.cc-ba{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:640px){.cc-ba{grid-template-columns:1fr}}
+.cc-ba-card{border:1px solid var(--border-200);border-radius:var(--radius);padding:12px 14px;background:var(--bg-100)}
+.cc-ba-tag{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+.cc-ba-card.before .cc-ba-tag{color:var(--text-400)}
+.cc-ba-card.after{border-color:var(--accent-border)}
+.cc-ba-card.after .cc-ba-tag{color:var(--accent)}
+.cc-ba-card p{font-size:13px;color:var(--text-300);margin:0;line-height:1.55}
+
+/* loop (how it thinks) */
+.cc-loop{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:var(--sp-4) 0}
+.cc-loop-step{flex:1;min-width:150px;background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius);padding:14px 16px}
+.cc-loop-arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;padding:0 8px}
+.cc-loop-step .n{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.6px}
+.cc-loop-step .t{font-weight:700;color:var(--text-100);margin:3px 0 4px;font-size:15px}
+.cc-loop-step .d{font-size:13px;color:var(--text-300);line-height:1.5}
+
+/* two-column compare */
+.cc-cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:var(--sp-4) 0}
+@media(max-width:640px){.cc-cmp{grid-template-columns:1fr}}
+.cc-cmp-col{border:1px solid var(--border-100);border-radius:var(--radius-lg);padding:16px 18px;background:var(--bg-100)}
+.cc-cmp-col.win{border-color:var(--accent-border);background:linear-gradient(160deg,var(--accent-dim-2),var(--bg-100) 60%)}
+.cc-cmp-col h4{margin:0 0 8px;font-size:15px;color:var(--text-100)}
+.cc-cmp-col ul{margin:0;padding-left:18px}
+.cc-cmp-col li{font-size:13.5px;color:var(--text-300);line-height:1.6;margin:4px 0}
+
+/* table */
+.cc-tbl{width:100%;border-collapse:collapse;margin:var(--sp-4) 0;font-size:13.5px}
+.cc-tbl th,.cc-tbl td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--border-100);vertical-align:top}
+.cc-tbl th{color:var(--text-400);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;font-weight:800}
+.cc-tbl td{color:var(--text-200)}
+.cc-tbl td b{color:var(--text-100)}
+.cc-tbl tr:hover td{background:var(--bg-100)}
+
+/* best-practice cards + flow */
+.cc-bp{border:1px solid var(--border-100);border-left:3px solid var(--accent);border-radius:var(--radius);padding:14px 16px;margin:10px 0;background:var(--bg-100)}
+.cc-bp h4{margin:0 0 5px;font-size:15px;color:var(--text-100)}
+.cc-bp p{margin:0;font-size:13.5px;color:var(--text-300);line-height:1.6}
+.cc-flow{counter-reset:step;margin:var(--sp-4) 0}
+.cc-flow-step{display:flex;gap:13px;padding:9px 0;align-items:flex-start}
+.cc-flow-step::before{counter-increment:step;content:counter(step);flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--accent-dim-2);border:1px solid var(--accent-border);color:var(--accent);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.cc-flow-step div{font-size:14px;color:var(--text-200);line-height:1.55}
+.cc-flow-step b{color:var(--text-100)}
+
 /* close CTA */
 .cc-cta{background:linear-gradient(135deg,var(--accent-dim-2),var(--bg-100) 70%);border:1px solid var(--accent-border);border-radius:var(--radius-lg);padding:26px;margin:var(--sp-6) 0 var(--sp-4);text-align:center}
 .cc-cta h3{margin:0 0 8px;font-size:20px;color:var(--text-100)}
@@ -41,7 +101,7 @@
 
 <div id="doc-content">
   <h1>Claude Code, in plain English</h1>
-  <p class="cc-lead">Claude Code isn't a chatbot. It's an <b>AI Employee you build</b> &mdash; a worker that does real jobs in your business. This page introduces every part of it, using one picture, so the words you'll hear later (skills, harness, hooks, MCP) already mean something. No code, no terminal &mdash; just the concepts and why each one matters.</p>
+  <p class="cc-lead">Claude Code isn't a chatbot. It's an <b>AI Employee you build</b> &mdash; a worker that does real jobs in your business. This page introduces every part of it, using one picture, so the words you'll hear later (skills, harness, hooks, MCP) already mean something. No code, no terminal &mdash; just the concepts and why each one matters. Each part has a <b>&ldquo;Go deeper&rdquo;</b> you can open when you're ready for more.</p>
 
   <h2 id="anatomy">The whole thing, in one picture</h2>
   <p>Here's your AI Employee. Every labeled part is one thing Claude Code does for you &mdash; the rest of this page is just one short section per part.</p>
@@ -54,7 +114,52 @@
   </div>
 
   <h2 id="big-idea">The big idea: you employ it, you don't chat with it</h2>
-  <p class="cc-lead">A chatbot answers questions. An AI Employee <b>does the work</b> &mdash; it has a memory of your business, tools it's trained to use, connections to your other software, and checks that keep it reliable. You set it up once, then it runs jobs for you. The parts below are how that's possible.</p>
+  <p class="cc-lead">A chatbot answers questions. An AI Employee <b>does the work</b> &mdash; it has a memory of your business, tools it's trained to use, connections to your other software, and checks that keep it reliable.</p>
+  <div class="cc-cmp">
+    <div class="cc-cmp-col">
+      <h4>💬 A chatbot</h4>
+      <ul>
+        <li>Can't see your files</li>
+        <li>Forgets you between chats</li>
+        <li>Gives you text to copy-paste</li>
+        <li>Does one turn at a time</li>
+      </ul>
+    </div>
+    <div class="cc-cmp-col win">
+      <h4>🤖 Your AI Employee</h4>
+      <ul>
+        <li>Reads and edits your actual files</li>
+        <li>Remembers your business (CLAUDE.md)</li>
+        <li>Does the job &mdash; in your tools</li>
+        <li>Works through multi-step tasks on its own</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="how-it-thinks">How it thinks <span class="cc-sub">&mdash; the worker in motion</span></h2>
+  <p>Claude Code isn't autocomplete. It works in a <b>loop</b>, like a good new hire: read the situation, do the task, check its own work, adjust &mdash; until it's actually done.</p>
+  <div class="cc-loop">
+    <div class="cc-loop-step"><div class="n">1 · Gather</div><div class="t">Read the situation</div><div class="d">Opens the right files, your memory, your rules &mdash; gets context first.</div></div>
+    <div class="cc-loop-arrow">&rarr;</div>
+    <div class="cc-loop-step"><div class="n">2 · Act</div><div class="t">Do the task</div><div class="d">Edits files, runs the work, drafts the output.</div></div>
+    <div class="cc-loop-arrow">&rarr;</div>
+    <div class="cc-loop-step"><div class="n">3 · Verify</div><div class="t">Check its own work</div><div class="d">Runs the tests / re-reads the result, and loops back if it's not right.</div></div>
+  </div>
+  <p style="font-size:14px;color:var(--text-300)">And you're never locked out: you can <b>interrupt, steer, or add context</b> mid-task at any time.</p>
+  <details class="cc-deep"><summary>Go deeper: staying in control (permissions)</summary>
+    <div class="cc-deepbody">
+      <p>It never does anything risky without asking. Before an action, it checks: <b>is this already approved or clearly safe?</b> If yes, it proceeds; if not, it stops and asks you &mdash; <span class="cc-mono">Deny</span> · <span class="cc-mono">Allow once</span> · <span class="cc-mono">Always allow</span>. Pick "always" and it remembers, so you're not asked again.</p>
+      <h4>The 5 permission modes</h4>
+      <ul>
+        <li><b>default</b> &mdash; asks for anything not pre-approved (the safe starting point)</li>
+        <li><b>acceptEdits</b> &mdash; auto-accepts file edits, still asks before running commands</li>
+        <li><b>plan</b> &mdash; read-only; it explores and proposes, changes nothing</li>
+        <li><b>dontAsk</b> &mdash; auto-approves everything (for trusted, repetitive work)</li>
+        <li><b>bypassPermissions</b> &mdash; skips all checks (use with caution)</li>
+      </ul>
+      <p>You can also pre-write rules once &mdash; e.g. always allow <span class="cc-mono">npm test</span>, always deny <span class="cc-mono">rm *</span> &mdash; and clicking "Always allow" writes that rule for you.</p>
+    </div>
+  </details>
 
   <section>
     <h2 id="memory" class="cc-h"><span class="cc-ico">🧠</span> Memory <span class="cc-sub">&mdash; the brain</span></h2>
@@ -62,6 +167,20 @@
       <p><b>What it is.</b> It remembers your business &mdash; your voice, your rules, your facts &mdash; in plain text files (CLAUDE.md and MEMORY.md). The brain in the robot's head.</p>
       <p><b>Why you use it.</b> So it never starts from scratch. It works like someone who already knows how your business runs, instead of a stranger you re-brief every time.</p>
       <div class="cc-eg">Try it: <code>remember that my brand voice is calm and plain, never hypey</code> &mdash; and it'll hold that from then on.</div>
+      <details class="cc-deep"><summary>Go deeper: CLAUDE.md, the memory layers &amp; context</summary>
+        <div class="cc-deepbody">
+          <p><b>CLAUDE.md is the most important file in your workspace</b> &mdash; the first thing it reads every session. The rule of thumb: <b>if something isn't in here, your AI doesn't know it exists.</b> It does three jobs:</p>
+          <ul>
+            <li><b>Routing</b> &mdash; which skill to use for what ("write content &rarr; the write skill")</li>
+            <li><b>Where things live</b> &mdash; the map of your folders</li>
+            <li><b>Rules</b> &mdash; your conventions ("run tests before committing," "follow the brand voice")</li>
+          </ul>
+          <h4>Layers of memory (most-specific wins)</h4>
+          <p>Project memory (<span class="cc-mono">.claude/CLAUDE.md</span>) &rarr; your personal memory (<span class="cc-mono">~/.claude/CLAUDE.md</span>) &rarr; auto-memory (things it learns over time). You rarely manage these by hand &mdash; just say <span class="cc-mono">remember that we always use dark mode for demos</span> and it files it for you.</p>
+          <h4>Working memory (context)</h4>
+          <p>Everything it can "see right now" is its <b>context window</b>. That's why skills are kept short and load their detail only when needed &mdash; so the window stays clean and it never runs out of room mid-task.</p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -71,6 +190,18 @@
       <p><b>What it is.</b> The same CLAUDE.md is also a <b>map</b> of your business &mdash; where things live and which skill to use for what. The map in the robot's hand.</p>
       <p><b>Why you use it.</b> So it goes straight to the right place instead of guessing. Give your AI a map and it navigates; leave it without one and it wanders.</p>
       <div class="cc-eg">Set up for you during onboarding, and it grows as you build &mdash; each new skill adds a line to the map.</div>
+      <details class="cc-deep"><summary>Go deeper: the routing chain &amp; when it goes wrong</summary>
+        <div class="cc-deepbody">
+          <p><b>CLAUDE.md is the traffic controller.</b> One request flows down a chain: <span class="cc-mono">CLAUDE.md</span> (which skill?) &rarr; <span class="cc-mono">SKILL.md</span> (which step?) &rarr; the workflow (do the steps) &rarr; references (apply your voice / data). If the top of that chain is wrong, the wrong skill loads and the output is wrong.</p>
+          <h4>When routing goes wrong (and the fix)</h4>
+          <ul>
+            <li><b>Wrong skill loads</b> &rarr; make the routing entry more specific</li>
+            <li><b>Output is generic</b> &rarr; point the skill at a reference file (your voice, your data)</li>
+            <li><b>One skill is doing too much</b> (500 lines, 8 clients) &rarr; split it into separate skills</li>
+          </ul>
+          <p>Scaling across clients: keep <b>one shared skill + a small reference file per client</b> (their data, their branding) &mdash; same process, different details.</p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -80,6 +211,19 @@
       <p><b>What it is.</b> A skill is a task you've trained it to do the same way every time &mdash; draft a newsletter, write a proposal, prep for a call. Your know-how, captured once.</p>
       <p><b>Why you use it.</b> Reusable and consistent. Instead of re-explaining the job, you say one phrase and it runs your exact process.</p>
       <div class="cc-eg">Try it: <code>create a skill that drafts a proposal from my call notes</code></div>
+      <details class="cc-deep"><summary>Go deeper: a skill is just a text file (and how it gets your voice)</summary>
+        <div class="cc-deepbody">
+          <p>A skill is a plain text file (<span class="cc-mono">SKILL.md</span>) with two lines of setup &mdash; a <b>name</b> (becomes <span class="cc-mono">/name</span>) and a <b>description</b> (what it reads to know when to use it) &mdash; then your instructions. That's it. You just built something most people think needs a developer.</p>
+          <p>It <b>grows with you</b>: start as one file; add a <span class="cc-mono">references/</span> folder for your voice or data; add <span class="cc-mono">workflows/</span> when one skill needs to handle a few variations.</p>
+          <h4>The magic: same prompt, your voice</h4>
+          <p>Watch one skill improve as you add a single file:</p>
+          <div class="cc-ba">
+            <div class="cc-ba-card before"><div class="cc-ba-tag">Before — just instructions</div><p>"Hi John, thank you for your time today. I wanted to follow up regarding our conversation…" &mdash; correct, but generic. It doesn't sound like <em>you</em>.</p></div>
+            <div class="cc-ba-card after"><div class="cc-ba-tag">After — + a voice file</div><p>"John — great talking through the rollout. Next step: I'll send the draft by Thursday." &mdash; <b>same <span class="cc-mono">/follow-up</span> command</b>, now in your voice, because you added one <span class="cc-mono">references/my-voice.md</span>.</p></div>
+          </div>
+          <p><b>Refining is normal.</b> Run it &rarr; ask "what's wrong?" &rarr; tone off? add a reference; too generic? add an example &rarr; re-run. Repeat 3&ndash;5 times. You're training an employee, not writing code.</p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -89,6 +233,15 @@
       <p><b>What it is.</b> A harness is an <b>automatic check</b> that runs every time a skill does its job &mdash; catching a slip before it ever reaches you. The belt strapping everything in place.</p>
       <p><b>Why you use it.</b> Reliability. A skill can quietly drift or forget its own rule; a harness catches that automatically, so you can trust the output without re-reading it.</p>
       <div class="cc-eg">Try it: <code>harden this skill so it never goes off-brand</code> &mdash; it adds a check that runs on every draft.</div>
+      <details class="cc-deep"><summary>Go deeper: two kinds of checks</summary>
+        <div class="cc-deepbody">
+          <ul>
+            <li><b>Exact-rule checks</b> (a banned word, a length, a format) become a tiny <b>script</b> that either passes or flags the line &mdash; 100% reliable, because a script never forgets.</li>
+            <li><b>Judgment checks</b> (is the tone right? is the hook strong?) become a fresh <b>reviewer</b> that reads the draft with clean eyes and sends it back if it's off.</li>
+          </ul>
+          <p>The principle: don't <em>instruct</em> a skill to remember a rule &mdash; <b>enforce</b> it with a check, so doing it right is automatic.</p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -98,6 +251,17 @@
       <p><b>What it is.</b> Links to your other tools &mdash; Notion, Gmail, your calendar, your CRM. The antenna that reaches the outside world. (The techy name is "MCP.")</p>
       <p><b>Why you use it.</b> So it does the work <b>where your work lives</b>, not just talks about it &mdash; reading your tasks, sending your emails, updating your docs.</p>
       <div class="cc-eg">Try it: <code>connect my Notion so you can read and update my tasks</code></div>
+      <details class="cc-deep"><summary>Go deeper: "USB ports for your AI"</summary>
+        <div class="cc-deepbody">
+          <p>Think of each connection as a <b>USB port</b> &mdash; plug in a service and your AI gets new abilities for it. Connecting is three steps and you don't touch any config:</p>
+          <ul>
+            <li><b>Ask</b> &mdash; "connect me to Notion"</li>
+            <li><b>Authenticate</b> &mdash; a normal sign-in window opens; you approve</li>
+            <li><b>Use it</b> &mdash; now you can say "add this to my Notion tasks"</li>
+          </ul>
+          <p>Once connected, it can work across tools in one go: <span class="cc-mono">take the action items from this call and create them as Notion tasks, then draft the recap email</span>.</p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -107,6 +271,18 @@
       <p><b>What it is.</b> It can spin up helper workers that go do a job on their own &mdash; in the background or several at once &mdash; then report back.</p>
       <p><b>Why you use it.</b> To delegate big or repetitive work instead of supervising each step. You ask once and get a finished result, not a play-by-play.</p>
       <div class="cc-eg">Try it: <code>create an agent that researches these 10 competitors and reports back</code></div>
+      <details class="cc-deep"><summary>Go deeper: contractors with their own desk</summary>
+        <div class="cc-deepbody">
+          <p>The key idea: each agent gets its <b>own context window</b> &mdash; its own desk. All the files it digs through stay on <em>its</em> desk; only the <b>summary</b> comes back to you. That keeps your main conversation clean and fast.</p>
+          <p>There are ready-made helpers you'll see it use automatically:</p>
+          <ul>
+            <li><b>Explore</b> &mdash; fast, read-only; finds the right files</li>
+            <li><b>Plan</b> &mdash; researches and proposes an approach, changes nothing</li>
+            <li><b>General-purpose</b> &mdash; handles a full multi-step job end to end</li>
+          </ul>
+          <p>Rule of thumb: keep it in the main chat when you want <b>back-and-forth</b>; send it to an agent when the task is <b>self-contained and verbose</b> ("research X and report back").</p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -116,6 +292,13 @@
       <p><b>What it is.</b> Automatic reactions to events &mdash; "after every save, run the check," "when a session starts, load my context." Reflexes that fire without being asked.</p>
       <p><b>Why you use it.</b> So the right thing happens on its own and you never have to remember it. The safety net that makes the whole system dependable.</p>
       <div class="cc-eg">Try it: <code>create a hook that checks every draft before it's saved</code></div>
+      <details class="cc-deep"><summary>Go deeper: WHEN → WHAT → DO</summary>
+        <div class="cc-deepbody">
+          <p>Every hook is three parts: <b>WHEN</b> (an event, like "before a file is written") &rarr; <b>WHAT</b> (which thing it watches) &rarr; <b>DO</b> (run a script, ask Claude a yes/no, or spawn a reviewer). They run outside the conversation, so they cost zero of your working memory.</p>
+          <p><b>The best move:</b> build a quality inspector right into a skill. Example &mdash; a write-email skill with a hook that says: <em>"before finishing, review this email. Does it sound like a real person, not AI? If it's robotic, rewrite it."</em> You only ever see the polished version.</p>
+          <p>There are 14 events in total (session start/end, before/after a tool runs, on completion, and more) &mdash; but you'll mostly meet them through skills, not by wiring them by hand.</p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -125,8 +308,54 @@
       <p><b>What it is.</b> A <b>command</b> is a one-word shortcut (a <code>/slash</code>) that runs a whole routine. A <b>routine</b> runs it on a schedule &mdash; nightly, every Monday &mdash; with no one starting it.</p>
       <p><b>Why you use it.</b> Stop re-typing the same request, and let recurring work run itself. This is where you finally step out of the loop.</p>
       <div class="cc-eg">Try it: <code>make a command for my daily plan</code> &mdash; or <code>run my weekly report every Monday at 9am</code></div>
+      <details class="cc-deep"><summary>Go deeper: a skill and a command are the same thing</summary>
+        <div class="cc-deepbody">
+          <p>Every skill is also a slash command &mdash; the folder name becomes the command. The <span class="cc-mono">write</span> skill is <span class="cc-mono">/write</span>. You can let Claude pick the skill automatically, or call it directly by name.</p>
+          <p>Whatever you type after the command <b>fills in the blank</b>: <span class="cc-mono">/follow-up John about the proposal</span> becomes "write a follow-up for John about the proposal." There are also a few built-ins worth knowing: <span class="cc-mono">/clear</span> (fresh start), <span class="cc-mono">/compact</span> (free up room), <span class="cc-mono">/memory</span> (edit what it remembers), <span class="cc-mono">/init</span> (set up CLAUDE.md).</p>
+        </div>
+      </details>
     </div>
   </section>
+
+  <h2 id="lifecycle">How it all fits together</h2>
+  <p>One prompt sets the whole worker in motion &mdash; every part you just met plays its role, in order:</p>
+  <div class="cc-flow">
+    <div class="cc-flow-step"><div><b>Session starts</b> — it reads your CLAUDE.md (memory + map + rules).</div></div>
+    <div class="cc-flow-step"><div><b>You give a prompt</b> — routing picks the right skill for the job.</div></div>
+    <div class="cc-flow-step"><div><b>The loop runs</b> — gather &rarr; act &rarr; verify, asking permission before anything risky.</div></div>
+    <div class="cc-flow-step"><div><b>Helpers if needed</b> — it sends agents off to do self-contained work and report back.</div></div>
+    <div class="cc-flow-step"><div><b>The harness / hooks check it</b> — an automatic quality gate before you ever see the result.</div></div>
+    <div class="cc-flow-step"><div><b>Done</b> — you get the finished work, not a play-by-play.</div></div>
+  </div>
+  <p style="font-size:14px;color:var(--text-300)"><b>The one-liner:</b> Memory = what it knows · Skills = what it does · Hooks &amp; the harness = what happens before and after.</p>
+
+  <h2 id="cheatsheet">Cheat sheet &amp; best practices</h2>
+  <p>The whole worker at a glance, then the three habits that make it dramatically better.</p>
+  <table class="cc-tbl">
+    <thead><tr><th>Part</th><th>What it does</th><th>Lives in</th></tr></thead>
+    <tbody>
+      <tr><td><b>🧠 Memory</b></td><td>What it knows about your business</td><td><span class="cc-mono">CLAUDE.md</span> · <span class="cc-mono">MEMORY.md</span></td></tr>
+      <tr><td><b>🗺️ Routing</b></td><td>Which skill to use, where things live</td><td><span class="cc-mono">CLAUDE.md</span></td></tr>
+      <tr><td><b>🛠️ Skills</b></td><td>Tasks it does the same way every time</td><td><span class="cc-mono">.claude/skills/</span></td></tr>
+      <tr><td><b>🪢 Harness</b></td><td>Automatic checks that keep it reliable</td><td>scripts + reviewers</td></tr>
+      <tr><td><b>📡 Connections</b></td><td>Reaches your tools (Notion, Gmail…)</td><td><span class="cc-mono">.mcp.json</span></td></tr>
+      <tr><td><b>🤖 Agents</b></td><td>Helpers that work on their own</td><td><span class="cc-mono">.claude/agents/</span></td></tr>
+      <tr><td><b>⚡ Hooks</b></td><td>Automatic reactions to events</td><td><span class="cc-mono">.claude/</span> settings</td></tr>
+      <tr><td><b>🔔 Commands</b></td><td>One-word shortcuts &amp; schedules</td><td><span class="cc-mono">/your-skill</span></td></tr>
+    </tbody>
+  </table>
+  <div class="cc-bp"><h4>1. Give it a way to check its own work</h4><p>The single highest-leverage habit. "Write the report" is vague; "write the report, then re-read it against these 3 rules and fix anything that fails" gives it a target to verify against. It performs dramatically better when it can grade itself.</p></div>
+  <div class="cc-bp"><h4>2. Explore → Plan → Code → Commit</h4><p>For anything bigger than a one-liner, let it look around and propose a plan before it acts. (In the editor, <span class="cc-mono">Shift+Tab</span> toggles read-only "plan" mode.) You approve the plan, then it executes.</p></div>
+  <div class="cc-bp"><h4>3. Be specific upfront</h4><p>"Fix the login bug" wanders. "Checkout breaks for expired cards — check the payments folder, write a failing test first, then fix it" lands. A minute of specifics saves three rounds of correction.</p></div>
+  <details class="cc-deep" style="margin-top:14px"><summary>Common mistakes (and the fix)</summary>
+    <div class="cc-deepbody">
+      <ul>
+        <li><b>The kitchen-sink session</b> &mdash; mixing unrelated tasks in one chat muddies its memory. Run <span class="cc-mono">/clear</span> between different jobs.</li>
+        <li><b>Correcting over and over</b> &mdash; after two failed corrections, stop. Run <span class="cc-mono">/clear</span> and rewrite the prompt with what you learned.</li>
+        <li><b>An over-stuffed CLAUDE.md</b> &mdash; more isn't better; it dilutes attention. Keep it lean and push detail into reference files.</li>
+      </ul>
+    </div>
+  </details>
 
   <div class="cc-cta">
     <h3>That's the whole worker.</h3>

@@ -107,6 +107,7 @@ window.CLO_LESSON_INDEX = [
   { page: 'claude-code-101', label: 'Claude Code 101', href: 'clo-course/claude-code-101.html', lessons: [
     { id: 'anatomy', group: 'Overview', name: 'The AI Employee (anatomy)' },
     { id: 'big-idea', group: 'Overview', name: 'You employ it, not chat with it' },
+    { id: 'how-it-thinks', group: 'Overview', name: 'How it thinks — the loop & permissions' },
     { id: 'memory', group: 'The Parts', name: 'Memory — the brain' },
     { id: 'routing', group: 'The Parts', name: 'Routing — the map' },
     { id: 'skills', group: 'The Parts', name: 'Skills — the tools' },
@@ -114,7 +115,9 @@ window.CLO_LESSON_INDEX = [
     { id: 'connections', group: 'The Parts', name: 'Connections — MCP' },
     { id: 'agents', group: 'The Parts', name: 'Agents — the helpers' },
     { id: 'hooks', group: 'The Parts', name: 'Hooks — reflexes' },
-    { id: 'commands', group: 'The Parts', name: 'Commands & Routines' }
+    { id: 'commands', group: 'The Parts', name: 'Commands & Routines' },
+    { id: 'lifecycle', group: 'The Whole Picture', name: 'How it all fits together' },
+    { id: 'cheatsheet', group: 'The Whole Picture', name: 'Cheat sheet & best practices' }
   ]},
   { page: 'meta-skill', label: 'Skill Systems', href: 'meta-create-skill/index.html', lessons: [
     { id: 'welcome', group: 'Orientation', name: "Welcome & What You'll Build" },
