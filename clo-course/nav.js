@@ -24,7 +24,8 @@ window.CLO_PRODUCTS = {
     nav: [
       { group: 'Get Started', items: [
         { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
-        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access.html', keywords: ['install','setup','claude code','plugin','license','activate','skillstack','onboard','marketplace','getting started','first steps'] }
+        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access.html', keywords: ['install','setup','claude code','plugin','license','activate','skillstack','onboard','marketplace','getting started','first steps'] },
+        { label: 'Roadmap', page: 'roadmap', href: 'clo-course/ai-employee-roadmap.html', keywords: ['roadmap','whats next','next step','journey','path','harness','agent','command','routine','what to build next','continue building','ai employee roadmap'] }
       ]},
       { group: 'Courses', items: [
         { label: 'Business X-Ray', page: 'business-x-ray', href: 'clo-course/business-x-ray.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','funnel','swimlanes','process','assets','asset explorer','score','operating system','digital assets','map my business','where to start'] },
@@ -40,7 +41,7 @@ window.CLO_PRODUCTS = {
         { label: 'YouTube', href: 'clo-course/skill-library.html#youtube', keywords: ['youtube','video','titles','thumbnails','hooks','scripts','channel'] },
         { label: 'Carousel', href: 'clo-course/skill-library.html#carousel', keywords: ['carousel','slides','instagram','visual','svg','charts'] },
         { label: 'Copywriter', href: 'clo-course/skill-library.html#copywriter', keywords: ['copywriter','campaign','offer','sales','emails','vsl','bullets'] },
-        { label: 'Roadmap', page: 'roadmap', href: 'clo-course/roadmap.html', keywords: ['release','status','planned','in progress','request','vote','upcoming','feature request','whats next','coming soon'] }
+        { label: 'Skill Releases', page: 'skill-releases', href: 'clo-course/skill-releases.html', keywords: ['release','status','planned','in progress','request','vote','upcoming','feature request','coming soon','skill roadmap'] }
       ]}
     ]
   },
@@ -63,7 +64,8 @@ window.CLO_PRODUCTS = {
     nav: [
       { group: 'Get Started', items: [
         { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
-        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','plugin','license','activate','skillstack','onboard','getting started','first steps'] }
+        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','plugin','license','activate','skillstack','onboard','getting started','first steps'] },
+        { label: 'Roadmap', page: 'roadmap', href: 'clo-course/ai-employee-roadmap.html', keywords: ['roadmap','whats next','next step','journey','path','harness','agent','command','routine','what to build next','continue building','ai employee roadmap'] }
       ]},
       { group: 'Courses', items: [
         { label: 'Claude Code 101', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['fundamentals','basics','tools','skills','agents','hooks','mcp','terminal','commands','subagents'] },

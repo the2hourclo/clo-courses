@@ -3,60 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skill Roadmap — Wiki</title>
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="shell.css">
-<style>
-/* roadmap-only components (use shared tokens via aliases) */
-.rm-stats{display:flex;gap:16px;margin:var(--sp-5) 0 var(--sp-6);flex-wrap:wrap}
-.rm-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 24px;min-width:140px;text-align:center}
-.rm-stat-num{font-size:28px;font-weight:700;color:var(--accent);line-height:1}
-.rm-stat-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);margin-top:4px}
-.rm-stat.released .rm-stat-num{color:#22c55e}
-.rm-stat.progress .rm-stat-num{color:#f59e0b}
-.rm-stat.planned .rm-stat-num{color:#3b82f6}
-.rm-embed-head{display:flex;align-items:center;justify-content:space-between;margin:var(--sp-6) 0 var(--sp-3)}
-.rm-embed-link{font-size:13px;color:var(--accent);text-decoration:none}
-.rm-embed-link:hover{opacity:.8}
-.rm-embed{border:1px solid var(--border-2);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface)}
-.rm-embed iframe{width:100%;height:600px;border:none;display:block;filter:invert(1) hue-rotate(180deg);-webkit-filter:invert(1) hue-rotate(180deg)}
-.rm-request{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;margin-top:var(--sp-6);text-align:center}
-.rm-request h3{margin-top:0}
-.rm-request p{margin-bottom:var(--sp-4)}
-@media(max-width:640px){.rm-embed iframe{height:480px}}
-</style>
+<title>Skill Releases — Wiki</title>
+<link rel="canonical" href="skill-releases.html">
+<meta http-equiv="refresh" content="0; url=skill-releases.html">
+<script>location.replace('skill-releases.html' + location.search + location.hash);</script>
 </head>
-<body hidden data-page="roadmap">
-
-<div id="doc-content">
-  <h1>Skill Roadmap</h1>
-  <p>See what skills are live, what's being built, and what's planned. Vote on what matters most to you.</p>
-
-  <div class="rm-stats">
-    <div class="rm-stat released"><div class="rm-stat-num">4</div><div class="rm-stat-label">Released</div></div>
-    <div class="rm-stat progress"><div class="rm-stat-num">1</div><div class="rm-stat-label">In Progress</div></div>
-    <div class="rm-stat planned"><div class="rm-stat-num">4</div><div class="rm-stat-label">Planned</div></div>
-  </div>
-
-  <h2>Full roadmap</h2>
-  <div class="rm-embed-head">
-    <span></span>
-    <a href="https://the2hourman.notion.site/93c0aa14308f4da1aa51cb59b24ffd24" target="_blank" class="rm-embed-link">Open in Notion →</a>
-  </div>
-  <div class="rm-embed">
-    <iframe src="https://the2hourman.notion.site/ebd/93c0aa14308f4da1aa51cb59b24ffd24?v=31c4289667b880d8a44f000c74ac3cb0" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
-  </div>
-
-  <h2>Request a skill</h2>
-  <div class="rm-request">
-    <h3>Want a skill that doesn't exist yet?</h3>
-    <p>Tell us what you need. The most requested skills get built first.</p>
-    <a href="https://the2hourman.notion.site/93c0aa14308f4da1aa51cb59b24ffd24" target="_blank" class="btn btn-primary">Submit a Request →</a>
-  </div>
-</div>
-
-<script src="nav.js"></script>
-<script src="toc.js"></script>
-<script src="shell.js"></script>
+<body>
+<p>The skill-release roadmap moved to <a href="skill-releases.html">Skill Releases</a>. Looking for your build path? See the <a href="ai-employee-roadmap.html">AI Employee Roadmap</a>.</p>
 </body>
 </html>

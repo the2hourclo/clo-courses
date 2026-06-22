@@ -3,289 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The AI Employee Roadmap — What to Build Next</title>
-<meta name="description" content="Your step-by-step path after onboarding: take each AI Employee from working to reliable, connected, and automatic. Plus copy-paste starter prompts.">
+<title>The AI Employee Roadmap — Wiki</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="shell.css">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0c0d0c;--surface:#131413;--surface-2:#191a19;--surface-3:#202220;
-  --border:#1e201e;--border-2:#2a2c2a;
-  --text:#e7e9e4;--text-muted:#9ea3a0;--text-dim:#5c605c;
-  --accent:#79EA20;--accent-dim:rgba(121,234,32,.08);--accent-dim-2:rgba(121,234,32,.14);
-  --accent-border:rgba(121,234,32,.35);--accent-text:#bff58a;
-  --blue:#5b9bff;--blue-bg:rgba(91,155,255,.1);
-  --orange:#f5a623;--orange-bg:rgba(245,166,35,.1);
-  --green:#4ade80;--green-bg:rgba(74,222,128,.1);
-  --radius:9px;--radius-lg:14px;
-  --font-display:'Bricolage Grotesque',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  --font-body:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  --font-mono:'SF Mono','Monaco','Consolas',monospace;
-}
-html{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
-body{min-height:100vh;background:radial-gradient(900px 500px at 50% -200px,rgba(121,234,32,.07),transparent 70%),var(--bg)}
-.wrap{padding:0 20px 64px}
-.container{max-width:760px;margin:0 auto}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-code{font-family:var(--font-mono);font-size:.9em;background:var(--surface-2);border:1px solid var(--border-2);border-radius:4px;padding:1px 6px;color:var(--accent-text)}
-strong{font-weight:700}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.rise{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
-
-/* HERO */
-.hero{text-align:center;padding:48px 0 8px}
-.hero .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);padding:5px 13px;border-radius:30px;margin-bottom:18px}
-.hero h1{font-family:var(--font-display);font-size:40px;font-weight:700;letter-spacing:-1px;line-height:1.08;margin-bottom:14px}
-.hero .lead{font-size:16.5px;color:var(--text-muted);max-width:600px;margin:0 auto;line-height:1.6}
-@media(max-width:640px){.hero h1{font-size:30px}.hero{padding:34px 0 6px}}
-
-/* CALLOUTS */
-.callout{padding:14px 17px;border-radius:var(--radius);margin:22px 0;font-size:14px;line-height:1.6;border-left:3px solid}
-.callout strong{color:inherit}
-.callout-tip{background:var(--green-bg);border-color:var(--green);color:#bbf3cf}
-.callout-info{background:var(--blue-bg);border-color:var(--blue);color:#c3d8ff}
-
-/* SECTION HEADERS */
-.sec{margin:38px 0 16px}
-.sec h2{font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:-.4px;margin-bottom:5px}
-.sec p{font-size:14px;color:var(--text-muted)}
+/* roadmap-only components — aer- namespaced, built on shared tokens */
+.aer-lead{font-size:var(--t-body);color:var(--text-200);max-width:640px}
+.aer-say{font-family:var(--font-mono);font-size:13px;color:var(--accent)}
 
 /* PATH TIMELINE */
-.path{position:relative;margin-left:4px;padding-left:30px}
-.path::before{content:'';position:absolute;left:14px;top:8px;bottom:24px;width:2px;background:linear-gradient(var(--accent-border),var(--border-2))}
-.stage{position:relative;margin-bottom:12px}
-.stage-dot{position:absolute;left:-30px;top:14px;width:30px;height:30px;border-radius:9px;background:var(--surface-3);border:1px solid var(--border-2);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:14px;z-index:2}
-.stage.done .stage-dot{background:var(--accent);border-color:var(--accent);color:#0a0a0a}
-.stage.loop .stage-dot{background:var(--accent-dim-2);border-color:var(--accent-border);color:var(--accent);font-size:16px}
-.stage-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:15px 18px}
-.stage.done .stage-card{background:var(--surface-2);opacity:.78}
-.stage-t{font-family:var(--font-display);font-size:16.5px;font-weight:700;letter-spacing:-.2px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.gloss{font-weight:400;font-size:13px;color:var(--text-dim)}
-.badge-done{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);background:var(--accent-dim-2);border:1px solid var(--accent-border);padding:2px 8px;border-radius:20px}
-.stage-sig{font-size:13.5px;color:var(--text-muted);margin-top:6px}
-.stage-sig b{color:var(--text)}
-.stage-say{font-size:12.5px;color:var(--text-dim);margin-top:6px;font-family:var(--font-mono)}
-.stage-say b{color:var(--accent-text);font-weight:700}
+.aer-path{position:relative;margin:var(--sp-5) 0;padding-left:30px}
+.aer-path::before{content:'';position:absolute;left:14px;top:8px;bottom:24px;width:2px;background:linear-gradient(var(--accent-border),var(--border-300))}
+.aer-stage{position:relative;margin-bottom:12px}
+.aer-dot{position:absolute;left:-30px;top:14px;width:30px;height:30px;border-radius:9px;background:var(--bg-000);border:1px solid var(--border-200);color:var(--text-300);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;z-index:2}
+.aer-stage.done .aer-dot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.aer-stage.loop .aer-dot{background:var(--accent-dim-2);border-color:var(--accent-border);color:var(--accent);font-size:16px}
+.aer-card{background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius);padding:15px 18px}
+.aer-stage.done .aer-card{background:var(--bg-200);opacity:.8}
+.aer-t{font-weight:700;font-size:16.5px;letter-spacing:-.2px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;color:var(--text-100)}
+.aer-gloss{font-weight:400;font-size:13px;color:var(--text-500)}
+.aer-badge{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);background:var(--accent-dim-2);border:1px solid var(--accent-border);padding:2px 8px;border-radius:20px}
+.aer-sig{font-size:13.5px;color:var(--text-300);margin-top:6px}
+.aer-sig b{color:var(--text-100)}
+.aer-cue{font-size:12.5px;color:var(--text-500);margin-top:6px;font-family:var(--font-mono)}
+.aer-cue b{color:var(--accent);font-weight:700}
 
-/* WHEN DO I — Q&A grid */
-.qa{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-@media(max-width:640px){.qa{grid-template-columns:1fr}}
-.qa-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
-.qa-q{font-family:var(--font-display);font-size:14.5px;font-weight:700;color:var(--accent-text);margin-bottom:5px}
-.qa-a{font-size:13.5px;color:var(--text-muted);line-height:1.55}
-.qa-a b{color:var(--text)}
+/* WHEN DO I — grid */
+.aer-qa{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:var(--sp-5) 0}
+@media(max-width:640px){.aer-qa{grid-template-columns:1fr}}
+.aer-qa-card{background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius);padding:14px 16px}
+.aer-q{font-weight:700;font-size:14.5px;color:var(--accent);margin-bottom:5px}
+.aer-a{font-size:13.5px;color:var(--text-300);line-height:1.55}
+.aer-a b{color:var(--text-100)}
 
 /* PROMPT PACKS */
-.tabs{display:flex;gap:5px;flex-wrap:wrap;background:var(--surface-2);border:1px solid var(--border-2);border-radius:12px;padding:5px;margin-bottom:14px}
-.tab{appearance:none;border:0;background:transparent;color:var(--text-muted);font-family:var(--font-body);font-size:13px;font-weight:700;padding:9px 14px;border-radius:8px;cursor:pointer;transition:all .15s;flex:1;white-space:nowrap}
-.tab:hover{color:var(--text)}
-.tab.active{background:var(--accent);color:#0a0a0a}
-.pack{display:none}.pack.active{display:block}
-.prompt{position:relative;background:#070807;border:1px solid var(--border-2);border-radius:var(--radius);margin-bottom:10px}
-.prompt p{font-family:var(--font-mono);font-size:12.5px;line-height:1.6;color:var(--text);padding:15px 96px 15px 16px;margin:0}
-.copy{position:absolute;top:10px;right:10px;font-size:11px;font-weight:800;padding:7px 13px;border-radius:7px;border:1px solid var(--accent-border);background:var(--accent);color:#0a0a0a;cursor:pointer;transition:all .15s;font-family:var(--font-body)}
-.copy:hover{opacity:.9}
-.copy.copied{background:#070807;color:var(--accent);border-color:var(--accent)}
-.pack-note{font-size:12.5px;color:var(--text-dim);margin:2px 0 0}
-
-/* FOOTER */
-.foot{text-align:center;margin-top:44px;padding-top:24px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim)}
-.foot b{color:var(--text-muted)}
+.aer-tabs{display:flex;gap:5px;flex-wrap:wrap;background:var(--bg-200);border:1px solid var(--border-200);border-radius:12px;padding:5px;margin:var(--sp-5) 0 14px}
+.aer-tab{appearance:none;border:0;background:transparent;color:var(--text-300);font-family:var(--font-body);font-size:13px;font-weight:700;padding:9px 14px;border-radius:8px;cursor:pointer;transition:all .15s;flex:1;white-space:nowrap}
+.aer-tab:hover{color:var(--text-100)}
+.aer-tab.active{background:var(--accent);color:var(--accent-ink)}
+.aer-pack{display:none}.aer-pack.active{display:block}
+.aer-prompt{position:relative;background:var(--bg-code);border:1px solid var(--border-200);border-radius:var(--radius);margin-bottom:10px}
+.aer-prompt p{font-family:var(--font-mono);font-size:12.5px;line-height:1.6;color:var(--text-100);padding:15px 96px 15px 16px;margin:0}
+.aer-copy{position:absolute;top:10px;right:10px;font-size:11px;font-weight:800;padding:7px 13px;border-radius:7px;border:1px solid var(--accent-border);background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:all .15s;font-family:var(--font-body)}
+.aer-copy:hover{background:var(--accent-hover)}
+.aer-copy.copied{background:var(--bg-code);color:var(--accent);border-color:var(--accent)}
+.aer-note{font-size:12.5px;color:var(--text-500);margin:2px 0 0}
 </style>
 </head>
-<body>
-<div class="wrap"><div class="container">
+<body hidden data-page="roadmap">
 
-  <header class="hero rise">
-    <span class="eyebrow">AI Employee Builder</span>
-    <h1>The AI Employee Roadmap</h1>
-    <p class="lead">You're past setup and you've built your first skill. Here's the whole path from here — you only ever do the <em>next</em> step. This page is the map; Claude walks you down it.</p>
-  </header>
+<div id="doc-content">
+  <h1>The AI Employee Roadmap</h1>
+  <p class="aer-lead">You're past setup and you've built your first skill. Here's the whole path from here &mdash; you only ever do the <em>next</em> step. This page is the map; Claude walks you down it.</p>
 
-  <div class="callout callout-tip rise d1">
-    💬 <strong>You never have to plan this.</strong> In Claude Code, just say <code>what's next</code> — the roadmap skill shows where you are and sets up your next move automatically. This page is here for when you want to see the whole path or grab a starter prompt.
+  <div class="callout callout--tip">
+    <svg class="callout-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+    <div>You never have to plan this. In Claude Code, just say <code>what's next</code> &mdash; the roadmap skill shows where you are and sets up your next move. This page is here for when you want to see the whole path or grab a starter prompt.</div>
   </div>
 
-  <!-- THE PATH -->
-  <div class="sec rise d2">
-    <h2>The path</h2>
-    <p>Seven stages. The first two happen during onboarding. You own the rest — and they're not strictly in order. Jump to whichever one matches what you're hitting right now.</p>
-  </div>
+  <h2 id="path">The path</h2>
+  <p>Seven stages. The first two happen during onboarding. You own the rest &mdash; and they're not strictly in order. Jump to whichever one matches what you're hitting right now.</p>
 
-  <div class="path">
-
-    <div class="stage done">
-      <div class="stage-dot">✓</div>
-      <div class="stage-card">
-        <div class="stage-t">Map your business <span class="badge-done">onboarding</span></div>
-        <div class="stage-sig">You found the one thing worth automating first.</div>
+  <div class="aer-path">
+    <div class="aer-stage done">
+      <div class="aer-dot">&#10003;</div>
+      <div class="aer-card">
+        <div class="aer-t">Map your business <span class="aer-badge">onboarding</span></div>
+        <div class="aer-sig">You found the one thing worth automating first.</div>
       </div>
     </div>
-
-    <div class="stage done">
-      <div class="stage-dot">✓</div>
-      <div class="stage-card">
-        <div class="stage-t">Build your first AI employee <span class="badge-done">onboarding</span></div>
-        <div class="stage-sig">A skill, a digital asset, or a connection — whatever the map pointed at.</div>
+    <div class="aer-stage done">
+      <div class="aer-dot">&#10003;</div>
+      <div class="aer-card">
+        <div class="aer-t">Build your first AI employee <span class="aer-badge">onboarding</span></div>
+        <div class="aer-sig">A skill, a digital asset, or a connection &mdash; whatever the map pointed at.</div>
       </div>
     </div>
-
-    <div class="stage">
-      <div class="stage-dot">3</div>
-      <div class="stage-card">
-        <div class="stage-t">Make it reliable <span class="gloss">— add a harness</span></div>
-        <div class="stage-sig"><b>Signal:</b> your skill works, but its output wanders, or it keeps ignoring one of its own rules. A <b>harness</b> is an automatic check that runs every time, so it can't quietly drift.</div>
-        <div class="stage-say">say <b>"harden this skill"</b> or <b>"add a harness"</b></div>
+    <div class="aer-stage">
+      <div class="aer-dot">3</div>
+      <div class="aer-card">
+        <div class="aer-t">Make it reliable <span class="aer-gloss">&mdash; add a harness</span></div>
+        <div class="aer-sig"><b>Signal:</b> your skill works, but its output wanders, or it keeps ignoring one of its own rules. A <b>harness</b> is an automatic check that runs every time, so it can't quietly drift.</div>
+        <div class="aer-cue">say <b>"harden this skill"</b> or <b>"add a harness"</b></div>
       </div>
     </div>
-
-    <div class="stage">
-      <div class="stage-dot">4</div>
-      <div class="stage-card">
-        <div class="stage-t">Connect skills into a system</div>
-        <div class="stage-sig"><b>Signal:</b> one skill needs another to run first, and you're stringing steps into one operation (intake → work → check → hand off).</div>
-        <div class="stage-say">say <b>"build a skill system for this"</b></div>
+    <div class="aer-stage">
+      <div class="aer-dot">4</div>
+      <div class="aer-card">
+        <div class="aer-t">Connect skills into a system</div>
+        <div class="aer-sig"><b>Signal:</b> one skill needs another to run first, and you're stringing steps into one operation (intake &rarr; work &rarr; check &rarr; hand off).</div>
+        <div class="aer-cue">say <b>"build a skill system for this"</b></div>
       </div>
     </div>
-
-    <div class="stage">
-      <div class="stage-dot">5</div>
-      <div class="stage-card">
-        <div class="stage-t">Hand work to an agent</div>
-        <div class="stage-sig"><b>Signal:</b> the job should run in the background, or in parallel, or "go do it and report back" — not step-by-step with you watching.</div>
-        <div class="stage-say">say <b>"create an agent for this"</b></div>
+    <div class="aer-stage">
+      <div class="aer-dot">5</div>
+      <div class="aer-card">
+        <div class="aer-t">Hand work to an agent</div>
+        <div class="aer-sig"><b>Signal:</b> the job should run in the background, or in parallel, or "go do it and report back" &mdash; not step-by-step with you watching.</div>
+        <div class="aer-cue">say <b>"create an agent for this"</b></div>
       </div>
     </div>
-
-    <div class="stage">
-      <div class="stage-dot">6</div>
-      <div class="stage-card">
-        <div class="stage-t">Make a shortcut <span class="gloss">— a command</span></div>
-        <div class="stage-sig"><b>Signal:</b> you run the same thing the same way, a lot, and want one word for it instead of re-explaining.</div>
-        <div class="stage-say">say <b>"make a command for this"</b></div>
+    <div class="aer-stage">
+      <div class="aer-dot">6</div>
+      <div class="aer-card">
+        <div class="aer-t">Make a shortcut <span class="aer-gloss">&mdash; a command</span></div>
+        <div class="aer-sig"><b>Signal:</b> you run the same thing the same way, a lot, and want one word for it instead of re-explaining.</div>
+        <div class="aer-cue">say <b>"make a command for this"</b></div>
       </div>
     </div>
-
-    <div class="stage">
-      <div class="stage-dot">7</div>
-      <div class="stage-card">
-        <div class="stage-t">Put it on autopilot <span class="gloss">— hooks, loops, schedules</span></div>
-        <div class="stage-sig"><b>Signal:</b> it should fire automatically on an event (after every save), or run on a schedule (every Monday) — without you starting it.</div>
-        <div class="stage-say">say <b>"create a hook for this"</b> or <b>"run this on a schedule"</b></div>
+    <div class="aer-stage">
+      <div class="aer-dot">7</div>
+      <div class="aer-card">
+        <div class="aer-t">Put it on autopilot <span class="aer-gloss">&mdash; hooks, loops, schedules</span></div>
+        <div class="aer-sig"><b>Signal:</b> it should fire automatically on an event (after every save), or run on a schedule (every Monday) &mdash; without you starting it.</div>
+        <div class="aer-cue">say <b>"create a hook for this"</b> or <b>"run this on a schedule"</b></div>
       </div>
     </div>
-
-    <div class="stage loop">
-      <div class="stage-dot">↻</div>
-      <div class="stage-card">
-        <div class="stage-t">Build the next one</div>
-        <div class="stage-sig">When this employee is reliable, connected, and automatic — map the next bottleneck and build the next one. Growth here is <b>more employees</b>, each taken up this same ladder.</div>
-        <div class="stage-say">say <b>"what's next"</b> or <b>"map my business"</b></div>
+    <div class="aer-stage loop">
+      <div class="aer-dot">&#8635;</div>
+      <div class="aer-card">
+        <div class="aer-t">Build the next one</div>
+        <div class="aer-sig">When this employee is reliable, connected, and automatic &mdash; map the next bottleneck and build the next one. Growth here is <b>more employees</b>, each taken up this same ladder.</div>
+        <div class="aer-cue">say <b>"what's next"</b> or <b>"map my business"</b></div>
       </div>
     </div>
-
   </div>
 
-  <!-- WHEN DO I -->
-  <div class="sec rise">
-    <h2>"When do I…"</h2>
-    <p>The quick gut-check for which tool fits. (Claude makes these calls with you — this is just so the words make sense as you go.)</p>
+  <h2 id="when">"When do I&hellip;"</h2>
+  <p>The quick gut-check for which tool fits. (Claude makes these calls with you &mdash; this is just so the words make sense as you go.)</p>
+
+  <div class="aer-qa">
+    <div class="aer-qa-card"><div class="aer-q">&hellip;split a skill?</div><div class="aer-a">When it's trying to do <b>two jobs</b> and keeps forgetting one. Two jobs &rarr; two skills that hand off to each other.</div></div>
+    <div class="aer-qa-card"><div class="aer-q">&hellip;add a harness?</div><div class="aer-a">When a skill <b>works but drifts</b>, or breaks its own rule. A harness is an automatic check that catches it every time &mdash; stronger than adding more instructions.</div></div>
+    <div class="aer-qa-card"><div class="aer-q">&hellip;use an agent?</div><div class="aer-a">When the work should run <b>in the background or in parallel</b> &mdash; "go do this and report back," not walked through with you.</div></div>
+    <div class="aer-qa-card"><div class="aer-q">&hellip;make a command?</div><div class="aer-a">When you do the <b>same thing the same way, often</b>, and want a one-word shortcut for it.</div></div>
+    <div class="aer-qa-card"><div class="aer-q">&hellip;wire a routine?</div><div class="aer-a">When it should run <b>on a schedule</b> &mdash; nightly, weekly &mdash; or fire on an event, with no one starting it.</div></div>
+    <div class="aer-qa-card"><div class="aer-q">&hellip;just build the next one?</div><div class="aer-a">When the current employee is solid on all of the above. <b>Map the next bottleneck</b> and repeat the ladder.</div></div>
   </div>
 
-  <div class="qa">
-    <div class="qa-card">
-      <div class="qa-q">…split a skill?</div>
-      <div class="qa-a">When it's trying to do <b>two jobs</b> and keeps forgetting one. Two jobs → two skills that hand off to each other.</div>
-    </div>
-    <div class="qa-card">
-      <div class="qa-q">…add a harness?</div>
-      <div class="qa-a">When a skill <b>works but drifts</b>, or breaks its own rule. A harness is an automatic check that catches it every time — stronger than adding more instructions.</div>
-    </div>
-    <div class="qa-card">
-      <div class="qa-q">…use an agent?</div>
-      <div class="qa-a">When the work should run <b>in the background or in parallel</b> — "go do this and report back," not walked through with you.</div>
-    </div>
-    <div class="qa-card">
-      <div class="qa-q">…make a command?</div>
-      <div class="qa-a">When you do the <b>same thing the same way, often</b>, and want a one-word shortcut for it.</div>
-    </div>
-    <div class="qa-card">
-      <div class="qa-q">…wire a routine?</div>
-      <div class="qa-a">When it should run <b>on a schedule</b> — nightly, weekly — or fire on an event, with no one starting it.</div>
-    </div>
-    <div class="qa-card">
-      <div class="qa-q">…just build the next one?</div>
-      <div class="qa-a">When the current employee is solid on all of the above. <b>Map the next bottleneck</b> and repeat the ladder.</div>
-    </div>
+  <h2 id="prompts">Starter prompts</h2>
+  <p>Don't start from a blank page. Pick your kind of work, copy a prompt, paste it into Claude Code, and it builds the skill with you. Tweak the wording to fit your business.</p>
+
+  <div class="aer-tabs" role="tablist">
+    <button class="aer-tab active" data-pack="content">Content &amp; marketing</button>
+    <button class="aer-tab" data-pack="sales">Sales</button>
+    <button class="aer-tab" data-pack="delivery">Client delivery</button>
+    <button class="aer-tab" data-pack="admin">Admin &amp; ops</button>
   </div>
 
-  <!-- PROMPT PACKS -->
-  <div class="sec rise">
-    <h2>Starter prompts</h2>
-    <p>Don't start from a blank page. Pick your kind of work, copy a prompt, paste it into Claude Code, and it builds the skill with you. Tweak the wording to fit your business.</p>
+  <div class="aer-pack active" data-pack="content">
+    <div class="aer-prompt"><p>Build me a skill that turns a YouTube transcript into a first-draft newsletter in my voice, with 3 subject-line options.</p><button class="aer-copy">Copy</button></div>
+    <div class="aer-prompt"><p>Build me a skill that repurposes one newsletter into a Twitter/X thread and a LinkedIn post, keeping my voice.</p><button class="aer-copy">Copy</button></div>
+    <div class="aer-prompt"><p>Build me a skill that takes a rough idea and returns 5 hooks, with the angle behind each one.</p><button class="aer-copy">Copy</button></div>
+    <p class="aer-note">After it's built, say <b>"harden this skill"</b> to add a voice check so the drafts stay on-brand.</p>
+  </div>
+  <div class="aer-pack" data-pack="sales">
+    <div class="aer-prompt"><p>Build me a skill that turns my sales-call notes into a proposal with scope, timeline, and 3 pricing options.</p><button class="aer-copy">Copy</button></div>
+    <div class="aer-prompt"><p>Build me a skill that drafts a follow-up email sequence after a sales call, using the prospect's stated goals.</p><button class="aer-copy">Copy</button></div>
+    <div class="aer-prompt"><p>Build me a skill that preps me for a sales call from the prospect's website and our past emails.</p><button class="aer-copy">Copy</button></div>
+    <p class="aer-note">Running this for every lead? Say <b>"make a command for this"</b> so it's one word.</p>
+  </div>
+  <div class="aer-pack" data-pack="delivery">
+    <div class="aer-prompt"><p>Build me a skill that turns a signed client into an onboarding checklist, a welcome email, and an intake form.</p><button class="aer-copy">Copy</button></div>
+    <div class="aer-prompt"><p>Build me a skill that writes a weekly client status update from my project notes.</p><button class="aer-copy">Copy</button></div>
+    <div class="aer-prompt"><p>Build me a skill that turns a finished project into a case-study draft and a testimonial request.</p><button class="aer-copy">Copy</button></div>
+    <p class="aer-note">Onboarding has several steps? Say <b>"build a skill system for this"</b> to chain them into one flow.</p>
+  </div>
+  <div class="aer-pack" data-pack="admin">
+    <div class="aer-prompt"><p>Build me a skill that turns my raw numbers into a monthly business report with the 3 things that moved.</p><button class="aer-copy">Copy</button></div>
+    <div class="aer-prompt"><p>Build me a skill that triages my inbox into reply-now / delegate / archive, with draft replies.</p><button class="aer-copy">Copy</button></div>
+    <div class="aer-prompt"><p>Build me a skill that turns a messy meeting transcript into decisions, action items with owners, and open questions.</p><button class="aer-copy">Copy</button></div>
+    <p class="aer-note">Want the report every month on its own? Say <b>"run this on a schedule"</b>.</p>
   </div>
 
-  <div class="tabs" role="tablist">
-    <button class="tab active" data-pack="content">Content &amp; marketing</button>
-    <button class="tab" data-pack="sales">Sales</button>
-    <button class="tab" data-pack="delivery">Client delivery</button>
-    <button class="tab" data-pack="admin">Admin &amp; ops</button>
+  <div class="callout callout--tip" style="margin-top:var(--sp-6)">
+    <svg class="callout-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    <div>Back in Claude Code, say <code>what's next</code> anytime to pick up where you left off.</div>
   </div>
+</div>
 
-  <div class="pack active" data-pack="content">
-    <div class="prompt"><p>Build me a skill that turns a YouTube transcript into a first-draft newsletter in my voice, with 3 subject-line options.</p><button class="copy">Copy</button></div>
-    <div class="prompt"><p>Build me a skill that repurposes one newsletter into a Twitter/X thread and a LinkedIn post, keeping my voice.</p><button class="copy">Copy</button></div>
-    <div class="prompt"><p>Build me a skill that takes a rough idea and returns 5 hooks, with the angle behind each one.</p><button class="copy">Copy</button></div>
-    <p class="pack-note">After it's built, say <b>"harden this skill"</b> to add a voice check so the drafts stay on-brand.</p>
-  </div>
-
-  <div class="pack" data-pack="sales">
-    <div class="prompt"><p>Build me a skill that turns my sales-call notes into a proposal with scope, timeline, and 3 pricing options.</p><button class="copy">Copy</button></div>
-    <div class="prompt"><p>Build me a skill that drafts a follow-up email sequence after a sales call, using the prospect's stated goals.</p><button class="copy">Copy</button></div>
-    <div class="prompt"><p>Build me a skill that preps me for a sales call from the prospect's website and our past emails.</p><button class="copy">Copy</button></div>
-    <p class="pack-note">Running this for every lead? Say <b>"make a command for this"</b> so it's one word.</p>
-  </div>
-
-  <div class="pack" data-pack="delivery">
-    <div class="prompt"><p>Build me a skill that turns a signed client into an onboarding checklist, a welcome email, and an intake form.</p><button class="copy">Copy</button></div>
-    <div class="prompt"><p>Build me a skill that writes a weekly client status update from my project notes.</p><button class="copy">Copy</button></div>
-    <div class="prompt"><p>Build me a skill that turns a finished project into a case-study draft and a testimonial request.</p><button class="copy">Copy</button></div>
-    <p class="pack-note">Onboarding has several steps? Say <b>"build a skill system for this"</b> to chain them into one flow.</p>
-  </div>
-
-  <div class="pack" data-pack="admin">
-    <div class="prompt"><p>Build me a skill that turns my raw numbers into a monthly business report with the 3 things that moved.</p><button class="copy">Copy</button></div>
-    <div class="prompt"><p>Build me a skill that triages my inbox into reply-now / delegate / archive, with draft replies.</p><button class="copy">Copy</button></div>
-    <div class="prompt"><p>Build me a skill that turns a messy meeting transcript into decisions, action items with owners, and open questions.</p><button class="copy">Copy</button></div>
-    <p class="pack-note">Want the report every month on its own? Say <b>"run this on a schedule"</b>.</p>
-  </div>
-
-  <div class="foot rise">
-    Back in Claude Code, say <b>"what's next"</b> anytime to pick up where you left off.
-  </div>
-
-</div></div>
-
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
 <script>
-// Tabs
-document.querySelectorAll('.tab').forEach(function(t){
-  t.addEventListener('click',function(){
-    var name=t.getAttribute('data-pack');
-    document.querySelectorAll('.tab').forEach(function(x){x.classList.toggle('active',x===t)});
-    document.querySelectorAll('.pack').forEach(function(p){p.classList.toggle('active',p.getAttribute('data-pack')===name)});
+(function(){
+  document.querySelectorAll('.aer-tab').forEach(function(t){
+    t.addEventListener('click',function(){
+      var name=t.getAttribute('data-pack');
+      document.querySelectorAll('.aer-tab').forEach(function(x){x.classList.toggle('active',x===t)});
+      document.querySelectorAll('.aer-pack').forEach(function(p){p.classList.toggle('active',p.getAttribute('data-pack')===name)});
+    });
   });
-});
-// Copy buttons
-document.querySelectorAll('.prompt .copy').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    var text=btn.parentElement.querySelector('p').innerText.trim();
-    var done=function(){btn.classList.add('copied');btn.textContent='Copied';setTimeout(function(){btn.classList.remove('copied');btn.textContent='Copy'},1600)};
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text);done()})}
-    else{fallback(text);done()}
+  document.querySelectorAll('.aer-prompt .aer-copy').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var text=btn.parentElement.querySelector('p').innerText.trim();
+      var done=function(){btn.classList.add('copied');btn.textContent='Copied';setTimeout(function(){btn.classList.remove('copied');btn.textContent='Copy'},1600)};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text);done()})}
+      else{fallback(text);done()}
+    });
   });
-});
-function fallback(text){var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}
+  function fallback(text){var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}
+})();
 </script>
 </body>
 </html>
