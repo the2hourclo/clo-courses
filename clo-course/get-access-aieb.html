@@ -371,15 +371,31 @@ Your standing rule: use the simplest path. Try terminal commands when they are a
    AIEB_MCP_URL=https://aieb-gated-mcp.vercel.app/mcp
    AIEB_ACTIVATE_URL=https://aieb-gated-mcp.vercel.app/activate
 
-4. ACTIVATE &amp; TEST - Start or reload Claude Code so the MCP proxy runs. On first use it should call the `/activate` endpoint, bind this computer to the license, store a local Lemon Squeezy instance ID, and then call the hosted MCP with both the license key and instance ID. Test by asking for one AIEB skill through the `get_skill` MCP tool, for example `meta-create-skill` with path `SKILL.md`.
+4. ACTIVATE &amp; TEST - Start or reload Claude Code so the MCP proxy runs. On first use it should call the `/activate` endpoint, bind this computer to the license, store a local Lemon Squeezy instance ID, and then call the hosted MCP with both the license key and instance ID. The plugin installs auto-routing skill stubs, so test by simply naming a skill - say "business x-ray" or "create a skill" - and confirm it routes, fetches its instructions from the MCP, and runs. (Low-level fallback: call the `get_skill` MCP tool for `meta-create-skill`, path `SKILL.md`.)
 
-5. CONFIRM - Confirm the local plugin is only a thin shell and that the paid instructions are fetched from the MCP server at runtime. If the license is invalid, expired, cancelled, or for the wrong product, tell me plainly and show the renewal/help response instead of trying to bypass it.
+5. CONFIRM - Confirm the local plugin holds only thin stubs (no paid skill bodies) and that the real instructions are fetched from the MCP server at runtime. If the license is invalid, expired, cancelled, or for the wrong product, tell me plainly and show the renewal/help response instead of trying to bypass it.
 
 Important: Do not use SkillStack for this AIEB install. SkillStack was the old delivery path. The current path is thin plugin shell + hosted LemonSqueezy-gated MCP.
 
 After each step, tell me whether it worked, or show the error and exactly how you're fixing it. Start now with step 1.</pre>
     </div>
     <div class="callout callout-tip" style="margin-top:14px">Rather do it by hand? Just keep following Steps&nbsp;2&ndash;6 below &mdash; each is short, and you can tick them off as you go.</div>
+  </div>
+
+  <!-- ═══════════════ CLAUDE COWORK (BETA) ═══════════════ -->
+  <div class="ai-card" id="cowork">
+    <div class="card-title">&#129309; Using Claude Cowork? <span class="pill">Beta</span></div>
+    <p>Cowork runs inside the Claude desktop app and <strong>shares Claude Code's plugin system</strong>, so AIEB should work there through the same plugin &mdash; no separate connection. We're still verifying this end to end, so treat the steps below as <strong>beta</strong> and tell us how it goes.</p>
+
+    <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Set up in Claude Code first.</strong> Do Steps&nbsp;2&ndash;5 below (or the one-paste prompt above) so the plugin is installed and your license is activated on this computer &mdash; that's what stores your access locally.</div></div>
+    <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Open the Claude desktop app</strong> and start a <strong>Cowork</strong> session.</div></div>
+    <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Trigger a skill by name</strong> &mdash; type one of these and watch whether it routes and runs:</div></div>
+    <div class="cmd-line indent"><span class="cmd-text">business x-ray</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+    <div class="cmd-line indent"><span class="cmd-text">create a skill</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+
+    <div class="callout callout-tip"><strong>Success looks like:</strong> the skill kicks in and Claude starts following its steps &mdash; it's pulling the real instructions from the MCP behind the scenes, exactly like it does in Claude Code.</div>
+    <div class="callout callout-warning"><strong>Don't use Cowork's &ldquo;Custom Connectors&rdquo; screen.</strong> It only supports OAuth sign-in, so it can't pass your license key &mdash; pasting the MCP URL there won't connect. Always go through the <strong>plugin</strong>, never the connector page.</div>
+    <div class="callout callout-info"><strong>Help us finish the beta:</strong> whether it worked or got stuck (and at which step), email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a> so we can lock the Cowork steps down.</div>
   </div>
 
   <!-- ═══════════════ STEP 2 ═══════════════ -->
@@ -453,9 +469,11 @@ After each step, tell me whether it worked, or show the error and exactly how yo
       <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
-      <p>Reload Claude Code, then ask it to fetch one AIEB skill through the MCP server. The first call activates this computer and stores a local instance ID.</p>
-      <div class="cmd-line"><span class="cmd-text">Use the aieb MCP get_skill tool to fetch meta-create-skill with path SKILL.md, then summarize what it returned.</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <div class="callout callout-tip"><strong>What success looks like:</strong> Claude can see the skill instructions, but your local plugin folder still contains only setup guidance and the proxy script.</div>
+      <p>Reload Claude Code, then just <strong>name a skill</strong> — the plugin's skills route on their own and pull their real instructions from the MCP. The first call activates this computer and stores a local instance ID.</p>
+      <div class="cmd-line"><span class="cmd-text">business x-ray</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+      <p style="margin-top:8px">Or try <code>create a skill</code> or <code>onboard me</code>. Each one loads from the hosted MCP after your license is checked — you don't call any tool by hand.</p>
+      <div class="callout callout-tip"><strong>What success looks like:</strong> the skill runs and Claude follows its instructions — yet your local plugin folder still holds only thin stubs and the proxy, never the paid skill bodies.</div>
+      <div class="callout callout-info"><strong>Want the low-level check instead?</strong> Ask: <em>"Use the aieb MCP get_skill tool to fetch meta-create-skill with path SKILL.md."</em> Same result, just the manual version.</div>
       <div class="callout callout-warning"><strong>If it fails:</strong> check that Node.js is installed, the license key is pasted correctly, and the key belongs to AI Employee Builders. Do not try to bypass the license gate.</div>
       <button class="done-btn" onclick="markDone(5)"><span class="dlabel">Mark step done</span></button>
     </div>
@@ -556,7 +574,8 @@ Check anything you can: Node.js version, whether the thin plugin is installed, w
     <details><summary>Why install a thin plugin plus MCP?</summary><div class="faq-body">The thin plugin gives Claude Code setup guidance and a local proxy. The paid instructions stay on the hosted MCP server, so your subscription can be checked at runtime and updates can ship without reinstalling the whole skill library.</div></details>
     <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Your license activates a limited number of machines according to the Lemon Squeezy license settings. The MCP binds each computer through a local activation instance so the key cannot be shared endlessly.</div></details>
     <details><summary>Why does it need Node.js?</summary><div class="faq-body">The local MCP proxy is a small Node.js script. It activates your license, stores the local instance ID, and forwards requests to the hosted MCP server.</div></details>
-    <details><summary>How do updates work?</summary><div class="faq-body">Most AIEB skill updates happen on the MCP server. You get the latest instructions automatically the next time Claude calls <code>get_skill</code>. You only reinstall the plugin when the local shell itself changes.</div></details>
+    <details><summary>How do updates work?</summary><div class="faq-body">Most AIEB skill updates happen on the MCP server. You get the latest instructions automatically the next time a skill runs &mdash; no reinstall, nothing to do. You only reinstall the plugin when the local shell itself changes (new setup behavior, proxy, or hooks), and the plugin will <strong>tell you</strong> when that's needed: it checks the server for the current shell version at startup and, if yours is behind, prompts you with the exact update commands.</div></details>
+    <details><summary>Can I use this in Claude Cowork?</summary><div class="faq-body"><strong>Beta &mdash; through the same plugin.</strong> Cowork runs in the Claude desktop app and shares Claude Code's plugin system, so once you've set AIEB up in Claude Code (Steps&nbsp;2&ndash;5), your skills and license connection should carry into Cowork. We're still verifying this end to end &mdash; follow the Cowork (Beta) steps above and let us know how it goes. <strong>Don't</strong> use Cowork's <em>Custom Connectors</em> screen to add the MCP URL &mdash; that path is OAuth-only and can't pass your license key. Always connect through the plugin.</div></details>
     <details><summary>What if my subscription lapses?</summary><div class="faq-body">Access pauses until you renew. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">Lemon Squeezy &rarr; My Orders</a>, then reload Claude Code and try the MCP call again.</div></details>
     <details><summary>I already use Claude Code &mdash; can I skip ahead?</summary><div class="faq-body">Yes. If the extension and Node.js are installed, tick Step&nbsp;1 and jump to <strong>Step&nbsp;3</strong>.</div></details>
     <details><summary>Is the Terminal method different from VS Code?</summary><div class="faq-body">Same result, same commands &mdash; just a different place to type them. The <strong>VS Code</strong> way is click-based and friendly; <strong>Terminal</strong> is for command-line folks. Use the toggle at the top to switch.</div></details>

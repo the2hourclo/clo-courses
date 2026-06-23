@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills — Wiki</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="cc-course.css">
+</head>
+<body hidden data-page="cc101-skills">
+
+<div id="doc-content">
+  <h1>Skills: teach it a job once</h1>
+  <p class="cc-lead">A skill is a job you've taught your AI Employee to do the same way every time, like draft a follow-up, write a proposal, or prep for a call. It's the single most useful thing you'll build, and it's just a text file.</p>
+
+  <section>
+    <h2 id="what" class="cc-h"><span class="cc-ico">🛠️</span> A skill is a playbook</h2>
+    <div class="cc-cbody">
+      <div class="cc-tile"><img src="kit/tile-skills.png" alt="Zoom on the robot's toolbelt of skills." loading="lazy"></div>
+      <p><b>What it is.</b> A skill is a plain text file called <span class="cc-mono">SKILL.md</span> with two parts. The first is a short bit of setup at the top, a name (which becomes its <code>/command</code>) and a description (which tells Claude when to reach for it). The second is your instructions for the job. The title says <b>when</b> to use it, the body says <b>how</b> to do it.</p>
+      <figure class="cc-viz"><img src="kit/cc-skill-playbook.png" alt="A SKILL.md shown as a two-page playbook: the left page is the setup (name, description, when to use, tools, voice), the right page is the body, the numbered steps and voice rules. The title says WHEN, the body says HOW." loading="lazy"></figure>
+      <p><b>Why you use it.</b> Instead of re-explaining the job every time, you say one phrase and it runs your exact process. You just built something most people think needs a developer.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="trigger" class="cc-h"><span class="cc-ico">⚡</span> How a skill gets used</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> There are two ways. The first is auto-loaded, where Claude notices your request matches a skill's description and loads it on its own. The second is direct, where you type its <code>/command</code>. A skill and a slash command are the same thing. The folder name <span class="cc-mono">.claude/skills/follow-up/</span> becomes <code>/follow-up</code>.</p>
+      <p><b>Why you use it.</b> Whatever you type after the command fills in the blank, so you can fire the same job with the details that matter today.</p>
+      <div class="cc-ba">
+        <div class="cc-ba-card before">
+          <div class="cc-ba-tag">Before</div>
+          <p><code>/follow-up</code></p>
+          <p>It has to stop and ask "who? about what?" before it can start.</p>
+        </div>
+        <div class="cc-ba-card after">
+          <div class="cc-ba-tag">After</div>
+          <p><code>/follow-up John about the proposal</code></p>
+          <p>It starts immediately, because you handed it the details up front.</p>
+        </div>
+      </div>
+      <p>A handful of built-ins ship with Claude Code and are worth knowing.</p>
+      <ul>
+        <li><span class="cc-mono">/clear</span> — a fresh start, like a new chat</li>
+        <li><span class="cc-mono">/compact</span> — free up room when a long session gets full</li>
+        <li><span class="cc-mono">/memory</span> — edit what it remembers about you</li>
+        <li><span class="cc-mono">/init</span> — set up your CLAUDE.md</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="build" class="cc-h"><span class="cc-ico">🔨</span> Build your first skill</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> Here's a worked example, a <code>/follow-up</code> skill that writes client emails in your voice. It grows in three stages, and each stage is already useful on its own.</p>
+      <div class="cc-flow">
+        <div class="cc-flow-step"><div><b>Stage 1, basic</b> — Create <span class="cc-mono">.claude/skills/follow-up/SKILL.md</span> with the name, the description, and simple instructions (ask for the key points, pick the tone, write a subject and body). It's already a working <code>/follow-up</code> command.</div></div>
+        <div class="cc-flow-step"><div><b>Stage 2, add your voice</b> — Add a <span class="cc-mono">references/brand-voice.md</span> with a few tone examples. Now the same command sounds like you, not like generic AI.</div></div>
+        <div class="cc-flow-step"><div><b>Stage 3, add workflows</b> — Add a <span class="cc-mono">workflows/</span> folder (welcome-email.md, follow-up.md). Now SKILL.md becomes a router that picks the right workflow for the job.</div></div>
+      </div>
+      <p><b>Why you use it.</b> You can start in five minutes with Stage 1, then layer on voice and workflows as you learn what it gets wrong. The skill gets better while you use it.</p>
+      <div class="cc-prompt">
+        <p>Create a skill called follow-up that drafts a follow-up email from my call notes, in my voice. Ask me for a few tone examples first.</p>
+        <button class="cc-copy">Copy</button>
+      </div>
+      <p class="cc-cue">Or just say: <b>"create a skill that…"</b></p>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="refine" class="cc-h"><span class="cc-ico">🔁</span> Refining is normal</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> Your first version rarely nails it, and that's expected. The loop is simple. You run it, look at what's off, fix it, then run it again. If the tone is wrong, add a voice example. If it's too generic, add a real sample. Three to five rounds is normal. You're training an employee, not writing code.</p>
+      <div class="cc-ba">
+        <div class="cc-ba-card before">
+          <div class="cc-ba-tag">Before · just instructions</div>
+          <p>"Hi John, thank you for your time today. I wanted to follow up regarding our conversation…"</p>
+          <p>Correct, but it could be from anyone.</p>
+        </div>
+        <div class="cc-ba-card after">
+          <div class="cc-ba-tag">After · plus a voice file</div>
+          <p>"John, great talking through the rollout. Next step, I'll send the draft by Thursday."</p>
+          <p>Same <code>/follow-up</code>, now it sounds like you.</p>
+        </div>
+      </div>
+      <details class="cc-deep"><summary>Go deeper: where skills live + the settings you can set</summary>
+        <div class="cc-deepbody">
+          <h4>Three places a skill can live</h4>
+          <ul>
+            <li><span class="cc-mono">~/.claude/skills/</span> — available in all your projects</li>
+            <li><span class="cc-mono">./.claude/skills/</span> — only this project</li>
+            <li>Bundled in a plugin, installed as a set and shared across machines</li>
+          </ul>
+          <h4>What the setup line at the top can also set</h4>
+          <p>Beyond the name and description, the setup at the top of SKILL.md can pin a few things.</p>
+          <ul>
+            <li>Which tools the skill is allowed to use</li>
+            <li>Whether Claude can auto-trigger it, or only you can with the command</li>
+            <li>Which model to run it on</li>
+          </ul>
+          <h4>Scaling the same skill across clients</h4>
+          <p>Keep one shared skill plus a small reference file per client (their data, their branding). Same process, different details, so you're never rebuilding the job for each new account.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="harness" class="cc-h"><span class="cc-ico">🪢</span> Make it reliable, add a harness</h2>
+    <div class="cc-cbody">
+      <div class="cc-tile"><img src="kit/tile-harness.png" alt="Zoom on the robot's belt, the harness that straps everything in place." loading="lazy"></div>
+      <p><b>What it is.</b> A new skill usually works, until one day the output wanders or it quietly forgets one of its own rules. The fix isn't to nag it with more instructions. It's a <b>harness</b>, an automatic check that runs every single time the skill does its job and catches the slip before it ever reaches you. Think of it as the belt that straps everything in.</p>
+      <p><b>Why it matters.</b> Reliability. This is the part that turns a helpful skill into a dependable employee. You stop re-reading every draft, because the harness catches the drift for you, so you can trust the output without checking it yourself every time.</p>
+      <p>There are two kinds of checks, and Claude builds whichever one fits.</p>
+      <div class="cc-cmp">
+        <div class="cc-cmp-col">
+          <h4>📏 Exact-rule checks</h4>
+          <ul>
+            <li>A banned word, a length, a format</li>
+            <li>Become a tiny script that passes or flags the line</li>
+            <li>Always reliable, because a script never forgets</li>
+          </ul>
+        </div>
+        <div class="cc-cmp-col win">
+          <h4>⚖️ Judgment checks</h4>
+          <ul>
+            <li>Is the tone right, is the hook strong</li>
+            <li>Become a fresh reviewer that reads with clean eyes</li>
+            <li>Send the draft back if it's off, before you ever see it</li>
+          </ul>
+        </div>
+      </div>
+      <p>The principle is simple. Don't <em>instruct</em> a skill to remember a rule, <b>enforce</b> it with a check, so doing it right is automatic instead of hopeful. The check itself usually runs on a hook, which you'll meet in the next module.</p>
+      <div class="cc-prompt">
+        <p>Harden my follow-up skill so it never goes off-brand. Add an automatic check that runs on every draft and flags anything that breaks my voice rules.</p>
+        <button class="cc-copy">Copy</button>
+      </div>
+      <p class="cc-cue">Or just say: <b>"harden this skill"</b></p>
+    </div>
+  </section>
+
+  <div class="cc-modnav">
+    <a href="cc101-3-memory.html"><span class="dir">← Previous</span><span class="ttl">3 · Memory</span></a>
+    <a class="next" href="cc101-5-extending.html"><span class="dir">Next →</span><span class="ttl">5 · Extending</span></a>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
+<script src="cc-course.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The whole picture — Wiki</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="cc-course.css">
+</head>
+<body hidden data-page="cc101-whole">
+
+<div id="doc-content">
+  <h1>The whole picture</h1>
+  <p class="cc-lead">You've met every part. This module shows them working together. One prompt sets the whole worker in motion, then the habits that make it dramatically better.</p>
+
+  <section>
+    <h2 id="lifecycle" class="cc-h"><span class="cc-ico">🔄</span> How it all fits together</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> One prompt fires every part in order. Session starts and it reads your CLAUDE.md, you prompt and routing picks the skill, the loop runs gather, act, verify while asking permission, helpers run if the job needs them, the harness and hooks check the work, done.</p>
+      <figure class="cc-viz"><img src="kit/kit-lifecycle.png" alt="One prompt sets the whole worker in motion: session starts and reads CLAUDE.md, you prompt and routing picks the skill, the loop runs gather-act-verify asking permission, helpers run if needed, the harness and hooks check it, done." loading="lazy"></figure>
+      <p>The one-liner to hold onto. <b>Memory is what it knows, Skills are what it does, Hooks and the harness are what happens before and after.</b></p>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="in-action" class="cc-h"><span class="cc-ico">🎬</span> Everything in action</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> A concrete trace. You type one sentence, <span class="cc-mono">write a welcome email for new subscribers</span>, and you watch the parts fire one after another.</p>
+      <div class="cc-flow">
+        <div class="cc-flow-step"><div><b>You type the prompt</b> — "write a welcome email for new subscribers."</div></div>
+        <div class="cc-flow-step"><div><b>Claude reads CLAUDE.md and routes</b> — it checks the map, sees this is a writing job, and picks the write skill.</div></div>
+        <div class="cc-flow-step"><div><b>The skill loads in a helper</b> — a sub-agent with its own context so the heavy work stays on its own desk.</div></div>
+        <div class="cc-flow-step"><div><b>The helper reads your references</b> — your brand voice file, so the email sounds like you, not generic AI.</div></div>
+        <div class="cc-flow-step"><div><b>It runs the workflow</b> — the exact steps you trained it on, every time.</div></div>
+        <div class="cc-flow-step"><div><b>A hook checks the draft</b> — voice and quality, before anything reaches you.</div></div>
+        <div class="cc-flow-step"><div><b>You get one clean result</b> — the finished email, not a play-by-play of every step.</div></div>
+      </div>
+      <figure class="cc-viz"><img src="kit/cc-glass-box.png" alt="The VS Code window showing each step happen in the open: reading CLAUDE.md, calling the skill, running the workflow, the hook validating, done." loading="lazy"></figure>
+      <p>One sentence in, several building blocks fire. And because <b>you wrote all the files</b>, the map, the skill, the voice file, the hook, it all works your way.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="network" class="cc-h"><span class="cc-ico">👑</span> You at the top</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> Growth here isn't a longer to-do list, it's more employees. You map the next bottleneck and build the next worker, and each one gets taken up the same ladder. You give the roles, the orchestrators dispatch the work, the sub-agents do the work.</p>
+      <figure class="cc-viz"><img src="kit/cc-network.png" alt="You at the center as the CEO, four leads (content, research, sales, operations), each with their own sub-agents doing the work. One CEO, four directors, eight specialists, your AI workforce." loading="lazy"></figure>
+      <p>One CEO, four directors, eight specialists. That's a workforce, and you're the one at the top of it.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="cheatsheet" class="cc-h"><span class="cc-ico">📋</span> Quick reference and best practices</h2>
+    <div class="cc-cbody">
+      <p>The whole worker at a glance, then the three habits that make it dramatically better.</p>
+      <table class="cc-tbl">
+        <thead><tr><th>Part</th><th>What it does</th><th>Lives in</th></tr></thead>
+        <tbody>
+          <tr><td><b>🧠 Memory</b></td><td>What it knows about your business</td><td><span class="cc-mono">CLAUDE.md</span> · <span class="cc-mono">MEMORY.md</span></td></tr>
+          <tr><td><b>🗺️ Routing</b></td><td>Which skill to use, where things live</td><td><span class="cc-mono">CLAUDE.md</span></td></tr>
+          <tr><td><b>🛠️ Skills</b></td><td>Tasks it does the same way every time</td><td><span class="cc-mono">.claude/skills/</span></td></tr>
+          <tr><td><b>🪢 Harness</b></td><td>Automatic checks that keep it reliable</td><td>scripts + reviewers</td></tr>
+          <tr><td><b>📡 Connections</b></td><td>Reaches your tools (Notion, Gmail…)</td><td><span class="cc-mono">.mcp.json</span></td></tr>
+          <tr><td><b>🤖 Agents</b></td><td>Helpers that work on their own</td><td><span class="cc-mono">.claude/agents/</span></td></tr>
+          <tr><td><b>⚡ Hooks</b></td><td>Automatic reactions to events</td><td><span class="cc-mono">.claude/</span> settings</td></tr>
+          <tr><td><b>🔔 Commands</b></td><td>One-word shortcuts &amp; schedules</td><td><span class="cc-mono">/your-skill</span></td></tr>
+        </tbody>
+      </table>
+      <div class="cc-bp"><h4>1. Give it a way to check its own work</h4><p>The single highest-leverage habit. "Write the report" is vague; "write the report, then re-read it against these 3 rules and fix anything that fails" gives it a target to verify against. It performs dramatically better when it can grade itself.</p></div>
+      <div class="cc-bp"><h4>2. Explore → Plan → Code → Commit</h4><p>For anything bigger than a one-liner, let it look around and propose a plan before it acts. (In the editor, <span class="cc-mono">Shift+Tab</span> toggles read-only "plan" mode.) You approve the plan, then it executes.</p></div>
+      <div class="cc-bp"><h4>3. Be specific upfront</h4><p>"Fix the login bug" wanders. "Checkout breaks for expired cards — check the payments folder, write a failing test first, then fix it" lands. A minute of specifics saves three rounds of correction.</p></div>
+      <details class="cc-deep" style="margin-top:14px"><summary>Common mistakes (and the fix)</summary>
+        <div class="cc-deepbody">
+          <ul>
+            <li><b>The kitchen-sink session</b> &mdash; mixing unrelated tasks in one chat muddies its memory. Run <span class="cc-mono">/clear</span> between different jobs.</li>
+            <li><b>Correcting over and over</b> &mdash; after two failed corrections, stop. Run <span class="cc-mono">/clear</span> and rewrite the prompt with what you learned.</li>
+            <li><b>An over-stuffed CLAUDE.md</b> &mdash; more isn't better; it dilutes attention. Keep it lean and push detail into reference files.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <div class="cc-cta">
+    <h3>That's the whole worker.</h3>
+    <p>Now build your first one. The Roadmap walks you through it, one step at a time.</p>
+    <a href="ai-employee-roadmap.html">Open the AI Employee Roadmap &rarr;</a>
+  </div>
+
+  <div class="cc-modnav">
+    <a href="cc101-5-extending.html"><span class="dir">← Previous</span><span class="ttl">5 · Extending</span></a>
+    <a class="next" href="ai-employee-roadmap.html"><span class="dir">Next →</span><span class="ttl">The AI Employee Roadmap</span></a>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
+<script src="cc-course.js"></script>
+</body>
+</html>

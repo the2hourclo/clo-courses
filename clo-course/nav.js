@@ -29,8 +29,16 @@ window.CLO_PRODUCTS = {
       ]},
       { group: 'Courses', items: [
         { label: 'Business X-Ray', page: 'business-x-ray', href: 'clo-course/business-x-ray.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','funnel','swimlanes','process','assets','asset explorer','score','operating system','digital assets','map my business','where to start'] },
-        { label: 'Claude Code 101', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['fundamentals','basics','tools','skills','agents','hooks','mcp','terminal','commands','slash commands','subagents','context','memory','getting started'] },
         { label: 'Skill Systems', page: 'meta-skill', href: 'meta-create-skill/index.html', keywords: ['create skill','build skill','make a skill','meta','capture','automate','skill system','authoring','new skill'] }
+      ]},
+      { group: 'Claude Code 101', items: [
+        { label: 'Overview', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['overview','anatomy','ai employee','building blocks','fundamentals','basics','plain english','start','getting started'] },
+        { label: '1 · What Claude Code Is', page: 'cc101-what', href: 'clo-course/cc101-1-what.html', keywords: ['what is claude code','chatbot','ai employee','glass box','vs code','where it lives','agentic loop','how it thinks','terminal','git','github','why claude code'] },
+        { label: '2 · The Foundation', page: 'cc101-foundation', href: 'clo-course/cc101-2-foundation.html', keywords: ['tools','built-in tools','read','grep','bash','edit','write','permission','permissions','allow','deny','plan mode','modes','settings','safe'] },
+        { label: '3 · Memory', page: 'cc101-memory', href: 'clo-course/cc101-3-memory.html', keywords: ['memory','claude.md','claude md','memory.md','hierarchy','rules','context window','imports','remember','routing'] },
+        { label: '4 · Skills', page: 'cc101-skills', href: 'clo-course/cc101-4-skills.html', keywords: ['skill','skills','playbook','frontmatter','build your first skill','slash command','arguments','refine','follow-up','workflows','harness','harden','reliable','automatic check','quality gate'] },
+        { label: '5 · Extending', page: 'cc101-extending', href: 'clo-course/cc101-5-extending.html', keywords: ['sub-agents','subagents','agents','parallel','mcp','connections','notion','hooks','automation','extend'] },
+        { label: '6 · The Whole Picture', page: 'cc101-whole', href: 'clo-course/cc101-6-whole-picture.html', keywords: ['lifecycle','everything in action','network','quick reference','cheat sheet','best practices','whole picture'] }
       ]},
       // ── Premium section: CLO-only. AIEB never gets this block, so it stays the base tier.
       //    When a skill course is built, swap its placeholder href (anchor on the library page)
@@ -67,8 +75,16 @@ window.CLO_PRODUCTS = {
         { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','plugin','license','activate','skillstack','onboard','getting started','first steps'] },
         { label: 'Roadmap', page: 'roadmap', href: 'clo-course/ai-employee-roadmap.html', keywords: ['roadmap','whats next','next step','journey','path','harness','agent','command','routine','what to build next','continue building','ai employee roadmap'] }
       ]},
+      { group: 'Claude Code 101', items: [
+        { label: 'Overview', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['overview','anatomy','ai employee','building blocks','fundamentals','basics','plain english','start'] },
+        { label: '1 · What Claude Code Is', page: 'cc101-what', href: 'clo-course/cc101-1-what.html', keywords: ['what is claude code','chatbot','glass box','vs code','where it lives','agentic loop','how it thinks','terminal','git'] },
+        { label: '2 · The Foundation', page: 'cc101-foundation', href: 'clo-course/cc101-2-foundation.html', keywords: ['tools','built-in tools','bash','permission','permissions','plan mode','modes','settings'] },
+        { label: '3 · Memory', page: 'cc101-memory', href: 'clo-course/cc101-3-memory.html', keywords: ['memory','claude.md','memory.md','hierarchy','context window','imports','remember'] },
+        { label: '4 · Skills', page: 'cc101-skills', href: 'clo-course/cc101-4-skills.html', keywords: ['skill','skills','playbook','frontmatter','build your first skill','slash command','arguments','refine','harness','harden','reliable','automatic check'] },
+        { label: '5 · Extending', page: 'cc101-extending', href: 'clo-course/cc101-5-extending.html', keywords: ['sub-agents','subagents','agents','parallel','mcp','connections','hooks','automation'] },
+        { label: '6 · The Whole Picture', page: 'cc101-whole', href: 'clo-course/cc101-6-whole-picture.html', keywords: ['lifecycle','everything in action','network','quick reference','cheat sheet','best practices'] }
+      ]},
       { group: 'Courses', items: [
-        { label: 'Claude Code 101', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['fundamentals','basics','tools','skills','agents','hooks','mcp','terminal','commands','subagents'] },
         { label: 'Business X-Ray', page: 'business-x-ray', href: 'clo-course/business-x-ray.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','swimlanes','process','assets','score','operating system'] },
         { label: 'Skill Systems', page: 'meta-skill', href: 'meta-create-skill/index.html', keywords: ['create skill','build skill','meta','capture','automate','skill system','authoring'] }
       ]}
@@ -139,5 +155,42 @@ window.CLO_LESSON_INDEX = [
     { id: 'first-skill', group: 'Ship It', name: 'Your First Skill' },
     { id: 'ship', group: 'Ship It', name: 'Validate, Test, Ship' },
     { id: 'frontmatter-lab', group: 'Reference', name: 'YAML Builder Lab' }
+  ]},
+  { page: 'cc101-what', label: 'Claude Code 101 · What Claude Code Is', href: 'clo-course/cc101-1-what.html', lessons: [
+    { id: 'watch', group: '1 · What Claude Code Is', name: 'Watch first: what Claude Code is' },
+    { id: 'problem', group: '1 · What Claude Code Is', name: 'The problem with a chat box' },
+    { id: 'employee', group: '1 · What Claude Code Is', name: 'You employ it, not chat with it' },
+    { id: 'why', group: '1 · What Claude Code Is', name: 'Why Claude Code, not just Claude.ai' },
+    { id: 'where', group: '1 · What Claude Code Is', name: 'Where it lives, and why VS Code' },
+    { id: 'loop', group: '1 · What Claude Code Is', name: 'How it thinks (the loop)' }
+  ]},
+  { page: 'cc101-foundation', label: 'Claude Code 101 · The Foundation', href: 'clo-course/cc101-2-foundation.html', lessons: [
+    { id: 'tools', group: '2 · The Foundation', name: 'The built-in tools' },
+    { id: 'permissions', group: '2 · The Foundation', name: 'The permission system' }
+  ]},
+  { page: 'cc101-memory', label: 'Claude Code 101 · Memory', href: 'clo-course/cc101-3-memory.html', lessons: [
+    { id: 'claude-md', group: '3 · Memory', name: 'CLAUDE.md, the most important file' },
+    { id: 'memory-file', group: '3 · Memory', name: 'Memory remembers who you are' },
+    { id: 'hierarchy', group: '3 · Memory', name: 'The memory hierarchy' },
+    { id: 'context', group: '3 · Memory', name: 'The context window' }
+  ]},
+  { page: 'cc101-skills', label: 'Claude Code 101 · Skills', href: 'clo-course/cc101-4-skills.html', lessons: [
+    { id: 'what', group: '4 · Skills', name: 'A skill is a playbook' },
+    { id: 'trigger', group: '4 · Skills', name: 'How a skill gets used' },
+    { id: 'build', group: '4 · Skills', name: 'Build your first skill' },
+    { id: 'refine', group: '4 · Skills', name: 'Refining is normal' },
+    { id: 'harness', group: '4 · Skills', name: 'Make it reliable, add a harness' }
+  ]},
+  { page: 'cc101-extending', label: 'Claude Code 101 · Extending', href: 'clo-course/cc101-5-extending.html', lessons: [
+    { id: 'subagents', group: '5 · Extending', name: 'Sub-agents, helpers with their own desk' },
+    { id: 'parallel', group: '5 · Extending', name: 'Run several at once' },
+    { id: 'mcp', group: '5 · Extending', name: 'Connections (MCP)' },
+    { id: 'hooks', group: '5 · Extending', name: 'Hooks, automatic reactions' }
+  ]},
+  { page: 'cc101-whole', label: 'Claude Code 101 · The Whole Picture', href: 'clo-course/cc101-6-whole-picture.html', lessons: [
+    { id: 'lifecycle', group: '6 · The Whole Picture', name: 'How it all fits together' },
+    { id: 'in-action', group: '6 · The Whole Picture', name: 'Everything in action' },
+    { id: 'network', group: '6 · The Whole Picture', name: 'You at the top' },
+    { id: 'cheatsheet', group: '6 · The Whole Picture', name: 'Quick reference and best practices' }
   ]}
 ];

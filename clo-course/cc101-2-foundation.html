@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Foundation: Tools and Permissions — Wiki</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="cc-course.css">
+</head>
+<body hidden data-page="cc101-foundation">
+
+<div id="doc-content">
+  <h1>The foundation: tools and permissions</h1>
+  <p class="cc-lead">Before you customize anything, every AI Employee already comes with the machinery to do real work. This module is that machinery. The <b>tools</b> it uses to get things done, and the <b>safety rail</b> that keeps it from doing anything risky without asking you first.</p>
+
+  <section>
+    <h2 id="tools" class="cc-h"><span class="cc-ico">🛠️</span> The built-in tools</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> Claude has a small set of built-in tools it reaches for automatically, and they map straight onto the loop from the last module. To <b>gather</b> it reads and searches. To <b>act</b> it edits and runs things. To <b>verify</b> it re-checks its own work. You never call these by name. Claude picks the right one for the step it's on.</p>
+      <table class="cc-tbl">
+        <thead><tr><th>Loop step</th><th>Tools it uses</th><th>What that does</th></tr></thead>
+        <tbody>
+          <tr><td><b>🔍 Gather</b></td><td><span class="cc-mono">Read</span>, <span class="cc-mono">Glob</span>, <span class="cc-mono">Grep</span>, <span class="cc-mono">WebFetch</span>, <span class="cc-mono">WebSearch</span></td><td>Open files, find files by name, search text inside them, pull a web page, search the web</td></tr>
+          <tr><td><b>✏️ Act</b></td><td><span class="cc-mono">Edit</span>, <span class="cc-mono">Write</span>, <span class="cc-mono">Bash</span></td><td>Change a file, create a new file, run a command</td></tr>
+          <tr><td><b>✅ Verify</b></td><td><span class="cc-mono">Bash</span> (run the tests), <span class="cc-mono">Read</span></td><td>Run the checks, then re-read the result to confirm it worked</td></tr>
+        </tbody>
+      </table>
+      <p><b>Why it matters.</b> Notice there's no separate tool for rename, delete, or move. <b>Bash is the swiss-army knife.</b> One tool runs any command your computer can run, so Claude just types the command for the job.</p>
+      <div class="cc-eg">Try it: <code>rename old.ts to new.ts and move it into the src folder</code></div>
+      <table class="cc-tbl">
+        <thead><tr><th>You want to…</th><th>Claude types</th></tr></thead>
+        <tbody>
+          <tr><td>Rename a file</td><td><span class="cc-mono">mv old.ts new.ts</span></td></tr>
+          <tr><td>Delete a file</td><td><span class="cc-mono">rm file.ts</span></td></tr>
+          <tr><td>Move a file</td><td><span class="cc-mono">mv file.ts src/</span></td></tr>
+          <tr><td>Install a package</td><td><span class="cc-mono">npm install axios</span></td></tr>
+        </tbody>
+      </table>
+      <p>Claude types these for you, and before anything destructive runs it stops and asks first. That's the next part.</p>
+      <div class="callout callout--tip">
+        <svg class="callout-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1h6c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"></path></svg>
+        <div>You never memorize any of this. Claude picks the right tool for each step, and you just watch it work. That's the glass box from module one, every action shows up in front of you.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="permissions" class="cc-h"><span class="cc-ico">🛡️</span> The permission system</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> Claude never does something risky without asking. Before any action it runs one check. Is this already approved or clearly safe? If yes, it goes ahead. If not, it stops and asks you, and you pick <b>Deny</b>, <b>Allow once</b>, or <b>Always allow</b>. Pick "Always allow" and it writes a rule, so it won't ask you for that same thing again.</p>
+      <figure class="cc-viz"><img src="kit/kit-permissions.png" alt="The permission gate: is this already approved or clearly safe? Yes, it proceeds. No, it stops and asks you, with the choices Deny, Allow once, and Always allow." loading="lazy"></figure>
+      <p><b>Why it matters.</b> This is what makes the glass box safe. You see exactly what it's about to do, and nothing risky happens until you approve it. The AI Employee is fast, but you stay in charge of the steering wheel.</p>
+      <div class="cc-prompt"><p>Switch to plan mode and propose how you'd fix this, but don't change anything yet.</p><button class="cc-copy">Copy</button></div>
+      <p class="cc-cue">Or just say: <b>"plan first, don't make changes"</b></p>
+      <details class="cc-deep"><summary>Go deeper: the 5 permission modes and pre-approving safe actions</summary>
+        <div class="cc-deepbody">
+          <p>The asking behavior has five modes. Most of the time you live in the first one. The others let you loosen or tighten the leash for a stretch of work.</p>
+          <ul>
+            <li><b>default</b> — asks before anything that isn't already pre-approved. The safe place to start, and where you'll spend most of your time.</li>
+            <li><b>acceptEdits</b> — auto-accepts file edits so it stops asking on every little change, but still asks before running a command.</li>
+            <li><b>plan</b> — read-only. It explores and proposes a plan, and changes nothing. Great for "show me what you'd do first."</li>
+            <li><b>dontAsk</b> — auto-approves everything. For trusted, repetitive work you've done many times and want to run hands-off.</li>
+            <li><b>bypassPermissions</b> — skips the checks entirely. Use with caution, only when you fully trust the task.</li>
+          </ul>
+          <p>You can also pre-write rules once, so the right things are approved or blocked forever. They live in <span class="cc-mono">.claude/settings.json</span>. Always allow the safe, repeated stuff and always deny the dangerous stuff.</p>
+          <ul>
+            <li>Always allow <span class="cc-mono">Bash(npm test)</span>, or a whole family with <span class="cc-mono">Bash(npm *)</span></li>
+            <li>Always allow a skill you trust, like <span class="cc-mono">Skill(commit)</span></li>
+            <li>Always deny anything that deletes, like <span class="cc-mono">Bash(rm *)</span></li>
+            <li>Always deny a risky skill, like <span class="cc-mono">Skill(deploy *)</span></li>
+          </ul>
+          <p>You don't have to write these by hand. Every time you click "Always allow," Claude writes one of these rules into that file for you.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <div class="cc-modnav">
+    <a href="cc101-1-what.html"><span class="dir">← Previous</span><span class="ttl">1 · What Claude Code Is</span></a>
+    <a class="next" href="cc101-3-memory.html"><span class="dir">Next →</span><span class="ttl">3 · Memory</span></a>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
+<script src="cc-course.js"></script>
+</body>
+</html>

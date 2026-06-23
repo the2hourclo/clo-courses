@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory — Wiki</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="cc-course.css">
+</head>
+<body hidden data-page="cc101-memory">
+
+<div id="doc-content">
+  <h1>Memory: what your AI Employee knows</h1>
+  <p class="cc-lead">A new hire who forgets everything overnight is useless. Memory is what makes Claude Code feel like someone who already knows your business. It lives in a couple of plain text files that you control.</p>
+
+  <section>
+    <h2 id="claude-md" class="cc-h"><span class="cc-ico">🗺️</span> CLAUDE.md, the most important file</h2>
+    <div class="cc-cbody">
+      <div class="cc-tile"><img src="kit/tile-memory.png" alt="Zoom on the robot's head and glowing eyes, its memory." loading="lazy"></div>
+      <p><b>What it is.</b> CLAUDE.md is the first thing Claude reads every session. The rule of thumb, if something isn't in here, your AI doesn't know it exists.</p>
+      <p>It does three jobs. <b>Routing</b> tells it which skill to use for what. <b>Where things live</b> is the map of your folders. And <b>Rules</b> are your conventions, like "run tests before committing" or "follow the brand voice".</p>
+      <figure class="cc-viz"><img src="kit/cc-routing.png" alt="CLAUDE.md as a routing map: you say publish today's draft, and it finds the right skill and the right file automatically." loading="lazy"></figure>
+      <div class="cc-eg">Try it: you rarely write it by hand. Say <code>/init</code> to generate one, or <code>/memory</code> to edit it anytime.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="memory-file" class="cc-h"><span class="cc-ico">🧠</span> Memory remembers who you are</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> Alongside CLAUDE.md, Claude keeps a memory of things it learns as you work. Your voice rules, past decisions, your preferences, and context about how you operate. You just tell it, and it sticks.</p>
+      <figure class="cc-viz"><img src="kit/cc-memory.png" alt="The robot's brain and a MEMORY.md file with four areas: voice rules, past decisions, preferences, and context. Skills capture HOW, CLAUDE.md decides WHEN, memory remembers WHO." loading="lazy"></figure>
+      <p><b>Why it matters.</b> Skills capture HOW, CLAUDE.md decides WHEN, and memory remembers WHO.</p>
+      <div class="cc-prompt"><p>Remember that we always use dark mode for demos and never use hype words.</p><button class="cc-copy">Copy</button></div>
+      <p class="cc-cue">Or just say: <b>"remember that…"</b></p>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="hierarchy" class="cc-h"><span class="cc-ico">📚</span> The memory hierarchy <span class="cc-sub">— most-specific wins</span></h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> Memory comes in layers, from broad to specific, and the more specific one always wins.</p>
+      <p>Project memory is the team-shared <span class="cc-mono">.claude/CLAUDE.md</span>. Then your personal memory at <span class="cc-mono">~/.claude/CLAUDE.md</span> covers all your projects. Then local notes for just this project. And auto-memory is what Claude learns over time.</p>
+      <details class="cc-deep"><summary>Go deeper: modular rules and imports</summary>
+        <div class="cc-deepbody">
+          <p>Instead of one giant CLAUDE.md, you can split rules into topic files in <span class="cc-mono">.claude/rules/</span> (for example <span class="cc-mono">code-style.md</span>, <span class="cc-mono">testing.md</span>, <span class="cc-mono">brand-voice.md</span>) and they all load automatically.</p>
+          <p>And CLAUDE.md can pull in other files with an <span class="cc-mono">@path/to/file</span> import, so it stays short while still giving Claude everything.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="context" class="cc-h"><span class="cc-ico">🪟</span> The context window <span class="cc-sub">— its working memory</span></h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> Everything Claude can see right now is its context window, its working memory. At the start of a session it loads the small stuff, CLAUDE.md, the list of skill names, connection tools, and recent auto-memory. The heavy stuff, a full skill or a reference file, only loads when it's actually needed.</p>
+      <p><b>Why it matters.</b> That's why skills are kept short and load their detail on demand, so the window stays clean and Claude never runs out of room mid-task. If it ever gets close to full, it tidies itself up automatically.</p>
+      <details class="cc-deep"><summary>Go deeper: keeping context clean</summary>
+        <div class="cc-deepbody">
+          <p>CLAUDE.md survives the auto-tidy. Skills load on demand. Sub-agents get their own separate memory (that's the next module). And hooks cost zero of this space.</p>
+          <p>A good habit, run <span class="cc-mono">/clear</span> between unrelated jobs so one task's clutter doesn't bleed into the next.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <div class="cc-modnav">
+    <a href="cc101-2-foundation.html"><span class="dir">← Previous</span><span class="ttl">2 · The Foundation</span></a>
+    <a class="next" href="cc101-4-skills.html"><span class="dir">Next →</span><span class="ttl">4 · Skills</span></a>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
+<script src="cc-course.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Claude Code Is — Wiki</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="cc-course.css">
+</head>
+<body hidden data-page="cc101-what">
+
+<div id="doc-content">
+  <h1>What Claude Code actually is</h1>
+  <p class="cc-lead">Most people meet AI in a chat box. It answers, you copy the answer out, and it forgets you by tomorrow. Claude Code is a different thing. It's an <b>AI Employee you build</b> that works inside your business and does the job, not just talks about it. This module is the "what" and the "why" before any of the how.</p>
+
+  <h2 id="watch">Watch first: what Claude Code is</h2>
+  <p class="cc-video-cap">A plain-English tour of the whole thing. The rest of this course breaks each part down.</p>
+  <div class="cc-video">
+    <iframe src="https://www.youtube.com/embed/gbbNVwqgk5k?start=30" title="What is Claude Code" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+
+  <section>
+    <h2 id="problem" class="cc-h"><span class="cc-ico">💬</span> The problem with a chat box</h2>
+    <div class="cc-cbody">
+      <p>A chatbot in a tab is helpful, but it's stuck behind glass. It can't open your files, it doesn't remember your business between chats, and everything it makes you have to copy out and paste somewhere yourself. You get <b>answers</b>, not work that's actually done.</p>
+      <figure class="cc-viz"><img src="kit/cc-tab-trap.png" alt="A robot stuck inside a chat tab, with your real tools (Notion, Gmail, calendar, files) greyed out around it. In a tab you get answers, you don't get a workforce." loading="lazy"></figure>
+      <p>That gap is the whole reason Claude Code exists. It takes the same intelligence out of the tab and puts it to work where your work already lives.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="employee" class="cc-h"><span class="cc-ico">🤖</span> You employ it, you don't chat with it</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> An AI Employee reads and edits your real files, remembers your business in a plain text file, works through multi-step jobs on its own, and runs your exact process instead of generic advice.</p>
+      <div class="cc-cmp">
+        <div class="cc-cmp-col">
+          <h4>💬 A chatbot</h4>
+          <ul>
+            <li>Can't see your files</li>
+            <li>Forgets you between chats</li>
+            <li>Hands you text to copy-paste</li>
+            <li>Does one turn at a time</li>
+          </ul>
+        </div>
+        <div class="cc-cmp-col win">
+          <h4>🤖 Your AI Employee</h4>
+          <ul>
+            <li>Reads and edits your actual files</li>
+            <li>Remembers your business (CLAUDE.md)</li>
+            <li>Does the job, in your tools</li>
+            <li>Works through multi-step tasks on its own</li>
+          </ul>
+        </div>
+      </div>
+      <p><b>Why it matters.</b> Everything in this course is just the parts that make that possible. Five of them do most of the work, and you'll meet each one in its own module.</p>
+      <table class="cc-tbl">
+        <thead><tr><th>Building block</th><th>What it gives your employee</th></tr></thead>
+        <tbody>
+          <tr><td><b>🧠 Memory</b> (CLAUDE.md)</td><td>It knows your business, your voice, your rules</td></tr>
+          <tr><td><b>🛠️ Skills</b></td><td>Jobs it runs the same way every time</td></tr>
+          <tr><td><b>🤖 Sub-agents</b></td><td>Helpers it sends off to work on their own</td></tr>
+          <tr><td><b>📡 Connections</b> (MCP)</td><td>It reaches your other tools (Notion, Gmail…)</td></tr>
+          <tr><td><b>⚡ Hooks</b></td><td>Automatic reactions that keep it reliable</td></tr>
+        </tbody>
+      </table>
+      <figure class="cc-viz"><img src="kit/cc-ai-employee.png" alt="The canonical AI Employee robot, with each part standing for one building block of Claude Code." loading="lazy"></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="why" class="cc-h"><span class="cc-ico">🏆</span> Why Claude Code, not just Claude.ai</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> Claude shows up in a few places. The chat app (Claude.ai) is great for thinking out loud. Cowork hands a task off and waits. <b>Claude Code</b> is the one that becomes a real workforce, because it's the only one with all the parts: skills, sub-agents, your own connections, memory, and the automatic checks.</p>
+      <figure class="cc-viz"><img src="kit/cc-why-cc.png" alt="A capability table comparing Claude.ai (2 of 7), Cowork (4 of 7) and Claude Code (9 of 9) across skills, sub-agents, custom MCPs, memory, hooks, CLAUDE.md routing, action visibility and parallel work." loading="lazy"></figure>
+      <p>The point isn't the scoreboard. It's that the building blocks only stack up into an employee in one of these, and that's where we work.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="where" class="cc-h"><span class="cc-ico">🪟</span> Where it lives, and why we use VS Code</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> It's one engine that runs in several places, the terminal, the desktop app, the web, JetBrains, Slack, and <b>VS Code</b>. They all share the same memory, settings, and connections. We teach it in VS Code for one reason.</p>
+      <p><b>Why VS Code.</b> You see everything it does. Every file it reads, every edit it makes, every command it runs shows up in front of you, and you approve or steer in real time. A chatbot is a black box. Claude Code in VS Code is a <b>glass box</b> you can see into.</p>
+      <figure class="cc-viz"><img src="kit/cc-glass-box.png" alt="The VS Code window: a file explorer, the Claude Code panel showing each tool it runs, a live MCP panel, and the terminal. A chatbot is a black box, Claude Code is a glass box you can see into." loading="lazy"></figure>
+      <div class="cc-eg">A workspace is just a folder with a <span class="cc-mono">.claude/</span> folder inside it. That little folder is where your employee's memory, skills, and settings live.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="loop" class="cc-h"><span class="cc-ico">🔁</span> How it thinks</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> Claude Code isn't autocomplete. It works in a <b>loop</b>, like a good new hire. It reads the situation, does the task, checks its own work, and goes again if it's not right yet, until the job is actually done.</p>
+      <figure class="cc-viz"><img src="kit/kit-loop.png" alt="The agentic loop: Gather (read the situation), Act (do the task), Verify (check its own work), looping back until it's right, then Done." loading="lazy"></figure>
+      <p>And you're never locked out. You can <b>interrupt, steer, or add context</b> at any point, the same way you'd lean over and redirect a teammate mid-task.</p>
+    </div>
+  </section>
+
+  <details class="cc-deep"><summary>Go deeper: new to the terminal or Git? (optional)</summary>
+    <div class="cc-deepbody">
+      <p>You don't need either to start, Claude runs the commands for you and shows you each one first. But here's what they are in plain English, so nothing feels like a black box.</p>
+      <h4>The terminal is just texting your computer</h4>
+      <p>Instead of clicking around, you type a short instruction and your computer does it. You'll really only ever see a handful, and Claude types them for you.</p>
+      <ul>
+        <li><span class="cc-mono">claude</span> — start Claude Code</li>
+        <li><span class="cc-mono">git pull</span> — get the latest updates</li>
+        <li><span class="cc-mono">git add .</span> then <span class="cc-mono">git commit -m "…"</span> — save a snapshot of your work</li>
+        <li><span class="cc-mono">git push</span> — upload it to the cloud</li>
+      </ul>
+      <h4>GitHub is Google Drive for your AI Employee</h4>
+      <p>It's where your workspace is stored and versioned, except you control when it syncs. Git gives you <b>save points</b>, like checkpoints in a game, so you can always go back to any version. When we ship an update, your skills and CLAUDE.md get the new version on <span class="cc-mono">git pull</span>, and the folders that hold <em>your</em> work (your clients, your content) are never touched.</p>
+    </div>
+  </details>
+
+  <div class="cc-modnav">
+    <a href="claude-code-101.html"><span class="dir">← Back to</span><span class="ttl">Overview (the whole picture)</span></a>
+    <a class="next" href="cc101-2-foundation.html"><span class="dir">Next →</span><span class="ttl">2 · The Foundation</span></a>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
+<script src="cc-course.js"></script>
+</body>
+</html>

@@ -6,105 +6,7 @@
 <title>Claude Code 101 — Wiki</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="shell.css">
-<style>
-/* claude-code-101 — cc- namespaced, built on shared tokens */
-.cc-lead{font-size:var(--t-body);color:var(--text-200);max-width:660px;line-height:1.65}
-
-/* anatomy centerpiece */
-.cc-anatomy{margin:var(--sp-5) 0 var(--sp-4);border:1px solid var(--border-200);border-radius:var(--radius-lg);overflow:hidden;background:#0F0F0F}
-.cc-anatomy img{display:block;width:100%;height:auto}
-.cc-anatomy-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:12px 16px;border-top:1px solid var(--border-200);background:var(--bg-200)}
-.cc-anatomy-foot span{font-size:13px;color:var(--text-400)}
-.cc-dl{font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid var(--accent-border);border-radius:var(--radius-sm);padding:7px 14px;background:var(--accent-dim)}
-.cc-dl:hover{background:var(--accent-dim-2);text-decoration:none}
-
-/* embedded robot-anchored kit visuals (rendered PNGs on #0F0F0F) */
-.cc-viz{margin:var(--sp-4) 0;border:1px solid var(--border-200);border-radius:var(--radius-lg);overflow:hidden;background:#0F0F0F}
-.cc-viz img{display:block;width:100%;height:auto}
-.cc-viz figcaption{font-size:12.5px;color:var(--text-400);padding:9px 15px;border-top:1px solid var(--border-100);background:var(--bg-200)}
-/* zoomed robot-part tile, floated beside a concept section */
-.cc-tile{float:right;width:148px;height:148px;margin:2px 0 14px 20px;border:1px solid var(--border-200);border-radius:var(--radius);overflow:hidden;background:#0F0F0F}
-.cc-tile img{display:block;width:100%;height:100%;object-fit:cover}
-@media(max-width:640px){.cc-tile{float:none;width:128px;height:128px;margin:0 0 12px}}
-
-/* concept sections */
-.cc-h{display:flex;align-items:center;gap:12px;scroll-margin-top:90px}
-.cc-ico{flex-shrink:0;width:46px;height:46px;border-radius:12px;background:var(--accent-dim-2);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;font-size:24px}
-.cc-sub{font-weight:400;font-size:15px;color:var(--text-400)}
-.cc-cbody{border-left:2px solid var(--border-200);margin:10px 0 var(--sp-6) 23px;padding:2px 0 2px 22px}
-.cc-cbody p{font-size:15px;color:var(--text-200);line-height:1.65;margin:10px 0}
-.cc-cbody p b{color:var(--text-100)}
-.cc-eg{font-size:13.5px;color:var(--text-300);background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius);padding:10px 14px;margin-top:12px}
-.cc-eg code{font-family:var(--font-mono);font-size:.92em;background:var(--bg-code);border:1px solid var(--border-200);border-radius:5px;padding:2px 7px;color:var(--accent)}
-.cc-eg b{color:var(--text-100)}
-
-/* go-deeper collapsible */
-.cc-deep{margin-top:14px;border:1px solid var(--border-100);border-radius:var(--radius);background:var(--bg-200);overflow:hidden}
-.cc-deep>summary{cursor:pointer;padding:11px 15px;font-size:13px;font-weight:700;color:var(--accent);list-style:none;user-select:none}
-.cc-deep>summary::-webkit-details-marker{display:none}
-.cc-deep>summary::before{content:'▸ ';font-family:var(--font-mono)}
-.cc-deep[open]>summary::before{content:'▾ '}
-.cc-deep>summary:hover{background:var(--bg-000)}
-.cc-deepbody{padding:4px 16px 16px;border-top:1px solid var(--border-100)}
-.cc-deepbody p{font-size:14px;color:var(--text-200);line-height:1.6;margin:10px 0}
-.cc-deepbody b{color:var(--text-100)}
-.cc-deepbody h4{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--text-400);margin:16px 0 6px}
-.cc-deepbody ul{margin:6px 0;padding-left:20px}
-.cc-deepbody li{font-size:14px;color:var(--text-200);line-height:1.55;margin:5px 0}
-.cc-deepbody code,.cc-mono{font-family:var(--font-mono);font-size:.9em;background:var(--bg-code);border:1px solid var(--border-200);border-radius:5px;padding:1px 6px;color:var(--accent-text,#bff58a)}
-
-/* before / after */
-.cc-ba{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
-@media(max-width:640px){.cc-ba{grid-template-columns:1fr}}
-.cc-ba-card{border:1px solid var(--border-200);border-radius:var(--radius);padding:12px 14px;background:var(--bg-100)}
-.cc-ba-tag{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
-.cc-ba-card.before .cc-ba-tag{color:var(--text-400)}
-.cc-ba-card.after{border-color:var(--accent-border)}
-.cc-ba-card.after .cc-ba-tag{color:var(--accent)}
-.cc-ba-card p{font-size:13px;color:var(--text-300);margin:0;line-height:1.55}
-
-/* loop (how it thinks) */
-.cc-loop{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:var(--sp-4) 0}
-.cc-loop-step{flex:1;min-width:150px;background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius);padding:14px 16px}
-.cc-loop-arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;padding:0 8px}
-.cc-loop-step .n{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.6px}
-.cc-loop-step .t{font-weight:700;color:var(--text-100);margin:3px 0 4px;font-size:15px}
-.cc-loop-step .d{font-size:13px;color:var(--text-300);line-height:1.5}
-
-/* two-column compare */
-.cc-cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:var(--sp-4) 0}
-@media(max-width:640px){.cc-cmp{grid-template-columns:1fr}}
-.cc-cmp-col{border:1px solid var(--border-100);border-radius:var(--radius-lg);padding:16px 18px;background:var(--bg-100)}
-.cc-cmp-col.win{border-color:var(--accent-border);background:linear-gradient(160deg,var(--accent-dim-2),var(--bg-100) 60%)}
-.cc-cmp-col h4{margin:0 0 8px;font-size:15px;color:var(--text-100)}
-.cc-cmp-col ul{margin:0;padding-left:18px}
-.cc-cmp-col li{font-size:13.5px;color:var(--text-300);line-height:1.6;margin:4px 0}
-
-/* table */
-.cc-tbl{width:100%;border-collapse:collapse;margin:var(--sp-4) 0;font-size:13.5px}
-.cc-tbl th,.cc-tbl td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--border-100);vertical-align:top}
-.cc-tbl th{color:var(--text-400);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;font-weight:800}
-.cc-tbl td{color:var(--text-200)}
-.cc-tbl td b{color:var(--text-100)}
-.cc-tbl tr:hover td{background:var(--bg-100)}
-
-/* best-practice cards + flow */
-.cc-bp{border:1px solid var(--border-100);border-left:3px solid var(--accent);border-radius:var(--radius);padding:14px 16px;margin:10px 0;background:var(--bg-100)}
-.cc-bp h4{margin:0 0 5px;font-size:15px;color:var(--text-100)}
-.cc-bp p{margin:0;font-size:13.5px;color:var(--text-300);line-height:1.6}
-.cc-flow{counter-reset:step;margin:var(--sp-4) 0}
-.cc-flow-step{display:flex;gap:13px;padding:9px 0;align-items:flex-start}
-.cc-flow-step::before{counter-increment:step;content:counter(step);flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--accent-dim-2);border:1px solid var(--accent-border);color:var(--accent);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
-.cc-flow-step div{font-size:14px;color:var(--text-200);line-height:1.55}
-.cc-flow-step b{color:var(--text-100)}
-
-/* close CTA */
-.cc-cta{background:linear-gradient(135deg,var(--accent-dim-2),var(--bg-100) 70%);border:1px solid var(--accent-border);border-radius:var(--radius-lg);padding:26px;margin:var(--sp-6) 0 var(--sp-4);text-align:center}
-.cc-cta h3{margin:0 0 8px;font-size:20px;color:var(--text-100)}
-.cc-cta p{margin:0 0 16px;color:var(--text-200);font-size:15px}
-.cc-cta a{display:inline-block;padding:13px 28px;background:var(--accent);color:var(--accent-ink);border-radius:var(--radius);font-weight:800;font-size:14px;text-decoration:none}
-.cc-cta a:hover{background:var(--accent-hover);text-decoration:none}
-</style>
+<link rel="stylesheet" href="cc-course.css">
 </head>
 <body hidden data-page="claude-code-101">
 
@@ -120,6 +22,17 @@
       <span>The canonical AI Employee &mdash; the same character across everything we build.</span>
       <a class="cc-dl" href="ai-employee-anatomy.png" download>Download the poster &darr;</a>
     </div>
+  </div>
+
+  <h2 id="modules">Go deeper, module by module</h2>
+  <p>This page is the map. Each part below opens into a full module with the how-to, the prompts, and the depth, in this same visual style. Work straight through, or jump to whatever you need.</p>
+  <div class="cc-modgrid">
+    <a class="cc-modtile" href="cc101-1-what.html"><div class="num">Module 1</div><div class="ttl">What Claude Code Is</div><div class="dsc">Chatbot vs employee, where it lives, and how it thinks.</div></a>
+    <a class="cc-modtile" href="cc101-2-foundation.html"><div class="num">Module 2</div><div class="ttl">The Foundation</div><div class="dsc">The built-in tools and the permission system.</div></a>
+    <a class="cc-modtile" href="cc101-3-memory.html"><div class="num">Module 3</div><div class="ttl">Memory</div><div class="dsc">CLAUDE.md, the memory hierarchy, and the context window.</div></a>
+    <a class="cc-modtile" href="cc101-4-skills.html"><div class="num">Module 4</div><div class="ttl">Skills</div><div class="dsc">Build your first skill, step by step.</div></a>
+    <a class="cc-modtile" href="cc101-5-extending.html"><div class="num">Module 5</div><div class="ttl">Extending</div><div class="dsc">Sub-agents, connections, and hooks.</div></a>
+    <a class="cc-modtile" href="cc101-6-whole-picture.html"><div class="num">Module 6</div><div class="ttl">The Whole Picture</div><div class="dsc">The full lifecycle and the habits that make it better.</div></a>
   </div>
 
   <h2 id="big-idea">The big idea: you employ it, you don't chat with it</h2>
