@@ -50,8 +50,9 @@
     <h2 id="hooks" class="cc-h"><span class="cc-ico">⚡</span> Hooks, automatic reactions</h2>
     <div class="cc-cbody">
       <p><b>What it is.</b> A hook is an automatic action that fires at a set moment. After every save run the check, when a session starts load my context. They run outside the conversation, so they cost zero of your working memory, and you never have to remember to trigger them.</p>
-      <figure class="cc-viz"><img src="kit/kit-hooks.png" alt="Hooks fire automatically at set checkpoints across the lifecycle: PrePrompt, SessionStart, PreTool, PostTool, Stop." loading="lazy"></figure>
       <p><b>Why you use it.</b> The best move is to build a quality inspector right into a skill. Take a write-email skill with a hook that says "before finishing, review this email. Does it sound like a real person, not AI? If it's robotic, rewrite it." You only ever see the polished version. Every hook is three parts. <b>WHEN</b> is the event, <b>WHAT</b> is the thing it watches, and <b>DO</b> is the action, run a check, ask a yes/no, or spawn a reviewer.</p>
+      <p><b>Explore the lifecycle.</b> Click any moment to see what fires there and what you'd use it for.</p>
+      <div class="cc-embed"><iframe id="ccHooksFrame" src="hooks-explorer.html" title="Interactive hook lifecycle explorer" loading="lazy"></iframe></div>
       <div class="cc-prompt"><p>Create a hook that reviews every draft before it's saved and rewrites it if it sounds robotic.</p><button class="cc-copy">Copy</button></div>
       <p class="cc-cue">Or just say: <b>"create a hook for this"</b></p>
       <details class="cc-deep"><summary>Go deeper: the lifecycle events</summary>
@@ -72,5 +73,6 @@
 <script src="toc.js"></script>
 <script src="shell.js"></script>
 <script src="cc-course.js"></script>
+<script>window.addEventListener('message',function(e){if(e.data&&e.data.ccHooks==='h'){var f=document.getElementById('ccHooksFrame');if(f&&e.data.h>200)f.style.height=(e.data.h+6)+'px'}});</script>
 </body>
 </html>

@@ -124,3 +124,8 @@
 .cc-video{position:relative;width:100%;padding-bottom:56.25%;height:0;margin:var(--sp-4) 0;border:1px solid var(--border-200);border-radius:var(--radius-lg);overflow:hidden;background:#000}
 .cc-video iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
 .cc-video-cap{font-size:13px;color:var(--text-400);margin:-4px 0 var(--sp-4)}
+
+/* interactive hook-lifecycle explorer (cc101-5-extending) */
+/* embedded interactive widget (iframe, kit aesthetic) */
+.cc-embed{width:100%;border:1px solid var(--border-200);border-radius:var(--radius-lg);overflow:hidden;background:#0F0F0F;margin:var(--sp-4) 0}
+.cc-embed iframe{width:100%;height:1120px;border:0;display:block}
