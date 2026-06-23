@@ -384,8 +384,8 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 
   <!-- ═══════════════ CLAUDE COWORK (BETA) ═══════════════ -->
   <div class="ai-card" id="cowork">
-    <div class="card-title">&#129309; Using Claude Cowork? <span class="pill">Beta</span></div>
-    <p>Cowork runs in the Claude <strong>desktop app</strong>. You don't need Claude Code for this &mdash; just install a small <strong>one-click extension</strong> and paste your license key. No terminal. <span style="color:var(--text-dim)">(Still in beta &mdash; tell us how it goes.)</span></p>
+    <div class="card-title">&#129309; Using Claude Cowork?</div>
+    <p>Cowork runs in the Claude <strong>desktop app</strong>. You don't need Claude Code for this &mdash; just install a small <strong>one-click extension</strong> and paste your license key. No terminal.</p>
 
     <div style="text-align:center;margin:8px 0 16px">
       <a href="downloads/ai-employee-builder.mcpb" download style="display:inline-block;padding:13px 28px;background:var(--accent);color:#0a0a0a;border-radius:var(--radius);font-weight:800;font-size:14px;text-decoration:none">&#11015;&#65039; Download the Cowork extension (.mcpb)</a>
@@ -399,7 +399,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 
     <div class="callout callout-tip"><strong>Success looks like:</strong> the skill kicks in and Claude follows its steps &mdash; pulling the real instructions from the MCP behind the scenes, just like it does in Claude Code.</div>
     <div class="callout callout-warning"><strong>Don't paste the MCP URL into &ldquo;Custom Connectors.&rdquo;</strong> That screen is OAuth-only and can't take your license key &mdash; install the downloaded <strong>file</strong> instead.</div>
-    <div class="callout callout-info"><strong>You'll need the desktop app</strong> (Pro, Max, or Team). On a managed Team/Enterprise account, an admin may have to allow custom extensions first. Stuck, or it didn't work? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a> &mdash; tell us which step.</div>
+    <div class="callout callout-info"><strong>You'll need the desktop app</strong> (Pro, Max, or Team). On a managed Team/Enterprise account, an admin may have to allow custom extensions first. Stuck? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a>.</div>
   </div>
 
   <!-- ═══════════════ STEP 2 ═══════════════ -->
@@ -579,7 +579,7 @@ Check anything you can: Node.js version, whether the thin plugin is installed, w
     <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Your license activates a limited number of machines according to the Lemon Squeezy license settings. The MCP binds each computer through a local activation instance so the key cannot be shared endlessly.</div></details>
     <details><summary>Why does it need Node.js?</summary><div class="faq-body">The local MCP proxy is a small Node.js script. It activates your license, stores the local instance ID, and forwards requests to the hosted MCP server.</div></details>
     <details><summary>How do updates work?</summary><div class="faq-body">Most AIEB skill updates happen on the MCP server. You get the latest instructions automatically the next time a skill runs &mdash; no reinstall, nothing to do. You only reinstall the plugin when the local shell itself changes (new setup behavior, proxy, or hooks), and the plugin will <strong>tell you</strong> when that's needed: it checks the server for the current shell version at startup and, if yours is behind, prompts you with the exact update commands.</div></details>
-    <details><summary>Can I use this in Claude Cowork?</summary><div class="faq-body"><strong>Yes &mdash; in beta, no Claude Code needed.</strong> Cowork runs in the Claude desktop app. Download the one-click <strong>Cowork extension</strong> from the Cowork (Beta) section above, drag it into <em>Customize &rarr; Connectors</em>, and paste your license key &mdash; no terminal. <strong>Don't</strong> paste the MCP URL into <em>Custom Connectors</em> (that's OAuth-only and can't take your key) &mdash; install the downloaded file instead.</div></details>
+    <details><summary>Can I use this in Claude Cowork?</summary><div class="faq-body"><strong>Yes &mdash; no Claude Code needed.</strong> Cowork runs in the Claude desktop app. Download the one-click <strong>Cowork extension</strong> from the Cowork section above, install it via <em>Settings &rarr; Extensions &rarr; Advanced settings &rarr; Extension Developer &rarr; Install Extension</em>, and paste your license key &mdash; no terminal. <strong>Don't</strong> paste the MCP URL into <em>Custom Connectors</em> (that's OAuth-only and can't take your key) &mdash; install the downloaded file instead.</div></details>
     <details><summary>What if my subscription lapses?</summary><div class="faq-body">Access pauses until you renew. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">Lemon Squeezy &rarr; My Orders</a>, then reload Claude Code and try the MCP call again.</div></details>
     <details><summary>I already use Claude Code &mdash; can I skip ahead?</summary><div class="faq-body">Yes. If the extension and Node.js are installed, tick Step&nbsp;1 and jump to <strong>Step&nbsp;3</strong>.</div></details>
     <details><summary>Is the Terminal method different from VS Code?</summary><div class="faq-body">Same result, same commands &mdash; just a different place to type them. The <strong>VS Code</strong> way is click-based and friendly; <strong>Terminal</strong> is for command-line folks. Use the toggle at the top to switch.</div></details>
