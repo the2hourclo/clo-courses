@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Extending: agents, connections, and hooks — Wiki</title>
+<title>Extending: agents and connections — Wiki</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="shell.css">
 <link rel="stylesheet" href="cc-course.css">
@@ -11,8 +11,8 @@
 <body hidden data-page="cc101-extending">
 
 <div id="doc-content">
-  <h1>Extending: agents, connections, and hooks</h1>
-  <p class="cc-lead">Once one employee can do a job, you scale it three ways. You hand work to helpers that run on their own, you plug it into your other tools, and you make the right thing happen automatically.</p>
+  <h1>Extending: agents and connections</h1>
+  <p class="cc-lead">Once one employee can do a job, you extend it. You hand work to helpers that run on their own, and you plug it into the other tools your business already uses. (Making the work run automatically is the next module, hooks.)</p>
 
   <section>
     <h2 id="subagents" class="cc-h"><span class="cc-ico">🤖</span> Sub-agents, helpers with their own desk</h2>
@@ -46,26 +46,9 @@
     </div>
   </section>
 
-  <section>
-    <h2 id="hooks" class="cc-h"><span class="cc-ico">⚡</span> Hooks, automatic reactions</h2>
-    <div class="cc-cbody">
-      <p><b>What it is.</b> A hook is an automatic action that fires at a set moment. After every save run the check, when a session starts load my context. They run outside the conversation, so they cost zero of your working memory, and you never have to remember to trigger them.</p>
-      <p><b>Why you use it.</b> The best move is to build a quality inspector right into a skill. Take a write-email skill with a hook that says "before finishing, review this email. Does it sound like a real person, not AI? If it's robotic, rewrite it." You only ever see the polished version. Every hook is three parts. <b>WHEN</b> is the event, <b>WHAT</b> is the thing it watches, and <b>DO</b> is the action, run a check, ask a yes/no, or spawn a reviewer.</p>
-      <p><b>Explore the lifecycle.</b> Click any moment to see what fires there and what you'd use it for.</p>
-      <div class="cc-embed"><iframe id="ccHooksFrame" src="hooks-explorer.html" title="Interactive hook lifecycle explorer" loading="lazy"></iframe></div>
-      <div class="cc-prompt"><p>Create a hook that reviews every draft before it's saved and rewrites it if it sounds robotic.</p><button class="cc-copy">Copy</button></div>
-      <p class="cc-cue">Or just say: <b>"create a hook for this"</b></p>
-      <details class="cc-deep"><summary>Go deeper: the lifecycle events</summary>
-        <div class="cc-deepbody">
-          <p>There are 14 events in total. Session start and end, before and after a tool runs, before you submit a prompt, when Claude finishes, and more. You'll mostly meet them through skills, not by wiring them by hand.</p>
-        </div>
-      </details>
-    </div>
-  </section>
-
   <div class="cc-modnav">
     <a href="cc101-4-skills.html"><span class="dir">← Previous</span><span class="ttl">4 · Skills</span></a>
-    <a class="next" href="cc101-6-whole-picture.html"><span class="dir">Next →</span><span class="ttl">6 · The Whole Picture</span></a>
+    <a class="next" href="cc101-6-hooks.html"><span class="dir">Next →</span><span class="ttl">6 · Hooks</span></a>
   </div>
 </div>
 
@@ -73,6 +56,5 @@
 <script src="toc.js"></script>
 <script src="shell.js"></script>
 <script src="cc-course.js"></script>
-<script>window.addEventListener('message',function(e){if(e.data&&e.data.ccHooks==='h'){var f=document.getElementById('ccHooksFrame');if(f&&e.data.h>200)f.style.height=(e.data.h+6)+'px'}});</script>
 </body>
 </html>

@@ -37,8 +37,9 @@ window.CLO_PRODUCTS = {
         { label: '2 · The Foundation', page: 'cc101-foundation', href: 'clo-course/cc101-2-foundation.html', keywords: ['tools','built-in tools','read','grep','bash','edit','write','permission','permissions','allow','deny','plan mode','modes','settings','safe'] },
         { label: '3 · Memory', page: 'cc101-memory', href: 'clo-course/cc101-3-memory.html', keywords: ['memory','claude.md','claude md','memory.md','hierarchy','rules','context window','imports','remember','routing'] },
         { label: '4 · Skills', page: 'cc101-skills', href: 'clo-course/cc101-4-skills.html', keywords: ['skill','skills','playbook','frontmatter','build your first skill','slash command','arguments','refine','follow-up','workflows','harness','harden','reliable','automatic check','quality gate'] },
-        { label: '5 · Extending', page: 'cc101-extending', href: 'clo-course/cc101-5-extending.html', keywords: ['sub-agents','subagents','agents','parallel','mcp','connections','notion','hooks','automation','extend'] },
-        { label: '6 · The Whole Picture', page: 'cc101-whole', href: 'clo-course/cc101-6-whole-picture.html', keywords: ['lifecycle','everything in action','network','quick reference','cheat sheet','best practices','whole picture'] }
+        { label: '5 · Extending', page: 'cc101-extending', href: 'clo-course/cc101-5-extending.html', keywords: ['sub-agents','subagents','agents','parallel','mcp','connections','notion','extend'] },
+        { label: '6 · Hooks', page: 'cc101-hooks', href: 'clo-course/cc101-6-hooks.html', keywords: ['hooks','automatic','automation','autopilot','lifecycle','sequence diagram','events','stop','quality gate','pretooluse','posttooluse','sessionstart','sessionend','triggers','reactions'] },
+        { label: '7 · The Whole Picture', page: 'cc101-whole', href: 'clo-course/cc101-7-whole-picture.html', keywords: ['lifecycle','everything in action','network','quick reference','cheat sheet','best practices','whole picture'] }
       ]},
       // ── Premium section: CLO-only. AIEB never gets this block, so it stays the base tier.
       //    When a skill course is built, swap its placeholder href (anchor on the library page)
@@ -81,8 +82,9 @@ window.CLO_PRODUCTS = {
         { label: '2 · The Foundation', page: 'cc101-foundation', href: 'clo-course/cc101-2-foundation.html', keywords: ['tools','built-in tools','bash','permission','permissions','plan mode','modes','settings'] },
         { label: '3 · Memory', page: 'cc101-memory', href: 'clo-course/cc101-3-memory.html', keywords: ['memory','claude.md','memory.md','hierarchy','context window','imports','remember'] },
         { label: '4 · Skills', page: 'cc101-skills', href: 'clo-course/cc101-4-skills.html', keywords: ['skill','skills','playbook','frontmatter','build your first skill','slash command','arguments','refine','harness','harden','reliable','automatic check'] },
-        { label: '5 · Extending', page: 'cc101-extending', href: 'clo-course/cc101-5-extending.html', keywords: ['sub-agents','subagents','agents','parallel','mcp','connections','hooks','automation'] },
-        { label: '6 · The Whole Picture', page: 'cc101-whole', href: 'clo-course/cc101-6-whole-picture.html', keywords: ['lifecycle','everything in action','network','quick reference','cheat sheet','best practices'] }
+        { label: '5 · Extending', page: 'cc101-extending', href: 'clo-course/cc101-5-extending.html', keywords: ['sub-agents','subagents','agents','parallel','mcp','connections'] },
+        { label: '6 · Hooks', page: 'cc101-hooks', href: 'clo-course/cc101-6-hooks.html', keywords: ['hooks','automatic','automation','autopilot','lifecycle','sequence diagram','events','stop','quality gate','triggers'] },
+        { label: '7 · The Whole Picture', page: 'cc101-whole', href: 'clo-course/cc101-7-whole-picture.html', keywords: ['lifecycle','everything in action','network','quick reference','cheat sheet','best practices'] }
       ]},
       { group: 'Courses', items: [
         { label: 'Business X-Ray', page: 'business-x-ray', href: 'clo-course/business-x-ray.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','swimlanes','process','assets','score','operating system'] },
@@ -184,10 +186,13 @@ window.CLO_LESSON_INDEX = [
   { page: 'cc101-extending', label: 'Claude Code 101 · Extending', href: 'clo-course/cc101-5-extending.html', lessons: [
     { id: 'subagents', group: '5 · Extending', name: 'Sub-agents, helpers with their own desk' },
     { id: 'parallel', group: '5 · Extending', name: 'Run several at once' },
-    { id: 'mcp', group: '5 · Extending', name: 'Connections (MCP)' },
-    { id: 'hooks', group: '5 · Extending', name: 'Hooks, automatic reactions' }
+    { id: 'mcp', group: '5 · Extending', name: 'Connections (MCP)' }
   ]},
-  { page: 'cc101-whole', label: 'Claude Code 101 · The Whole Picture', href: 'clo-course/cc101-6-whole-picture.html', lessons: [
+  { page: 'cc101-hooks', label: 'Claude Code 101 · Hooks', href: 'clo-course/cc101-6-hooks.html', lessons: [
+    { id: 'what', group: '6 · Hooks', name: 'What a hook is' },
+    { id: 'lifecycle', group: '6 · Hooks', name: 'The complete lifecycle (interactive)' }
+  ]},
+  { page: 'cc101-whole', label: 'Claude Code 101 · The Whole Picture', href: 'clo-course/cc101-7-whole-picture.html', lessons: [
     { id: 'lifecycle', group: '6 · The Whole Picture', name: 'How it all fits together' },
     { id: 'in-action', group: '6 · The Whole Picture', name: 'Everything in action' },
     { id: 'network', group: '6 · The Whole Picture', name: 'You at the top' },

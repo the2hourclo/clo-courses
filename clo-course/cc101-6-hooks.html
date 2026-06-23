@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hooks — Wiki</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="cc-course.css">
+</head>
+<body hidden data-page="cc101-hooks">
+
+<div id="doc-content">
+  <h1>Hooks: automatic reactions</h1>
+  <p class="cc-lead">Hooks are the autopilot layer. A hook is an automatic action that fires at a set moment while your AI Employee works, so the right thing happens on its own and you never have to remember to trigger it. This is the part that makes the whole system dependable.</p>
+
+  <section>
+    <h2 id="what" class="cc-h"><span class="cc-ico">⚡</span> What a hook is</h2>
+    <div class="cc-cbody">
+      <p><b>What it is.</b> A hook is an automatic action that fires at a set moment. After every save run the check, when a session starts load my context. They run outside the conversation, so they cost zero of your working memory, and you never have to remember to trigger them.</p>
+      <p><b>Why you use it.</b> The best move is to build a quality inspector right into a skill. Take a write-email skill with a hook that says "before finishing, review this email. Does it sound like a real person, not AI? If it's robotic, rewrite it." You only ever see the polished version. Every hook is three parts. <b>WHEN</b> is the event, <b>WHAT</b> is the thing it watches, and <b>DO</b> is the action, run a check, ask a yes/no, or spawn a reviewer.</p>
+      <div class="cc-eg">This is also how a <b>harness</b> fires. The automatic check you added to a skill back in the Skills module runs on a hook, usually the Stop event.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="lifecycle" class="cc-h"><span class="cc-ico">🔁</span> The complete lifecycle</h2>
+    <div class="cc-cbody">
+      <p>Here is one prompt from start to finish. Follow it top to bottom and you can see exactly where every hook fires, and where a sub-agent plugs in. Click any amber hook to see what it does.</p>
+      <div class="cc-embed"><iframe id="ccHooksFrame" src="hooks-explorer.html" title="Interactive hook lifecycle explorer" loading="lazy"></iframe></div>
+      <div class="cc-prompt"><p>Create a hook that reviews every draft before it's saved and rewrites it if it sounds robotic.</p><button class="cc-copy">Copy</button></div>
+      <p class="cc-cue">Or just say: <b>"create a hook for this"</b></p>
+      <details class="cc-deep"><summary>Go deeper: the 14 events</summary>
+        <div class="cc-deepbody">
+          <p>There are 14 events in total. Session start and end, before and after a tool runs, before you submit a prompt, when a sub-agent starts or stops, when Claude finishes, and more. You'll mostly meet them through skills, not by wiring them by hand.</p>
+          <p>The one worth knowing by name is <b>Stop</b>. It fires right before you see the result, and it can send the work back for a rewrite. That's the quality gate, and it's where most harnesses live.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <div class="cc-modnav">
+    <a href="cc101-5-extending.html"><span class="dir">← Previous</span><span class="ttl">5 · Extending</span></a>
+    <a class="next" href="cc101-7-whole-picture.html"><span class="dir">Next →</span><span class="ttl">7 · The Whole Picture</span></a>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+<script src="toc.js"></script>
+<script src="shell.js"></script>
+<script src="cc-course.js"></script>
+<script>window.addEventListener('message',function(e){if(e.data&&e.data.ccHooks==='h'){var f=document.getElementById('ccHooksFrame');if(f&&e.data.h>200)f.style.height=(e.data.h+6)+'px'}});</script>
+</body>
+</html>
