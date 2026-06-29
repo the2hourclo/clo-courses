@@ -274,15 +274,31 @@ body.show-terminal .m-terminal{display:block}
   <div class="hero rise d1">
     <div class="eyebrow">&#128273; Get Access</div>
     <h1>Let's get your AI&nbsp;Employee Builder running</h1>
-    <p class="lead">Six small steps, all inside VS Code &mdash; no terminal required, no coding. Tick each one off as you go. If you ever get stuck, Claude itself will walk you through it.</p>
+    <p class="lead">Seven small steps to get set up &mdash; mostly inside VS Code, no coding. Tick each one off as you go. If you ever get stuck, Claude itself will walk you through it.</p>
     <div class="reassure">
       <span>&#9201;&#65039; ~20 minutes</span>
-      <span>&#9989; 6 simple steps</span>
+      <span>&#9989; 7 simple steps</span>
       <span>&#129302; Claude helps if stuck</span>
     </div>
   </div>
 
-  <!-- PATH FORK -->
+  <!-- APP CHOOSER (first decision) -->
+  <div class="section-rule rise d2" style="margin-top:6px">First, which app are you using?</div>
+  <div class="fork rise d2">
+    <a class="fork-card" href="#claude-code-path">
+      <span class="fork-ic">&#128187;</span>
+      <span class="fork-tx"><strong>Claude Code</strong>Runs inside VS Code. Follow the guided steps below to install the plugin + MCP shell.</span>
+      <span class="fork-go">Use Claude Code &rarr;</span>
+    </a>
+    <a class="fork-card alt" href="#cowork">
+      <span class="fork-ic">&#129309;</span>
+      <span class="fork-tx"><strong>Claude Cowork</strong>Runs in the Claude desktop app &mdash; no terminal. Just download the one-click extension and paste your key.</span>
+      <span class="fork-go">&#11015;&#65039; Get the Cowork extension &rarr;</span>
+    </a>
+  </div>
+
+  <!-- PATH FORK (Claude Code experience level) -->
+  <div class="section-rule rise d2" id="claude-code-path">Using Claude Code?</div>
   <div class="fork rise d2">
     <a class="fork-card" href="#step1">
       <span class="fork-ic">&#128075;</span>
@@ -301,11 +317,11 @@ body.show-terminal .m-terminal{display:block}
     <div class="tracker-inner">
       <div class="tracker-top">
         <span class="tracker-label">&#128640; Your setup progress</span>
-        <span class="tracker-count"><b id="doneCount">0</b> of 6 done</span>
+        <span class="tracker-count"><b id="doneCount">0</b> of 7 done</span>
       </div>
       <div class="tracker-seg" id="trackerSeg">
-        <div class="tseg" data-d="1"></div><div class="tseg" data-d="2"></div><div class="tseg" data-d="3"></div>
-        <div class="tseg" data-d="4"></div><div class="tseg" data-d="5"></div><div class="tseg" data-d="6"></div>
+        <div class="tseg" data-d="1"></div><div class="tseg" data-d="2"></div><div class="tseg" data-d="3"></div><div class="tseg" data-d="4"></div>
+        <div class="tseg" data-d="5"></div><div class="tseg" data-d="6"></div><div class="tseg" data-d="7"></div>
       </div>
       <div class="tracker-reset"><button onclick="resetProgress()">Reset progress</button></div>
     </div>
@@ -396,6 +412,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <div class="substep"><div class="substep-badge">3</div><div class="substep-body">Go to <strong>Extensions</strong> &rarr; expand <strong>Advanced settings</strong> &rarr; under <strong>Extension Developer</strong>, click <strong>&ldquo;Install Extension&hellip;&rdquo;</strong> and select the <code>.mcpb</code> file you downloaded.</div></div>
     <div class="substep"><div class="substep-badge">4</div><div class="substep-body"><strong>Paste your license key</strong> in the form that appears, then click <strong>Install</strong>. Your key is stored securely on your own device.</div></div>
     <div class="substep"><div class="substep-badge">5</div><div class="substep-body">Start a <strong>Cowork</strong> session and say <code>business x-ray</code> or <code>create a skill</code>.</div></div>
+    <div class="substep"><div class="substep-badge">6</div><div class="substep-body"><strong>Install Draw.io Desktop</strong> to open the <code>.drawio</code> maps your AI Employees draw &mdash; <a href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">download it here</a> and run the installer for your OS.</div></div>
 
     <div class="callout callout-tip"><strong>Success looks like:</strong> the skill kicks in and Claude follows its steps &mdash; pulling the real instructions from the MCP behind the scenes, just like it does in Claude Code.</div>
     <div class="callout callout-warning"><strong>Don't paste the MCP URL into &ldquo;Custom Connectors.&rdquo;</strong> That screen is OAuth-only and can't take your license key &mdash; install the downloaded <strong>file</strong> instead.</div>
@@ -487,6 +504,30 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   <details class="step" id="step6" data-step="6">
     <summary class="step-sum">
       <span class="step-check"><span class="num">6</span><span class="tick">&#10003;</span></span>
+      <span class="step-titles"><span class="step-t">Install Draw.io Desktop</span><span class="step-sub">Opens the maps your AI Employees draw</span></span>
+      <span class="step-meta"><span class="time">~3 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+    </summary>
+    <div class="step-content">
+      <p>Your onboarding builds an <strong>AI Employee Map</strong> &mdash; a <code>.drawio</code> diagram of your business &mdash; and the Business X-Ray draws more as you go. <strong>Draw.io Desktop</strong> is the free app that opens, edits, and exports those files right on your computer, no browser or account needed. Install it now so your map is ready to open the moment onboarding creates it.</p>
+
+      <div style="text-align:center;margin:6px 0 14px">
+        <a href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener" style="display:inline-block;padding:13px 28px;background:var(--accent);color:#0a0a0a;border-radius:var(--radius);font-weight:800;font-size:14px;text-decoration:none">&#11015;&#65039; Download Draw.io Desktop &#8599;</a>
+      </div>
+
+      <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the releases page</strong> above and scroll down to <strong>Assets</strong>.</div></div>
+      <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Pick your installer:</strong> <code>...-windows-installer.exe</code> for <strong>Windows</strong>, <code>...-universal.dmg</code> for <strong>Mac</strong>, or the <code>.deb</code> / <code>.AppImage</code> for <strong>Linux</strong>.</div></div>
+      <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Run it with the default options.</strong> Once it's installed, any <code>.drawio</code> file opens with a double-click.</div></div>
+
+      <div class="callout callout-tip"><strong>Why local?</strong> Your maps stay on your own machine, and the app opens the exact <code>.drawio</code> files in your workspace folders &mdash; nothing to upload.</div>
+      <div class="callout callout-info"><strong>In VS Code already?</strong> The <em>Draw.io Integration</em> extension also previews <code>.drawio</code> files inside the editor &mdash; a nice extra, but install the desktop app here.</div>
+      <button class="done-btn" onclick="markDone(6)"><span class="dlabel">Mark step done</span></button>
+    </div>
+  </details>
+
+  <!-- ═══════════════ STEP 7 ═══════════════ -->
+  <details class="step" id="step7" data-step="7">
+    <summary class="step-sum">
+      <span class="step-check"><span class="num">7</span><span class="tick">&#10003;</span></span>
       <span class="step-titles"><span class="step-t">Onboard &mdash; build your first skill</span><span class="step-sub">The fun part</span></span>
       <span class="step-meta"><span class="time">~10 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
@@ -503,7 +544,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
         </tbody>
       </table>
       <p style="font-size:12.5px;color:var(--text-dim);margin-top:10px">Takes ~10 minutes. End state: your authoring workspace is set up and your first custom skill is built and running &mdash; plus you know exactly how to build more (just say <code>create a skill for X</code> anytime).</p>
-      <button class="done-btn" onclick="markDone(6)"><span class="dlabel">Mark step done</span></button>
+      <button class="done-btn" onclick="markDone(7)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
 
@@ -591,7 +632,7 @@ Check anything you can: Node.js version, whether the thin plugin is installed, w
 </div>
 
 <script>
-var STEPS = 6, KEY = 'aieb_get_access_done_v1';
+var STEPS = 7, KEY = 'aieb_get_access_done_v2';
 function loadDone(){ try { return new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch(e){ return new Set(); } }
 function saveDone(s){ try { localStorage.setItem(KEY, JSON.stringify([].slice.call(s))); } catch(e){} }
 var done = loadDone();
