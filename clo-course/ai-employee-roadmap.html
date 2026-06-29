@@ -8,37 +8,79 @@
 <link rel="stylesheet" href="shell.css">
 <style>
 /* roadmap-only components — aer- namespaced, built on shared tokens */
-.aer-lead{font-size:var(--t-body);color:var(--text-200);max-width:640px}
+.aer-lead{font-size:var(--t-body);color:var(--text-200);max-width:660px;line-height:1.6}
 
-/* PROGRESS */
-.aer-prog{background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius);padding:14px 18px;margin:var(--sp-5) 0 var(--sp-6)}
-.aer-prog-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--text-200);margin-bottom:9px}
-.aer-prog-top b{color:var(--accent)}
+/* ── CONTROL PANEL (scoreboard + next move as one unit) ── */
+.aer-panel{background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius-lg);overflow:hidden;margin:var(--sp-6) 0 12px}
+.aer-hint{font-size:12.5px;color:var(--text-300);line-height:1.55;margin:0 0 var(--sp-6);max-width:620px}
+.aer-hint code{font-family:var(--font-mono);font-size:.9em;background:var(--bg-code);border:1px solid var(--border-200);border-radius:5px;padding:1px 5px;color:var(--text-200)}
+.aer-pathintro{color:var(--text-300);max-width:640px}
+
+/* ── HUD / SCOREBOARD (top row of the panel) ── */
+.aer-hud{display:flex;gap:18px;align-items:center;flex-wrap:wrap;padding:16px 20px 17px;position:relative}
+.aer-emp{display:flex;align-items:center;gap:12px;padding-right:18px;border-right:1px solid var(--border-200)}
+.aer-emp-bot{font-size:30px;line-height:1}
+.aer-emp-num{font-size:32px;font-weight:800;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums}
+.aer-emp-lbl{font-size:12px;color:var(--text-300);font-weight:600;line-height:1.2;max-width:96px}
+.aer-hud-prog{flex:1;min-width:190px}
+.aer-hud-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--text-200);margin-bottom:9px}
+.aer-hud-top b{color:var(--accent)}
+.aer-hud-bar{height:9px;border-radius:6px;background:var(--bg-300);overflow:hidden}
+.aer-hud-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-hover));width:0;transition:width .5s cubic-bezier(.2,.8,.2,1)}
 .aer-prog-reset{background:none;border:0;color:var(--text-500);font-size:11.5px;cursor:pointer;text-decoration:underline;font-family:var(--font-body)}
 .aer-prog-reset:hover{color:var(--text-300)}
-.aer-prog-bar{height:8px;border-radius:5px;background:var(--bg-300);overflow:hidden}
-.aer-prog-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-hover));width:0;transition:width .4s cubic-bezier(.2,.8,.2,1)}
+/* +1 float on employee built */
+.aer-float{position:absolute;left:38px;top:14px;font-size:18px;font-weight:800;color:var(--accent);pointer-events:none;opacity:0}
+.aer-float.go{animation:aer-float 1.3s ease forwards}
+@keyframes aer-float{0%{opacity:0;transform:translateY(8px)}18%{opacity:1}100%{opacity:0;transform:translateY(-34px)}}
 
-/* PHASE ACCORDION */
-.aer-phase{background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius-lg);margin-bottom:10px;overflow:hidden;transition:border-color .2s}
-.aer-phase[open]{border-color:var(--border-300)}
-.aer-phase.done{border-color:var(--accent-border)}
-.aer-phsum{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:15px 18px;user-select:none}
-.aer-phsum::-webkit-details-marker{display:none}
-.aer-phsum:hover{background:var(--bg-000)}
-.aer-pdot{flex-shrink:0;width:32px;height:32px;border-radius:9px;background:var(--bg-000);border:1px solid var(--border-200);color:var(--text-300);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;transition:all .2s}
-.aer-phase.done .aer-pdot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.aer-pdot .tick{display:none}
-.aer-phase.done .aer-pdot .num{display:none}
-.aer-phase.done .aer-pdot .tick{display:block}
-.aer-pttl{flex:1;min-width:0}
-.aer-pname{font-weight:700;font-size:16px;color:var(--text-100);letter-spacing:-.2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.aer-gloss{font-weight:400;font-size:13px;color:var(--text-500)}
+/* ── YOUR NEXT MOVE (bottom row of the panel) ── */
+.aer-next{border-top:1px solid var(--border-100);background:var(--accent-dim);padding:16px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.aer-next.win{background:linear-gradient(135deg,var(--accent-dim-2),transparent);text-align:center;justify-content:center;flex-direction:column;gap:8px;padding:28px 22px}
+.aer-next-main{flex:1;min-width:200px}
+.aer-next-label{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:5px}
+.aer-next-title{font-weight:700;font-size:17px;color:var(--text-100);letter-spacing:-.2px}
+.aer-next-sub{font-size:13px;color:var(--text-400);margin-top:3px}
+.aer-next-emoji{font-size:38px;line-height:1}
+.aer-next-go{flex-shrink:0;border:0;background:var(--accent);color:var(--accent-ink);font-family:var(--font-body);font-weight:800;font-size:14px;padding:12px 22px;border-radius:9px;cursor:pointer;transition:all .15s}
+.aer-next-go:hover{background:var(--accent-hover);transform:translateY(-1px)}
+
+/* ── BUILD PATH ── */
+.aer-path{position:relative;margin-top:14px}
+.aer-node{position:relative;padding-left:60px;margin-bottom:9px}
+/* connector rail behind the dots */
+.aer-node::before{content:'';position:absolute;left:18px;top:34px;bottom:-9px;width:2px;background:var(--border-200);z-index:0;transition:background .3s}
+.aer-node:last-of-type::before{display:none}
+.aer-node.done::before{background:var(--accent)}
+/* the dot */
+.aer-dot{position:absolute;left:0;top:11px;width:38px;height:38px;border-radius:50%;background:var(--bg-000);border:2px solid var(--border-300);color:var(--text-300);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;z-index:2;transition:transform .25s,background .25s,border-color .25s,color .25s,box-shadow .3s}
+.aer-dot .tick{display:none}
+.aer-node.done .aer-dot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);box-shadow:0 0 0 3px var(--bg-300)}
+.aer-node.done .aer-dot .num{display:none}
+.aer-node.done .aer-dot .tick{display:block}
+.aer-node.current .aer-dot{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 5px var(--accent-dim-2);animation:aer-pulse 2.2s ease-in-out infinite}
+@keyframes aer-pulse{0%,100%{box-shadow:0 0 0 5px var(--accent-dim-2)}50%{box-shadow:0 0 0 9px transparent}}
+@keyframes aer-pop{0%{transform:scale(1)}45%{transform:scale(1.28)}100%{transform:scale(1)}}
+.aer-dot.pop{animation:aer-pop .45s ease}
+/* summary card */
+.aer-node>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 16px;user-select:none;background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius-lg);transition:border-color .2s,background .2s}
+.aer-node>summary::-webkit-details-marker{display:none}
+.aer-node>summary:hover{background:var(--bg-000)}
+.aer-node[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0}
+.aer-node.done>summary{border-color:var(--accent-border)}
+.aer-node.current>summary{border-color:var(--accent-border)}
+.aer-htext{flex:1;min-width:0}
+.aer-title{font-weight:700;font-size:16px;color:var(--text-100);letter-spacing:-.2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;line-height:1.25}
+.aer-gloss{font-weight:400;font-size:13px;color:var(--text-400)}
+.aer-tease{font-size:12.5px;color:var(--text-300);margin-top:3px;display:block}
+.aer-node.done .aer-title{color:var(--text-300)}
 .aer-badge{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);background:var(--accent-dim-2);border:1px solid var(--accent-border);padding:2px 8px;border-radius:20px}
-.aer-psig{font-size:12.5px;color:var(--text-400);margin-top:3px}
+.aer-here{display:none;flex-shrink:0;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--accent-ink);background:var(--accent);padding:4px 9px;border-radius:20px;white-space:nowrap}
+.aer-node.current .aer-here{display:inline-flex}
 .aer-pchev{flex-shrink:0;color:var(--text-500);font-family:var(--font-mono);transition:transform .2s}
-.aer-phase[open] .aer-pchev{transform:rotate(180deg)}
-.aer-body{padding:4px 18px 18px;border-top:1px solid var(--border-100)}
+.aer-node[open] .aer-pchev{transform:rotate(180deg)}
+/* body */
+.aer-body{background:var(--bg-100);border:1px solid var(--border-100);border-top:0;border-radius:0 0 var(--radius-lg) var(--radius-lg);padding:2px 18px 18px}
 .aer-body h4{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--text-400);margin:18px 0 8px}
 .aer-what{font-size:14px;color:var(--text-200);line-height:1.65;margin-top:14px}
 .aer-what b{color:var(--text-100)}
@@ -60,7 +102,11 @@
 .aer-copy.copied{background:var(--bg-code);color:var(--accent);border-color:var(--accent)}
 .aer-cue{font-size:13px;color:var(--text-300);margin-top:4px}
 .aer-cue b{color:var(--accent);font-family:var(--font-mono);font-weight:700}
-.aer-tip{font-size:12.5px;color:var(--text-500);margin:8px 0 0}
+.aer-tip{font-size:12.5px;color:var(--text-400);margin:8px 0 0}
+.aer-note{display:flex;gap:10px;align-items:flex-start;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:var(--radius);padding:12px 14px;margin:16px 0 0;font-size:13px;color:var(--text-200);line-height:1.6}
+.aer-note .aer-note-ic{flex-shrink:0;font-size:16px;line-height:1.3}
+.aer-note b{color:var(--text-100)}
+.aer-note code{font-family:var(--font-mono);font-size:.88em;background:var(--bg-code);border:1px solid var(--border-200);border-radius:5px;padding:1px 5px;color:var(--text-100)}
 
 /* PHASE 2 use-case tabs */
 .aer-tabs{display:flex;gap:5px;flex-wrap:wrap;background:var(--bg-200);border:1px solid var(--border-200);border-radius:11px;padding:5px;margin:0 0 12px}
@@ -69,14 +115,15 @@
 .aer-tab.active{background:var(--accent);color:var(--accent-ink)}
 .aer-pack{display:none}.aer-pack.active{display:block}
 
-/* LOOP CARD */
-.aer-loop{background:linear-gradient(135deg,var(--accent-dim-2),var(--bg-100) 70%);border:1px solid var(--accent-border);border-radius:var(--radius-lg);padding:18px 20px;margin-top:6px}
-.aer-loop-t{font-weight:700;font-size:16px;color:var(--text-100);display:flex;align-items:center;gap:9px}
-.aer-loop p{font-size:14px;color:var(--text-200);line-height:1.6;margin:8px 0 0}
+/* mark-phase-done button inside body — quiet, secondary, right-aligned */
+.aer-finish{margin:18px 0 2px auto;width:fit-content;display:flex;align-items:center;gap:7px;padding:8px 15px;border-radius:8px;border:1px solid var(--border-200);background:transparent;color:var(--text-300);font-family:var(--font-body);font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s}
+.aer-finish:hover{border-color:var(--accent-border);color:var(--accent);background:var(--accent-dim)}
+.aer-finish::before{content:'\2713';font-weight:800;opacity:.7}
+.aer-node.done .aer-finish{border-color:var(--accent-border);color:var(--accent)}
 
 /* WHEN DO I cheat sheet */
 .aer-qa{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:var(--sp-5) 0}
-@media(max-width:640px){.aer-qa{grid-template-columns:1fr}}
+@media(max-width:640px){.aer-qa{grid-template-columns:1fr}.aer-emp{border-right:0;padding-right:0}}
 .aer-qa-card{background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius);padding:14px 16px}
 .aer-q{font-weight:700;font-size:14px;color:var(--accent);margin-bottom:5px}
 .aer-a{font-size:13.5px;color:var(--text-300);line-height:1.55}
@@ -87,26 +134,37 @@
 
 <div id="doc-content">
   <h1>The AI Employee Roadmap</h1>
-  <p class="aer-lead">A step-by-step path from your first AI Employee to a set of them that run your work for you. Each phase below tells you what it is, what to do, and gives you prompts to paste straight into Claude Code. Check steps off as you go &mdash; your progress is saved on this device.</p>
+  <p class="aer-lead">Your home base. Whenever you're not sure what to do next, come back here &mdash; it shows you where you are and the one next thing to build.</p>
 
-  <div class="callout callout--tip">
-    <svg class="callout-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
-    <div>New to this? You don't have to memorize anything. Open a phase, follow the steps, and when in doubt just tell Claude Code <code>what's next</code> &mdash; it reads where you are and walks you through the next move.</div>
+  <!-- CONTROL PANEL: scoreboard + your next move, one unit -->
+  <div class="aer-panel">
+    <div class="aer-hud">
+      <div class="aer-float" id="aerFloat">+1 &#129302;</div>
+      <div class="aer-emp">
+        <span class="aer-emp-bot">&#129302;</span>
+        <span class="aer-emp-num" id="aerEmp">0</span>
+        <span class="aer-emp-lbl">AI Employees built</span>
+      </div>
+      <div class="aer-hud-prog">
+        <div class="aer-hud-top"><span>This one: <b id="aerDone">0</b> of 7 phases</span><button class="aer-prog-reset" id="aerReset">Reset this one</button></div>
+        <div class="aer-hud-bar"><span id="aerFill"></span></div>
+      </div>
+    </div>
+    <div class="aer-next" id="aerNext"></div>
   </div>
-
-  <div class="aer-prog">
-    <div class="aer-prog-top"><span><b id="aerDone">0</b> of 7 phases done</span><button class="aer-prog-reset" id="aerReset">Reset progress</button></div>
-    <div class="aer-prog-bar"><span id="aerFill"></span></div>
-  </div>
+  <p class="aer-hint">Stuck, or just back for the next move? Tell Claude Code <code>what's next</code> anytime &mdash; it reads where you are and walks you through it.</p>
 
   <h2 id="path">The path</h2>
-  <p>Seven phases. The first two happen during onboarding &mdash; tick them off if you've done them. The rest are yours to work through, and they don't have to be in order: jump to whichever one matches what you're hitting now.</p>
+  <p class="aer-pathintro">Seven phases, one node at a time. You did the first two during onboarding &mdash; tick them off, then pick up wherever you are.</p>
+
+  <div class="aer-path">
 
   <!-- PHASE 1 -->
-  <details class="aer-phase" data-phase="1" open>
-    <summary class="aer-phsum">
-      <span class="aer-pdot"><span class="num">1</span><span class="tick">&#10003;</span></span>
-      <span class="aer-pttl"><span class="aer-pname">Map your business <span class="aer-badge">onboarding</span></span><span class="aer-psig">Start here &mdash; find the one job worth handing off first</span></span>
+  <details class="aer-node" data-phase="1">
+    <span class="aer-dot"><span class="num">1</span><span class="tick">&#10003;</span></span>
+    <summary>
+      <span class="aer-htext"><span class="aer-title">Map your business <span class="aer-badge">onboarding</span></span><span class="aer-tease">Start here &mdash; find the one job worth handing off first</span></span>
+      <span class="aer-here">You are here</span>
       <span class="aer-pchev">&#9662;</span>
     </summary>
     <div class="aer-body">
@@ -120,14 +178,17 @@
       <h4>Prompts to copy</h4>
       <div class="aer-prompt"><p>Map my business and show me the one job I should hand to an AI Employee first.</p><button class="aer-copy">Copy</button></div>
       <p class="aer-cue">Or just say: <b>"map my business"</b></p>
+      <div class="aer-note"><span class="aer-note-ic">&#128208;</span><div><b>First time? Install the Draw.io extension so you can see your map.</b> Your business map saves as a <code>.drawio</code> file. In VS Code, open Extensions (<code>Ctrl+Shift+X</code>), search <b>"Draw.io Integration"</b> by Henning Dieterichs, and click <b>Install</b> &mdash; then your map opens visually whenever you click it. <a href="business-x-ray.html">Full setup &rarr;</a></div></div>
+      <button class="aer-finish" data-finish="1">Mark this phase done</button>
     </div>
   </details>
 
   <!-- PHASE 2 -->
-  <details class="aer-phase" data-phase="2">
-    <summary class="aer-phsum">
-      <span class="aer-pdot"><span class="num">2</span><span class="tick">&#10003;</span></span>
-      <span class="aer-pttl"><span class="aer-pname">Build your first AI Employee <span class="aer-badge">onboarding</span></span><span class="aer-psig">Turn that one job into a skill that does it for you</span></span>
+  <details class="aer-node" data-phase="2">
+    <span class="aer-dot"><span class="num">2</span><span class="tick">&#10003;</span></span>
+    <summary>
+      <span class="aer-htext"><span class="aer-title">Build your first AI Employee <span class="aer-badge">onboarding</span></span><span class="aer-tease">Turn that one job into a skill that does it for you</span></span>
+      <span class="aer-here">You are here</span>
       <span class="aer-pchev">&#9662;</span>
     </summary>
     <div class="aer-body">
@@ -170,20 +231,22 @@
         <div class="aer-prompt"><p>Build me a skill that turns a messy meeting transcript into decisions, action items with owners, and open questions.</p><button class="aer-copy">Copy</button></div>
       </div>
       <p class="aer-cue">Or just say: <b>"create a skill for [the job]"</b></p>
+      <button class="aer-finish" data-finish="2">Mark this phase done</button>
     </div>
   </details>
 
   <!-- PHASE 3 -->
-  <details class="aer-phase" data-phase="3">
-    <summary class="aer-phsum">
-      <span class="aer-pdot"><span class="num">3</span><span class="tick">&#10003;</span></span>
-      <span class="aer-pttl"><span class="aer-pname">Make it reliable <span class="aer-gloss">&mdash; add a harness</span></span><span class="aer-psig">Your skill works but sometimes drifts? Lock it in.</span></span>
+  <details class="aer-node" data-phase="3">
+    <span class="aer-dot"><span class="num">3</span><span class="tick">&#10003;</span></span>
+    <summary>
+      <span class="aer-htext"><span class="aer-title">Make it reliable <span class="aer-gloss">&mdash; add a harness</span></span><span class="aer-tease">Your skill works but sometimes drifts? Lock it in.</span></span>
+      <span class="aer-here">You are here</span>
       <span class="aer-pchev">&#9662;</span>
     </summary>
     <div class="aer-body">
       <p class="aer-what">A new skill usually works &mdash; until one day the output wanders, or it ignores one of its own rules. The fix isn't to nag it with more instructions. It's a <b>harness</b>: an automatic check that runs every time and catches the slip before it reaches you. You don't write it &mdash; you tell Claude what "good" looks like and it builds the check.</p>
       <h4>When you're ready</h4>
-      <p class="aer-psig" style="margin:0">Your skill works, but its output sometimes drifts, or it keeps breaking a rule you gave it (a banned word, a format, a length).</p>
+      <p class="aer-tease" style="margin:0">Your skill works, but its output sometimes drifts, or it keeps breaking a rule you gave it (a banned word, a format, a length).</p>
       <h4>Do this</h4>
       <ul class="aer-steps">
         <li class="aer-step"><input type="checkbox" data-step="3-1" data-phase="3"><span>Run your skill a few times and note exactly where it slips (the rule it breaks).</span></li>
@@ -193,21 +256,27 @@
       <h4>Prompts to copy</h4>
       <div class="aer-prompt"><p>Harden my [skill name] so it can't drift. Add an automatic check that runs every time.</p><button class="aer-copy">Copy</button></div>
       <div class="aer-prompt"><p>My [skill name] keeps [the mistake — e.g. using em-dashes / going off-brand]. Add a harness that catches that before it reaches me.</p><button class="aer-copy">Copy</button></div>
-      <p class="aer-cue">Or just say: <b>"harden this skill"</b></p>
+      <p class="aer-tip" style="margin-top:14px"><b>Keep it reliable as it changes</b> &mdash; add evals (tests that run every time, so it can't quietly regress later):</p>
+      <div class="aer-prompt"><p>Generate evals for my [skill name] — turn a few real examples into tests and run them every time, so it can't silently regress.</p><button class="aer-copy">Copy</button></div>
+      <p class="aer-tip" style="margin-top:14px"><b>Not triggering right?</b> If it won't fire when it should, or fires for the wrong requests:</p>
+      <div class="aer-prompt"><p>My [skill name] isn't triggering reliably. Optimize its description so it fires for the right requests and not the wrong ones.</p><button class="aer-copy">Copy</button></div>
+      <p class="aer-cue">Or just say: <b>"harden this skill"</b>, <b>"generate evals for this"</b>, or <b>"fix this skill's triggering"</b></p>
+      <button class="aer-finish" data-finish="3">Mark this phase done</button>
     </div>
   </details>
 
   <!-- PHASE 4 -->
-  <details class="aer-phase" data-phase="4">
-    <summary class="aer-phsum">
-      <span class="aer-pdot"><span class="num">4</span><span class="tick">&#10003;</span></span>
-      <span class="aer-pttl"><span class="aer-pname">Connect skills into a system</span><span class="aer-psig">One skill needs another? Chain them into one flow.</span></span>
+  <details class="aer-node" data-phase="4">
+    <span class="aer-dot"><span class="num">4</span><span class="tick">&#10003;</span></span>
+    <summary>
+      <span class="aer-htext"><span class="aer-title">Connect skills into a system</span><span class="aer-tease">One skill needs another? Chain them into one flow.</span></span>
+      <span class="aer-here">You are here</span>
       <span class="aer-pchev">&#9662;</span>
     </summary>
     <div class="aer-body">
       <p class="aer-what">A single job is often several steps: intake &rarr; do the work &rarr; check it &rarr; hand it off. When one skill needs another to run first, you chain them into a <b>skill system</b> &mdash; an AI Employee that does the <em>whole</em> job, not one slice of it.</p>
       <h4>When you're ready</h4>
-      <p class="aer-psig" style="margin:0">You catch yourself running one skill, then copying its output into another. Those steps belong together.</p>
+      <p class="aer-tease" style="margin:0">You catch yourself running one skill, then copying its output into another. Those steps belong together.</p>
       <h4>Do this</h4>
       <ul class="aer-steps">
         <li class="aer-step"><input type="checkbox" data-step="4-1" data-phase="4"><span>Write down the steps of the bigger job, in the order they happen.</span></li>
@@ -218,20 +287,22 @@
       <div class="aer-prompt"><p>Build me a skill system for [the whole job]. The steps are: [step 1] then [step 2] then [step 3].</p><button class="aer-copy">Copy</button></div>
       <div class="aer-prompt"><p>Chain my [skill A] and [skill B] into one flow so I don't have to move the work between them.</p><button class="aer-copy">Copy</button></div>
       <p class="aer-cue">Or just say: <b>"build a skill system for this"</b></p>
+      <button class="aer-finish" data-finish="4">Mark this phase done</button>
     </div>
   </details>
 
   <!-- PHASE 5 -->
-  <details class="aer-phase" data-phase="5">
-    <summary class="aer-phsum">
-      <span class="aer-pdot"><span class="num">5</span><span class="tick">&#10003;</span></span>
-      <span class="aer-pttl"><span class="aer-pname">Hand work to an agent</span><span class="aer-psig">Want it to run on its own and report back?</span></span>
+  <details class="aer-node" data-phase="5">
+    <span class="aer-dot"><span class="num">5</span><span class="tick">&#10003;</span></span>
+    <summary>
+      <span class="aer-htext"><span class="aer-title">Hand work to an agent</span><span class="aer-tease">Want it to run on its own and report back?</span></span>
+      <span class="aer-here">You are here</span>
       <span class="aer-pchev">&#9662;</span>
     </summary>
     <div class="aer-body">
       <p class="aer-what">Some jobs you don't want to walk through step by step &mdash; you want to say "go do this and report back." That's an <b>agent</b>: it runs on its own, in the background or alongside other work, and hands you the result. Use it when supervising each step is the slow part.</p>
       <h4>When you're ready</h4>
-      <p class="aer-psig" style="margin:0">The work could run in the background or in parallel, and you'd rather get a finished report than babysit it.</p>
+      <p class="aer-tease" style="margin:0">The work could run in the background or in parallel, and you'd rather get a finished report than babysit it.</p>
       <h4>Do this</h4>
       <ul class="aer-steps">
         <li class="aer-step"><input type="checkbox" data-step="5-1" data-phase="5"><span>Pick a job you'd rather delegate than watch (research, a first pass, a batch).</span></li>
@@ -242,20 +313,22 @@
       <div class="aer-prompt"><p>Create an agent that [does the job] on its own and reports back when it's done. Here's what "done" looks like: [your standard].</p><button class="aer-copy">Copy</button></div>
       <div class="aer-prompt"><p>Make a background agent for [the task] so I can keep working while it runs.</p><button class="aer-copy">Copy</button></div>
       <p class="aer-cue">Or just say: <b>"create an agent for this"</b></p>
+      <button class="aer-finish" data-finish="5">Mark this phase done</button>
     </div>
   </details>
 
   <!-- PHASE 6 -->
-  <details class="aer-phase" data-phase="6">
-    <summary class="aer-phsum">
-      <span class="aer-pdot"><span class="num">6</span><span class="tick">&#10003;</span></span>
-      <span class="aer-pttl"><span class="aer-pname">Make a shortcut <span class="aer-gloss">&mdash; a command</span></span><span class="aer-psig">Doing the same thing a lot? Give it one word.</span></span>
+  <details class="aer-node" data-phase="6">
+    <span class="aer-dot"><span class="num">6</span><span class="tick">&#10003;</span></span>
+    <summary>
+      <span class="aer-htext"><span class="aer-title">Make a shortcut <span class="aer-gloss">&mdash; a command</span></span><span class="aer-tease">Doing the same thing a lot? Give it one word.</span></span>
+      <span class="aer-here">You are here</span>
       <span class="aer-pchev">&#9662;</span>
     </summary>
     <div class="aer-body">
-      <p class="aer-what">When you run the same thing the same way over and over, stop re-explaining it. Turn it into a <b>command</b> &mdash; a <code>/shortcut</code> you type once and Claude runs the whole routine.</p>
+      <p class="aer-what">When you run the same thing the same way over and over, stop re-explaining it. Turn it into a <b>command</b> &mdash; a <code>/shortcut</code> you run whenever you want it. You're still the one who kicks it off; it just saves you re-typing the whole request every time.</p>
       <h4>When you're ready</h4>
-      <p class="aer-psig" style="margin:0">You've typed nearly the same request more than a few times. It wants a name.</p>
+      <p class="aer-tease" style="margin:0">You've typed nearly the same request more than a few times. It wants a name.</p>
       <h4>Do this</h4>
       <ul class="aer-steps">
         <li class="aer-step"><input type="checkbox" data-step="6-1" data-phase="6"><span>Notice a request you make the same way again and again.</span></li>
@@ -265,20 +338,22 @@
       <h4>Prompts to copy</h4>
       <div class="aer-prompt"><p>Make a command for [the routine] so I can run it by typing one short slash command.</p><button class="aer-copy">Copy</button></div>
       <p class="aer-cue">Or just say: <b>"make a command for this"</b></p>
+      <button class="aer-finish" data-finish="6">Mark this phase done</button>
     </div>
   </details>
 
   <!-- PHASE 7 -->
-  <details class="aer-phase" data-phase="7">
-    <summary class="aer-phsum">
-      <span class="aer-pdot"><span class="num">7</span><span class="tick">&#10003;</span></span>
-      <span class="aer-pttl"><span class="aer-pname">Put it on autopilot <span class="aer-gloss">&mdash; hooks, loops, schedules</span></span><span class="aer-psig">Take yourself out of the loop entirely.</span></span>
+  <details class="aer-node" data-phase="7">
+    <span class="aer-dot"><span class="num">7</span><span class="tick">&#10003;</span></span>
+    <summary>
+      <span class="aer-htext"><span class="aer-title">Put it on autopilot <span class="aer-gloss">&mdash; hooks, loops, schedules</span></span><span class="aer-tease">Take yourself out of the loop entirely.</span></span>
+      <span class="aer-here">You are here</span>
       <span class="aer-pchev">&#9662;</span>
     </summary>
     <div class="aer-body">
-      <p class="aer-what">The last step is removing yourself. A <b>hook</b> fires automatically on an event (run a check after every save). A <b>schedule</b> runs the work on its own (every Monday at 9am). A <b>loop</b> repeats until something's done. Now the outcome happens whether or not you remember it.</p>
+      <p class="aer-what">A command still waits for you to type it &mdash; the last step removes even that. A <b>hook</b> fires automatically on an event (run a check after every save). A <b>schedule</b> runs the work on its own (every Monday at 9am). A <b>loop</b> repeats until something's done. Now the outcome happens without you starting it &mdash; whether or not you remember.</p>
       <h4>When you're ready</h4>
-      <p class="aer-psig" style="margin:0">Something should happen on an event, or on a clock, without you starting it.</p>
+      <p class="aer-tease" style="margin:0">Something should happen on an event, or on a clock, without you starting it.</p>
       <h4>Do this</h4>
       <ul class="aer-steps">
         <li class="aer-step"><input type="checkbox" data-step="7-1" data-phase="7"><span>Decide what should run without you &mdash; on an event, or on a schedule.</span></li>
@@ -287,16 +362,19 @@
       </ul>
       <h4>Prompts to copy</h4>
       <div class="aer-prompt"><p>Create a hook that [does the thing] automatically every time [the event happens].</p><button class="aer-copy">Copy</button></div>
-      <div class="aer-prompt"><p>Run my [skill] on a schedule &mdash; [e.g. every Monday at 9am] &mdash; and send me the result.</p><button class="aer-copy">Copy</button></div>
-      <p class="aer-cue">Or just say: <b>"create a hook for this"</b> or <b>"run this on a schedule"</b></p>
+      <div class="aer-prompt"><p>Graduate my [skill name] to a scheduled routine — it's proven, so run it unattended [e.g. every Monday at 9am], add the safety guard rails, and send me the result.</p><button class="aer-copy">Copy</button></div>
+      <p class="aer-cue">Or just say: <b>"create a hook for this"</b> or <b>"graduate this to a schedule"</b></p>
+      <button class="aer-finish" data-finish="7">Mark this phase done</button>
     </div>
   </details>
 
-  <!-- LOOP -->
-  <div class="aer-loop">
-    <div class="aer-loop-t">&#8635;&nbsp; Then build the next one</div>
-    <p>When this AI Employee is reliable, connected, and automatic &mdash; map the next bottleneck and do it again. Growth here isn't a longer to-do list; it's <b>more employees</b>, each taken up this same ladder. Say <b>"what's next"</b> or <b>"map my business"</b> to start the next one.</p>
-  </div>
+  </div><!-- /aer-path -->
+
+  <h2 id="tuneup">Keep your employees sharp</h2>
+  <p class="aer-pathintro">As you add more AI Employees, give the whole set a tune-up now and then &mdash; catch overlap, fix drift, and tidy anything that's grown messy. This is part of running the loop, not a one-off.</p>
+  <div class="aer-prompt"><p>Audit my skill library — find overlap, skill-soup, and anything that's grown messy, and tell me what to fix first.</p><button class="aer-copy">Copy</button></div>
+  <div class="aer-prompt"><p>Upgrade my skills based on that audit — clean up the structure and routing, and check each change with me before applying it.</p><button class="aer-copy">Copy</button></div>
+  <p class="aer-cue">Or just say: <b>"audit my skills"</b>, then <b>"upgrade my skills"</b></p>
 
   <h2 id="when">"When do I&hellip;" &mdash; quick cheat sheet</h2>
   <p>A fast gut-check for which tool fits. (Claude makes these calls with you &mdash; this is just so the words make sense.)</p>
@@ -315,34 +393,114 @@
 <script src="shell.js"></script>
 <script>
 (function(){
-  var KEY='aer_roadmap_v1';
-  var state={}; try{state=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){state={}}
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var STEP_KEY='aer_roadmap_v1', EMP_KEY='aer_employees_v1';
+  var state={}; try{state=JSON.parse(localStorage.getItem(STEP_KEY)||'{}')||{}}catch(e){state={}}
+  var employees=0; try{employees=parseInt(localStorage.getItem(EMP_KEY)||'0',10)||0}catch(e){employees=0}
+  function saveSteps(){try{localStorage.setItem(STEP_KEY,JSON.stringify(state))}catch(e){}}
+  function saveEmp(){try{localStorage.setItem(EMP_KEY,String(employees))}catch(e){}}
 
-  var phases=[].slice.call(document.querySelectorAll('.aer-phase'));
-  function refresh(){
-    var done=0;
-    phases.forEach(function(ph){
-      var boxes=[].slice.call(ph.querySelectorAll('input[type=checkbox]'));
-      var all=boxes.length>0 && boxes.every(function(b){return b.checked});
-      ph.classList.toggle('done',all);
-      if(all)done++;
-    });
-    var d=document.getElementById('aerDone'); if(d)d.textContent=done;
-    var f=document.getElementById('aerFill'); if(f)f.style.width=Math.round(done/phases.length*100)+'%';
+  var nodes=[].slice.call(document.querySelectorAll('.aer-node'));
+  var TOTAL=nodes.length;
+
+  function phaseDone(node){
+    var boxes=[].slice.call(node.querySelectorAll('input[type=checkbox]'));
+    return boxes.length>0 && boxes.every(function(b){return b.checked});
   }
+
+  // open a node and scroll it into view
+  function focusNode(node){
+    if(!node) return;
+    nodes.forEach(function(n){ if(n!==node) n.open=false; });
+    node.open=true;
+    setTimeout(function(){ node.scrollIntoView({behavior:'smooth',block:'start'}); },120);
+  }
+
+  function renderNext(doneCount, currentNode){
+    var box=document.getElementById('aerNext');
+    if(!box) return;
+    if(doneCount>=TOTAL){
+      box.className='aer-next win';
+      box.innerHTML='<div class="aer-next-emoji">&#127881;</div>'+
+        '<div class="aer-next-main" style="text-align:center"><div class="aer-next-title">You built an AI Employee!</div>'+
+        '<div class="aer-next-sub">That\'s one more job running without you. Map the next bottleneck and take it up the same ladder.</div></div>'+
+        '<button class="aer-next-go" id="aerNextBtn">&#8635; Start the next one</button>';
+      document.getElementById('aerNextBtn').addEventListener('click',function(){
+        employees++; saveEmp();
+        state={}; saveSteps();
+        document.querySelectorAll('.aer-step input[type=checkbox]').forEach(function(b){b.checked=false});
+        var fl=document.getElementById('aerFloat'); if(fl){fl.classList.remove('go'); void fl.offsetWidth; fl.classList.add('go');}
+        refresh();
+        window.scrollTo({top:0,behavior:'smooth'});
+      });
+      return;
+    }
+    var n=currentNode;
+    var title=n.querySelector('.aer-title')?n.querySelector('.aer-title').textContent.trim():'';
+    var tease=n.querySelector('.aer-tease')?n.querySelector('.aer-tease').textContent.trim():'';
+    var ph=n.getAttribute('data-phase');
+    box.className='aer-next';
+    box.innerHTML='<div class="aer-next-main"><div class="aer-next-label">&#8627; Your next move</div>'+
+      '<div class="aer-next-title">Phase '+ph+' &middot; '+title+'</div>'+
+      '<div class="aer-next-sub">'+tease+'</div></div>'+
+      '<button class="aer-next-go" id="aerNextBtn">Open this step &rarr;</button>';
+    document.getElementById('aerNextBtn').addEventListener('click',function(){ focusNode(n); });
+  }
+
+  function refresh(){
+    var done=0, current=null;
+    nodes.forEach(function(node){
+      var isDone=phaseDone(node);
+      node.classList.toggle('done',isDone);
+      node.classList.remove('current');
+      if(isDone)done++;
+      else if(!current)current=node;
+    });
+    if(current)current.classList.add('current');
+    var d=document.getElementById('aerDone'); if(d)d.textContent=done;
+    var f=document.getElementById('aerFill'); if(f)f.style.width=Math.round(done/TOTAL*100)+'%';
+    var e=document.getElementById('aerEmp'); if(e)e.textContent=employees;
+    renderNext(done,current);
+  }
+
+  // wire checkboxes
   document.querySelectorAll('.aer-step input[type=checkbox]').forEach(function(b){
     var id=b.getAttribute('data-step');
     if(state[id])b.checked=true;
-    b.addEventListener('change',function(){state[id]=b.checked;save();refresh()});
+    b.addEventListener('change',function(){
+      var node=b.closest('.aer-node');
+      var wasDone=node.classList.contains('done');
+      state[id]=b.checked; saveSteps(); refresh();
+      // reward pop when a phase flips to done
+      if(!wasDone && node.classList.contains('done')){
+        var dot=node.querySelector('.aer-dot');
+        if(dot){dot.classList.remove('pop'); void dot.offsetWidth; dot.classList.add('pop');}
+      }
+    });
   });
-  // keep clicks on the checkbox from toggling the parent <details> oddly
-  document.querySelectorAll('.aer-step').forEach(function(l){ l.addEventListener('click',function(e){e.stopPropagation()}); });
-  refresh();
 
+  // "Mark this phase done" buttons — tick every box in the phase (or untick if already done)
+  document.querySelectorAll('.aer-finish').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var node=btn.closest('.aer-node');
+      var boxes=[].slice.call(node.querySelectorAll('input[type=checkbox]'));
+      var makeDone=!phaseDone(node);
+      boxes.forEach(function(b){ b.checked=makeDone; state[b.getAttribute('data-step')]=makeDone; });
+      saveSteps(); refresh();
+      if(makeDone){
+        var dot=node.querySelector('.aer-dot');
+        if(dot){dot.classList.remove('pop'); void dot.offsetWidth; dot.classList.add('pop');}
+        node.open=false;
+      }
+    });
+  });
+
+  // keep checkbox clicks from toggling the parent <details>
+  document.querySelectorAll('.aer-step').forEach(function(l){ l.addEventListener('click',function(e){e.stopPropagation()}); });
+
+  // reset just this employee's phases
   var reset=document.getElementById('aerReset');
   if(reset)reset.addEventListener('click',function(){
-    state={}; save();
+    state={}; saveSteps();
     document.querySelectorAll('.aer-step input[type=checkbox]').forEach(function(b){b.checked=false});
     refresh();
   });
@@ -367,6 +525,11 @@
     });
   });
   function fallback(text){var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}
+
+  refresh();
+  // open the current phase on load so the next move is visible
+  var cur=document.querySelector('.aer-node.current');
+  if(cur)cur.open=true;
 })();
 </script>
 </body>
