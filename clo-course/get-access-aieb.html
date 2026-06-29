@@ -122,6 +122,7 @@ strong{font-weight:700}
 .fork-tx strong{display:block;font-family:var(--font-display);font-size:16px;color:var(--text);margin-bottom:3px;font-weight:700;letter-spacing:-.2px}
 .fork-go{font-size:12.5px;font-weight:800;color:var(--accent);margin-top:auto}
 [id]{scroll-margin-top:96px}
+.cc-hidden{display:none}
 
 /* ── STICKY PROGRESS TRACKER ── */
 .tracker{position:sticky;top:0;z-index:40;margin:0 -20px 18px;padding:14px 20px;background:rgba(12,13,12,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-2)}
@@ -282,12 +283,12 @@ body.show-terminal .m-terminal{display:block}
     </div>
   </div>
 
-  <!-- APP CHOOSER (first decision) -->
+  <!-- APP CHOOSER (first decision — two buttons) -->
   <div class="section-rule rise d2" style="margin-top:6px">First, which app are you using?</div>
   <div class="fork rise d2">
-    <a class="fork-card" href="#claude-code-path">
+    <a class="fork-card" href="#claude-code-path" onclick="showCCPath(event)">
       <span class="fork-ic">&#128187;</span>
-      <span class="fork-tx"><strong>Claude Code</strong>Runs inside VS Code. Follow the guided steps below to install the plugin + MCP shell.</span>
+      <span class="fork-tx"><strong>Claude Code</strong>Runs inside VS Code. Follow the guided steps to install the plugin + MCP shell.</span>
       <span class="fork-go">Use Claude Code &rarr;</span>
     </a>
     <a class="fork-card alt" href="#cowork">
@@ -297,19 +298,21 @@ body.show-terminal .m-terminal{display:block}
     </a>
   </div>
 
-  <!-- PATH FORK (Claude Code experience level) -->
-  <div class="section-rule rise d2" id="claude-code-path">Using Claude Code?</div>
-  <div class="fork rise d2">
-    <a class="fork-card" href="#step1">
-      <span class="fork-ic">&#128075;</span>
-      <span class="fork-tx"><strong>New to Claude Code?</strong>Start at Step&nbsp;1 &mdash; we'll get it installed first. Everything after that is guided.</span>
-      <span class="fork-go">Start with Step 1 &rarr;</span>
-    </a>
-    <a class="fork-card alt" href="#shortcut">
-      <span class="fork-ic">&#9889;</span>
-      <span class="fork-tx"><strong>Already use Claude Code?</strong>Skip the manual steps &mdash; let Claude install the rest for you.</span>
-      <span class="fork-go">Jump to the shortcut &rarr;</span>
-    </a>
+  <!-- PATH FORK (Claude Code experience level — revealed after picking Claude Code) -->
+  <div id="cc-path-wrap" class="cc-hidden">
+    <div class="section-rule" id="claude-code-path">Using Claude Code &mdash; which are you?</div>
+    <div class="fork">
+      <a class="fork-card" href="#step1">
+        <span class="fork-ic">&#128075;</span>
+        <span class="fork-tx"><strong>New to Claude Code?</strong>Start at Step&nbsp;1 &mdash; we'll get it installed first. Everything after that is guided.</span>
+        <span class="fork-go">Start with Step 1 &rarr;</span>
+      </a>
+      <a class="fork-card alt" href="#shortcut">
+        <span class="fork-ic">&#9889;</span>
+        <span class="fork-tx"><strong>Already use Claude Code?</strong>Skip the manual steps &mdash; let Claude install the rest for you.</span>
+        <span class="fork-go">Jump to the shortcut &rarr;</span>
+      </a>
+    </div>
   </div>
 
   <!-- STICKY PROGRESS TRACKER -->
@@ -722,6 +725,15 @@ function copyPrompt(btn){
     var o = btn.textContent; btn.textContent='Copied!'; btn.classList.add('copied');
     setTimeout(function(){ btn.textContent=o; btn.classList.remove('copied'); }, 1600);
   });
+}
+// App chooser: reveal the Claude Code experience fork only after picking Claude Code
+function showCCPath(e){
+  if (e) e.preventDefault();
+  var w = document.getElementById('cc-path-wrap');
+  if (w){
+    w.classList.remove('cc-hidden');
+    setTimeout(function(){ w.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
+  }
 }
 // VS Code / Terminal toggle
 function setMethod(m){
