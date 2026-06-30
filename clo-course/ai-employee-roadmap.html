@@ -138,6 +138,16 @@
 .aer-tree{font-family:var(--font-mono);font-size:12px;line-height:1.75;background:var(--bg-code);border:1px solid var(--border-200);border-radius:var(--radius);padding:15px 16px;color:var(--text-200);overflow-x:auto;margin:10px 0 0;white-space:pre}
 .aer-tree b{color:var(--accent);font-weight:600}
 .aer-tree i{color:var(--text-400);font-style:normal}
+
+/* ── TOOLKIT reference (every AIEB skill) ── */
+.aer-grouplabel{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--text-400);margin:20px 0 9px}
+.aer-skills{display:flex;flex-direction:column;gap:9px}
+.aer-skill{background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius);padding:12px 15px}
+.aer-skill-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.aer-skill-name{font-weight:800;font-size:14px;color:var(--text-100);letter-spacing:-.2px}
+.aer-skill-trig{font-family:var(--font-mono);font-size:11.5px;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:6px;padding:2px 8px;white-space:nowrap}
+.aer-skill-note{font-size:13px;color:var(--text-300);line-height:1.55}
+.aer-skill-note b{color:var(--text-100)}
 </style>
 </head>
 <body hidden data-page="roadmap">
@@ -425,6 +435,33 @@
     <div class="aer-qa-card"><div class="aer-q">&hellip;make a command?</div><div class="aer-a">When you do the <b>same thing the same way, often</b>, and want a one-word shortcut.</div></div>
     <div class="aer-qa-card"><div class="aer-q">&hellip;put it on autopilot?</div><div class="aer-a">When it should run <b>on a schedule</b> or fire on an event, with no one starting it.</div></div>
     <div class="aer-qa-card"><div class="aer-q">&hellip;build the next one?</div><div class="aer-a">When the current employee is solid on all of the above. <b>Map the next bottleneck</b> and repeat.</div></div>
+  </div>
+
+  <h2 id="toolkit">Your toolkit &mdash; every skill you have</h2>
+  <p class="aer-pathintro">These are the skills built into your AI Employee Builder. You never call them by their technical name &mdash; just say the plain-English phrase and Claude loads the right one. Works the same in <b>Claude Code</b> and <b>Cowork</b>. Here's the whole set, so you know what's available.</p>
+
+  <div class="aer-grouplabel">Set up &amp; navigate</div>
+  <div class="aer-skills">
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Onboard</span><span class="aer-skill-trig">onboard me</span></div><div class="aer-skill-note">First-run setup. Scaffolds your workspace, maps your business, and builds your first skill &mdash; the guided start you ran up top.</div></div>
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Business X-Ray</span><span class="aer-skill-trig">business x-ray</span></div><div class="aer-skill-note">Interviews you about how your business runs and draws it as maps (bow-tie funnel, process swimlanes, opportunity map) to find the <b>one job</b> worth handing to AI first.</div></div>
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Business OS</span><span class="aer-skill-trig">set up my business OS</span></div><div class="aer-skill-note">Organizes your files into department folders plus a <code>BUSINESS-MAP.md</code> so your AI Employees navigate by reading a map instead of searching. Also tidies a messy workspace.</div></div>
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Roadmap</span><span class="aer-skill-trig">what's next</span></div><div class="aer-skill-note">This page's brain. Tracks where you are and names your single next move &mdash; or describe a pain in plain words and it tells you what to build and routes you to the builder.</div></div>
+  </div>
+
+  <div class="aer-grouplabel">Build a new AI Employee</div>
+  <div class="aer-skills">
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Create a skill</span><span class="aer-skill-trig">create a skill for X</span></div><div class="aer-skill-note">The main builder. Turns a repeatable task into a <b>skill</b> Claude runs the same way every time. Also upgrades, tests, and audits the skills you already have.</div></div>
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Create an agent</span><span class="aer-skill-trig">create an agent</span></div><div class="aer-skill-note">Builds a specialist <b>subagent</b> that runs a multi-step job in the background and reports back &mdash; "go do this and tell me when it's done."</div></div>
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Create a command</span><span class="aer-skill-trig">create a command</span></div><div class="aer-skill-note">Turns a request you make constantly into a one-word <code>/shortcut</code> you can fire instantly.</div></div>
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Create a hook</span><span class="aer-skill-trig">create a hook</span></div><div class="aer-skill-note">Adds an <b>automatic check or action</b> that fires on an event (like after every save) &mdash; so you never have to remember to run it.</div></div>
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Add an MCP</span><span class="aer-skill-trig">add an MCP / connect notion</span></div><div class="aer-skill-note">Connects an outside tool (Notion, YouTube, your CRM&hellip;) so your AI Employees can actually use it &mdash; or builds a brand-new MCP server.</div></div>
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Create a plugin</span><span class="aer-skill-trig">create a plugin</span></div><div class="aer-skill-note">Packages a set of your skills into a shareable <b>plugin</b> you can reuse across workspaces or hand to someone else.</div></div>
+  </div>
+
+  <div class="aer-grouplabel">Maintain &amp; grow</div>
+  <div class="aer-skills">
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Install a skill</span><span class="aer-skill-trig">install this skill</span></div><div class="aer-skill-note">Imports a skill from outside &mdash; a GitHub repo or a skill pack &mdash; straight into your workspace.</div></div>
+    <div class="aer-skill"><div class="aer-skill-top"><span class="aer-skill-name">Retrospective</span><span class="aer-skill-trig">this skill messed up</span></div><div class="aer-skill-note">Patches a skill that misbehaved &mdash; captures exactly what went wrong and proposes a fix to its instructions so it doesn't repeat.</div></div>
   </div>
 </div>
 
