@@ -118,6 +118,7 @@ strong{font-weight:700}
 .fork-card:hover{border-color:var(--accent-border);background:var(--surface-2);text-decoration:none;transform:translateY(-2px)}
 .fork-card.alt{background:linear-gradient(135deg,var(--accent-dim-2),var(--surface) 72%);border-color:var(--accent-border)}
 .fork-ic{font-size:24px;line-height:1}
+.fork-ic img{width:36px;height:36px;object-fit:contain;display:block;border-radius:8px}
 .fork-tx{font-size:13px;color:var(--text-muted);line-height:1.5}
 .fork-tx strong{display:block;font-family:var(--font-display);font-size:16px;color:var(--text);margin-bottom:3px;font-weight:700;letter-spacing:-.2px}
 .fork-go{font-size:12.5px;font-weight:800;color:var(--accent);margin-top:auto}
@@ -287,12 +288,12 @@ body.show-terminal .m-terminal{display:block}
   <div class="section-rule rise d2" style="margin-top:6px">First, which app are you using?</div>
   <div class="fork rise d2">
     <a class="fork-card" href="#claude-code-path" onclick="showCCPath(event)">
-      <span class="fork-ic">&#128187;</span>
+      <span class="fork-ic"><img src="assets/get-access/claude-code-mascot.png" alt="Claude Code"></span>
       <span class="fork-tx"><strong>Claude Code</strong>Runs inside VS Code. Follow the guided steps to install the plugin + MCP shell.</span>
       <span class="fork-go">Use Claude Code &rarr;</span>
     </a>
     <a class="fork-card alt" href="#cowork">
-      <span class="fork-ic">&#129309;</span>
+      <span class="fork-ic"><img src="assets/get-access/cowork-logo.png" alt="Claude Cowork"></span>
       <span class="fork-tx"><strong>Claude Cowork</strong>Runs in the Claude desktop app &mdash; no terminal. Just download the one-click extension and paste your key.</span>
       <span class="fork-go">&#11015;&#65039; Get the Cowork extension &rarr;</span>
     </a>
