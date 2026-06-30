@@ -128,6 +128,16 @@
 .aer-q{font-weight:700;font-size:14px;color:var(--accent);margin-bottom:5px}
 .aer-a{font-size:13.5px;color:var(--text-300);line-height:1.55}
 .aer-a b{color:var(--text-100)}
+
+/* ── START-HERE / ONBOARD block ── */
+.aer-olist{margin:10px 0 0;padding-left:22px;color:var(--text-200);font-size:14px;line-height:1.6}
+.aer-olist li{margin-bottom:7px}
+.aer-olist li::marker{color:var(--accent);font-weight:800}
+.aer-olist b{color:var(--text-100)}
+.aer-olist code{font-family:var(--font-mono);font-size:.88em;background:var(--bg-code);border:1px solid var(--border-200);border-radius:5px;padding:1px 6px;color:var(--text-100)}
+.aer-tree{font-family:var(--font-mono);font-size:12px;line-height:1.75;background:var(--bg-code);border:1px solid var(--border-200);border-radius:var(--radius);padding:15px 16px;color:var(--text-200);overflow-x:auto;margin:10px 0 0;white-space:pre}
+.aer-tree b{color:var(--accent);font-weight:600}
+.aer-tree i{color:var(--text-400);font-style:normal}
 </style>
 </head>
 <body hidden data-page="roadmap">
@@ -152,7 +162,37 @@
     </div>
     <div class="aer-next" id="aerNext"></div>
   </div>
-  <p class="aer-hint">Stuck, or just back for the next move? Tell Claude Code <code>what's next</code> anytime &mdash; it reads where you are and walks you through it.</p>
+  <p class="aer-hint">Stuck, or just back for the next move? Tell Claude Code or Cowork <code>what's next</code> anytime &mdash; it reads where you are and walks you through it.</p>
+
+  <!-- ── START HERE: ONBOARD (Claude Code OR Cowork) ── -->
+  <h2 id="start">Start here &mdash; set up your workspace</h2>
+  <p class="aer-pathintro">Brand new? Run onboarding once before the path below. It works exactly the same in <b>Claude Code</b> and <b>Claude Cowork</b> &mdash; open a session, type the command, and answer its questions. It builds everything for you.</p>
+
+  <div class="aer-prompt"><p>onboard me</p><button class="aer-copy">Copy</button></div>
+  <p class="aer-cue">Works in either app &mdash; just say: <b>"onboard me"</b></p>
+
+  <p class="aer-what"><b>What it does &mdash; three guided steps.</b> You only answer questions; it does the building:</p>
+  <ol class="aer-olist">
+    <li><b>Scaffolds your workspace</b> &mdash; creates the authoring folders where every AI Employee you build will live.</li>
+    <li><b>Maps your business</b> &mdash; lays out your departments and a business map, so every AI Employee knows where to read from and write to.</li>
+    <li><b>Builds your first skill</b> &mdash; runs the Business X-Ray to find your highest-leverage job, then builds and tests your first AI Employee with you.</li>
+  </ol>
+
+  <p class="aer-what" style="margin-top:16px"><b>What it builds on disk</b> &mdash; you don't create any of this by hand:</p>
+  <pre class="aer-tree">your-workspace/
+├─ <b>.claude/</b>
+│  ├─ <b>skills/</b>      <i>← the AI Employees you build</i>
+│  ├─ <b>agents/</b>      <i>← multi-step workers</i>
+│  ├─ <b>commands/</b>    <i>← shortcuts you can trigger</i>
+│  └─ <b>hooks/</b>       <i>← automatic checks that keep output on-brand</i>
+├─ <b>.claude-state/</b>  <i>← remembers your onboarding progress</i>
+├─ <b>diagrams/</b>       <i>← your Business X-Ray map (.drawio)</i>
+├─ <b>marketing/  sales/  product/</b>      <i>← your business, as folders</i>
+├─ <b>finance/  operations/  strategy/</b>  <i>  (your departments)</i>
+├─ <b>BUSINESS-MAP.md</b> <i>← the map your AI Employees read first</i>
+└─ <b>CLAUDE.md</b>       <i>← your workspace guide + skill routing</i></pre>
+
+  <div class="aer-note"><span class="aer-note-ic">&#9989;</span><div><b>That's the whole setup.</b> When it finishes you'll have your workspace mapped and your first AI Employee running &mdash; that's Phases&nbsp;1 and&nbsp;2 below already done. Pick the path up from Phase&nbsp;3.</div></div>
 
   <h2 id="path">The path</h2>
   <p class="aer-pathintro">Seven phases, one node at a time. You did the first two during onboarding &mdash; tick them off, then pick up wherever you are.</p>
@@ -171,14 +211,14 @@
       <p class="aer-what">Before you build anything, you find the <b>one job</b> that's worth handing to AI first. The Business X-Ray asks you about how your business runs, then points at the spot that's slowing you down most. Build for <em>that</em>, not for whatever's top of mind.</p>
       <h4>Do this</h4>
       <ul class="aer-steps">
-        <li class="aer-step"><input type="checkbox" data-step="1-1" data-phase="1"><span>In Claude Code, say <code>map my business</code> (onboarding runs this for you).</span></li>
+        <li class="aer-step"><input type="checkbox" data-step="1-1" data-phase="1"><span>In Claude Code or Cowork, say <code>map my business</code> (onboarding runs this for you).</span></li>
         <li class="aer-step"><input type="checkbox" data-step="1-2" data-phase="1"><span>Answer its questions about how your business actually works &mdash; plain language is fine.</span></li>
         <li class="aer-step"><input type="checkbox" data-step="1-3" data-phase="1"><span>Read the result. It names your highest-leverage thing to automate. That's your first build.</span></li>
       </ul>
       <h4>Prompts to copy</h4>
       <div class="aer-prompt"><p>Map my business and show me the one job I should hand to an AI Employee first.</p><button class="aer-copy">Copy</button></div>
       <p class="aer-cue">Or just say: <b>"map my business"</b></p>
-      <div class="aer-note"><span class="aer-note-ic">&#128208;</span><div><b>First time? Install the Draw.io extension so you can see your map.</b> Your business map saves as a <code>.drawio</code> file. In VS Code, open Extensions (<code>Ctrl+Shift+X</code>), search <b>"Draw.io Integration"</b> by Henning Dieterichs, and click <b>Install</b> &mdash; then your map opens visually whenever you click it. <a href="business-x-ray.html">Full setup &rarr;</a></div></div>
+      <div class="aer-note"><span class="aer-note-ic">&#128208;</span><div><b>First time? Install Draw.io so you can see your map.</b> Your business map saves as a <code>.drawio</code> file. Grab the free <b>Draw.io Desktop</b> app (works for both Claude Code and Cowork) and your map opens visually whenever you click it &mdash; in Claude Code's VS Code you can also add the <b>"Draw.io Integration"</b> extension to preview it inline. <a href="get-access-aieb.html#step6">Full setup &rarr;</a></div></div>
       <button class="aer-finish" data-finish="1">Mark this phase done</button>
     </div>
   </details>
@@ -196,7 +236,7 @@
       <h4>Do this</h4>
       <ul class="aer-steps">
         <li class="aer-step"><input type="checkbox" data-step="2-1" data-phase="2"><span>Pick the job from your X-Ray (or the one you're most tired of doing).</span></li>
-        <li class="aer-step"><input type="checkbox" data-step="2-2" data-phase="2"><span>Either build what your X-Ray recommended, or copy a sample prompt below that's closest to your work &mdash; then paste it into Claude Code.</span></li>
+        <li class="aer-step"><input type="checkbox" data-step="2-2" data-phase="2"><span>Either build what your X-Ray recommended, or copy a sample prompt below that's closest to your work &mdash; then paste it into Claude Code or Cowork.</span></li>
         <li class="aer-step"><input type="checkbox" data-step="2-3" data-phase="2"><span>Answer its questions &mdash; it writes the skill and tests it with you.</span></li>
         <li class="aer-step"><input type="checkbox" data-step="2-4" data-phase="2"><span>Try your new skill by saying its trigger phrase. You just built an AI Employee.</span></li>
       </ul>
