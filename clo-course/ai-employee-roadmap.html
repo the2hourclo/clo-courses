@@ -139,6 +139,14 @@
 .aer-tree b{color:var(--accent);font-weight:600}
 .aer-tree i{color:var(--text-400);font-style:normal}
 
+/* ── initial-setup collapse ── */
+.aer-donerow{display:flex;align-items:center;gap:11px;cursor:pointer;font-size:13.5px;font-weight:600;color:var(--text-200);background:var(--bg-100);border:1px solid var(--border-100);border-radius:var(--radius);padding:11px 15px;margin:0 0 16px;user-select:none}
+.aer-donerow input{appearance:none;-webkit-appearance:none;flex-shrink:0;width:20px;height:20px;border:1px solid var(--border-300);border-radius:6px;background:var(--bg-000);cursor:pointer;position:relative;transition:all .15s}
+.aer-donerow input:checked{background:var(--accent);border-color:var(--accent)}
+.aer-donerow input:checked::after{content:'\2713';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--accent-ink);font-size:13px;font-weight:800}
+.aer-donerow.done{border-color:var(--accent-border);color:var(--text-300)}
+#aerSetupBody.collapsed{display:none}
+
 /* ── TOOLKIT reference (every AIEB skill) ── */
 .aer-grouplabel{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--text-400);margin:20px 0 9px}
 .aer-skills{display:flex;flex-direction:column;gap:9px}
@@ -186,6 +194,8 @@
 
   <!-- ── START HERE: ONBOARD (Claude Code OR Cowork) ── -->
   <h2 id="start">Start here &mdash; set up your workspace</h2>
+  <label class="aer-donerow" id="aerDoneRow"><input type="checkbox" id="aerSetupDone"><span id="aerSetupLbl">I've done the initial setup &mdash; collapse this</span></label>
+  <div id="aerSetupBody">
   <p class="aer-pathintro">Brand new? Two quick things — give your business a home folder, then run onboarding once. It works exactly the same in <b>Claude Code</b> and <b>Claude Cowork</b>.</p>
 
   <p class="aer-what" style="margin-top:6px"><b>First, make a folder for your business.</b> Everything your AI Employees build lives inside one folder on your computer:</p>
@@ -220,6 +230,7 @@
 └─ <b>CLAUDE.md</b>       <i>← your workspace guide + skill routing</i></pre>
 
   <div class="aer-note"><span class="aer-note-ic">&#9989;</span><div><b>That's the whole setup.</b> When it finishes you'll have your workspace mapped and your first AI Employee running &mdash; that's Phases&nbsp;1 and&nbsp;2 below already done. Pick the path up from Phase&nbsp;3.</div></div>
+  </div><!-- /aerSetupBody -->
 
   <h2 id="path">The path</h2>
   <p class="aer-pathintro">Seven phases, one node at a time. You did the first two during onboarding &mdash; tick them off, then pick up wherever you are.</p>
@@ -648,6 +659,17 @@
     });
   });
   function fallback(text){var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}
+
+  // Initial-setup collapse — once a returning user ticks it, the setup block folds away
+  (function(){
+    var SK='aer_setup_done_v1';
+    var cb=document.getElementById('aerSetupDone'), body=document.getElementById('aerSetupBody'), row=document.getElementById('aerDoneRow'), lbl=document.getElementById('aerSetupLbl');
+    if(!cb||!body) return;
+    function apply(d){ body.classList.toggle('collapsed',d); if(row) row.classList.toggle('done',d); if(lbl) lbl.textContent = d ? "Setup done — show the steps again" : "I've done the initial setup — collapse this"; }
+    var d=false; try{d=localStorage.getItem(SK)==='1'}catch(e){}
+    cb.checked=d; apply(d);
+    cb.addEventListener('change',function(){ try{localStorage.setItem(SK,cb.checked?'1':'0')}catch(e){} apply(cb.checked); });
+  })();
 
   refresh();
   // open the current phase on load so the next move is visible

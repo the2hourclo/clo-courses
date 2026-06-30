@@ -65,10 +65,10 @@ window.CLO_PRODUCTS = {
     checkout_url: 'https://www.polynet.ai/c/ai-employee-builders',
     community: { url: 'https://www.polynet.ai/c/ai-employee-builders', label: 'Community ↗', external: true },
     onboarding: [
-      { label: 'Join the community', href: 'https://www.polynet.ai/c/ai-employee-builders', hint: 'Meet the other builders' },
-      { label: 'Get access & install', href: 'clo-course/get-access-aieb.html', hint: 'Set up Claude Code + the plugin' },
-      { label: 'Run your Business X-Ray', href: 'clo-course/business-x-ray.html', hint: 'Find your highest-leverage build' },
-      { label: 'Build your first Skill System', href: 'meta-create-skill/index.html', hint: 'Ship a skill that chains' }
+      { label: 'Get access & install', href: 'clo-course/get-access-aieb.html', hint: 'Pick Claude Code or Cowork, install, add Draw.io' },
+      { label: 'Make a folder & onboard', href: 'clo-course/ai-employee-roadmap.html#start', hint: 'Create your workspace folder, then run "onboard me"' },
+      { label: 'Follow your Roadmap', href: 'clo-course/ai-employee-roadmap.html', hint: 'Your home base — the next thing to build' },
+      { label: 'Join the community', href: 'https://www.polynet.ai/c/ai-employee-builders', hint: 'Meet the other builders' }
     ],
     nav: [
       { group: 'Get Started', items: [
