@@ -475,9 +475,10 @@ After each step, tell me whether it worked, or show the error and exactly how yo
         <span class="step-meta"><span class="time">~1 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
       <div class="step-content">
-        <p>In the same chat, type either command:</p>
-        <div class="cmd-line"><span class="cmd-text">/business-x-ray</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="cmd-line"><span class="cmd-text">/meta-create-skill</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Start with the Business X-Ray</strong> &mdash; it maps how your business runs today and shows where AI Employees fit. In the same chat, type:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">/business-x-ray</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Then build your first skill</strong> whenever you're ready:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">/meta-create-skill</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
         <div class="callout callout-tip"><strong>Success looks like:</strong> the skill kicks in and Claude follows its steps &mdash; pulling the real instructions from the server behind the scenes, just like it does in Claude Code. <span style="color:var(--text-dim)">(Plain words work too &mdash; saying <code>business x-ray</code> or <code>create a skill</code> triggers the same skills.)</span></div>
         <button class="done-btn" onclick="markDoneCW(3)"><span class="dlabel">Mark step done</span></button>
       </div>
