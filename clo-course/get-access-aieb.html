@@ -124,6 +124,14 @@ strong{font-weight:700}
 .fork-go{font-size:12.5px;font-weight:800;color:var(--accent);margin-top:auto}
 [id]{scroll-margin-top:96px}
 .cc-hidden{display:none}
+/* Track gating: until an app is chosen only the hero + chooser show; choosing
+   one switches the page into that app's track (persisted in localStorage). */
+body:not(.track-cc) .cc-only{display:none!important}
+body:not(.track-cowork) .cw-only{display:none!important}
+body:not(.track-cc):not(.track-cowork) .post-setup{display:none!important}
+.fork-card.selected{border-color:var(--accent);background:var(--accent-dim-2);box-shadow:0 0 0 1px var(--accent-border)}
+body.track-cc #chooser-cw,body.track-cowork #chooser-cc{opacity:.45}
+body.track-cc #chooser-cw:hover,body.track-cowork #chooser-cc:hover{opacity:1}
 
 /* ── STICKY PROGRESS TRACKER ── */
 .tracker{position:sticky;top:0;z-index:40;margin:0 -20px 18px;padding:14px 20px;background:rgba(12,13,12,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-2)}
@@ -271,31 +279,31 @@ body.show-terminal .m-terminal{display:block}
   <div class="hero rise d1">
     <div class="eyebrow">&#128273; Get Access</div>
     <h1>Let's get your AI&nbsp;Employee Builder running</h1>
-    <p class="lead">Seven small steps to get set up &mdash; mostly inside VS Code, no coding. Tick each one off as you go. If you ever get stuck, Claude itself will walk you through it.</p>
+    <p class="lead">Pick the app you use below and you'll only see <em>your</em> steps &mdash; short, guided, tick them off as you go. If you ever get stuck, Claude itself will walk you through it.</p>
     <div class="reassure">
-      <span>&#9201;&#65039; ~20 minutes</span>
-      <span>&#9989; 7 simple steps</span>
+      <span>&#9201;&#65039; 10&ndash;20 minutes</span>
+      <span>&#9989; Every step guided</span>
       <span>&#129302; Claude helps if stuck</span>
     </div>
   </div>
 
-  <!-- APP CHOOSER (first decision — two buttons) -->
+  <!-- APP CHOOSER (the real fork — switches the whole page to one track) -->
   <div class="section-rule rise d2" style="margin-top:6px">First, which app are you using?</div>
-  <div class="fork rise d2">
-    <a class="fork-card" href="#claude-code-path" onclick="showCCPath(event)">
+  <div class="fork rise d2" id="app-chooser">
+    <a class="fork-card" id="chooser-cc" href="#claude-code-path" onclick="chooseTrack(event,'cc')">
       <span class="fork-ic"><img src="assets/get-access/claude-code-mascot.png" alt="Claude Code"></span>
       <span class="fork-tx"><strong>Claude Code</strong>Runs inside VS Code. Follow the guided steps to install the plugin + MCP shell.</span>
       <span class="fork-go">Use Claude Code &rarr;</span>
     </a>
-    <a class="fork-card alt" href="#cowork">
+    <a class="fork-card alt" id="chooser-cw" href="#cowork" onclick="chooseTrack(event,'cowork')">
       <span class="fork-ic"><img src="assets/get-access/cowork-logo.png" alt="Claude Cowork"></span>
-      <span class="fork-tx"><strong>Claude Cowork</strong>Runs in the Claude desktop app &mdash; no terminal. Add our plugin from the marketplace, paste your key in chat, done. All point-and-click.</span>
+      <span class="fork-tx"><strong>Claude Cowork</strong>Runs in the Claude desktop app &mdash; no terminal. Add our plugin, paste your key in chat, done. All point-and-click.</span>
       <span class="fork-go">&#129309; Set up Cowork &rarr;</span>
     </a>
   </div>
 
   <!-- PATH FORK (Claude Code experience level — revealed after picking Claude Code) -->
-  <div id="cc-path-wrap" class="cc-hidden">
+  <div id="cc-path-wrap" class="cc-only cc-hidden">
     <div class="section-rule" id="claude-code-path">Using Claude Code &mdash; which are you?</div>
     <div class="fork">
       <a class="fork-card" href="#step1">
@@ -312,7 +320,7 @@ body.show-terminal .m-terminal{display:block}
   </div>
 
   <!-- STICKY PROGRESS TRACKER -->
-  <div class="tracker">
+  <div class="tracker cc-only">
     <div class="tracker-inner">
       <div class="tracker-top">
         <span class="tracker-label">&#128640; Your setup progress</span>
@@ -327,7 +335,7 @@ body.show-terminal .m-terminal{display:block}
   </div>
 
   <!-- METHOD TOGGLE -->
-  <div class="method-wrap">
+  <div class="method-wrap cc-only">
     <div class="method-toggle" role="tablist" aria-label="Choose install method">
       <button class="method-btn active" id="mb-vscode" onclick="setMethod('vscode')">&#128421;&#65039; VS Code (click)</button>
       <button class="method-btn" id="mb-terminal" onclick="setMethod('terminal')">&#9000;&#65039; Terminal (type)</button>
@@ -337,7 +345,7 @@ body.show-terminal .m-terminal{display:block}
   </div>
 
   <!-- ═══════════════ STEP 1 ═══════════════ -->
-  <details class="step" id="step1" data-step="1" open>
+  <details class="step cc-only" id="step1" data-step="1" open>
     <summary class="step-sum">
       <span class="step-check"><span class="num">1</span><span class="tick">&#10003;</span></span>
       <span class="step-titles"><span class="step-t">Install Claude Code</span><span class="step-sub">Get the editor + extension running</span></span>
@@ -364,7 +372,7 @@ body.show-terminal .m-terminal{display:block}
   </details>
 
   <!-- ═══════════════ AI SHORTCUT (usable once Claude Code is installed) ═══════════════ -->
-  <div class="ai-card" id="shortcut">
+  <div class="ai-card cc-only" id="shortcut">
     <div class="card-title">&#9889; Got Claude Code open? Let Claude do the rest</div>
     <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude does the whole install itself, and if it ever hits something only you can do (paste your key, click a button), it walks you through it one clear step at a time. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
     <div class="ai-prompt">
@@ -398,25 +406,117 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   </div>
 
   <!-- ═══════════════ CLAUDE COWORK ═══════════════ -->
-  <div class="ai-card" id="cowork">
-    <div class="card-title">&#129309; Using Claude Cowork?</div>
-    <p>Cowork runs in the Claude <strong>desktop app</strong>. You don't need Claude Code for this &mdash; you add <strong>one plugin</strong> from a marketplace, paste your license key in chat, and Claude handles the rest. No terminal, nothing to download.</p>
+  <!-- ═══════════════ CLAUDE COWORK TRACK (5 guided steps) ═══════════════ -->
+  <div id="cowork" class="cw-only">
 
-    <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Install the plugin.</strong> In the desktop app open <strong>Customize &rarr; Personal plugins</strong>, click the <strong>+</strong>, choose <strong>Add marketplace</strong>, paste <code>the2hourclo/aieb-thin-plugin</code> and click <strong>Sync</strong>, then install <strong>AI Employee Builder</strong>. <span style="color:var(--text-dim)">(You'll see a red &ldquo;make sure you trust this plugin&rdquo; notice &mdash; that's Claude's standard warning for every non-Anthropic plugin. This one is ours.)</span></div></div>
-    <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Connect your license.</strong> Start a <strong>Cowork</strong> chat and say <code>set up my AI Employee Builder</code>. Claude asks for your license key (it's in your Lemon Squeezy receipt email), saves it on your own machine, and runs a real test fetch to confirm you're connected. The key never leaves your device.</div></div>
-    <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Try it:</strong> in the same chat, say <code>business x-ray</code> or <code>create a skill</code>.</div></div>
-    <div class="substep"><div class="substep-badge">4</div><div class="substep-body"><strong>Install Draw.io Desktop</strong> to open the <code>.drawio</code> maps your AI Employees draw &mdash; <a href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">download it here</a> and run the installer for your OS.</div></div>
-    <div class="substep"><div class="substep-badge">5</div><div class="substep-body"><strong>Connect the Draw.io MCP</strong> so Claude can draw into it. In the desktop app go to <strong>Settings &rarr; Connectors &rarr; Add custom connector</strong> and paste <code>https://mcp.draw.io/mcp</code>, then save. <span style="color:var(--text-dim)">(This one <em>is</em> a normal custom connector &mdash; it takes no license key.)</span></div></div>
+    <div class="section-rule">Using Claude Cowork &mdash; five steps, all point-and-click</div>
 
-    <div class="callout callout-tip"><strong>Success looks like:</strong> the skill kicks in and Claude follows its steps &mdash; pulling the real instructions from the MCP behind the scenes, just like it does in Claude Code.</div>
-    <div class="callout callout-info"><strong>Don't see &ldquo;Personal plugins&rdquo; in Customize?</strong> Update the Claude desktop app first (quit and reopen usually does it), then look again.</div>
-    <div class="callout callout-warning"><strong>Connector didn't light up?</strong> If step 2 can't find the AI Employee tools after the key is saved (a few machines are missing Node.js, which the plugin's connector needs), use the fallback extension instead: <a href="downloads/ai-employee-builder.mcpb" download><strong>download the Cowork extension (.mcpb)</strong></a>, then in the desktop app go to <strong>Settings &rarr; Extensions &rarr; Advanced settings &rarr; Extension Developer &rarr; &ldquo;Install Extension&hellip;&rdquo;</strong>, pick the file, and paste your license key in the form that appears. Same access, same skills &mdash; just a different pipe. Say <code>check my setup</code> in any chat and Claude will sort it out with you.</div>
-    <div class="callout callout-warning"><strong>Don't paste the MCP URL into &ldquo;Custom Connectors.&rdquo;</strong> That screen is OAuth-only and can't take your license key &mdash; the plugin (or the fallback extension) is the way in.</div>
-    <div class="callout callout-info"><strong>You'll need the desktop app</strong> (Pro, Max, or Team). On a managed Team/Enterprise account, an admin may have to allow personal plugins or custom extensions first. Stuck? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a>.</div>
+    <div class="tracker">
+      <div class="tracker-inner">
+        <div class="tracker-top">
+          <span class="tracker-label">&#128640; Your setup progress</span>
+          <span class="tracker-count"><b id="cwDoneCount">0</b> of 5 done</span>
+        </div>
+        <div class="tracker-seg" id="cwTrackerSeg">
+          <div class="tseg" data-d="1"></div><div class="tseg" data-d="2"></div><div class="tseg" data-d="3"></div><div class="tseg" data-d="4"></div><div class="tseg" data-d="5"></div>
+        </div>
+        <div class="tracker-reset"><button onclick="resetProgressCW()">Reset progress</button></div>
+      </div>
+    </div>
+
+    <!-- CW STEP 1 -->
+    <details class="step" id="cwstep1" data-step="1" open>
+      <summary class="step-sum">
+        <span class="step-check"><span class="num">1</span><span class="tick">&#10003;</span></span>
+        <span class="step-titles"><span class="step-t">Install the plugin</span><span class="step-sub">One marketplace, one install &mdash; inside the desktop app</span></span>
+        <span class="step-meta"><span class="time">~3 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+      </summary>
+      <div class="step-content">
+        <p>Everything happens in the Claude <strong>desktop app</strong> (Pro, Max, or Team) &mdash; no terminal, nothing to download.</p>
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body">Open <strong>Customize &rarr; Personal plugins</strong> and click the <strong>+</strong>.</div></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Choose <strong>Add marketplace</strong> and paste:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body">Click <strong>Sync</strong>, then install <strong>AI Employee Builder</strong>.</div></div>
+        <div class="callout callout-info"><strong>You'll see a red &ldquo;make sure you trust this plugin&rdquo; notice.</strong> That's Claude's standard warning for every non-Anthropic plugin &mdash; this one is ours.</div>
+        <div class="callout callout-tip"><strong>Don't see &ldquo;Personal plugins&rdquo; in Customize?</strong> Update the Claude desktop app first (quit and reopen usually does it), then look again. On a managed Team/Enterprise account, an admin may have to allow personal plugins first.</div>
+        <button class="done-btn" onclick="markDoneCW(1)"><span class="dlabel">Mark step done</span></button>
+      </div>
+    </details>
+
+    <!-- CW STEP 2 -->
+    <details class="step" id="cwstep2" data-step="2">
+      <summary class="step-sum">
+        <span class="step-check"><span class="num">2</span><span class="tick">&#10003;</span></span>
+        <span class="step-titles"><span class="step-t">Connect your license</span><span class="step-sub">One chat message + one paste</span></span>
+        <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+      </summary>
+      <div class="step-content">
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body">Start a <strong>Cowork</strong> chat and say:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">set up my AI Employee Builder</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Paste your license key when Claude asks.</strong> It's in your Lemon Squeezy receipt email (from <code>noreply@lemonsqueezy.com</code>) &mdash; or grab it any time at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">app.lemonsqueezy.com/my-orders</a>.</div></div>
+        <p>Claude saves the key on your own machine and runs a real test fetch to confirm you're connected. The key never leaves your device.</p>
+        <div class="callout callout-warning"><strong>Connector didn't light up?</strong> A few machines are missing Node.js, which the plugin's connector needs. Use the fallback extension instead &mdash; same access, same skills, different pipe: <a href="downloads/ai-employee-builder.mcpb" download><strong>download the Cowork extension (.mcpb)</strong></a>, then go to <strong>Settings &rarr; Extensions &rarr; Advanced settings &rarr; Extension Developer &rarr; &ldquo;Install Extension&hellip;&rdquo;</strong>, pick the file, and paste your key in the form. Then say <code>check my setup</code> in any chat and Claude verifies it with you.</div>
+        <div class="callout callout-warning"><strong>Don't paste the MCP URL into &ldquo;Custom Connectors.&rdquo;</strong> That screen is OAuth-only and can't take your license key &mdash; the plugin (or the fallback extension) is the way in.</div>
+        <button class="done-btn" onclick="markDoneCW(2)"><span class="dlabel">Mark step done</span></button>
+      </div>
+    </details>
+
+    <!-- CW STEP 3 -->
+    <details class="step" id="cwstep3" data-step="3">
+      <summary class="step-sum">
+        <span class="step-check"><span class="num">3</span><span class="tick">&#10003;</span></span>
+        <span class="step-titles"><span class="step-t">Try your first skill</span><span class="step-sub">Prove the connection works</span></span>
+        <span class="step-meta"><span class="time">~1 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+      </summary>
+      <div class="step-content">
+        <p>In the same chat, just say:</p>
+        <div class="cmd-line"><span class="cmd-text">business x-ray</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-line"><span class="cmd-text">create a skill</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="callout callout-tip"><strong>Success looks like:</strong> the skill kicks in and Claude follows its steps &mdash; pulling the real instructions from the server behind the scenes, just like it does in Claude Code.</div>
+        <button class="done-btn" onclick="markDoneCW(3)"><span class="dlabel">Mark step done</span></button>
+      </div>
+    </details>
+
+    <!-- CW STEP 4 -->
+    <details class="step" id="cwstep4" data-step="4">
+      <summary class="step-sum">
+        <span class="step-check"><span class="num">4</span><span class="tick">&#10003;</span></span>
+        <span class="step-titles"><span class="step-t">Install Draw.io Desktop</span><span class="step-sub">Opens the maps your AI Employees draw</span></span>
+        <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+      </summary>
+      <div class="step-content">
+        <p>Your AI Employees deliver business maps as <code>.drawio</code> files &mdash; Draw.io Desktop is the free app that opens, edits, and exports them (no browser, no account).</p>
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><a href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener"><strong>Download Draw.io Desktop here</strong></a> and run the installer for your OS.</div></div>
+        <button class="done-btn" onclick="markDoneCW(4)"><span class="dlabel">Mark step done</span></button>
+      </div>
+    </details>
+
+    <!-- CW STEP 5 -->
+    <details class="step" id="cwstep5" data-step="5">
+      <summary class="step-sum">
+        <span class="step-check"><span class="num">5</span><span class="tick">&#10003;</span></span>
+        <span class="step-titles"><span class="step-t">Connect the Draw.io connector</span><span class="step-sub">So Claude can draw straight into it</span></span>
+        <span class="step-meta"><span class="time">~1 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+      </summary>
+      <div class="step-content">
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body">In the desktop app go to <strong>Settings &rarr; Connectors &rarr; Add custom connector</strong> and paste:</div></div>
+        <div class="cmd-line indent"><span class="cmd-text">https://mcp.draw.io/mcp</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Save. <span style="color:var(--text-dim)">(This one <em>is</em> a normal custom connector &mdash; it takes no license key.)</span></div></div>
+        <button class="done-btn" onclick="markDoneCW(5)"><span class="dlabel">Mark step done</span></button>
+      </div>
+    </details>
+
+    <!-- CW FINISH -->
+    <div class="finish" id="cwfinish">
+      <h2>&#127881; You're all set</h2>
+      <p>Your AI Employees are connected. Start any Cowork chat and say <code>business x-ray</code>, <code>create a skill</code>, or <code>what should I build next</code>.</p>
+    </div>
+
+    <div class="callout callout-info" style="margin-top:14px"><strong>Something not working?</strong> Say <code>check my setup</code> in any Cowork chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a>.</div>
   </div>
 
   <!-- ═══════════════ STEP 2 ═══════════════ -->
-  <details class="step" id="step2" data-step="2">
+  <details class="step cc-only" id="step2" data-step="2">
     <summary class="step-sum">
       <span class="step-check"><span class="num">2</span><span class="tick">&#10003;</span></span>
       <span class="step-titles"><span class="step-t">Find your license key</span><span class="step-sub">It's in your Lemon Squeezy email</span></span>
@@ -435,7 +535,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   </details>
 
   <!-- ═══════════════ STEP 3 ═══════════════ -->
-  <details class="step" id="step3" data-step="3">
+  <details class="step cc-only" id="step3" data-step="3">
     <summary class="step-sum">
       <span class="step-check"><span class="num">3</span><span class="tick">&#10003;</span></span>
       <span class="step-titles"><span class="step-t">Install the MCP shell</span><span class="step-sub">A free local wrapper, not the paid skill bodies</span></span>
@@ -463,7 +563,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   </details>
 
   <!-- ═══════════════ STEP 4 ═══════════════ -->
-  <details class="step" id="step4" data-step="4">
+  <details class="step cc-only" id="step4" data-step="4">
     <summary class="step-sum">
       <span class="step-check"><span class="num">4</span><span class="tick">&#10003;</span></span>
       <span class="step-titles"><span class="step-t">Add your license to MCP</span><span class="step-sub">Paste your key once</span></span>
@@ -479,7 +579,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   </details>
 
   <!-- ═══════════════ STEP 5 ═══════════════ -->
-  <details class="step" id="step5" data-step="5">
+  <details class="step cc-only" id="step5" data-step="5">
     <summary class="step-sum">
       <span class="step-check"><span class="num">5</span><span class="tick">&#10003;</span></span>
       <span class="step-titles"><span class="step-t">Test the hosted skill</span><span class="step-sub">Make sure AIEB loads from MCP</span></span>
@@ -497,7 +597,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   </details>
 
   <!-- ═══════════════ STEP 6 ═══════════════ -->
-  <details class="step" id="step6" data-step="6">
+  <details class="step cc-only" id="step6" data-step="6">
     <summary class="step-sum">
       <span class="step-check"><span class="num">6</span><span class="tick">&#10003;</span></span>
       <span class="step-titles"><span class="step-t">Set up Draw.io</span><span class="step-sub">Install the app + connect the MCP so your AI Employees can draw</span></span>
@@ -534,7 +634,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   </details>
 
   <!-- ═══════════════ STEP 7 ═══════════════ -->
-  <details class="step" id="step7" data-step="7">
+  <details class="step cc-only" id="step7" data-step="7">
     <summary class="step-sum">
       <span class="step-check"><span class="num">7</span><span class="tick">&#10003;</span></span>
       <span class="step-titles"><span class="step-t">Onboard &mdash; build your first skill</span><span class="step-sub">The fun part</span></span>
@@ -558,21 +658,21 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   </details>
 
   <!-- FINISH BANNER -->
-  <div class="finish" id="finish">
+  <div class="finish cc-only" id="finish">
     <div class="finish-emoji">&#127881;</div>
     <div class="finish-h">You're all set up!</div>
     <div class="finish-p">The AI Employee Builder toolkit is live inside Claude Code and your workspace is scaffolded. You've got your first custom skill running &mdash; now build the next one. Welcome aboard.</div>
   </div>
 
   <!-- ═══ YOUR ROADMAP ═══ -->
-  <div class="ai-card" style="text-align:center">
+  <div class="ai-card post-setup" style="text-align:center">
     <div class="card-title" style="justify-content:center">&#128506;&#65039; Your next move: the AI Employee Roadmap</div>
     <p>You've built your first one. From here the roadmap shows you the whole path &mdash; make it reliable, connect skills into a system, hand work to an agent, put it on autopilot &mdash; one step at a time, with copy-paste prompts for common jobs (content, sales, client delivery, admin). Inside Claude Code you can just say <code>what's next</code> anytime; this page is the map.</p>
     <a href="ai-employee-roadmap.html" style="display:inline-block;margin-top:14px;padding:13px 28px;background:var(--accent);color:#0a0a0a;border-radius:var(--radius);font-weight:800;font-size:14px;text-decoration:none">Open your roadmap &#8594;</a>
   </div>
 
   <!-- ═══ JOIN THE COMMUNITY ═══ -->
-  <div class="ai-card" style="text-align:center">
+  <div class="ai-card post-setup" style="text-align:center">
     <img src="assets/get-access/community-robot.png" alt="AI Employee Builders" width="120" height="120" style="width:120px;height:120px;border-radius:18px;margin:0 auto 14px;display:block;border:1px solid var(--accent-border)" onerror="this.style.display='none'">
     <div class="card-title" style="justify-content:center">&#128101; Join the AI Employee Builders community</div>
     <p>Plug into the people building alongside you &mdash; share what you're building, get feedback on your AI Employees' output, and join the monthly group call. It's included with your subscription.</p>
@@ -582,7 +682,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   <!-- ═══ STUCK? AI DEBUG ═══ -->
   <div class="section-rule">If something goes wrong</div>
 
-  <div class="ai-card">
+  <div class="ai-card cc-only">
     <div class="card-title">&#129302; Stuck? Ask Claude to fix it</div>
     <p>Fastest fix is to let Claude diagnose it live. <strong>Copy this, paste it into Claude Code, and add what you saw</strong> where it says <code>[describe...]</code>.</p>
     <div class="ai-prompt">
@@ -602,7 +702,7 @@ Check anything you can: Node.js version, whether the thin plugin is installed, w
   </div>
 
   <!-- COMMON FIXES -->
-  <div class="card">
+  <div class="card cc-only">
     <div class="card-title">Common fixes</div>
     <table class="tbl">
       <thead><tr><th>What you see</th><th>The fix</th></tr></thead>
@@ -718,15 +818,98 @@ function copyPrompt(btn){
     setTimeout(function(){ btn.textContent=o; btn.classList.remove('copied'); }, 1600);
   });
 }
-// App chooser: reveal the Claude Code experience fork only after picking Claude Code
-function showCCPath(e){
-  if (e) e.preventDefault();
-  var w = document.getElementById('cc-path-wrap');
-  if (w){
-    w.classList.remove('cc-hidden');
-    setTimeout(function(){ w.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
+// ── COWORK TRACK progress (its own 5 steps + tracker, separate storage) ──
+var CWSTEPS = 5, CWKEY = 'aieb_get_access_cw_done_v1';
+function loadDoneCW(){ try { return new Set(JSON.parse(localStorage.getItem(CWKEY) || '[]')); } catch(e){ return new Set(); } }
+function saveDoneCW(s){ try { localStorage.setItem(CWKEY, JSON.stringify([].slice.call(s))); } catch(e){} }
+var doneCW = loadDoneCW();
+
+function renderCW(){
+  var count = document.getElementById('cwDoneCount');
+  if (count) count.textContent = doneCW.size;
+  for (var i=1; i<=CWSTEPS; i++){
+    var el = document.getElementById('cwstep'+i);
+    var seg = document.querySelector('#cwTrackerSeg .tseg[data-d="'+i+'"]');
+    var on = doneCW.has(i);
+    if (el) {
+      el.classList.toggle('done', on);
+      var lbl = el.querySelector('.dlabel');
+      if (lbl) lbl.textContent = on ? '✓ Done — tap to undo' : 'Mark step done';
+    }
+    if (seg) seg.classList.toggle('on', on);
+  }
+  var fin = document.getElementById('cwfinish');
+  if (fin) fin.classList.toggle('show', doneCW.size === CWSTEPS);
+}
+
+function markDoneCW(n){
+  if (doneCW.has(n)) {
+    doneCW.delete(n);
+  } else {
+    doneCW.add(n);
+    var cur = document.getElementById('cwstep'+n);
+    if (cur) cur.open = false;
+    if (doneCW.size === CWSTEPS) {
+      saveDoneCW(doneCW); renderCW();
+      var fin = document.getElementById('cwfinish');
+      if (fin) setTimeout(function(){ fin.scrollIntoView({behavior:'smooth', block:'center'}); }, 150);
+      return;
+    }
+    for (var k=1; k<=CWSTEPS; k++){
+      var idx = ((n - 1 + k) % CWSTEPS) + 1;
+      if (!doneCW.has(idx)) {
+        var nx = document.getElementById('cwstep'+idx);
+        if (nx) { nx.open = true; setTimeout((function(e){ return function(){ e.scrollIntoView({behavior:'smooth', block:'start'}); }; })(nx), 150); }
+        break;
+      }
+    }
+  }
+  saveDoneCW(doneCW); renderCW();
+}
+
+function resetProgressCW(){ doneCW = new Set(); saveDoneCW(doneCW); renderCW();
+  for (var i=1;i<=CWSTEPS;i++){ var el=document.getElementById('cwstep'+i); if(el) el.open=(i===1); }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+(function initOpenCW(){
+  var firstOpen = null;
+  for (var i=1;i<=CWSTEPS;i++){ if(!doneCW.has(i)){ firstOpen = i; break; } }
+  if (firstOpen === null) firstOpen = 0;
+  for (var j=1;j<=CWSTEPS;j++){ var el=document.getElementById('cwstep'+j); if(el) el.open=(j===firstOpen); }
+  renderCW();
+})();
+
+// ── APP CHOOSER: switch the whole page to one app's track (persisted) ──
+var TRACKKEY = 'aieb_get_access_track';
+function applyTrack(t, scroll){
+  if (t !== 'cc' && t !== 'cowork') return;
+  document.body.classList.toggle('track-cc', t === 'cc');
+  document.body.classList.toggle('track-cowork', t === 'cowork');
+  var cc = document.getElementById('chooser-cc'), cw = document.getElementById('chooser-cw');
+  if (cc) cc.classList.toggle('selected', t === 'cc');
+  if (cw) cw.classList.toggle('selected', t === 'cowork');
+  if (t === 'cc') {
+    var w = document.getElementById('cc-path-wrap');
+    if (w) w.classList.remove('cc-hidden');
+  }
+  try { localStorage.setItem(TRACKKEY, t); } catch(e){}
+  if (scroll) {
+    var target = t === 'cc' ? document.getElementById('cc-path-wrap') : document.getElementById('cowork');
+    if (target) setTimeout(function(){ target.scrollIntoView({behavior:'smooth', block:'start'}); }, 80);
   }
 }
+function chooseTrack(e, t){
+  if (e) e.preventDefault();
+  applyTrack(t, true);
+}
+// Restore: #cowork deep links (old emails) win, then the saved choice.
+(function initTrack(){
+  var saved = null;
+  try { saved = localStorage.getItem(TRACKKEY); } catch(e){}
+  if (location.hash === '#cowork') saved = 'cowork';
+  if (saved) applyTrack(saved, false);
+})();
 // VS Code / Terminal toggle
 function setMethod(m){
   document.body.classList.toggle('show-terminal', m === 'terminal');
