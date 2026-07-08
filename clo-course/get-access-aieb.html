@@ -398,13 +398,13 @@ Your standing rule: use the simplest path. Try terminal commands when they are a
    claude plugin install ai-employee-builder@aieb-thin-plugin --scope user
    If that fails, walk me through `/plugin` -&gt; Manage Plugins -&gt; Marketplaces -&gt; add the GitHub marketplace -&gt; Plugins -&gt; install `ai-employee-builder` -&gt; choose "Install for you" -&gt; reload.
 
-3. SETUP - Run `/setup-aieb`. Ask me to paste my Lemon Squeezy license key when needed. The command should write the local MCP config with:
-   AIEB_MCP_URL=https://aieb-gated-mcp.vercel.app/mcp
-   AIEB_ACTIVATE_URL=https://aieb-gated-mcp.vercel.app/activate
+3. RELOAD - Reload so the plugin's connector comes alive: run /reload-plugins (or reload the window).
 
-4. ACTIVATE &amp; TEST - Start or reload Claude Code so the MCP proxy runs. On first use it should call the `/activate` endpoint, bind this computer to the license, store a local Lemon Squeezy instance ID, and then call the hosted MCP with both the license key and instance ID. The plugin installs auto-routing skill stubs, so test by simply naming a skill - say "business x-ray" or "create a skill" - and confirm it routes, fetches its instructions from the MCP, and runs. (Low-level fallback: call the `get_skill` MCP tool for `meta-create-skill`, path `SKILL.md`.)
+4. LICENSE - Ask me to paste my Lemon Squeezy license key, then activate it by calling the connector's `activate_license` MCP tool with the pasted key. The tool validates the key with the server, saves it machine-globally (~/.aieb-mcp/config.json), binds this computer to the license, and takes effect immediately - no restart, no config files to write. Never echo the full key back; refer to it by its last 4 characters. (If no activate_license tool exists, the connector is older - run `/setup-aieb` instead and paste the key there.)
 
-5. CONFIRM - Confirm the local plugin holds only thin stubs (no paid skill bodies) and that the real instructions are fetched from the MCP server at runtime. If the license is invalid, expired, cancelled, or for the wrong product, tell me plainly and show the renewal/help response instead of trying to bypass it.
+5. TEST - The plugin installs auto-routing skill stubs, so test by simply naming a skill - say "business x-ray" or "create a skill" - and confirm it routes, fetches its instructions from the MCP, and runs. (Low-level fallback: call the `get_skill` MCP tool for `meta-create-skill`, path `SKILL.md`.)
+
+6. CONFIRM - Confirm the local plugin holds only thin stubs (no paid skill bodies) and that the real instructions are fetched from the MCP server at runtime. If the license is invalid, expired, cancelled, or for the wrong product, tell me plainly and show the renewal/help response instead of trying to bypass it.
 
 Important: Do not use SkillStack for this AIEB install. SkillStack was the old delivery path. The current path is thin plugin shell + hosted LemonSqueezy-gated MCP.
 
@@ -463,7 +463,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
         <div class="cmd-line indent"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
         <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Paste your license key when Claude asks.</strong> It's in your Lemon Squeezy receipt email (from <code>noreply@lemonsqueezy.com</code>) &mdash; or grab it any time at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">app.lemonsqueezy.com/my-orders</a>.</div></div>
         <div class="callout callout-info"><strong>Don't see the command?</strong> Saying <code>set up my AI Employee Builder</code> in the chat does exactly the same thing.</div>
-        <p>Claude saves the key on your own machine and runs a real test fetch to confirm you're connected. The key never leaves your device.</p>
+        <p>Claude validates and activates the key through the connector itself &mdash; it works immediately, no restart. (Honestly, just pasting your key into any chat works too; Claude knows what to do with it.) The key is saved on your own machine and never leaves your device.</p>
         <div class="callout callout-warning"><strong>Connector didn't light up?</strong> Type <code>/check-setup</code> in any chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a> and Rashid will sort it with you.</div>
         <div class="callout callout-warning"><strong>Don't paste the MCP URL into &ldquo;Custom Connectors.&rdquo;</strong> That screen is OAuth-only and can't take your license key &mdash; the plugin is the way in.</div>
         <button class="done-btn" onclick="markDoneCW(2)"><span class="dlabel">Mark step done</span></button>
@@ -582,7 +582,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <div class="step-content">
       <p>The shell connects to the hosted MCP server. Run the setup command and paste your Lemon Squeezy key when Claude asks.</p>
       <div class="cmd-line"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <p style="margin-top:10px">The command writes the MCP config with <code>AIEB_MCP_URL</code>, <code>AIEB_ACTIVATE_URL</code>, and your local <code>AIEB_LICENSE_KEY</code>.</p>
+      <p style="margin-top:10px">Claude activates the key through the connector itself (the <code>activate_license</code> tool) &mdash; it validates with the server, saves once for your whole machine, and works immediately. No restart, no config files. In fact, just pasting your key into any chat works too.</p>
       <div class="callout callout-info"><strong>Subscription license:</strong> access stays active while your subscription is active. If the subscription is cancelled or expires, the MCP stops returning paid instructions.</div>
       <button class="done-btn" onclick="markDone(4)"><span class="dlabel">Mark step done</span></button>
     </div>
@@ -705,9 +705,10 @@ Please help me fix it. Background on how this install works:
 - The local plugin is a thin shell. It should contain setup guidance plus a Node.js MCP proxy, not the paid skill bodies.
 - The paid AIEB instructions come from https://aieb-gated-mcp.vercel.app/mcp through the `get_skill` MCP tool.
 - The proxy activates my Lemon Squeezy license through https://aieb-gated-mcp.vercel.app/activate, stores a local instance ID, then sends both the license key and instance ID on MCP calls.
+- License setup is in-chat: I paste my key and you call the connector's `activate_license` MCP tool with it. It validates, saves to ~/.aieb-mcp/config.json, and works immediately - no restart. Never hand-write that config file or ask me to edit files.
 - Do not use SkillStack for this AIEB install. That was the old delivery path.
 
-Check anything you can: Node.js version, whether the thin plugin is installed, whether `.mcp.json` has AIEB_MCP_URL, AIEB_ACTIVATE_URL, and AIEB_LICENSE_KEY, and whether the aieb MCP server is visible. Then explain the problem in plain English and give me the exact next step. If Claude Code needs me to type a slash command or paste a license key, tell me exactly what to do and wait.</pre>
+Check anything you can: Node.js version, whether the thin plugin is installed, whether the aieb MCP server and its `activate_license` + `get_skill` tools are visible. Then explain the problem in plain English and give me the exact next step. If a license problem comes back, ask me to paste my key and activate it with the tool. If Claude Code needs me to type a slash command, tell me exactly what to do and wait.</pre>
     </div>
   </div>
 
@@ -719,7 +720,7 @@ Check anything you can: Node.js version, whether the thin plugin is installed, w
       <tbody>
         <tr><td>A new command doesn't appear</td><td>You skipped a reload. Type <code>/reload-plugins</code>, or reload the window (<span class="kbd">Ctrl/Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> &rarr; "Reload Window").</td></tr>
         <tr><td>Install fails mentioning <code>node</code></td><td>Node.js isn't installed. Install the <strong>LTS</strong> build from <a href="https://nodejs.org" target="_blank">nodejs.org</a>, restart VS Code, retry.</td></tr>
-        <tr><td>The MCP says <strong>401</strong> or unauthorized</td><td>Check that <code>AIEB_LICENSE_KEY</code> is present, the key belongs to AI Employee Builders, and the subscription is active.</td></tr>
+        <tr><td>The MCP says <strong>401</strong> or unauthorized</td><td>Paste your license key in the chat &mdash; Claude re-activates it on the spot. Then check the key belongs to AI Employee Builders and the subscription is active.</td></tr>
         <tr><td>"Key bound to other plugin"</td><td>That key is for a different product &mdash; each key activates one plugin. Re-check the key in your Lemon Squeezy email.</td></tr>
         <tr><td>"Expired" or "Revoked"</td><td>Your subscription lapsed. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">My Orders</a>, then reload Claude Code and try the MCP call again.</td></tr>
         <tr><td>Skills don't show up after install</td><td>Reload Claude Code. If the plugin is installed but the MCP is missing, check the plugin's <code>.mcp.json</code> config.</td></tr>
