@@ -276,12 +276,62 @@ body.show-terminal .m-terminal{display:block}
 .faq .faq-body{padding:0 18px 16px;font-size:13.5px;color:var(--text-muted);line-height:1.65}
 
 /* ── FOOTER ── */
+body.activation-mode{display:flex;align-items:center;justify-content:center;padding:24px}
+body.activation-mode #doc-content> :not(#secure-activation){display:none!important}
+body.activation-mode .container{max-width:620px;width:100%}
+.activation-panel{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--accent-border);border-radius:18px;padding:30px;box-shadow:0 24px 90px rgba(0,0,0,.38)}
+.activation-panel::before{content:'';position:absolute;left:36px;right:36px;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.activation-kicker{font-family:var(--font-mono);font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.activation-panel h1{font-family:var(--font-display);font-size:31px;line-height:1.12;letter-spacing:-.7px;margin-bottom:10px}
+.activation-intro{color:var(--text-muted);font-size:14.5px;max-width:510px}
+.handoff-line{display:grid;grid-template-columns:auto 1fr auto 1fr auto;align-items:center;gap:9px;margin:25px 0;padding:14px;background:#090a09;border:1px solid var(--border-2);border-radius:11px}
+.handoff-node{font-family:var(--font-mono);font-size:10px;font-weight:800;letter-spacing:.45px;color:var(--text-muted);text-transform:uppercase;white-space:nowrap}
+.handoff-node.live{color:var(--accent)}
+.handoff-rail{height:1px;background:linear-gradient(90deg,var(--border-2),var(--accent-border));position:relative;overflow:hidden}
+.handoff-rail::after{content:'';position:absolute;inset:0;width:45%;background:var(--accent);animation:handoff 1.8s ease-in-out infinite}
+@keyframes handoff{from{transform:translateX(-120%)}to{transform:translateX(340%)}}
+.activation-code{display:inline-flex;margin:0 0 18px;padding:5px 9px;border-radius:6px;background:var(--accent-dim);border:1px solid var(--accent-border);font-family:var(--font-mono);font-size:12px;color:var(--accent-text)}
+.activation-form label{display:block;font-size:12px;font-weight:800;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.6px}
+.activation-input{width:100%;padding:13px 14px;background:#090a09;border:1px solid var(--border-2);border-radius:9px;color:var(--text);font-family:var(--font-mono);font-size:14px;outline:none}
+.activation-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+.activation-button{width:100%;margin-top:12px;padding:13px;border:0;border-radius:9px;background:var(--accent);color:#091006;font-family:var(--font-body);font-size:14px;font-weight:850;cursor:pointer}
+.activation-button:hover{filter:brightness(1.06)}
+.activation-button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.activation-button:disabled{opacity:.55;cursor:wait}
+.activation-status{display:none;margin-top:14px;padding:12px 14px;border-radius:9px;font-size:13.5px;line-height:1.5}
+.activation-status.show{display:block}
+.activation-status.working{background:var(--blue-bg);color:#c3d8ff;border:1px solid rgba(91,155,255,.35)}
+.activation-status.error{background:var(--orange-bg);color:#ffe0b0;border:1px solid rgba(245,166,35,.35)}
+.activation-status.success{background:var(--green-bg);color:#bbf3cf;border:1px solid rgba(74,222,128,.35)}
+.activation-privacy{margin-top:13px;color:var(--text-dim);font-size:11.5px;line-height:1.55}
+@media(max-width:580px){body.activation-mode{padding:12px}.activation-panel{padding:23px 18px}.activation-panel h1{font-size:26px}.handoff-line{gap:6px;padding:12px 9px}.handoff-node{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.handoff-rail::after{animation:none;width:100%;opacity:.55}}
+
 .footer{text-align:center;margin-top:38px;padding-top:22px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim)}
 </style>
 </head>
 <body hidden data-page="get-access" data-product="aieb">
 <div class="wrap">
 <div class="container" id="doc-content">
+
+  <section id="secure-activation" class="activation-panel" hidden aria-labelledby="activation-title">
+    <div class="activation-kicker">Secure device handoff</div>
+    <h1 id="activation-title">Connect this device</h1>
+    <p class="activation-intro">Paste the license from your Lemon Squeezy receipt here. It goes directly to the AIEB activation service and Lemon Squeezy&mdash;never through Claude or your chat history.</p>
+    <div class="handoff-line" aria-hidden="true">
+      <span class="handoff-node">Claude</span><span class="handoff-rail"></span>
+      <span class="handoff-node live">AIEB</span><span class="handoff-rail"></span>
+      <span class="handoff-node">Skills</span>
+    </div>
+    <div class="activation-code" id="activation-code"></div>
+    <form class="activation-form" id="secure-activation-form">
+      <label for="secure-license-key">Lemon Squeezy license key</label>
+      <input class="activation-input" id="secure-license-key" name="license_key" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" required placeholder="Paste your key">
+      <button class="activation-button" id="secure-connect-button" type="submit">Connect this device</button>
+    </form>
+    <div class="activation-status" id="secure-activation-status" role="status" aria-live="polite"></div>
+    <p class="activation-privacy">The key is used once for validation and is not stored by the plugin. This page stores no license key, transcript, prompt, file, or business content.</p>
+  </section>
 
   <!-- HERO -->
   <div class="hero rise d1">
@@ -305,7 +355,7 @@ body.show-terminal .m-terminal{display:block}
     </a>
     <a class="fork-card alt" id="chooser-cw" href="#cowork" onclick="chooseTrack(event,'cowork')">
       <span class="fork-ic"><img src="assets/get-access/cowork-logo.png" alt="Claude Cowork"></span>
-      <span class="fork-tx"><strong>Claude Cowork</strong>Runs in the Claude desktop app &mdash; no terminal. Add our plugin, paste your key in chat, done. All point-and-click.</span>
+      <span class="fork-tx"><strong>Claude Cowork</strong>Runs in the Claude desktop app &mdash; no terminal. Add our plugin, open its secure connection page, done. All point-and-click.</span>
       <span class="fork-go">&#129309; Set up Cowork &rarr;</span>
     </a>
   </div>
@@ -382,12 +432,12 @@ body.show-terminal .m-terminal{display:block}
   <!-- ═══════════════ AI SHORTCUT (usable once Claude Code is installed) ═══════════════ -->
   <div class="ai-card cc-only" id="shortcut">
     <div class="card-title">&#9889; Got Claude Code open? Let Claude do the rest</div>
-    <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude does the whole install itself, and if it ever hits something only you can do (paste your key, click a button), it walks you through it one clear step at a time. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
+    <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude does the install itself, then opens a secure page when it needs you to connect the subscription. Your license key never goes into Claude or your chat history. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
     <div class="ai-prompt">
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
-      <pre>You are setting up AI Employee Builder in my Claude Code for me. The new setup uses a free thin plugin shell plus a hosted licensed MCP server. Do as much as you can yourself, verify every step, and only hand work to me when Claude Code requires a human click, slash command, or license-key paste.
+      <pre>You are setting up AI Employee Builder in my Claude Code for me. The setup uses a free thin plugin shell plus a hosted licensed MCP server. Do as much as you can yourself, verify every step, and only hand work to me when Claude Code requires a human click or slash command.
 
-MY SETUP - read carefully: I'm in the Claude Code VS Code extension. You CANNOT type slash commands into my chat for me. When something can ONLY be done by me, give me a short numbered "do this" instruction with the exact text to paste or exact thing to click, then STOP and wait for me to confirm.
+MY SETUP - read carefully: I'm in the Claude Code VS Code extension. You CANNOT type slash commands into my chat for me. When something can ONLY be done by me, give me a short numbered "do this" instruction with the exact safe text to paste or exact thing to click, then STOP and wait for me to confirm. Never ask me to paste a license key into chat.
 
 Your standing rule: use the simplest path. Try terminal commands when they are available. If they fail or my version does not support them, switch to the VS Code Manage Plugins panel and guide me one click at a time.
 
@@ -400,7 +450,7 @@ Your standing rule: use the simplest path. Try terminal commands when they are a
 
 3. RELOAD - Reload so the plugin's connector comes alive: run /reload-plugins (or reload the window).
 
-4. LICENSE - Ask me to paste my Lemon Squeezy license key, then activate it by calling the connector's `activate_license` MCP tool with the pasted key. The tool validates the key with the server, saves it machine-globally (~/.aieb-mcp/config.json), binds this computer to the license, and takes effect immediately - no restart, no config files to write. Never echo the full key back; refer to it by its last 4 characters. (If no activate_license tool exists, the connector is older - run `/setup-aieb` instead and paste the key there.)
+4. CONNECT - Call the connector's `connect_aieb` MCP tool with no arguments. Give me the secure page URL and short code it returns. Tell me to open that page, enter my Lemon Squeezy key there, click Connect, then return and say "done." Never ask for the key in chat. When I say done, call `finish_aieb_connection`; it stores an opaque device token and takes effect immediately without a restart. If those tools are missing, the connector is old and must be updated before continuing.
 
 5. TEST - The plugin installs auto-routing skill stubs, so test by simply naming a skill - say "business x-ray" or "create a skill" - and confirm it routes, fetches its instructions from the MCP, and runs. (Low-level fallback: call the `get_skill` MCP tool for `meta-create-skill`, path `SKILL.md`.)
 
@@ -455,17 +505,17 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <details class="step" id="cwstep2" data-step="2">
       <summary class="step-sum">
         <span class="step-check"><span class="num">2</span><span class="tick">&#10003;</span></span>
-        <span class="step-titles"><span class="step-t">Connect your license</span><span class="step-sub">One chat message + one paste</span></span>
+        <span class="step-titles"><span class="step-t">Connect your subscription</span><span class="step-sub">One chat message + one secure page</span></span>
         <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
       <div class="step-content">
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body">Start a <strong>Cowork</strong> chat and type:</div></div>
         <div class="cmd-line indent"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Paste your license key when Claude asks.</strong> It's in your Lemon Squeezy receipt email (from <code>noreply@lemonsqueezy.com</code>) &mdash; or grab it any time at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">app.lemonsqueezy.com/my-orders</a>.</div></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Claude gives you a short code and opens this course page in secure connection mode. Enter your Lemon Squeezy key <strong>on that page</strong>, click <strong>Connect this device</strong>, then return to Claude and say <code>done</code>. Find the key in your receipt email or at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener">app.lemonsqueezy.com/my-orders</a>.</div></div>
         <div class="callout callout-info"><strong>Don't see the command?</strong> Saying <code>set up my AI Employee Builder</code> in the chat does exactly the same thing.</div>
-        <p>Claude validates and activates the key through the connector itself &mdash; it works immediately, no restart. (Honestly, just pasting your key into any chat works too; Claude knows what to do with it.) The key is saved on your own machine and never leaves your device.</p>
+        <p>The secure page uses your key once to validate the subscription. The plugin receives an opaque device token instead of the key, and it works immediately with no restart. <strong>Never paste a license key into a Claude chat.</strong></p>
         <div class="callout callout-warning"><strong>Connector didn't light up?</strong> Type <code>/check-setup</code> in any chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a> and Rashid will sort it with you.</div>
-        <div class="callout callout-warning"><strong>Don't paste the MCP URL into &ldquo;Custom Connectors.&rdquo;</strong> That screen is OAuth-only and can't take your license key &mdash; the plugin is the way in.</div>
+        <div class="callout callout-warning"><strong>Don't paste the MCP URL into &ldquo;Custom Connectors.&rdquo;</strong> Install the plugin, then let <code>/setup-aieb</code> create the secure connection link.</div>
         <button class="done-btn" onclick="markDoneCW(2)"><span class="dlabel">Mark step done</span></button>
       </div>
     </details>
@@ -539,7 +589,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
       <div class="callout callout-tip" style="margin:0 0 12px"><strong>Got your key in an email from Rashid?</strong> (e.g. a free-access invite.) Use that key &mdash; skip the two lookups below and head to Step&nbsp;3.</div>
       <div class="prereq"><div style="flex:1"><div class="prereq-title">&#9993;&#65039; Your purchase email</div><div class="prereq-sub">Lemon Squeezy emailed you a receipt right after you bought (from <code>noreply@lemonsqueezy.com</code>). Your key is printed inside. Can't find it? Check spam, or search your inbox for <strong>"Chief Leverage Officer"</strong> or <strong>"license"</strong>.</div></div></div>
       <div class="prereq"><div style="flex:1"><div class="prereq-title">&#128273; The "My Orders" page</div><div class="prereq-sub">Go to <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">app.lemonsqueezy.com/my-orders</a>, enter the email you bought with, and click the magic link. Open your order &mdash; the key (with a copy button) is right there. You can also renew or manage your subscription here.</div></div></div>
-      <div class="callout callout-tip"><strong>Copy it somewhere handy.</strong> You'll paste it once, in Step&nbsp;4. The same subscription key works on your permitted devices; each device activates separately.</div>
+      <div class="callout callout-tip"><strong>Keep it private.</strong> You'll enter it once on the secure connection page in Step&nbsp;4 &mdash; never in Claude or another chat. Each permitted device connects separately.</div>
       <button class="done-btn" onclick="markDone(2)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -580,10 +630,10 @@ After each step, tell me whether it worked, or show the error and exactly how yo
       <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
-      <p>The shell connects to the hosted MCP server. Run the setup command and paste your Lemon Squeezy key when Claude asks.</p>
+      <p>The shell connects to the hosted MCP server. Run the setup command; Claude will give you a secure page and short code for connecting this device.</p>
       <div class="cmd-line"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <p style="margin-top:10px">Claude activates the key through the connector itself (the <code>activate_license</code> tool) &mdash; it validates with the server, saves once for your whole machine, and works immediately. No restart, no config files. In fact, just pasting your key into any chat works too.</p>
-      <div class="callout callout-info"><strong>Subscription license:</strong> access stays active while your subscription is active. If the subscription is cancelled or expires, the MCP stops returning paid instructions.</div>
+      <p style="margin-top:10px">Open the link, enter the license key on the secure page, click <strong>Connect this device</strong>, then return and say <code>done</code>. The plugin stores an opaque device token for the whole machine; it never stores the license key. No restart or config editing.</p>
+      <div class="callout callout-info"><strong>Subscription access:</strong> access stays active while your subscription is active. Cancelling revokes MCP access immediately. If you resume or renew, reconnect and access is restored.</div>
       <button class="done-btn" onclick="markDone(4)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -601,7 +651,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
       <p style="margin-top:8px">Or try <code>create a skill</code> or <code>onboard me</code>. Each one loads from the hosted MCP after your license is checked — you don't call any tool by hand.</p>
       <div class="callout callout-tip"><strong>What success looks like:</strong> the skill runs and Claude follows its instructions — yet your local plugin folder still holds only thin stubs and the proxy, never the paid skill bodies.</div>
       <div class="callout callout-info"><strong>Want the low-level check instead?</strong> Ask: <em>"Use the aieb MCP get_skill tool to fetch meta-create-skill with path SKILL.md."</em> Same result, just the manual version.</div>
-      <div class="callout callout-warning"><strong>If it fails:</strong> check that Node.js is installed, the license key is pasted correctly, and the key belongs to AI Employee Builders. Do not try to bypass the license gate.</div>
+      <div class="callout callout-warning"><strong>If it fails:</strong> check that Node.js is installed, run <code>/setup-aieb</code> again, and make sure the key entered on the secure page belongs to AI Employee Builders. Do not paste the key into chat.</div>
       <button class="done-btn" onclick="markDone(5)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -704,11 +754,11 @@ Here's what happened: [describe the error or what you see on screen].
 Please help me fix it. Background on how this install works:
 - The local plugin is a thin shell. It should contain setup guidance plus a Node.js MCP proxy, not the paid skill bodies.
 - The paid AIEB instructions come from https://aieb-gated-mcp.vercel.app/mcp through the `get_skill` MCP tool.
-- The proxy activates my Lemon Squeezy license through https://aieb-gated-mcp.vercel.app/activate, stores a local instance ID, then sends both the license key and instance ID on MCP calls.
-- License setup is in-chat: I paste my key and you call the connector's `activate_license` MCP tool with it. It validates, saves to ~/.aieb-mcp/config.json, and works immediately - no restart. Never hand-write that config file or ask me to edit files.
+- Connection is a secure device flow: call `connect_aieb` with no arguments, send me to the returned course-page URL, and never ask me to paste a license key into chat. After I connect there and say done, call `finish_aieb_connection`.
+- The plugin stores only an opaque device token in ~/.aieb-mcp/config.json. The license key is entered on the secure HTTPS page, used once for validation, and is not stored by the plugin.
 - Do not use SkillStack for this AIEB install. That was the old delivery path.
 
-Check anything you can: Node.js version, whether the thin plugin is installed, whether the aieb MCP server and its `activate_license` + `get_skill` tools are visible. Then explain the problem in plain English and give me the exact next step. If a license problem comes back, ask me to paste my key and activate it with the tool. If Claude Code needs me to type a slash command, tell me exactly what to do and wait.</pre>
+Check anything you can: Node.js version, whether the thin plugin is installed, and whether the aieb MCP server and its `connect_aieb`, `finish_aieb_connection`, and `get_skill` tools are visible. Then explain the problem in plain English and give me the exact next step. If connection is missing, start the secure device flow. Never request or repeat my license key in chat. If Claude Code needs me to type a slash command, tell me exactly what to do and wait.</pre>
     </div>
   </div>
 
@@ -720,7 +770,7 @@ Check anything you can: Node.js version, whether the thin plugin is installed, w
       <tbody>
         <tr><td>A new command doesn't appear</td><td>You skipped a reload. Type <code>/reload-plugins</code>, or reload the window (<span class="kbd">Ctrl/Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> &rarr; "Reload Window").</td></tr>
         <tr><td>Install fails mentioning <code>node</code></td><td>Node.js isn't installed. Install the <strong>LTS</strong> build from <a href="https://nodejs.org" target="_blank">nodejs.org</a>, restart VS Code, retry.</td></tr>
-        <tr><td>The MCP says <strong>401</strong> or unauthorized</td><td>Paste your license key in the chat &mdash; Claude re-activates it on the spot. Then check the key belongs to AI Employee Builders and the subscription is active.</td></tr>
+        <tr><td>The MCP says <strong>401</strong> or unauthorized</td><td>Run <code>/setup-aieb</code> and use the secure page it opens. Never paste the key into chat. Check that the key belongs to AI Employee Builders and the subscription is active.</td></tr>
         <tr><td>"Key bound to other plugin"</td><td>That key is for a different product &mdash; each key activates one plugin. Re-check the key in your Lemon Squeezy email.</td></tr>
         <tr><td>"Expired" or "Revoked"</td><td>Your subscription lapsed. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">My Orders</a>, then reload Claude Code and try the MCP call again.</td></tr>
         <tr><td>Skills don't show up after install</td><td>Reload Claude Code. If the plugin is installed but the MCP is missing, check the plugin's <code>.mcp.json</code> config.</td></tr>
@@ -737,11 +787,11 @@ Check anything you can: Node.js version, whether the thin plugin is installed, w
   <div class="faq">
     <details><summary>Do I need to know how to code?</summary><div class="faq-body">No. You copy a few short commands into a chat box and click "Install." If you can copy and paste, you can do this &mdash; and the <strong>"Let Claude install it"</strong> prompt up top will walk you through it.</div></details>
     <details><summary>Why install a thin plugin plus MCP?</summary><div class="faq-body">The thin plugin gives Claude Code setup guidance and a local proxy. The paid instructions stay on the hosted MCP server, so your subscription can be checked at runtime and updates can ship without reinstalling the whole skill library.</div></details>
-    <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Your license activates a limited number of machines according to the Lemon Squeezy license settings. The MCP binds each computer through a local activation instance so the key cannot be shared endlessly.</div></details>
-    <details><summary>Why does it need Node.js?</summary><div class="faq-body">The local MCP proxy is a small Node.js script. It activates your license, stores the local instance ID, and forwards requests to the hosted MCP server.</div></details>
+    <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Your subscription allows a limited number of devices according to the Lemon Squeezy license settings. Each computer connects separately and stores its own opaque device token; the license key is not stored by the plugin.</div></details>
+    <details><summary>Why does it need Node.js?</summary><div class="faq-body">The local MCP proxy is a small Node.js script. It starts the secure connection, stores the device token locally, and forwards requests to the hosted MCP server.</div></details>
     <details><summary>How do updates work?</summary><div class="faq-body">Most AIEB skill updates happen on the MCP server. You get the latest instructions automatically the next time a skill runs &mdash; no reinstall, nothing to do. You only reinstall the plugin when the local shell itself changes (new setup behavior, proxy, or hooks), and the plugin will <strong>tell you</strong> when that's needed: it checks the server for the current shell version at startup and, if yours is behind, prompts you with the exact update commands.</div></details>
-    <details><summary>Can I use this in Claude Cowork?</summary><div class="faq-body"><strong>Yes &mdash; no Claude Code needed.</strong> Cowork runs in the Claude desktop app, and setup is one plugin install plus one chat message: add the <strong>AI Employee Builder plugin</strong> (<em>Customize &rarr; Personal plugins &rarr; + &rarr; Add marketplace &rarr;</em> <code>the2hourclo/aieb-thin-plugin</code>), then say <code>set up my AI Employee Builder</code> in a Cowork chat and paste your license key when Claude asks. The plugin carries both the skill routing and the connector to your AI Employees. If the connector doesn't light up on your machine, type <code>/check-setup</code> in any chat and Claude will fix it with you. <strong>Don't</strong> paste the MCP URL into <em>Custom Connectors</em> (that's OAuth-only and can't take your key).</div></details>
-    <details><summary>What if my subscription lapses?</summary><div class="faq-body">Access pauses until you renew. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">Lemon Squeezy &rarr; My Orders</a>, then reload Claude Code and try the MCP call again.</div></details>
+    <details><summary>Can I use this in Claude Cowork?</summary><div class="faq-body"><strong>Yes &mdash; no Claude Code needed.</strong> Add the <strong>AI Employee Builder plugin</strong> (<em>Customize &rarr; Personal plugins &rarr; + &rarr; Add marketplace &rarr;</em> <code>the2hourclo/aieb-thin-plugin</code>), then say <code>set up my AI Employee Builder</code>. Claude gives you a secure connection link; enter the key there, not in chat, then return and say <code>done</code>. If the connector doesn't light up, type <code>/check-setup</code>. <strong>Don't</strong> paste the MCP URL into <em>Custom Connectors</em>.</div></details>
+    <details><summary>What if I cancel or my subscription lapses?</summary><div class="faq-body">Cancelling revokes paid MCP access immediately. Renew or resume at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener">Lemon Squeezy &rarr; My Orders</a>, then run <code>/setup-aieb</code> to reconnect.</div></details>
     <details><summary>I already use Claude Code &mdash; can I skip ahead?</summary><div class="faq-body">Yes. If the extension and Node.js are installed, tick Step&nbsp;1 and jump to <strong>Step&nbsp;3</strong>.</div></details>
     <details><summary>Is the Terminal method different from VS Code?</summary><div class="faq-body">Same result, same commands &mdash; just a different place to type them. The <strong>VS Code</strong> way is click-based and friendly; <strong>Terminal</strong> is for command-line folks. Use the toggle at the top to switch.</div></details>
   </div>
@@ -752,6 +802,60 @@ Check anything you can: Node.js version, whether the thin plugin is installed, w
 </div>
 
 <script>
+(function initSecureActivation(){
+  var params = new URLSearchParams(window.location.search);
+  var userCode = (params.get('activate') || '').trim().toUpperCase();
+  if (!userCode) return;
+
+  document.body.classList.add('activation-mode');
+  var panel = document.getElementById('secure-activation');
+  var form = document.getElementById('secure-activation-form');
+  var code = document.getElementById('activation-code');
+  var keyInput = document.getElementById('secure-license-key');
+  var button = document.getElementById('secure-connect-button');
+  var status = document.getElementById('secure-activation-status');
+  panel.hidden = false;
+  code.textContent = userCode;
+  keyInput.focus();
+
+  form.addEventListener('submit', async function(event){
+    event.preventDefault();
+    button.disabled = true;
+    status.className = 'activation-status show working';
+    status.textContent = 'Checking your subscription…';
+    var licenseKey = keyInput.value.trim();
+
+    try {
+      var response = await fetch('https://aieb-gated-mcp.vercel.app/device/complete', {
+        method: 'POST',
+        headers: {'content-type':'application/json'},
+        body: JSON.stringify({user_code:userCode, license_key:licenseKey}),
+        cache: 'no-store',
+        credentials: 'omit',
+        referrerPolicy: 'no-referrer'
+      });
+      keyInput.value = '';
+      licenseKey = '';
+      var payload = await response.json().catch(function(){ return {}; });
+      if (!response.ok || !payload.ok) throw new Error(payload.reason || payload.message || payload.error || 'Connection failed. Please try again.');
+
+      form.hidden = true;
+      status.className = 'activation-status show success';
+      status.textContent = 'Connected. Return to Claude and say “done.”';
+      params.delete('activate');
+      var cleanQuery = params.toString();
+      history.replaceState({}, '', window.location.pathname + (cleanQuery ? '?' + cleanQuery : '') + window.location.hash);
+    } catch (error) {
+      keyInput.value = '';
+      licenseKey = '';
+      status.className = 'activation-status show error';
+      status.textContent = error && error.message ? error.message : 'Connection failed. Please try again.';
+      button.disabled = false;
+      keyInput.focus();
+    }
+  });
+})();
+
 var STEPS = 7, KEY = 'aieb_get_access_done_v2';
 function loadDone(){ try { return new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch(e){ return new Set(); } }
 function saveDone(s){ try { localStorage.setItem(KEY, JSON.stringify(Array.from(s))); } catch(e){} }

@@ -18,6 +18,14 @@
   var PAGE = document.body.getAttribute('data-page') || 'home';
   document.title = document.title || P.title;
 
+  // The AIEB device handoff is a deliberately chrome-free, one-action page.
+  // It must stay reachable even when the course license gate is enabled: the
+  // buyer is here to establish that entitlement, not to browse course content.
+  if (PAGE === 'get-access' && params.has('activate')) {
+    document.body.hidden = false;
+    return;
+  }
+
   var ICON = {
     search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
     menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
