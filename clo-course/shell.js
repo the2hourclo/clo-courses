@@ -39,7 +39,9 @@
 
   // ════════ INIT / GATE ════════
   (async function init() {
-    if (GATE_OPEN) return buildShell();
+    // A product without a `license` block in nav.js is ungated by design
+    // (AIEB's dead placeholder gate was removed 2026-07-11).
+    if (GATE_OPEN || !P.license) return buildShell();
 
     var key = params.get('license_key') || localStorage.getItem(STORAGE_KEY);
     // skip re-validation within a session

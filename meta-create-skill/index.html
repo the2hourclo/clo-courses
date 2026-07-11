@@ -1562,10 +1562,10 @@ LESSON_CONTENT['prereq'] = `
 
 LESSON_CONTENT['install-cc'] = `
 <h2>Install on Claude Code</h2>
-<p class="subtitle">Five steps. Install the extension, log in, clone the skill, verify, trigger it. About 5 minutes.</p>
+<p class="subtitle">Five steps. Install the extension, log in, install the plugin, connect, trigger it. About 5 minutes.</p>
 
 <div class="callout" style="margin-bottom:20px">
-  <strong>New to Claude Code?</strong> Watch the video walkthrough first &mdash; it covers installing Claude Code, setting up your workspace, and running your first skill. Already have it set up with a <code>.claude/skills/</code> folder? Skip to Step 3.
+  <strong>New to Claude Code?</strong> The <a href="../clo-course/get-access.html" style="color:var(--accent);font-weight:700">Get Access page</a> has the full walkthrough &mdash; installing Claude Code, adding the plugin, and connecting your subscription. Already have Claude Code set up? Skip to Step 3.
 </div>
 
 <div class="install-step">
@@ -1588,33 +1588,26 @@ LESSON_CONTENT['install-cc'] = `
 <div class="install-step">
   <div class="step-num">3</div>
   <div class="step-body">
-    <h4>Install GitHub CLI &amp; Clone the Skill</h4>
-    <p>Copy and paste this entire prompt into Claude Code. It will install the GitHub CLI, walk you through login, and clone the skill automatically:</p>
+    <h4>Install the AI Employee Builder Plugin</h4>
+    <p>The skill is delivered through the free thin plugin &mdash; nothing to clone, no folders to manage. Type these two commands in the Claude Code chat panel:</p>
     <div class="card" style="background:var(--surface-2);margin:12px 0 8px;position:relative">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim)">Paste this into Claude Code</span>
+        <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim)">Type these in Claude Code</span>
         <button onclick="navigator.clipboard.writeText(this.closest('.card').querySelector('pre').textContent);this.textContent='Copied!';setTimeout(()=&gt;this.textContent='Copy',2000)" style="font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:var(--bg);color:var(--text-muted);cursor:pointer">Copy</button>
       </div>
-      <pre style="white-space:pre-wrap;font-size:13px;line-height:1.6;color:var(--text);padding:12px;background:var(--bg);border-radius:6px;border:1px solid var(--border);margin:0">1. Check if the GitHub CLI (gh) is installed. If not, install it (use winget on Windows, brew on Mac, or apt on Linux)
-2. Run "gh auth login" so I can authenticate with GitHub (use the browser flow)
-3. Once authenticated, clone the skill: git clone https://github.com/the2hourclo/meta-create-skill-standalone .claude/skills/meta-create-skill-standalone
-4. Verify the folder structure shows SKILL.md, workflows/, and references/</pre>
+      <pre style="white-space:pre-wrap;font-size:13px;line-height:1.6;color:var(--text);padding:12px;background:var(--bg);border-radius:6px;border:1px solid var(--border);margin:0">/plugin marketplace add https://github.com/the2hourclo/aieb-thin-plugin
+/plugin install ai-employee-builder@aieb-thin-plugin</pre>
     </div>
-    <p style="color:var(--text-dim);font-size:12px;margin:4px 0 20px">Claude will guide you through each step. The GitHub login opens in your browser and returns automatically.</p>
+    <p style="color:var(--text-dim);font-size:12px;margin:4px 0 20px">When it asks for scope, choose <strong>"Install for you"</strong> so the plugin works in every project, then reload when prompted.</p>
   </div>
 </div>
 
 <div class="install-step">
   <div class="step-num">4</div>
   <div class="step-body">
-    <h4>Verify the Skill is Installed</h4>
-    <p>After Claude finishes, expand <code>.claude/skills/meta-create-skill-standalone/</code> in the file explorer. You should see <code>SKILL.md</code>, <code>workflows/</code>, <code>references/</code>, <code>assets/</code>, and <code>scripts/</code>.</p>
-    <div class="folder-tree"><span class="fold">&#128193; .claude/skills/meta-create-skill-standalone/</span>
-&#9500;&#9472;&#9472; <span class="file">SKILL.md</span>           <span class="ann"># router + architecture decision tree</span>
-&#9500;&#9472;&#9472; <span class="fold">&#128193; workflows/</span>         <span class="ann"># 7 workflow files</span>
-&#9500;&#9472;&#9472; <span class="fold">&#128193; assets/</span>            <span class="ann"># 5 opinionated templates</span>
-&#9500;&#9472;&#9472; <span class="fold">&#128193; references/</span>        <span class="ann"># deep architecture docs</span>
-&#9492;&#9472;&#9472; <span class="fold">&#128193; scripts/</span>           <span class="ann"># eval scripts</span></div>
+    <h4>Connect Your Subscription</h4>
+    <p>In the chat, type <code>/setup-aieb</code>. It opens a secure one-link activation page in your browser &mdash; you enter your license key <em>there</em>, never in the chat. Once activated, the gated server delivers the full skill content to Claude at runtime, so you always run the latest version.</p>
+    <p style="color:var(--text-dim);font-size:12px;margin:4px 0 20px">Full step-by-step with troubleshooting lives on the <a href="../clo-course/get-access.html" style="color:var(--accent)">Get Access page</a>.</p>
   </div>
 </div>
 
@@ -1622,70 +1615,56 @@ LESSON_CONTENT['install-cc'] = `
   <div class="step-num">5</div>
   <div class="step-body">
     <h4>Trigger the skill</h4>
-    <p>Start a new Claude Code session in the project and paste any prompt from the panel below. Claude's router reads the description in <code>SKILL.md</code>, matches it to your request, and loads the right workflow. You'll know it worked once Claude starts walking you through a workflow step-by-step.</p>
+    <p>Start a new Claude Code session and just say <strong>"create a skill"</strong> &mdash; or paste any prompt from the panel below. The plugin's meta-create-skill stub auto-routes your request and fetches the full skill from the server. You'll know it worked once Claude starts walking you through a workflow step-by-step.</p>
   </div>
 </div>
 
 ${SAMPLE_PROMPTS}
 
 <div class="callout" style="margin-top:24px">
-  <strong>That's it.</strong> No plugin install, no restart, no settings toggle. The skill is just a folder of markdown and Claude reads it.
+  <strong>That's it.</strong> No cloning, no ZIPs, no folders to keep in sync. The plugin is a thin shell &mdash; the full skill content is served securely at runtime and updates itself.
 </div>
 `;
 
 LESSON_CONTENT['install-web'] = `
 <h2>Install on Claude.ai</h2>
-<p class="subtitle">Claude.ai has a native Skills install at <code>claude.ai/customize/skills</code>. Upload the skill as a ZIP, toggle it on, done. Auto-invokes like Claude Code.</p>
+<p class="subtitle">No terminal needed. Install the AI Employee Builder plugin in the Claude desktop app (Cowork), run <code>/setup-aieb</code>, and the skill works in chat &mdash; all point-and-click.</p>
 
 <div class="callout note">
-  <strong>Two paths exist. Pick the right one.</strong> The native path (Customize &rarr; Skills) gives you a real skill that auto-invokes based on its description, just like Claude Code. The Project Knowledge path (bottom of this lesson) uploads files as reference documents you have to point to manually. Use the native path unless you specifically want the skill scoped to one Project chat.
+  <strong>Use the Claude desktop app.</strong> The plugin installs through <strong>Customize &rarr; Personal plugins</strong> in Claude Desktop (Cowork). Once it's connected, the skill auto-invokes from its description, just like Claude Code.
 </div>
-
-<h3>Native path: Customize &rarr; Skills (recommended)</h3>
 
 <div class="card" style="text-align:center;padding:28px 32px;margin-bottom:28px;border-color:var(--accent-border);background:var(--accent-dim)"><h3 style="margin-bottom:4px">Get this skill</h3><p style="color:var(--text-muted);font-size:13px;margin-bottom:16px">Delivered through the AI Employee Builder plugin &mdash; license-gated, nothing to download.</p><a href="../clo-course/get-access-aieb.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--accent);color:var(--bg);border-radius:var(--radius);font-size:15px;font-weight:700;text-decoration:none">Get Access &rarr;</a></div>
 
 <div class="install-step">
+  <div class="step-num">1</div>
+  <div class="step-body">
+    <h4>Install the plugin</h4>
+    <p>In the Claude desktop app, open <strong>Customize &rarr; Personal plugins</strong> &rarr; click the <strong>+</strong> &rarr; <strong>Add marketplace</strong> and paste <code>the2hourclo/aieb-thin-plugin</code>. Then install <strong>ai-employee-builder</strong> from that marketplace.</p>
+    <p style="color:var(--text-dim);font-size:12px">Don't see "Personal plugins" in Customize? Update the desktop app first (quit and reopen usually does it), then look again.</p>
+  </div>
+</div>
+
+<div class="install-step">
   <div class="step-num">2</div>
   <div class="step-body">
-    <h4>Enable Code Execution (prerequisite)</h4>
-    <p>Skills on Claude.ai run inside the code execution sandbox, so turn it on once at <code>claude.ai/settings/capabilities</code> &rarr; toggle <strong>Code execution and file creation</strong> ON.</p>
-    <p><em>On Enterprise plans:</em> the workspace owner also has to enable Skills + Code Execution at <code>claude.ai/admin-settings/skills</code> before individual users can install skills.</p>
-    <div class="screenshot-placeholder" data-label="Screenshot: Settings &rarr; Capabilities toggle">Screenshot pending &mdash; Settings page, Code execution toggle</div>
+    <h4>Connect your subscription</h4>
+    <p>Start a chat and type <code>/setup-aieb</code>. It gives you a secure one-link activation page &mdash; you enter your license key <em>there</em>, never in the chat. The full walkthrough with troubleshooting lives on the <a href="../clo-course/get-access.html" style="color:var(--accent);font-weight:700">Get Access page</a>.</p>
   </div>
 </div>
 
 <div class="install-step">
   <div class="step-num">3</div>
   <div class="step-body">
-    <h4>Upload at claude.ai/customize/skills</h4>
-    <p>Go to <code>claude.ai/customize/skills</code> &rarr; click the <strong>+</strong> button &rarr; <strong>Upload a skill</strong>. Drop the ZIP you just downloaded.</p>
-    <div class="screenshot-placeholder" data-label="Screenshot: Customize &rarr; Skills upload dialog">Screenshot pending &mdash; Customize/Skills page with upload dialog open</div>
-  </div>
-</div>
-
-<div class="install-step">
-  <div class="step-num">4</div>
-  <div class="step-body">
-    <h4>Enable and invoke</h4>
-    <p>Toggle the skill ON. Open any conversation and paste any prompt from the panel below. Claude's router reads the description and auto-invokes the skill, so you don't need to reference it manually. Plan availability: <strong>Free, Pro, Max, Team, Enterprise</strong>.</p>
-    <div class="screenshot-placeholder" data-label="Screenshot: skill enabled + first invocation">Screenshot pending &mdash; Skills list with toggle on, followed by chat</div>
+    <h4>Invoke the skill</h4>
+    <p>Open any conversation and just say <strong>"create a skill"</strong> &mdash; or paste any prompt from the panel below. The plugin's meta-create-skill stub auto-routes your request and fetches the full skill from the gated server, so you don't need to reference it manually.</p>
   </div>
 </div>
 
 ${SAMPLE_PROMPTS}
 
-<h3 style="margin-top:32px">Alternative: Project Knowledge (for project-scoped use)</h3>
-<p>If you want the skill files available only inside one specific Project chat (not auto-invoking globally):</p>
-<ol>
-  <li>Go to <code>claude.ai/projects</code> &rarr; <strong>New Project</strong>.</li>
-  <li>In the project, use the <strong>project knowledge</strong> panel on the right &rarr; <strong>+</strong> &rarr; drag-drop your <code>SKILL.md</code> and workflow files. Max 30MB per file.</li>
-  <li>Click <strong>Set project instructions</strong> and paste: <em>"When the user asks to create, validate, test, or audit a skill, follow the SKILL.md and workflow files in project knowledge."</em></li>
-  <li>Start a chat in that project. You may still need to reference the files explicitly on the first turn, because they do <em>not</em> auto-invoke the way a properly installed skill does.</li>
-</ol>
-
 <div class="callout warn">
-  <strong>What you lose on Claude.ai (vs Claude Code):</strong> No <strong>hooks</strong> (the Stop hook that auto-detects skill friction is ignored, so you run retrospective manually). No <strong>custom subagents</strong> (parallel test runs fall back to sequential in-chat). No user <strong>Python scripts</strong> running outside the code-execution sandbox. No <strong>plugins</strong>, <strong>slash commands</strong>, <strong>settings.json</strong>, or local MCP config. Everything conceptual &mdash; architecture, routing, self-improvement &mdash; works identically.
+  <strong>What you lose vs Claude Code:</strong> No <strong>hooks</strong> (the Stop hook that auto-detects skill friction is ignored, so you run retrospective manually). No <strong>custom subagents</strong> (parallel test runs fall back to sequential in-chat). No user <strong>Python scripts</strong> running outside the code-execution sandbox. No <strong>settings.json</strong> or local MCP config &mdash; the plugin and its <code>/setup-aieb</code> command load through the desktop app instead. Everything conceptual &mdash; architecture, routing, self-improvement &mdash; works identically.
 </div>
 `;
 

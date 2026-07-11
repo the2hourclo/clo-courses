@@ -60,9 +60,9 @@ window.CLO_PRODUCTS = {
     tierBadge: { label: 'AI Employee Builder', star: false },
     storageKey: 'aieb_license',
     pluginName: 'ai-employee-builder',
-    // TODO: fill AIEB's real Lemon Squeezy IDs before re-enabling the license gate
-    license: { store_id: 0, product_id: 0, variant_id: 0 },
-    checkout_url: 'https://www.polynet.ai/c/ai-employee-builders',
+    // No license gate on the AIEB portal (removed 2026-07-11 — it shipped as a
+    // dead placeholder with zeroed LS ids). If gating is ever wanted, re-add a
+    // license block with the real store/product/variant ids and a checkout URL.
     community: { url: 'https://www.polynet.ai/c/ai-employee-builders', label: 'Community ↗', external: true },
     onboarding: [
       { label: 'Get access & install', href: 'clo-course/get-access-aieb.html', hint: 'Pick Claude Code or Cowork, install, add Draw.io' },
@@ -73,7 +73,7 @@ window.CLO_PRODUCTS = {
     nav: [
       { group: 'Get Started', items: [
         { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
-        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','plugin','license','activate','skillstack','onboard','getting started','first steps'] },
+        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','plugin','license','activate','onboard','getting started','first steps'] },
         { label: 'Roadmap', page: 'roadmap', href: 'clo-course/ai-employee-roadmap.html', keywords: ['roadmap','whats next','next step','journey','path','harness','agent','command','routine','what to build next','continue building','ai employee roadmap'] }
       ]},
       { group: 'Claude Code 101', items: [
