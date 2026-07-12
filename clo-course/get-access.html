@@ -316,37 +316,10 @@ body.show-terminal .m-terminal{display:block}
     <div class="method-note m-terminal">For the command-line crowd &mdash; you type into the <code>claude</code> terminal. Steps 3 &amp; 5 match this.</div>
   </div>
 
-  <!-- ═══════════════ STEP 1 ═══════════════ -->
-  <details class="step" id="step1" data-step="1" open>
-    <summary class="step-sum">
-      <span class="step-check"><span class="num">1</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Install Claude Code</span><span class="step-sub">Get the editor + extension running</span></span>
-      <span class="step-meta"><span class="time">~8 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
-    </summary>
-    <div class="step-content">
-      <p>This is the one part you set up by hand &mdash; and once Claude Code is running, Claude can do almost everything after this <em>for</em> you. Three quick things:</p>
-
-      <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Have a Claude subscription</strong> (Pro, Max, or Teams) &mdash; this powers Claude Code. Sign up at <a href="https://claude.ai" target="_blank">claude.ai</a> if you don't have one yet.</div></div>
-
-      <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Install VS Code</strong> &mdash; the free editor you'll work in. Download it from <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a> and run the installer with the default options.</div></div>
-
-      <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Add the Claude Code extension &amp; sign in.</strong> Open VS Code, open the <strong>Extensions</strong> panel (<span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span> / <span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span>), search <strong>"Claude Code"</strong>, and click <strong>Install</strong> on the first result by Anthropic. Then click the <strong>Spark icon (&#10022;)</strong> top-right to open the panel and <strong>sign in</strong> with your Claude account.</div></div>
-
-      <figure class="shot">
-        <img src="assets/get-access/02-claude-code-extension.png" alt="Installing the Claude Code extension in VS Code" onerror="this.closest('figure').style.display='none'">
-        <figcaption><strong>What you'll see:</strong> search <strong>"Claude Code"</strong> in the Extensions panel and click <strong>Install</strong> on the first result by Anthropic.</figcaption>
-      </figure>
-
-      <div class="callout callout-tip"><strong>That's the only manual install.</strong> One more tool (Node.js) is needed later &mdash; but you don't install it yourself. In Step&nbsp;3, Claude sets it up for you from the terminal.</div>
-      <div class="callout callout-info"><strong>Already use Claude Code?</strong> If the extension is installed and you're signed in, tick this and jump to Step&nbsp;3.</div>
-      <button class="done-btn" onclick="markDone(1)"><span class="dlabel">Mark step done</span></button>
-    </div>
-  </details>
-
-  <!-- ═══════════════ AI SHORTCUT (usable once Claude Code is installed) ═══════════════ -->
+  <!-- ═══════════════ AI SHORTCUT — the optional fast path (needs Claude Code open; Step 1 installs it) ═══════════════ -->
   <div class="ai-card" id="shortcut">
-    <div class="card-title">&#9889; Got Claude Code open? Let Claude do the rest</div>
-    <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude does the whole install itself, and if it ever hits something only you can do (paste your key, click a button), it walks you through it one clear step at a time. <span style="color:var(--text-dim)">(Have your license key ready &mdash; Step&nbsp;2 below shows where to find it.)</span></p>
+    <div class="card-title">&#9889; Fastest route: paste this and let Claude do Steps 1&ndash;7 with you</div>
+    <p>If Claude Code is already open, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude does the whole install itself, and if it ever hits something only you can do (paste your key, click a button), it walks you through it one clear step at a time. <span style="color:var(--text-dim)">(No Claude Code yet? Step&nbsp;1 below gets it installed &mdash; that's the one manual part. And have your license key ready &mdash; Step&nbsp;2 shows where to find it.)</span></p>
     <div class="ai-prompt">
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
       <pre>You are setting up the CLO-OS Community plugin in my Claude Code for me. Do as much of this yourself as you possibly can — run the commands, install what's needed, check the results — and only hand a task to me when it's genuinely impossible for you to do it. My job should be near zero: ideally I only paste my license key and click a button or two. Verify every step actually worked before moving to the next.
@@ -374,8 +347,35 @@ Your standing rule for the whole process: try to do it yourself in the terminal 
 
 After each step, tell me plainly whether it worked, or show me the error and exactly how you're fixing it. Start now with step 1.</pre>
     </div>
-    <div class="callout callout-tip" style="margin-top:14px">Rather do it by hand? Just keep following Steps&nbsp;2&ndash;6 below &mdash; each is short, and you can tick them off as you go.</div>
+    <div class="callout callout-tip" style="margin-top:14px">Rather do it by hand? Just follow Steps&nbsp;1&ndash;7 below &mdash; each is short, and you can tick them off as you go.</div>
   </div>
+
+  <!-- ═══════════════ STEP 1 ═══════════════ -->
+  <details class="step" id="step1" data-step="1" open>
+    <summary class="step-sum">
+      <span class="step-check"><span class="num">1</span><span class="tick">&#10003;</span></span>
+      <span class="step-titles"><span class="step-t">Install Claude Code</span><span class="step-sub">Get the editor + extension running</span></span>
+      <span class="step-meta"><span class="time">~8 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+    </summary>
+    <div class="step-content">
+      <p>This is the one part you set up by hand &mdash; and once Claude Code is running, Claude can do almost everything after this <em>for</em> you. Three quick things:</p>
+
+      <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Have a Claude subscription</strong> (Pro, Max, or Teams) &mdash; this powers Claude Code. Sign up at <a href="https://claude.ai" target="_blank">claude.ai</a> if you don't have one yet.</div></div>
+
+      <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Install VS Code</strong> &mdash; the free editor you'll work in. Download it from <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a> and run the installer with the default options.</div></div>
+
+      <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Add the Claude Code extension &amp; sign in.</strong> Open VS Code, open the <strong>Extensions</strong> panel (<span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span> / <span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span>), search <strong>"Claude Code"</strong>, and click <strong>Install</strong> on the first result by Anthropic. Then click the <strong>Spark icon (&#10022;)</strong> top-right to open the panel and <strong>sign in</strong> with your Claude account.</div></div>
+
+      <figure class="shot">
+        <img src="assets/get-access/02-claude-code-extension.png" alt="Installing the Claude Code extension in VS Code" onerror="this.closest('figure').style.display='none'">
+        <figcaption><strong>What you'll see:</strong> search <strong>"Claude Code"</strong> in the Extensions panel and click <strong>Install</strong> on the first result by Anthropic.</figcaption>
+      </figure>
+
+      <div class="callout callout-tip"><strong>That's the only manual install.</strong> One more tool (Node.js) is needed later &mdash; but you don't install it yourself. In Step&nbsp;3, Claude sets it up for you from the terminal.</div>
+      <div class="callout callout-info"><strong>Already use Claude Code?</strong> If the extension is installed and you're signed in, tick this and jump to Step&nbsp;3.</div>
+      <button class="done-btn" onclick="markDone(1)"><span class="dlabel">Mark step done</span></button>
+    </div>
+  </details>
 
   <!-- ═══════════════ STEP 2 ═══════════════ -->
   <details class="step" id="step2" data-step="2">
