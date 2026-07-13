@@ -806,8 +806,39 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
 <script>
 (function initSecureActivation(){
   var params = new URLSearchParams(window.location.search);
+  var CLAIM_KEY = 'aieb_purchase_claim_v1';
+  var CLAIM_MAX_AGE_MS = 60 * 60 * 1000; // matches the server-side claim expiry
+
+  // Post-purchase redirect: bank the claim in this browser, then scrub the URL.
+  var incomingClaim = (params.get('claim') || '').trim();
+  if (incomingClaim) {
+    try { localStorage.setItem(CLAIM_KEY, JSON.stringify({ nonce: incomingClaim, stored_at: Date.now() })); } catch (e) {}
+    params.delete('claim');
+    var scrubbed = params.toString();
+    history.replaceState({}, '', window.location.pathname + (scrubbed ? '?' + scrubbed : '') + window.location.hash);
+  }
+  function storedClaim(){
+    try {
+      var raw = JSON.parse(localStorage.getItem(CLAIM_KEY) || 'null');
+      if (raw && raw.nonce && (Date.now() - raw.stored_at) < CLAIM_MAX_AGE_MS) return raw.nonce;
+    } catch (e) {}
+    return '';
+  }
+  function clearClaim(){ try { localStorage.removeItem(CLAIM_KEY); } catch (e) {} }
+
   var userCode = (params.get('activate') || '').trim().toUpperCase();
-  if (!userCode) return;
+  if (!userCode) {
+    // Fresh from checkout, not connecting yet: confirm the claim landed.
+    if (incomingClaim) {
+      var note = document.createElement('div');
+      note.setAttribute('role', 'status');
+      note.style.cssText = 'position:sticky;top:0;z-index:50;background:#12240e;color:#c9f4b2;border-bottom:1px solid #79EA20;padding:10px 16px;font-size:14px;text-align:center';
+      note.textContent = '✓ Purchase linked to this browser — when Claude sends you back here to connect, it finishes with zero typing.';
+      document.body.prepend(note);
+      setTimeout(function(){ note.remove(); }, 12000);
+    }
+    return;
+  }
 
   document.body.classList.add('activation-mode');
   var panel = document.getElementById('secure-activation');
@@ -818,7 +849,45 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
   var status = document.getElementById('secure-activation-status');
   panel.hidden = false;
   code.textContent = userCode;
-  keyInput.focus();
+
+  async function completeActivation(body){
+    var response = await fetch('https://aieb-gated-mcp.vercel.app/device/complete', {
+      method: 'POST',
+      headers: {'content-type':'application/json'},
+      body: JSON.stringify(body),
+      cache: 'no-store',
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer'
+    });
+    var payload = await response.json().catch(function(){ return {}; });
+    if (!response.ok || !payload.ok) throw new Error(payload.reason || payload.message || payload.error || 'Connection failed. Please try again.');
+    form.hidden = true;
+    status.className = 'activation-status show success';
+    status.textContent = 'Connected — you can close this tab. Back in Claude, just keep going; the connection finishes by itself in a few seconds.';
+    params.delete('activate');
+    var cleanQuery = params.toString();
+    history.replaceState({}, '', window.location.pathname + (cleanQuery ? '?' + cleanQuery : '') + window.location.hash);
+  }
+
+  // Zero-typing lane: this browser holds a purchase claim, so connect with it
+  // directly. Any failure falls back to the license-key box below.
+  var claim = storedClaim();
+  if (claim) {
+    button.disabled = true;
+    status.className = 'activation-status show working';
+    status.textContent = 'Connecting this device from your purchase — no key needed…';
+    completeActivation({ user_code: userCode, claim: claim })
+      .then(function(){ clearClaim(); })
+      .catch(function(){
+        clearClaim();
+        button.disabled = false;
+        status.className = 'activation-status show error';
+        status.textContent = 'Automatic connect didn’t go through — paste your license key below instead (it’s in your Lemon Squeezy receipt).';
+        keyInput.focus();
+      });
+  } else {
+    keyInput.focus();
+  }
 
   form.addEventListener('submit', async function(event){
     event.preventDefault();
@@ -828,25 +897,9 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
     var licenseKey = keyInput.value.trim();
 
     try {
-      var response = await fetch('https://aieb-gated-mcp.vercel.app/device/complete', {
-        method: 'POST',
-        headers: {'content-type':'application/json'},
-        body: JSON.stringify({user_code:userCode, license_key:licenseKey}),
-        cache: 'no-store',
-        credentials: 'omit',
-        referrerPolicy: 'no-referrer'
-      });
+      await completeActivation({ user_code: userCode, license_key: licenseKey });
       keyInput.value = '';
       licenseKey = '';
-      var payload = await response.json().catch(function(){ return {}; });
-      if (!response.ok || !payload.ok) throw new Error(payload.reason || payload.message || payload.error || 'Connection failed. Please try again.');
-
-      form.hidden = true;
-      status.className = 'activation-status show success';
-      status.textContent = 'Connected — you can close this tab. Back in Claude, just keep going; the connection finishes by itself in a few seconds.';
-      params.delete('activate');
-      var cleanQuery = params.toString();
-      history.replaceState({}, '', window.location.pathname + (cleanQuery ? '?' + cleanQuery : '') + window.location.hash);
     } catch (error) {
       keyInput.value = '';
       licenseKey = '';
