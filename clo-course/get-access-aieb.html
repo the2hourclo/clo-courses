@@ -402,13 +402,10 @@ body.activation-mode .container{max-width:620px;width:100%}
     <div class="wiz-auto" id="wizClaimNote" hidden>&#10003; Purchase linked to this browser &mdash; your connect step will finish with zero typing.</div>
   </div>
 
-  <!-- WIZARD HERO (chooser stage — Cowork is the default, VS Code the escape hatch) -->
+  <!-- WIZARD HERO (chooser stage — two big cards, Cowork visually primary) -->
   <div id="wiz-hero"><div class="wiz-hero-inner">
     <h1>You're in &#127881; Let's get you set up</h1>
-    <p>A few short steps, one at a time &mdash; most people are done in about 15 minutes. Your AI Employees run in the <strong>Claude desktop app</strong> &mdash; no terminal, all point-and-click.</p>
-    <div style="margin-top:22px"><button type="button" class="wiz-go" onclick="chooseTrack(null,'cowork')">Continue with Claude Cowork &#8594;</button></div>
-    <div style="margin-top:12px"><a href="#" onclick="chooseTrack(event,'cc')" style="font-size:13px;color:var(--text-muted)">I already use VS Code &mdash; set up with Claude Code instead</a></div>
-    <p style="font-size:12px;color:var(--text-dim);margin-top:14px">You can switch apps anytime from the bar above.</p>
+    <p>A few short steps, one at a time &mdash; most people are done in about 15 minutes. First: which app will you run your AI Employees in? Pick one &mdash; you can switch anytime from the bar above.</p>
   </div></div>
 
   <!-- HERO -->
@@ -1244,7 +1241,8 @@ function wizRender(){
   if (claimNote) claimNote.hidden = !(window.__aiebClaim && !wizConnected());
   if (!wizTrackName){
     document.getElementById('wiz-hero').classList.add('wiz-visible');
-    count.textContent='Welcome';
+    document.getElementById('app-chooser').classList.add('wiz-visible');
+    count.textContent='Pick your app';
     eta.textContent='~15 min total';
     fill.style.width = window.__aiebClaim ? '12%' : '4%';
     if (app) app.hidden = true;
