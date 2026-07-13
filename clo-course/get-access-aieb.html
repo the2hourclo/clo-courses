@@ -807,7 +807,7 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
 (function initSecureActivation(){
   var params = new URLSearchParams(window.location.search);
   var CLAIM_KEY = 'aieb_purchase_claim_v1';
-  var CLAIM_MAX_AGE_MS = 60 * 60 * 1000; // matches the server-side claim expiry
+  var CLAIM_MAX_AGE_MS = 24 * 60 * 60 * 1000; // matches the server-side claim expiry
 
   // Post-purchase redirect: bank the claim in this browser, then scrub the URL.
   var incomingClaim = (params.get('claim') || '').trim();
