@@ -484,11 +484,11 @@ body.activation-mode .container{max-width:620px;width:100%}
     <div class="tracker-inner">
       <div class="tracker-top">
         <span class="tracker-label">&#128640; Your setup progress</span>
-        <span class="tracker-count"><b id="doneCount">0</b> of 6 done</span>
+        <span class="tracker-count"><b id="doneCount">0</b> of 5 done</span>
       </div>
       <div class="tracker-seg" id="trackerSeg">
         <div class="tseg" data-d="1"></div><div class="tseg" data-d="2"></div><div class="tseg" data-d="3"></div>
-        <div class="tseg" data-d="4"></div><div class="tseg" data-d="5"></div><div class="tseg" data-d="6"></div>
+        <div class="tseg" data-d="4"></div><div class="tseg" data-d="5"></div>
       </div>
       <div class="tracker-reset"><button onclick="resetProgress()">Reset progress</button></div>
     </div>
@@ -558,29 +558,31 @@ Your standing rule: use the simplest path. Try terminal commands when they are a
 
 6. CONFIRM - Confirm the local plugin holds only thin stubs (no paid skill bodies) and that the real instructions are fetched from the MCP server at runtime. If the license is invalid, expired, cancelled, or for the wrong product, tell me plainly and show the renewal/help response instead of trying to bypass it.
 
+7. ONBOARD - once connected and verified, kick off my onboarding so I get my first working AI employee. Run /setup-aieb (or, in the extension, tell me the exact command to type) - it maps how my business runs today (the Business X-Ray is built in) and builds my first custom skill with me. I just answer its questions. My first AI employee is about 30 minutes away.
+
 Important: Do not use SkillStack for this AIEB install. SkillStack was the old delivery path. The current path is thin plugin shell + hosted LemonSqueezy-gated MCP.
 
 After each step, tell me whether it worked, or show the error and exactly how you're fixing it. Start now with step 1.</pre>
     </div>
     <div class="wiz-auto" id="shortcutConnected" hidden>&#10003; Device connected &mdash; setup verified by the machine, not by you.</div>
     <button class="done-btn wiz-only" type="button" onclick="wizShortcutDone()"><span>Claude finished the setup &mdash; next &#8594;</span></button>
-    <div class="callout callout-tip" style="margin-top:14px">Rather do it by hand? <a href="#step2" onclick="if(typeof wizExit==='function'&&window.wizOn){wizExit(event)}">Open the full guide</a> &mdash; Steps&nbsp;2&ndash;6 written out click by click.</div>
+    <div class="callout callout-tip" style="margin-top:14px">Rather do it by hand? <a href="#step2" onclick="if(typeof wizExit==='function'&&window.wizOn){wizExit(event)}">Open the full guide</a> &mdash; Steps&nbsp;2&ndash;5 written out click by click.</div>
   </div>
 
   <!-- ═══════════════ CLAUDE COWORK ═══════════════ -->
   <!-- ═══════════════ CLAUDE COWORK TRACK (3 guided steps + 2 optional) ═══════════════ -->
   <div id="cowork" class="cw-only">
 
-    <div class="section-rule">Using Claude Cowork &mdash; three steps, all point-and-click (plus two optional)</div>
+    <div class="section-rule">Using Claude Cowork &mdash; two steps, all point-and-click (plus two optional)</div>
 
     <div class="tracker">
       <div class="tracker-inner">
         <div class="tracker-top">
           <span class="tracker-label">&#128640; Your setup progress</span>
-          <span class="tracker-count"><b id="cwDoneCount">0</b> of 5 done</span>
+          <span class="tracker-count"><b id="cwDoneCount">0</b> of 4 done</span>
         </div>
         <div class="tracker-seg" id="cwTrackerSeg">
-          <div class="tseg" data-d="1"></div><div class="tseg" data-d="2"></div><div class="tseg" data-d="3"></div><div class="tseg" data-d="4"></div><div class="tseg" data-d="5"></div>
+          <div class="tseg" data-d="1"></div><div class="tseg" data-d="2"></div><div class="tseg" data-d="3"></div><div class="tseg" data-d="4"></div>
         </div>
         <div class="tracker-reset"><button onclick="resetProgressCW()">Reset progress</button></div>
       </div>
@@ -609,8 +611,8 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <details class="step" id="cwstep2" data-step="2">
       <summary class="step-sum">
         <span class="step-check"><span class="num">2</span><span class="tick">&#10003;</span></span>
-        <span class="step-titles"><span class="step-t">Connect your subscription</span><span class="step-sub">One chat message + one secure page</span></span>
-        <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+        <span class="step-titles"><span class="step-t">Connect &amp; onboard</span><span class="step-sub">One command connects you, then builds your first skill</span></span>
+        <span class="step-meta"><span class="time">~12 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
       <div class="step-content">
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body">Start a <strong>Cowork</strong> chat and type:</div></div>
@@ -620,24 +622,9 @@ After each step, tell me whether it worked, or show the error and exactly how yo
         <p>The secure page validates your subscription and hands the plugin an opaque device token &mdash; the plugin never sees or stores a license key, and it works immediately with no restart. If the page ever does ask for your key, enter it there only &mdash; <strong>never paste a license key into a Claude chat.</strong></p>
         <div class="callout callout-warning"><strong>Connector didn't light up?</strong> Type <code>/check-setup</code> in any chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a> and Rashid will sort it with you.</div>
         <div class="callout callout-warning"><strong>Don't paste the MCP URL into &ldquo;Custom Connectors.&rdquo;</strong> Install the plugin, then let <code>/setup-aieb</code> create the secure connection link.</div>
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body">Back in the chat, <code>/setup-aieb</code> keeps going on its own &mdash; it runs your guided onboarding: it sets up your workspace, maps how your business runs today (the <strong>Business X-Ray</strong> is built in, no separate step), and builds your first custom skill with you. You just answer its questions.</div></div>
+        <div class="callout callout-tip"><strong>Success looks like:</strong> once you're connected, Claude starts asking about your business &mdash; that's onboarding running. <strong>Your first AI employee is about 30 minutes away.</strong></div>
         <button class="done-btn" onclick="markDoneCW(2)"><span class="dlabel">Mark step done</span></button>
-      </div>
-    </details>
-
-    <!-- CW STEP 3 -->
-    <details class="step" id="cwstep3" data-step="3">
-      <summary class="step-sum">
-        <span class="step-check"><span class="num">3</span><span class="tick">&#10003;</span></span>
-        <span class="step-titles"><span class="step-t">Onboard &mdash; your first real action</span><span class="step-sub">One sentence kicks off everything</span></span>
-        <span class="step-meta"><span class="time">~10 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
-      </summary>
-      <div class="step-content">
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body">In the same chat, just say (plain words &mdash; no slash command needed):</div></div>
-        <div class="cmd-line indent"><span class="cmd-text">onboard me</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Claude runs a guided onboarding &mdash; it sets up your workspace, maps how your business runs today (the <strong>Business X-Ray</strong> is built in, no separate step), and builds your first custom skill with you. You just answer its questions.</div></div>
-        <div class="callout callout-tip"><strong>Success looks like:</strong> the onboarding kicks in and Claude starts asking about your business &mdash; pulling the real instructions from the server behind the scenes, just like it does in Claude Code.</div>
-        <p style="margin-top:12px"><strong>Your first AI employee is about 30 minutes away.</strong> Say <code>onboard me</code> now, while everything's fresh, and let it run.</p>
-        <button class="done-btn" onclick="markDoneCW(3)"><span class="dlabel">Mark step done</span></button>
       </div>
     </details>
 
@@ -650,24 +637,24 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <!-- CW OPTIONAL: DRAW.IO (after the payoff — nice to have, not gating) -->
     <div class="section-rule">Optional &mdash; open the maps your AI Employees draw</div>
 
-    <!-- CW STEP 4 -->
-    <details class="step" id="cwstep4" data-step="4">
+    <!-- CW STEP 3 (optional) -->
+    <details class="step" id="cwstep3" data-step="3">
       <summary class="step-sum">
-        <span class="step-check"><span class="num">4</span><span class="tick">&#10003;</span></span>
+        <span class="step-check"><span class="num">3</span><span class="tick">&#10003;</span></span>
         <span class="step-titles"><span class="step-t">Install Draw.io Desktop (optional)</span><span class="step-sub">You'll build maps and diagrams as you go &mdash; this opens them</span></span>
         <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
       <div class="step-content">
         <p>You'll build maps and diagrams as you go &mdash; your onboarding already drew an AI Employee Map as a <code>.drawio</code> file. Draw.io Desktop is the free app that opens, edits, and exports them (no browser, no account). Install it whenever you want to see them full-size.</p>
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><a href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener"><strong>Download Draw.io Desktop here</strong></a> and run the installer for your OS.</div></div>
-        <button class="done-btn" onclick="markDoneCW(4)"><span class="dlabel">Mark step done</span></button>
+        <button class="done-btn" onclick="markDoneCW(3)"><span class="dlabel">Mark step done</span></button>
       </div>
     </details>
 
-    <!-- CW STEP 5 -->
-    <details class="step" id="cwstep5" data-step="5">
+    <!-- CW STEP 4 (optional) -->
+    <details class="step" id="cwstep4" data-step="4">
       <summary class="step-sum">
-        <span class="step-check"><span class="num">5</span><span class="tick">&#10003;</span></span>
+        <span class="step-check"><span class="num">4</span><span class="tick">&#10003;</span></span>
         <span class="step-titles"><span class="step-t">Connect the Draw.io connector (optional)</span><span class="step-sub">So Claude can draw straight into it</span></span>
         <span class="step-meta"><span class="time">~1 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
@@ -675,7 +662,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body">In the desktop app go to <strong>Settings &rarr; Connectors &rarr; Add custom connector</strong> and paste:</div></div>
         <div class="cmd-line indent"><span class="cmd-text">https://mcp.draw.io/mcp</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
         <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Save. <span style="color:var(--text-dim)">(This one <em>is</em> a normal custom connector &mdash; it takes no license key.)</span></div></div>
-        <button class="done-btn" onclick="markDoneCW(5)"><span class="dlabel">Mark step done</span></button>
+        <button class="done-btn" onclick="markDoneCW(4)"><span class="dlabel">Mark step done</span></button>
       </div>
     </details>
 
@@ -714,14 +701,16 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   <details class="step cc-only" id="step3" data-step="3">
     <summary class="step-sum">
       <span class="step-check"><span class="num">3</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Connect your subscription</span><span class="step-sub">One secure page &mdash; it connects by itself in the browser you bought in</span></span>
-      <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+      <span class="step-titles"><span class="step-t">Connect &amp; onboard</span><span class="step-sub">One command connects you, then builds your first skill</span></span>
+      <span class="step-meta"><span class="time">~12 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
       <p>The shell connects to the hosted MCP server. Run the setup command; Claude will give you a secure page and short code for connecting this device.</p>
       <div class="cmd-line"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
       <p style="margin-top:10px">Click the link Claude gives you. If you're in the same browser you bought in, the page connects by itself &mdash; nothing to enter. Otherwise the page asks for the license key from your Lemon Squeezy receipt &mdash; enter it on that page only, never in Claude or any chat. Either way, close the tab and keep going in Claude; the connection finishes by itself in a few seconds. (If Claude seems unaware, typing <code>done</code> nudges it along.) The plugin stores an opaque device token for the whole machine; it never sees or stores a license key. No restart or config editing.</p>
       <div class="callout callout-info"><strong>Subscription access:</strong> access stays active while your subscription is active. Cancelling revokes MCP access immediately. If you resume or renew, reconnect and access is restored.</div>
+      <p style="margin-top:10px">Once connected, <code>/setup-aieb</code> keeps going on its own &mdash; it runs your guided onboarding: it sets up your authoring workspace, maps how your business runs today (the <strong>Business X-Ray</strong> is built in), and builds your first custom skill with you. You just answer its questions.</p>
+      <div class="callout callout-tip"><strong>Your first AI employee is about 30 minutes away.</strong> Kick off <code>/setup-aieb</code> now, while everything's fresh, and let it run.</div>
       <button class="done-btn" onclick="markDone(3)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -744,35 +733,10 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     </div>
   </details>
 
-  <!-- ═══════════════ STEP 5 ═══════════════ -->
+  <!-- ═══════════════ STEP 5 (optional) ═══════════════ -->
   <details class="step cc-only" id="step5" data-step="5">
     <summary class="step-sum">
       <span class="step-check"><span class="num">5</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Onboard &mdash; build your first skill</span><span class="step-sub">Your first real action &mdash; the fun part</span></span>
-      <span class="step-meta"><span class="time">~10 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
-    </summary>
-    <div class="step-content">
-      <p>In your Claude session (panel or terminal), simply type:</p>
-      <div class="cmd-line"><span class="cmd-text">onboard me</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <p style="margin-top:10px">The MCP-loaded AIEB workflow runs a guided, three-phase setup &mdash; you just answer its questions. The <strong>Business X-Ray</strong> (mapping how your business runs today) is part of it, so there's nothing to run before this:</p>
-      <table class="tbl">
-        <thead><tr><th>Phase</th><th>What happens</th></tr></thead>
-        <tbody>
-          <tr><td><strong>1. Scaffold</strong></td><td>Sets up your authoring folders (<code>.claude/skills</code>, <code>agents</code>, <code>commands</code>, <code>hooks</code>) and a workspace guide</td></tr>
-          <tr><td><strong>2. Map your business</strong></td><td>Lays out the rooms of your business &mdash; marketing, sales, delivery &mdash; as department folders plus a business map, so every AI Employee you build has a clear place to work and read from</td></tr>
-          <tr><td><strong>3. Build your first skill</strong></td><td>X-rays those rooms to find the highest-leverage thing to automate, then creates your first custom skill and tests it</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:12.5px;color:var(--text-dim);margin-top:10px">Takes ~10 minutes. End state: your authoring workspace is set up and your first custom skill is built and running &mdash; plus you know exactly how to build more (just say <code>create a skill for X</code> anytime).</p>
-      <p style="margin-top:12px"><strong>Your first AI employee is about 30 minutes away.</strong> Say <code>onboard me</code> now, while everything's fresh, and let it run.</p>
-      <button class="done-btn" onclick="markDone(5)"><span class="dlabel">Mark step done</span></button>
-    </div>
-  </details>
-
-  <!-- ═══════════════ STEP 6 ═══════════════ -->
-  <details class="step cc-only" id="step6" data-step="6">
-    <summary class="step-sum">
-      <span class="step-check"><span class="num">6</span><span class="tick">&#10003;</span></span>
       <span class="step-titles"><span class="step-t">Set up Draw.io (optional)</span><span class="step-sub">You'll build maps and diagrams as you go &mdash; this opens them</span></span>
       <span class="step-meta"><span class="time">~4 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
@@ -802,7 +766,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 
       <div class="callout callout-info"><strong>On Claude Cowork?</strong> Add the same URL under <em>Settings &rarr; Connectors &rarr; Add custom connector</em> in the desktop app &mdash; see the Cowork section above.</div>
       <div class="callout callout-tip"><strong>Why local?</strong> Your maps stay on your own machine, and the app opens the exact <code>.drawio</code> files in your workspace folders &mdash; nothing to upload.</div>
-      <button class="done-btn" onclick="markDone(6)"><span class="dlabel">Mark step done</span></button>
+      <button class="done-btn" onclick="markDone(5)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
 
@@ -1017,7 +981,7 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
   });
 })();
 
-var STEPS = 6, CORE_STEPS = 5, KEY = 'aieb_get_access_done_v3'; // steps 1-5 = core; step 6 (Draw.io) is optional
+var STEPS = 5, CORE_STEPS = 4, KEY = 'aieb_get_access_done_v4'; // steps 1-4 = core; step 5 (Draw.io) is optional
 function loadDone(){ try { return new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch(e){ return new Set(); } }
 function saveDone(s){ try { localStorage.setItem(KEY, JSON.stringify(Array.from(s))); } catch(e){} }
 var done = loadDone();
@@ -1097,7 +1061,7 @@ function copyPrompt(btn){
   });
 }
 // ── COWORK TRACK progress (its own 5 steps + tracker, separate storage) ──
-var CWSTEPS = 5, CWCORE = 3, CWKEY = 'aieb_get_access_cw_done_v1'; // steps 1-3 = core; steps 4-5 (Draw.io) are optional
+var CWSTEPS = 4, CWCORE = 2, CWKEY = 'aieb_get_access_cw_done_v2'; // steps 1-2 = core; steps 3-4 (Draw.io) are optional
 function loadDoneCW(){ try { return new Set(JSON.parse(localStorage.getItem(CWKEY) || '[]')); } catch(e){ return new Set(); } }
 function saveDoneCW(s){ try { localStorage.setItem(CWKEY, JSON.stringify(Array.from(s))); } catch(e){} }
 var doneCW = loadDoneCW();
@@ -1219,12 +1183,10 @@ function wizSteps(){
   s.push({el:'joinstep', min:1, isDone:function(){ return wizExtra.has('join'); }});
   if (wizTrackName==='cowork'){
     s.push({el:'cwstep1', min:3, isDone:function(){ return doneCW.has(1); }});
-    s.push({el:'cwstep2', min:2, isDone:function(){ return doneCW.has(2); }, connect:true});
-    s.push({el:'cwstep3', min:10, isDone:function(){ return doneCW.has(3); }});
+    s.push({el:'cwstep2', min:12, isDone:function(){ return doneCW.has(2); }, connect:true});
   } else {
     s.push({el:'step1', min:8, isDone:function(){ return done.has(1); }});
-    s.push({el:'shortcut', min:5, isDone:function(){ return wizExtra.has('shortcut'); }, connect:true});
-    s.push({el:'step5', min:10, isDone:function(){ return done.has(5); }});
+    s.push({el:'shortcut', min:15, isDone:function(){ return wizExtra.has('shortcut'); }, connect:true});
   }
   s.push({el:'communitystep', min:2, isDone:function(){ return wizExtra.has('community'); }});
   return s;
