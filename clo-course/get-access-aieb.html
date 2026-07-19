@@ -1265,7 +1265,9 @@ function wizRender(){
   if (idx<0) idx = steps.length-1; // safety: all done but reviewing via the cursor
   count.innerHTML='Step <b>'+(idx+1)+'</b> of '+steps.length;
   eta.textContent = left>0 ? '~'+left+' min left' : 'review';
-  fill.style.width=Math.round(100*doneCount/steps.length)+'%';
+  // Bar tracks the current step position so it moves with Back/Next (matches "Step X of N"),
+  // and stays at least as full as the number of steps actually completed.
+  fill.style.width=Math.round(100*Math.max(idx+1, doneCount)/steps.length)+'%';
   var el=document.getElementById(steps[idx].el);
   if (el){
     el.classList.add('wiz-visible');
