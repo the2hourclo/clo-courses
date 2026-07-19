@@ -163,6 +163,13 @@ body.wizard-mode #wiz-hero.wiz-visible{display:block!important}
 .wiz-links button:hover{color:var(--text-muted)}
 .wiz-auto{display:flex;align-items:center;gap:10px;padding:11px 15px;margin-top:12px;background:var(--green-bg);border:1px solid rgba(74,222,128,.35);border-radius:var(--radius);color:#bbf3cf;font-size:13px;font-weight:600}
 .wiz-auto[hidden]{display:none!important}
+.wiz-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
+.wiz-nav[hidden]{display:none!important}
+.wiz-navbtn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:9px;border:1px solid var(--border-2);background:var(--surface);color:var(--text);font-family:var(--font-body);font-size:13.5px;font-weight:700;cursor:pointer;transition:all .15s}
+.wiz-navbtn:hover:not(:disabled){border-color:var(--accent-border);color:var(--accent);background:var(--accent-dim)}
+.wiz-navbtn:disabled{opacity:.32;cursor:not-allowed}
+.wiz-navbtn.primary{background:var(--accent);color:#0a0a0a;border-color:var(--accent)}
+.wiz-navbtn.primary:hover:not(:disabled){filter:brightness(1.06);color:#0a0a0a;background:var(--accent)}
 body.wizard-mode .step.wiz-visible{border-color:var(--accent-border);box-shadow:0 18px 60px rgba(0,0,0,.4)}
 body.wizard-mode .step.wiz-visible .step-sum{pointer-events:none}
 body.wizard-mode .step.wiz-visible .chev{display:none}
@@ -392,6 +399,10 @@ body.activation-mode .container{max-width:620px;width:100%}
     <div class="wiz-meta">
       <span class="wiz-app" id="wizApp" hidden><img id="wizAppIc" src="assets/get-access/cowork-logo.png" alt=""><span id="wizAppName"></span><button type="button" onclick="wizSwitchApp()">switch app</button></span>
       <span class="wiz-links"><button type="button" onclick="wizToggleHelp()">Stuck?</button> &nbsp;&middot;&nbsp; <button type="button" onclick="wizExit(event)">Open the full guide</button></span>
+    </div>
+    <div class="wiz-nav" id="wizNav" hidden>
+      <button type="button" class="wiz-navbtn" id="wizBackBtn" onclick="wizNav(-1)">&larr; Back</button>
+      <button type="button" class="wiz-navbtn primary" id="wizNextBtn" onclick="wizNav(1)">Next &rarr;</button>
     </div>
     <div id="wizHelp" hidden>
       <b>Three ways out, fastest first:</b>
@@ -1171,7 +1182,7 @@ function applyTrack(t, scroll){
 function chooseTrack(e, t){
   if (e) e.preventDefault();
   applyTrack(t, !window.wizOn);
-  if (window.wizOn) { wizTrackName = t; wizRender(); }
+  if (window.wizOn) { wizTrackName = t; wizPos=null; wizRender(); }
 }
 // Restore: #cowork deep links (old emails) win, then the saved choice.
 (function initTrack(){
@@ -1194,6 +1205,9 @@ function setMethod(m){
 // the activation tab via localStorage) checks the connect step by itself.
 var WIZKEY='aieb_wiz_pref_v1', WIZEXTRAKEY='aieb_wiz_extra_v1', CONNKEY='aieb_device_connected_v1';
 var wizOn=false, wizTrackName=null;
+// Explicit navigation cursor. null = auto (show the first incomplete step, i.e. resume).
+// Set by the Back/Next buttons so the human can move freely through the steps.
+var wizPos=null;
 function wizExtraLoad(){ try { return new Set(JSON.parse(localStorage.getItem(WIZEXTRAKEY)||'[]')); } catch(e){ return new Set(); } }
 function wizExtraSave(s){ try { localStorage.setItem(WIZEXTRAKEY, JSON.stringify(Array.from(s))); } catch(e){} }
 var wizExtra = wizExtraLoad();
@@ -1246,6 +1260,7 @@ function wizRender(){
     eta.textContent='~15 min total';
     fill.style.width = window.__aiebClaim ? '12%' : '4%';
     if (app) app.hidden = true;
+    var navChoose=document.getElementById('wizNav'); if (navChoose) navChoose.hidden = true;
     return;
   }
   if (app){
@@ -1254,16 +1269,19 @@ function wizRender(){
     document.getElementById('wizAppIc').src = wizTrackName==='cowork' ? 'assets/get-access/cowork-logo.png' : 'assets/get-access/claude-code-mascot.png';
   }
   wizAbsorbConnect();
-  var steps=wizSteps(), idx=-1, doneCount=0, left=0;
+  var steps=wizSteps(), firstIncomplete=-1, doneCount=0, left=0;
   for (var i=0;i<steps.length;i++){
     if (steps[i].isDone()) { doneCount++; }
-    else { if (idx<0) idx=i; left+=steps[i].min; }
+    else { if (firstIncomplete<0) firstIncomplete=i; left+=steps[i].min; }
   }
-  if (idx<0){
+  var nav=document.getElementById('wizNav');
+  // Everything done AND the human hasn't navigated back — show the finish screen.
+  if (firstIncomplete<0 && wizPos===null){
     document.body.classList.remove('wiz-focus'); // onboarding done — unlock the wiki
     count.innerHTML='All set &#127881;';
     eta.textContent='';
     fill.style.width='100%';
+    if (nav) nav.hidden=true;
     var fin=document.getElementById(wizTrackName==='cowork'?'cwfinish':'finish');
     if (fin){ fin.classList.add('wiz-visible','show'); }
     if (wizTrackName==='cowork') document.getElementById('cowork').classList.add('wiz-visible');
@@ -1273,8 +1291,11 @@ function wizRender(){
     if (cm && !wizExtra.has('community')) cm.classList.add('wiz-visible');
     return;
   }
+  // Displayed step = explicit cursor if the human set one, else the first incomplete step.
+  var idx = (wizPos!==null && wizPos>=0 && wizPos<steps.length) ? wizPos : firstIncomplete;
+  if (idx<0) idx = steps.length-1; // safety: all done but reviewing via the cursor
   count.innerHTML='Step <b>'+(idx+1)+'</b> of '+steps.length;
-  eta.textContent='~'+left+' min left';
+  eta.textContent = left>0 ? '~'+left+' min left' : 'review';
   fill.style.width=Math.round(100*doneCount/steps.length)+'%';
   var el=document.getElementById(steps[idx].el);
   if (el){
@@ -1282,10 +1303,36 @@ function wizRender(){
     if (el.tagName==='DETAILS') el.open=true;
     if (el.closest && el.closest('#cowork')) document.getElementById('cowork').classList.add('wiz-visible');
   }
+  if (nav){
+    nav.hidden=false;
+    var backBtn=document.getElementById('wizBackBtn'), nextBtn=document.getElementById('wizNextBtn');
+    if (backBtn) backBtn.disabled = (idx<=0);
+    // Next is disabled only at the last step while steps remain unfinished (no skipping the gate);
+    // once everything's done, Next on the last step advances to the finish screen.
+    if (nextBtn) nextBtn.disabled = (idx>=steps.length-1) && firstIncomplete>=0;
+  }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function wizShortcutDone(){ wizExtra.add('shortcut'); wizExtraSave(wizExtra); wizRender(); }
+// Back / Next — move the cursor through the steps regardless of done-state.
+function wizNav(delta){
+  if (!wizOn || !wizTrackName) return;
+  var steps=wizSteps();
+  if (!steps.length) return;
+  var firstIncomplete=-1;
+  for (var i=0;i<steps.length;i++){ if(!steps[i].isDone()){ firstIncomplete=i; break; } }
+  var cur = (wizPos!==null && wizPos>=0 && wizPos<steps.length) ? wizPos : (firstIncomplete<0?steps.length-1:firstIncomplete);
+  var nx = cur + delta;
+  if (nx>steps.length-1){
+    if (firstIncomplete<0){ wizPos=null; wizRender(); return; } // step past the last, all done → finish
+    nx=steps.length-1;
+  }
+  if (nx<0) nx=0;
+  wizPos=nx;
+  wizRender();
+}
+
+function wizShortcutDone(){ wizExtra.add('shortcut'); wizExtraSave(wizExtra); wizPos=null; wizRender(); }
 function wizToggleHelp(){ var h=document.getElementById('wizHelp'); if (h) h.hidden = !h.hidden; }
 function markDoneJoin(){
   if (wizExtra.has('join')) { wizExtra.delete('join'); } else { wizExtra.add('join'); }
@@ -1293,6 +1340,7 @@ function markDoneJoin(){
   var b=document.getElementById('joinDoneBtn'), st=document.getElementById('joinstep');
   if (b) b.querySelector('.dlabel').textContent = wizExtra.has('join') ? '✓ Done — tap to undo' : "I'm in — next →";
   if (st) st.classList.toggle('done', wizExtra.has('join'));
+  wizPos=null;
   if (wizOn) wizRender();
 }
 function markDoneCommunity(){
@@ -1301,16 +1349,18 @@ function markDoneCommunity(){
   var b=document.getElementById('communityDoneBtn'), st=document.getElementById('communitystep');
   if (b) b.querySelector('.dlabel').textContent = wizExtra.has('community') ? '✓ Done — tap to undo' : "I've posted my intro";
   if (st) st.classList.toggle('done', wizExtra.has('community'));
+  wizPos=null;
   if (wizOn) wizRender();
 }
 function wizSwitchApp(){
   var t = wizTrackName==='cowork' ? 'cc' : 'cowork';
-  applyTrack(t, false); wizTrackName=t; wizRender();
+  applyTrack(t, false); wizTrackName=t; wizPos=null; wizRender();
 }
 function wizStart(e){
   if (e && e.preventDefault) e.preventDefault();
   try { localStorage.setItem(WIZKEY,'wizard'); } catch(err){}
   wizOn=true;
+  wizPos=null;
   try { wizTrackName = localStorage.getItem(TRACKKEY) || null; } catch(err){ wizTrackName=null; }
   wizRender();
   window.scrollTo({top:0});
@@ -1326,8 +1376,16 @@ function wizExit(e){
 }
 
 // Done-button hooks: existing markDone/markDoneCW drive the wizard forward.
-var _wizMD=markDone; markDone=function(n){ _wizMD(n); if (wizOn) wizRender(); };
-var _wizMDCW=markDoneCW; markDoneCW=function(n){ _wizMDCW(n); if (wizOn) wizRender(); };
+var _wizMD=markDone; markDone=function(n){ _wizMD(n); wizPos=null; if (wizOn) wizRender(); };
+var _wizMDCW=markDoneCW; markDoneCW=function(n){ _wizMDCW(n); wizPos=null; if (wizOn) wizRender(); };
+// Arrow keys move through the steps too (handy for demos) — ignored while typing.
+document.addEventListener('keydown', function(e){
+  if (!wizOn || !wizTrackName) return;
+  var t=e.target;
+  if (t && (t.tagName==='INPUT' || t.tagName==='TEXTAREA' || t.isContentEditable)) return;
+  if (e.key==='ArrowLeft'){ e.preventDefault(); wizNav(-1); }
+  else if (e.key==='ArrowRight'){ e.preventDefault(); wizNav(1); }
+});
 
 // Auto-advance when the activation tab flags a successful connect.
 window.addEventListener('storage', function(ev){ if (ev.key===CONNKEY && wizOn) wizRender(); });
