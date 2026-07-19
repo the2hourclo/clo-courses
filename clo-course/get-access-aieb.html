@@ -1277,7 +1277,7 @@ function wizRender(){
   if (nav){
     nav.hidden=false;
     var backBtn=document.getElementById('wizBackBtn'), nextBtn=document.getElementById('wizNextBtn');
-    if (backBtn) backBtn.disabled = (idx<=0);
+    if (backBtn) backBtn.disabled = false; // first step's Back returns to the app chooser
     // Next is disabled only at the last step while steps remain unfinished (no skipping the gate);
     // once everything's done, Next on the last step advances to the finish screen.
     if (nextBtn) nextBtn.disabled = (idx>=steps.length-1) && firstIncomplete>=0;
@@ -1298,7 +1298,10 @@ function wizNav(delta){
     if (firstIncomplete<0){ wizPos=null; wizRender(); return; } // step past the last, all done → finish
     nx=steps.length-1;
   }
-  if (nx<0) nx=0;
+  if (nx<0){
+    // Back from the first step returns to the app chooser (re-pick Cowork / Claude Code).
+    wizTrackName=null; wizPos=null; wizRender(); return;
+  }
   wizPos=nx;
   wizRender();
 }
@@ -1379,7 +1382,7 @@ setInterval(function(){
   if (should){
     wizOn=true;
     try { localStorage.setItem(WIZKEY,'wizard'); } catch(e){}
-    try { wizTrackName = localStorage.getItem(TRACKKEY) || null; } catch(e){ wizTrackName=null; }
+    wizTrackName = null; // always start at the app chooser (Cowork / Claude Code) on load
     wizRender();
   } else if (window.__aiebClaimJustLanded){
     // Classic view still confirms the claim landed (user opted out of the wizard).
