@@ -1178,7 +1178,7 @@ var WIZKEY='aieb_wiz_pref_v1', WIZEXTRAKEY='aieb_wiz_extra_v1', CONNKEY='aieb_de
 var wizOn=false, wizTrackName=null;
 // Explicit navigation cursor. null = auto (show the first incomplete step, i.e. resume).
 // Set by the Back/Next buttons so the human can move freely through the steps.
-var wizPos=null;
+var wizPos=null, wizCurIdx=0; // wizCurIdx = index of the step currently shown (so "done" can advance forward)
 function wizExtraLoad(){ try { return new Set(JSON.parse(localStorage.getItem(WIZEXTRAKEY)||'[]')); } catch(e){ return new Set(); } }
 function wizExtraSave(s){ try { localStorage.setItem(WIZEXTRAKEY, JSON.stringify(Array.from(s))); } catch(e){} }
 var wizExtra = wizExtraLoad();
@@ -1263,6 +1263,7 @@ function wizRender(){
   // Displayed step = explicit cursor if the human set one, else the first incomplete step.
   var idx = (wizPos!==null && wizPos>=0 && wizPos<steps.length) ? wizPos : firstIncomplete;
   if (idx<0) idx = steps.length-1; // safety: all done but reviewing via the cursor
+  wizCurIdx = idx; // remember what's shown so the "Mark step done" buttons can advance forward
   count.innerHTML='Step <b>'+(idx+1)+'</b> of '+steps.length;
   eta.textContent = left>0 ? '~'+left+' min left' : 'review';
   // Bar tracks the current step position so it moves with Back/Next (matches "Step X of N"),
@@ -1306,7 +1307,24 @@ function wizNav(delta){
   wizRender();
 }
 
-function wizShortcutDone(){ wizExtra.add('shortcut'); wizExtraSave(wizExtra); wizPos=null; wizRender(); }
+// Advance forward one step from the step currently shown — used by the "Mark step done"
+// buttons so completing a step moves you on exactly like Next (never jumps backward).
+function wizStepForward(){
+  if (!wizOn || !wizTrackName) return;
+  var steps=wizSteps();
+  if (!steps.length) return;
+  var nx = wizCurIdx + 1;
+  if (nx>steps.length-1){
+    var allDone=true;
+    for (var i=0;i<steps.length;i++){ if(!steps[i].isDone()){ allDone=false; break; } }
+    if (allDone){ wizPos=null; wizRender(); return; } // finished the last step → finish screen
+    nx=steps.length-1;
+  }
+  wizPos=nx;
+  wizRender();
+}
+
+function wizShortcutDone(){ wizExtra.add('shortcut'); wizExtraSave(wizExtra); if (wizOn) wizStepForward(); else wizRender(); }
 function wizToggleHelp(){ var h=document.getElementById('wizHelp'); if (h) h.hidden = !h.hidden; }
 function markDoneJoin(){
   if (wizExtra.has('join')) { wizExtra.delete('join'); } else { wizExtra.add('join'); }
@@ -1314,8 +1332,7 @@ function markDoneJoin(){
   var b=document.getElementById('joinDoneBtn'), st=document.getElementById('joinstep');
   if (b) b.querySelector('.dlabel').textContent = wizExtra.has('join') ? '✓ Done — tap to undo' : "I'm in — next →";
   if (st) st.classList.toggle('done', wizExtra.has('join'));
-  wizPos=null;
-  if (wizOn) wizRender();
+  if (wizOn){ if (wizExtra.has('join')) wizStepForward(); else { wizPos=null; wizRender(); } }
 }
 function markDoneCommunity(){
   if (wizExtra.has('community')) { wizExtra.delete('community'); } else { wizExtra.add('community'); }
@@ -1323,8 +1340,7 @@ function markDoneCommunity(){
   var b=document.getElementById('communityDoneBtn'), st=document.getElementById('communitystep');
   if (b) b.querySelector('.dlabel').textContent = wizExtra.has('community') ? '✓ Done — tap to undo' : "I've posted my intro";
   if (st) st.classList.toggle('done', wizExtra.has('community'));
-  wizPos=null;
-  if (wizOn) wizRender();
+  if (wizOn){ if (wizExtra.has('community')) wizStepForward(); else { wizPos=null; wizRender(); } }
 }
 function wizSwitchApp(){
   var t = wizTrackName==='cowork' ? 'cc' : 'cowork';
@@ -1346,8 +1362,8 @@ function wizExit(e){
 }
 
 // Done-button hooks: existing markDone/markDoneCW drive the wizard forward.
-var _wizMD=markDone; markDone=function(n){ _wizMD(n); wizPos=null; if (wizOn) wizRender(); };
-var _wizMDCW=markDoneCW; markDoneCW=function(n){ _wizMDCW(n); wizPos=null; if (wizOn) wizRender(); };
+var _wizMD=markDone; markDone=function(n){ var was=done.has(n); _wizMD(n); if (wizOn){ if(!was && done.has(n)) wizStepForward(); else { wizPos=null; wizRender(); } } };
+var _wizMDCW=markDoneCW; markDoneCW=function(n){ var was=doneCW.has(n); _wizMDCW(n); if (wizOn){ if(!was && doneCW.has(n)) wizStepForward(); else { wizPos=null; wizRender(); } } };
 // Arrow keys move through the steps too (handy for demos) — ignored while typing.
 document.addEventListener('keydown', function(e){
   if (!wizOn || !wizTrackName) return;
