@@ -55,9 +55,9 @@ strong{font-weight:700;color:var(--text)}
 .note strong{color:#bff58a}
 
 /* ── BOARD ── */
-.board-wrap{overflow-x:auto;padding:26px 24px 60px}
-.board{display:flex;gap:14px;min-width:min-content;margin:0 auto;width:fit-content;max-width:100%}
-.col{flex:0 0 320px;width:320px;display:flex;flex-direction:column;gap:10px}
+.board-wrap{overflow-x:auto;padding:22px 24px 60px}
+.board{display:flex;gap:13px;width:max-content;margin:0 auto}
+.col{flex:0 0 250px;width:250px;display:flex;flex-direction:column;gap:9px}
 .col-head{display:flex;align-items:center;gap:8px;padding:2px 4px 6px;position:sticky;top:0}
 .col-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display);font-size:13px;font-weight:800;letter-spacing:.2px;padding:4px 11px;border-radius:7px;background:color-mix(in srgb,var(--cp) 16%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 32%,transparent)}
 .col-pill .cdot{width:8px;height:8px;border-radius:50%;background:var(--cp)}
@@ -67,18 +67,18 @@ strong{font-weight:700;color:var(--text)}
 .col-state.active{color:var(--cp)}
 .col-state.locked{color:var(--text-dim)}
 
-.col-body{background:color-mix(in srgb,var(--cp) 5%,var(--surface));border:1px solid var(--border);border-top:3px solid var(--cp);border-radius:var(--radius-lg);padding:14px;display:flex;flex-direction:column;gap:14px;min-height:120px}
+.col-body{background:color-mix(in srgb,var(--cp) 5%,var(--surface));border:1px solid var(--border);border-top:3px solid var(--cp);border-radius:var(--radius-lg);padding:11px;display:flex;flex-direction:column;gap:11px;min-height:100px}
 .col.active .col-body{border-color:color-mix(in srgb,var(--cp) 40%,transparent);box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 0 1px color-mix(in srgb,var(--cp) 22%,transparent)}
 .col.locked .col-body{opacity:.72}
 
 /* ── CARDS ── */
-.kcard{background:var(--surface-2);border:1px solid var(--border-2);border-radius:11px;padding:16px 17px;transition:transform .13s,box-shadow .13s,border-color .13s;box-shadow:0 1px 3px rgba(0,0,0,.35)}
-.kcard:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--cp) 34%,var(--border-2));box-shadow:0 10px 26px rgba(0,0,0,.44)}
-.kcard .ktitle{font-size:15.5px;font-weight:600;color:var(--text);line-height:1.42;display:flex;gap:9px;align-items:flex-start}
-.kcard .kic{flex-shrink:0;font-size:17px;line-height:1.32}
+.kcard{background:var(--surface-2);border:1px solid var(--border-2);border-radius:10px;padding:13px 14px;transition:transform .13s,box-shadow .13s,border-color .13s;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.kcard:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--cp) 34%,var(--border-2));box-shadow:0 8px 22px rgba(0,0,0,.42)}
+.kcard .ktitle{font-size:14px;font-weight:600;color:var(--text);line-height:1.4;display:flex;gap:8px;align-items:flex-start}
+.kcard .kic{flex-shrink:0;font-size:15px;line-height:1.34}
 .kcard.is-done .ktitle{color:var(--text-muted)}
-.ktags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
-.tag{font-size:11px;font-weight:700;letter-spacing:.2px;padding:3px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.ktags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.tag{font-size:10.5px;font-weight:700;letter-spacing:.2px;padding:3px 9px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 /* type tag (muted) */
 .tag.type{background:var(--surface-3);color:var(--text-muted);border:1px solid var(--border-2)}
 /* status tags — Notion-style colours */
@@ -98,14 +98,6 @@ strong{font-weight:700;color:var(--text)}
 <div class="head rise">
   <span class="brand-badge">🤖 AI Employee Builder</span>
   <h1>Your AI Employee — Build Board</h1>
-  <p>Your whole journey, on one board. Each <strong>checkpoint is a column</strong>. Finish a column's cards in Claude and the next checkpoint unlocks — no skipping ahead.</p>
-  <div class="prog">
-    <div class="bar"><div class="fill" id="progFill"></div></div>
-    <div class="t" id="progText"></div>
-  </div>
-  <div class="note">
-    <strong>You don't drag these cards.</strong> You do the work with Claude; when it confirms a card is done, the card flips to <strong>Completed</strong> and the next checkpoint unlocks. Stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Ask in the Polynet community</a>.
-  </div>
 </div>
 
 <div class="board-wrap rise">
@@ -207,11 +199,6 @@ function colHTML(col){
 
 function render(){
   document.getElementById('board').innerHTML = BOARD.map(colHTML).join('');
-  // progress = cards done / total cards
-  var all=0, done=0, activeName='';
-  BOARD.forEach(function(c){ c.cards.forEach(function(k){ all++; if(k.status==='done') done++; }); if(c.state==='active') activeName=c.name; });
-  document.getElementById('progFill').style.width = Math.round(100*done/all)+'%';
-  document.getElementById('progText').innerHTML = '<b>'+done+' of '+all+'</b> cards done' + (activeName?' · you’re on <b>'+activeName+'</b>':'');
 }
 
 render();
