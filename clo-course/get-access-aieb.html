@@ -99,6 +99,12 @@ strong{font-weight:700}
 .callout-tip{background:var(--green-bg);border-color:var(--green);color:#bbf3cf}
 .callout-warning{background:var(--orange-bg);border-color:var(--orange);color:#ffe0b0}
 
+/* ── VIDEO EMBED (responsive 16:9) ── */
+.video-embed{position:relative;width:100%;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border-2);margin:2px 0 15px;background:#000}
+.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-lead{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--accent-text);margin:0 0 9px}
+.video-lead::before{content:'\25B6';font-size:10px;color:var(--accent)}
+
 /* ── KEYBOARD ── */
 .kbd{display:inline-block;font-family:var(--font-mono);font-size:11px;line-height:1;padding:3px 6px;border-radius:5px;background:#070807;border:1px solid var(--border-2);border-bottom-width:2px;color:var(--text)}
 
@@ -398,17 +404,16 @@ body.activation-mode .container{max-width:620px;width:100%}
     <div class="wiz-bar"><div class="wiz-fill" id="wizFill"></div></div>
     <div class="wiz-meta">
       <span class="wiz-app" id="wizApp" hidden><img id="wizAppIc" src="assets/get-access/cowork-logo.png" alt=""><span id="wizAppName"></span><button type="button" onclick="wizSwitchApp()">switch app</button></span>
-      <span class="wiz-links"><button type="button" onclick="wizToggleHelp()">Stuck?</button> &nbsp;&middot;&nbsp; <button type="button" onclick="wizExit(event)">Open the full guide</button></span>
+      <span class="wiz-links"><button type="button" onclick="wizToggleHelp()">Stuck?</button></span>
     </div>
     <div class="wiz-nav" id="wizNav" hidden>
       <button type="button" class="wiz-navbtn" id="wizBackBtn" onclick="wizNav(-1)">&larr; Back</button>
       <button type="button" class="wiz-navbtn primary" id="wizNextBtn" onclick="wizNav(1)">Next &rarr;</button>
     </div>
     <div id="wizHelp" hidden>
-      <b>Three ways out, fastest first:</b>
+      <b>Two ways out, fastest first:</b>
       <div class="hrow"><span class="hn">1</span><span>In any Claude chat, type <code>/check-setup</code> (or say <em>"check my setup"</em>) &mdash; Claude diagnoses the connection with you and offers the fix.</span></div>
-      <div class="hrow"><span class="hn">2</span><span><a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Ask in the community</a> &mdash; describe what you see; the builders (and Rashid) are in there.</span></div>
-      <div class="hrow"><span class="hn">3</span><span>Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a> with a screenshot &mdash; he'll sort it with you.</span></div>
+      <div class="hrow"><span class="hn">2</span><span><a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a> &mdash; describe what you see (a screenshot helps); the builders (and Rashid) are in there.</span></div>
     </div>
     <div class="wiz-auto" id="wizClaimNote" hidden>&#10003; Purchase linked to this browser &mdash; your connect step will finish with zero typing.</div>
   </div>
@@ -566,7 +571,6 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     </div>
     <div class="wiz-auto" id="shortcutConnected" hidden>&#10003; Device connected &mdash; setup verified by the machine, not by you.</div>
     <button class="done-btn wiz-only" type="button" onclick="wizShortcutDone()"><span>Claude finished the setup &mdash; next &#8594;</span></button>
-    <div class="callout callout-tip" style="margin-top:14px">Rather do it by hand? <a href="#step2" onclick="if(typeof wizExit==='function'&&window.wizOn){wizExit(event)}">Open the full guide</a> &mdash; Steps&nbsp;2&ndash;5 written out click by click.</div>
   </div>
 
   <!-- ═══════════════ CLAUDE COWORK ═══════════════ -->
@@ -596,6 +600,8 @@ After each step, tell me whether it worked, or show the error and exactly how yo
         <span class="step-meta"><span class="time">~3 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
       <div class="step-content">
+        <p class="video-lead">Watch the full walkthrough (~3 min)</p>
+        <div class="video-embed"><iframe src="https://share.descript.com/embed/N9izyUOTEDE" title="Installing Cowork and the AI Employee Builder Plugin" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>
         <p>Everything happens in the Claude <strong>desktop app</strong> (Pro, Max, or Team) &mdash; no terminal, nothing to download.</p>
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body">Open <strong>Customize &rarr; Personal plugins</strong> and click the <strong>+</strong>.</div></div>
         <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Choose <strong>Add marketplace</strong> and paste:</div></div>
@@ -615,15 +621,16 @@ After each step, tell me whether it worked, or show the error and exactly how yo
         <span class="step-meta"><span class="time">~12 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
       <div class="step-content">
+        <p class="video-lead">Watch: connect &amp; onboard</p>
+        <div class="video-embed"><iframe src="https://share.descript.com/embed/3oxZO3lcgGI" title="Connect and onboard" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body">Start a <strong>Cowork</strong> chat and type:</div></div>
         <div class="cmd-line indent"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
         <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Claude gives you a short code and a link to this course page in secure connection mode. Click the link &mdash; if you're in the same browser you bought in, it connects by itself, nothing to enter. Otherwise the page asks for the license key from your Lemon Squeezy receipt (also at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener">app.lemonsqueezy.com/my-orders</a>) &mdash; enter it on that page, then click <strong>Connect this device</strong>. Either way, close the tab and head back to Claude; the connection finishes by itself in a few seconds. (If Claude seems unaware, typing <code>done</code> nudges it along.)</div></div>
-        <div class="callout callout-info"><strong>Don't see the command?</strong> Saying <code>set up my AI Employee Builder</code> in the chat does exactly the same thing.</div>
-        <p>The secure page validates your subscription and hands the plugin an opaque device token &mdash; the plugin never sees or stores a license key, and it works immediately with no restart. If the page ever does ask for your key, enter it there only &mdash; <strong>never paste a license key into a Claude chat.</strong></p>
-        <div class="callout callout-warning"><strong>Connector didn't light up?</strong> Type <code>/check-setup</code> in any chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a> and Rashid will sort it with you.</div>
-        <div class="callout callout-warning"><strong>Don't paste the MCP URL into &ldquo;Custom Connectors.&rdquo;</strong> Install the plugin, then let <code>/setup-aieb</code> create the secure connection link.</div>
         <div class="substep"><div class="substep-badge">3</div><div class="substep-body">Back in the chat, <code>/setup-aieb</code> keeps going on its own &mdash; it runs your guided onboarding: it sets up your workspace, maps how your business runs today (the <strong>Business X-Ray</strong> is built in, no separate step), and builds your first custom skill with you. You just answer its questions.</div></div>
         <div class="callout callout-tip"><strong>Success looks like:</strong> once you're connected, Claude starts asking about your business &mdash; that's onboarding running. <strong>Your first AI employee is about 30 minutes away.</strong></div>
+        <div class="callout callout-info"><strong>Don't see the command?</strong> Saying <code>set up my AI Employee Builder</code> in the chat does exactly the same thing.</div>
+        <p>The secure page validates your subscription and hands the plugin an opaque device token &mdash; the plugin never sees or stores a license key, and it works immediately with no restart. If the page ever does ask for your key, enter it there only &mdash; <strong>never paste a license key into a Claude chat.</strong></p>
+        <div class="callout callout-warning"><strong>Connector didn't light up?</strong> Type <code>/check-setup</code> in any chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a> &mdash; the builders (and Rashid) will sort it with you.</div>
         <button class="done-btn" onclick="markDoneCW(2)"><span class="dlabel">Mark step done</span></button>
       </div>
     </details>
@@ -666,7 +673,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
       </div>
     </details>
 
-    <div class="callout callout-info" style="margin-top:14px"><strong>Something not working?</strong> Type <code>/check-setup</code> in any Cowork chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a>.</div>
+    <div class="callout callout-info" style="margin-top:14px"><strong>Something not working?</strong> Type <code>/check-setup</code> in any Cowork chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a>.</div>
   </div>
 
   <!-- ═══════════════ STEP 2 ═══════════════ -->
@@ -854,7 +861,7 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
         <tr><td><code>/plugin</code> not recognized</td><td>Claude Code is outdated. Update the extension (Extensions panel &rarr; Claude Code &rarr; update), reload, retry.</td></tr>
       </tbody>
     </table>
-    <div class="callout callout-info">Still stuck after the AI prompt? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a>.</div>
+    <div class="callout callout-info">Still stuck after the AI prompt? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a>.</div>
   </div>
 
   <!-- FAQ -->
@@ -872,7 +879,7 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
     <details><summary>Is the Terminal method different from VS Code?</summary><div class="faq-body">Same result, same commands &mdash; just a different place to type them. The <strong>VS Code</strong> way is click-based and friendly; <strong>Terminal</strong> is for command-line folks. Use the toggle at the top to switch.</div></details>
   </div>
 
-  <div class="footer">Questions? Email <a href="mailto:rashid@thepeakperformer.io">rashid@thepeakperformer.io</a></div>
+  <div class="footer">Questions? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Ask in the Polynet community</a></div>
 
 </div>
 </div>
@@ -1329,12 +1336,8 @@ function wizStart(e){
 }
 function wizExit(e){
   if (e && e.preventDefault) e.preventDefault();
-  try { localStorage.setItem(WIZKEY,'classic'); } catch(err){}
-  wizOn=false;
-  document.body.classList.remove('wizard-mode');
-  document.body.classList.remove('wiz-focus');
-  wizClearMarks();
-  window.scrollTo({top:0});
+  // Wizard-only: there is no classic view to exit to. Kept as a no-op so any
+  // lingering reference can't drop the buyer out of the guided flow.
 }
 
 // Done-button hooks: existing markDone/markDoneCW drive the wizard forward.
@@ -1369,9 +1372,8 @@ setInterval(function(){
     if (jst) jst.classList.add('done');
     if (jbtn) jbtn.querySelector('.dlabel').textContent='✓ Done — tap to undo';
   }
-  var pref=null; try { pref=localStorage.getItem(WIZKEY); } catch(e){}
-  var p=new URLSearchParams(window.location.search);
-  var should = pref==='wizard' || (pref!=='classic' && (!!window.__aiebClaim || p.has('wizard')));
+  // Wizard-only: the step-by-step guide is the ONLY Get Access experience (no classic scroll view).
+  var should = true;
   if (should){
     wizOn=true;
     try { localStorage.setItem(WIZKEY,'wizard'); } catch(e){}
