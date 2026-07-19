@@ -60,6 +60,11 @@ strong{font-weight:700;color:var(--text)}
 .col{flex:0 0 250px;width:250px;display:flex;flex-direction:column;gap:9px}
 .col-head{display:flex;align-items:center;gap:8px;padding:2px 4px 6px;position:sticky;top:0}
 .col-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display);font-size:13px;font-weight:800;letter-spacing:.2px;padding:4px 11px;border-radius:7px;background:color-mix(in srgb,var(--cp) 16%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 32%,transparent)}
+a.col-pill{cursor:pointer;text-decoration:none;transition:background .13s,border-color .13s}
+a.col-pill:hover{background:color-mix(in srgb,var(--cp) 28%,transparent);border-color:color-mix(in srgb,var(--cp) 55%,transparent);text-decoration:none}
+.col-pill .open{margin-left:2px;font-weight:800;opacity:.6;transition:opacity .13s,transform .13s}
+a.col-pill:hover .open{opacity:1;transform:translateX(2px)}
+.col.clickable .col-body{cursor:default}
 .col-pill .cdot{width:8px;height:8px;border-radius:50%;background:var(--cp)}
 .col-count{font-size:12px;font-weight:700;color:var(--text-dim)}
 .col-state{margin-left:auto;font-size:11px;font-weight:700}
@@ -171,6 +176,16 @@ var BOARD = [
 // Being ON the board already means "to do" — so only In progress / Completed get a tag.
 var STATUS = { doing:'In progress', done:'Completed' };
 
+// Hub & spoke: each checkpoint opens its own wizard page. Locked checkpoints
+// aren't clickable (no skipping ahead). Add the rest as you build them this week.
+var WIZARDS = {
+  setup:'get-access-aieb.html',
+  cp1:'checkpoint-map.html',
+  cp2:'checkpoint-first-skill.html',
+  cp3:'checkpoint-system.html',
+  cp4:'checkpoint-autonomy.html'
+};
+
 function esc(s){ return (s||'').replace(/&(?![a-z#0-9]+;)/gi,'&amp;'); }
 
 function cardHTML(card){
@@ -186,9 +201,14 @@ function cardHTML(card){
 
 function colHTML(col){
   var stateLabel = col.state==='done' ? '✓ Done' : col.state==='active' ? '● Now' : '🔒 Locked';
-  var h = '<div class="col '+col.state+'" style="--cp:'+col.color+'">';
+  var wiz = WIZARDS[col.id];
+  var clickable = (col.state==='active' || col.state==='done') && wiz;
+  var pillInner = '<span class="cdot"></span>'+col.name;
+  var h = '<div class="col '+col.state+(clickable?' clickable':'')+'" style="--cp:'+col.color+'">';
   h += '<div class="col-head">';
-  h += '<span class="col-pill"><span class="cdot"></span>'+col.name+'</span>';
+  h += clickable
+    ? '<a class="col-pill" href="'+wiz+'" title="Open the '+col.name+' wizard">'+pillInner+'<span class="open">→</span></a>'
+    : '<span class="col-pill">'+pillInner+'</span>';
   h += '<span class="col-count">'+col.cards.length+'</span>';
   h += '<span class="col-state '+col.state+'">'+stateLabel+'</span>';
   h += '</div>';

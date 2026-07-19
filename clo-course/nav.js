@@ -65,16 +65,15 @@ window.CLO_PRODUCTS = {
     // license block with the real store/product/variant ids and a checkout URL.
     community: { url: 'https://www.polynet.ai/c/ai-employee-builders', label: 'Community ↗', external: true },
     onboarding: [
-      { label: 'Get access & install', href: 'clo-course/get-access-aieb.html', hint: 'Pick Claude Code or Cowork, install, add Draw.io' },
-      { label: 'Make a folder & onboard', href: 'clo-course/ai-employee-roadmap.html#start', hint: 'Create your workspace folder, then run "onboard me"' },
-      { label: 'Follow your Roadmap', href: 'clo-course/ai-employee-roadmap.html', hint: 'Your home base — the next thing to build' },
+      { label: 'Get access & set up', href: 'clo-course/get-access-aieb.html', hint: 'Install, connect, and onboard — one guided flow' },
+      { label: 'Open your Build Board', href: 'clo-course/ai-employee-board.html', hint: 'Your home base — the whole journey, one checkpoint at a time' },
       { label: 'Join the community', href: 'https://www.polynet.ai/c/ai-employee-builders', hint: 'Meet the other builders' }
     ],
     nav: [
       { group: 'Get Started', items: [
         { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
         { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','plugin','license','activate','onboard','getting started','first steps'] },
-        { label: 'Roadmap', page: 'roadmap', href: 'clo-course/ai-employee-roadmap.html', keywords: ['roadmap','whats next','next step','journey','path','harness','agent','command','routine','what to build next','continue building','ai employee roadmap'] }
+        { label: 'Build Board', page: 'roadmap', href: 'clo-course/ai-employee-board.html', keywords: ['board','build board','roadmap','journey','checkpoints','whats next','next step','path','progress','home base','what to build next','continue building','ai employee roadmap'] }
       ]},
       { group: 'Claude Code 101', items: [
         { label: '1 · What Claude Code Is', page: 'cc101-what', href: 'clo-course/cc101-1-what.html', keywords: ['what is claude code','chatbot','glass box','vs code','where it lives','agentic loop','how it thinks','terminal','git'] },

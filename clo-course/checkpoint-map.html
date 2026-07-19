@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Map the business — AI Employee Builder</title>
+<meta name="description" content="Checkpoint 1 — run your Business X-Ray and pick the highest-leverage thing to automate first.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c0d0c;--surface:#131413;--surface-2:#191a19;--surface-3:#202220;
+  --border:#1e201e;--border-2:#2a2c2a;
+  --text:#e7e9e4;--text-muted:#9ea3a0;--text-dim:#5c605c;
+  --accent:#79EA20;
+  --radius:9px;--radius-lg:14px;
+  --font-display:'Bricolage Grotesque',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-body:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'SF Mono','Monaco','Consolas',monospace;
+  --cp:#5b9bff; /* checkpoint colour — set per checkpoint below in CONFIG too */
+}
+html{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,color-mix(in srgb,var(--cp) 8%,transparent),transparent 70%),var(--bg)}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px 70px}
+a{color:var(--cp);text-decoration:none}
+a:hover{text-decoration:underline}
+strong{font-weight:700;color:var(--text)}
+code{font-family:var(--font-mono);font-size:.9em;background:var(--surface-2);border:1px solid var(--border-2);border-radius:4px;padding:1px 6px;color:var(--cp)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.rise{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+
+/* top bar */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 0 6px;gap:12px}
+.back{font-size:13px;font-weight:700;color:var(--text-muted);display:inline-flex;align-items:center;gap:6px}
+.back:hover{color:var(--cp);text-decoration:none}
+.cp-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display);font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:5px 12px;border-radius:20px;background:color-mix(in srgb,var(--cp) 16%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 34%,transparent)}
+.cp-badge .cdot{width:8px;height:8px;border-radius:50%;background:var(--cp)}
+
+/* wizard bar */
+.wizbar{margin:16px 0 22px}
+.wiztop{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.wizcount{font-family:var(--font-display);font-size:15px;font-weight:800}
+.wizcount b{color:var(--cp)}
+.wizeta{font-size:12.5px;color:var(--text-muted);font-weight:600}
+.wbar{height:8px;border-radius:6px;background:var(--surface-3);overflow:hidden}
+.wfill{height:100%;width:0;background:linear-gradient(90deg,var(--cp),color-mix(in srgb,var(--cp) 55%,#fff));border-radius:6px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+
+/* step card */
+.step{background:var(--surface);border:1px solid color-mix(in srgb,var(--cp) 30%,var(--border));border-radius:var(--radius-lg);padding:24px;box-shadow:0 18px 60px rgba(0,0,0,.4)}
+.step-type{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--cp);background:color-mix(in srgb,var(--cp) 14%,transparent);padding:3px 10px;border-radius:6px;margin-bottom:13px}
+.step h2{font-family:var(--font-display);font-size:23px;font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:11px}
+.step p{color:var(--text-muted);font-size:15px;line-height:1.6;margin-bottom:12px}
+.step p:last-child{margin-bottom:0}
+.video{position:relative;width:100%;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border-2);margin:4px 0 16px;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-slot{position:relative;width:100%;padding-top:52%;border-radius:var(--radius);border:1px dashed var(--border-2);margin:4px 0 16px;background:var(--surface-2)}
+.video-slot span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-dim)}
+.cmd{display:flex;align-items:center;gap:10px;background:#070807;border:1px solid var(--border-2);border-radius:var(--radius);padding:12px 14px;margin:6px 0 14px}
+.cmd .txt{flex:1;font-family:var(--font-mono);font-size:14px;color:var(--cp);white-space:pre-wrap;word-break:break-word}
+.copy{flex-shrink:0;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid var(--border-2);background:var(--surface);color:var(--text-muted);cursor:pointer;font-family:var(--font-body);transition:all .15s}
+.copy:hover{border-color:var(--cp);color:var(--cp)}
+.copy.copied{background:var(--cp);color:#0a0a0a;border-color:var(--cp)}
+.gate{background:var(--surface-2);border:1px solid var(--border-2);border-left:3px solid var(--cp);border-radius:var(--radius);padding:13px 15px;margin-top:6px}
+.gate .gl{font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--cp);margin-bottom:5px}
+.gate .gb{font-size:14px;color:var(--text-muted);line-height:1.55}
+.gate .gb strong{color:var(--text)}
+
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;border:1px solid var(--border-2);background:var(--surface);color:var(--text);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn:hover:not(:disabled){border-color:var(--cp);color:var(--cp)}
+.btn:disabled{opacity:.32;cursor:not-allowed}
+.btn.primary{background:var(--cp);color:#0a0a0a;border-color:var(--cp)}
+.btn.primary:hover{filter:brightness(1.06)}
+
+/* completion */
+.done-screen{text-align:center;background:linear-gradient(160deg,color-mix(in srgb,var(--cp) 16%,var(--surface)),var(--surface) 66%);border:1px solid color-mix(in srgb,var(--cp) 40%,transparent);border-radius:var(--radius-lg);padding:40px 26px;box-shadow:0 18px 60px rgba(0,0,0,.4)}
+.done-screen .big{font-size:42px}
+.done-screen h2{font-family:var(--font-display);font-size:26px;font-weight:800;margin:10px 0 8px}
+.done-screen p{color:var(--text-muted);max-width:420px;margin:0 auto 20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar rise">
+    <a class="back" id="backLink" href="ai-employee-board.html">← Back to board</a>
+    <span class="cp-badge"><span class="cdot"></span><span id="cpName"></span></span>
+  </div>
+
+  <div class="wizbar rise">
+    <div class="wiztop"><span class="wizcount" id="wizCount"></span><span class="wizeta" id="wizEta"></span></div>
+    <div class="wbar"><div class="wfill" id="wizFill"></div></div>
+  </div>
+
+  <div id="stage" class="rise"></div>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   CHECKPOINT WIZARD — reusable template.
+   To build another checkpoint: copy this file, change CONFIG, done.
+   Each step: { type:'video'|'build'|'gate', title, body(HTML),
+                video?:embedURL, command?:'do this in Claude', gate?:HTML }
+   ═══════════════════════════════════════════════════════════════ */
+var CONFIG = {
+  id: 'cp1',
+  name: 'Map the business',
+  color: '#5b9bff',
+  board: 'ai-employee-board.html',
+  steps: [
+    { type:'video', title:'Why the X-Ray interview works',
+      video:'', // ← paste the Descript/YouTube embed URL here when recorded
+      body:'A few minutes on <strong>why</strong> we map before we build. The Business X-Ray interview finds the single highest-leverage thing to automate first — so your first skill is one you actually feel.' },
+
+    { type:'build', title:'Run your Business X-Ray',
+      command:'run my business x-ray',
+      body:'In Claude, run the command above (or just say <em>“map my business”</em>). Claude interviews you about how your business works today, lays it out, and surfaces the process worth automating first. <strong>You just answer its questions.</strong>' },
+
+    { type:'gate', title:'Lock your first target',
+      body:'From the X-Ray, pick the <strong>one process</strong> you’ll turn into your first skill — and note what it costs you today (<em>“this eats about N hours a week”</em>). That baseline is how we’ll measure the time you get back.',
+      gate:'Your X-Ray map exists <strong>and</strong> you’ve picked a first-skill target with a “costs me N hrs/week” baseline. When Claude confirms this, <strong>Your first skill</strong> unlocks on your board.' }
+  ]
+};
+
+document.documentElement.style.setProperty('--cp', CONFIG.color);
+document.getElementById('cpName').textContent = CONFIG.name;
+document.getElementById('backLink').href = CONFIG.board;
+document.title = CONFIG.name + ' — AI Employee Builder';
+
+var STORE = 'aieb_ckpt_'+CONFIG.id+'_v1';
+var pos = 0; // current step index (0..steps.length). steps.length = completion screen.
+try { var saved = parseInt(localStorage.getItem(STORE),10); if(!isNaN(saved)) pos = Math.min(saved, CONFIG.steps.length); } catch(e){}
+
+function save(){ try { localStorage.setItem(STORE, String(pos)); } catch(e){} }
+function copyCmd(btn){
+  var t = btn.parentElement.querySelector('.txt').textContent.trim();
+  navigator.clipboard.writeText(t).then(function(){
+    var o=btn.textContent; btn.textContent='Copied!'; btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent=o; btn.classList.remove('copied'); },1400);
+  });
+}
+var TYPE = { video:'📹 Watch', build:'🔨 Build', gate:'🎯 Done-signal' };
+
+function render(){
+  var n = CONFIG.steps.length;
+  var fill = document.getElementById('wizFill'), count = document.getElementById('wizCount'), eta = document.getElementById('wizEta');
+  var stage = document.getElementById('stage');
+
+  if (pos >= n){ // completion
+    count.innerHTML='All done &#127881;'; eta.textContent=''; fill.style.width='100%';
+    stage.innerHTML = '<div class="done-screen"><div class="big">🎉</div>'+
+      '<h2>Checkpoint complete</h2>'+
+      '<p>Nice — <strong>'+CONFIG.name+'</strong> is done. Head back to your board; the next checkpoint is unlocked and waiting.</p>'+
+      '<a class="btn primary" href="'+CONFIG.board+'">← Back to your board</a></div>';
+    return;
+  }
+
+  var s = CONFIG.steps[pos];
+  count.innerHTML='Step <b>'+(pos+1)+'</b> of '+n;
+  eta.textContent = s.type==='gate' ? 'the gate' : '';
+  fill.style.width = Math.round(100*(pos+1)/n)+'%';
+
+  var h = '<div class="step">';
+  h += '<span class="step-type">'+(TYPE[s.type]||'')+'</span>';
+  h += '<h2>'+s.title+'</h2>';
+  if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
+  else if (s.type==='video'){ h += '<div class="video-slot"><span>🎬 Video slot — paste the embed URL in CONFIG</span></div>'; }
+  if (s.body){ h += '<p>'+s.body+'</p>'; }
+  if (s.command){ h += '<div class="cmd"><span class="txt">'+s.command+'</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'; }
+  if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
+
+  // nav
+  h += '<div class="nav">';
+  h += '<button class="btn" onclick="back()">← Back</button>';
+  h += pos===n-1
+      ? '<button class="btn primary" onclick="next()">Finish checkpoint →</button>'
+      : '<button class="btn primary" onclick="next()">Next →</button>';
+  h += '</div>';
+  h += '</div>';
+  stage.innerHTML = h;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function next(){ pos = Math.min(pos+1, CONFIG.steps.length); save(); render(); }
+function back(){ if (pos<=0){ window.location.href = CONFIG.board; return; } pos--; save(); render(); }
+
+render();
+</script>
+</body>
+</html>
