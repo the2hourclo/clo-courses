@@ -20,6 +20,14 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .cp-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display);font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:5px 12px;border-radius:20px;background:color-mix(in srgb,var(--cp) 16%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 34%,transparent)}
 .cp-badge .cdot{width:8px;height:8px;border-radius:50%;background:var(--cp)}
 
+/* surface toggle (Cowork vs Claude Code) */
+.surface-row{display:flex;align-items:center;gap:10px;margin-top:12px}
+.surface-label{font-size:12px;font-weight:700;color:var(--text-dim)}
+.surface-toggle{display:inline-flex;background:var(--surface);border:1px solid var(--border-2);border-radius:20px;padding:3px;gap:3px}
+.sbtn{font-family:var(--font-body);font-size:12px;font-weight:700;padding:5px 14px;border-radius:16px;border:0;background:transparent;color:var(--text-muted);cursor:pointer;transition:all .15s}
+.sbtn:hover{color:var(--text)}
+.sbtn.active{background:color-mix(in srgb,var(--cp) 18%,transparent);color:var(--cp)}
+
 /* wizard bar */
 .wizbar{margin:16px 0 22px}
 .wiztop{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
@@ -72,6 +80,14 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
     <span class="cp-badge"><span class="cdot"></span><span id="cpName"></span></span>
   </div>
 
+  <div class="surface-row rise">
+    <span class="surface-label">I build in:</span>
+    <div class="surface-toggle">
+      <button class="sbtn" id="sb-cowork" onclick="setSurface('cowork')">Cowork</button>
+      <button class="sbtn" id="sb-cc" onclick="setSurface('claude-code')">Claude Code</button>
+    </div>
+  </div>
+
   <div class="wizbar rise">
     <div class="wiztop"><span class="wizcount" id="wizCount"></span><span class="wizeta" id="wizEta"></span></div>
     <div class="wbar"><div class="wfill" id="wizFill"></div></div>
@@ -94,13 +110,21 @@ var CONFIG = {
   color: '#5b9bff',
   board: 'ai-employee-board.html',
   steps: [
+    { type:'build', surface:'cowork', title:'Set up Draw.io — app + connector',
+      command:'https://mcp.draw.io/mcp',
+      body:'The X-Ray draws your business as <code>.drawio</code> maps. Two quick parts:<br><br><strong>1 · Install the app</strong> — <a href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener"><strong>Download Draw.io Desktop</strong></a> (free, no account), pick your installer under <strong>Assets</strong> (<code>…windows-installer.exe</code> for Windows, <code>…universal.dmg</code> for Mac), run it with the defaults.<br><br><strong>2 · Connect it</strong> — in the desktop app go to <strong>Settings → Connectors → Add custom connector</strong>, paste the URL below, and save. <em>(No license key.)</em> Now Claude draws the map straight into Draw.io while it interviews you.' },
+
+    { type:'build', surface:'claude-code', title:'Set up Draw.io — app + MCP',
+      command:'claude mcp add --transport http drawio https://mcp.draw.io/mcp',
+      body:'The X-Ray draws your business as <code>.drawio</code> maps. Two quick parts:<br><br><strong>1 · Install the app</strong> — <a href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener"><strong>Download Draw.io Desktop</strong></a> (free, no account), pick your installer under <strong>Assets</strong> (<code>…windows-installer.exe</code> for Windows, <code>…universal.dmg</code> for Mac), run it with the defaults.<br><br><strong>2 · Connect it</strong> — run the command below in your terminal (or type <code>/mcp</code> → <strong>Add connector</strong> → paste <code>https://mcp.draw.io/mcp</code>), then reload Claude Code. Now Claude draws the map straight into Draw.io while it interviews you.' },
+
     { type:'video', title:'Why the X-Ray interview works',
       video:'', // ← paste the Descript/YouTube embed URL here when recorded
       body:'A few minutes on <strong>why</strong> we map before we build. The Business X-Ray interview finds the single highest-leverage thing to automate first — so your first skill is one you actually feel.' },
 
     { type:'build', title:'Run your Business X-Ray',
-      command:'run my business x-ray',
-      body:'In Claude, run the command above (or just say <em>“map my business”</em>). Claude interviews you about how your business works today, lays it out, and surfaces the process worth automating first. <strong>You just answer its questions.</strong>' },
+      command:'x-ray my business',
+      body:'In Claude, say the phrase above (or just <em>“map my business”</em>) — your Business X-Ray skill picks it up. Claude interviews you about how your business works today, draws it, and surfaces the process worth automating first. <strong>You just answer its questions.</strong>' },
 
     { type:'gate', title:'Lock your first target',
       body:'From the X-Ray, pick the <strong>one process</strong> you’ll turn into your first skill — and note what it costs you today (<em>“this eats about N hours a week”</em>). That baseline is how we’ll measure the time you get back.',
@@ -113,9 +137,26 @@ document.getElementById('cpName').textContent = CONFIG.name;
 document.getElementById('backLink').href = CONFIG.board;
 document.title = CONFIG.name + ' — AI Employee Builder';
 
+/* Surface (Cowork vs Claude Code) — shared with the board via localStorage.
+   Steps may carry surface:'cowork'|'claude-code'; no surface = shown on both. */
+var SURFACE_STORE = 'aieb_surface';
+var surface = 'cowork';
+try { var ss = localStorage.getItem(SURFACE_STORE); if (ss==='cowork'||ss==='claude-code') surface = ss; } catch(e){}
+function activeSteps(){ return CONFIG.steps.filter(function(st){ return !st.surface || st.surface===surface; }); }
+function paintSurface(){
+  document.getElementById('sb-cowork').classList.toggle('active', surface==='cowork');
+  document.getElementById('sb-cc').classList.toggle('active', surface==='claude-code');
+}
+function setSurface(s){
+  surface = s;
+  try { localStorage.setItem(SURFACE_STORE, s); } catch(e){}
+  pos = Math.min(pos, activeSteps().length); save();
+  paintSurface(); render();
+}
+
 var STORE = 'aieb_ckpt_'+CONFIG.id+'_v1';
 var pos = 0; // current step index (0..steps.length). steps.length = completion screen.
-try { var saved = parseInt(localStorage.getItem(STORE),10); if(!isNaN(saved)) pos = Math.min(saved, CONFIG.steps.length); } catch(e){}
+try { var saved = parseInt(localStorage.getItem(STORE),10); if(!isNaN(saved)) pos = Math.min(saved, activeSteps().length); } catch(e){}
 
 function save(){ try { localStorage.setItem(STORE, String(pos)); } catch(e){} }
 function copyCmd(btn){
@@ -128,7 +169,8 @@ function copyCmd(btn){
 var TYPE = { video:'📹 Watch', build:'🔨 Build', gate:'🎯 Done-signal' };
 
 function render(){
-  var n = CONFIG.steps.length;
+  var steps = activeSteps();
+  var n = steps.length;
   var fill = document.getElementById('wizFill'), count = document.getElementById('wizCount'), eta = document.getElementById('wizEta');
   var stage = document.getElementById('stage');
 
@@ -141,7 +183,7 @@ function render(){
     return;
   }
 
-  var s = CONFIG.steps[pos];
+  var s = steps[pos];
   count.innerHTML='Step <b>'+(pos+1)+'</b> of '+n;
   eta.textContent = s.type==='gate' ? 'the gate' : '';
   fill.style.width = Math.round(100*(pos+1)/n)+'%';
@@ -167,9 +209,10 @@ function render(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function next(){ pos = Math.min(pos+1, CONFIG.steps.length); save(); render(); }
+function next(){ pos = Math.min(pos+1, activeSteps().length); save(); render(); }
 function back(){ if (pos<=0){ window.location.href = CONFIG.board; return; } pos--; save(); render(); }
 
+paintSurface();
 render();
 </script>
 </body>

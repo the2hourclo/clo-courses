@@ -19,6 +19,14 @@ body{min-height:100vh;background:radial-gradient(1200px 640px at 50% -260px,rgba
 .head p{font-size:15.5px;color:var(--text-muted);max-width:640px;margin:0 auto;line-height:1.6}
 @media(max-width:640px){.head h1{font-size:26px}}
 
+/* surface toggle (Cowork vs Claude Code) — persisted for every checkpoint wizard */
+.surface-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px}
+.surface-label{font-size:12px;font-weight:700;color:var(--text-dim)}
+.surface-toggle{display:inline-flex;background:var(--surface);border:1px solid var(--border-2);border-radius:20px;padding:3px;gap:3px}
+.sbtn{font-family:var(--font-body);font-size:12px;font-weight:700;padding:5px 14px;border-radius:16px;border:0;background:transparent;color:var(--text-muted);cursor:pointer;transition:all .15s}
+.sbtn:hover{color:var(--text)}
+.sbtn.active{background:var(--accent-dim);color:var(--accent)}
+
 /* progress line */
 .prog{max-width:560px;margin:18px auto 0}
 .prog .bar{height:7px;border-radius:6px;background:var(--surface-3);overflow:hidden;margin-bottom:8px}
@@ -78,6 +86,13 @@ a.col-pill:hover .open{opacity:1;transform:translateX(2px)}
 <div class="head rise">
   <span class="brand-badge">🤖 AI Employee Builder</span>
   <h1>Your AI Employee — Build Board</h1>
+  <div class="surface-row">
+    <span class="surface-label">I build in:</span>
+    <div class="surface-toggle">
+      <button class="sbtn" id="sb-cowork" onclick="setSurface('cowork')">Cowork</button>
+      <button class="sbtn" id="sb-cc" onclick="setSurface('claude-code')">Claude Code</button>
+    </div>
+  </div>
 </div>
 
 <div class="board-wrap rise">
@@ -111,6 +126,7 @@ var BOARD = [
     { t:'Welcome — what you just built', type:'video',  status:'done' }
   ]},
   { id:'cp1', name:'Map the business', color:'#5b9bff', state:'active', cards:[
+    { t:'Set up Draw.io — app + connector',         type:'build', status:'todo' },
     { t:'Why the X-Ray interview works',            type:'video', status:'todo' },
     { t:'Run your Business X-Ray',                  type:'build', status:'doing' },
     { t:'X-Ray map exists + “N hrs/week” baseline', type:'gate',  status:'todo' }
@@ -196,7 +212,23 @@ function render(){
   document.getElementById('board').innerHTML = BOARD.map(colHTML).join('');
 }
 
+/* Surface (Cowork vs Claude Code) — persisted; the checkpoint wizards read the
+   same key and swap their surface-specific steps (e.g. how Draw.io connects). */
+var SURFACE_STORE = 'aieb_surface';
+var surface = 'cowork';
+try { var ss = localStorage.getItem(SURFACE_STORE); if (ss==='cowork'||ss==='claude-code') surface = ss; } catch(e){}
+function setSurface(s){
+  surface = s;
+  try { localStorage.setItem(SURFACE_STORE, s); } catch(e){}
+  paintSurface();
+}
+function paintSurface(){
+  document.getElementById('sb-cowork').classList.toggle('active', surface==='cowork');
+  document.getElementById('sb-cc').classList.toggle('active', surface==='claude-code');
+}
+
 render();
+paintSurface();
 </script>
 </body>
 </html>
