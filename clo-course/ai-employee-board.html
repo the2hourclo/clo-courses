@@ -126,7 +126,7 @@ var BOARD = [
     { t:'Welcome — what you just built', type:'video',  status:'done' }
   ]},
   { id:'cp1', name:'Map the business', color:'#5b9bff', state:'active', cards:[
-    { t:'Set up Draw.io — app + connector',         type:'build', status:'todo' },
+    { t:'Set up Draw.io — connector + app',         type:'build', status:'todo' },
     { t:'Why the X-Ray interview works',            type:'video', status:'todo' },
     { t:'Run your Business X-Ray',                  type:'build', status:'doing' },
     { t:'X-Ray map exists + “N hrs/week” baseline', type:'gate',  status:'todo' }
@@ -171,7 +171,7 @@ var STATUS = { doing:'In progress', done:'Completed' };
 // aren't clickable (no skipping ahead). Add the rest as you build them this week.
 var WIZARDS = {
   setup:'get-access-aieb.html',
-  cp1:'checkpoint-map.html?v=2', // cache-buster: bump when the wizard's steps change, so the board never opens a stale cached copy
+  cp1:'checkpoint-map.html?v=3', // cache-buster: bump when the wizard's steps change, so the board never opens a stale cached copy
 
   cp2:'checkpoint-first-skill.html',
   cp3:'checkpoint-system.html',
