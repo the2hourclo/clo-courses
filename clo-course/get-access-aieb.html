@@ -104,6 +104,9 @@ strong{font-weight:700}
 .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-lead{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--accent-text);margin:0 0 9px}
 .video-lead::before{content:'\25B6';font-size:10px;color:var(--accent)}
+/* ── DOWNLOAD BUTTON (real button, not a text link) ── */
+.dl-btn{display:inline-block;padding:13px 28px;background:var(--accent);color:#0a0a0a;border-radius:var(--radius);font-weight:800;font-size:14px;text-decoration:none;margin:8px 0 4px}
+.dl-btn:hover{filter:brightness(1.07);text-decoration:none;color:#0a0a0a}
 
 /* ── KEYBOARD ── */
 .kbd{display:inline-block;font-family:var(--font-mono);font-size:11px;line-height:1;padding:3px 6px;border-radius:5px;background:#070807;border:1px solid var(--border-2);border-bottom-width:2px;color:var(--text)}
@@ -521,7 +524,7 @@ body.activation-mode .container{max-width:620px;width:100%}
 
       <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Have a Claude subscription</strong> (Pro, Max, or Teams) &mdash; this powers Claude Code. Sign up at <a href="https://claude.ai" target="_blank">claude.ai</a> if you don't have one yet.</div></div>
 
-      <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Install VS Code</strong> &mdash; the free editor you'll work in. Download it from <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a> and run the installer with the default options.</div></div>
+      <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Install VS Code</strong> &mdash; the free editor you'll work in:<br><a class="dl-btn" href="https://code.visualstudio.com/" target="_blank" rel="noopener">&#11015;&#65039; Download VS Code &#8599;</a><br>Run the installer with the default options.</div></div>
 
       <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Add the Claude Code extension &amp; sign in.</strong> Open VS Code, open the <strong>Extensions</strong> panel (<span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span> / <span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span>), search <strong>"Claude Code"</strong>, and click <strong>Install</strong> on the first result by Anthropic. Then click the <strong>Spark icon (&#10022;)</strong> top-right to open the panel and <strong>sign in</strong> with your Claude account.</div></div>
 
@@ -653,7 +656,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
       </summary>
       <div class="step-content">
         <p>You'll build maps and diagrams as you go &mdash; your onboarding already drew an AI Employee Map as a <code>.drawio</code> file. Draw.io Desktop is the free app that opens, edits, and exports them (no browser, no account). Install it whenever you want to see them full-size.</p>
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><a href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener"><strong>Download Draw.io Desktop here</strong></a> and run the installer for your OS.</div></div>
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><a class="dl-btn" href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">&#11015;&#65039; Download Draw.io Desktop &#8599;</a><br>Run the installer for your OS.</div></div>
         <button class="done-btn" onclick="markDoneCW(3)"><span class="dlabel">Mark step done</span></button>
       </div>
     </details>
@@ -752,7 +755,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 
       <p style="margin-top:12px"><strong>Part A &mdash; Install Draw.io Desktop</strong> (the free app that opens, edits, and exports <code>.drawio</code> files locally, no browser or account):</p>
       <div style="text-align:center;margin:6px 0 14px">
-        <a href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener" style="display:inline-block;padding:13px 28px;background:var(--accent);color:#0a0a0a;border-radius:var(--radius);font-weight:800;font-size:14px;text-decoration:none">&#11015;&#65039; Download Draw.io Desktop &#8599;</a>
+        <a class="dl-btn" href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">&#11015;&#65039; Download Draw.io Desktop &#8599;</a>
       </div>
       <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the releases page</strong> above and scroll down to <strong>Assets</strong>.</div></div>
       <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Pick your installer:</strong> <code>...-windows-installer.exe</code> for <strong>Windows</strong>, <code>...-universal.dmg</code> for <strong>Mac</strong>, or the <code>.deb</code> / <code>.AppImage</code> for <strong>Linux</strong>.</div></div>
