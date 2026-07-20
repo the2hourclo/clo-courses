@@ -154,7 +154,7 @@ function setSurface(s){
   paintSurface(); render();
 }
 
-var STORE = 'aieb_ckpt_'+CONFIG.id+'_v1';
+var STORE = 'aieb_ckpt_'+CONFIG.id+'_v2'; // _v2: step list reordered (draw.io first) — resets positions saved against the old order
 var pos = 0; // current step index (0..steps.length). steps.length = completion screen.
 try { var saved = parseInt(localStorage.getItem(STORE),10); if(!isNaN(saved)) pos = Math.min(saved, activeSteps().length); } catch(e){}
 
