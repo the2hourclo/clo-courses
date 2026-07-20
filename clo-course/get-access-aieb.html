@@ -107,6 +107,11 @@ strong{font-weight:700}
 /* ── DOWNLOAD BUTTON (real button, not a text link) ── */
 .dl-btn{display:inline-block;padding:13px 28px;background:var(--accent);color:#0a0a0a;border-radius:var(--radius);font-weight:800;font-size:14px;text-decoration:none;margin:8px 0 4px}
 .dl-btn:hover{filter:brightness(1.07);text-decoration:none;color:#0a0a0a}
+/* ── SUB BULLETS (break run-on instructions into scannable dots) ── */
+ul.sub{margin:8px 0 4px;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+ul.sub li{position:relative;padding-left:18px;font-size:13.5px;line-height:1.55;color:var(--text-muted)}
+ul.sub li::before{content:'';position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.75}
+ul.sub li strong{color:var(--text)}
 
 /* ── KEYBOARD ── */
 .kbd{display:inline-block;font-family:var(--font-mono);font-size:11px;line-height:1;padding:3px 6px;border-radius:5px;background:#070807;border:1px solid var(--border-2);border-bottom-width:2px;color:var(--text)}
@@ -526,7 +531,12 @@ body.activation-mode .container{max-width:620px;width:100%}
 
       <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Install VS Code</strong> &mdash; the free editor you'll work in:<br><a class="dl-btn" href="https://code.visualstudio.com/" target="_blank" rel="noopener">&#11015;&#65039; Download VS Code &#8599;</a><br>Run the installer with the default options.</div></div>
 
-      <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Add the Claude Code extension &amp; sign in.</strong> Open VS Code, open the <strong>Extensions</strong> panel (<span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span> / <span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span>), search <strong>"Claude Code"</strong>, and click <strong>Install</strong> on the first result by Anthropic. Then click the <strong>Spark icon (&#10022;)</strong> top-right to open the panel and <strong>sign in</strong> with your Claude account.</div></div>
+      <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Add the Claude Code extension &amp; sign in:</strong>
+        <ul class="sub">
+          <li>Open VS Code &rarr; <strong>Extensions</strong> panel (<span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span> / <span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">X</span>)</li>
+          <li>Search <strong>"Claude Code"</strong> &rarr; click <strong>Install</strong> on the first result by Anthropic</li>
+          <li>Click the <strong>Spark icon (&#10022;)</strong> top-right &rarr; <strong>sign in</strong> with your Claude account</li>
+        </ul></div></div>
 
       <figure class="shot">
         <img src="assets/get-access/02-claude-code-extension.png" alt="Installing the Claude Code extension in VS Code" onerror="this.closest('figure').style.display='none'">
@@ -628,8 +638,18 @@ After each step, tell me whether it worked, or show the error and exactly how yo
         <div class="video-embed"><iframe src="https://share.descript.com/embed/3oxZO3lcgGI" title="Connect and onboard" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body">Start a <strong>Cowork</strong> chat and type:</div></div>
         <div class="cmd-line indent"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Claude gives you a short code and a link to this course page in secure connection mode. Click the link &mdash; if you're in the same browser you bought in, it connects by itself, nothing to enter. Otherwise the page asks for the license key from your Lemon Squeezy receipt (also at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener">app.lemonsqueezy.com/my-orders</a>) &mdash; enter it on that page, then click <strong>Connect this device</strong>. Either way, close the tab and head back to Claude; the connection finishes by itself in a few seconds. (If Claude seems unaware, typing <code>done</code> nudges it along.)</div></div>
-        <div class="substep"><div class="substep-badge">3</div><div class="substep-body">Back in the chat, <code>/setup-aieb</code> keeps going on its own &mdash; it runs your guided onboarding: it sets up your workspace, maps how your business runs today (the <strong>Business X-Ray</strong> is built in, no separate step), and builds your first custom skill with you. You just answer its questions.</div></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Claude gives you a short code and a secure connection link.</strong>
+          <ul class="sub">
+            <li><strong>Click the link.</strong> Same browser you bought in? It connects by itself &mdash; nothing to enter.</li>
+            <li><strong>Different browser or device?</strong> The page asks for the license key from your Lemon Squeezy receipt (also at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener">app.lemonsqueezy.com/my-orders</a>) &mdash; enter it there, click <strong>Connect this device</strong>.</li>
+            <li><strong>Close the tab</strong> and head back to Claude &mdash; the connection finishes by itself in a few seconds. <em>(If Claude seems unaware, typing <code>done</code> nudges it along.)</em></li>
+          </ul></div></div>
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Back in the chat, <code>/setup-aieb</code> keeps going on its own</strong> &mdash; your guided onboarding:
+          <ul class="sub">
+            <li>Sets up your workspace</li>
+            <li>Maps how your business runs today (the <strong>Business X-Ray</strong> is built in &mdash; no separate step)</li>
+            <li>Builds your first custom skill with you &mdash; <strong>you just answer its questions</strong></li>
+          </ul></div></div>
         <div class="callout callout-tip"><strong>Success looks like:</strong> once you're connected, Claude starts asking about your business &mdash; that's onboarding running. <strong>Your first AI employee is about 30 minutes away.</strong></div>
         <div class="callout callout-info"><strong>Don't see the command?</strong> Saying <code>set up my AI Employee Builder</code> in the chat does exactly the same thing.</div>
         <p>The secure page validates your subscription and hands the plugin an opaque device token &mdash; the plugin never sees or stores a license key, and it works immediately with no restart. If the page ever does ask for your key, enter it there only &mdash; <strong>never paste a license key into a Claude chat.</strong></p>
@@ -717,9 +737,19 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <div class="step-content">
       <p>The shell connects to the hosted MCP server. Run the setup command; Claude will give you a secure page and short code for connecting this device.</p>
       <div class="cmd-line"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <p style="margin-top:10px">Click the link Claude gives you. If you're in the same browser you bought in, the page connects by itself &mdash; nothing to enter. Otherwise the page asks for the license key from your Lemon Squeezy receipt &mdash; enter it on that page only, never in Claude or any chat. Either way, close the tab and keep going in Claude; the connection finishes by itself in a few seconds. (If Claude seems unaware, typing <code>done</code> nudges it along.) The plugin stores an opaque device token for the whole machine; it never sees or stores a license key. No restart or config editing.</p>
+      <ul class="sub" style="margin-top:10px">
+        <li><strong>Click the link</strong> Claude gives you. Same browser you bought in? The page connects by itself &mdash; nothing to enter.</li>
+        <li><strong>Different browser or device?</strong> It asks for the license key from your Lemon Squeezy receipt &mdash; enter it on that page only, <strong>never in Claude or any chat</strong>.</li>
+        <li><strong>Close the tab</strong> and keep going in Claude &mdash; the connection finishes by itself in a few seconds. <em>(If Claude seems unaware, typing <code>done</code> nudges it along.)</em></li>
+      </ul>
+      <p style="margin-top:8px">The plugin stores an opaque device token for the whole machine; it never sees or stores a license key. No restart or config editing.</p>
       <div class="callout callout-info"><strong>Subscription access:</strong> access stays active while your subscription is active. Cancelling revokes MCP access immediately. If you resume or renew, reconnect and access is restored.</div>
-      <p style="margin-top:10px">Once connected, <code>/setup-aieb</code> keeps going on its own &mdash; it runs your guided onboarding: it sets up your authoring workspace, maps how your business runs today (the <strong>Business X-Ray</strong> is built in), and builds your first custom skill with you. You just answer its questions.</p>
+      <p style="margin-top:10px">Once connected, <code>/setup-aieb</code> keeps going on its own &mdash; your guided onboarding:</p>
+      <ul class="sub">
+        <li>Sets up your authoring workspace</li>
+        <li>Maps how your business runs today (the <strong>Business X-Ray</strong> is built in)</li>
+        <li>Builds your first custom skill with you &mdash; <strong>you just answer its questions</strong></li>
+      </ul>
       <div class="callout callout-tip"><strong>Your first AI employee is about 30 minutes away.</strong> Kick off <code>/setup-aieb</code> now, while everything's fresh, and let it run.</div>
       <button class="done-btn" onclick="markDone(3)"><span class="dlabel">Mark step done</span></button>
     </div>
