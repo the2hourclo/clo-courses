@@ -61,6 +61,12 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .dl-btn{display:inline-block;padding:12px 26px;background:var(--cp);color:#0a0a0a;border-radius:var(--radius);font-weight:800;font-size:14px;text-decoration:none;margin:6px 0 4px}
 .dl-btn:hover{filter:brightness(1.07);text-decoration:none;color:#0a0a0a}
 
+/* sub bullet points inside a step body */
+.step ul.sub{margin:9px 0 11px;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.step ul.sub li{position:relative;padding-left:20px;color:var(--text-muted);font-size:14.5px;line-height:1.55}
+.step ul.sub li::before{content:'';position:absolute;left:4px;top:9px;width:6px;height:6px;border-radius:50%;background:color-mix(in srgb,var(--cp) 70%,transparent)}
+.step ul.sub li strong{color:var(--text)}
+
 /* nav */
 .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:10px;border:1px solid var(--border-2);background:var(--surface);color:var(--text);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
@@ -116,19 +122,36 @@ var CONFIG = {
   steps: [
     { type:'build', surface:'cowork', title:'Set up Draw.io — connector + app',
       video:'https://share.descript.com/embed/42pEyvI1VyH',
-      body:'The X-Ray draws your business as <code>.drawio</code> maps. Two quick parts:<br><br><strong>1 · Connect the Draw.io connector</strong> — in the Claude desktop app go to <strong>Settings → Connectors → Add custom connector</strong>, paste this URL, and save <em>(no license key)</em> — now Claude draws the map straight into Draw.io while it interviews you:'+
+      body:'The X-Ray draws your business as <code>.drawio</code> maps. Two quick parts:<br><br><strong>1 · Connect the Draw.io connector</strong>'+
+        '<ul class="sub">'+
+        '<li>Open the Claude desktop app → <strong>Settings → Connectors</strong></li>'+
+        '<li>Click <strong>Add custom connector</strong></li>'+
+        '<li>Paste this URL and save <em>(no license key)</em>:</li>'+
+        '</ul>'+
         '<div class="cmd"><span class="txt">https://mcp.draw.io/mcp</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'+
+        'Claude can now draw the map straight into Draw.io while it interviews you.<br><br>'+
         '<strong>2 · Install the Draw.io app</strong> — the free app that opens your maps full-size (no browser, no account):<br>'+
-        '<a class="dl-btn" href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">⬇️ Download Draw.io Desktop ↗</a><br>'+
-        'Pick your installer under <strong>Assets</strong> (<code>…windows-installer.exe</code> for Windows, <code>…universal.dmg</code> for Mac) and run it with the defaults.' },
+        '<a class="dl-btn" href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">⬇️ Download Draw.io Desktop ↗</a>'+
+        '<ul class="sub">'+
+        '<li>Pick your installer under <strong>Assets</strong> — <code>…windows-installer.exe</code> (Windows) or <code>…universal.dmg</code> (Mac)</li>'+
+        '<li>Run it with the defaults</li>'+
+        '</ul>' },
 
     { type:'build', surface:'claude-code', title:'Set up Draw.io — MCP + app',
       video:'https://share.descript.com/embed/42pEyvI1VyH',
-      body:'The X-Ray draws your business as <code>.drawio</code> maps. Two quick parts:<br><br><strong>1 · Connect the Draw.io MCP</strong> — run this in your terminal (or type <code>/mcp</code> → <strong>Add connector</strong> → paste <code>https://mcp.draw.io/mcp</code>), then reload Claude Code — now Claude draws the map straight into Draw.io while it interviews you:'+
+      body:'The X-Ray draws your business as <code>.drawio</code> maps. Two quick parts:<br><br><strong>1 · Connect the Draw.io MCP</strong>'+
+        '<ul class="sub">'+
+        '<li>Run the command below in your terminal <em>(or type <code>/mcp</code> → <strong>Add connector</strong> → paste <code>https://mcp.draw.io/mcp</code>)</em></li>'+
+        '<li>Reload Claude Code</li>'+
+        '</ul>'+
         '<div class="cmd"><span class="txt">claude mcp add --transport http drawio https://mcp.draw.io/mcp</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'+
+        'Claude can now draw the map straight into Draw.io while it interviews you.<br><br>'+
         '<strong>2 · Install the Draw.io app</strong> — the free app that opens your maps full-size (no browser, no account):<br>'+
-        '<a class="dl-btn" href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">⬇️ Download Draw.io Desktop ↗</a><br>'+
-        'Pick your installer under <strong>Assets</strong> (<code>…windows-installer.exe</code> for Windows, <code>…universal.dmg</code> for Mac) and run it with the defaults.' },
+        '<a class="dl-btn" href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">⬇️ Download Draw.io Desktop ↗</a>'+
+        '<ul class="sub">'+
+        '<li>Pick your installer under <strong>Assets</strong> — <code>…windows-installer.exe</code> (Windows) or <code>…universal.dmg</code> (Mac)</li>'+
+        '<li>Run it with the defaults</li>'+
+        '</ul>' },
 
     { type:'video', title:'Why the X-Ray interview works',
       video:'', // ← paste the Descript/YouTube embed URL here when recorded
