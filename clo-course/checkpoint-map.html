@@ -157,6 +157,10 @@ var CONFIG = {
       video:'', // ← paste the Descript/YouTube embed URL here when recorded
       body:'A few minutes on <strong>why</strong> we map before we build. The Business X-Ray interview finds the single highest-leverage thing to automate first — so your first skill is one you actually feel.' },
 
+    { type:'video', optional:true, title:'See a full X-Ray in action',
+      video:'https://www.youtube.com/embed/S9_nfd-mHV0?rel=0',
+      body:'<strong>Optional.</strong> A complete Business X-Ray from start to finish, so you know exactly what you\'re about to build. Prefer to just experience it live? Skip ahead — the next step starts yours.' },
+
     { type:'build', title:'Run your Business X-Ray',
       command:'/ai-employee-builder:business-x-ray',
       body:'In Claude, run the command above (or just say <em>“x-ray my business”</em>). Claude interviews you about how your business works today, draws it, and surfaces the process worth automating first. <strong>You just answer its questions.</strong>' },
@@ -189,7 +193,7 @@ function setSurface(s){
   paintSurface(); render();
 }
 
-var STORE = 'aieb_ckpt_'+CONFIG.id+'_v2'; // _v2: step list reordered (draw.io first) — resets positions saved against the old order
+var STORE = 'aieb_ckpt_'+CONFIG.id+'_v3'; // bump whenever the step ORDER changes — resets positions saved against the old order (v3: optional demo-video step inserted)
 var pos = 0; // current step index (0..steps.length). steps.length = completion screen.
 try { var saved = parseInt(localStorage.getItem(STORE),10); if(!isNaN(saved)) pos = Math.min(saved, activeSteps().length); } catch(e){}
 
@@ -220,11 +224,11 @@ function render(){
 
   var s = steps[pos];
   count.innerHTML='Step <b>'+(pos+1)+'</b> of '+n;
-  eta.textContent = s.type==='gate' ? 'the gate' : '';
+  eta.textContent = s.type==='gate' ? 'the gate' : (s.optional ? 'optional — skip anytime' : '');
   fill.style.width = Math.round(100*(pos+1)/n)+'%';
 
   var h = '<div class="step">';
-  h += '<span class="step-type">'+(TYPE[s.type]||'')+'</span>';
+  h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.type==='video'){ h += '<div class="video-slot"><span>🎬 Video slot — paste the embed URL in CONFIG</span></div>'; }
