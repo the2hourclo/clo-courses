@@ -59,15 +59,25 @@ body{min-height:100vh;background:radial-gradient(1100px 620px at 50% -220px,rgba
 /* surface gate (first-time only) */
 .surface-gate{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(6,8,6,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .surface-gate[hidden]{display:none}
-.sg-card{max-width:440px;width:100%;background:var(--surface);border:1px solid var(--border-2);border-radius:var(--radius-lg);padding:30px 26px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+.sg-card{max-width:500px;width:100%;background:var(--surface);border:1px solid var(--border-2);border-radius:var(--radius-lg);padding:26px 22px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.6);max-height:94vh;overflow-y:auto}
 .sg-card .eyebrow{margin-bottom:0}
 .sg-card h2{font-family:var(--font-display);font-size:23px;font-weight:800;margin:8px 0 6px}
-.sg-card p{color:var(--text-muted);font-size:14px;margin-bottom:20px}
-.sg-opts{display:flex;flex-direction:column;gap:11px}
-.sg-opts button{display:flex;flex-direction:column;gap:3px;text-align:left;padding:15px 18px;border-radius:12px;border:1px solid var(--border-2);background:var(--surface-2);color:var(--text);cursor:pointer;transition:all .14s;font-family:var(--font-body)}
-.sg-opts button:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface-2));transform:translateY(-1px)}
-.sg-opts b{font-size:15.5px;font-weight:800}
-.sg-opts span{font-size:13px;color:var(--text-muted);line-height:1.45}
+.sg-card>p{color:var(--text-muted);font-size:14px;margin-bottom:18px;line-height:1.5}
+.sg-opts{display:flex;flex-direction:column;gap:12px;text-align:left}
+/* two decision cards — Cowork is the recommended default (reco) */
+.sg-opt{display:flex;flex-direction:column;gap:7px;padding:16px 17px;border-radius:14px;border:1px solid var(--border-2);background:var(--surface-2);color:var(--text);cursor:pointer;transition:all .15s;font-family:var(--font-body);text-align:left}
+.sg-opt:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface-2));transform:translateY(-2px)}
+.sg-opt.reco{border-color:color-mix(in srgb,var(--accent) 45%,var(--border-2));background:linear-gradient(150deg,var(--accent-dim),var(--surface-2) 60%)}
+.sg-badge{align-self:flex-start;font-size:10px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:var(--accent-dim);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 32%,transparent)}
+.sg-badge.alt{background:var(--surface-3);color:var(--text-muted);border-color:var(--border-2)}
+.sg-head{display:flex;align-items:center;gap:10px}
+.sg-ic{width:32px;height:32px;border-radius:8px;flex-shrink:0;object-fit:contain;background:var(--surface-3);padding:5px}
+.sg-opt b{font-size:16px;font-weight:800;font-family:var(--font-display)}
+.sg-what{font-size:13.5px;color:var(--text);line-height:1.5}
+.sg-if{font-size:12.5px;color:var(--text-muted);line-height:1.5}
+.sg-if em{color:var(--accent);font-style:normal;font-weight:700}
+.sg-go{font-size:13.5px;font-weight:800;color:var(--accent)}
+.sg-opt:not(.reco) .sg-go{color:var(--text)}
 </style>
 </head>
 <body>
@@ -108,13 +118,28 @@ function paintSurf(){ document.getElementById('surfBar').innerHTML = surfBarHTML
 function swapSurface(s){ AIEB.setSurface(s); paintSurf(); renderHome(); }
 
 function gateHTML(){
+  // The single surface picker (asked once, up front). Get Access reads this choice and
+  // skips its own "pick your app" step, so nobody chooses twice. Cowork is the recommended
+  // default for non-technical builders; the top-bar toggle swaps it anytime.
   return '<div class="sg-card">'+
-    '<div class="eyebrow">One quick thing</div>'+
-    '<h2>Where are you building?</h2>'+
-    '<p>Pick where you run Claude. You can switch anytime.</p>'+
+    '<div class="eyebrow">One quick thing · switch anytime</div>'+
+    '<h2>Where do you want to build?</h2>'+
+    '<p>This just sets which setup steps we show you. Not sure? Go with Cowork — it’s the easy, nothing-to-install path.</p>'+
     '<div class="sg-opts">'+
-      '<button onclick="pickSurface(\'cowork\')"><b>Cowork</b><span>'+AIEB.SURFACES.cowork.blurb+'</span></button>'+
-      '<button onclick="pickSurface(\'claude-code\')"><b>Claude Code</b><span>'+AIEB.SURFACES['claude-code'].blurb+'</span></button>'+
+      '<button class="sg-opt reco" onclick="pickSurface(\'cowork\')">'+
+        '<span class="sg-badge">Easiest · start here</span>'+
+        '<span class="sg-head"><img class="sg-ic" src="assets/get-access/cowork-logo.png" alt="" onerror="this.style.display=\'none\'"><b>Claude Cowork</b></span>'+
+        '<span class="sg-what">Claude runs in your browser. Nothing to install — add one plugin, click a link, and you’re building. All point-and-click.</span>'+
+        '<span class="sg-if"><em>Pick this if</em> you’re not technical and words like “terminal” or “VS Code” make you nervous. You still build a real AI Employee — just the easy way.</span>'+
+        '<span class="sg-go">Build in Cowork →</span>'+
+      '</button>'+
+      '<button class="sg-opt" onclick="pickSurface(\'claude-code\')">'+
+        '<span class="sg-badge alt">Full control</span>'+
+        '<span class="sg-head"><img class="sg-ic" src="assets/get-access/claude-code-mascot.png" alt="" onerror="this.style.display=\'none\'"><b>Claude Code</b></span>'+
+        '<span class="sg-what">Claude runs in your code editor (VS Code) or terminal, right on your own computer.</span>'+
+        '<span class="sg-if"><em>Pick this if</em> you want full control and customization, you’re comfortable in VS Code, and you want to go deep on AI engineering.</span>'+
+        '<span class="sg-go">Build in Claude Code →</span>'+
+      '</button>'+
     '</div></div>';
 }
 function pickSurface(s){ AIEB.setSurface(s); document.getElementById('gate').hidden = true; renderHome(); }

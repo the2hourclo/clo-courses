@@ -135,6 +135,7 @@ ul.sub li strong{color:var(--text)}
 .fork-ic img{width:36px;height:36px;object-fit:contain;display:block;border-radius:8px}
 .fork-tx{font-size:13px;color:var(--text-muted);line-height:1.5}
 .fork-tx strong{display:block;font-family:var(--font-display);font-size:16px;color:var(--text);margin-bottom:3px;font-weight:700;letter-spacing:-.2px}
+.fork-tx em{display:block;margin-top:7px;font-style:normal;font-size:12.5px;font-weight:600;color:var(--accent-text)}
 .fork-go{font-size:12.5px;font-weight:800;color:var(--accent);margin-top:auto}
 [id]{scroll-margin-top:96px}
 .cc-hidden{display:none}
@@ -465,12 +466,12 @@ body.activation-mode .container{max-width:620px;width:100%}
   <div class="fork rise d2" id="app-chooser">
     <a class="fork-card" id="chooser-cc" href="#claude-code-path" onclick="chooseTrack(event,'cc')">
       <span class="fork-ic"><img src="assets/get-access/claude-code-mascot.png" alt="Claude Code"></span>
-      <span class="fork-tx"><strong>Claude Code</strong>Already use VS Code? It runs inside it &mdash; and Claude installs everything for you from one pasted prompt.</span>
+      <span class="fork-tx"><strong>Claude Code</strong>Runs in your code editor (VS Code) or terminal, on your own computer. <em>Pick this if you want full control, customization, and to go deep on AI engineering.</em></span>
       <span class="fork-go">Use Claude Code &rarr;</span>
     </a>
     <a class="fork-card alt" id="chooser-cw" href="#cowork" onclick="chooseTrack(event,'cowork')">
       <span class="fork-ic"><img src="assets/get-access/cowork-logo.png" alt="Claude Cowork"></span>
-      <span class="fork-tx"><span class="fork-badge">Easiest &mdash; no terminal</span><strong>Claude Cowork</strong>Runs in the Claude desktop app. Add our plugin, open its secure connection page, done. All point-and-click.</span>
+      <span class="fork-tx"><span class="fork-badge">Easiest &mdash; no terminal</span><strong>Claude Cowork</strong>Runs in the Claude desktop app &mdash; add our plugin, open its connection page, done. All point-and-click. <em>Pick this if you&rsquo;re not technical and &ldquo;terminal&rdquo; sounds scary.</em></span>
       <span class="fork-go">&#129309; Set up Cowork &rarr;</span>
     </a>
   </div>
@@ -1207,10 +1208,17 @@ function chooseTrack(e, t){
   applyTrack(t, !window.wizOn);
   if (window.wizOn) { wizTrackName = t; wizPos=null; wizRender(); }
 }
-// Restore: #cowork deep links (old emails) win, then the saved choice.
+// Restore the track. aieb_surface (chosen on the home gate + the global top-bar toggle) is the
+// SOURCE OF TRUTH — read it first so a surface switched anywhere else always wins here. Fall back
+// to this page's own saved track only when no surface is set yet; a #cowork deep-link still wins last.
 (function initTrack(){
   var saved = null;
-  try { saved = localStorage.getItem(TRACKKEY); } catch(e){}
+  try {
+    var s = localStorage.getItem('aieb_surface');
+    if (s === 'claude-code') saved = 'cc';
+    else if (s === 'cowork') saved = 'cowork';
+  } catch(e){}
+  if (!saved){ try { saved = localStorage.getItem(TRACKKEY); } catch(e){} }
   if (location.hash === '#cowork') saved = 'cowork';
   if (saved) applyTrack(saved, false);
 })();
@@ -1451,7 +1459,13 @@ setInterval(function(){
   if (should){
     wizOn=true;
     try { localStorage.setItem(WIZKEY,'wizard'); } catch(e){}
-    wizTrackName = null; // always start at the app chooser (Cowork / Claude Code) on load
+    // Honor the surface already chosen on the home gate (aieb_surface) so we DON'T re-ask
+    // "Pick your app" — the choice is made once, up front. Fall back to the in-wizard
+    // chooser only when no surface is set yet (e.g. a direct deep-link straight to this page).
+    var preTrack = null;
+    try { var _s = localStorage.getItem('aieb_surface'); preTrack = _s==='claude-code' ? 'cc' : (_s==='cowork' ? 'cowork' : null); } catch(e){ preTrack=null; }
+    if (preTrack){ applyTrack(preTrack, false); wizTrackName = preTrack; }
+    else { wizTrackName = null; } // no surface chosen yet → show the app chooser as step 1
     wizRender();
   } else if (window.__aiebClaimJustLanded){
     // Classic view still confirms the claim landed (user opted out of the wizard).
