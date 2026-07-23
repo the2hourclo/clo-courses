@@ -120,73 +120,30 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
                 video?:embedURL, command?:'do this in Claude', gate?:HTML }
    ═══════════════════════════════════════════════════════════════ */
 var CONFIG = {
-  id: 'cp1',
-  name: 'Map the business',
-  color: '#5b9bff',
+  id: 'cp4',
+  name: 'Make it run itself',
+  color: '#f472b6',
   board: 'ai-employee-board.html',
   steps: [
-    { type:'build', surface:'cowork', title:'Set up Draw.io — connector + app',
-      video:'https://share.descript.com/embed/42pEyvI1VyH',
-      body:'The X-Ray draws your business as <code>.drawio</code> maps. Two quick parts:<br><br><strong>1 · Connect the Draw.io connector</strong>'+
-        '<ul class="sub">'+
-        '<li>Open the Claude desktop app → <strong>Settings → Connectors</strong></li>'+
-        '<li>Click <strong>Add custom connector</strong></li>'+
-        '<li>Paste this URL and save <em>(no license key)</em>:</li>'+
-        '</ul>'+
-        '<div class="cmd"><span class="txt">https://mcp.draw.io/mcp</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'+
-        'Claude can now draw the map straight into Draw.io while it interviews you.<br><br>'+
-        '<strong>2 · Install the Draw.io app</strong> — the free app that opens your maps full-size (no browser, no account):<br>'+
-        '<a class="dl-btn" href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">⬇️ Download Draw.io Desktop ↗</a>'+
-        '<ul class="sub">'+
-        '<li>Pick your installer under <strong>Assets</strong> — <code>…windows-installer.exe</code> (Windows) or <code>…universal.dmg</code> (Mac)</li>'+
-        '<li>Run it with the defaults</li>'+
-        '</ul>' },
+    { type:'video', title:'Review + harden',
+      video:'',
+      body:'Before you let it run alone, tighten it. <strong>Hardening</strong> makes the skill check its own work and fail loudly instead of quietly, so you can trust the output without re-reading every line.' },
 
-    { type:'build', surface:'claude-code', title:'Set up Draw.io — MCP + app',
-      video:'https://share.descript.com/embed/42pEyvI1VyH',
-      body:'The X-Ray draws your business as <code>.drawio</code> maps. Two quick parts:<br><br><strong>1 · Connect the Draw.io MCP</strong>'+
-        '<ul class="sub">'+
-        '<li>Run the command below in your terminal <em>(or type <code>/mcp</code> → <strong>Add connector</strong> → paste <code>https://mcp.draw.io/mcp</code>)</em></li>'+
-        '<li>Reload Claude Code</li>'+
-        '</ul>'+
-        '<div class="cmd"><span class="txt">claude mcp add --transport http drawio https://mcp.draw.io/mcp</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'+
-        'Claude can now draw the map straight into Draw.io while it interviews you.<br><br>'+
-        '<strong>2 · Install the Draw.io app</strong> — the free app that opens your maps full-size (no browser, no account):<br>'+
-        '<a class="dl-btn" href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">⬇️ Download Draw.io Desktop ↗</a>'+
-        '<ul class="sub">'+
-        '<li>Pick your installer under <strong>Assets</strong> — <code>…windows-installer.exe</code> (Windows) or <code>…universal.dmg</code> (Mac)</li>'+
-        '<li>Run it with the defaults</li>'+
-        '</ul>' },
+    { type:'video', title:'Build a harness',
+      video:'',
+      body:'A <strong>harness</strong> is the set of guardrails and checks around a skill that hold its quality steady when you are not watching. It is what turns a good skill into a reliable one.' },
 
-    { type:'video', title:'Why the X-Ray interview works',
-      video:'', // ← paste the Descript/YouTube embed URL here when recorded
-      body:'A few minutes on <strong>why</strong> we map before we build. The Business X-Ray interview finds the single highest-leverage thing to automate first — so your first skill is one you actually feel.' },
+    { type:'video', title:'Schedule it / autonomy',
+      video:'',
+      body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask.' },
 
-    { type:'video', optional:true, title:'See a full X-Ray in action',
-      video:'https://www.youtube.com/embed/S9_nfd-mHV0?rel=0',
-      body:'<strong>Optional.</strong> A complete Business X-Ray from start to finish, so you know exactly what you\'re about to build. Prefer to just experience it live? Skip ahead — the next step starts yours.' },
+    { type:'build', title:'Run autonomously or self-improve',
+      video:'',
+      body:'Add the harness and the schedule (or just say <em>&ldquo;put this on autopilot&rdquo;</em>). From here the AI runs the function on its own and gets sharper each time you correct it. <strong>You review, it runs.</strong>' },
 
-    { type:'build', surface:'cowork', title:'Run your Business X-Ray',
-      video:'https://share.descript.com/embed/ztow6gEQug0',
-      body:'In any Cowork chat, just say <em>“x-ray my business”</em>. Claude interviews you about how your business works today, draws it, and surfaces the process worth automating first. <strong>You just answer its questions.</strong>' },
-
-    { type:'build', surface:'claude-code', title:'Run your Business X-Ray',
-      video:'https://share.descript.com/embed/ztow6gEQug0',
-      command:'/ai-employee-builder:business-x-ray',
-      body:'In Claude Code, run the command above <em>(or just say “x-ray my business”)</em>. Claude interviews you about how your business works today, draws it, and surfaces the process worth automating first. <strong>You just answer its questions.</strong>' },
-
-    { type:'share', optional:true, title:'Read &amp; share your X-Ray',
-      video:'https://share.descript.com/embed/uV3ggymkgdw',
-      body:'<strong>Optional.</strong> Your X-Ray is done. This quick walkthrough shows you how to <strong>read</strong> it, so the map, the bottleneck, and the scores actually mean something. Then share it and let the community pressure-test it before you build:'+
-        '<ul class="sub">'+
-        '<li>In Draw.io, open your X-Ray map and choose <strong>File → Export as → PDF</strong></li>'+
-        '<li>Post the PDF in the <strong>Polynet community</strong> with one line on the process you’re automating first</li>'+
-        '</ul>'+
-        '<a class="dl-btn" href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">📤 Share it in the community ↗</a>' },
-
-    { type:'gate', title:'Lock your first target',
-      body:'From the X-Ray, pick the <strong>one process</strong> you’ll turn into your first skill — and note what it costs you today (<em>“this eats about N hours a week”</em>). That baseline is how we’ll measure the time you get back.',
-      gate:'Your X-Ray map exists <strong>and</strong> you’ve picked a first-skill target with a “costs me N hrs/week” baseline. When Claude confirms this, <strong>Your first skill</strong> unlocks on your board.' }
+    { type:'gate', title:'It runs on its own',
+      body:'Confirm the system runs without you kicking it off, and that when you correct it, the fix sticks for next time.',
+      gate:'Your AI Employee runs a whole function <strong>on its own</strong> and improves when you correct it. That is <strong>Your AI Employee</strong> built. &#127881;' }
   ]
 };
 

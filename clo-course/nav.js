@@ -17,7 +17,7 @@ window.CLO_PRODUCTS = {
     onboarding: [
       { label: 'Join the community', href: 'clo-community/', hint: 'Meet the other builders on Polynet' },
       { label: 'Get access & install', href: 'clo-course/get-access.html', hint: 'Set up Claude Code + the plugin' },
-      { label: 'Run your Business X-Ray', href: 'clo-course/business-x-ray.html', hint: 'Map your business, find the bottleneck' },
+      { label: 'Run your Business X-Ray', href: 'clo-course/checkpoint-map.html', hint: 'Map your business, find the bottleneck' },
       { label: 'Build your first Skill System', href: 'meta-create-skill/index.html', hint: 'Ship a skill that chains' }
     ],
     // grouped left-sidebar nav. `page` matches each page's <body data-page>. hrefs are ROOT-relative.
@@ -28,7 +28,7 @@ window.CLO_PRODUCTS = {
         { label: 'Roadmap', page: 'roadmap', href: 'clo-course/ai-employee-roadmap.html', keywords: ['roadmap','whats next','next step','journey','path','harness','agent','command','routine','what to build next','continue building','ai employee roadmap'] }
       ]},
       { group: 'Courses', items: [
-        { label: 'Business X-Ray', page: 'business-x-ray', href: 'clo-course/business-x-ray.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','funnel','swimlanes','process','assets','asset explorer','score','operating system','digital assets','map my business','where to start'] },
+        { label: 'Business X-Ray', page: 'business-x-ray', href: 'clo-course/checkpoint-map.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','funnel','swimlanes','process','assets','asset explorer','score','operating system','digital assets','map my business','where to start'] },
         { label: 'Skill Systems', page: 'meta-skill', href: 'meta-create-skill/index.html', keywords: ['create skill','build skill','make a skill','meta','capture','automate','skill system','authoring','new skill'] }
       ]},
       { group: 'Claude Code 101', items: [
@@ -72,22 +72,16 @@ window.CLO_PRODUCTS = {
     nav: [
       { group: 'Get Started', items: [
         { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
-        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','plugin','license','activate','onboard','getting started','first steps'] },
-        { label: 'Build Board', page: 'roadmap', href: 'clo-course/ai-employee-board.html', keywords: ['board','build board','roadmap','journey','checkpoints','whats next','next step','path','progress','home base','what to build next','continue building','ai employee roadmap'] }
+        { label: 'Build Board', page: 'roadmap', href: 'clo-course/ai-employee-board.html', keywords: ['board','build board','roadmap','journey','checkpoints','whats next','next step','path','progress','home base','what to build next','continue building','ai employee roadmap'] },
+        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','plugin','license','activate','onboard','getting started','first steps'] }
       ]},
-      { group: 'Claude Code 101', items: [
-        { label: '1 · What Claude Code Is', page: 'cc101-what', href: 'clo-course/cc101-1-what.html', keywords: ['what is claude code','chatbot','glass box','vs code','where it lives','agentic loop','how it thinks','terminal','git'] },
-        { label: '2 · The Foundation', page: 'cc101-foundation', href: 'clo-course/cc101-2-foundation.html', keywords: ['tools','built-in tools','bash','permission','permissions','plan mode','modes','settings'] },
-        { label: '3 · Memory', page: 'cc101-memory', href: 'clo-course/cc101-3-memory.html', keywords: ['memory','claude.md','memory.md','hierarchy','context window','imports','remember'] },
-        { label: '4 · Skills', page: 'cc101-skills', href: 'clo-course/cc101-4-skills.html', keywords: ['skill','skills','playbook','frontmatter','build your first skill','slash command','arguments','refine','harness','harden','reliable','automatic check'] },
-        { label: '5 · Extending', page: 'cc101-extending', href: 'clo-course/cc101-5-extending.html', keywords: ['sub-agents','subagents','agents','parallel','mcp','connections'] },
-        { label: '6 · Hooks', page: 'cc101-hooks', href: 'clo-course/cc101-6-hooks.html', keywords: ['hooks','automatic','automation','autopilot','lifecycle','sequence diagram','events','stop','quality gate','triggers'] },
-        { label: '7 · The Whole Picture', page: 'cc101-whole', href: 'clo-course/cc101-7-whole-picture.html', keywords: ['lifecycle','everything in action','network','quick reference','cheat sheet','best practices'] },
-        { label: 'All-in-one page (reference)', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['overview','anatomy','ai employee','building blocks','fundamentals','basics','plain english','all in one','reference'] }
-      ]},
-      { group: 'Courses', items: [
-        { label: 'Business X-Ray', page: 'business-x-ray', href: 'clo-course/business-x-ray.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','swimlanes','process','assets','score','operating system'] },
-        { label: 'Skill Systems', page: 'meta-skill', href: 'meta-create-skill/index.html', keywords: ['create skill','build skill','meta','capture','automate','skill system','authoring'] }
+      // ── Reference: kept for people who want the courses, moved out of the build path (owner: "too course heavy").
+      //    Claude Code 101's 7 lessons collapse to the all-in-one page here; every lesson still surfaces in ⌘K search
+      //    via CLO_LESSON_INDEX below. Business X-Ray points at the deep wiki (the DOING version lives on the board).
+      { group: 'Reference', items: [
+        { label: 'Business X-Ray (deep wiki)', page: 'business-x-ray', href: 'clo-course/business-x-ray.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','swimlanes','process','assets','score','operating system','x-ray methodology','deep wiki'] },
+        { label: 'Skill Systems (course)', page: 'meta-skill', href: 'meta-create-skill/index.html', keywords: ['create skill','build skill','meta','capture','automate','skill system','authoring'] },
+        { label: 'Claude Code 101', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['claude code 101','what is claude code','memory','skills','hooks','mcp','agents','harness','fundamentals','basics','plain english','course','tools','permissions','extending'] }
       ]}
     ]
   }
