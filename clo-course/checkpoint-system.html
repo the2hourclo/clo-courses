@@ -126,17 +126,17 @@ var CONFIG = {
   color: '#f5a623',
   board: 'ai-employee-board.html',
   steps: [
-    { type:'video', title:'Build a skill system',
-      video:'',
-      body:'One skill does one task. A <strong>skill system</strong> chains several so the AI runs a whole job end to end. This is where a skill becomes an <strong>AI Employee</strong> that owns a function, not just a task.' },
+    { type:'video', title:'What a skill system is',
+      video:'', slotLabel:'🎬 Explainer — coming soon',
+      body:'One skill does one task. A <strong>skill system</strong> chains a few skills together so the AI runs a whole job end to end — that’s the moment a skill becomes an <strong>AI Employee</strong> that owns a function, not just a task. The skill that does this is <strong>build-skill-system</strong>: it maps the job, names every hand-off between steps, and builds the lead skill that runs the rest in order — so you don’t wire anything by hand.' },
 
-    { type:'build', title:'Wire skills into one system',
-      video:'',
-      body:'Take two or three skills from the same job and connect them into one flow, with a lead skill that calls the rest. Say <em>&ldquo;wire these into a skill system&rdquo;</em> and the AI builds the orchestration with you.' },
+    { type:'build', title:'Wire your skills into one system',
+      video:'', videoSlot:true, slotLabel:'🎬 Demo · watch me build one — coming soon',
+      body:'Take two or three skills from the same job and connect them into one flow, with a lead skill that calls the rest. Just say <em>&ldquo;build a skill system&rdquo;</em> (or <em>&ldquo;wire these into a skill system&rdquo;</em>) and the AI plans it with you, then builds the orchestration — <strong>you direct, it does the wiring</strong>.' },
 
     { type:'gate', title:'System runs a whole function',
       body:'Hand the system a real job from start to finish, and watch it run every step without you steering each one.',
-      gate:'Your skill system ran a <strong>complete function</strong> end to end on real work. When Claude confirms this, <strong>Make it run itself</strong> unlocks on your board.' }
+      gate:'Your skill system ran a <strong>complete function</strong> end to end on real work. When the AI confirms this, <strong>Make it run itself</strong> unlocks on your board.' }
   ]
 };
 
@@ -214,7 +214,7 @@ function render(){
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
-  else if (s.type==='video'){ h += '<div class="video-slot"><span>🎬 Video coming soon</span></div>'; }
+  else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
   if (s.body){ h += '<p>'+s.body+'</p>'; }
   if (s.command){ h += '<div class="cmd"><span class="txt">'+s.command+'</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'; }
   if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }

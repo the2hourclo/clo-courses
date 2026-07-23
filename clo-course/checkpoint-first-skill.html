@@ -127,19 +127,19 @@ var CONFIG = {
   board: 'ai-employee-board.html',
   steps: [
     { type:'video', title:'What is a skill',
-      video:'',
+      video:'', slotLabel:'📹 Explainer — coming soon',
       body:'A skill is a <strong>reusable playbook</strong> you write once so the AI does a task your way, every time. Same input, same quality, no re-explaining. It is the unit everything else here is built from.' },
 
     { type:'video', title:'The 3 levels of skills',
-      video:'',
+      video:'', slotLabel:'📹 Explainer — coming soon',
       body:'Skills come in three shapes. A <strong>simple</strong> one-file skill, one <strong>with workflows</strong> it loads only when needed, and an <strong>orchestrator</strong> that runs other skills. You start simple.' },
 
     { type:'video', title:'How to create a skill',
-      video:'',
-      body:'Creating a skill works like the X-Ray in reverse. The AI <strong>interviews you</strong> about how you do the task, writes the playbook, and wires in your own examples so the output sounds like you.' },
+      video:'', slotLabel:'📹 Explainer — coming soon',
+      body:'Creating a skill works like the X-Ray in reverse. The <strong>meta-create-skill</strong> skill <strong>interviews you</strong> about how you do the task, writes the playbook, and wires in your own examples so the output sounds like you.' },
 
     { type:'build', title:'Turn 1 real process into a skill',
-      video:'',
+      video:'', demoSlot:true, demoLabel:'🎬 Demo · watch me create one — coming soon',
       command:'/ai-employee-builder:meta-create-skill',
       body:'Pick <strong>one</strong> repetitive task from your X-Ray. Run the command above (or just say <em>&ldquo;build me a skill for this&rdquo;</em>). The AI interviews you, drafts the skill, and you refine it together until the output is right. <strong>You just answer its questions.</strong>' },
 
@@ -223,7 +223,9 @@ function render(){
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
-  else if (s.type==='video'){ h += '<div class="video-slot"><span>🎬 Video coming soon</span></div>'; }
+  else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
+  if (s.demo){ h += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
+  else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
   if (s.body){ h += '<p>'+s.body+'</p>'; }
   if (s.command){ h += '<div class="cmd"><span class="txt">'+s.command+'</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'; }
   if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
