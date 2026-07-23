@@ -15,6 +15,10 @@
   var PRODUCT_KEY = (params.get('product') === 'aieb' || document.body.getAttribute('data-product') === 'aieb') ? 'aieb' : 'clo';
   var P = window.CLO_PRODUCTS[PRODUCT_KEY];
   var STORAGE_KEY = P.storageKey;
+  // Surface-aware nav: on AIEB, hide items tagged for the OTHER surface
+  // (e.g. Claude Code 101 while building in Cowork). Undecided surface shows all.
+  var curSurface = null; try { curSurface = localStorage.getItem('aieb_surface'); } catch (e) {}
+  function surfaceOK(it) { if (!it || !it.surface) return true; if (PRODUCT_KEY !== 'aieb' || !curSurface) return true; return it.surface === curSurface; }
   var PAGE = document.body.getAttribute('data-page') || 'home';
   document.title = document.title || P.title;
 
@@ -179,12 +183,14 @@
     if (doc) doc.remove();
 
     var flat = [];
-    P.nav.forEach(function (g) { g.items.forEach(function (it) { flat.push(Object.assign({ group: g.group }, it)); }); });
+    P.nav.forEach(function (g) { g.items.filter(surfaceOK).forEach(function (it) { flat.push(Object.assign({ group: g.group }, it)); }); });
     var active = flat.filter(function (it) { return it.page === PAGE; })[0];
 
     var sidebar = P.nav.map(function (g) {
+      var gitems = g.items.filter(surfaceOK);
+      if (!gitems.length) return '';
       return '<div class="clo-nav-group"><div class="clo-nav-grouplabel">' + g.group + '</div>' +
-        g.items.map(function (it) {
+        gitems.map(function (it) {
           var isActive = it.page === PAGE;
           // active course with lessons → a collapsible group (click the row to fold/unfold)
           if (isActive && lessons && lessons.length) {
@@ -322,7 +328,7 @@
   }
   function searchItems() {
     var items = [];
-    P.nav.forEach(function (g) { g.items.forEach(function (it) {
+    P.nav.forEach(function (g) { g.items.filter(surfaceOK).forEach(function (it) {
       items.push({ type: 'Page', label: it.label, sub: it.group, keywords: it.keywords || [], act: { href: resolveHref(it.href) } });
     }); });
     // every course's lessons (global) — same-course lessons swap in place; others deep-link to their page

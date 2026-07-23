@@ -4,294 +4,275 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your AI Employee — Build Board</title>
-<meta name="description" content="Your whole build journey on one board. Each checkpoint is a column; finish its cards in Claude and the next checkpoint unlocks — no skipping ahead.">
+<meta name="description" content="Your whole build journey on one board — what to do next up top, every checkpoint below. Finish one and the next unlocks.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="journey.css">
 <style>
-body{min-height:100vh;background:radial-gradient(1200px 640px at 50% -260px,rgba(121,234,32,.06),transparent 70%),var(--bg)}
+body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba(121,234,32,.05),transparent 70%),var(--bg)}
 
-/* ── HEADER ── */
-.head{max-width:1180px;margin:0 auto;padding:26px 24px 4px;text-align:center}
-.brand-badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);padding:5px 12px;border-radius:30px;margin-bottom:14px}
-.head h1{font-family:var(--font-display);font-size:34px;font-weight:800;letter-spacing:-.8px;line-height:1.1;margin-bottom:11px}
-.head p{font-size:15.5px;color:var(--text-muted);max-width:640px;margin:0 auto;line-height:1.6}
-@media(max-width:640px){.head h1{font-size:26px}}
-
-/* surface toggle (Cowork vs Claude Code) — persisted for every checkpoint wizard */
-.surface-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px}
-.surface-label{font-size:12px;font-weight:700;color:var(--text-dim)}
+/* ── TOP BAR (brand + swappable surface toggle; no sidebar) ── */
+.topbar{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 24px 2px;flex-wrap:wrap}
+.brand{font-size:12px;font-weight:800;letter-spacing:.5px;color:var(--accent);display:inline-flex;align-items:center;gap:7px;text-transform:uppercase}
+.surf{display:inline-flex;align-items:center;gap:9px}
+.surf .surface-label{font-size:11.5px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:.3px}
 .surface-toggle{display:inline-flex;background:var(--surface);border:1px solid var(--border-2);border-radius:20px;padding:3px;gap:3px}
-.sbtn{font-family:var(--font-body);font-size:12px;font-weight:700;padding:5px 14px;border-radius:16px;border:0;background:transparent;color:var(--text-muted);cursor:pointer;transition:all .15s}
+.sbtn{font-family:var(--font-body);font-size:12px;font-weight:700;padding:5px 13px;border-radius:16px;border:0;background:transparent;color:var(--text-muted);cursor:pointer;transition:all .15s}
 .sbtn:hover{color:var(--text)}
 .sbtn.active{background:var(--accent-dim);color:var(--accent)}
 
-/* progress line */
-.prog{max-width:560px;margin:18px auto 0}
-.prog .bar{height:7px;border-radius:6px;background:var(--surface-3);overflow:hidden;margin-bottom:8px}
-.prog .fill{height:100%;width:0;background:linear-gradient(90deg,#4ade80,#5b9bff,#a78bfa,#f5a623,#f472b6,#fbbf24);border-radius:6px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
-.prog .t{font-size:12.5px;font-weight:600;color:var(--text-muted);text-align:center}
-.prog .t b{color:var(--accent)}
+/* ── OVERALL PROGRESS (toward a finished AI Employee) ── */
+.head{max-width:640px;margin:0 auto;padding:0 22px}
+.oprog{margin:16px auto 2px}
+.oprog-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;gap:12px}
+.oprog-label{font-family:var(--font-display);font-size:14px;font-weight:800;color:var(--text)}
+.oprog-pct{font-size:14px;font-weight:800;color:var(--accent)}
+.oprog-bar{height:9px;border-radius:6px;background:var(--surface-3);overflow:hidden}
+.oprog-fill{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,#4ade80,#5b9bff,#a78bfa,#f5a623,#f472b6,#fbbf24);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.oprog-next{margin-top:9px;font-size:13px;color:var(--text-muted);text-align:center}
+.oprog-next b{color:var(--text)}
 
-.note{max-width:820px;margin:20px auto 0;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);padding:12px 16px;font-size:13px;color:var(--text-muted);line-height:1.55}
-.note strong{color:#bff58a}
+/* ── "WHAT TO WORK ON NEXT" banner ── */
+.nextbar{max-width:640px;margin:18px auto 4px;background:linear-gradient(120deg,color-mix(in srgb,var(--nc) 17%,var(--surface)),var(--surface) 72%);border:1px solid color-mix(in srgb,var(--nc) 44%,transparent);border-radius:var(--radius-lg);padding:18px 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 16px 46px rgba(0,0,0,.38)}
+.nb-main{flex:1;min-width:210px}
+.nb-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--nc);margin-bottom:5px}
+.nb-title{font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-.4px;line-height:1.12}
+.nb-lead{font-size:13.5px;color:var(--text-muted);margin-top:6px;line-height:1.5}
+.nb-go{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:12px;background:var(--nc);color:#0a0a0a;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 12px 30px color-mix(in srgb,var(--nc) 30%,transparent);transition:filter .14s,transform .14s}
+.nb-go:hover{filter:brightness(1.07);transform:translateY(-1px);text-decoration:none;color:#0a0a0a}
 
-/* ── RESUME / CONTINUE CTA ── */
-.resume-wrap{max-width:820px;margin:20px auto 0;padding:0 24px}
-.resume-card{display:flex;align-items:center;gap:14px;background:linear-gradient(100deg,color-mix(in srgb,var(--cp) 15%,var(--surface)),var(--surface) 72%);border:1px solid color-mix(in srgb,var(--cp) 42%,transparent);border-radius:var(--radius-lg);padding:15px 20px;text-decoration:none;transition:transform .14s,box-shadow .14s,border-color .14s}
-a.resume-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--cp) 66%,transparent);box-shadow:0 14px 40px rgba(0,0,0,.4);text-decoration:none}
-.resume-ic{flex-shrink:0;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;background:color-mix(in srgb,var(--cp) 20%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 40%,transparent)}
-.resume-txt{display:flex;flex-direction:column;gap:2px;line-height:1.3;min-width:0}
-.resume-txt b{font-family:var(--font-display);font-size:15px;font-weight:800;color:var(--text)}
-.resume-txt span{font-size:13px;color:var(--text-muted)}
-.resume-arr{margin-left:auto;font-size:19px;font-weight:800;color:var(--cp);opacity:.7;transition:transform .14s,opacity .14s}
-a.resume-card:hover .resume-arr{opacity:1;transform:translateX(3px)}
-.resume-card.done{cursor:default}
+.map-label{max-width:1300px;margin:26px auto 0;padding:0 24px;font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--text-dim);text-align:center}
 
-/* ── BOARD ── */
-.board-wrap{overflow-x:auto;padding:22px 24px 60px}
-.board{display:flex;gap:13px;width:max-content;margin:0 auto}
-.col{flex:0 0 250px;width:250px;display:flex;flex-direction:column;gap:9px}
-.col-head{display:flex;align-items:center;gap:8px;padding:2px 4px 6px;position:sticky;top:0}
-.col-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display);font-size:13px;font-weight:800;letter-spacing:.2px;padding:4px 11px;border-radius:7px;background:color-mix(in srgb,var(--cp) 16%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 32%,transparent)}
+/* ── FULL BOARD — fits the width, no horizontal scrollbar ── */
+.board-wrap{padding:12px 24px 46px}
+.board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:11px;max-width:1300px;margin:0 auto;align-items:start}
+@media(max-width:1120px){.board{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.board{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.col{display:flex;flex-direction:column;gap:8px;min-width:0}
+.col-head{display:flex;align-items:center;gap:6px;padding:2px 2px 4px;flex-wrap:wrap}
+.col-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-display);font-size:12px;font-weight:800;padding:4px 9px;border-radius:7px;background:color-mix(in srgb,var(--cp) 16%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 32%,transparent);min-width:0}
+.col-pill span.nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 a.col-pill{cursor:pointer;text-decoration:none;transition:background .13s,border-color .13s}
 a.col-pill:hover{background:color-mix(in srgb,var(--cp) 28%,transparent);border-color:color-mix(in srgb,var(--cp) 55%,transparent);text-decoration:none}
-.col-pill .open{margin-left:2px;font-weight:800;opacity:.6;transition:opacity .13s,transform .13s}
-a.col-pill:hover .open{opacity:1;transform:translateX(2px)}
-.col.clickable .col-body{cursor:default}
-.col-pill .cdot{width:8px;height:8px;border-radius:50%;background:var(--cp)}
-.col-count{font-size:12px;font-weight:700;color:var(--text-dim)}
-.col-state{margin-left:auto;font-size:11px;font-weight:700}
+.col-pill .open{font-weight:800;opacity:.6}
+a.col-pill:hover .open{opacity:1}
+.col-pill .cdot{width:7px;height:7px;border-radius:50%;background:var(--cp);flex-shrink:0}
+.col-state{margin-left:auto;font-size:10.5px;font-weight:700;white-space:nowrap}
 .col-state.done{color:#4ade80}
 .col-state.active{color:var(--cp)}
 .col-state.locked{color:var(--text-dim)}
-
-.col-body{background:color-mix(in srgb,var(--cp) 5%,var(--surface));border:1px solid var(--border);border-top:3px solid var(--cp);border-radius:var(--radius-lg);padding:11px;display:flex;flex-direction:column;gap:11px;min-height:100px}
+.col-body{background:color-mix(in srgb,var(--cp) 5%,var(--surface));border:1px solid var(--border);border-top:3px solid var(--cp);border-radius:var(--radius-lg);padding:10px;display:flex;flex-direction:column;gap:9px;min-height:80px}
 .col.active .col-body{border-color:color-mix(in srgb,var(--cp) 40%,transparent);box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 0 1px color-mix(in srgb,var(--cp) 22%,transparent)}
-.col.locked .col-body{opacity:.72}
-
-/* ── CARDS ── */
-.kcard{background:var(--surface-2);border:1px solid var(--border-2);border-radius:10px;padding:13px 14px;transition:transform .13s,box-shadow .13s,border-color .13s;box-shadow:0 1px 3px rgba(0,0,0,.35)}
-.kcard:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--cp) 34%,var(--border-2));box-shadow:0 8px 22px rgba(0,0,0,.42)}
-.kcard .ktitle{font-size:14px;font-weight:600;color:var(--text);line-height:1.4;display:flex;gap:8px;align-items:flex-start}
-.kcard .kic{flex-shrink:0;font-size:15px;line-height:1.34}
+.col.locked .col-body{opacity:.7}
+.kcard{background:var(--surface-2);border:1px solid var(--border-2);border-radius:9px;padding:10px 11px;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.kcard .ktitle{font-size:13px;font-weight:600;color:var(--text);line-height:1.35;display:flex;gap:7px;align-items:flex-start}
+.kcard .kic{flex-shrink:0;font-size:14px;line-height:1.3}
 .kcard.is-done .ktitle{color:var(--text-muted)}
-.ktags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
-.tag{font-size:10.5px;font-weight:700;letter-spacing:.2px;padding:3px 9px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
-/* type tag (muted) */
+.ktags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .tag.type{background:var(--surface-3);color:var(--text-muted);border:1px solid var(--border-2)}
-/* status tags — Notion-style colours */
-.tag.st-todo{background:rgba(158,163,160,.14);color:#b9beba}
 .tag.st-doing{background:rgba(91,155,255,.16);color:#8db4ff}
 .tag.st-done{background:rgba(74,222,128,.15);color:#6fe39a}
-.tag.st-todo::before{content:'○';font-size:9px}
 .tag.st-doing::before{content:'◐';font-size:9px}
 .tag.st-done::before{content:'●';font-size:9px}
 
-.footer{text-align:center;padding:8px 24px 50px;font-size:13px;color:var(--text-dim)}
+.footer{text-align:center;padding:6px 24px 54px;font-size:13px;color:var(--text-dim)}
 .footer a{font-weight:600}
+
+/* ── SURFACE GATE (first-time only) ── */
+.surface-gate{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(6,8,6,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.surface-gate[hidden]{display:none}
+.sg-card{max-width:440px;width:100%;background:var(--surface);border:1px solid var(--border-2);border-radius:var(--radius-lg);padding:30px 26px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+.sg-card .eyebrow{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--accent)}
+.sg-card h2{font-family:var(--font-display);font-size:23px;font-weight:800;margin:8px 0 6px}
+.sg-card p{color:var(--text-muted);font-size:14px;margin-bottom:20px}
+.sg-opts{display:flex;flex-direction:column;gap:11px}
+.sg-opts button{display:flex;flex-direction:column;gap:3px;text-align:left;padding:15px 18px;border-radius:12px;border:1px solid var(--border-2);background:var(--surface-2);color:var(--text);cursor:pointer;transition:all .14s;font-family:var(--font-body)}
+.sg-opts button:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface-2));transform:translateY(-1px)}
+.sg-opts b{font-size:15.5px;font-weight:800}
+.sg-opts span{font-size:13px;color:var(--text-muted);line-height:1.45}
 </style>
 </head>
 <body>
 
+<div class="topbar rise">
+  <span class="brand">🤖 AI Employee Builder</span>
+  <div class="surf" id="surfBar"></div>
+</div>
+
 <div class="head rise">
-  <span class="brand-badge">🤖 AI Employee Builder</span>
-  <h1>Your AI Employee — Build Board</h1>
-  <div class="surface-row">
-    <span class="surface-label">I build in:</span>
-    <div class="surface-toggle">
-      <button class="sbtn" id="sb-cowork" onclick="setSurface('cowork')">Cowork</button>
-      <button class="sbtn" id="sb-cc" onclick="setSurface('claude-code')">Claude Code</button>
-    </div>
-  </div>
+  <div class="oprog" id="oprog"></div>
 </div>
+<div class="rise" id="nextbar"></div>
 
-<div class="resume-wrap rise" id="resumeWrap" hidden></div>
+<div class="map-label rise">Your whole journey</div>
+<div class="board-wrap rise"><div class="board" id="board"></div></div>
 
-<div class="board-wrap rise">
-  <div class="board" id="board"></div>
-</div>
+<div class="footer">Questions? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Ask in the community ↗</a></div>
 
-<div class="footer">
-  New here? <a href="get-access-aieb.html">Start with Get Access →</a> &nbsp;·&nbsp; Questions? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Polynet community</a>
-</div>
+<div class="surface-gate" id="gate" hidden></div>
 
-<script src="progress.js"></script>
+<script src="progress.js?v=2"></script>
 <script>
 /* ──────────────────────────────────────────────────────────────
-   THE BOARD — one column per checkpoint (from the locked drawio
-   build-checkpoint map). Each card is a task inside that checkpoint
-   with a TYPE and a STATUS property. Order is fixed: finish a
-   checkpoint's cards to unlock the next one.
+   BOARD PAGE. Top: what to work on NEXT (from progress.js). Below:
+   the whole journey rendered to fit — no horizontal scrollbar. The
+   wizards stay full-focus (they never render this board).
    ────────────────────────────────────────────────────────────── */
-var TYPES = {
-  action: { label:'Action',      ic:'⚡' },
-  video:  { label:'Watch',       ic:'📹' },
-  build:  { label:'Build',       ic:'🔨' },
-  gate:   { label:'Done-signal', ic:'🎯' },
-  outcome:{ label:'Outcome',     ic:'🌟' }
+
+var FOCUS_LEAD = {
+  cp1:'Map how your business runs today and find the one job worth handing off first. You just answer its questions.',
+  cp2:'Take that one job and turn it into a reusable skill — the AI does it your way, every time.',
+  cp3:'Chain a few skills into a system that runs a whole function from start to finish.',
+  cp4:'Add the guardrails and a schedule so it runs on its own and gets sharper when you correct it.'
 };
 
+var TYPES = {
+  action:{ label:'Action', ic:'⚡' }, video:{ label:'Watch', ic:'📹' },
+  build:{ label:'Build', ic:'🔨' }, gate:{ label:'Done-signal', ic:'🎯' }, outcome:{ label:'Outcome', ic:'🌟' }
+};
 var BOARD = [
-  { id:'setup', name:'Set up', color:'#4ade80', state:'done', cards:[
-    { t:'Join the community',            type:'action', status:'done' },
-    { t:'Install the plugin + connect',  type:'action', status:'done' },
-    { t:'Onboard — run /setup-aieb',     type:'action', status:'done' },
-    { t:'Welcome — what you just built', type:'video',  status:'done' }
+  { id:'setup', name:'Get set up', color:'#4ade80', cards:[
+    { t:'Join the community', type:'action' },
+    { t:'Install the plugin + connect', type:'action' },
+    { t:'Onboard — run /setup-aieb', type:'action' },
+    { t:'Welcome — what you just built', type:'video' }
   ]},
-  { id:'cp1', name:'Map the business', color:'#5b9bff', state:'active', cards:[
-    { t:'Set up Draw.io — connector + app',         type:'build', status:'todo' },
-    { t:'Why the X-Ray interview works',            type:'video', status:'todo' },
-    { t:'See a full X-Ray in action (optional)',    type:'video', status:'todo' },
-    { t:'Run your Business X-Ray',                  type:'build', status:'doing' },
-    { t:'X-Ray map exists + “N hrs/week” baseline', type:'gate',  status:'todo' }
+  { id:'cp1', name:'Map the business', color:'#5b9bff', cards:[
+    { t:'Set up Draw.io — connector + app', type:'build' },
+    { t:'Why the X-Ray interview works', type:'video' },
+    { t:'See a full X-Ray in action (optional)', type:'video' },
+    { t:'Run your Business X-Ray', type:'build' },
+    { t:'X-Ray map exists + “N hrs/week” baseline', type:'gate' }
   ]},
-  { id:'cp2', name:'Your first skill', color:'#a78bfa', state:'locked', cards:[
-    { t:'What is a skill',                 type:'video', status:'todo' },
-    { t:'The 3 levels of skills',          type:'video', status:'todo' },
-    { t:'How to create a skill',           type:'video', status:'todo' },
-    { t:'Turn 1 real process into a skill',type:'build', status:'todo' },
-    { t:'Skill ran once on real data',     type:'gate',  status:'todo' }
+  { id:'cp2', name:'Your first skill', color:'#a78bfa', cards:[
+    { t:'What is a skill', type:'video' },
+    { t:'The 3 levels of skills', type:'video' },
+    { t:'How to create a skill', type:'video' },
+    { t:'Turn 1 real process into a skill', type:'build' },
+    { t:'Skill ran once on real data', type:'gate' }
   ]},
-  { id:'cp3', name:'A skill system', color:'#f5a623', state:'locked', cards:[
-    { t:'Build a skill system',        type:'video', status:'todo' },
-    { t:'Wire skills into one system', type:'build', status:'todo' },
-    { t:'System runs a whole function',type:'gate',  status:'todo' }
+  { id:'cp3', name:'A skill system', color:'#f5a623', cards:[
+    { t:'Build a skill system', type:'video' },
+    { t:'Wire skills into one system', type:'build' },
+    { t:'System runs a whole function', type:'gate' }
   ]},
-  { id:'cp4', name:'Make it run itself', color:'#f472b6', state:'locked', cards:[
-    { t:'Review + harden',                 type:'video', status:'todo' },
-    { t:'Build a harness',                 type:'video', status:'todo' },
-    { t:'Schedule it / autonomy',          type:'video', status:'todo' },
-    { t:'Run autonomously or self-improve',type:'build', status:'todo' },
-    { t:'It runs on its own',              type:'gate',  status:'todo' }
+  { id:'cp4', name:'Make it run itself', color:'#f472b6', cards:[
+    { t:'Review + harden', type:'video' },
+    { t:'Build a harness', type:'video' },
+    { t:'Schedule it / autonomy', type:'video' },
+    { t:'Run autonomously or self-improve', type:'build' },
+    { t:'It runs on its own', type:'gate' }
   ]},
-  { id:'goal', name:'Your AI Employee', color:'#fbbf24', state:'locked', cards:[
-    { t:'Runs (or self-improves)',            type:'outcome', status:'todo' },
-    { t:'Gets better every time you use it',  type:'outcome', status:'todo' }
+  { id:'goal', name:'Your AI Employee', color:'#fbbf24', cards:[
+    { t:'Runs (or self-improves)', type:'outcome' },
+    { t:'Gets better every time you use it', type:'outcome' }
   ]}
 ];
-
-/* ──────────────────────────────────────────────────────────────
-   Column states + card statuses are LIVE, driven by progress.js
-   (client-side localStorage): finishing a checkpoint marks it done,
-   which flips the next column from locked → active. The `state` and
-   `status` values authored in BOARD above are only the documented
-   just-onboarded starting point — they're recomputed at render.
-   FUTURE: swap the localStorage read inside progress.js for a live
-     GET https://aieb-gated-mcp.vercel.app/api/progress?key=<license>
-   driven by Claude's report_outcome done-signals (server truth).
-   ────────────────────────────────────────────────────────────── */
-
-// Being ON the board already means "to do" — so only In progress / Completed get a tag.
 var STATUS = { doing:'In progress', done:'Completed' };
+var WIZARDS = { setup:'get-access-aieb.html', cp1:'checkpoint-map.html?v=7', cp2:'checkpoint-first-skill.html', cp3:'checkpoint-system.html', cp4:'checkpoint-autonomy.html' };
 
-// Hub & spoke: each checkpoint opens its own wizard page. Locked checkpoints
-// aren't clickable (no skipping ahead). Add the rest as you build them this week.
-var WIZARDS = {
-  setup:'get-access-aieb.html',
-  cp1:'checkpoint-map.html?v=7', // cache-buster: bump when the wizard's steps change, so the board never opens a stale cached copy
+/* ---- SURFACE: swappable toggle + first-time gate ---- */
+function surfBarHTML(){
+  var cur = AIEB.getSurface();
+  function btn(k){ return '<button class="sbtn'+(cur===k?' active':'')+'" onclick="swapSurface(\''+k+'\')">'+AIEB.SURFACES[k].label+'</button>'; }
+  return '<span class="surface-label">Building in</span><div class="surface-toggle">'+btn('cowork')+btn('claude-code')+'</div>';
+}
+function paintSurf(){ document.getElementById('surfBar').innerHTML = surfBarHTML(); }
+function swapSurface(s){ AIEB.setSurface(s); paintSurf(); renderNext(); }
 
-  cp2:'checkpoint-first-skill.html',
-  cp3:'checkpoint-system.html',
-  cp4:'checkpoint-autonomy.html'
-};
+function gateHTML(){
+  return '<div class="sg-card">'+
+    '<div class="eyebrow">One quick thing</div>'+
+    '<h2>Where are you building?</h2>'+
+    '<p>Pick where you run Claude. You can switch anytime.</p>'+
+    '<div class="sg-opts">'+
+      '<button onclick="pickSurface(\'cowork\')"><b>Cowork</b><span>'+AIEB.SURFACES.cowork.blurb+'</span></button>'+
+      '<button onclick="pickSurface(\'claude-code\')"><b>Claude Code</b><span>'+AIEB.SURFACES['claude-code'].blurb+'</span></button>'+
+    '</div></div>';
+}
+function pickSurface(s){ AIEB.setSurface(s); document.getElementById('gate').hidden = true; renderAll(); }
+function maybeGate(){
+  var g = document.getElementById('gate');
+  if (!AIEB.getSurface()){ g.innerHTML = gateHTML(); g.hidden = false; }
+  else { g.hidden = true; }
+}
 
-function esc(s){ return (s||'').replace(/&(?![a-z#0-9]+;)/gi,'&amp;'); }
+/* ---- OVERALL PROGRESS ---- */
+function overallHTML(){
+  var o = AIEB.overall();
+  var label = o.complete ? 'Your AI Employee is built 🎉' : 'Progress to your AI Employee';
+  var nextLine = o.complete
+    ? 'All '+o.total+' steps complete.'
+    : 'Step '+(o.done+1)+' of '+o.total+' on the way to a finished AI Employee';
+  return '<div class="oprog-top"><span class="oprog-label">'+label+'</span><span class="oprog-pct">'+o.pct+'%</span></div>'+
+    '<div class="oprog-bar"><div class="oprog-fill" style="width:'+o.pct+'%"></div></div>'+
+    '<div class="oprog-next">'+nextLine+'</div>';
+}
 
+/* ---- WHAT TO WORK ON NEXT ---- */
+function nextbarHTML(){
+  var id = AIEB.activeId(), m = AIEB.META[id];
+  if (id==='goal'){
+    return '<div class="nextbar" style="--nc:#fbbf24">'+
+      '<div class="nb-main"><div class="nb-badge">🎉 You made it</div>'+
+      '<div class="nb-title">Your AI Employee is built</div>'+
+      '<div class="nb-lead">Every step is complete — reopen any checkpoint below to refine it.</div></div></div>';
+  }
+  var isSetup = id==='setup';
+  var lead = isSetup ? 'Install Claude + the plugin and connect — one guided flow, about 30 minutes.' : (FOCUS_LEAD[id]||'');
+  var badge = isSetup ? 'Start here · step 1' : ('Next up · checkpoint '+AIEB.buildIndex(id)+' of 4');
+  var verb = isSetup ? 'Start setup' : (AIEB.stepInfo(id).pos>0 ? 'Continue' : 'Start this checkpoint');
+  return '<div class="nextbar" style="--nc:'+m.color+'">'+
+    '<div class="nb-main"><div class="nb-badge">'+badge+'</div>'+
+    '<div class="nb-title">'+m.name+'</div>'+
+    '<div class="nb-lead">'+lead+'</div></div>'+
+    '<a class="nb-go" href="'+(WIZARDS[id]||m.wizard)+'">'+verb+' →</a></div>';
+}
+function renderNext(){ document.getElementById('nextbar').innerHTML = nextbarHTML(); }
+
+/* ---- THE FULL BOARD ---- */
 function cardHTML(card, status){
-  status = status || card.status;
   var ty = TYPES[card.type] || TYPES.action;
   var h = '<div class="kcard is-'+status+'">';
   h += '<div class="ktitle"><span class="kic">'+ty.ic+'</span><span>'+card.t+'</span></div>';
-  h += '<div class="ktags">';
-  h += '<span class="tag type">'+ty.label+'</span>';
+  h += '<div class="ktags"><span class="tag type">'+ty.label+'</span>';
   if (STATUS[status]) h += '<span class="tag st-'+status+'">'+STATUS[status]+'</span>';
   h += '</div></div>';
   return h;
 }
-
-/* Card statuses for a column, from its live state:
-   locked → all to-do · done → all completed · active → live-fill from the
-   wizard's saved step (aieb_ckpt_<id>_v4 / _n), so the board mirrors how far
-   through the checkpoint they actually are. */
 function colStatuses(col, state){
   var n = col.cards.length;
   if (state==='locked') return col.cards.map(function(){ return 'todo'; });
   if (state==='done')   return col.cards.map(function(){ return 'done'; });
-  var info = window.AIEB ? AIEB.stepInfo(col.id) : { pos:0, total:0 };
-  var total = info.total || n;
+  var info = AIEB.stepInfo(col.id), total = info.total || n;
   var doneCount = total>0 ? Math.round(info.pos/total*n) : 0;
   doneCount = Math.max(0, Math.min(n, doneCount));
-  if (doneCount>=n) doneCount = n-1;            // an active column always shows one card in progress
+  if (doneCount>=n) doneCount = n-1;
   return col.cards.map(function(c,i){ return i<doneCount ? 'done' : (i===doneCount ? 'doing' : 'todo'); });
 }
-
 function colHTML(col){
-  var state = window.AIEB ? AIEB.stateOf(col.id) : col.state;
-  var statuses = colStatuses(col, state);
+  var state = AIEB.stateOf(col.id), statuses = colStatuses(col, state);
   var stateLabel = state==='done' ? '✓ Done' : state==='active' ? '● Now' : '🔒 Locked';
-  var wiz = WIZARDS[col.id];
-  var clickable = (state==='active' || state==='done') && wiz;
-  var pillInner = '<span class="cdot"></span>'+col.name;
-  var h = '<div class="col '+state+(clickable?' clickable':'')+'" style="--cp:'+col.color+'">';
-  h += '<div class="col-head">';
-  h += clickable
-    ? '<a class="col-pill" href="'+wiz+'" title="Open the '+col.name+' wizard">'+pillInner+'<span class="open">→</span></a>'
-    : '<span class="col-pill">'+pillInner+'</span>';
-  h += '<span class="col-count">'+col.cards.length+'</span>';
-  h += '<span class="col-state '+state+'">'+stateLabel+'</span>';
-  h += '</div>';
-  h += '<div class="col-body">'+col.cards.map(function(c,i){ return cardHTML(c, statuses[i]); }).join('')+'</div>';
-  h += '</div>';
+  var wiz = WIZARDS[col.id], clickable = (state==='active' || state==='done') && wiz;
+  var pillInner = '<span class="cdot"></span><span class="nm">'+col.name+'</span>';
+  var h = '<div class="col '+state+'" style="--cp:'+col.color+'"><div class="col-head">';
+  h += clickable ? '<a class="col-pill" href="'+wiz+'">'+pillInner+'<span class="open">→</span></a>' : '<span class="col-pill">'+pillInner+'</span>';
+  h += '<span class="col-state '+state+'">'+stateLabel+'</span></div>';
+  h += '<div class="col-body">'+col.cards.map(function(c,i){ return cardHTML(c, statuses[i]); }).join('')+'</div></div>';
   return h;
 }
+function renderMap(){ document.getElementById('board').innerHTML = BOARD.map(colHTML).join(''); }
 
-/* "Continue where you left off" — jumps to the active checkpoint's wizard,
-   which itself resumes at the saved step. Hidden until they've started. */
-function renderResume(){
-  var wrap = document.getElementById('resumeWrap');
-  if (!wrap || !window.AIEB) return;
-  if (!AIEB.started()){ wrap.hidden = true; return; }
-  var r = AIEB.resume();
-  if (r.atGoal){
-    wrap.innerHTML = '<div class="resume-card done" style="--cp:#fbbf24">'+
-      '<span class="resume-ic">🎉</span>'+
-      '<div class="resume-txt"><b>You’ve built your AI Employee</b>'+
-      '<span>Every checkpoint is complete. Reopen any column below to refine it.</span></div></div>';
-    wrap.hidden = false; return;
-  }
-  var href = WIZARDS[r.id] || (AIEB.META[r.id] && AIEB.META[r.id].wizard) || '#';
-  var verb = r.step>0 ? 'Continue where you left off' : 'Pick up your next step';
-  wrap.innerHTML = '<a class="resume-card" style="--cp:'+r.color+'" href="'+href+'">'+
-    '<span class="resume-ic">▶</span>'+
-    '<div class="resume-txt"><b>'+verb+'</b><span>'+r.name+'</span></div>'+
-    '<span class="resume-arr">→</span></a>';
-  wrap.hidden = false;
+function renderAll(){
+  maybeGate();
+  paintSurf();
+  document.getElementById('oprog').innerHTML = overallHTML();
+  renderNext();
+  renderMap();
 }
-
-function render(){
-  document.getElementById('board').innerHTML = BOARD.map(colHTML).join('');
-  renderResume();
-}
-
-/* Surface (Cowork vs Claude Code) — persisted; the checkpoint wizards read the
-   same key and swap their surface-specific steps (e.g. how Draw.io connects). */
-var SURFACE_STORE = 'aieb_surface';
-var surface = 'cowork';
-try { var ss = localStorage.getItem(SURFACE_STORE); if (ss==='cowork'||ss==='claude-code') surface = ss; } catch(e){}
-function setSurface(s){
-  surface = s;
-  try { localStorage.setItem(SURFACE_STORE, s); } catch(e){}
-  paintSurface();
-}
-function paintSurface(){
-  document.getElementById('sb-cowork').classList.toggle('active', surface==='cowork');
-  document.getElementById('sb-cc').classList.toggle('active', surface==='claude-code');
-}
-
-render();
-paintSurface();
+renderAll();
 </script>
 </body>
 </html>

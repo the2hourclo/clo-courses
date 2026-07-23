@@ -677,7 +677,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <div class="finish" id="cwfinish">
       <h2>&#127881; You're all set</h2>
       <p>Your AI Employees are connected and onboarding is done. Now run your Business X-Ray. It maps how your business works and names the first work to hand off.</p>
-      <a class="finish-cta" href="checkpoint-map.html">&#128300; Start the Business X-Ray &#8594;</a>
+      <a class="finish-cta" href="checkpoint-map.html" onclick="if(window.AIEB)AIEB.markDone('setup')">&#128300; Start the Business X-Ray &#8594;</a>
     </div>
 
     <!-- CW OPTIONAL: DRAW.IO (after the payoff — nice to have, not gating) -->
@@ -1305,6 +1305,7 @@ function wizRender(){
     if (nav) nav.hidden=true;
     var fin=document.getElementById(wizTrackName==='cowork'?'cwfinish':'finish');
     if (fin){ fin.classList.add('wiz-visible','show'); }
+    if (window.AIEB) AIEB.markDone('setup'); // completing Get Access advances the board: Set up → Map the business
     if (wizTrackName==='cowork') document.getElementById('cowork').classList.add('wiz-visible');
     var rc=document.getElementById('roadmap-card'), cm=document.getElementById('community-card');
     if (rc) rc.classList.add('wiz-visible');
@@ -1463,8 +1464,9 @@ setInterval(function(){
   }
 })();
 </script>
-<script src="nav.js"></script>
+<script src="progress.js?v=2"></script>
+<script src="nav.js?v=2"></script>
 <script src="toc.js"></script>
-<script src="shell.js"></script>
+<script src="shell.js?v=2"></script>
 </body>
 </html>

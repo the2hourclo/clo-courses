@@ -64,11 +64,7 @@ window.CLO_PRODUCTS = {
     // dead placeholder with zeroed LS ids). If gating is ever wanted, re-add a
     // license block with the real store/product/variant ids and a checkout URL.
     community: { url: 'https://www.polynet.ai/c/ai-employee-builders', label: 'Community ↗', external: true },
-    onboarding: [
-      { label: 'Get access & set up', href: 'clo-course/get-access-aieb.html', hint: 'Install, connect, and onboard — one guided flow' },
-      { label: 'Open your Build Board', href: 'clo-course/ai-employee-board.html', hint: 'Your home base — the whole journey, one checkpoint at a time' },
-      { label: 'Join the community', href: 'https://www.polynet.ai/c/ai-employee-builders', hint: 'Meet the other builders' }
-    ],
+    // No bottom-right onboarding widget on AIEB — the board IS the checklist (removed to cut duplicate nav).
     nav: [
       { group: 'Get Started', items: [
         { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
@@ -81,7 +77,7 @@ window.CLO_PRODUCTS = {
       { group: 'Reference', items: [
         { label: 'Business X-Ray (deep wiki)', page: 'business-x-ray', href: 'clo-course/business-x-ray.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','swimlanes','process','assets','score','operating system','x-ray methodology','deep wiki'] },
         { label: 'Skill Systems (course)', page: 'meta-skill', href: 'meta-create-skill/index.html', keywords: ['create skill','build skill','meta','capture','automate','skill system','authoring'] },
-        { label: 'Claude Code 101', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['claude code 101','what is claude code','memory','skills','hooks','mcp','agents','harness','fundamentals','basics','plain english','course','tools','permissions','extending'] }
+        { label: 'Claude Code 101', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', surface: 'claude-code', keywords: ['claude code 101','what is claude code','memory','skills','hooks','mcp','agents','harness','fundamentals','basics','plain english','course','tools','permissions','extending'] }
       ]}
     ]
   }
