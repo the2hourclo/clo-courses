@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="journey.css">
+<link rel="stylesheet" href="journey.css?v=3">
 <style>
 body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba(121,234,32,.05),transparent 70%),var(--bg)}
 
@@ -29,12 +29,12 @@ body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba
 .oprog-label{font-family:var(--font-display);font-size:14px;font-weight:800;color:var(--text)}
 .oprog-pct{font-size:14px;font-weight:800;color:var(--accent)}
 .oprog-bar{height:9px;border-radius:6px;background:var(--surface-3);overflow:hidden}
-.oprog-fill{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,#4ade80,#5b9bff,#a78bfa,#f5a623,#f472b6,#fbbf24);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.oprog-fill{height:100%;width:0;border-radius:6px;background:var(--accent);transition:width .6s cubic-bezier(.2,.8,.2,1)}
 .oprog-next{margin-top:9px;font-size:13px;color:var(--text-muted);text-align:center}
 .oprog-next b{color:var(--text)}
 
 /* ── "WHAT TO WORK ON NEXT" banner ── */
-.nextbar{max-width:640px;margin:18px auto 4px;background:linear-gradient(120deg,color-mix(in srgb,var(--nc) 17%,var(--surface)),var(--surface) 72%);border:1px solid color-mix(in srgb,var(--nc) 44%,transparent);border-radius:var(--radius-lg);padding:18px 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 16px 46px rgba(0,0,0,.38)}
+.nextbar{max-width:640px;margin:18px auto 4px;background:linear-gradient(120deg,color-mix(in srgb,var(--nc) 17%,var(--surface)),var(--surface) 72%);border:1px solid color-mix(in srgb,var(--nc) 44%,transparent);border-radius:var(--radius-lg);padding:18px 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:4px 5px 0 rgba(33,33,30,.1)}
 .nb-main{flex:1;min-width:210px}
 .nb-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--nc);margin-bottom:5px}
 .nb-title{font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-.4px;line-height:1.12}
@@ -93,6 +93,7 @@ a.col-pill:hover .open{opacity:1}
 .sg-opts b{font-size:15.5px;font-weight:800}
 .sg-opts span{font-size:13px;color:var(--text-muted);line-height:1.45}
 </style>
+<link rel="stylesheet" href="excalifont.css">
 </head>
 <body>
 

@@ -4,20 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Business X-Ray Skill — Interactive Course</title>
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="tokens.css?v=3">
+<link rel="stylesheet" href="shell.css?v=3">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
---bg:#0d0d0d;--surface:#131313;--surface-2:#181818;--surface-3:#1f1f1f;
---border:#1e1e1e;--border-2:#2a2a2a;--border-3:#333;
---text:#e4e5ef;--text-muted:#9ea3ba;--text-dim:#4a4d60;
---accent:#79EA20;--accent-dim:rgba(121,234,32,.12);--accent-border:rgba(121,234,32,.35);
---ann-red:#FF6B6B;--ann-orange:#FFA500;--ann-green:#90EE90;--ann-purple:#9370DB;
---score-green:#4ade80;--score-green-bg:rgba(74,222,128,.08);
---score-yellow:#fde68a;--score-yellow-bg:rgba(253,230,138,.08);
---score-red:#f87171;--score-red-bg:rgba(248,113,113,.08);
---tier-critical:#FF6B6B;--tier-important:#FFA500;--tier-secondary:#4a4d60;
+/* white-excali skin (2026-07-23) — paper/ink/green; score/tier/annotation = muted earth tones on cream */
+--bg:#FAFAFA;--surface:#FFFFFF;--surface-2:#F4F4F0;--surface-3:#EFEFE9;
+--border:#ECECE6;--border-2:#E2E2DC;--border-3:#D4D4CC;--border-ink:#21211E;
+--text:#21211E;--text-muted:#5F5F57;--text-dim:#9A9A90;
+--accent:#2D8C3C;--accent-dim:#EAF4EC;--accent-border:#2D8C3C;
+--ann-red:#B3402A;--ann-orange:#B26B00;--ann-green:#2D8C3C;--ann-purple:#6B5BA8;
+--score-green:#2D8C3C;--score-green-bg:#EAF4EC;
+--score-yellow:#B26B00;--score-yellow-bg:#FBF1E0;
+--score-red:#B3402A;--score-red-bg:#F7E9E5;
+--tier-critical:#B3402A;--tier-important:#B26B00;--tier-secondary:#9A9A90;
+--ink:#21211E;--body-c:#3D3D38;--soft:#6B6B63;--card:#FFFFFF;--green:#2D8C3C;--green-soft:#EAF4EC;
+--font-accent:'Excalifont',"Segoe UI",system-ui,sans-serif;
 --sidebar-w:260px;--radius:8px;--radius-lg:12px;
 }
 html{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -310,6 +313,7 @@ svg text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 }
 
 </style>
+<link rel="stylesheet" href="excalifont.css">
 </head>
 <body hidden data-page="business-x-ray" data-shell="course">
 
@@ -1456,7 +1460,7 @@ function renderSynthesis() {
       <p style="font-size:14px;font-weight:600;margin-bottom:4px">A free 15-minute strategy call with Rashid</p>
       <p style="font-size:12px;color:var(--text-dim)">We'll review your X-Ray results together and map your next move.</p>
     </div>
-    <a href="https://the2hourman.notion.site/31b4289667b8801387dec44cb1438e3c?pvs=105" target="_blank" style="display:inline-block;background:var(--accent);color:#0a0a0a;font-weight:700;padding:10px 24px;border-radius:var(--radius);text-decoration:none;font-size:14px">Share Your Experience</a>
+    <a href="https://the2hourman.notion.site/31b4289667b8801387dec44cb1438e3c?pvs=105" target="_blank" style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:10px 24px;border-radius:var(--radius);text-decoration:none;font-size:14px">Share Your Experience</a>
     <p style="font-size:12px;color:var(--text-dim);margin-top:10px">Text testimonials welcome too &mdash; video unlocks the bonus call</p>
   </div>`;
 }
@@ -1709,7 +1713,7 @@ function renderNextStep() {
         'Learn the <strong>architecture</strong> so you can build your second, third, and fourth AI Employee on your own'
       ].map(b=>`<div style="display:flex;gap:10px;align-items:start"><span style="color:var(--accent);font-size:18px;line-height:1">&#10003;</span><span style="font-size:14px;line-height:1.6;color:var(--text-muted)">${b}</span></div>`).join('')}
     </div>
-    <a href="https://chiefleverageofficers.com/ai-employee-builders-invitation" target="_blank" style="display:inline-block;background:var(--accent);color:#0a0a0a;font-weight:700;padding:12px 28px;border-radius:var(--radius);text-decoration:none;font-size:15px">Read the Invitation &rarr;</a>
+    <a href="https://chiefleverageofficers.com/ai-employee-builders-invitation" target="_blank" style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:12px 28px;border-radius:var(--radius);text-decoration:none;font-size:15px">Read the Invitation &rarr;</a>
   </div>
 
   <div style="background:linear-gradient(135deg, rgba(74,222,128,0.08), rgba(74,222,128,0.02));border:2px solid var(--accent);border-radius:var(--radius-lg);padding:28px;margin-bottom:24px;text-align:center">

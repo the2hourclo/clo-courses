@@ -1,29 +1,41 @@
 /* journey.css — shared design system for the AI Employee journey pages (build board + checkpoint wizards). Single source of truth. */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0c0d0c;
-  --surface:#131413;
-  --surface-2:#191a19;
-  --surface-3:#202220;
-  --border:#1e201e;
-  --border-2:#2a2c2a;
-  --text:#e7e9e4;
-  --text-muted:#9ea3a0;
-  --text-dim:#5c605c;
-  --accent:#79EA20;
-  --accent-dim:rgba(121,234,32,.08);
-  --accent-border:rgba(121,234,32,.35);
+  /* white-excali skin (2026-07-23) — paper/ink/green, Segoe UI + Excalifont accents */
+  --bg:#FAFAFA;
+  --surface:#FFFFFF;
+  --surface-2:#F4F4F0;
+  --surface-3:#EFEFE9;
+  --border:#ECECE6;
+  --border-2:#E2E2DC;
+  --border-ink:#21211E;
+  --text:#21211E;
+  --text-muted:#6B6B63;
+  --text-dim:#9A9A90;
+  --accent:#2D8C3C;
+  --accent-hover:#256F30;
+  --accent-dim:#EAF4EC;
+  --accent-dim-2:#DDEEDF;
+  --accent-border:#2D8C3C;
+  --accent-ink:#FFFFFF;
   --cp:var(--accent);
   --radius:9px;
   --radius-lg:14px;
-  --font-display:'Bricolage Grotesque',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  --font-body:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --sketch:255px 15px 225px 15px/15px 225px 15px 255px;
+  --sketch-card:15px 4px 15px 4px;
+  --shadow-sketch:3px 4px 0 rgba(33,33,30,.08);
+  --shadow-sketch-strong:3px 4px 0 rgba(33,33,30,.55);
+  /* house aliases (so page CSS can use the white-excali names too) */
+  --paper:var(--bg); --ink:var(--text); --body:#3D3D38; --soft:var(--text-muted); --green:var(--accent); --green-soft:var(--accent-dim); --card:var(--surface);
+  --font-display:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-body:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
+  --font-accent:'Excalifont',"Segoe UI",system-ui,sans-serif;
   --font-mono:'SF Mono','Monaco','Consolas',monospace;
 }
 html{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:var(--cp);text-decoration:none}
 a:hover{text-decoration:underline}
 strong{font-weight:700;color:var(--text)}
-code{font-family:var(--font-mono);font-size:.9em;background:var(--surface-2);border:1px solid var(--border-2);border-radius:4px;padding:1px 6px;color:var(--cp)}
+code{font-family:var(--font-mono);font-size:.9em;background:var(--surface-2);border:1px solid var(--border-2);border-radius:4px;padding:1px 6px;color:#256F30}
 @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .rise{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}

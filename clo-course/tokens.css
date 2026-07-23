@@ -5,49 +5,57 @@
    existing page CSS keeps resolving with zero find-replace.
    ============================================================ */
 :root{
-  /* ── SURFACE LAYERS (000 brightest card → 400 deepest page) ── */
-  --bg-000:#1c201b;   /* raised card / hover surface */
-  --bg-100:#161916;   /* card / panel */
-  --bg-200:#121512;   /* sidebar, secondary panels */
-  --bg-300:#0e110e;   /* content surface */
-  --bg-400:#0b0d0b;   /* page background (canonical) */
-  --bg-code:#0a0c0a;  /* code well — always its own darkest surface */
+  /* ═══ WHITE-EXCALI SKIN (2026-07-23) — paper/ink/green, the site standard.
+     Token NAMES unchanged so every reference-page CSS keeps resolving; only VALUES
+     flipped dark→cream. Code wells stay dark (the sanctioned home for dark artifacts). ═══ */
 
-  /* ── TEXT LAYERS (100 strongest → 500 faintest) ── */
-  --text-100:#e9eae6;
-  --text-200:#c8cabf;
-  --text-300:#9ea3ba;
-  --text-400:#6c7184;
-  --text-500:#4a4d60;
+  /* ── SURFACE LAYERS (000 whitest card → 400 paper page) ── */
+  --bg-000:#FFFFFF;   /* raised card / hover surface */
+  --bg-100:#FFFFFF;   /* card / panel */
+  --bg-200:#F4F4F0;   /* sidebar, secondary panels (faint cream) */
+  --bg-300:#FAFAFA;   /* content surface */
+  --bg-400:#FAFAFA;   /* page background (paper, canonical) */
+  --bg-code:#21211E;  /* code well — dark band (dark-artifact home on cream) */
 
-  /* ── BORDERS (hue-tinted hairlines) ── */
-  --border-100:#1c201c;
-  --border-200:#262b26;
-  --border-300:#333833;
+  /* ── TEXT LAYERS (100 ink strongest → 500 faintest) ── */
+  --text-100:#21211E;  /* ink — headings/strong */
+  --text-200:#3D3D38;  /* body prose */
+  --text-300:#5F5F57;  /* muted */
+  --text-400:#6B6B63;  /* soft — captions */
+  --text-500:#9A9A90;  /* faintest — labels */
 
-  /* ── ACCENT (CLO green — reserved for active states + primary CTA) ── */
-  --accent:#79EA20;
-  --accent-hover:#8af23a;
-  --accent-ink:#0a0c0a;
-  --accent-dim:rgba(121,234,32,.10);
-  --accent-dim-2:rgba(121,234,32,.16);
-  --accent-border:rgba(121,234,32,.35);
-  --accent-ring:rgba(121,234,32,.45);
+  /* ── BORDERS (subtle → visible cream hairlines; prominent ink is --ink/--border-ink) ── */
+  --border-100:#ECECE6;   /* subtlest hairline (most components) */
+  --border-200:#E2E2DC;   /* light divider */
+  --border-300:#D4D4CC;   /* most visible cream line / dashed */
+  --border-ink:#21211E;   /* prominent 2px card + button border (opt-in) */
 
-  /* ── SEMANTIC (callouts / scores / annotations — defined ONCE) ── */
-  --note:#9ea3ba;     --note-bg:rgba(158,163,186,.08);
-  --tip:#79EA20;      --tip-bg:rgba(121,234,32,.10);
-  --warn:#f59e0b;     --warn-bg:rgba(245,158,11,.10);
-  --danger:#f87171;   --danger-bg:rgba(248,113,113,.10);
-  --info:#3b82f6;     --info-bg:rgba(59,130,246,.10);
-  --score-green:#4ade80; --score-yellow:#fde68a; --score-red:#f87171;
-  --ann-red:#FF6B6B; --ann-orange:#FFA500; --ann-green:#90EE90; --ann-purple:#9370DB;
+  /* ── ACCENT (CLO green — the ONLY accent) ── */
+  --accent:#2D8C3C;
+  --accent-hover:#256F30;
+  --accent-ink:#FFFFFF;             /* text ON green */
+  --accent-text:#7BD389;            /* green on a DARK band/code well */
+  --accent-dim:#EAF4EC;             /* green-soft tint */
+  --accent-dim-2:#DDEEDF;           /* deeper green tint */
+  --accent-border:#2D8C3C;
+  --accent-ring:rgba(45,140,60,.35);
 
-  /* ── RADIUS (inline / control / container) ── */
+  /* ── SEMANTIC (green-first; muted earth tones only where semantics need it) ── */
+  --note:#6B6B63;     --note-bg:#F2F2EE;
+  --tip:#2D8C3C;      --tip-bg:#EAF4EC;
+  --warn:#B26B00;     --warn-bg:#FBF1E0;
+  --danger:#B3402A;   --danger-bg:#F7E9E5;
+  --info:#2D8C3C;     --info-bg:#EAF4EC;
+  --score-green:#2D8C3C; --score-yellow:#B26B00; --score-red:#B3402A;
+  --ann-red:#B3402A; --ann-orange:#c2410c; --ann-green:#2D8C3C; --ann-purple:#6B6B63;
+
+  /* ── RADIUS (symmetric tokens kept safe; sketch shapes opt-in) ── */
   --radius-sm:6px;
   --radius:12px;
   --radius-lg:16px;
   --radius-full:9999px;
+  --sketch:255px 15px 225px 15px/15px 225px 15px 255px;   /* button wobble */
+  --sketch-card:15px 4px 15px 4px;                        /* house card corners */
 
   /* ── SPACING ── */
   --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px;
@@ -60,28 +68,35 @@
   --content-max:760px;
   --container-max:1500px;
 
-  /* ── TYPE (system fonts — DECIDED: no webfonts) ── */
-  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  /* ── TYPE (Segoe UI for reading, Excalifont for ACCENTS only) ── */
+  --font-body:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
   --font-display:var(--font-body);
+  --font-accent:'Excalifont',"Segoe UI",system-ui,sans-serif;
   --font-mono:'SF Mono','Monaco','Consolas',ui-monospace,monospace;
   --t-eyebrow:12px; --t-h1:30px; --t-h2:22px; --t-h3:18px;
   --t-body:16px; --t-small:14px; --t-code:13.5px;
   --lh-body:1.6; --lh-tight:1.25;
 
-  /* ── ELEVATION (rings, not shadows) ── */
-  --ring:0 0 0 1px var(--border-100);
+  /* ── ELEVATION (hand-drawn hard-offset shadows) ── */
+  --ring:0 0 0 1px var(--border-200);
   --ring-focus:0 0 0 2px var(--accent-ring);
+  --shadow-sketch:3px 4px 0 rgba(33,33,30,.08);
+  --shadow-sketch-strong:3px 4px 0 rgba(33,33,30,.55);
 
   /* ════ LEGACY ALIASES — keep existing page CSS resolving ════ */
   --bg:var(--bg-400);
   --surface:var(--bg-100);
-  --surface-2:var(--bg-000);
-  --surface-3:var(--bg-000);
+  --surface-2:var(--bg-200);
+  --surface-3:var(--bg-200);
   --border:var(--border-100);
   --border-2:var(--border-200);
   --border-3:var(--border-300);
   --text:var(--text-100);
-  --text-muted:var(--text-300);
+  --text-muted:var(--text-400);
   --text-dim:var(--text-500);
-  --red:var(--danger); --red-bg:var(--danger-bg); --red-border:rgba(248,113,113,.3);
+  --red:var(--danger); --red-bg:var(--danger-bg); --red-border:rgba(179,64,42,.3);
+
+  /* ── house aliases (white-excali names usable in page CSS) ── */
+  --paper:var(--bg-400); --ink:var(--text-100); --body:var(--text-200);
+  --soft:var(--text-400); --green:var(--accent); --green-soft:var(--accent-dim); --card:#FFFFFF;
 }
