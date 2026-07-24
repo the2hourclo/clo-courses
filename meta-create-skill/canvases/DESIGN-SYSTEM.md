@@ -2,7 +2,7 @@
 
 The single source of truth for every diagram in this canvas set. Every diagram — this
 video and all future ones — is built against these rules so the whole series reads as one
-system. Built with the `excali-graphic` skill (cream bg, real Excalifont, wobble-on-shapes-only,
+system. Built with the `excali-graphic` skill (white bg, real Excalifont, wobble-on-shapes-only,
 color-by-meaning). Render → gate (`excali-gate.py`, 0 hard) → `excali-reviewer` (PASS) → ship.
 
 ---
@@ -47,6 +47,26 @@ Whenever an individual subfolder is named or drawn, it ALWAYS gets its locked co
   (ink `rgb(33,33,33)`, bold) + a **`REQUIRED` badge**, never by stealing a subfolder color.
 - **Load-timing** (read-every-time vs read-on-demand) is encoded by **position + brackets/labels**,
   NOT by row hue — so it coexists with the subfolder legend on the same diagram (e.g. the anatomy tree).
+
+## 3b. The paper is WHITE (2026-07-24) — and the neutrals are grey, not beige
+
+The canvas set was repainted from cream to **white** so the slides dissolve into the white
+card they sit in inside the buyer portal's wizard (the slide viewer's frame is `#FFFFFF`).
+A beige rectangle floating on a white card is the exact thing this rules out.
+
+| Role | Use | Never |
+|---|---|---|
+| paper / `--bg` | `rgb(255,255,255)` | `rgb(250,249,245)` (the retired cream) |
+| dot grid texture | `rgb(224,224,222)` @ 0.5 opacity | any warm/beige dot |
+| hairline divider | `rgb(228,228,226)` | `rgb(220,218,210)` |
+| divider (heavier) | `rgb(223,223,221)` | `rgb(214,212,204)` |
+| neutral zone container | `rgb(225,225,223)` stroke | `rgb(216,214,206)` |
+| faint zone/row outline | `rgb(212,212,210)` · `rgb(217,217,215)` | any R>G>B neutral |
+
+**The rule:** a neutral is **grey** (R=G=B, or within 2) — never warm. A colour whose red
+channel sits meaningfully above its blue is either a *semantic* accent (the subfolder legend,
+red for failure, the tan sediment fill in `02-8-sediment`) or a mistake. Semantic warm colours
+are untouched by this rule; decorative ones are not allowed to be warm.
 
 ## 4. Other color meanings (reserved — do not repurpose)
 

@@ -1,17 +1,17 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
-:root{--bg:rgb(250,249,245);--ink:rgb(33,33,33);--dim:rgb(120,120,125);--red:rgb(214,69,58);--green:rgb(45,140,60);--amber:rgb(214,140,40);--blue:rgb(52,120,190);--purple:rgb(147,112,219);--sans:"Excalifont",Inter,system-ui,sans-serif;}
+:root{--bg:rgb(255,255,255);--ink:rgb(33,33,33);--dim:rgb(120,120,125);--red:rgb(214,69,58);--green:rgb(45,140,60);--amber:rgb(214,140,40);--blue:rgb(52,120,190);--purple:rgb(147,112,219);--sans:"Excalifont",Inter,system-ui,sans-serif;}
 *{box-sizing:border-box;margin:0;padding:0;}html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}svg{display:block;}text{font-family:var(--sans);}
 </style></head><body>
 <svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
-<pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+<pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
 </defs>
 <rect width="1600" height="1050" fill="var(--bg)"/><rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
 <!-- lane divider (plain, outside filter) -->
-<line x1="492" y1="576" x2="1560" y2="576" stroke="rgb(221,219,211)" stroke-width="2" stroke-dasharray="10 9"/>
+<line x1="492" y1="576" x2="1560" y2="576" stroke="rgb(229,229,227)" stroke-width="2" stroke-dasharray="10 9"/>
 
 <!-- ===== SHAPES (wobble) — NO text in here ===== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">

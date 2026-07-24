@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
-  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
   --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
@@ -16,7 +16,7 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
-  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
 </defs>
 
 <rect width="1600" height="1050" fill="var(--bg)"/>
@@ -53,7 +53,7 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
   <!-- =================================================================== -->
   <!-- CARD 1 — LEVEL 1 (lowest step)  x64..520  top340..880 -->
   <rect x="64" y="340" width="456" height="540" rx="22" stroke="var(--ink)" stroke-width="4.5" fill="rgba(0,0,0,0.012)"/>
-  <line x1="86" y1="480" x2="498" y2="480" stroke="rgb(210,208,200)" stroke-width="2"/>
+  <line x1="86" y1="480" x2="498" y2="480" stroke="rgb(224,224,222)" stroke-width="2"/>
   <!-- SKILL.md object (ink doc glyph) -->
   <rect x="198" y="596" width="44" height="54" rx="4" stroke="var(--ink)" stroke-width="3.5"/>
   <polyline points="230,596 230,608 242,608" stroke="var(--ink)" stroke-width="2.5"/>
@@ -66,7 +66,7 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
   <!-- =================================================================== -->
   <!-- CARD 2 — LEVEL 2 (middle step)  x572..1028  top274..880 -->
   <rect x="572" y="274" width="456" height="606" rx="22" stroke="var(--ink)" stroke-width="4.5" fill="rgba(0,0,0,0.012)"/>
-  <line x1="594" y1="414" x2="1006" y2="414" stroke="rgb(210,208,200)" stroke-width="2"/>
+  <line x1="594" y1="414" x2="1006" y2="414" stroke="rgb(224,224,222)" stroke-width="2"/>
   <!-- four subfolder legend glyphs (fixed colors + icons), one per row -->
   <!-- workflows/ = GREEN fork : row y=576, icon center ~703,568 -->
   <line x1="690" y1="568" x2="702" y2="568" stroke="var(--green)" stroke-width="3"/>
@@ -99,7 +99,7 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
   <!-- =================================================================== -->
   <!-- CARD 3 — LEVEL 3 (highest step)  x1080..1536  top208..880 -->
   <rect x="1080" y="208" width="456" height="672" rx="22" stroke="var(--ink)" stroke-width="4.5" fill="rgba(0,0,0,0.012)"/>
-  <line x1="1102" y1="348" x2="1514" y2="348" stroke="rgb(210,208,200)" stroke-width="2"/>
+  <line x1="1102" y1="348" x2="1514" y2="348" stroke="rgb(224,224,222)" stroke-width="2"/>
   <!-- orchestrator SKILL.md hub (ink doc glyph) -->
   <rect x="1126" y="424" width="44" height="54" rx="4" stroke="var(--ink)" stroke-width="3.5"/>
   <polyline points="1158,424 1158,436 1170,436" stroke="var(--ink)" stroke-width="2.5"/>

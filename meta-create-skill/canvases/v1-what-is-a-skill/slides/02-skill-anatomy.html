@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
-  --bg:rgb(250,249,245);  --ink:rgb(33,33,33);  --dim:rgb(120,120,125);
+  --bg:rgb(255,255,255);  --ink:rgb(33,33,33);  --dim:rgb(120,120,125);
   --green:rgb(45,140,60);  --blue:rgb(52,120,190);  --amber:rgb(214,140,40);  --purple:rgb(147,112,219);
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
@@ -17,7 +17,7 @@ svg{display:block;} text{font-family:var(--sans);}
     <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
-  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
 </defs>
 
 <rect width="1600" height="1050" fill="var(--bg)"/>
@@ -33,7 +33,7 @@ svg{display:block;} text{font-family:var(--sans);}
   <circle cx="331" cy="204" r="8" stroke="var(--dim)" stroke-width="3"/>
   <circle cx="361" cy="204" r="8" stroke="var(--dim)" stroke-width="3"/>
   <!-- title-bar divider -->
-  <line x1="273" y1="240" x2="1327" y2="240" stroke="rgb(214,212,204)" stroke-width="2.5"/>
+  <line x1="273" y1="240" x2="1327" y2="240" stroke="rgb(223,223,221)" stroke-width="2.5"/>
 
   <!-- continuous tree spine (bridges the gaps between the box-drawing connectors) -->
   <line x1="331" y1="340" x2="331" y2="842" stroke="var(--dim)" stroke-width="2.5"/>

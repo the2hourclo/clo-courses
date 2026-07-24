@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
-  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
   --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
@@ -16,7 +16,7 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
-  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
 </defs>
 
 <rect width="1600" height="1050" fill="var(--bg)"/>
@@ -32,7 +32,7 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
   <circle cx="128" cy="226" r="7" stroke="var(--dim)" stroke-width="3"/>
   <circle cx="154" cy="226" r="7" stroke="var(--dim)" stroke-width="3"/>
   <!-- title-bar divider -->
-  <line x1="76" y1="256" x2="700" y2="256" stroke="rgb(214,212,204)" stroke-width="2.5"/>
+  <line x1="76" y1="256" x2="700" y2="256" stroke="rgb(223,223,221)" stroke-width="2.5"/>
   <!-- the single └── connector (only one child) -->
   <!-- REQUIRED badge frame (ink weight, never a subfolder color) -->
   <rect x="384" y="378" width="150" height="32" rx="8" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
@@ -79,7 +79,7 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 
   <!-- =============== BOTTOM: before / after (the one job in action) =============== -->
   <!-- grouping container -->
-  <rect x="70" y="706" width="1466" height="228" rx="20" stroke="rgb(216,214,206)" stroke-width="2" fill="rgba(0,0,0,0.010)"/>
+  <rect x="70" y="706" width="1466" height="228" rx="20" stroke="rgb(225,225,223)" stroke-width="2" fill="rgba(0,0,0,0.010)"/>
   <!-- input node (messy notes) -->
   <rect x="110" y="760" width="300" height="150" rx="14" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
   <!-- messy note lines (uneven = unstructured) -->
