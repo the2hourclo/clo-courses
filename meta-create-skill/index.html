@@ -20,9 +20,12 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 /* WHITE-EXCALI SKIN (2026-07-24) — token NAMES unchanged so all 378 lines of page CSS
    below keep resolving; only the VALUES flip dark→paper. Matches clo-course/journey.css.
-   ⚠ This flips the page CHROME only. 726 hardcoded colour attributes inside this file's
-   39 inline SVG diagrams do NOT read these tokens and are still dark-skin — see
-   HANDOFF-white-excali.md in this folder for the exact remaining work. */
+   The 39 inline SVG diagrams carry LITERAL colour attributes (they never read these
+   tokens); those were migrated to the same paper palette on 2026-07-24 as well.
+   Two graphics stay deliberately dark — the glyphShell terminal and the glyphTriggers
+   command bar — because a code well (--bg-code:#21211E) is the sanctioned home for a
+   dark artifact on cream. Green ON that dark band is #7BD389 (--accent-text), never
+   the page accent. Keep that carve-out if you touch these diagrams again. */
 :root{
 --bg:#FAFAFA;--surface:#FFFFFF;--surface-2:#F4F4F0;--surface-3:#EFEFE9;
 --border:#ECECE6;--border-2:#E2E2DC;--border-3:#D4D4CC;
@@ -116,7 +119,7 @@ code{background:var(--surface-3);padding:2px 6px;border-radius:4px;font-size:13p
 .matrix-table td.capability{font-weight:500;color:var(--text)}
 .matrix-table td.hl{background:var(--accent-dim)}
 .matrix-table tr:hover td{background:var(--surface-2)}
-.matrix-table tr:hover td.hl{background:rgba(121,234,32,.18)}
+.matrix-table tr:hover td.hl{background:rgba(45,140,60,.18)}
 .matrix-cell{font-weight:600;text-align:center;font-size:13px}
 .matrix-yes{color:var(--accent)}
 .matrix-no{color:var(--text-dim)}
@@ -135,9 +138,9 @@ code{background:var(--surface-3);padding:2px 6px;border-radius:4px;font-size:13p
 .type-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:all .2s}
 .type-card:hover{border-color:var(--accent-border);transform:translateY(-2px)}
 .type-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 10px;border-radius:12px;display:inline-block;margin-bottom:10px}
-.type-badge.simple{color:var(--green);background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3)}
-.type-badge.domain{color:var(--blue);background:rgba(91,156,246,.1);border:1px solid rgba(91,156,246,.3)}
-.type-badge.orch{color:var(--purple);background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.3)}
+.type-badge.simple{color:var(--green);background:rgba(45,140,60,.1);border:1px solid rgba(45,140,60,.3)}
+.type-badge.domain{color:var(--blue);background:rgba(59,111,176,.1);border:1px solid rgba(59,111,176,.3)}
+.type-badge.orch{color:var(--purple);background:rgba(107,70,193,.1);border:1px solid rgba(107,70,193,.3)}
 .type-card h4{font-size:16px;margin:0 0 10px}
 .type-card .tree{font-family:'SF Mono',Consolas,monospace;font-size:11px;line-height:1.5;background:var(--bg);border-radius:var(--radius);padding:10px;margin:12px 0;color:var(--text-muted);overflow-x:auto}
 .type-card .tree .fold{color:var(--yellow)}
@@ -153,7 +156,7 @@ code{background:var(--surface-3);padding:2px 6px;border-radius:4px;font-size:13p
 
 /* FOLDER TREE (L7, L14) */
 .folder-tree{font-family:'SF Mono',Consolas,monospace;font-size:12px;line-height:1.7;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:14px 0;color:var(--text-muted);overflow-x:auto;white-space:pre}
-.folder-tree .fold{color:#ffd700}
+.folder-tree .fold{color:#B26B00}
 .folder-tree .file{color:var(--text-muted)}
 .folder-tree .ann{color:var(--text-dim);font-style:italic;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
 
@@ -224,7 +227,7 @@ code{background:var(--surface-3);padding:2px 6px;border-radius:4px;font-size:13p
 @media(max-width:700px){.fw-grid{grid-template-columns:1fr}}
 
 /* STAGE TRIGGER (L12 progression) */
-.stage-trigger{display:flex;align-items:flex-start;gap:12px;padding:10px 16px;margin:0 0 10px 24px;font-size:13px;color:var(--text-muted);border-left:2px dashed var(--orange);background:rgba(255,165,0,.04);border-radius:0 var(--radius) var(--radius) 0}
+.stage-trigger{display:flex;align-items:flex-start;gap:12px;padding:10px 16px;margin:0 0 10px 24px;font-size:13px;color:var(--text-muted);border-left:2px dashed var(--orange);background:rgba(178,107,0,.04);border-radius:0 var(--radius) var(--radius) 0}
 .stage-trigger strong{color:var(--orange)}
 .stage-trigger .trigger-icon{color:var(--orange);font-weight:700;font-size:14px;line-height:1.4;flex-shrink:0}
 .stage-note{font-size:12px;color:var(--text-dim);font-style:italic;margin-top:10px !important;margin-bottom:0 !important}
@@ -250,17 +253,17 @@ code{background:var(--surface-3);padding:2px 6px;border-radius:4px;font-size:13p
 .yb-preview{padding:18px 20px;background:var(--bg);min-height:280px}
 .yb-preview-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-bottom:10px}
 .yb-preview pre{margin:0;font-family:'SF Mono',Consolas,monospace;font-size:12px;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-word}
-.yb-preview pre .yb-kw{color:#5b9cf6}
+.yb-preview pre .yb-kw{color:#3B6FB0}
 .yb-preview pre .yb-str{color:var(--accent)}
 .yb-preview pre .yb-cmt{color:var(--text-dim);font-style:italic}
 .yb-behavior{padding:14px 20px;border-top:1px solid var(--border);background:var(--surface-2)}
 .yb-behavior-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
 .yb-tag{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;font-family:'SF Mono',Consolas,monospace;border:1px solid;letter-spacing:.2px}
-.yb-tag.green{background:rgba(121,234,32,.1);color:var(--accent);border-color:rgba(121,234,32,.3)}
-.yb-tag.blue{background:rgba(91,156,246,.1);color:var(--blue);border-color:rgba(91,156,246,.3)}
-.yb-tag.purple{background:rgba(192,132,252,.1);color:var(--purple);border-color:rgba(192,132,252,.3)}
-.yb-tag.orange{background:rgba(255,165,0,.1);color:var(--orange);border-color:rgba(255,165,0,.3)}
-.yb-tag.red{background:rgba(255,107,107,.1);color:var(--red);border-color:rgba(255,107,107,.3)}
+.yb-tag.green{background:rgba(45,140,60,.1);color:var(--accent);border-color:rgba(45,140,60,.3)}
+.yb-tag.blue{background:rgba(59,111,176,.1);color:var(--blue);border-color:rgba(59,111,176,.3)}
+.yb-tag.purple{background:rgba(107,70,193,.1);color:var(--purple);border-color:rgba(107,70,193,.3)}
+.yb-tag.orange{background:rgba(178,107,0,.1);color:var(--orange);border-color:rgba(178,107,0,.3)}
+.yb-tag.red{background:rgba(179,64,42,.1);color:var(--red);border-color:rgba(179,64,42,.3)}
 .yb-tag.gray{background:var(--surface-3);color:var(--text-muted);border-color:var(--border-2)}
 .yb-explanation{font-size:12.5px;color:var(--text-muted);line-height:1.6}
 .yb-explanation code{background:var(--surface-3);padding:1px 6px;border-radius:3px;color:var(--accent)}
@@ -313,7 +316,7 @@ code{background:var(--surface-3);padding:2px 6px;border-radius:4px;font-size:13p
   padding:10px 14px;border-radius:6px;
   font-size:11.5px;color:var(--text);line-height:1.55;
   width:max-content;max-width:300px;white-space:normal;text-align:left;
-  z-index:100;box-shadow:0 6px 20px rgba(0,0,0,.55);
+  z-index:100;box-shadow:0 6px 20px rgba(33,33,30,.14);
   pointer-events:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-weight:400
 }
 .glyph-card[data-tip]:hover::before{
@@ -824,17 +827,17 @@ function setVal(id, text, lit){
 
 function glyphModel(model){
   const states = {
-    '':                   {fill:'none',    stroke:'#555',    opacity:0.55, scale:0.72, label:''},
-    'claude-haiku-4-5':   {fill:'rgba(91,156,246,0.35)',  stroke:'#5b9cf6', opacity:0.8,  scale:0.78},
-    'claude-sonnet-4-6':  {fill:'rgba(192,132,252,0.55)', stroke:'#c084fc', opacity:0.95, scale:0.9},
-    'claude-opus-4-7':    {fill:'url(#brainGradOpus)',    stroke:'#79EA20', opacity:1,    scale:1.05}
+    '':                   {fill:'none',    stroke:'#9A9A90',    opacity:0.55, scale:0.72, label:''},
+    'claude-haiku-4-5':   {fill:'rgba(59,111,176,0.35)',  stroke:'#3B6FB0', opacity:0.8,  scale:0.78},
+    'claude-sonnet-4-6':  {fill:'rgba(107,70,193,0.55)', stroke:'#6B46C1', opacity:0.95, scale:0.9},
+    'claude-opus-4-7':    {fill:'url(#brainGradOpus)',    stroke:'#2D8C3C', opacity:1,    scale:1.05}
   };
   const s = states[model] || states[''];
   return '<svg viewBox="0 0 120 90" width="140" height="95">'
     + '<defs><linearGradient id="brainGradOpus" x1="0" y1="0" x2="1" y2="1">'
-    + '<stop offset="0%" stop-color="#79EA20"/>'
-    + '<stop offset="60%" stop-color="#c084fc"/>'
-    + '<stop offset="100%" stop-color="#5b9cf6"/>'
+    + '<stop offset="0%" stop-color="#2D8C3C"/>'
+    + '<stop offset="60%" stop-color="#6B46C1"/>'
+    + '<stop offset="100%" stop-color="#3B6FB0"/>'
     + '</linearGradient></defs>'
     + '<g transform="translate(60,45) scale(' + s.scale + ')" opacity="' + s.opacity + '">'
     + '<ellipse cx="-14" cy="0" rx="24" ry="28" fill="' + s.fill + '" stroke="' + s.stroke + '" stroke-width="1.8"/>'
@@ -849,60 +852,60 @@ function glyphModel(model){
 
 function glyphEffort(effort){
   const levels = {'':0,'low':1,'medium':2,'high':4,'xhigh':5,'max':6};
-  const colors = ['#5b9cf6','#06b6d4','#22d3ee','#79EA20','#fbbf24','#FF6B6B'];
+  const colors = ['#3B6FB0','#0E7490','#2E9CB8','#2D8C3C','#B26B00','#B3402A'];
   const lit = levels[effort] || 0;
   let bars = '';
   for (let i = 0; i < 6; i++){
     const on = i < lit;
-    const color = on ? colors[i] : '#2a2a2a';
+    const color = on ? colors[i] : '#D4D4CC';
     const opacity = on ? '1' : '0.5';
     bars += '<rect x="' + (8 + i*18) + '" y="14" width="14" height="26" rx="2" fill="' + color + '" opacity="' + opacity + '"/>';
   }
   return '<svg viewBox="0 0 130 56" width="150" height="60">' + bars
-    + '<text x="65" y="52" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#9ea3ba" letter-spacing="1.5">POWER</text>'
+    + '<text x="65" y="52" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#6B6B63" letter-spacing="1.5">POWER</text>'
     + '</svg>';
 }
 
 function glyphFork(fork){
   if (!fork){
     return '<svg viewBox="0 0 150 64" width="165" height="70">'
-      + '<line x1="10" y1="32" x2="140" y2="32" stroke="#9ea3ba" stroke-width="2"/>'
-      + '<polygon points="134,28 140,32 134,36" fill="#9ea3ba"/>'
-      + '<circle cx="75" cy="32" r="9" fill="#181818" stroke="#79EA20" stroke-width="2"/>'
-      + '<text x="75" y="35" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">skill</text>'
-      + '<text x="75" y="56" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#9ea3ba">main context</text>'
+      + '<line x1="10" y1="32" x2="140" y2="32" stroke="#6B6B63" stroke-width="2"/>'
+      + '<polygon points="134,28 140,32 134,36" fill="#6B6B63"/>'
+      + '<circle cx="75" cy="32" r="9" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="2"/>'
+      + '<text x="75" y="35" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">skill</text>'
+      + '<text x="75" y="56" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#6B6B63">main context</text>'
       + '</svg>';
   }
   return '<svg viewBox="0 0 150 64" width="165" height="70">'
-    + '<line x1="10" y1="42" x2="66" y2="42" stroke="#9ea3ba" stroke-width="2"/>'
-    + '<line x1="84" y1="42" x2="140" y2="42" stroke="#9ea3ba" stroke-width="2"/>'
-    + '<polygon points="134,38 140,42 134,46" fill="#9ea3ba"/>'
-    + '<path d="M 75,42 Q 90,42 90,16 L 140,16" fill="none" stroke="#FFA500" stroke-width="2" stroke-dasharray="4 2"/>'
-    + '<polygon points="134,12 140,16 134,20" fill="#FFA500"/>'
-    + '<circle cx="75" cy="42" r="9" fill="#181818" stroke="#79EA20" stroke-width="2"/>'
-    + '<text x="75" y="45" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">skill</text>'
-    + '<text x="110" y="13" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#FFA500" font-weight="700">forked</text>'
-    + '<text x="42" y="58" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9ea3ba">main</text>'
+    + '<line x1="10" y1="42" x2="66" y2="42" stroke="#6B6B63" stroke-width="2"/>'
+    + '<line x1="84" y1="42" x2="140" y2="42" stroke="#6B6B63" stroke-width="2"/>'
+    + '<polygon points="134,38 140,42 134,46" fill="#6B6B63"/>'
+    + '<path d="M 75,42 Q 90,42 90,16 L 140,16" fill="none" stroke="#B26B00" stroke-width="2" stroke-dasharray="4 2"/>'
+    + '<polygon points="134,12 140,16 134,20" fill="#B26B00"/>'
+    + '<circle cx="75" cy="42" r="9" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="2"/>'
+    + '<text x="75" y="45" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">skill</text>'
+    + '<text x="110" y="13" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#B26B00" font-weight="700">forked</text>'
+    + '<text x="42" y="58" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B6B63">main</text>'
     + '</svg>';
 }
 
 function glyphAgent(agent, fork){
   if (!agent){
     return '<svg viewBox="0 0 150 70" width="165" height="75">'
-      + '<circle cx="75" cy="32" r="18" fill="none" stroke="#3a3a3a" stroke-width="1.5" stroke-dasharray="3 2"/>'
-      + '<text x="75" y="62" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#666">no subagent</text>'
+      + '<circle cx="75" cy="32" r="18" fill="none" stroke="#C4C4BB" stroke-width="1.5" stroke-dasharray="3 2"/>'
+      + '<text x="75" y="62" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#9A9A90">no subagent</text>'
       + '</svg>';
   }
   const icons = {
-    'general-purpose': {color:'#79EA20', inner:'<circle cx="75" cy="32" r="6" fill="#79EA20"/><circle cx="75" cy="32" r="10" fill="none" stroke="#79EA20" stroke-width="1" opacity="0.5"/>'},
-    'Explore':         {color:'#5b9cf6', inner:'<circle cx="72" cy="29" r="6" fill="none" stroke="#5b9cf6" stroke-width="2"/><line x1="77" y1="34" x2="83" y2="40" stroke="#5b9cf6" stroke-width="2" stroke-linecap="round"/>'},
-    'Plan':            {color:'#c084fc', inner:'<rect x="69" y="24" width="12" height="16" rx="1" fill="none" stroke="#c084fc" stroke-width="1.8"/><line x1="71" y1="28" x2="79" y2="28" stroke="#c084fc" stroke-width="1.2"/><line x1="71" y1="32" x2="79" y2="32" stroke="#c084fc" stroke-width="1.2"/><line x1="71" y1="36" x2="76" y2="36" stroke="#c084fc" stroke-width="1.2"/>'}
+    'general-purpose': {color:'#2D8C3C', inner:'<circle cx="75" cy="32" r="6" fill="#2D8C3C"/><circle cx="75" cy="32" r="10" fill="none" stroke="#2D8C3C" stroke-width="1" opacity="0.5"/>'},
+    'Explore':         {color:'#3B6FB0', inner:'<circle cx="72" cy="29" r="6" fill="none" stroke="#3B6FB0" stroke-width="2"/><line x1="77" y1="34" x2="83" y2="40" stroke="#3B6FB0" stroke-width="2" stroke-linecap="round"/>'},
+    'Plan':            {color:'#6B46C1', inner:'<rect x="69" y="24" width="12" height="16" rx="1" fill="none" stroke="#6B46C1" stroke-width="1.8"/><line x1="71" y1="28" x2="79" y2="28" stroke="#6B46C1" stroke-width="1.2"/><line x1="71" y1="32" x2="79" y2="32" stroke="#6B46C1" stroke-width="1.2"/><line x1="71" y1="36" x2="76" y2="36" stroke="#6B46C1" stroke-width="1.2"/>'}
   };
   const ic = icons[agent] || icons['general-purpose'];
-  const bubble = fork ? '<rect x="8" y="6" width="134" height="52" rx="26" fill="rgba(192,132,252,0.05)" stroke="#c084fc" stroke-dasharray="4 3" stroke-width="1" stroke-opacity="0.55"/>' : '';
+  const bubble = fork ? '<rect x="8" y="6" width="134" height="52" rx="26" fill="rgba(107,70,193,0.05)" stroke="#6B46C1" stroke-dasharray="4 3" stroke-width="1" stroke-opacity="0.55"/>' : '';
   return '<svg viewBox="0 0 150 70" width="165" height="75">'
     + bubble
-    + '<circle cx="75" cy="32" r="18" fill="#181818" stroke="' + ic.color + '" stroke-width="1.8"/>'
+    + '<circle cx="75" cy="32" r="18" fill="#FFFFFF" stroke="' + ic.color + '" stroke-width="1.8"/>'
     + ic.inner
     + '<text x="75" y="64" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" fill="' + ic.color + '" font-weight="700">' + agent + '</text>'
     + '</svg>';
@@ -917,14 +920,14 @@ function glyphTools(tools){
   let g = '';
   for (let i = 0; i < 6; i++){
     const on = allowed[i];
-    const border = on ? '#79EA20' : '#444';
-    const bg = on ? 'rgba(121,234,32,0.12)' : '#181818';
-    const txt = on ? '#79EA20' : '#555';
+    const border = on ? '#2D8C3C' : '#D4D4CC';
+    const bg = on ? 'rgba(45,140,60,0.12)' : '#FFFFFF';
+    const txt = on ? '#2D8C3C' : '#9A9A90';
     g += '<g>'
       + '<rect x="' + (6 + i*24) + '" y="14" width="20" height="24" rx="3" fill="' + bg + '" stroke="' + border + '" stroke-width="1.2"/>'
       + '<text x="' + (16 + i*24) + '" y="30" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="' + txt + '">' + labels[i] + '</text>';
     if (!on){
-      g += '<line x1="' + (6 + i*24) + '" y1="14" x2="' + (26 + i*24) + '" y2="38" stroke="#FF6B6B" stroke-width="1.5" opacity="0.9"/>';
+      g += '<line x1="' + (6 + i*24) + '" y1="14" x2="' + (26 + i*24) + '" y2="38" stroke="#B3402A" stroke-width="1.5" opacity="0.9"/>';
     }
     g += '</g>';
   }
@@ -932,13 +935,13 @@ function glyphTools(tools){
 }
 
 function glyphHooks(hooks){
-  const endColor = hooks ? '#c084fc' : '#555';
+  const endColor = hooks ? '#6B46C1' : '#9A9A90';
   const endRadius = hooks ? 7 : 4;
-  const label = hooks ? '<text x="132" y="14" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#c084fc" font-weight="700">Stop hook</text>' : '';
+  const label = hooks ? '<text x="132" y="14" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#6B46C1" font-weight="700">Stop hook</text>' : '';
   return '<svg viewBox="0 0 160 48" width="170" height="52">'
-    + '<line x1="14" y1="28" x2="146" y2="28" stroke="#444" stroke-width="2"/>'
-    + '<circle cx="14" cy="28" r="4" fill="#9ea3ba"/>'
-    + '<text x="14" y="44" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#9ea3ba">start</text>'
+    + '<line x1="14" y1="28" x2="146" y2="28" stroke="#D4D4CC" stroke-width="2"/>'
+    + '<circle cx="14" cy="28" r="4" fill="#6B6B63"/>'
+    + '<text x="14" y="44" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#6B6B63">start</text>'
     + '<circle cx="132" cy="28" r="' + endRadius + '" fill="' + endColor + '"' + (hooks ? ' stroke="#fff" stroke-width="1"' : '') + '/>'
     + label
     + '<text x="132" y="44" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="' + endColor + '">session end</text>'
@@ -947,23 +950,23 @@ function glyphHooks(hooks){
 
 function glyphRouting(disable, userinv){
   const autoOn = !disable;
-  const autoColor = autoOn ? '#79EA20' : '#FF6B6B';
+  const autoColor = autoOn ? '#2D8C3C' : '#B3402A';
   const autoOpacity = autoOn ? '1' : '0.7';
   const slashOn = userinv || disable;
-  const slashColor = slashOn ? '#5b9cf6' : '#444';
+  const slashColor = slashOn ? '#3B6FB0' : '#D4D4CC';
   const slashOpacity = slashOn ? '1' : '0.5';
   let x = '';
   if (!autoOn){
-    x = '<line x1="68" y1="10" x2="82" y2="24" stroke="#FF6B6B" stroke-width="2.5"/>'
-      + '<line x1="82" y1="10" x2="68" y2="24" stroke="#FF6B6B" stroke-width="2.5"/>';
+    x = '<line x1="68" y1="10" x2="82" y2="24" stroke="#B3402A" stroke-width="2.5"/>'
+      + '<line x1="82" y1="10" x2="68" y2="24" stroke="#B3402A" stroke-width="2.5"/>';
   }
   return '<svg viewBox="0 0 170 74" width="185" height="78">'
-    + '<rect x="6" y="8" width="42" height="18" rx="3" fill="#181818" stroke="#666"/>'
-    + '<text x="27" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#9ea3ba">prompt</text>'
-    + '<rect x="6" y="46" width="42" height="18" rx="3" fill="#181818" stroke="#666"/>'
-    + '<text x="27" y="58" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#9ea3ba">/slash</text>'
-    + '<rect x="118" y="26" width="44" height="22" rx="3" fill="rgba(121,234,32,0.1)" stroke="#79EA20"/>'
-    + '<text x="140" y="40" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#79EA20">skill</text>'
+    + '<rect x="6" y="8" width="42" height="18" rx="3" fill="#FFFFFF" stroke="#D4D4CC"/>'
+    + '<text x="27" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#6B6B63">prompt</text>'
+    + '<rect x="6" y="46" width="42" height="18" rx="3" fill="#FFFFFF" stroke="#D4D4CC"/>'
+    + '<text x="27" y="58" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#6B6B63">/slash</text>'
+    + '<rect x="118" y="26" width="44" height="22" rx="3" fill="rgba(45,140,60,0.1)" stroke="#2D8C3C"/>'
+    + '<text x="140" y="40" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#2D8C3C">skill</text>'
     + '<path d="M 48,17 Q 82,17 118,30" fill="none" stroke="' + autoColor + '" stroke-width="1.6" opacity="' + autoOpacity + '"/>'
     + '<polygon points="114,26 120,30 114,33" fill="' + autoColor + '" opacity="' + autoOpacity + '"/>'
     + x
@@ -984,8 +987,8 @@ function glyphPaths(paths){
     const y = 6 + i * 16;
     const hit = paths && f.match === paths;
     const dim = paths && !hit;
-    const color = hit ? '#79EA20' : (dim ? '#444' : '#9ea3ba');
-    const bg = hit ? 'rgba(121,234,32,0.1)' : 'transparent';
+    const color = hit ? '#2D8C3C' : (dim ? '#9A9A90' : '#6B6B63');
+    const bg = hit ? 'rgba(45,140,60,0.1)' : 'transparent';
     g += '<rect x="6" y="' + y + '" width="158" height="12" rx="2" fill="' + bg + '"/>'
       + '<text x="12" y="' + (y + 9) + '" font-family="SF Mono,Consolas,monospace" font-size="8" fill="' + color + '">' + (hit ? '● ' : '  ') + f.path + '</text>';
   });
@@ -995,12 +998,12 @@ function glyphPaths(paths){
 function glyphShell(shell){
   const isPs = shell === 'powershell';
   const prompt = isPs ? 'PS&gt;' : '$';
-  const color = isPs ? '#5b9cf6' : '#79EA20';
+  const color = isPs ? '#7FB2E8' : '#7BD389';
   return '<svg viewBox="0 0 170 62" width="185" height="66">'
-    + '<rect x="6" y="6" width="158" height="50" rx="5" fill="#0d0d0d" stroke="#2a2a2a"/>'
-    + '<circle cx="16" cy="15" r="2.5" fill="#FF6B6B"/>'
-    + '<circle cx="25" cy="15" r="2.5" fill="#fbbf24"/>'
-    + '<circle cx="34" cy="15" r="2.5" fill="#79EA20"/>'
+    + '<rect x="6" y="6" width="158" height="50" rx="5" fill="#21211E" stroke="#3A3A34"/>'
+    + '<circle cx="16" cy="15" r="2.5" fill="#F08A7A"/>'
+    + '<circle cx="25" cy="15" r="2.5" fill="#E3B341"/>'
+    + '<circle cx="34" cy="15" r="2.5" fill="#7BD389"/>'
     + '<text x="16" y="42" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="' + color + '">' + prompt + '</text>'
     + '<rect x="' + (isPs ? 50 : 30) + '" y="30" width="8" height="14" fill="' + color + '" opacity="0.85">'
     + '<animate attributeName="opacity" values="0.2;1;0.2" dur="1.4s" repeatCount="indefinite"/>'
@@ -1010,22 +1013,22 @@ function glyphShell(shell){
 
 function glyphTriggers(wtu, argOn, preset, presetName){
   const hint = argOn && preset.argHint ? ' ' + preset.argHint : '';
-  const hintColor = argOn ? '#fbbf24' : '#444';
+  const hintColor = argOn ? '#E3B341' : '#8A8A80';
   let bubbles = '';
   if (wtu && preset.whenToUse){
     const phrases = preset.whenToUse.split(',').slice(0, 3).map(p => p.trim().replace(/['"]/g, ''));
     phrases.forEach((p, i) => {
       const x = 8 + i * 115;
-      bubbles += '<rect x="' + x + '" y="58" width="106" height="20" rx="10" fill="rgba(91,156,246,0.08)" stroke="#5b9cf6" stroke-width="1"/>'
-        + '<text x="' + (x + 53) + '" y="71" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#5b9cf6">' + (p.length > 22 ? p.slice(0, 20) + '…' : p) + '</text>';
+      bubbles += '<rect x="' + x + '" y="58" width="106" height="20" rx="10" fill="rgba(59,111,176,0.08)" stroke="#3B6FB0" stroke-width="1"/>'
+        + '<text x="' + (x + 53) + '" y="71" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#3B6FB0">' + (p.length > 22 ? p.slice(0, 20) + '…' : p) + '</text>';
     });
   } else {
-    bubbles = '<text x="175" y="72" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" fill="#555">(description-only triggering)</text>';
+    bubbles = '<text x="175" y="72" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" fill="#9A9A90">(description-only triggering)</text>';
   }
   return '<svg viewBox="0 0 360 94" width="100%" height="100" preserveAspectRatio="xMidYMid meet">'
-    + '<rect x="6" y="10" width="348" height="34" rx="5" fill="#0d0d0d" stroke="#2a2a2a"/>'
+    + '<rect x="6" y="10" width="348" height="34" rx="5" fill="#21211E" stroke="#3A3A34"/>'
     + '<text x="16" y="32" font-family="SF Mono,Consolas,monospace" font-size="13">'
-    + '<tspan fill="#79EA20" font-weight="700">/' + presetName + '</tspan>'
+    + '<tspan fill="#7BD389" font-weight="700">/' + presetName + '</tspan>'
     + '<tspan fill="' + hintColor + '" font-weight="600">' + hint + '</tspan>'
     + '</text>'
     + bubbles
@@ -1158,22 +1161,22 @@ LESSON_CONTENT['welcome'] = `
 <svg class="exploded-view" viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" aria-label="The meta-create-skill-standalone folder with its seven workflow documents exploded outward">
   <defs>
     <linearGradient id="evFolderGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#79EA20"/>
-      <stop offset="100%" stop-color="#5cb818"/>
+      <stop offset="0%" stop-color="#2D8C3C"/>
+      <stop offset="100%" stop-color="#256F30"/>
     </linearGradient>
     <linearGradient id="evFolderTab" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#8ff030"/>
-      <stop offset="100%" stop-color="#79EA20"/>
+      <stop offset="0%" stop-color="#3FA24E"/>
+      <stop offset="100%" stop-color="#2D8C3C"/>
     </linearGradient>
     <radialGradient id="evGlow" cx="50%" cy="82%" r="48%">
-      <stop offset="0%" stop-color="#79EA20" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#79EA20" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#2D8C3C" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#2D8C3C" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
   <ellipse cx="450" cy="395" rx="370" ry="100" fill="url(#evGlow)"/>
 
-  <g stroke="#79EA20" stroke-opacity="0.32" stroke-width="1.2" stroke-dasharray="4 6" fill="none">
+  <g stroke="#2D8C3C" stroke-opacity="0.32" stroke-width="1.2" stroke-dasharray="4 6" fill="none">
     <path d="M 450,348 L 90,290"/>
     <path d="M 450,348 L 210,220"/>
     <path d="M 450,348 L 330,165"/>
@@ -1185,61 +1188,61 @@ LESSON_CONTENT['welcome'] = `
 
   <g font-family="SF Mono,Consolas,monospace">
     <g transform="translate(20, 220)">
-      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#181818" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <text x="60" y="30" text-anchor="middle" fill="#9ea3ba" font-size="8" font-weight="500" letter-spacing="1.5">BUILD</text>
-      <text x="60" y="48" text-anchor="middle" fill="#e4e5ef" font-size="11" font-weight="700">create-skill</text>
-      <line x1="16" y1="58" x2="96" y2="58" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <text x="60" y="30" text-anchor="middle" fill="#6B6B63" font-size="8" font-weight="500" letter-spacing="1.5">BUILD</text>
+      <text x="60" y="48" text-anchor="middle" fill="#21211E" font-size="11" font-weight="700">create-skill</text>
+      <line x1="16" y1="58" x2="96" y2="58" stroke="#E2E2DC" stroke-width="1"/>
     </g>
     <g transform="translate(140, 150)">
-      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#181818" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <text x="60" y="30" text-anchor="middle" fill="#9ea3ba" font-size="8" font-weight="500" letter-spacing="1.5">CHECK</text>
-      <text x="60" y="48" text-anchor="middle" fill="#e4e5ef" font-size="11" font-weight="700">validate-skill</text>
-      <line x1="16" y1="58" x2="96" y2="58" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <text x="60" y="30" text-anchor="middle" fill="#6B6B63" font-size="8" font-weight="500" letter-spacing="1.5">CHECK</text>
+      <text x="60" y="48" text-anchor="middle" fill="#21211E" font-size="11" font-weight="700">validate-skill</text>
+      <line x1="16" y1="58" x2="96" y2="58" stroke="#E2E2DC" stroke-width="1"/>
     </g>
     <g transform="translate(260, 95)">
-      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#181818" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <text x="60" y="30" text-anchor="middle" fill="#9ea3ba" font-size="8" font-weight="500" letter-spacing="1.5">EVAL</text>
-      <text x="60" y="48" text-anchor="middle" fill="#e4e5ef" font-size="11" font-weight="700">test-skill</text>
-      <line x1="16" y1="58" x2="96" y2="58" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <text x="60" y="30" text-anchor="middle" fill="#6B6B63" font-size="8" font-weight="500" letter-spacing="1.5">EVAL</text>
+      <text x="60" y="48" text-anchor="middle" fill="#21211E" font-size="11" font-weight="700">test-skill</text>
+      <line x1="16" y1="58" x2="96" y2="58" stroke="#E2E2DC" stroke-width="1"/>
     </g>
     <g transform="translate(380, 80)">
-      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#181818" stroke="#79EA20" stroke-opacity="0.7" stroke-width="1.5"/>
-      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#79EA20" stroke-opacity="0.7" stroke-width="1.5"/>
-      <text x="60" y="24" text-anchor="middle" fill="#9ea3ba" font-size="8" font-weight="500" letter-spacing="1.5">TRIGGER</text>
-      <text x="60" y="42" text-anchor="middle" fill="#e4e5ef" font-size="10.5" font-weight="700">optimize-</text>
-      <text x="60" y="56" text-anchor="middle" fill="#e4e5ef" font-size="10.5" font-weight="700">description</text>
+      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.7" stroke-width="1.5"/>
+      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#2D8C3C" stroke-opacity="0.7" stroke-width="1.5"/>
+      <text x="60" y="24" text-anchor="middle" fill="#6B6B63" font-size="8" font-weight="500" letter-spacing="1.5">TRIGGER</text>
+      <text x="60" y="42" text-anchor="middle" fill="#21211E" font-size="10.5" font-weight="700">optimize-</text>
+      <text x="60" y="56" text-anchor="middle" fill="#21211E" font-size="10.5" font-weight="700">description</text>
     </g>
     <g transform="translate(500, 95)">
-      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#181818" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <text x="60" y="30" text-anchor="middle" fill="#9ea3ba" font-size="8" font-weight="500" letter-spacing="1.5">DIAGNOSE</text>
-      <text x="60" y="48" text-anchor="middle" fill="#e4e5ef" font-size="11" font-weight="700">audit-library</text>
-      <line x1="16" y1="58" x2="96" y2="58" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <text x="60" y="30" text-anchor="middle" fill="#6B6B63" font-size="8" font-weight="500" letter-spacing="1.5">DIAGNOSE</text>
+      <text x="60" y="48" text-anchor="middle" fill="#21211E" font-size="11" font-weight="700">audit-library</text>
+      <line x1="16" y1="58" x2="96" y2="58" stroke="#E2E2DC" stroke-width="1"/>
     </g>
     <g transform="translate(620, 150)">
-      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#181818" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <text x="60" y="30" text-anchor="middle" fill="#9ea3ba" font-size="8" font-weight="500" letter-spacing="1.5">REWIRE</text>
-      <text x="60" y="48" text-anchor="middle" fill="#e4e5ef" font-size="11" font-weight="700">upgrade-skill</text>
-      <line x1="16" y1="58" x2="96" y2="58" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <text x="60" y="30" text-anchor="middle" fill="#6B6B63" font-size="8" font-weight="500" letter-spacing="1.5">REWIRE</text>
+      <text x="60" y="48" text-anchor="middle" fill="#21211E" font-size="11" font-weight="700">upgrade-skill</text>
+      <line x1="16" y1="58" x2="96" y2="58" stroke="#E2E2DC" stroke-width="1"/>
     </g>
     <g transform="translate(740, 220)">
-      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#181818" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.5"/>
-      <text x="60" y="30" text-anchor="middle" fill="#9ea3ba" font-size="8" font-weight="500" letter-spacing="1.5">SELF-HEAL</text>
-      <text x="60" y="48" text-anchor="middle" fill="#e4e5ef" font-size="11" font-weight="700">retrospective</text>
-      <line x1="16" y1="58" x2="96" y2="58" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M 0,0 L 116,0 L 140,22 L 140,70 L 0,70 Z" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <path d="M 116,0 L 116,22 L 140,22" fill="none" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.5"/>
+      <text x="60" y="30" text-anchor="middle" fill="#6B6B63" font-size="8" font-weight="500" letter-spacing="1.5">SELF-HEAL</text>
+      <text x="60" y="48" text-anchor="middle" fill="#21211E" font-size="11" font-weight="700">retrospective</text>
+      <line x1="16" y1="58" x2="96" y2="58" stroke="#E2E2DC" stroke-width="1"/>
     </g>
   </g>
 
   <g transform="translate(350, 348)">
     <path d="M 0,0 L 60,0 L 75,-16 L 175,-16 L 200,0 L 0,0 Z" fill="url(#evFolderTab)"/>
     <rect x="0" y="0" width="200" height="76" rx="4" fill="url(#evFolderGrad)"/>
-    <text x="100" y="34" text-anchor="middle" fill="#0d0d0d" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700">meta-create-skill</text>
-    <text x="100" y="54" text-anchor="middle" fill="#0d0d0d" opacity="0.78" font-family="SF Mono,Consolas,monospace" font-size="11" font-weight="600">standalone/</text>
+    <text x="100" y="34" text-anchor="middle" fill="#FFFFFF" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700">meta-create-skill</text>
+    <text x="100" y="54" text-anchor="middle" fill="#FFFFFF" opacity="0.78" font-family="SF Mono,Consolas,monospace" font-size="11" font-weight="600">standalone/</text>
   </g>
 </svg>
 <p class="exploded-caption">Inside the folder, <code>SKILL.md</code> reads your intent and routes you to one of seven workflow documents. You don't need to memorize them now &mdash; the next few lessons unpack what a skill is, how the folder is structured, and what each of these seven workflows does when you actually need it.</p>
@@ -1375,19 +1378,19 @@ LESSON_CONTENT['comparison'] = `
 <div class="feature-card">
   <div class="feature-visual">
     <svg viewBox="0 0 170 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <line x1="22" y1="20" x2="148" y2="20" stroke="#79EA20" stroke-opacity="0.25" stroke-width="1"/>
-      <g fill="#181818" stroke="#79EA20" stroke-width="1.3" stroke-opacity="0.75">
+      <line x1="22" y1="20" x2="148" y2="20" stroke="#2D8C3C" stroke-opacity="0.25" stroke-width="1"/>
+      <g fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.3" stroke-opacity="0.75">
         <circle cx="22" cy="20" r="9"/><circle cx="53" cy="20" r="9"/><circle cx="85" cy="20" r="9"/><circle cx="117" cy="20" r="9"/><circle cx="148" cy="20" r="9"/>
       </g>
-      <g font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20" text-anchor="middle">
+      <g font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C" text-anchor="middle">
         <text x="22" y="23">Q1</text><text x="53" y="23">Q2</text><text x="85" y="23">Q3</text><text x="117" y="23">Q4</text><text x="148" y="23">Q5</text>
       </g>
-      <path d="M 85,30 Q 85,52 43,68" fill="none" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.4"/>
-      <path d="M 85,30 Q 85,52 127,68" fill="none" stroke="#5b9cf6" stroke-opacity="0.55" stroke-width="1.4"/>
-      <rect x="8" y="72" width="70" height="24" rx="5" fill="rgba(121,234,32,0.12)" stroke="#79EA20" stroke-opacity="0.7"/>
-      <text x="43" y="87" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">STANDALONE</text>
-      <rect x="92" y="72" width="70" height="24" rx="5" fill="rgba(91,156,246,0.12)" stroke="#5b9cf6" stroke-opacity="0.7"/>
-      <text x="127" y="87" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#5b9cf6">WORKFLOW</text>
+      <path d="M 85,30 Q 85,52 43,68" fill="none" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.4"/>
+      <path d="M 85,30 Q 85,52 127,68" fill="none" stroke="#3B6FB0" stroke-opacity="0.55" stroke-width="1.4"/>
+      <rect x="8" y="72" width="70" height="24" rx="5" fill="rgba(45,140,60,0.12)" stroke="#2D8C3C" stroke-opacity="0.7"/>
+      <text x="43" y="87" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">STANDALONE</text>
+      <rect x="92" y="72" width="70" height="24" rx="5" fill="rgba(59,111,176,0.12)" stroke="#3B6FB0" stroke-opacity="0.7"/>
+      <text x="127" y="87" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#3B6FB0">WORKFLOW</text>
     </svg>
   </div>
   <div class="feature-text">
@@ -1400,25 +1403,25 @@ LESSON_CONTENT['comparison'] = `
   <div class="feature-visual">
     <svg viewBox="0 0 170 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <g>
-        <rect x="10" y="10" width="36" height="18" rx="3" fill="#181818" stroke="#3a3a3a"/>
-        <rect x="50" y="10" width="36" height="18" rx="3" fill="#181818" stroke="#FF6B6B" stroke-width="1.5"/>
-        <circle cx="82" cy="14" r="3.5" fill="#FF6B6B"/>
+        <rect x="10" y="10" width="36" height="18" rx="3" fill="#FFFFFF" stroke="#E2E2DC"/>
+        <rect x="50" y="10" width="36" height="18" rx="3" fill="#FFFFFF" stroke="#B3402A" stroke-width="1.5"/>
+        <circle cx="82" cy="14" r="3.5" fill="#B3402A"/>
         <text x="82" y="16.5" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" font-weight="700" fill="#fff">!</text>
-        <rect x="90" y="10" width="36" height="18" rx="3" fill="#181818" stroke="#3a3a3a"/>
-        <rect x="130" y="10" width="30" height="18" rx="3" fill="#181818" stroke="#FF6B6B" stroke-width="1.5"/>
-        <circle cx="156" cy="14" r="3.5" fill="#FF6B6B"/>
+        <rect x="90" y="10" width="36" height="18" rx="3" fill="#FFFFFF" stroke="#E2E2DC"/>
+        <rect x="130" y="10" width="30" height="18" rx="3" fill="#FFFFFF" stroke="#B3402A" stroke-width="1.5"/>
+        <circle cx="156" cy="14" r="3.5" fill="#B3402A"/>
         <text x="156" y="16.5" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" font-weight="700" fill="#fff">!</text>
       </g>
       <g>
-        <rect x="10" y="34" width="36" height="18" rx="3" fill="#181818" stroke="#FFA500" stroke-width="1.5"/>
-        <circle cx="42" cy="38" r="3.5" fill="#FFA500"/>
+        <rect x="10" y="34" width="36" height="18" rx="3" fill="#FFFFFF" stroke="#B26B00" stroke-width="1.5"/>
+        <circle cx="42" cy="38" r="3.5" fill="#B26B00"/>
         <text x="42" y="40.5" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" font-weight="700" fill="#fff">!</text>
-        <rect x="50" y="34" width="36" height="18" rx="3" fill="#181818" stroke="#3a3a3a"/>
-        <rect x="90" y="34" width="36" height="18" rx="3" fill="#181818" stroke="#3a3a3a"/>
-        <rect x="130" y="34" width="30" height="18" rx="3" fill="#181818" stroke="#3a3a3a"/>
+        <rect x="50" y="34" width="36" height="18" rx="3" fill="#FFFFFF" stroke="#E2E2DC"/>
+        <rect x="90" y="34" width="36" height="18" rx="3" fill="#FFFFFF" stroke="#E2E2DC"/>
+        <rect x="130" y="34" width="30" height="18" rx="3" fill="#FFFFFF" stroke="#E2E2DC"/>
       </g>
-      <rect x="20" y="70" width="130" height="26" rx="5" fill="rgba(121,234,32,0.12)" stroke="#79EA20" stroke-width="1.3"/>
-      <text x="85" y="87" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#79EA20">AUDIT REPORT</text>
+      <rect x="20" y="70" width="130" height="26" rx="5" fill="rgba(45,140,60,0.12)" stroke="#2D8C3C" stroke-width="1.3"/>
+      <text x="85" y="87" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#2D8C3C">AUDIT REPORT</text>
     </svg>
   </div>
   <div class="feature-text">
@@ -1432,28 +1435,28 @@ LESSON_CONTENT['comparison'] = `
     <svg viewBox="0 0 170 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
         <marker id="fc-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M 0,0 L 10,5 L 0,10 Z" fill="#79EA20"/>
+          <path d="M 0,0 L 10,5 L 0,10 Z" fill="#2D8C3C"/>
         </marker>
       </defs>
       <g>
-        <rect x="4" y="10" width="22" height="14" rx="2" fill="#181818" stroke="#555"/>
-        <g transform="rotate(-8 38 33)"><rect x="28" y="27" width="22" height="14" rx="2" fill="#181818" stroke="#555"/></g>
-        <g transform="rotate(7 15 49)"><rect x="4" y="42" width="22" height="14" rx="2" fill="#181818" stroke="#555"/></g>
-        <rect x="30" y="58" width="22" height="14" rx="2" fill="#181818" stroke="#555"/>
-        <text x="30" y="88" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#9ea3ba">BEFORE</text>
+        <rect x="4" y="10" width="22" height="14" rx="2" fill="#FFFFFF" stroke="#D4D4CC"/>
+        <g transform="rotate(-8 38 33)"><rect x="28" y="27" width="22" height="14" rx="2" fill="#FFFFFF" stroke="#D4D4CC"/></g>
+        <g transform="rotate(7 15 49)"><rect x="4" y="42" width="22" height="14" rx="2" fill="#FFFFFF" stroke="#D4D4CC"/></g>
+        <rect x="30" y="58" width="22" height="14" rx="2" fill="#FFFFFF" stroke="#D4D4CC"/>
+        <text x="30" y="88" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#6B6B63">BEFORE</text>
       </g>
-      <path d="M 64,42 L 98,42" stroke="#79EA20" stroke-width="1.6" fill="none" marker-end="url(#fc-arr)"/>
+      <path d="M 64,42 L 98,42" stroke="#2D8C3C" stroke-width="1.6" fill="none" marker-end="url(#fc-arr)"/>
       <g>
-        <rect x="104" y="10" width="58" height="18" rx="4" fill="rgba(192,132,252,0.15)" stroke="#c084fc" stroke-width="1.4"/>
-        <text x="133" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#c084fc">orchestrator</text>
-        <rect x="104" y="34" width="58" height="16" rx="3" fill="#181818" stroke="#79EA20" stroke-width="1.3"/>
-        <text x="133" y="45" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#79EA20">layer a</text>
-        <rect x="104" y="54" width="58" height="16" rx="3" fill="#181818" stroke="#79EA20" stroke-width="1.3"/>
-        <text x="133" y="65" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#79EA20">layer b</text>
-        <g stroke="#c084fc" stroke-opacity="0.55" stroke-width="1" fill="none" stroke-dasharray="2 2">
+        <rect x="104" y="10" width="58" height="18" rx="4" fill="rgba(107,70,193,0.15)" stroke="#6B46C1" stroke-width="1.4"/>
+        <text x="133" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#6B46C1">orchestrator</text>
+        <rect x="104" y="34" width="58" height="16" rx="3" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.3"/>
+        <text x="133" y="45" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#2D8C3C">layer a</text>
+        <rect x="104" y="54" width="58" height="16" rx="3" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.3"/>
+        <text x="133" y="65" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#2D8C3C">layer b</text>
+        <g stroke="#6B46C1" stroke-opacity="0.55" stroke-width="1" fill="none" stroke-dasharray="2 2">
           <line x1="133" y1="29" x2="133" y2="33"/><line x1="133" y1="51" x2="133" y2="53"/>
         </g>
-        <text x="133" y="88" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#79EA20">AFTER</text>
+        <text x="133" y="88" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#2D8C3C">AFTER</text>
       </g>
     </svg>
   </div>
@@ -1466,22 +1469,22 @@ LESSON_CONTENT['comparison'] = `
 <div class="feature-card">
   <div class="feature-visual">
     <svg viewBox="0 0 170 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="10" y="40" width="54" height="32" rx="5" fill="#181818" stroke="#FF6B6B" stroke-width="1.5"/>
-      <text x="37" y="58" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#e4e5ef">SKILL.md</text>
-      <line x1="18" y1="64" x2="56" y2="64" stroke="#FF6B6B" stroke-opacity="0.6" stroke-width="1"/>
-      <circle cx="60" cy="44" r="5" fill="#FF6B6B"/>
+      <rect x="10" y="40" width="54" height="32" rx="5" fill="#FFFFFF" stroke="#B3402A" stroke-width="1.5"/>
+      <text x="37" y="58" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#21211E">SKILL.md</text>
+      <line x1="18" y1="64" x2="56" y2="64" stroke="#B3402A" stroke-opacity="0.6" stroke-width="1"/>
+      <circle cx="60" cy="44" r="5" fill="#B3402A"/>
       <text x="60" y="47" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#fff">!</text>
-      <g fill="none" stroke="#79EA20" stroke-width="1.3" stroke-dasharray="3 2">
+      <g fill="none" stroke="#2D8C3C" stroke-width="1.3" stroke-dasharray="3 2">
         <path d="M 68,54 Q 85,18 106,54"/>
       </g>
-      <rect x="66" y="10" width="40" height="14" rx="3" fill="rgba(121,234,32,0.15)" stroke="#79EA20" stroke-width="1"/>
-      <text x="86" y="19.5" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" font-weight="700" fill="#79EA20">STOP HOOK</text>
-      <rect x="106" y="40" width="54" height="32" rx="5" fill="#181818" stroke="#79EA20" stroke-width="1.5"/>
-      <text x="133" y="58" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#e4e5ef">SKILL.md</text>
-      <line x1="114" y1="64" x2="152" y2="64" stroke="#79EA20" stroke-opacity="0.6" stroke-width="1"/>
-      <circle cx="156" cy="44" r="5" fill="#79EA20"/>
-      <text x="156" y="47" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#0d0d0d">✓</text>
-      <text x="85" y="94" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#9ea3ba">detect · patch · ship</text>
+      <rect x="66" y="10" width="40" height="14" rx="3" fill="rgba(45,140,60,0.15)" stroke="#2D8C3C" stroke-width="1"/>
+      <text x="86" y="19.5" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" font-weight="700" fill="#2D8C3C">STOP HOOK</text>
+      <rect x="106" y="40" width="54" height="32" rx="5" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.5"/>
+      <text x="133" y="58" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#21211E">SKILL.md</text>
+      <line x1="114" y1="64" x2="152" y2="64" stroke="#2D8C3C" stroke-opacity="0.6" stroke-width="1"/>
+      <circle cx="156" cy="44" r="5" fill="#2D8C3C"/>
+      <text x="156" y="47" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#FFFFFF">✓</text>
+      <text x="85" y="94" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" font-weight="700" fill="#6B6B63">detect · patch · ship</text>
     </svg>
   </div>
   <div class="feature-text">
@@ -1493,17 +1496,17 @@ LESSON_CONTENT['comparison'] = `
 <div class="feature-card">
   <div class="feature-visual">
     <svg viewBox="0 0 170 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <line x1="15" y1="88" x2="155" y2="88" stroke="#3a3a3a" stroke-width="1"/>
-      <rect x="28" y="62" width="22" height="26" fill="rgba(121,234,32,0.25)" stroke="#79EA20" stroke-width="1.3"/>
-      <text x="39" y="58" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">58%</text>
-      <text x="39" y="100" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9ea3ba">v1</text>
-      <rect x="74" y="42" width="22" height="46" fill="rgba(121,234,32,0.45)" stroke="#79EA20" stroke-width="1.3"/>
-      <text x="85" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">76%</text>
-      <text x="85" y="100" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9ea3ba">v2</text>
-      <rect x="120" y="20" width="22" height="68" fill="#79EA20"/>
-      <text x="131" y="16" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">92%</text>
-      <text x="131" y="100" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9ea3ba">v3</text>
-      <path d="M 39,55 L 85,35 L 131,13" fill="none" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1" stroke-dasharray="2 3"/>
+      <line x1="15" y1="88" x2="155" y2="88" stroke="#D4D4CC" stroke-width="1"/>
+      <rect x="28" y="62" width="22" height="26" fill="rgba(45,140,60,0.25)" stroke="#2D8C3C" stroke-width="1.3"/>
+      <text x="39" y="58" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">58%</text>
+      <text x="39" y="100" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B6B63">v1</text>
+      <rect x="74" y="42" width="22" height="46" fill="rgba(45,140,60,0.45)" stroke="#2D8C3C" stroke-width="1.3"/>
+      <text x="85" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">76%</text>
+      <text x="85" y="100" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B6B63">v2</text>
+      <rect x="120" y="20" width="22" height="68" fill="#2D8C3C"/>
+      <text x="131" y="16" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">92%</text>
+      <text x="131" y="100" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B6B63">v3</text>
+      <path d="M 39,55 L 85,35 L 131,13" fill="none" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1" stroke-dasharray="2 3"/>
     </svg>
   </div>
   <div class="feature-text">
@@ -1515,11 +1518,11 @@ LESSON_CONTENT['comparison'] = `
 <div class="feature-card">
   <div class="feature-visual">
     <svg viewBox="0 0 170 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="85" cy="55" r="48" fill="none" stroke="#2a2a2a" stroke-width="1"/>
-      <circle cx="85" cy="55" r="34" fill="none" stroke="#3a3a3a" stroke-width="1"/>
-      <circle cx="85" cy="55" r="20" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-opacity="0.45" stroke-width="1"/>
-      <circle cx="85" cy="55" r="8" fill="rgba(121,234,32,0.3)" stroke="#79EA20" stroke-width="1.2"/>
-      <g fill="#79EA20">
+      <circle cx="85" cy="55" r="48" fill="none" stroke="#D4D4CC" stroke-width="1"/>
+      <circle cx="85" cy="55" r="34" fill="none" stroke="#D4D4CC" stroke-width="1"/>
+      <circle cx="85" cy="55" r="20" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-opacity="0.45" stroke-width="1"/>
+      <circle cx="85" cy="55" r="8" fill="rgba(45,140,60,0.3)" stroke="#2D8C3C" stroke-width="1.2"/>
+      <g fill="#2D8C3C">
         <circle cx="82" cy="53" r="2.5"/>
         <circle cx="87" cy="57" r="2.5"/>
         <circle cx="83" cy="58" r="2.5"/>
@@ -1527,9 +1530,9 @@ LESSON_CONTENT['comparison'] = `
         <circle cx="80" cy="56" r="2.5"/>
         <circle cx="90" cy="55" r="2.5"/>
       </g>
-      <circle cx="118" cy="38" r="2.5" fill="#FFA500" opacity="0.55"/>
-      <circle cx="55" cy="72" r="2.5" fill="#FFA500" opacity="0.55"/>
-      <text x="85" y="108" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">TRIGGER ACCURACY</text>
+      <circle cx="118" cy="38" r="2.5" fill="#B26B00" opacity="0.55"/>
+      <circle cx="55" cy="72" r="2.5" fill="#B26B00" opacity="0.55"/>
+      <text x="85" y="108" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">TRIGGER ACCURACY</text>
     </svg>
   </div>
   <div class="feature-text">
@@ -1750,56 +1753,56 @@ LESSON_CONTENT['anatomy'] = `
 <svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" aria-label="Four scopes where a Claude skill can live: project, personal, plugin, enterprise">
 
   <g>
-    <rect x="20" y="10" width="200" height="200" rx="12" fill="#181818" stroke="#79EA20" stroke-opacity="0.4" stroke-width="1.5"/>
+    <rect x="20" y="10" width="200" height="200" rx="12" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.4" stroke-width="1.5"/>
     <g transform="translate(120, 44)">
-      <rect x="-34" y="-20" width="68" height="40" rx="3" fill="none" stroke="#79EA20" stroke-opacity="0.5" stroke-width="1.2"/>
-      <line x1="-34" y1="-10" x2="34" y2="-10" stroke="#79EA20" stroke-opacity="0.5"/>
-      <circle cx="-29" cy="-15" r="1.5" fill="#79EA20"/>
-      <circle cx="-23" cy="-15" r="1.5" fill="#79EA20"/>
-      <path d="M -15,0 L -3,0 L 1,-6 L 18,-6 L 18,12 L -15,12 Z" fill="rgba(121,234,32,0.3)" stroke="#79EA20" stroke-width="1.2"/>
+      <rect x="-34" y="-20" width="68" height="40" rx="3" fill="none" stroke="#2D8C3C" stroke-opacity="0.5" stroke-width="1.2"/>
+      <line x1="-34" y1="-10" x2="34" y2="-10" stroke="#2D8C3C" stroke-opacity="0.5"/>
+      <circle cx="-29" cy="-15" r="1.5" fill="#2D8C3C"/>
+      <circle cx="-23" cy="-15" r="1.5" fill="#2D8C3C"/>
+      <path d="M -15,0 L -3,0 L 1,-6 L 18,-6 L 18,12 L -15,12 Z" fill="rgba(45,140,60,0.3)" stroke="#2D8C3C" stroke-width="1.2"/>
     </g>
-    <text x="120" y="104" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#79EA20">PROJECT</text>
-    <text x="120" y="124" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9.5" fill="#9ea3ba">.claude/skills/</text>
-    <rect x="75" y="140" width="90" height="34" rx="6" fill="#0d0d0d" stroke="#79EA20" stroke-opacity="0.45" stroke-dasharray="3 2"/>
-    <text x="120" y="161" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10.5" font-weight="700" fill="#e4e5ef">1 repo</text>
-    <text x="120" y="195" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9.5" fill="#9ea3ba">team with repo access</text>
+    <text x="120" y="104" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#2D8C3C">PROJECT</text>
+    <text x="120" y="124" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9.5" fill="#6B6B63">.claude/skills/</text>
+    <rect x="75" y="140" width="90" height="34" rx="6" fill="#F4F4F0" stroke="#2D8C3C" stroke-opacity="0.45" stroke-dasharray="3 2"/>
+    <text x="120" y="161" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10.5" font-weight="700" fill="#21211E">1 repo</text>
+    <text x="120" y="195" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9.5" fill="#6B6B63">team with repo access</text>
   </g>
 
   <g>
-    <rect x="240" y="10" width="200" height="200" rx="12" fill="#181818" stroke="#5b9cf6" stroke-opacity="0.4" stroke-width="1.5"/>
+    <rect x="240" y="10" width="200" height="200" rx="12" fill="#FFFFFF" stroke="#3B6FB0" stroke-opacity="0.4" stroke-width="1.5"/>
     <g transform="translate(340, 44)">
-      <rect x="-26" y="-20" width="52" height="30" rx="2" fill="none" stroke="#5b9cf6" stroke-opacity="0.6" stroke-width="1.3"/>
-      <rect x="-22" y="-16" width="44" height="22" rx="1" fill="rgba(91,156,246,0.1)"/>
-      <path d="M -32,14 L 32,14 L 28,18 L -28,18 Z" fill="none" stroke="#5b9cf6" stroke-opacity="0.6" stroke-width="1.3"/>
-      <circle cx="0" cy="-5" r="6" fill="rgba(91,156,246,0.35)" stroke="#5b9cf6" stroke-width="1"/>
+      <rect x="-26" y="-20" width="52" height="30" rx="2" fill="none" stroke="#3B6FB0" stroke-opacity="0.6" stroke-width="1.3"/>
+      <rect x="-22" y="-16" width="44" height="22" rx="1" fill="rgba(59,111,176,0.1)"/>
+      <path d="M -32,14 L 32,14 L 28,18 L -28,18 Z" fill="none" stroke="#3B6FB0" stroke-opacity="0.6" stroke-width="1.3"/>
+      <circle cx="0" cy="-5" r="6" fill="rgba(59,111,176,0.35)" stroke="#3B6FB0" stroke-width="1"/>
     </g>
-    <text x="340" y="104" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#5b9cf6">PERSONAL</text>
-    <text x="340" y="124" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9.5" fill="#9ea3ba">~/.claude/skills/</text>
-    <rect x="295" y="140" width="90" height="34" rx="6" fill="#0d0d0d" stroke="#5b9cf6" stroke-opacity="0.45" stroke-dasharray="3 2"/>
-    <text x="340" y="161" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10.5" font-weight="700" fill="#e4e5ef">your machine</text>
-    <text x="340" y="195" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9.5" fill="#9ea3ba">every project you open</text>
+    <text x="340" y="104" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3B6FB0">PERSONAL</text>
+    <text x="340" y="124" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9.5" fill="#6B6B63">~/.claude/skills/</text>
+    <rect x="295" y="140" width="90" height="34" rx="6" fill="#F4F4F0" stroke="#3B6FB0" stroke-opacity="0.45" stroke-dasharray="3 2"/>
+    <text x="340" y="161" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10.5" font-weight="700" fill="#21211E">your machine</text>
+    <text x="340" y="195" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9.5" fill="#6B6B63">every project you open</text>
   </g>
 
   <g>
-    <rect x="460" y="10" width="200" height="200" rx="12" fill="#181818" stroke="#c084fc" stroke-opacity="0.4" stroke-width="1.5"/>
+    <rect x="460" y="10" width="200" height="200" rx="12" fill="#FFFFFF" stroke="#6B46C1" stroke-opacity="0.4" stroke-width="1.5"/>
     <g transform="translate(560, 44)">
-      <path d="M -22,-18 L 0,-26 L 22,-18 L 22,10 L 0,18 L -22,10 Z" fill="rgba(192,132,252,0.22)" stroke="#c084fc" stroke-width="1.4"/>
-      <line x1="-22" y1="-18" x2="0" y2="-10" stroke="#c084fc" stroke-width="1.2"/>
-      <line x1="22" y1="-18" x2="0" y2="-10" stroke="#c084fc" stroke-width="1.2"/>
-      <line x1="0" y1="-10" x2="0" y2="18" stroke="#c084fc" stroke-width="1.2"/>
+      <path d="M -22,-18 L 0,-26 L 22,-18 L 22,10 L 0,18 L -22,10 Z" fill="rgba(107,70,193,0.22)" stroke="#6B46C1" stroke-width="1.4"/>
+      <line x1="-22" y1="-18" x2="0" y2="-10" stroke="#6B46C1" stroke-width="1.2"/>
+      <line x1="22" y1="-18" x2="0" y2="-10" stroke="#6B46C1" stroke-width="1.2"/>
+      <line x1="0" y1="-10" x2="0" y2="18" stroke="#6B46C1" stroke-width="1.2"/>
     </g>
-    <text x="560" y="104" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#c084fc">PLUGIN</text>
-    <text x="560" y="124" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9.5" fill="#9ea3ba">~/.claude/plugins/</text>
-    <rect x="515" y="140" width="90" height="34" rx="6" fill="#0d0d0d" stroke="#c084fc" stroke-opacity="0.45" stroke-dasharray="3 2"/>
-    <text x="560" y="161" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10.5" font-weight="700" fill="#e4e5ef">installable</text>
-    <text x="560" y="195" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9.5" fill="#9ea3ba">anyone who installs it</text>
+    <text x="560" y="104" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#6B46C1">PLUGIN</text>
+    <text x="560" y="124" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9.5" fill="#6B6B63">~/.claude/plugins/</text>
+    <rect x="515" y="140" width="90" height="34" rx="6" fill="#F4F4F0" stroke="#6B46C1" stroke-opacity="0.45" stroke-dasharray="3 2"/>
+    <text x="560" y="161" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10.5" font-weight="700" fill="#21211E">installable</text>
+    <text x="560" y="195" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9.5" fill="#6B6B63">anyone who installs it</text>
   </g>
 
   <g>
-    <rect x="680" y="10" width="200" height="200" rx="12" fill="#181818" stroke="#FFA500" stroke-opacity="0.4" stroke-width="1.5"/>
+    <rect x="680" y="10" width="200" height="200" rx="12" fill="#FFFFFF" stroke="#B26B00" stroke-opacity="0.4" stroke-width="1.5"/>
     <g transform="translate(780, 44)">
-      <rect x="-20" y="-24" width="40" height="44" fill="rgba(255,165,0,0.08)" stroke="#FFA500" stroke-opacity="0.6" stroke-width="1.3"/>
-      <g fill="rgba(255,165,0,0.35)">
+      <rect x="-20" y="-24" width="40" height="44" fill="rgba(178,107,0,0.08)" stroke="#B26B00" stroke-opacity="0.6" stroke-width="1.3"/>
+      <g fill="rgba(178,107,0,0.35)">
         <rect x="-15" y="-19" width="6" height="6"/>
         <rect x="-3" y="-19" width="6" height="6"/>
         <rect x="9" y="-19" width="6" height="6"/>
@@ -1809,13 +1812,13 @@ LESSON_CONTENT['anatomy'] = `
         <rect x="-15" y="1" width="6" height="6"/>
         <rect x="9" y="1" width="6" height="6"/>
       </g>
-      <rect x="-4" y="8" width="8" height="12" fill="rgba(255,165,0,0.3)" stroke="#FFA500" stroke-opacity="0.6"/>
+      <rect x="-4" y="8" width="8" height="12" fill="rgba(178,107,0,0.3)" stroke="#B26B00" stroke-opacity="0.6"/>
     </g>
-    <text x="780" y="104" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#FFA500">ENTERPRISE</text>
-    <text x="780" y="124" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9.5" fill="#9ea3ba">admin-deployed</text>
-    <rect x="735" y="140" width="90" height="34" rx="6" fill="#0d0d0d" stroke="#FFA500" stroke-opacity="0.45" stroke-dasharray="3 2"/>
-    <text x="780" y="161" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10.5" font-weight="700" fill="#e4e5ef">workspace</text>
-    <text x="780" y="195" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9.5" fill="#9ea3ba">everyone in the org</text>
+    <text x="780" y="104" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#B26B00">ENTERPRISE</text>
+    <text x="780" y="124" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9.5" fill="#6B6B63">admin-deployed</text>
+    <rect x="735" y="140" width="90" height="34" rx="6" fill="#F4F4F0" stroke="#B26B00" stroke-opacity="0.45" stroke-dasharray="3 2"/>
+    <text x="780" y="161" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10.5" font-weight="700" fill="#21211E">workspace</text>
+    <text x="780" y="195" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9.5" fill="#6B6B63">everyone in the org</text>
   </g>
 
 </svg>
@@ -1864,32 +1867,32 @@ LESSON_CONTENT['disclosure'] = `
 <div class="pyramid-wrap">
 <svg viewBox="0 0 620 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px" aria-label="Progressive disclosure three-tier pyramid">
   <!-- Tier 1: Metadata -->
-  <polygon points="260,20 360,20 410,80 210,80" fill="rgba(121,234,32,.18)" stroke="#79EA20" stroke-width="1.5"/>
-  <text x="310" y="46" text-anchor="middle" fill="#e4e5ef" font-size="13" font-weight="700">Tier 1 &middot; Metadata</text>
-  <text x="310" y="64" text-anchor="middle" fill="#9ea3ba" font-size="11">YAML name + description (~100 words)</text>
+  <polygon points="260,20 360,20 410,80 210,80" fill="rgba(45,140,60,.18)" stroke="#2D8C3C" stroke-width="1.5"/>
+  <text x="310" y="46" text-anchor="middle" fill="#21211E" font-size="13" font-weight="700">Tier 1 &middot; Metadata</text>
+  <text x="310" y="64" text-anchor="middle" fill="#6B6B63" font-size="11">YAML name + description (~100 words)</text>
 
   <!-- Tier 2: SKILL.md body -->
-  <polygon points="210,88 410,88 470,180 150,180" fill="rgba(91,156,246,.15)" stroke="#5b9cf6" stroke-width="1.5"/>
-  <text x="310" y="120" text-anchor="middle" fill="#e4e5ef" font-size="13" font-weight="700">Tier 2 &middot; SKILL.md body</text>
-  <text x="310" y="140" text-anchor="middle" fill="#9ea3ba" font-size="11">Router + core instructions</text>
-  <text x="310" y="158" text-anchor="middle" fill="#9ea3ba" font-size="11">Ideally &lt; 500 lines</text>
+  <polygon points="210,88 410,88 470,180 150,180" fill="rgba(59,111,176,.15)" stroke="#3B6FB0" stroke-width="1.5"/>
+  <text x="310" y="120" text-anchor="middle" fill="#21211E" font-size="13" font-weight="700">Tier 2 &middot; SKILL.md body</text>
+  <text x="310" y="140" text-anchor="middle" fill="#6B6B63" font-size="11">Router + core instructions</text>
+  <text x="310" y="158" text-anchor="middle" fill="#6B6B63" font-size="11">Ideally &lt; 500 lines</text>
 
   <!-- Tier 3: Bundled resources -->
-  <polygon points="150,188 470,188 560,320 60,320" fill="rgba(192,132,252,.12)" stroke="#c084fc" stroke-width="1.5"/>
-  <text x="310" y="224" text-anchor="middle" fill="#e4e5ef" font-size="13" font-weight="700">Tier 3 &middot; Bundled resources</text>
-  <text x="310" y="246" text-anchor="middle" fill="#9ea3ba" font-size="11">workflows/ &nbsp;&middot;&nbsp; references/</text>
-  <text x="310" y="262" text-anchor="middle" fill="#9ea3ba" font-size="11">assets/ &nbsp;&middot;&nbsp; scripts/</text>
-  <text x="310" y="282" text-anchor="middle" fill="#9ea3ba" font-size="11">Loaded on demand &mdash; no hard size limit</text>
+  <polygon points="150,188 470,188 560,320 60,320" fill="rgba(107,70,193,.12)" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="310" y="224" text-anchor="middle" fill="#21211E" font-size="13" font-weight="700">Tier 3 &middot; Bundled resources</text>
+  <text x="310" y="246" text-anchor="middle" fill="#6B6B63" font-size="11">workflows/ &nbsp;&middot;&nbsp; references/</text>
+  <text x="310" y="262" text-anchor="middle" fill="#6B6B63" font-size="11">assets/ &nbsp;&middot;&nbsp; scripts/</text>
+  <text x="310" y="282" text-anchor="middle" fill="#6B6B63" font-size="11">Loaded on demand &mdash; no hard size limit</text>
 
   <!-- Load-timing captions on the right -->
-  <line x1="420" y1="50" x2="490" y2="50" stroke="#4a4d60" stroke-dasharray="3,3"/>
-  <text x="500" y="54" fill="#79EA20" font-size="11" font-weight="600">always loaded</text>
+  <line x1="420" y1="50" x2="490" y2="50" stroke="#D4D4CC" stroke-dasharray="3,3"/>
+  <text x="500" y="54" fill="#2D8C3C" font-size="11" font-weight="600">always loaded</text>
 
-  <line x1="480" y1="134" x2="530" y2="134" stroke="#4a4d60" stroke-dasharray="3,3"/>
-  <text x="540" y="138" fill="#5b9cf6" font-size="11" font-weight="600">on trigger</text>
+  <line x1="480" y1="134" x2="530" y2="134" stroke="#D4D4CC" stroke-dasharray="3,3"/>
+  <text x="540" y="138" fill="#3B6FB0" font-size="11" font-weight="600">on trigger</text>
 
-  <line x1="570" y1="250" x2="580" y2="250" stroke="#4a4d60" stroke-dasharray="3,3"/>
-  <text x="490" y="340" fill="#c084fc" font-size="11" font-weight="600" text-anchor="middle">on demand &mdash; per workflow step</text>
+  <line x1="570" y1="250" x2="580" y2="250" stroke="#D4D4CC" stroke-dasharray="3,3"/>
+  <text x="490" y="340" fill="#6B46C1" font-size="11" font-weight="600" text-anchor="middle">on demand &mdash; per workflow step</text>
 </svg>
 </div>
 
@@ -1929,8 +1932,8 @@ LESSON_CONTENT['decision'] = `
   <thead>
     <tr>
       <th class="capability" style="width:32%">Ask yourself...</th>
-      <th style="color:#c084fc;text-align:left">&larr; Points to NESTED WORKFLOW</th>
-      <th style="color:#79EA20;text-align:left">Points to STANDALONE SKILL &rarr;</th>
+      <th style="color:#6B46C1;text-align:left">&larr; Points to NESTED WORKFLOW</th>
+      <th style="color:#2D8C3C;text-align:left">Points to STANDALONE SKILL &rarr;</th>
     </tr>
   </thead>
   <tbody>
@@ -1960,7 +1963,7 @@ LESSON_CONTENT['decision'] = `
       <td class="hl">Parent still works without it</td>
     </tr>
     <tr class="philosophy-row">
-      <td colspan="3" style="text-align:center"><strong style="color:var(--text)">Count where your answers land.</strong> Mostly left &rarr; nest it. Mostly right &rarr; standalone. <strong style="color:#FFA500">Mixed? Default to STANDALONE</strong> &mdash; extracting later is cheap, merging back is expensive.</td>
+      <td colspan="3" style="text-align:center"><strong style="color:var(--text)">Count where your answers land.</strong> Mostly left &rarr; nest it. Mostly right &rarr; standalone. <strong style="color:#B26B00">Mixed? Default to STANDALONE</strong> &mdash; extracting later is cheap, merging back is expensive.</td>
     </tr>
   </tbody>
 </table>
@@ -1971,30 +1974,30 @@ LESSON_CONTENT['decision'] = `
 <div class="feature-card dq">
   <div class="feature-visual">
     <svg viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="6" y="6" width="108" height="108" rx="6" fill="rgba(192,132,252,0.03)" stroke="#c084fc" stroke-opacity="0.35" stroke-dasharray="3 2"/>
-      <text x="60" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#c084fc" letter-spacing=".5">WORKFLOW</text>
-      <rect x="24" y="30" width="72" height="20" rx="3" fill="rgba(192,132,252,0.1)" stroke="#c084fc"/>
-      <text x="60" y="43" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" fill="#c084fc" font-weight="700">newsletter</text>
-      <line x1="60" y1="52" x2="60" y2="68" stroke="#c084fc" stroke-opacity="0.6"/>
-      <polygon points="56,65 60,72 64,65" fill="#c084fc"/>
-      <rect x="26" y="76" width="68" height="20" rx="3" fill="#181818" stroke="#c084fc"/>
-      <text x="60" y="89" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" fill="#e4e5ef">hook flow</text>
-      <text x="60" y="109" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#c084fc" opacity="0.75">1 parent</text>
+      <rect x="6" y="6" width="108" height="108" rx="6" fill="rgba(107,70,193,0.03)" stroke="#6B46C1" stroke-opacity="0.35" stroke-dasharray="3 2"/>
+      <text x="60" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#6B46C1" letter-spacing=".5">WORKFLOW</text>
+      <rect x="24" y="30" width="72" height="20" rx="3" fill="rgba(107,70,193,0.1)" stroke="#6B46C1"/>
+      <text x="60" y="43" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" fill="#6B46C1" font-weight="700">newsletter</text>
+      <line x1="60" y1="52" x2="60" y2="68" stroke="#6B46C1" stroke-opacity="0.6"/>
+      <polygon points="56,65 60,72 64,65" fill="#6B46C1"/>
+      <rect x="26" y="76" width="68" height="20" rx="3" fill="#FFFFFF" stroke="#6B46C1"/>
+      <text x="60" y="89" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" fill="#21211E">hook flow</text>
+      <text x="60" y="109" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#6B46C1" opacity="0.75">1 parent</text>
 
-      <rect x="126" y="6" width="108" height="108" rx="6" fill="rgba(121,234,32,0.03)" stroke="#79EA20" stroke-opacity="0.35" stroke-dasharray="3 2"/>
-      <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20" letter-spacing=".5">STANDALONE</text>
-      <rect x="132" y="28" width="28" height="14" rx="2" fill="rgba(121,234,32,0.08)" stroke="#79EA20" stroke-width="0.8"/>
-      <text x="146" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#79EA20">news</text>
-      <rect x="166" y="28" width="28" height="14" rx="2" fill="rgba(121,234,32,0.08)" stroke="#79EA20" stroke-width="0.8"/>
-      <text x="180" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#79EA20">reel</text>
-      <rect x="200" y="28" width="28" height="14" rx="2" fill="rgba(121,234,32,0.08)" stroke="#79EA20" stroke-width="0.8"/>
-      <text x="214" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#79EA20">carousel</text>
-      <line x1="146" y1="42" x2="172" y2="70" stroke="#79EA20" stroke-dasharray="2 2" stroke-opacity="0.55"/>
-      <line x1="180" y1="42" x2="180" y2="70" stroke="#79EA20" stroke-dasharray="2 2" stroke-opacity="0.55"/>
-      <line x1="214" y1="42" x2="188" y2="70" stroke="#79EA20" stroke-dasharray="2 2" stroke-opacity="0.55"/>
-      <rect x="142" y="74" width="76" height="22" rx="3" fill="#181818" stroke="#79EA20" stroke-width="1.5"/>
-      <text x="180" y="88" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" fill="#e4e5ef" font-weight="700">write-hook</text>
-      <text x="180" y="109" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#79EA20" opacity="0.75">many parents</text>
+      <rect x="126" y="6" width="108" height="108" rx="6" fill="rgba(45,140,60,0.03)" stroke="#2D8C3C" stroke-opacity="0.35" stroke-dasharray="3 2"/>
+      <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C" letter-spacing=".5">STANDALONE</text>
+      <rect x="132" y="28" width="28" height="14" rx="2" fill="rgba(45,140,60,0.08)" stroke="#2D8C3C" stroke-width="0.8"/>
+      <text x="146" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#2D8C3C">news</text>
+      <rect x="166" y="28" width="28" height="14" rx="2" fill="rgba(45,140,60,0.08)" stroke="#2D8C3C" stroke-width="0.8"/>
+      <text x="180" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#2D8C3C">reel</text>
+      <rect x="200" y="28" width="28" height="14" rx="2" fill="rgba(45,140,60,0.08)" stroke="#2D8C3C" stroke-width="0.8"/>
+      <text x="214" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#2D8C3C">carousel</text>
+      <line x1="146" y1="42" x2="172" y2="70" stroke="#2D8C3C" stroke-dasharray="2 2" stroke-opacity="0.55"/>
+      <line x1="180" y1="42" x2="180" y2="70" stroke="#2D8C3C" stroke-dasharray="2 2" stroke-opacity="0.55"/>
+      <line x1="214" y1="42" x2="188" y2="70" stroke="#2D8C3C" stroke-dasharray="2 2" stroke-opacity="0.55"/>
+      <rect x="142" y="74" width="76" height="22" rx="3" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.5"/>
+      <text x="180" y="88" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" fill="#21211E" font-weight="700">write-hook</text>
+      <text x="180" y="109" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#2D8C3C" opacity="0.75">many parents</text>
     </svg>
   </div>
   <div class="feature-text">
@@ -2006,25 +2009,25 @@ LESSON_CONTENT['decision'] = `
 <div class="feature-card dq">
   <div class="feature-visual">
     <svg viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="6" y="6" width="108" height="108" rx="6" fill="rgba(192,132,252,0.03)" stroke="#c084fc" stroke-opacity="0.35" stroke-dasharray="3 2"/>
-      <text x="60" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#c084fc">WORKFLOW</text>
-      <rect x="20" y="32" width="80" height="16" rx="8" fill="#181818" stroke="#666"/>
-      <text x="60" y="43" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9ea3ba">"write a newsletter"</text>
-      <line x1="60" y1="50" x2="60" y2="64" stroke="#c084fc" stroke-opacity="0.6"/>
-      <polygon points="56,61 60,67 64,61" fill="#c084fc"/>
-      <rect x="24" y="70" width="72" height="32" rx="3" fill="rgba(192,132,252,0.1)" stroke="#c084fc" stroke-width="1.3"/>
-      <text x="60" y="83" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#c084fc">write-content</text>
-      <text x="60" y="94" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9ea3ba">routes internally</text>
+      <rect x="6" y="6" width="108" height="108" rx="6" fill="rgba(107,70,193,0.03)" stroke="#6B46C1" stroke-opacity="0.35" stroke-dasharray="3 2"/>
+      <text x="60" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#6B46C1">WORKFLOW</text>
+      <rect x="20" y="32" width="80" height="16" rx="8" fill="#FFFFFF" stroke="#D4D4CC"/>
+      <text x="60" y="43" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B6B63">"write a newsletter"</text>
+      <line x1="60" y1="50" x2="60" y2="64" stroke="#6B46C1" stroke-opacity="0.6"/>
+      <polygon points="56,61 60,67 64,61" fill="#6B46C1"/>
+      <rect x="24" y="70" width="72" height="32" rx="3" fill="rgba(107,70,193,0.1)" stroke="#6B46C1" stroke-width="1.3"/>
+      <text x="60" y="83" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#6B46C1">write-content</text>
+      <text x="60" y="94" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B6B63">routes internally</text>
 
-      <rect x="126" y="6" width="108" height="108" rx="6" fill="rgba(121,234,32,0.03)" stroke="#79EA20" stroke-opacity="0.35" stroke-dasharray="3 2"/>
-      <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">STANDALONE</text>
-      <rect x="140" y="32" width="80" height="16" rx="8" fill="#181818" stroke="#79EA20"/>
-      <text x="180" y="43" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#79EA20" font-weight="700">/humanize</text>
-      <line x1="180" y1="50" x2="180" y2="64" stroke="#79EA20" stroke-opacity="0.75"/>
-      <polygon points="176,61 180,67 184,61" fill="#79EA20"/>
-      <rect x="144" y="70" width="72" height="32" rx="3" fill="rgba(121,234,32,0.1)" stroke="#79EA20" stroke-width="1.3"/>
-      <text x="180" y="83" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#79EA20">voice-cleanup</text>
-      <text x="180" y="94" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9ea3ba">direct invoke</text>
+      <rect x="126" y="6" width="108" height="108" rx="6" fill="rgba(45,140,60,0.03)" stroke="#2D8C3C" stroke-opacity="0.35" stroke-dasharray="3 2"/>
+      <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">STANDALONE</text>
+      <rect x="140" y="32" width="80" height="16" rx="8" fill="#FFFFFF" stroke="#2D8C3C"/>
+      <text x="180" y="43" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#2D8C3C" font-weight="700">/humanize</text>
+      <line x1="180" y1="50" x2="180" y2="64" stroke="#2D8C3C" stroke-opacity="0.75"/>
+      <polygon points="176,61 180,67 184,61" fill="#2D8C3C"/>
+      <rect x="144" y="70" width="72" height="32" rx="3" fill="rgba(45,140,60,0.1)" stroke="#2D8C3C" stroke-width="1.3"/>
+      <text x="180" y="83" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#2D8C3C">voice-cleanup</text>
+      <text x="180" y="94" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B6B63">direct invoke</text>
     </svg>
   </div>
   <div class="feature-text">
@@ -2036,38 +2039,38 @@ LESSON_CONTENT['decision'] = `
 <div class="feature-card dq">
   <div class="feature-visual">
     <svg viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="6" y="6" width="108" height="108" rx="6" fill="rgba(192,132,252,0.03)" stroke="#c084fc" stroke-opacity="0.35" stroke-dasharray="3 2"/>
-      <text x="60" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#c084fc">WORKFLOW</text>
-      <rect x="30" y="32" width="60" height="70" rx="3" fill="rgba(192,132,252,0.08)" stroke="#c084fc"/>
-      <text x="60" y="44" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#c084fc" font-weight="700">newsletter format</text>
-      <line x1="38" y1="52" x2="82" y2="52" stroke="#c084fc" stroke-opacity="0.55"/>
-      <line x1="38" y1="60" x2="78" y2="60" stroke="#c084fc" stroke-opacity="0.4"/>
-      <line x1="38" y1="66" x2="72" y2="66" stroke="#c084fc" stroke-opacity="0.4"/>
-      <line x1="38" y1="75" x2="78" y2="75" stroke="#c084fc" stroke-opacity="0.4"/>
-      <line x1="38" y1="81" x2="76" y2="81" stroke="#c084fc" stroke-opacity="0.4"/>
-      <line x1="38" y1="87" x2="66" y2="87" stroke="#c084fc" stroke-opacity="0.4"/>
-      <line x1="38" y1="95" x2="70" y2="95" stroke="#c084fc" stroke-opacity="0.4"/>
-      <text x="60" y="116" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#c084fc" opacity="0.7">one shape</text>
+      <rect x="6" y="6" width="108" height="108" rx="6" fill="rgba(107,70,193,0.03)" stroke="#6B46C1" stroke-opacity="0.35" stroke-dasharray="3 2"/>
+      <text x="60" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#6B46C1">WORKFLOW</text>
+      <rect x="30" y="32" width="60" height="70" rx="3" fill="rgba(107,70,193,0.08)" stroke="#6B46C1"/>
+      <text x="60" y="44" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B46C1" font-weight="700">newsletter format</text>
+      <line x1="38" y1="52" x2="82" y2="52" stroke="#6B46C1" stroke-opacity="0.55"/>
+      <line x1="38" y1="60" x2="78" y2="60" stroke="#6B46C1" stroke-opacity="0.4"/>
+      <line x1="38" y1="66" x2="72" y2="66" stroke="#6B46C1" stroke-opacity="0.4"/>
+      <line x1="38" y1="75" x2="78" y2="75" stroke="#6B46C1" stroke-opacity="0.4"/>
+      <line x1="38" y1="81" x2="76" y2="81" stroke="#6B46C1" stroke-opacity="0.4"/>
+      <line x1="38" y1="87" x2="66" y2="87" stroke="#6B46C1" stroke-opacity="0.4"/>
+      <line x1="38" y1="95" x2="70" y2="95" stroke="#6B46C1" stroke-opacity="0.4"/>
+      <text x="60" y="116" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B46C1" opacity="0.7">one shape</text>
 
-      <rect x="126" y="6" width="108" height="108" rx="6" fill="rgba(121,234,32,0.03)" stroke="#79EA20" stroke-opacity="0.35" stroke-dasharray="3 2"/>
-      <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">STANDALONE</text>
-      <rect x="132" y="28" width="24" height="14" rx="2" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="0.8"/>
-      <text x="144" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#79EA20">news</text>
-      <rect x="160" y="28" width="24" height="14" rx="2" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="0.8"/>
-      <text x="172" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#79EA20">email</text>
-      <rect x="188" y="28" width="24" height="14" rx="2" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="0.8"/>
-      <text x="200" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#79EA20">thread</text>
-      <rect x="146" y="46" width="24" height="14" rx="2" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="0.8"/>
-      <text x="158" y="56" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#79EA20">reel</text>
-      <rect x="174" y="46" width="24" height="14" rx="2" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="0.8"/>
-      <text x="186" y="56" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#79EA20">carousel</text>
-      <line x1="144" y1="42" x2="170" y2="80" stroke="#79EA20" stroke-dasharray="2 2" stroke-opacity="0.5"/>
-      <line x1="172" y1="42" x2="180" y2="80" stroke="#79EA20" stroke-dasharray="2 2" stroke-opacity="0.5"/>
-      <line x1="200" y1="42" x2="190" y2="80" stroke="#79EA20" stroke-dasharray="2 2" stroke-opacity="0.5"/>
-      <line x1="158" y1="60" x2="175" y2="80" stroke="#79EA20" stroke-dasharray="2 2" stroke-opacity="0.5"/>
-      <line x1="186" y1="60" x2="185" y2="80" stroke="#79EA20" stroke-dasharray="2 2" stroke-opacity="0.5"/>
-      <rect x="140" y="84" width="80" height="22" rx="3" fill="#181818" stroke="#79EA20" stroke-width="1.5"/>
-      <text x="180" y="98" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#e4e5ef" font-weight="700">voice-cleanup</text>
+      <rect x="126" y="6" width="108" height="108" rx="6" fill="rgba(45,140,60,0.03)" stroke="#2D8C3C" stroke-opacity="0.35" stroke-dasharray="3 2"/>
+      <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">STANDALONE</text>
+      <rect x="132" y="28" width="24" height="14" rx="2" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="0.8"/>
+      <text x="144" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#2D8C3C">news</text>
+      <rect x="160" y="28" width="24" height="14" rx="2" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="0.8"/>
+      <text x="172" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#2D8C3C">email</text>
+      <rect x="188" y="28" width="24" height="14" rx="2" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="0.8"/>
+      <text x="200" y="38" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#2D8C3C">thread</text>
+      <rect x="146" y="46" width="24" height="14" rx="2" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="0.8"/>
+      <text x="158" y="56" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#2D8C3C">reel</text>
+      <rect x="174" y="46" width="24" height="14" rx="2" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="0.8"/>
+      <text x="186" y="56" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="6" fill="#2D8C3C">carousel</text>
+      <line x1="144" y1="42" x2="170" y2="80" stroke="#2D8C3C" stroke-dasharray="2 2" stroke-opacity="0.5"/>
+      <line x1="172" y1="42" x2="180" y2="80" stroke="#2D8C3C" stroke-dasharray="2 2" stroke-opacity="0.5"/>
+      <line x1="200" y1="42" x2="190" y2="80" stroke="#2D8C3C" stroke-dasharray="2 2" stroke-opacity="0.5"/>
+      <line x1="158" y1="60" x2="175" y2="80" stroke="#2D8C3C" stroke-dasharray="2 2" stroke-opacity="0.5"/>
+      <line x1="186" y1="60" x2="185" y2="80" stroke="#2D8C3C" stroke-dasharray="2 2" stroke-opacity="0.5"/>
+      <rect x="140" y="84" width="80" height="22" rx="3" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.5"/>
+      <text x="180" y="98" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#21211E" font-weight="700">voice-cleanup</text>
     </svg>
   </div>
   <div class="feature-text">
@@ -2079,26 +2082,26 @@ LESSON_CONTENT['decision'] = `
 <div class="feature-card dq">
   <div class="feature-visual">
     <svg viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="6" y="6" width="108" height="108" rx="6" fill="rgba(192,132,252,0.03)" stroke="#c084fc" stroke-opacity="0.35" stroke-dasharray="3 2"/>
-      <text x="60" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#c084fc">WORKFLOW</text>
-      <rect x="16" y="30" width="88" height="74" rx="8" fill="none" stroke="#c084fc" stroke-opacity="0.5" stroke-width="1.3" stroke-dasharray="4 2"/>
-      <text x="60" y="42" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#c084fc" font-weight="700">shared context</text>
-      <rect x="26" y="50" width="68" height="18" rx="3" fill="rgba(192,132,252,0.12)" stroke="#c084fc"/>
-      <text x="60" y="62" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#c084fc">parent skill</text>
-      <line x1="60" y1="70" x2="60" y2="76" stroke="#c084fc" stroke-opacity="0.6"/>
-      <rect x="26" y="78" width="68" height="18" rx="3" fill="#181818" stroke="#c084fc"/>
-      <text x="60" y="90" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#e4e5ef">workflow step</text>
+      <rect x="6" y="6" width="108" height="108" rx="6" fill="rgba(107,70,193,0.03)" stroke="#6B46C1" stroke-opacity="0.35" stroke-dasharray="3 2"/>
+      <text x="60" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#6B46C1">WORKFLOW</text>
+      <rect x="16" y="30" width="88" height="74" rx="8" fill="none" stroke="#6B46C1" stroke-opacity="0.5" stroke-width="1.3" stroke-dasharray="4 2"/>
+      <text x="60" y="42" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B46C1" font-weight="700">shared context</text>
+      <rect x="26" y="50" width="68" height="18" rx="3" fill="rgba(107,70,193,0.12)" stroke="#6B46C1"/>
+      <text x="60" y="62" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#6B46C1">parent skill</text>
+      <line x1="60" y1="70" x2="60" y2="76" stroke="#6B46C1" stroke-opacity="0.6"/>
+      <rect x="26" y="78" width="68" height="18" rx="3" fill="#FFFFFF" stroke="#6B46C1"/>
+      <text x="60" y="90" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#21211E">workflow step</text>
 
-      <rect x="126" y="6" width="108" height="108" rx="6" fill="rgba(121,234,32,0.03)" stroke="#79EA20" stroke-opacity="0.35" stroke-dasharray="3 2"/>
-      <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">STANDALONE</text>
-      <rect x="134" y="30" width="50" height="26" rx="5" fill="none" stroke="#666" stroke-dasharray="2 2"/>
-      <text x="159" y="45" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9ea3ba">parent ctx</text>
-      <path d="M 175,56 Q 195,56 195,72" fill="none" stroke="#FFA500" stroke-width="1.3" stroke-dasharray="3 2"/>
-      <polygon points="192,70 195,76 198,70" fill="#FFA500"/>
-      <rect x="170" y="70" width="58" height="36" rx="6" fill="rgba(255,165,0,0.05)" stroke="#FFA500" stroke-width="1.3"/>
-      <text x="199" y="82" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#FFA500" font-weight="700">fresh ctx</text>
-      <rect x="177" y="86" width="44" height="16" rx="2" fill="#181818" stroke="#79EA20"/>
-      <text x="199" y="97" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#e4e5ef">skill</text>
+      <rect x="126" y="6" width="108" height="108" rx="6" fill="rgba(45,140,60,0.03)" stroke="#2D8C3C" stroke-opacity="0.35" stroke-dasharray="3 2"/>
+      <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">STANDALONE</text>
+      <rect x="134" y="30" width="50" height="26" rx="5" fill="none" stroke="#D4D4CC" stroke-dasharray="2 2"/>
+      <text x="159" y="45" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B6B63">parent ctx</text>
+      <path d="M 175,56 Q 195,56 195,72" fill="none" stroke="#B26B00" stroke-width="1.3" stroke-dasharray="3 2"/>
+      <polygon points="192,70 195,76 198,70" fill="#B26B00"/>
+      <rect x="170" y="70" width="58" height="36" rx="6" fill="rgba(178,107,0,0.05)" stroke="#B26B00" stroke-width="1.3"/>
+      <text x="199" y="82" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#B26B00" font-weight="700">fresh ctx</text>
+      <rect x="177" y="86" width="44" height="16" rx="2" fill="#FFFFFF" stroke="#2D8C3C"/>
+      <text x="199" y="97" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#21211E">skill</text>
     </svg>
   </div>
   <div class="feature-text">
@@ -2110,27 +2113,27 @@ LESSON_CONTENT['decision'] = `
 <div class="feature-card dq">
   <div class="feature-visual">
     <svg viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="6" y="6" width="108" height="108" rx="6" fill="rgba(192,132,252,0.03)" stroke="#c084fc" stroke-opacity="0.35" stroke-dasharray="3 2"/>
-      <text x="60" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#c084fc">WORKFLOW</text>
-      <rect x="20" y="30" width="80" height="64" rx="4" fill="rgba(192,132,252,0.08)" stroke="#c084fc"/>
-      <text x="60" y="44" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#c084fc" font-weight="700">parent skill</text>
-      <rect x="32" y="52" width="56" height="20" rx="2" fill="rgba(255,107,107,0.1)" stroke="#FF6B6B" stroke-dasharray="3 2"/>
-      <text x="60" y="65" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#FF6B6B" font-weight="700">removed</text>
-      <line x1="32" y1="52" x2="88" y2="72" stroke="#FF6B6B" stroke-width="2"/>
-      <line x1="88" y1="52" x2="32" y2="72" stroke="#FF6B6B" stroke-width="2"/>
-      <text x="60" y="87" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#FF6B6B" font-weight="700">breaks</text>
-      <text x="60" y="110" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#c084fc" opacity="0.75">tightly coupled</text>
+      <rect x="6" y="6" width="108" height="108" rx="6" fill="rgba(107,70,193,0.03)" stroke="#6B46C1" stroke-opacity="0.35" stroke-dasharray="3 2"/>
+      <text x="60" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#6B46C1">WORKFLOW</text>
+      <rect x="20" y="30" width="80" height="64" rx="4" fill="rgba(107,70,193,0.08)" stroke="#6B46C1"/>
+      <text x="60" y="44" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#6B46C1" font-weight="700">parent skill</text>
+      <rect x="32" y="52" width="56" height="20" rx="2" fill="rgba(179,64,42,0.1)" stroke="#B3402A" stroke-dasharray="3 2"/>
+      <text x="60" y="65" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#B3402A" font-weight="700">removed</text>
+      <line x1="32" y1="52" x2="88" y2="72" stroke="#B3402A" stroke-width="2"/>
+      <line x1="88" y1="52" x2="32" y2="72" stroke="#B3402A" stroke-width="2"/>
+      <text x="60" y="87" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#B3402A" font-weight="700">breaks</text>
+      <text x="60" y="110" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B46C1" opacity="0.75">tightly coupled</text>
 
-      <rect x="126" y="6" width="108" height="108" rx="6" fill="rgba(121,234,32,0.03)" stroke="#79EA20" stroke-opacity="0.35" stroke-dasharray="3 2"/>
-      <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">STANDALONE</text>
-      <rect x="138" y="32" width="56" height="30" rx="4" fill="rgba(121,234,32,0.06)" stroke="#79EA20"/>
-      <text x="166" y="52" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#79EA20" font-weight="700">parent skill</text>
-      <path d="M 196,47 L 212,47" stroke="#79EA20" stroke-width="1.4"/>
-      <polygon points="208,43 216,47 208,51" fill="#79EA20"/>
-      <rect x="198" y="64" width="36" height="24" rx="3" fill="#181818" stroke="#79EA20" stroke-width="1.5"/>
-      <text x="216" y="79" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#79EA20" font-weight="700">extracted</text>
-      <text x="166" y="82" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#79EA20" font-weight="700">still works &#10003;</text>
-      <text x="180" y="110" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#79EA20" opacity="0.75">extractable</text>
+      <rect x="126" y="6" width="108" height="108" rx="6" fill="rgba(45,140,60,0.03)" stroke="#2D8C3C" stroke-opacity="0.35" stroke-dasharray="3 2"/>
+      <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">STANDALONE</text>
+      <rect x="138" y="32" width="56" height="30" rx="4" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C"/>
+      <text x="166" y="52" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#2D8C3C" font-weight="700">parent skill</text>
+      <path d="M 196,47 L 212,47" stroke="#2D8C3C" stroke-width="1.4"/>
+      <polygon points="208,43 216,47 208,51" fill="#2D8C3C"/>
+      <rect x="198" y="64" width="36" height="24" rx="3" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.5"/>
+      <text x="216" y="79" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#2D8C3C" font-weight="700">extracted</text>
+      <text x="166" y="82" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" fill="#2D8C3C" font-weight="700">still works &#10003;</text>
+      <text x="180" y="110" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#2D8C3C" opacity="0.75">extractable</text>
     </svg>
   </div>
   <div class="feature-text">
@@ -2361,87 +2364,87 @@ LESSON_CONTENT['chain'] = `
 <svg viewBox="0 0 880 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:880px" aria-label="Skill system routing and chaining diagram">
   <defs>
     <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#79EA20"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2D8C3C"/>
     </marker>
   </defs>
 
   <!-- Top layer label -->
-  <text x="440" y="20" text-anchor="middle" fill="#c084fc" font-size="12" font-weight="700">ORCHESTRATORS</text>
-  <text x="440" y="36" text-anchor="middle" fill="#4a4d60" font-size="10">one per domain &middot; routes intent to nested workflows</text>
+  <text x="440" y="20" text-anchor="middle" fill="#6B46C1" font-size="12" font-weight="700">ORCHESTRATORS</text>
+  <text x="440" y="36" text-anchor="middle" fill="#9A9A90" font-size="10">one per domain &middot; routes intent to nested workflows</text>
 
   <!-- Orchestrator A -->
-  <rect x="20" y="50" width="260" height="200" rx="12" fill="rgba(192,132,252,.06)" stroke="#c084fc" stroke-width="1.5"/>
-  <text x="150" y="72" text-anchor="middle" fill="#c084fc" font-size="11" font-weight="700">ORCHESTRATOR A</text>
-  <text x="150" y="92" text-anchor="middle" fill="#9ea3ba" font-size="10" font-style="italic">e.g., content-authoring domain</text>
-  <text x="150" y="116" text-anchor="middle" fill="#4a4d60" font-size="9" text-transform="uppercase">nested workflows (content-type specific)</text>
-  <rect x="36" y="126" width="228" height="28" rx="5" fill="#131313" stroke="#2a2a2a"/>
-  <text x="150" y="144" text-anchor="middle" fill="#e4e5ef" font-size="11" font-family="'SF Mono',monospace">workflow-1.md</text>
-  <rect x="36" y="160" width="228" height="28" rx="5" fill="#131313" stroke="#2a2a2a"/>
-  <text x="150" y="178" text-anchor="middle" fill="#e4e5ef" font-size="11" font-family="'SF Mono',monospace">workflow-2.md</text>
-  <rect x="36" y="194" width="228" height="28" rx="5" fill="#131313" stroke="#2a2a2a"/>
-  <text x="150" y="212" text-anchor="middle" fill="#e4e5ef" font-size="11" font-family="'SF Mono',monospace">workflow-3.md</text>
-  <text x="150" y="240" text-anchor="middle" fill="#9ea3ba" font-size="10">delegates out &darr;</text>
+  <rect x="20" y="50" width="260" height="200" rx="12" fill="rgba(107,70,193,.06)" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="150" y="72" text-anchor="middle" fill="#6B46C1" font-size="11" font-weight="700">ORCHESTRATOR A</text>
+  <text x="150" y="92" text-anchor="middle" fill="#6B6B63" font-size="10" font-style="italic">e.g., content-authoring domain</text>
+  <text x="150" y="116" text-anchor="middle" fill="#9A9A90" font-size="9" text-transform="uppercase">nested workflows (content-type specific)</text>
+  <rect x="36" y="126" width="228" height="28" rx="5" fill="#F4F4F0" stroke="#E2E2DC"/>
+  <text x="150" y="144" text-anchor="middle" fill="#21211E" font-size="11" font-family="'SF Mono',monospace">workflow-1.md</text>
+  <rect x="36" y="160" width="228" height="28" rx="5" fill="#F4F4F0" stroke="#E2E2DC"/>
+  <text x="150" y="178" text-anchor="middle" fill="#21211E" font-size="11" font-family="'SF Mono',monospace">workflow-2.md</text>
+  <rect x="36" y="194" width="228" height="28" rx="5" fill="#F4F4F0" stroke="#E2E2DC"/>
+  <text x="150" y="212" text-anchor="middle" fill="#21211E" font-size="11" font-family="'SF Mono',monospace">workflow-3.md</text>
+  <text x="150" y="240" text-anchor="middle" fill="#6B6B63" font-size="10">delegates out &darr;</text>
 
   <!-- Orchestrator B -->
-  <rect x="310" y="50" width="260" height="200" rx="12" fill="rgba(192,132,252,.06)" stroke="#c084fc" stroke-width="1.5"/>
-  <text x="440" y="72" text-anchor="middle" fill="#c084fc" font-size="11" font-weight="700">ORCHESTRATOR B</text>
-  <text x="440" y="92" text-anchor="middle" fill="#9ea3ba" font-size="10" font-style="italic">e.g., video-production domain</text>
-  <text x="440" y="116" text-anchor="middle" fill="#4a4d60" font-size="9" text-transform="uppercase">nested workflows</text>
-  <rect x="326" y="126" width="228" height="28" rx="5" fill="#131313" stroke="#2a2a2a"/>
-  <text x="440" y="144" text-anchor="middle" fill="#e4e5ef" font-size="11" font-family="'SF Mono',monospace">workflow-1.md</text>
-  <rect x="326" y="160" width="228" height="28" rx="5" fill="#131313" stroke="#2a2a2a"/>
-  <text x="440" y="178" text-anchor="middle" fill="#e4e5ef" font-size="11" font-family="'SF Mono',monospace">workflow-2.md</text>
-  <text x="440" y="214" text-anchor="middle" fill="#9ea3ba" font-size="10">delegates out &darr;</text>
+  <rect x="310" y="50" width="260" height="200" rx="12" fill="rgba(107,70,193,.06)" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="440" y="72" text-anchor="middle" fill="#6B46C1" font-size="11" font-weight="700">ORCHESTRATOR B</text>
+  <text x="440" y="92" text-anchor="middle" fill="#6B6B63" font-size="10" font-style="italic">e.g., video-production domain</text>
+  <text x="440" y="116" text-anchor="middle" fill="#9A9A90" font-size="9" text-transform="uppercase">nested workflows</text>
+  <rect x="326" y="126" width="228" height="28" rx="5" fill="#F4F4F0" stroke="#E2E2DC"/>
+  <text x="440" y="144" text-anchor="middle" fill="#21211E" font-size="11" font-family="'SF Mono',monospace">workflow-1.md</text>
+  <rect x="326" y="160" width="228" height="28" rx="5" fill="#F4F4F0" stroke="#E2E2DC"/>
+  <text x="440" y="178" text-anchor="middle" fill="#21211E" font-size="11" font-family="'SF Mono',monospace">workflow-2.md</text>
+  <text x="440" y="214" text-anchor="middle" fill="#6B6B63" font-size="10">delegates out &darr;</text>
 
   <!-- Orchestrator C -->
-  <rect x="600" y="50" width="260" height="200" rx="12" fill="rgba(192,132,252,.06)" stroke="#c084fc" stroke-width="1.5"/>
-  <text x="730" y="72" text-anchor="middle" fill="#c084fc" font-size="11" font-weight="700">ORCHESTRATOR C</text>
-  <text x="730" y="92" text-anchor="middle" fill="#9ea3ba" font-size="10" font-style="italic">e.g., ad-campaign domain</text>
-  <text x="730" y="116" text-anchor="middle" fill="#4a4d60" font-size="9" text-transform="uppercase">nested workflows</text>
-  <rect x="616" y="126" width="228" height="28" rx="5" fill="#131313" stroke="#2a2a2a"/>
-  <text x="730" y="144" text-anchor="middle" fill="#e4e5ef" font-size="11" font-family="'SF Mono',monospace">workflow-1.md</text>
-  <rect x="616" y="160" width="228" height="28" rx="5" fill="#131313" stroke="#2a2a2a"/>
-  <text x="730" y="178" text-anchor="middle" fill="#e4e5ef" font-size="11" font-family="'SF Mono',monospace">workflow-2.md</text>
-  <text x="730" y="214" text-anchor="middle" fill="#9ea3ba" font-size="10">delegates out &darr;</text>
+  <rect x="600" y="50" width="260" height="200" rx="12" fill="rgba(107,70,193,.06)" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="730" y="72" text-anchor="middle" fill="#6B46C1" font-size="11" font-weight="700">ORCHESTRATOR C</text>
+  <text x="730" y="92" text-anchor="middle" fill="#6B6B63" font-size="10" font-style="italic">e.g., ad-campaign domain</text>
+  <text x="730" y="116" text-anchor="middle" fill="#9A9A90" font-size="9" text-transform="uppercase">nested workflows</text>
+  <rect x="616" y="126" width="228" height="28" rx="5" fill="#F4F4F0" stroke="#E2E2DC"/>
+  <text x="730" y="144" text-anchor="middle" fill="#21211E" font-size="11" font-family="'SF Mono',monospace">workflow-1.md</text>
+  <rect x="616" y="160" width="228" height="28" rx="5" fill="#F4F4F0" stroke="#E2E2DC"/>
+  <text x="730" y="178" text-anchor="middle" fill="#21211E" font-size="11" font-family="'SF Mono',monospace">workflow-2.md</text>
+  <text x="730" y="214" text-anchor="middle" fill="#6B6B63" font-size="10">delegates out &darr;</text>
 
   <!-- Delegation arrows: each orchestrator fans out to multiple shared skills -->
   <!-- A -> shared 1, 2 -->
-  <line x1="110" y1="250" x2="120" y2="380" stroke="#79EA20" stroke-width="1.3" marker-end="url(#arr2)"/>
-  <line x1="180" y1="250" x2="340" y2="380" stroke="#79EA20" stroke-width="1.3" marker-end="url(#arr2)"/>
-  <line x1="250" y1="250" x2="570" y2="380" stroke="#79EA20" stroke-width="1.3" marker-end="url(#arr2)"/>
+  <line x1="110" y1="250" x2="120" y2="380" stroke="#2D8C3C" stroke-width="1.3" marker-end="url(#arr2)"/>
+  <line x1="180" y1="250" x2="340" y2="380" stroke="#2D8C3C" stroke-width="1.3" marker-end="url(#arr2)"/>
+  <line x1="250" y1="250" x2="570" y2="380" stroke="#2D8C3C" stroke-width="1.3" marker-end="url(#arr2)"/>
   <!-- B -> shared 1, 2, 3 -->
-  <line x1="360" y1="250" x2="140" y2="380" stroke="#79EA20" stroke-width="1.3" marker-end="url(#arr2)"/>
-  <line x1="440" y1="250" x2="360" y2="380" stroke="#79EA20" stroke-width="1.3" marker-end="url(#arr2)"/>
-  <line x1="520" y1="250" x2="590" y2="380" stroke="#79EA20" stroke-width="1.3" marker-end="url(#arr2)"/>
-  <line x1="470" y1="250" x2="760" y2="380" stroke="#79EA20" stroke-width="1.3" marker-end="url(#arr2)"/>
+  <line x1="360" y1="250" x2="140" y2="380" stroke="#2D8C3C" stroke-width="1.3" marker-end="url(#arr2)"/>
+  <line x1="440" y1="250" x2="360" y2="380" stroke="#2D8C3C" stroke-width="1.3" marker-end="url(#arr2)"/>
+  <line x1="520" y1="250" x2="590" y2="380" stroke="#2D8C3C" stroke-width="1.3" marker-end="url(#arr2)"/>
+  <line x1="470" y1="250" x2="760" y2="380" stroke="#2D8C3C" stroke-width="1.3" marker-end="url(#arr2)"/>
   <!-- C -> shared 2, 3 -->
-  <line x1="650" y1="250" x2="160" y2="380" stroke="#79EA20" stroke-width="1.3" marker-end="url(#arr2)"/>
-  <line x1="720" y1="250" x2="380" y2="380" stroke="#79EA20" stroke-width="1.3" marker-end="url(#arr2)"/>
-  <line x1="790" y1="250" x2="780" y2="380" stroke="#79EA20" stroke-width="1.3" marker-end="url(#arr2)"/>
+  <line x1="650" y1="250" x2="160" y2="380" stroke="#2D8C3C" stroke-width="1.3" marker-end="url(#arr2)"/>
+  <line x1="720" y1="250" x2="380" y2="380" stroke="#2D8C3C" stroke-width="1.3" marker-end="url(#arr2)"/>
+  <line x1="790" y1="250" x2="780" y2="380" stroke="#2D8C3C" stroke-width="1.3" marker-end="url(#arr2)"/>
 
   <!-- Shared layer label -->
-  <text x="440" y="340" text-anchor="middle" fill="#79EA20" font-size="12" font-weight="700">SHARED STANDALONE SKILLS</text>
-  <text x="440" y="356" text-anchor="middle" fill="#4a4d60" font-size="10">universal &middot; many orchestrators pull from these</text>
+  <text x="440" y="340" text-anchor="middle" fill="#2D8C3C" font-size="12" font-weight="700">SHARED STANDALONE SKILLS</text>
+  <text x="440" y="356" text-anchor="middle" fill="#9A9A90" font-size="10">universal &middot; many orchestrators pull from these</text>
 
   <!-- Shared Skill 1 -->
-  <rect x="30" y="374" width="230" height="54" rx="10" fill="rgba(121,234,32,.1)" stroke="#79EA20" stroke-width="1.5"/>
-  <text x="145" y="398" text-anchor="middle" fill="#e4e5ef" font-size="13" font-weight="600">Shared Skill A</text>
-  <text x="145" y="416" text-anchor="middle" fill="#9ea3ba" font-size="10">universal opening / claim pattern</text>
+  <rect x="30" y="374" width="230" height="54" rx="10" fill="rgba(45,140,60,.1)" stroke="#2D8C3C" stroke-width="1.5"/>
+  <text x="145" y="398" text-anchor="middle" fill="#21211E" font-size="13" font-weight="600">Shared Skill A</text>
+  <text x="145" y="416" text-anchor="middle" fill="#6B6B63" font-size="10">universal opening / claim pattern</text>
 
   <!-- Shared Skill 2 -->
-  <rect x="280" y="374" width="230" height="54" rx="10" fill="rgba(121,234,32,.1)" stroke="#79EA20" stroke-width="1.5"/>
-  <text x="395" y="398" text-anchor="middle" fill="#e4e5ef" font-size="13" font-weight="600">Shared Skill B</text>
-  <text x="395" y="416" text-anchor="middle" fill="#9ea3ba" font-size="10">teaching / explanation framework</text>
+  <rect x="280" y="374" width="230" height="54" rx="10" fill="rgba(45,140,60,.1)" stroke="#2D8C3C" stroke-width="1.5"/>
+  <text x="395" y="398" text-anchor="middle" fill="#21211E" font-size="13" font-weight="600">Shared Skill B</text>
+  <text x="395" y="416" text-anchor="middle" fill="#6B6B63" font-size="10">teaching / explanation framework</text>
 
   <!-- Shared Skill 3 -->
-  <rect x="530" y="374" width="230" height="54" rx="10" fill="rgba(121,234,32,.1)" stroke="#79EA20" stroke-width="2"/>
-  <text x="645" y="398" text-anchor="middle" fill="#e4e5ef" font-size="13" font-weight="600">Shared Skill C <tspan fill="#FFA500" font-size="10" font-weight="700">&nbsp;fork context</tspan></text>
-  <text x="645" y="416" text-anchor="middle" fill="#9ea3ba" font-size="10">voice cleanup, needs fresh read</text>
+  <rect x="530" y="374" width="230" height="54" rx="10" fill="rgba(45,140,60,.1)" stroke="#2D8C3C" stroke-width="2"/>
+  <text x="645" y="398" text-anchor="middle" fill="#21211E" font-size="13" font-weight="600">Shared Skill C <tspan fill="#B26B00" font-size="10" font-weight="700">&nbsp;fork context</tspan></text>
+  <text x="645" y="416" text-anchor="middle" fill="#6B6B63" font-size="10">voice cleanup, needs fresh read</text>
 
   <!-- Bottom caption -->
-  <text x="440" y="460" text-anchor="middle" fill="#e4e5ef" font-size="12" font-weight="600">Read the lines.</text>
-  <text x="440" y="478" text-anchor="middle" fill="#9ea3ba" font-size="11">Workflows inside a box = one parent. Arrows converging on a skill = shared.</text>
-  <text x="440" y="494" text-anchor="middle" fill="#9ea3ba" font-size="11">That convergence is the signal it should be a standalone, not nested.</text>
+  <text x="440" y="460" text-anchor="middle" fill="#21211E" font-size="12" font-weight="600">Read the lines.</text>
+  <text x="440" y="478" text-anchor="middle" fill="#6B6B63" font-size="11">Workflows inside a box = one parent. Arrows converging on a skill = shared.</text>
+  <text x="440" y="494" text-anchor="middle" fill="#6B6B63" font-size="11">That convergence is the signal it should be a standalone, not nested.</text>
 </svg>
 </div>
 
@@ -2492,15 +2495,15 @@ LESSON_CONTENT['progression'] = `
 
   <div class="evo-panel active" data-extab-panel="evo-1" data-extab-group="evo">
     <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M 230,52 L 330,52 L 346,36 L 470,36 L 470,56 L 230,56 Z" fill="#5cb818"/>
-      <rect x="230" y="56" width="240" height="180" rx="8" fill="rgba(121,234,32,0.08)" stroke="#79EA20" stroke-width="1.5"/>
-      <text x="350" y="86" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#79EA20">write-newsletter/</text>
+      <path d="M 230,52 L 330,52 L 346,36 L 470,36 L 470,56 L 230,56 Z" fill="#256F30"/>
+      <rect x="230" y="56" width="240" height="180" rx="8" fill="rgba(45,140,60,0.08)" stroke="#2D8C3C" stroke-width="1.5"/>
+      <text x="350" y="86" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#2D8C3C">write-newsletter/</text>
       <g transform="translate(280, 130)">
-        <path d="M 0,0 L 108,0 L 132,22 L 132,90 L 0,90 Z" fill="#181818" stroke="#79EA20" stroke-width="1.5"/>
-        <path d="M 108,0 L 108,22 L 132,22" fill="none" stroke="#79EA20" stroke-width="1.5"/>
-        <text x="66" y="52" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#e4e5ef">SKILL.md</text>
-        <line x1="14" y1="64" x2="110" y2="64" stroke="#2a2a2a" stroke-width="1"/>
-        <line x1="14" y1="74" x2="90" y2="74" stroke="#2a2a2a" stroke-width="1"/>
+        <path d="M 0,0 L 108,0 L 132,22 L 132,90 L 0,90 Z" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.5"/>
+        <path d="M 108,0 L 108,22 L 132,22" fill="none" stroke="#2D8C3C" stroke-width="1.5"/>
+        <text x="66" y="52" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#21211E">SKILL.md</text>
+        <line x1="14" y1="64" x2="110" y2="64" stroke="#E2E2DC" stroke-width="1"/>
+        <line x1="14" y1="74" x2="90" y2="74" stroke="#E2E2DC" stroke-width="1"/>
       </g>
     </svg>
     <p class="evo-caption"><span class="pill">SINGLE SKILL</span>One folder, one file, one job. Fast to build, easy to understand, easy to change. Most skills start here and many never need to leave.</p>
@@ -2508,23 +2511,23 @@ LESSON_CONTENT['progression'] = `
 
   <div class="evo-panel" data-extab-panel="evo-2" data-extab-group="evo">
     <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M 170,38 L 270,38 L 286,22 L 530,22 L 530,42 L 170,42 Z" fill="#5cb818"/>
-      <rect x="170" y="42" width="360" height="262" rx="8" fill="rgba(121,234,32,0.08)" stroke="#79EA20" stroke-width="1.5"/>
-      <text x="350" y="68" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#79EA20">write-content/</text>
+      <path d="M 170,38 L 270,38 L 286,22 L 530,22 L 530,42 L 170,42 Z" fill="#256F30"/>
+      <rect x="170" y="42" width="360" height="262" rx="8" fill="rgba(45,140,60,0.08)" stroke="#2D8C3C" stroke-width="1.5"/>
+      <text x="350" y="68" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#2D8C3C">write-content/</text>
       <g transform="translate(200, 86)">
-        <path d="M 0,0 L 78,0 L 96,16 L 96,46 L 0,46 Z" fill="#181818" stroke="#79EA20" stroke-width="1.3"/>
-        <text x="48" y="29" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="11" font-weight="700" fill="#e4e5ef">SKILL.md</text>
+        <path d="M 0,0 L 78,0 L 96,16 L 96,46 L 0,46 Z" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.3"/>
+        <text x="48" y="29" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="11" font-weight="700" fill="#21211E">SKILL.md</text>
       </g>
-      <path d="M 200,156 L 260,156 L 272,142 L 500,142 L 500,160 L 200,160 Z" fill="#5cb818" opacity="0.55"/>
-      <rect x="200" y="160" width="300" height="130" rx="6" fill="rgba(121,234,32,0.04)" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.2"/>
-      <text x="350" y="184" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="11" font-weight="700" fill="#79EA20">workflows/</text>
-      <g font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#e4e5ef">
-        <g transform="translate(213, 200)"><rect width="66" height="28" rx="4" fill="#181818" stroke="#79EA20" stroke-opacity="0.7" stroke-width="1.2"/><text x="33" y="18" text-anchor="middle">newsletter</text></g>
-        <g transform="translate(285, 200)"><rect width="66" height="28" rx="4" fill="#181818" stroke="#79EA20" stroke-opacity="0.7" stroke-width="1.2"/><text x="33" y="18" text-anchor="middle">email</text></g>
-        <g transform="translate(357, 200)"><rect width="66" height="28" rx="4" fill="#181818" stroke="#79EA20" stroke-opacity="0.7" stroke-width="1.2"/><text x="33" y="18" text-anchor="middle">thread</text></g>
-        <g transform="translate(429, 200)"><rect width="66" height="28" rx="4" fill="#181818" stroke="#79EA20" stroke-opacity="0.7" stroke-width="1.2"/><text x="33" y="18" text-anchor="middle">carousel</text></g>
-        <g transform="translate(249, 244)"><rect width="66" height="28" rx="4" fill="#181818" stroke="#79EA20" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="3 2"/><text x="33" y="18" text-anchor="middle" fill="#9ea3ba">vsl</text></g>
-        <g transform="translate(393, 244)"><rect width="66" height="28" rx="4" fill="#181818" stroke="#79EA20" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="3 2"/><text x="33" y="18" text-anchor="middle" fill="#9ea3ba">tweet</text></g>
+      <path d="M 200,156 L 260,156 L 272,142 L 500,142 L 500,160 L 200,160 Z" fill="#256F30" opacity="0.55"/>
+      <rect x="200" y="160" width="300" height="130" rx="6" fill="rgba(45,140,60,0.04)" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.2"/>
+      <text x="350" y="184" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="11" font-weight="700" fill="#2D8C3C">workflows/</text>
+      <g font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#21211E">
+        <g transform="translate(213, 200)"><rect width="66" height="28" rx="4" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.7" stroke-width="1.2"/><text x="33" y="18" text-anchor="middle">newsletter</text></g>
+        <g transform="translate(285, 200)"><rect width="66" height="28" rx="4" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.7" stroke-width="1.2"/><text x="33" y="18" text-anchor="middle">email</text></g>
+        <g transform="translate(357, 200)"><rect width="66" height="28" rx="4" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.7" stroke-width="1.2"/><text x="33" y="18" text-anchor="middle">thread</text></g>
+        <g transform="translate(429, 200)"><rect width="66" height="28" rx="4" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.7" stroke-width="1.2"/><text x="33" y="18" text-anchor="middle">carousel</text></g>
+        <g transform="translate(249, 244)"><rect width="66" height="28" rx="4" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="3 2"/><text x="33" y="18" text-anchor="middle" fill="#6B6B63">vsl</text></g>
+        <g transform="translate(393, 244)"><rect width="66" height="28" rx="4" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="3 2"/><text x="33" y="18" text-anchor="middle" fill="#6B6B63">tweet</text></g>
       </g>
     </svg>
     <p class="evo-caption"><span class="pill">WORKFLOWS EMERGE</span>Variants share a domain so <code>SKILL.md</code> shortens into a router. Each content type becomes its own workflow file. Adding a new variant is now just a new file, not a rewrite.</p>
@@ -2532,41 +2535,41 @@ LESSON_CONTENT['progression'] = `
 
   <div class="evo-panel" data-extab-panel="evo-3" data-extab-group="evo">
     <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M 40,38 L 130,38 L 146,22 L 310,22 L 310,42 L 40,42 Z" fill="#5cb818"/>
-      <rect x="40" y="42" width="270" height="230" rx="8" fill="rgba(121,234,32,0.08)" stroke="#79EA20" stroke-width="1.5"/>
-      <text x="175" y="68" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#79EA20">write-content/</text>
+      <path d="M 40,38 L 130,38 L 146,22 L 310,22 L 310,42 L 40,42 Z" fill="#256F30"/>
+      <rect x="40" y="42" width="270" height="230" rx="8" fill="rgba(45,140,60,0.08)" stroke="#2D8C3C" stroke-width="1.5"/>
+      <text x="175" y="68" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#2D8C3C">write-content/</text>
       <g transform="translate(70, 86)">
-        <path d="M 0,0 L 78,0 L 96,16 L 96,46 L 0,46 Z" fill="#181818" stroke="#79EA20" stroke-width="1.3"/>
-        <text x="48" y="29" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="11" font-weight="700" fill="#e4e5ef">SKILL.md</text>
+        <path d="M 0,0 L 78,0 L 96,16 L 96,46 L 0,46 Z" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.3"/>
+        <text x="48" y="29" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="11" font-weight="700" fill="#21211E">SKILL.md</text>
       </g>
       <g transform="translate(70, 146)">
-        <path d="M 0,0 L 180,0 L 180,106 L 0,106 Z" fill="rgba(121,234,32,0.04)" stroke="#79EA20" stroke-opacity="0.55" stroke-width="1.2"/>
-        <text x="90" y="18" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#79EA20">workflows/</text>
-        <g font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#e4e5ef">
-          <g transform="translate(12, 28)"><rect width="72" height="22" rx="3" fill="#181818" stroke="#79EA20" stroke-opacity="0.6"/><text x="36" y="15" text-anchor="middle">newsletter</text></g>
-          <g transform="translate(92, 28)"><rect width="72" height="22" rx="3" fill="#181818" stroke="#79EA20" stroke-opacity="0.6"/><text x="36" y="15" text-anchor="middle">email</text></g>
-          <g transform="translate(12, 58)"><rect width="72" height="22" rx="3" fill="#181818" stroke="#79EA20" stroke-opacity="0.6"/><text x="36" y="15" text-anchor="middle">thread</text></g>
-          <g transform="translate(92, 58)"><rect width="72" height="22" rx="3" fill="#181818" stroke="#79EA20" stroke-opacity="0.6"/><text x="36" y="15" text-anchor="middle">carousel</text></g>
+        <path d="M 0,0 L 180,0 L 180,106 L 0,106 Z" fill="rgba(45,140,60,0.04)" stroke="#2D8C3C" stroke-opacity="0.55" stroke-width="1.2"/>
+        <text x="90" y="18" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#2D8C3C">workflows/</text>
+        <g font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#21211E">
+          <g transform="translate(12, 28)"><rect width="72" height="22" rx="3" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.6"/><text x="36" y="15" text-anchor="middle">newsletter</text></g>
+          <g transform="translate(92, 28)"><rect width="72" height="22" rx="3" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.6"/><text x="36" y="15" text-anchor="middle">email</text></g>
+          <g transform="translate(12, 58)"><rect width="72" height="22" rx="3" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.6"/><text x="36" y="15" text-anchor="middle">thread</text></g>
+          <g transform="translate(92, 58)"><rect width="72" height="22" rx="3" fill="#FFFFFF" stroke="#2D8C3C" stroke-opacity="0.6"/><text x="36" y="15" text-anchor="middle">carousel</text></g>
         </g>
       </g>
 
       <g>
-        <path d="M 370,54 L 436,54 L 448,42 L 640,42 L 640,58 L 370,58 Z" fill="#5cb818"/>
-        <rect x="370" y="58" width="270" height="50" rx="6" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="1.3"/>
-        <text x="505" y="90" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#79EA20">write-hook/</text>
+        <path d="M 370,54 L 436,54 L 448,42 L 640,42 L 640,58 L 370,58 Z" fill="#256F30"/>
+        <rect x="370" y="58" width="270" height="50" rx="6" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="1.3"/>
+        <text x="505" y="90" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#2D8C3C">write-hook/</text>
       </g>
       <g>
-        <path d="M 370,128 L 436,128 L 448,116 L 640,116 L 640,132 L 370,132 Z" fill="#5cb818"/>
-        <rect x="370" y="132" width="270" height="50" rx="6" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="1.3"/>
-        <text x="505" y="164" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#79EA20">voice-cleanup/</text>
+        <path d="M 370,128 L 436,128 L 448,116 L 640,116 L 640,132 L 370,132 Z" fill="#256F30"/>
+        <rect x="370" y="132" width="270" height="50" rx="6" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="1.3"/>
+        <text x="505" y="164" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#2D8C3C">voice-cleanup/</text>
       </g>
       <g>
-        <path d="M 370,202 L 436,202 L 448,190 L 640,190 L 640,206 L 370,206 Z" fill="#5cb818"/>
-        <rect x="370" y="206" width="270" height="50" rx="6" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="1.3"/>
-        <text x="505" y="238" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#79EA20">format-platform/</text>
+        <path d="M 370,202 L 436,202 L 448,190 L 640,190 L 640,206 L 370,206 Z" fill="#256F30"/>
+        <rect x="370" y="206" width="270" height="50" rx="6" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="1.3"/>
+        <text x="505" y="238" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#2D8C3C">format-platform/</text>
       </g>
 
-      <text x="340" y="300" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="#9ea3ba" font-style="italic">shared logic moves out to its own folders</text>
+      <text x="340" y="300" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="#6B6B63" font-style="italic">shared logic moves out to its own folders</text>
     </svg>
     <p class="evo-caption"><span class="pill">SIBLINGS EXTRACT</span>Two or more workflows repeat 40%+ of the same prep. Those pieces move out to sibling folders. Now other skills can invoke them by name too.</p>
   </div>
@@ -2575,51 +2578,51 @@ LESSON_CONTENT['progression'] = `
     <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
         <marker id="evo-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M 0,0 L 10,5 L 0,10 Z" fill="#c084fc"/>
+          <path d="M 0,0 L 10,5 L 0,10 Z" fill="#6B46C1"/>
         </marker>
       </defs>
-      <path d="M 40,38 L 130,38 L 146,22 L 310,22 L 310,42 L 40,42 Z" fill="#8c5bd9"/>
-      <rect x="40" y="42" width="270" height="250" rx="8" fill="rgba(192,132,252,0.10)" stroke="#c084fc" stroke-width="1.6"/>
-      <text x="175" y="68" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#c084fc">write-content/</text>
-      <text x="175" y="86" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#c084fc" letter-spacing="1.5">ORCHESTRATOR</text>
+      <path d="M 40,38 L 130,38 L 146,22 L 310,22 L 310,42 L 40,42 Z" fill="#553098"/>
+      <rect x="40" y="42" width="270" height="250" rx="8" fill="rgba(107,70,193,0.10)" stroke="#6B46C1" stroke-width="1.6"/>
+      <text x="175" y="68" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#6B46C1">write-content/</text>
+      <text x="175" y="86" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#6B46C1" letter-spacing="1.5">ORCHESTRATOR</text>
       <g transform="translate(70, 100)">
-        <path d="M 0,0 L 78,0 L 96,16 L 96,46 L 0,46 Z" fill="#181818" stroke="#c084fc" stroke-width="1.3"/>
-        <text x="48" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#e4e5ef">SKILL.md</text>
-        <text x="48" y="36" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9ea3ba">routes only</text>
+        <path d="M 0,0 L 78,0 L 96,16 L 96,46 L 0,46 Z" fill="#FFFFFF" stroke="#6B46C1" stroke-width="1.3"/>
+        <text x="48" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#21211E">SKILL.md</text>
+        <text x="48" y="36" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#6B6B63">routes only</text>
       </g>
       <g transform="translate(70, 164)">
-        <path d="M 0,0 L 180,0 L 180,114 L 0,114 Z" fill="rgba(192,132,252,0.04)" stroke="#c084fc" stroke-opacity="0.5" stroke-width="1.2"/>
-        <text x="90" y="18" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#c084fc">workflows/</text>
-        <g font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#e4e5ef">
-          <g transform="translate(12, 28)"><rect width="156" height="18" rx="3" fill="#181818" stroke="#c084fc" stroke-opacity="0.6"/><text x="78" y="13" text-anchor="middle">newsletter</text></g>
-          <g transform="translate(12, 50)"><rect width="156" height="18" rx="3" fill="#181818" stroke="#c084fc" stroke-opacity="0.6"/><text x="78" y="13" text-anchor="middle">email</text></g>
-          <g transform="translate(12, 72)"><rect width="156" height="18" rx="3" fill="#181818" stroke="#c084fc" stroke-opacity="0.6"/><text x="78" y="13" text-anchor="middle">thread</text></g>
-          <g transform="translate(12, 94)"><rect width="156" height="18" rx="3" fill="#181818" stroke="#c084fc" stroke-opacity="0.6"/><text x="78" y="13" text-anchor="middle">carousel</text></g>
+        <path d="M 0,0 L 180,0 L 180,114 L 0,114 Z" fill="rgba(107,70,193,0.04)" stroke="#6B46C1" stroke-opacity="0.5" stroke-width="1.2"/>
+        <text x="90" y="18" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#6B46C1">workflows/</text>
+        <g font-family="SF Mono,Consolas,monospace" font-size="9" font-weight="700" fill="#21211E">
+          <g transform="translate(12, 28)"><rect width="156" height="18" rx="3" fill="#FFFFFF" stroke="#6B46C1" stroke-opacity="0.6"/><text x="78" y="13" text-anchor="middle">newsletter</text></g>
+          <g transform="translate(12, 50)"><rect width="156" height="18" rx="3" fill="#FFFFFF" stroke="#6B46C1" stroke-opacity="0.6"/><text x="78" y="13" text-anchor="middle">email</text></g>
+          <g transform="translate(12, 72)"><rect width="156" height="18" rx="3" fill="#FFFFFF" stroke="#6B46C1" stroke-opacity="0.6"/><text x="78" y="13" text-anchor="middle">thread</text></g>
+          <g transform="translate(12, 94)"><rect width="156" height="18" rx="3" fill="#FFFFFF" stroke="#6B46C1" stroke-opacity="0.6"/><text x="78" y="13" text-anchor="middle">carousel</text></g>
         </g>
       </g>
 
       <g>
-        <path d="M 440,54 L 500,54 L 512,42 L 660,42 L 660,58 L 440,58 Z" fill="#5cb818"/>
-        <rect x="440" y="58" width="220" height="50" rx="6" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="1.3"/>
-        <text x="550" y="90" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#79EA20">write-hook/</text>
+        <path d="M 440,54 L 500,54 L 512,42 L 660,42 L 660,58 L 440,58 Z" fill="#256F30"/>
+        <rect x="440" y="58" width="220" height="50" rx="6" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="1.3"/>
+        <text x="550" y="90" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#2D8C3C">write-hook/</text>
       </g>
       <g>
-        <path d="M 440,128 L 500,128 L 512,116 L 660,116 L 660,132 L 440,132 Z" fill="#5cb818"/>
-        <rect x="440" y="132" width="220" height="50" rx="6" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="1.3"/>
-        <text x="550" y="164" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#79EA20">voice-cleanup/</text>
+        <path d="M 440,128 L 500,128 L 512,116 L 660,116 L 660,132 L 440,132 Z" fill="#256F30"/>
+        <rect x="440" y="132" width="220" height="50" rx="6" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="1.3"/>
+        <text x="550" y="164" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#2D8C3C">voice-cleanup/</text>
       </g>
       <g>
-        <path d="M 440,202 L 500,202 L 512,190 L 660,190 L 660,206 L 440,206 Z" fill="#5cb818"/>
-        <rect x="440" y="206" width="220" height="50" rx="6" fill="rgba(121,234,32,0.06)" stroke="#79EA20" stroke-width="1.3"/>
-        <text x="550" y="238" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#79EA20">format-platform/</text>
+        <path d="M 440,202 L 500,202 L 512,190 L 660,190 L 660,206 L 440,206 Z" fill="#256F30"/>
+        <rect x="440" y="206" width="220" height="50" rx="6" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C" stroke-width="1.3"/>
+        <text x="550" y="238" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#2D8C3C">format-platform/</text>
       </g>
 
-      <g stroke="#c084fc" stroke-width="1.3" stroke-dasharray="4 3" fill="none" stroke-opacity="0.7">
+      <g stroke="#6B46C1" stroke-width="1.3" stroke-dasharray="4 3" fill="none" stroke-opacity="0.7">
         <path d="M 250,201 C 340,201 360,82 438,82" marker-end="url(#evo-arr)"/>
         <path d="M 250,223 C 340,223 360,156 438,156" marker-end="url(#evo-arr)"/>
         <path d="M 250,245 C 340,245 360,230 438,230" marker-end="url(#evo-arr)"/>
       </g>
-      <text x="350" y="320" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="#c084fc" font-style="italic">workflows delegate to standalone siblings</text>
+      <text x="350" y="320" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="#6B46C1" font-style="italic">workflows delegate to standalone siblings</text>
     </svg>
     <p class="evo-caption"><span class="pill">ORCHESTRATOR</span>The parent's <code>SKILL.md</code> does intent detection only. Workflows stitch the call chain together by delegating to the standalone siblings. The parent stops doing work and starts coordinating it.</p>
   </div>
@@ -2628,46 +2631,46 @@ LESSON_CONTENT['progression'] = `
     <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
         <marker id="evo-arr5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M 0,0 L 10,5 L 0,10 Z" fill="#c084fc"/>
+          <path d="M 0,0 L 10,5 L 0,10 Z" fill="#6B46C1"/>
         </marker>
       </defs>
 
       <g>
-        <path d="M 40,40 L 110,40 L 122,28 L 220,28 L 220,44 L 40,44 Z" fill="#8c5bd9"/>
-        <rect x="40" y="44" width="180" height="56" rx="6" fill="rgba(192,132,252,0.10)" stroke="#c084fc" stroke-width="1.5"/>
-        <text x="130" y="66" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#c084fc">write-content/</text>
-        <text x="130" y="86" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#c084fc" letter-spacing="1.2">ORCHESTRATOR</text>
+        <path d="M 40,40 L 110,40 L 122,28 L 220,28 L 220,44 L 40,44 Z" fill="#553098"/>
+        <rect x="40" y="44" width="180" height="56" rx="6" fill="rgba(107,70,193,0.10)" stroke="#6B46C1" stroke-width="1.5"/>
+        <text x="130" y="66" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#6B46C1">write-content/</text>
+        <text x="130" y="86" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#6B46C1" letter-spacing="1.2">ORCHESTRATOR</text>
       </g>
       <g>
-        <path d="M 260,40 L 330,40 L 342,28 L 440,28 L 440,44 L 260,44 Z" fill="#8c5bd9"/>
-        <rect x="260" y="44" width="180" height="56" rx="6" fill="rgba(192,132,252,0.10)" stroke="#c084fc" stroke-width="1.5"/>
-        <text x="350" y="66" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#c084fc">youtube-strategy/</text>
-        <text x="350" y="86" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#c084fc" letter-spacing="1.2">ORCHESTRATOR</text>
+        <path d="M 260,40 L 330,40 L 342,28 L 440,28 L 440,44 L 260,44 Z" fill="#553098"/>
+        <rect x="260" y="44" width="180" height="56" rx="6" fill="rgba(107,70,193,0.10)" stroke="#6B46C1" stroke-width="1.5"/>
+        <text x="350" y="66" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#6B46C1">youtube-strategy/</text>
+        <text x="350" y="86" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#6B46C1" letter-spacing="1.2">ORCHESTRATOR</text>
       </g>
       <g>
-        <path d="M 480,40 L 550,40 L 562,28 L 660,28 L 660,44 L 480,44 Z" fill="#8c5bd9"/>
-        <rect x="480" y="44" width="180" height="56" rx="6" fill="rgba(192,132,252,0.10)" stroke="#c084fc" stroke-width="1.5"/>
-        <text x="570" y="66" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#c084fc">ad-campaigns/</text>
-        <text x="570" y="86" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#c084fc" letter-spacing="1.2">ORCHESTRATOR</text>
+        <path d="M 480,40 L 550,40 L 562,28 L 660,28 L 660,44 L 480,44 Z" fill="#553098"/>
+        <rect x="480" y="44" width="180" height="56" rx="6" fill="rgba(107,70,193,0.10)" stroke="#6B46C1" stroke-width="1.5"/>
+        <text x="570" y="66" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#6B46C1">ad-campaigns/</text>
+        <text x="570" y="86" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#6B46C1" letter-spacing="1.2">ORCHESTRATOR</text>
       </g>
 
       <g>
-        <path d="M 40,228 L 110,228 L 122,216 L 220,216 L 220,232 L 40,232 Z" fill="#5cb818"/>
-        <rect x="40" y="232" width="180" height="56" rx="6" fill="rgba(121,234,32,0.08)" stroke="#79EA20" stroke-width="1.5"/>
-        <text x="130" y="266" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#79EA20">write-hook/</text>
+        <path d="M 40,228 L 110,228 L 122,216 L 220,216 L 220,232 L 40,232 Z" fill="#256F30"/>
+        <rect x="40" y="232" width="180" height="56" rx="6" fill="rgba(45,140,60,0.08)" stroke="#2D8C3C" stroke-width="1.5"/>
+        <text x="130" y="266" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#2D8C3C">write-hook/</text>
       </g>
       <g>
-        <path d="M 260,228 L 330,228 L 342,216 L 440,216 L 440,232 L 260,232 Z" fill="#5cb818"/>
-        <rect x="260" y="232" width="180" height="56" rx="6" fill="rgba(121,234,32,0.08)" stroke="#79EA20" stroke-width="1.5"/>
-        <text x="350" y="266" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#79EA20">voice-cleanup/</text>
+        <path d="M 260,228 L 330,228 L 342,216 L 440,216 L 440,232 L 260,232 Z" fill="#256F30"/>
+        <rect x="260" y="232" width="180" height="56" rx="6" fill="rgba(45,140,60,0.08)" stroke="#2D8C3C" stroke-width="1.5"/>
+        <text x="350" y="266" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#2D8C3C">voice-cleanup/</text>
       </g>
       <g>
-        <path d="M 480,228 L 550,228 L 562,216 L 660,216 L 660,232 L 480,232 Z" fill="#5cb818"/>
-        <rect x="480" y="232" width="180" height="56" rx="6" fill="rgba(121,234,32,0.08)" stroke="#79EA20" stroke-width="1.5"/>
-        <text x="570" y="266" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#79EA20">format-platform/</text>
+        <path d="M 480,228 L 550,228 L 562,216 L 660,216 L 660,232 L 480,232 Z" fill="#256F30"/>
+        <rect x="480" y="232" width="180" height="56" rx="6" fill="rgba(45,140,60,0.08)" stroke="#2D8C3C" stroke-width="1.5"/>
+        <text x="570" y="266" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#2D8C3C">format-platform/</text>
       </g>
 
-      <g stroke="#c084fc" stroke-width="1" stroke-dasharray="3 3" fill="none" stroke-opacity="0.55">
+      <g stroke="#6B46C1" stroke-width="1" stroke-dasharray="3 3" fill="none" stroke-opacity="0.55">
         <path d="M 130,102 L 130,228" marker-end="url(#evo-arr5)"/>
         <path d="M 145,102 L 345,228" marker-end="url(#evo-arr5)"/>
         <path d="M 160,102 L 560,228" marker-end="url(#evo-arr5)"/>
@@ -2679,7 +2682,7 @@ LESSON_CONTENT['progression'] = `
         <path d="M 570,102 L 570,228" marker-end="url(#evo-arr5)"/>
       </g>
 
-      <text x="350" y="160" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="#9ea3ba" font-style="italic">every orchestrator composes the same primitives</text>
+      <text x="350" y="160" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="#6B6B63" font-style="italic">every orchestrator composes the same primitives</text>
     </svg>
     <p class="evo-caption"><span class="pill">CROSS-DOMAIN</span>Different orchestrators across different domains all delegate to the same shared standalones. The standalones are now primitives of the library. Every new domain is just one more orchestrator composing the same pieces. This is a full <strong>skill system</strong> — Claude running the operation, not one task.</p>
   </div>
@@ -2950,63 +2953,63 @@ LESSON_CONTENT['frameworks'] = `
 
 <div class="pin-hero" style="padding:18px">
 <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#FF6B6B" letter-spacing=".5">WITHOUT FRAMEWORK</text>
-  <rect x="30" y="30" width="300" height="28" rx="6" fill="#181818" stroke="#666"/>
-  <text x="180" y="48" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="11" fill="#9ea3ba">"Write a hook"</text>
-  <line x1="180" y1="62" x2="180" y2="74" stroke="#FF6B6B" stroke-opacity="0.6" stroke-width="1.3"/>
-  <polygon points="176,71 180,77 184,71" fill="#FF6B6B"/>
+  <text x="180" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#B3402A" letter-spacing=".5">WITHOUT FRAMEWORK</text>
+  <rect x="30" y="30" width="300" height="28" rx="6" fill="#FFFFFF" stroke="#D4D4CC"/>
+  <text x="180" y="48" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="11" fill="#6B6B63">"Write a hook"</text>
+  <line x1="180" y1="62" x2="180" y2="74" stroke="#B3402A" stroke-opacity="0.6" stroke-width="1.3"/>
+  <polygon points="176,71 180,77 184,71" fill="#B3402A"/>
 
   <g>
-    <rect x="35" y="82" width="90" height="66" rx="4" fill="#181818" stroke="#FF6B6B" stroke-opacity="0.5"/>
-    <text x="80" y="95" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#666" letter-spacing="1">OUTPUT v1</text>
-    <line x1="42" y1="104" x2="118" y2="104" stroke="#444"/>
-    <line x1="42" y1="112" x2="110" y2="112" stroke="#444"/>
-    <line x1="42" y1="120" x2="100" y2="120" stroke="#444"/>
-    <line x1="42" y1="128" x2="115" y2="128" stroke="#444"/>
-    <line x1="42" y1="136" x2="92" y2="136" stroke="#444"/>
+    <rect x="35" y="82" width="90" height="66" rx="4" fill="#FFFFFF" stroke="#B3402A" stroke-opacity="0.5"/>
+    <text x="80" y="95" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9A9A90" letter-spacing="1">OUTPUT v1</text>
+    <line x1="42" y1="104" x2="118" y2="104" stroke="#D4D4CC"/>
+    <line x1="42" y1="112" x2="110" y2="112" stroke="#D4D4CC"/>
+    <line x1="42" y1="120" x2="100" y2="120" stroke="#D4D4CC"/>
+    <line x1="42" y1="128" x2="115" y2="128" stroke="#D4D4CC"/>
+    <line x1="42" y1="136" x2="92" y2="136" stroke="#D4D4CC"/>
   </g>
   <g transform="rotate(-2.5 180 115)">
-    <rect x="135" y="88" width="90" height="64" rx="4" fill="#181818" stroke="#FF6B6B" stroke-opacity="0.5"/>
-    <text x="180" y="101" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#666" letter-spacing="1">OUTPUT v2</text>
-    <line x1="142" y1="110" x2="218" y2="110" stroke="#444"/>
-    <line x1="142" y1="118" x2="208" y2="118" stroke="#444"/>
-    <line x1="142" y1="126" x2="212" y2="126" stroke="#444"/>
-    <line x1="142" y1="134" x2="200" y2="134" stroke="#444"/>
-    <line x1="142" y1="142" x2="215" y2="142" stroke="#444"/>
+    <rect x="135" y="88" width="90" height="64" rx="4" fill="#FFFFFF" stroke="#B3402A" stroke-opacity="0.5"/>
+    <text x="180" y="101" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9A9A90" letter-spacing="1">OUTPUT v2</text>
+    <line x1="142" y1="110" x2="218" y2="110" stroke="#D4D4CC"/>
+    <line x1="142" y1="118" x2="208" y2="118" stroke="#D4D4CC"/>
+    <line x1="142" y1="126" x2="212" y2="126" stroke="#D4D4CC"/>
+    <line x1="142" y1="134" x2="200" y2="134" stroke="#D4D4CC"/>
+    <line x1="142" y1="142" x2="215" y2="142" stroke="#D4D4CC"/>
   </g>
   <g transform="rotate(3 280 115)">
-    <rect x="235" y="80" width="90" height="70" rx="4" fill="#181818" stroke="#FF6B6B" stroke-opacity="0.5"/>
-    <text x="280" y="93" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#666" letter-spacing="1">OUTPUT v3</text>
-    <line x1="242" y1="102" x2="318" y2="102" stroke="#444"/>
-    <line x1="242" y1="110" x2="312" y2="110" stroke="#444"/>
-    <line x1="242" y1="118" x2="305" y2="118" stroke="#444"/>
-    <line x1="242" y1="126" x2="315" y2="126" stroke="#444"/>
-    <line x1="242" y1="134" x2="298" y2="134" stroke="#444"/>
-    <line x1="242" y1="142" x2="310" y2="142" stroke="#444"/>
+    <rect x="235" y="80" width="90" height="70" rx="4" fill="#FFFFFF" stroke="#B3402A" stroke-opacity="0.5"/>
+    <text x="280" y="93" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="7" fill="#9A9A90" letter-spacing="1">OUTPUT v3</text>
+    <line x1="242" y1="102" x2="318" y2="102" stroke="#D4D4CC"/>
+    <line x1="242" y1="110" x2="312" y2="110" stroke="#D4D4CC"/>
+    <line x1="242" y1="118" x2="305" y2="118" stroke="#D4D4CC"/>
+    <line x1="242" y1="126" x2="315" y2="126" stroke="#D4D4CC"/>
+    <line x1="242" y1="134" x2="298" y2="134" stroke="#D4D4CC"/>
+    <line x1="242" y1="142" x2="310" y2="142" stroke="#D4D4CC"/>
   </g>
-  <text x="180" y="175" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#FF6B6B" font-style="italic">wildly varied &middot; not critique-able</text>
-  <text x="180" y="192" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#9ea3ba">"Is it good?" &rarr; depends on the vibe</text>
+  <text x="180" y="175" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#B3402A" font-style="italic">wildly varied &middot; not critique-able</text>
+  <text x="180" y="192" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#6B6B63">"Is it good?" &rarr; depends on the vibe</text>
 
-  <line x1="380" y1="20" x2="380" y2="200" stroke="#2a2a2a" stroke-dasharray="3 3"/>
+  <line x1="380" y1="20" x2="380" y2="200" stroke="#E2E2DC" stroke-dasharray="3 3"/>
 
-  <text x="570" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#79EA20" letter-spacing=".5">WITH FRAMEWORK</text>
-  <rect x="420" y="30" width="300" height="28" rx="6" fill="#181818" stroke="#79EA20"/>
-  <text x="570" y="48" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="11" fill="#79EA20" font-weight="700">"Write a hook using ABT"</text>
-  <line x1="570" y1="62" x2="570" y2="74" stroke="#79EA20" stroke-opacity="0.75" stroke-width="1.3"/>
-  <polygon points="566,71 570,77 574,71" fill="#79EA20"/>
+  <text x="570" y="20" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#2D8C3C" letter-spacing=".5">WITH FRAMEWORK</text>
+  <rect x="420" y="30" width="300" height="28" rx="6" fill="#FFFFFF" stroke="#2D8C3C"/>
+  <text x="570" y="48" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="11" fill="#2D8C3C" font-weight="700">"Write a hook using ABT"</text>
+  <line x1="570" y1="62" x2="570" y2="74" stroke="#2D8C3C" stroke-opacity="0.75" stroke-width="1.3"/>
+  <polygon points="566,71 570,77 574,71" fill="#2D8C3C"/>
 
-  <rect x="420" y="82" width="300" height="72" rx="4" fill="rgba(121,234,32,0.04)" stroke="#79EA20" stroke-width="1.3"/>
-  <rect x="430" y="90" width="280" height="18" rx="2" fill="rgba(121,234,32,0.12)" stroke="#79EA20" stroke-opacity="0.6"/>
-  <text x="440" y="102" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#79EA20">AND</text>
-  <line x1="472" y1="103" x2="700" y2="103" stroke="#79EA20" stroke-opacity="0.35"/>
-  <rect x="430" y="112" width="280" height="18" rx="2" fill="rgba(255,165,0,0.12)" stroke="#FFA500" stroke-opacity="0.6"/>
-  <text x="440" y="124" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#FFA500">BUT</text>
-  <line x1="467" y1="125" x2="700" y2="125" stroke="#FFA500" stroke-opacity="0.35"/>
-  <rect x="430" y="134" width="280" height="18" rx="2" fill="rgba(91,156,246,0.12)" stroke="#5b9cf6" stroke-opacity="0.6"/>
-  <text x="440" y="146" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#5b9cf6">THEREFORE</text>
-  <line x1="502" y1="147" x2="700" y2="147" stroke="#5b9cf6" stroke-opacity="0.35"/>
-  <text x="570" y="175" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#79EA20" font-style="italic">named structure &middot; testable</text>
-  <text x="570" y="192" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#9ea3ba">"Did it actually do ABT?" &rarr; yes/no</text>
+  <rect x="420" y="82" width="300" height="72" rx="4" fill="rgba(45,140,60,0.04)" stroke="#2D8C3C" stroke-width="1.3"/>
+  <rect x="430" y="90" width="280" height="18" rx="2" fill="rgba(45,140,60,0.12)" stroke="#2D8C3C" stroke-opacity="0.6"/>
+  <text x="440" y="102" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#2D8C3C">AND</text>
+  <line x1="472" y1="103" x2="700" y2="103" stroke="#2D8C3C" stroke-opacity="0.35"/>
+  <rect x="430" y="112" width="280" height="18" rx="2" fill="rgba(178,107,0,0.12)" stroke="#B26B00" stroke-opacity="0.6"/>
+  <text x="440" y="124" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#B26B00">BUT</text>
+  <line x1="467" y1="125" x2="700" y2="125" stroke="#B26B00" stroke-opacity="0.35"/>
+  <rect x="430" y="134" width="280" height="18" rx="2" fill="rgba(59,111,176,0.12)" stroke="#3B6FB0" stroke-opacity="0.6"/>
+  <text x="440" y="146" font-family="SF Mono,Consolas,monospace" font-size="8" font-weight="700" fill="#3B6FB0">THEREFORE</text>
+  <line x1="502" y1="147" x2="700" y2="147" stroke="#3B6FB0" stroke-opacity="0.35"/>
+  <text x="570" y="175" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#2D8C3C" font-style="italic">named structure &middot; testable</text>
+  <text x="570" y="192" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#6B6B63">"Did it actually do ABT?" &rarr; yes/no</text>
 </svg>
 </div>
 
@@ -3290,53 +3293,53 @@ LESSON_CONTENT['improve'] = `
 <svg viewBox="0 0 640 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px" aria-label="Self-improvement circular loop">
   <defs>
     <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#79EA20"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2D8C3C"/>
     </marker>
   </defs>
 
   <!-- Center label -->
-  <circle cx="320" cy="220" r="65" fill="rgba(121,234,32,.08)" stroke="#79EA20" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <text x="320" y="212" text-anchor="middle" fill="#e4e5ef" font-size="13" font-weight="700">Self-Heal</text>
-  <text x="320" y="232" text-anchor="middle" fill="#9ea3ba" font-size="11">Patch after</text>
-  <text x="320" y="246" text-anchor="middle" fill="#9ea3ba" font-size="11">misbehavior</text>
+  <circle cx="320" cy="220" r="65" fill="rgba(45,140,60,.08)" stroke="#2D8C3C" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="320" y="212" text-anchor="middle" fill="#21211E" font-size="13" font-weight="700">Self-Heal</text>
+  <text x="320" y="232" text-anchor="middle" fill="#6B6B63" font-size="11">Patch after</text>
+  <text x="320" y="246" text-anchor="middle" fill="#6B6B63" font-size="11">misbehavior</text>
 
   <!-- Stage 1: Deploy -->
-  <rect x="270" y="20" width="100" height="50" rx="10" fill="#131313" stroke="#5b9cf6" stroke-width="1.5"/>
-  <text x="320" y="42" text-anchor="middle" fill="#e4e5ef" font-size="12" font-weight="600">Deploy</text>
-  <text x="320" y="58" text-anchor="middle" fill="#9ea3ba" font-size="10">skill in production</text>
+  <rect x="270" y="20" width="100" height="50" rx="10" fill="#FFFFFF" stroke="#3B6FB0" stroke-width="1.5"/>
+  <text x="320" y="42" text-anchor="middle" fill="#21211E" font-size="12" font-weight="600">Deploy</text>
+  <text x="320" y="58" text-anchor="middle" fill="#6B6B63" font-size="10">skill in production</text>
 
   <!-- Stage 2: Invoke -->
-  <rect x="500" y="110" width="120" height="50" rx="10" fill="#131313" stroke="#5b9cf6" stroke-width="1.5"/>
-  <text x="560" y="132" text-anchor="middle" fill="#e4e5ef" font-size="12" font-weight="600">User invokes</text>
-  <text x="560" y="148" text-anchor="middle" fill="#9ea3ba" font-size="10">output observed</text>
+  <rect x="500" y="110" width="120" height="50" rx="10" fill="#FFFFFF" stroke="#3B6FB0" stroke-width="1.5"/>
+  <text x="560" y="132" text-anchor="middle" fill="#21211E" font-size="12" font-weight="600">User invokes</text>
+  <text x="560" y="148" text-anchor="middle" fill="#6B6B63" font-size="10">output observed</text>
 
   <!-- Stage 3: Friction -->
-  <rect x="495" y="260" width="130" height="50" rx="10" fill="#131313" stroke="#FFA500" stroke-width="1.5"/>
-  <text x="560" y="282" text-anchor="middle" fill="#e4e5ef" font-size="12" font-weight="600">Friction signal</text>
-  <text x="560" y="298" text-anchor="middle" fill="#FFA500" font-size="10">"that was wrong"</text>
+  <rect x="495" y="260" width="130" height="50" rx="10" fill="#FFFFFF" stroke="#B26B00" stroke-width="1.5"/>
+  <text x="560" y="282" text-anchor="middle" fill="#21211E" font-size="12" font-weight="600">Friction signal</text>
+  <text x="560" y="298" text-anchor="middle" fill="#B26B00" font-size="10">"that was wrong"</text>
 
   <!-- Stage 4: Retrospective -->
-  <rect x="260" y="370" width="120" height="50" rx="10" fill="#131313" stroke="#c084fc" stroke-width="1.5"/>
-  <text x="320" y="392" text-anchor="middle" fill="#e4e5ef" font-size="12" font-weight="600">Retrospective</text>
-  <text x="320" y="408" text-anchor="middle" fill="#c084fc" font-size="10">diagnose root cause</text>
+  <rect x="260" y="370" width="120" height="50" rx="10" fill="#FFFFFF" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="320" y="392" text-anchor="middle" fill="#21211E" font-size="12" font-weight="600">Retrospective</text>
+  <text x="320" y="408" text-anchor="middle" fill="#6B46C1" font-size="10">diagnose root cause</text>
 
   <!-- Stage 5: Diff approval -->
-  <rect x="20" y="260" width="130" height="50" rx="10" fill="#131313" stroke="#c084fc" stroke-width="1.5"/>
-  <text x="85" y="282" text-anchor="middle" fill="#e4e5ef" font-size="12" font-weight="600">Diff approval</text>
-  <text x="85" y="298" text-anchor="middle" fill="#c084fc" font-size="10">before/after shown</text>
+  <rect x="20" y="260" width="130" height="50" rx="10" fill="#FFFFFF" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="85" y="282" text-anchor="middle" fill="#21211E" font-size="12" font-weight="600">Diff approval</text>
+  <text x="85" y="298" text-anchor="middle" fill="#6B46C1" font-size="10">before/after shown</text>
 
   <!-- Stage 6: Patched -->
-  <rect x="20" y="110" width="130" height="50" rx="10" fill="#131313" stroke="#79EA20" stroke-width="1.5"/>
-  <text x="85" y="132" text-anchor="middle" fill="#e4e5ef" font-size="12" font-weight="600">Patched skill</text>
-  <text x="85" y="148" text-anchor="middle" fill="#79EA20" font-size="10">root cause fixed</text>
+  <rect x="20" y="110" width="130" height="50" rx="10" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.5"/>
+  <text x="85" y="132" text-anchor="middle" fill="#21211E" font-size="12" font-weight="600">Patched skill</text>
+  <text x="85" y="148" text-anchor="middle" fill="#2D8C3C" font-size="10">root cause fixed</text>
 
   <!-- Arrows -->
-  <path d="M 370 45 Q 500 60 540 108" fill="none" stroke="#79EA20" stroke-width="1.5" marker-end="url(#arr3)"/>
-  <path d="M 560 160 Q 600 210 560 258" fill="none" stroke="#79EA20" stroke-width="1.5" marker-end="url(#arr3)"/>
-  <path d="M 495 310 Q 430 360 380 390" fill="none" stroke="#79EA20" stroke-width="1.5" marker-end="url(#arr3)"/>
-  <path d="M 260 390 Q 160 360 110 308" fill="none" stroke="#79EA20" stroke-width="1.5" marker-end="url(#arr3)"/>
-  <path d="M 85 258 Q 40 210 85 160" fill="none" stroke="#79EA20" stroke-width="1.5" marker-end="url(#arr3)"/>
-  <path d="M 140 108 Q 210 60 268 45" fill="none" stroke="#79EA20" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <path d="M 370 45 Q 500 60 540 108" fill="none" stroke="#2D8C3C" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <path d="M 560 160 Q 600 210 560 258" fill="none" stroke="#2D8C3C" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <path d="M 495 310 Q 430 360 380 390" fill="none" stroke="#2D8C3C" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <path d="M 260 390 Q 160 360 110 308" fill="none" stroke="#2D8C3C" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <path d="M 85 258 Q 40 210 85 160" fill="none" stroke="#2D8C3C" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <path d="M 140 108 Q 210 60 268 45" fill="none" stroke="#2D8C3C" stroke-width="1.5" marker-end="url(#arr3)"/>
 </svg>
 </div>
 
@@ -3413,48 +3416,48 @@ LESSON_CONTENT['pin-output'] = `
 
 <div class="pin-hero">
 <svg viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <text x="20" y="26" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#FF6B6B" letter-spacing=".5">FORWARD APPROACH &mdash; how most skills fail</text>
-  <rect x="20" y="36" width="120" height="44" rx="5" fill="rgba(255,107,107,0.06)" stroke="#FF6B6B" stroke-opacity="0.5"/>
-  <text x="80" y="53" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#FF6B6B" font-weight="700">vague goal</text>
-  <text x="80" y="68" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#9ea3ba" font-style="italic">"skill for carousels"</text>
-  <line x1="140" y1="58" x2="175" y2="58" stroke="#FF6B6B" stroke-opacity="0.55" stroke-dasharray="3 2"/>
-  <polygon points="170,54 177,58 170,62" fill="#FF6B6B" fill-opacity="0.6"/>
-  <rect x="175" y="36" width="120" height="44" rx="5" fill="rgba(255,107,107,0.06)" stroke="#FF6B6B" stroke-opacity="0.5"/>
-  <text x="235" y="53" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#FF6B6B" font-weight="700">rough process</text>
-  <text x="235" y="68" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#9ea3ba" font-style="italic">"some steps, ideas..."</text>
-  <line x1="295" y1="58" x2="330" y2="58" stroke="#FF6B6B" stroke-opacity="0.55" stroke-dasharray="3 2"/>
-  <polygon points="325,54 332,58 325,62" fill="#FF6B6B" fill-opacity="0.6"/>
-  <rect x="330" y="36" width="120" height="44" rx="5" fill="rgba(255,107,107,0.06)" stroke="#FF6B6B" stroke-opacity="0.5"/>
-  <text x="390" y="53" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#FF6B6B" font-weight="700">fuzzy output</text>
-  <text x="390" y="68" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#9ea3ba" font-style="italic">"kinda works?"</text>
-  <line x1="450" y1="58" x2="485" y2="58" stroke="#FF6B6B" stroke-opacity="0.55" stroke-dasharray="3 2"/>
-  <polygon points="480,54 487,58 480,62" fill="#FF6B6B" fill-opacity="0.6"/>
-  <rect x="485" y="36" width="110" height="44" rx="5" fill="rgba(255,107,107,0.15)" stroke="#FF6B6B" stroke-width="1.5"/>
-  <text x="540" y="62" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" fill="#FF6B6B" font-weight="700">MUSH</text>
+  <text x="20" y="26" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#B3402A" letter-spacing=".5">FORWARD APPROACH &mdash; how most skills fail</text>
+  <rect x="20" y="36" width="120" height="44" rx="5" fill="rgba(179,64,42,0.06)" stroke="#B3402A" stroke-opacity="0.5"/>
+  <text x="80" y="53" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#B3402A" font-weight="700">vague goal</text>
+  <text x="80" y="68" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#6B6B63" font-style="italic">"skill for carousels"</text>
+  <line x1="140" y1="58" x2="175" y2="58" stroke="#B3402A" stroke-opacity="0.55" stroke-dasharray="3 2"/>
+  <polygon points="170,54 177,58 170,62" fill="#B3402A" fill-opacity="0.6"/>
+  <rect x="175" y="36" width="120" height="44" rx="5" fill="rgba(179,64,42,0.06)" stroke="#B3402A" stroke-opacity="0.5"/>
+  <text x="235" y="53" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#B3402A" font-weight="700">rough process</text>
+  <text x="235" y="68" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#6B6B63" font-style="italic">"some steps, ideas..."</text>
+  <line x1="295" y1="58" x2="330" y2="58" stroke="#B3402A" stroke-opacity="0.55" stroke-dasharray="3 2"/>
+  <polygon points="325,54 332,58 325,62" fill="#B3402A" fill-opacity="0.6"/>
+  <rect x="330" y="36" width="120" height="44" rx="5" fill="rgba(179,64,42,0.06)" stroke="#B3402A" stroke-opacity="0.5"/>
+  <text x="390" y="53" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#B3402A" font-weight="700">fuzzy output</text>
+  <text x="390" y="68" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#6B6B63" font-style="italic">"kinda works?"</text>
+  <line x1="450" y1="58" x2="485" y2="58" stroke="#B3402A" stroke-opacity="0.55" stroke-dasharray="3 2"/>
+  <polygon points="480,54 487,58 480,62" fill="#B3402A" fill-opacity="0.6"/>
+  <rect x="485" y="36" width="110" height="44" rx="5" fill="rgba(179,64,42,0.15)" stroke="#B3402A" stroke-width="1.5"/>
+  <text x="540" y="62" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" fill="#B3402A" font-weight="700">MUSH</text>
 
-  <line x1="20" y1="115" x2="600" y2="115" stroke="#2a2a2a"/>
+  <line x1="20" y1="115" x2="600" y2="115" stroke="#E2E2DC"/>
 
-  <text x="20" y="140" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#79EA20" letter-spacing=".5">REVERSE APPROACH &mdash; start here</text>
-  <rect x="20" y="150" width="120" height="44" rx="5" fill="rgba(121,234,32,0.1)" stroke="#79EA20" stroke-width="1.3"/>
-  <text x="80" y="167" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#79EA20" font-weight="700">GOLD OUTPUT</text>
-  <text x="80" y="182" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#9ea3ba" font-style="italic">"my best carousel"</text>
-  <line x1="175" y1="172" x2="140" y2="172" stroke="#79EA20" stroke-opacity="0.7" stroke-dasharray="3 2"/>
-  <polygon points="145,168 138,172 145,176" fill="#79EA20"/>
-  <rect x="175" y="150" width="120" height="44" rx="5" fill="rgba(121,234,32,0.06)" stroke="#79EA20"/>
-  <text x="235" y="167" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#79EA20" font-weight="700">qualities</text>
-  <text x="235" y="182" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#9ea3ba" font-style="italic">"SEED, 5-beat hook"</text>
-  <line x1="330" y1="172" x2="295" y2="172" stroke="#79EA20" stroke-opacity="0.7" stroke-dasharray="3 2"/>
-  <polygon points="300,168 293,172 300,176" fill="#79EA20"/>
-  <rect x="330" y="150" width="120" height="44" rx="5" fill="rgba(121,234,32,0.06)" stroke="#79EA20"/>
-  <text x="390" y="167" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#79EA20" font-weight="700">moves</text>
-  <text x="390" y="182" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#9ea3ba" font-style="italic">"extract, map, write..."</text>
-  <line x1="485" y1="172" x2="450" y2="172" stroke="#79EA20" stroke-opacity="0.7" stroke-dasharray="3 2"/>
-  <polygon points="455,168 448,172 455,176" fill="#79EA20"/>
-  <rect x="485" y="150" width="110" height="44" rx="5" fill="rgba(121,234,32,0.2)" stroke="#79EA20" stroke-width="1.5"/>
-  <text x="540" y="176" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" fill="#79EA20" font-weight="700">SKILL</text>
+  <text x="20" y="140" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#2D8C3C" letter-spacing=".5">REVERSE APPROACH &mdash; start here</text>
+  <rect x="20" y="150" width="120" height="44" rx="5" fill="rgba(45,140,60,0.1)" stroke="#2D8C3C" stroke-width="1.3"/>
+  <text x="80" y="167" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#2D8C3C" font-weight="700">GOLD OUTPUT</text>
+  <text x="80" y="182" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#6B6B63" font-style="italic">"my best carousel"</text>
+  <line x1="175" y1="172" x2="140" y2="172" stroke="#2D8C3C" stroke-opacity="0.7" stroke-dasharray="3 2"/>
+  <polygon points="145,168 138,172 145,176" fill="#2D8C3C"/>
+  <rect x="175" y="150" width="120" height="44" rx="5" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C"/>
+  <text x="235" y="167" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#2D8C3C" font-weight="700">qualities</text>
+  <text x="235" y="182" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#6B6B63" font-style="italic">"SEED, 5-beat hook"</text>
+  <line x1="330" y1="172" x2="295" y2="172" stroke="#2D8C3C" stroke-opacity="0.7" stroke-dasharray="3 2"/>
+  <polygon points="300,168 293,172 300,176" fill="#2D8C3C"/>
+  <rect x="330" y="150" width="120" height="44" rx="5" fill="rgba(45,140,60,0.06)" stroke="#2D8C3C"/>
+  <text x="390" y="167" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" fill="#2D8C3C" font-weight="700">moves</text>
+  <text x="390" y="182" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="#6B6B63" font-style="italic">"extract, map, write..."</text>
+  <line x1="485" y1="172" x2="450" y2="172" stroke="#2D8C3C" stroke-opacity="0.7" stroke-dasharray="3 2"/>
+  <polygon points="455,168 448,172 455,176" fill="#2D8C3C"/>
+  <rect x="485" y="150" width="110" height="44" rx="5" fill="rgba(45,140,60,0.2)" stroke="#2D8C3C" stroke-width="1.5"/>
+  <text x="540" y="176" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="13" fill="#2D8C3C" font-weight="700">SKILL</text>
 
-  <text x="310" y="107" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#FF6B6B" font-style="italic">start vague &rarr; end fuzzy</text>
-  <text x="310" y="219" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#79EA20" font-style="italic">start concrete &rarr; end precise (walked backward from the finish line)</text>
+  <text x="310" y="107" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#B3402A" font-style="italic">start vague &rarr; end fuzzy</text>
+  <text x="310" y="219" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#2D8C3C" font-style="italic">start concrete &rarr; end precise (walked backward from the finish line)</text>
 </svg>
 </div>
 
@@ -3464,53 +3467,53 @@ LESSON_CONTENT['pin-output'] = `
 <div class="pin-flow">
 <svg viewBox="0 0 920 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <g transform="translate(10,30)">
-    <rect x="0" y="0" width="140" height="80" rx="6" fill="rgba(121,234,32,0.15)" stroke="#79EA20" stroke-width="1.8"/>
-    <text x="70" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#79EA20" letter-spacing=".8">1 &middot; START HERE</text>
-    <text x="70" y="46" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="700" fill="#e4e5ef">Pin the</text>
-    <text x="70" y="62" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="700" fill="#e4e5ef">Gold Output</text>
+    <rect x="0" y="0" width="140" height="80" rx="6" fill="rgba(45,140,60,0.15)" stroke="#2D8C3C" stroke-width="1.8"/>
+    <text x="70" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#2D8C3C" letter-spacing=".8">1 &middot; START HERE</text>
+    <text x="70" y="46" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="700" fill="#21211E">Pin the</text>
+    <text x="70" y="62" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="700" fill="#21211E">Gold Output</text>
   </g>
-  <path d="M 155,70 L 180,70" stroke="#79EA20" stroke-width="2"/>
-  <polygon points="175,66 183,70 175,74" fill="#79EA20"/>
+  <path d="M 155,70 L 180,70" stroke="#2D8C3C" stroke-width="2"/>
+  <polygon points="175,66 183,70 175,74" fill="#2D8C3C"/>
 
   <g transform="translate(185,40)">
-    <rect width="120" height="60" rx="6" fill="rgba(91,156,246,0.08)" stroke="#5b9cf6"/>
-    <text x="60" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#5b9cf6">2</text>
-    <text x="60" y="42" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12" fill="#e4e5ef">Qualities</text>
+    <rect width="120" height="60" rx="6" fill="rgba(59,111,176,0.08)" stroke="#3B6FB0"/>
+    <text x="60" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#3B6FB0">2</text>
+    <text x="60" y="42" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12" fill="#21211E">Qualities</text>
   </g>
-  <path d="M 310,70 L 335,70" stroke="#5b9cf6" stroke-width="1.5"/>
-  <polygon points="330,66 338,70 330,74" fill="#5b9cf6"/>
+  <path d="M 310,70 L 335,70" stroke="#3B6FB0" stroke-width="1.5"/>
+  <polygon points="330,66 338,70 330,74" fill="#3B6FB0"/>
 
   <g transform="translate(340,40)">
-    <rect width="120" height="60" rx="6" fill="rgba(91,156,246,0.08)" stroke="#5b9cf6"/>
-    <text x="60" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#5b9cf6">3</text>
-    <text x="60" y="42" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12" fill="#e4e5ef">Moves</text>
+    <rect width="120" height="60" rx="6" fill="rgba(59,111,176,0.08)" stroke="#3B6FB0"/>
+    <text x="60" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#3B6FB0">3</text>
+    <text x="60" y="42" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12" fill="#21211E">Moves</text>
   </g>
-  <path d="M 465,70 L 490,70" stroke="#5b9cf6" stroke-width="1.5"/>
-  <polygon points="485,66 493,70 485,74" fill="#5b9cf6"/>
+  <path d="M 465,70 L 490,70" stroke="#3B6FB0" stroke-width="1.5"/>
+  <polygon points="485,66 493,70 485,74" fill="#3B6FB0"/>
 
   <g transform="translate(495,40)">
-    <rect width="120" height="60" rx="6" fill="rgba(91,156,246,0.08)" stroke="#5b9cf6"/>
-    <text x="60" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#5b9cf6">4</text>
-    <text x="60" y="42" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12" fill="#e4e5ef">Reach</text>
+    <rect width="120" height="60" rx="6" fill="rgba(59,111,176,0.08)" stroke="#3B6FB0"/>
+    <text x="60" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#3B6FB0">4</text>
+    <text x="60" y="42" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12" fill="#21211E">Reach</text>
   </g>
-  <path d="M 620,70 L 645,70" stroke="#5b9cf6" stroke-width="1.5"/>
-  <polygon points="640,66 648,70 640,74" fill="#5b9cf6"/>
+  <path d="M 620,70 L 645,70" stroke="#3B6FB0" stroke-width="1.5"/>
+  <polygon points="640,66 648,70 640,74" fill="#3B6FB0"/>
 
   <g transform="translate(650,40)">
-    <rect width="120" height="60" rx="6" fill="rgba(91,156,246,0.08)" stroke="#5b9cf6"/>
-    <text x="60" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#5b9cf6">5</text>
-    <text x="60" y="42" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12" fill="#e4e5ef">Trigger</text>
+    <rect width="120" height="60" rx="6" fill="rgba(59,111,176,0.08)" stroke="#3B6FB0"/>
+    <text x="60" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#3B6FB0">5</text>
+    <text x="60" y="42" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12" fill="#21211E">Trigger</text>
   </g>
-  <path d="M 775,70 L 795,70" stroke="#79EA20" stroke-width="1.5"/>
-  <polygon points="790,66 798,70 790,74" fill="#79EA20"/>
+  <path d="M 775,70 L 795,70" stroke="#2D8C3C" stroke-width="1.5"/>
+  <polygon points="790,66 798,70 790,74" fill="#2D8C3C"/>
 
   <g transform="translate(800,30)">
-    <rect width="110" height="80" rx="6" fill="rgba(121,234,32,0.12)" stroke="#79EA20" stroke-width="1.5"/>
-    <text x="55" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#79EA20" letter-spacing=".8">6 &middot; FINISH</text>
-    <text x="55" y="48" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="700" fill="#e4e5ef">Quality</text>
-    <text x="55" y="64" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="700" fill="#e4e5ef">Check</text>
+    <rect width="110" height="80" rx="6" fill="rgba(45,140,60,0.12)" stroke="#2D8C3C" stroke-width="1.5"/>
+    <text x="55" y="22" text-anchor="middle" font-family="SF Mono,Consolas,monospace" font-size="10" font-weight="700" fill="#2D8C3C" letter-spacing=".8">6 &middot; FINISH</text>
+    <text x="55" y="48" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="700" fill="#21211E">Quality</text>
+    <text x="55" y="64" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="700" fill="#21211E">Check</text>
   </g>
-  <text x="460" y="130" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#9ea3ba" font-style="italic">Pin the gold output first (1). Steps 2&ndash;5 reverse the path back. Step 6 locks in what "done" means.</text>
+  <text x="460" y="130" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#6B6B63" font-style="italic">Pin the gold output first (1). Steps 2&ndash;5 reverse the path back. Step 6 locks in what "done" means.</text>
 </svg>
 </div>
 
@@ -3562,7 +3565,7 @@ LESSON_CONTENT['pin-output'] = `
 <div class="ex-tab-panel active" data-extab-panel="pin-carousel" data-extab-group="pin">
   <div class="pin-example">
     <div class="pin-example-head">
-      <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="32" height="32" rx="3" fill="rgba(121,234,32,0.15)" stroke="#79EA20" stroke-width="1.5"/><rect x="10" y="14" width="32" height="32" rx="3" fill="#181818" stroke="#79EA20" stroke-width="1.5"/><line x1="16" y1="22" x2="36" y2="22" stroke="#79EA20" stroke-opacity="0.6"/><line x1="16" y1="28" x2="32" y2="28" stroke="#79EA20" stroke-opacity="0.4"/><line x1="16" y1="34" x2="34" y2="34" stroke="#79EA20" stroke-opacity="0.4"/></svg>
+      <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="32" height="32" rx="3" fill="rgba(45,140,60,0.15)" stroke="#2D8C3C" stroke-width="1.5"/><rect x="10" y="14" width="32" height="32" rx="3" fill="#FFFFFF" stroke="#2D8C3C" stroke-width="1.5"/><line x1="16" y1="22" x2="36" y2="22" stroke="#2D8C3C" stroke-opacity="0.6"/><line x1="16" y1="28" x2="32" y2="28" stroke="#2D8C3C" stroke-opacity="0.4"/><line x1="16" y1="34" x2="34" y2="34" stroke="#2D8C3C" stroke-opacity="0.4"/></svg>
       <div>
         <h4>Carousel creation (content)</h4>
         <div class="reach-type">reach: multi-tool &middot; creative output</div>
@@ -3582,7 +3585,7 @@ LESSON_CONTENT['pin-output'] = `
 <div class="ex-tab-panel" data-extab-panel="pin-review" data-extab-group="pin">
   <div class="pin-example">
     <div class="pin-example-head">
-      <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="3" fill="#181818" stroke="#5b9cf6" stroke-width="1.5"/><path d="M 14,18 L 20,24 L 14,30" fill="none" stroke="#5b9cf6" stroke-width="1.8"/><line x1="24" y1="30" x2="34" y2="30" stroke="#5b9cf6" stroke-width="1.8"/></svg>
+      <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="3" fill="#FFFFFF" stroke="#3B6FB0" stroke-width="1.5"/><path d="M 14,18 L 20,24 L 14,30" fill="none" stroke="#3B6FB0" stroke-width="1.8"/><line x1="24" y1="30" x2="34" y2="30" stroke="#3B6FB0" stroke-width="1.8"/></svg>
       <div>
         <h4>Code review (engineering)</h4>
         <div class="reach-type">reach: local files &middot; analytical output</div>
@@ -3602,7 +3605,7 @@ LESSON_CONTENT['pin-output'] = `
 <div class="ex-tab-panel" data-extab-panel="pin-summary" data-extab-group="pin">
   <div class="pin-example">
     <div class="pin-example-head">
-      <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="#181818" stroke="#c084fc" stroke-width="1.5"/><line x1="12" y1="16" x2="36" y2="16" stroke="#c084fc"/><line x1="12" y1="22" x2="32" y2="22" stroke="#c084fc" stroke-opacity="0.6"/><line x1="12" y1="28" x2="30" y2="28" stroke="#c084fc" stroke-opacity="0.6"/><line x1="12" y1="34" x2="26" y2="34" stroke="#c084fc" stroke-opacity="0.6"/></svg>
+      <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="3" fill="#FFFFFF" stroke="#6B46C1" stroke-width="1.5"/><line x1="12" y1="16" x2="36" y2="16" stroke="#6B46C1"/><line x1="12" y1="22" x2="32" y2="22" stroke="#6B46C1" stroke-opacity="0.6"/><line x1="12" y1="28" x2="30" y2="28" stroke="#6B46C1" stroke-opacity="0.6"/><line x1="12" y1="34" x2="26" y2="34" stroke="#6B46C1" stroke-opacity="0.6"/></svg>
       <div>
         <h4>Meeting summarizer (ops)</h4>
         <div class="reach-type">reach: minimal &middot; structured output</div>
