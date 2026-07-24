@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --frame:rgb(178,176,170);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ================= THE SKILL SYSTEM boundary (faint dashed) + tab ================= -->
+  <rect x="356" y="150" width="1200" height="676" rx="28" stroke="var(--frame)" stroke-width="2.5" stroke-dasharray="12 12"/>
+  <rect x="356" y="124" width="470" height="28" rx="9" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- ---- the incoming request card ---- -->
+  <rect x="86" y="180" width="232" height="56" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <!-- request -> the AI -->
+  <line x1="206" y1="238" x2="178" y2="260" stroke="var(--dim)" stroke-width="2.5"/>
+  <polyline points="172,250 178,262 189,255" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- ---- THE AI (canonical black-marker robot) ---- -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="160" y1="256" x2="160" y2="270"/>
+    <rect x="118" y="270" width="84" height="60" rx="12"/>
+    <rect x="132" y="286" width="56" height="28" rx="7"/>
+    <line x1="160" y1="330" x2="160" y2="340"/>
+    <rect x="124" y="340" width="72" height="72" rx="12"/>
+    <line x1="124" y1="366" x2="96" y2="392"/>
+    <line x1="142" y1="412" x2="136" y2="440"/>
+    <line x1="178" y1="412" x2="184" y2="440"/>
+    <polyline points="196,366 244,388 262,402" fill="none"/>
+  </g>
+  <rect x="140" y="356" width="40" height="22" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="160" cy="250" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="146" cy="300" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="174" cy="300" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <!-- green "loads" arrow: the AI -> the orchestrator -->
+  <line x1="268" y1="392" x2="384" y2="338" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="372,331 386,338 375,351" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ================= THE ORCHESTRATOR skill (publish-post/) ================= -->
+  <rect x="388" y="166" width="216" height="24" rx="6" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="388" y="190" width="540" height="246" rx="18" stroke="var(--ink)" stroke-width="5" fill="var(--bg)"/>
+  <!-- SKILL.md REQUIRED badge (ink weight — never a subfolder color) -->
+  <rect x="602" y="250" width="120" height="30" rx="7" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- ================= THE FOUR FOLDERS legend (right of orchestrator) ================= -->
+  <!-- row 1: workflows/ = GREEN fork -->
+  <circle cx="978" cy="286" r="5" fill="var(--green)" stroke="var(--green)"/>
+  <path d="M978,286 L996,286" stroke="var(--green)" stroke-width="3.5"/>
+  <path d="M996,286 L1008,277" stroke="var(--green)" stroke-width="3.5"/>
+  <path d="M996,286 L1008,295" stroke="var(--green)" stroke-width="3.5"/>
+  <circle cx="1010" cy="276" r="4" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="1010" cy="296" r="4" fill="var(--green)" stroke="var(--green)"/>
+  <!-- row 2: scripts/ = AMBER gear -->
+  <circle cx="990" cy="328" r="11" stroke="var(--amber)" stroke-width="3"/>
+  <circle cx="990" cy="328" r="4" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="990" y1="317" x2="990" y2="311" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="990" y1="339" x2="990" y2="345" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="979" y1="328" x2="973" y2="328" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="1001" y1="328" x2="1007" y2="328" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="998" y1="320" x2="1002" y2="316" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="982" y1="320" x2="978" y2="316" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="998" y1="336" x2="1002" y2="340" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="982" y1="336" x2="978" y2="340" stroke="var(--amber)" stroke-width="2.5"/>
+  <!-- row 3: references/ = BLUE open book -->
+  <path d="M990,360 C978,355 968,356 963,360 L963,382 C968,378 978,378 990,383 Z" stroke="var(--blue)" stroke-width="3" fill="var(--bg)"/>
+  <path d="M990,360 C1002,355 1012,356 1017,360 L1017,382 C1012,378 1002,378 990,383 Z" stroke="var(--blue)" stroke-width="3" fill="var(--bg)"/>
+  <path d="M990,360 L990,383" stroke="var(--blue)" stroke-width="2.5"/>
+  <!-- row 4: assets/ = PURPLE stacked copy -->
+  <rect x="975" y="400" width="26" height="30" rx="4" stroke="var(--purple)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="983" y="408" width="26" height="30" rx="4" stroke="var(--purple)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="989" y1="418" x2="1003" y2="418" stroke="var(--purple)" stroke-width="2"/>
+  <line x1="989" y1="425" x2="1003" y2="425" stroke="var(--purple)" stroke-width="2"/>
+
+  <!-- ---- delegate arrow: orchestrator fires the sequence (in order) ---- -->
+  <path d="M470,438 C466,486 452,512 452,540" stroke="var(--green)" stroke-width="6"/>
+  <polyline points="444,532 452,544 461,534" stroke="var(--green)" stroke-width="6"/>
+
+  <!-- ================= THE WORKER SKILLS — a sequenced pipeline ================= -->
+  <!-- node 1: write-content/ -->
+  <rect x="378" y="532" width="96" height="18" rx="4" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="378" y="548" width="205" height="155" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <circle cx="404" cy="574" r="13" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- chip: workflows/ (green) -->
+  <rect x="394" y="648" width="173" height="40" rx="10" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.08)"/>
+  <circle cx="404" cy="668" r="3.5" fill="var(--green)" stroke="var(--green)"/>
+  <line x1="404" y1="668" x2="416" y2="668" stroke="var(--green)" stroke-width="2.5"/>
+  <line x1="416" y1="668" x2="424" y2="662" stroke="var(--green)" stroke-width="2.5"/>
+  <line x1="416" y1="668" x2="424" y2="674" stroke="var(--green)" stroke-width="2.5"/>
+
+  <!-- node 2: voice-cleanup/ -->
+  <rect x="640" y="532" width="96" height="18" rx="4" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="640" y="548" width="205" height="155" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <circle cx="666" cy="574" r="13" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- chip: references/ (blue) -->
+  <rect x="656" y="648" width="173" height="40" rx="10" stroke="var(--blue)" stroke-width="2.5" fill="rgba(52,120,190,0.07)"/>
+  <path d="M672,661 C665,658 659,659 656,661 L656,675 C659,673 665,673 672,676" stroke="var(--blue)" stroke-width="2.5"/>
+  <path d="M672,661 C679,658 685,659 688,661 L688,675 C685,673 679,673 672,676" stroke="var(--blue)" stroke-width="2.5"/>
+  <line x1="672" y1="661" x2="672" y2="676" stroke="var(--blue)" stroke-width="2"/>
+
+  <!-- node 3: format-post/ -->
+  <rect x="902" y="532" width="96" height="18" rx="4" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="902" y="548" width="205" height="155" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <circle cx="928" cy="574" r="13" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- chip: assets/ (purple) -->
+  <rect x="918" y="648" width="173" height="40" rx="10" stroke="var(--purple)" stroke-width="2.5" fill="rgba(147,112,219,0.08)"/>
+  <rect x="925" y="658" width="16" height="20" rx="3" stroke="var(--purple)" stroke-width="2" fill="var(--bg)"/>
+  <rect x="931" y="663" width="16" height="20" rx="3" stroke="var(--purple)" stroke-width="2" fill="var(--bg)"/>
+
+  <!-- node 4: schedule/ -->
+  <rect x="1164" y="532" width="96" height="18" rx="4" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="1164" y="548" width="205" height="155" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <circle cx="1190" cy="574" r="13" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- chip: scripts/ (amber) -->
+  <rect x="1180" y="648" width="173" height="40" rx="10" stroke="var(--amber)" stroke-width="2.5" fill="rgba(214,140,40,0.10)"/>
+  <circle cx="1196" cy="668" r="7" stroke="var(--amber)" stroke-width="2.5"/>
+  <circle cx="1196" cy="668" r="2.5" stroke="var(--amber)" stroke-width="2"/>
+  <line x1="1196" y1="661" x2="1196" y2="658" stroke="var(--amber)" stroke-width="2"/>
+  <line x1="1196" y1="675" x2="1196" y2="678" stroke="var(--amber)" stroke-width="2"/>
+  <line x1="1189" y1="668" x2="1186" y2="668" stroke="var(--amber)" stroke-width="2"/>
+  <line x1="1203" y1="668" x2="1206" y2="668" stroke="var(--amber)" stroke-width="2"/>
+
+  <!-- hand-off arrows between workers (green = the orchestrator's routing hand-off) -->
+  <line x1="583" y1="625" x2="636" y2="625" stroke="var(--green)" stroke-width="5"/>
+  <polyline points="628,617 638,625 628,633" stroke="var(--green)" stroke-width="5"/>
+  <line x1="845" y1="625" x2="898" y2="625" stroke="var(--green)" stroke-width="5"/>
+  <polyline points="890,617 900,625 890,633" stroke="var(--green)" stroke-width="5"/>
+  <line x1="1107" y1="625" x2="1160" y2="625" stroke="var(--green)" stroke-width="5"/>
+  <polyline points="1152,617 1162,625 1152,633" stroke="var(--green)" stroke-width="5"/>
+  <line x1="1369" y1="625" x2="1394" y2="625" stroke="var(--green)" stroke-width="5"/>
+  <polyline points="1386,617 1396,625 1386,633" stroke="var(--green)" stroke-width="5"/>
+
+  <!-- output: the published post (good = green) -->
+  <rect x="1398" y="548" width="150" height="155" rx="14" stroke="var(--green)" stroke-width="5" fill="rgba(45,140,60,0.06)"/>
+  <polyline points="1444,602 1462,622 1502,572" stroke="var(--green)" stroke-width="7"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="46" font-weight="700" text-anchor="middle" fill="var(--ink)">Level 3 &#183; Skill System / Orchestrator</text>
+<text x="800" y="98" font-size="25" text-anchor="middle" fill="var(--dim)">an orchestrator that runs a team of skills = your AI Employee</text>
+
+<!-- system boundary tab -->
+<text x="376" y="145" font-size="20" font-weight="700" text-anchor="start" fill="var(--ink)">THE SKILL SYSTEM &#183; your AI Employee</text>
+
+<!-- the request -->
+<text x="202" y="170" font-size="17" text-anchor="middle" fill="var(--dim)">A REQUEST COMES IN</text>
+<text x="202" y="214" font-size="23" text-anchor="middle" fill="var(--ink)">&#8220;publish this post&#8221;</text>
+
+<!-- robot label -->
+<text x="160" y="476" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="160" y="500" font-size="18" text-anchor="middle" fill="var(--dim)">loads the orchestrator</text>
+
+<!-- ===== ORCHESTRATOR card ===== -->
+<text class="mono" x="402" y="185" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">publish-post/</text>
+<text x="410" y="226" font-size="19" font-weight="700" text-anchor="start" fill="var(--green)">THE ORCHESTRATOR &#183; the conductor</text>
+<text class="mono" x="410" y="274" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">SKILL.md</text>
+<text x="662" y="271" font-size="17" font-weight="700" text-anchor="middle" fill="var(--ink)">REQUIRED</text>
+<text x="736" y="273" font-size="18" text-anchor="start" fill="var(--dim)">routes only</text>
+<text x="410" y="310" font-size="19" text-anchor="start" fill="var(--dim)">Its whole body is a routing map:</text>
+<text class="mono" x="420" y="348" font-size="21" text-anchor="start" fill="var(--ink)">&#8594; write-content</text>
+<text class="mono" x="680" y="348" font-size="21" text-anchor="start" fill="var(--ink)">&#8594; voice-cleanup</text>
+<text class="mono" x="420" y="384" font-size="21" text-anchor="start" fill="var(--ink)">&#8594; format-post</text>
+<text class="mono" x="680" y="384" font-size="21" text-anchor="start" fill="var(--ink)">&#8594; schedule</text>
+<text x="410" y="418" font-size="18" text-anchor="start" fill="var(--dim)">Does none of the work &#8212; it just hands off.</text>
+
+<!-- ===== FOUR FOLDERS legend ===== -->
+<text x="1015" y="222" font-size="20" font-weight="700" text-anchor="start" fill="var(--ink)">THE FOUR FOLDERS</text>
+<text x="1015" y="248" font-size="17" text-anchor="start" fill="var(--dim)">every worker brings its own set</text>
+<text x="1018" y="293" font-size="22" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text x="1160" y="293" font-size="18" text-anchor="start" fill="var(--dim)">which job</text>
+<text x="1018" y="335" font-size="22" font-weight="700" text-anchor="start" fill="var(--amber)">scripts/</text>
+<text x="1160" y="335" font-size="18" text-anchor="start" fill="var(--dim)">deterministic step</text>
+<text x="1018" y="377" font-size="22" font-weight="700" text-anchor="start" fill="var(--blue)">references/</text>
+<text x="1160" y="377" font-size="18" text-anchor="start" fill="var(--dim)">deeper doc</text>
+<text x="1018" y="419" font-size="22" font-weight="700" text-anchor="start" fill="var(--purple)">assets/</text>
+<text x="1160" y="419" font-size="18" text-anchor="start" fill="var(--dim)">a template to copy</text>
+
+<!-- delegate label -->
+<text x="486" y="500" font-size="20" font-weight="700" text-anchor="start" fill="var(--green)">delegates, in order &#8595;</text>
+
+<!-- ===== PIPELINE header ===== -->
+<text x="963" y="508" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">THE WORKER SKILLS &#183; the team it conducts</text>
+
+<!-- node numbers -->
+<text x="404" y="581" font-size="18" font-weight="700" text-anchor="middle" fill="var(--ink)">1</text>
+<text x="666" y="581" font-size="18" font-weight="700" text-anchor="middle" fill="var(--ink)">2</text>
+<text x="928" y="581" font-size="18" font-weight="700" text-anchor="middle" fill="var(--ink)">3</text>
+<text x="1190" y="581" font-size="18" font-weight="700" text-anchor="middle" fill="var(--ink)">4</text>
+
+<!-- node names + roles -->
+<text class="mono" x="480" y="608" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">write-content/</text>
+<text x="480" y="636" font-size="18" text-anchor="middle" fill="var(--dim)">writes the draft</text>
+<text class="mono" x="742" y="608" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">voice-cleanup/</text>
+<text x="742" y="636" font-size="18" text-anchor="middle" fill="var(--dim)">makes it human</text>
+<text class="mono" x="1004" y="608" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">format-post/</text>
+<text x="1004" y="636" font-size="18" text-anchor="middle" fill="var(--dim)">formats the post</text>
+<text class="mono" x="1266" y="608" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">schedule/</text>
+<text x="1266" y="636" font-size="18" text-anchor="middle" fill="var(--dim)">publishes it</text>
+
+<!-- chip labels -->
+<text class="mono" x="432" y="674" font-size="18" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text class="mono" x="694" y="674" font-size="18" font-weight="700" text-anchor="start" fill="var(--blue)">references/</text>
+<text class="mono" x="956" y="674" font-size="18" font-weight="700" text-anchor="start" fill="var(--purple)">assets/</text>
+<text class="mono" x="1218" y="674" font-size="18" font-weight="700" text-anchor="start" fill="var(--amber)">scripts/</text>
+
+<!-- output -->
+<text x="1473" y="660" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">published post</text>
+<text x="1473" y="686" font-size="17" text-anchor="middle" fill="var(--dim)">it&#8217;s live</text>
+
+<!-- ===== caption under pipeline ===== -->
+<text x="963" y="748" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">Each worker is its own full skill &#8212; with all four folders.</text>
+<text x="963" y="778" font-size="19" text-anchor="middle" fill="var(--dim)">This run, each fires the one folder it needs.</text>
+
+<!-- ===== one-line takeaway ===== -->
+<text x="800" y="880" font-size="26" text-anchor="middle" fill="var(--ink)">An orchestrator conducting a team of skills &#8212; each with its own four folders.</text>
+<text x="800" y="924" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">That&#8217;s a Skill System. That&#8217;s your AI Employee.</text>
+</svg></body></html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- severity chip (LOW = dim gray) -->
+  <rect x="1360" y="152" width="172" height="40" rx="14" stroke="var(--dim)" stroke-width="2.5" fill="rgba(120,120,125,0.06)"/>
+
+  <!-- ============ WATER (dim wavy strokes = the sea) ============ -->
+  <g stroke="var(--dim)" stroke-width="2.5" opacity="0.8">
+    <path d="M150,500 q9,-9 18,0 t18,0"/>
+    <path d="M170,600 q9,-9 18,0 t18,0"/>
+    <path d="M140,665 q9,-9 18,0 t18,0"/>
+    <path d="M640,560 q9,-9 18,0 t18,0"/>
+    <path d="M600,600 q9,-9 18,0 t18,0"/>
+    <path d="M740,620 q9,-9 18,0 t18,0"/>
+    <path d="M560,762 q9,-9 18,0 t18,0"/>
+    <path d="M660,700 q9,-9 18,0 t18,0"/>
+    <path d="M820,660 q9,-9 18,0 t18,0"/>
+    <path d="M700,770 q9,-9 18,0 t18,0"/>
+  </g>
+
+  <!-- ============ THE ISLAND — write-hook/ alone in open water ============ -->
+  <path d="M250,600 C210,560 220,468 300,450 C362,434 452,446 490,502 C516,542 500,592 452,626 C402,656 300,652 250,600 Z"
+        stroke="var(--ink)" stroke-width="3" fill="rgba(0,0,0,0.02)"/>
+  <!-- folder on the island (ink) -->
+  <rect x="300" y="470" width="46" height="18" rx="5" stroke="var(--ink)" stroke-width="3"/>
+  <rect x="300" y="482" width="120" height="70" rx="8" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ============ THE MAINLAND — the connected family ============ -->
+  <path d="M865,560 C850,470 950,410 1080,400 C1230,388 1382,406 1416,482 C1441,542 1420,632 1330,682 C1230,722 1030,716 960,672 C900,642 872,600 865,560 Z"
+        stroke="var(--ink)" stroke-width="3" fill="rgba(0,0,0,0.02)"/>
+  <!-- write-content/ folder -->
+  <rect x="1230" y="440" width="46" height="18" rx="5" stroke="var(--ink)" stroke-width="3"/>
+  <rect x="1230" y="452" width="120" height="70" rx="8" stroke="var(--ink)" stroke-width="3"/>
+  <!-- publish-posts/ folder -->
+  <rect x="940" y="510" width="46" height="18" rx="5" stroke="var(--ink)" stroke-width="3"/>
+  <rect x="940" y="522" width="120" height="70" rx="8" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- green bridge between the two siblings (the callouts that wire them together) -->
+  <g stroke="var(--green)" stroke-width="3">
+    <line x1="1062" y1="552" x2="1230" y2="506"/>
+    <line x1="1062" y1="572" x2="1230" y2="520"/>
+    <line x1="1102" y1="558" x2="1102" y2="578"/>
+    <line x1="1150" y1="552" x2="1150" y2="572"/>
+    <line x1="1198" y1="546" x2="1198" y2="566"/>
+  </g>
+
+  <!-- ============ THE STRAY REQUEST ============ -->
+  <!-- request pill -->
+  <rect x="590" y="452" width="260" height="54" rx="15" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- RED arrow: request yanked LEFT to the island (the wrong grab) -->
+  <path d="M588,482 Q510,472 452,504" stroke="var(--red)" stroke-width="3.5"/>
+  <polyline points="468,494 448,506 466,516" stroke="var(--red)" stroke-width="3.5"/>
+  <!-- DIM dashed line: where it should have gone (publish-posts/, the short hop) -->
+  <line x1="852" y1="480" x2="938" y2="552" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="8 7"/>
+
+  <!-- ============ bottom strip ============ -->
+  <line x1="200" y1="850" x2="1400" y2="850" stroke="var(--dim)" stroke-width="1.5" opacity="0.6"/>
+  <!-- magnifier glyph -->
+  <circle cx="618" cy="884" r="12" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="627" y1="893" x2="639" y2="905" stroke="var(--dim)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="70" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">SIGNAL 4 OF 8 &#183; ROUTING PROBLEMS</text>
+<text x="800" y="112" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">No Cross-Skill Callouts</text>
+<text x="800" y="154" font-size="24" text-anchor="middle" fill="var(--dim)">No &#8220;Delegate to &#8594;&#8221; and no &#8220;Do NOT use when &#8594;&#8221; line &#8212; the skill can&#8217;t see its siblings.</text>
+
+<!-- severity chip -->
+<text x="1446" y="180" font-size="24" font-weight="700" text-anchor="middle" fill="var(--dim)">LOW</text>
+<text x="1446" y="214" font-size="17" text-anchor="middle" fill="var(--dim)">severity</text>
+
+<!-- island labels -->
+<text class="mono" x="360" y="597" font-size="26" text-anchor="middle" fill="var(--ink)">write-hook/</text>
+<text x="360" y="702" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">no &#8220;Delegate to&#8221; &#183; no &#8220;Do NOT use when&#8221;</text>
+<text x="360" y="730" font-size="18" text-anchor="middle" fill="var(--dim)">it can&#8217;t point away from itself</text>
+
+<!-- the stray request -->
+<text x="720" y="440" font-size="17" text-anchor="middle" fill="var(--dim)">a request:</text>
+<text x="720" y="486" font-size="23" font-weight="700" text-anchor="middle" fill="var(--ink)">publish this post</text>
+<text x="522" y="450" font-size="19" font-weight="700" text-anchor="middle" fill="var(--red)">grabs it</text>
+<text x="900" y="420" font-size="17" text-anchor="middle" fill="var(--dim)">its real home</text>
+
+<!-- mainland labels -->
+<text x="1160" y="384" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">THE CONNECTED FAMILY</text>
+<text class="mono" x="1290" y="548" font-size="24" text-anchor="middle" fill="var(--ink)">write-content/</text>
+<text class="mono" x="1000" y="618" font-size="24" text-anchor="middle" fill="var(--ink)">publish-posts/</text>
+<!-- bridge labels (green = the callouts) -->
+<text x="1200" y="612" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">Do NOT use when &#8594;</text>
+<text x="1200" y="640" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">Delegate to &#8594;</text>
+
+<!-- HOW THE AUDIT SPOTS IT -->
+<text x="800" y="892" font-size="22" font-weight="700" text-anchor="middle" fill="var(--dim)">HOW THE AUDIT SPOTS IT</text>
+<text x="800" y="926" font-size="21" text-anchor="middle" fill="var(--dim)">greps every SKILL.md for &#8220;Do NOT use when&#8221; and &#8220;Delegate to&#8221; &#8212; neither present = the skill is isolated.</text>
+
+<!-- takeaway -->
+<text x="800" y="982" font-size="27" text-anchor="middle" fill="var(--ink)">A skill that can&#8217;t point away from itself takes jobs that belong to another skill.</text>
+<text x="800" y="1020" font-size="28" font-weight="700" text-anchor="middle" fill="var(--green)">Two small callouts &#8212; Delegate to &#8594; and Do NOT use when &#8594; &#8212; wire it into the family.</text>
+</svg></body></html>

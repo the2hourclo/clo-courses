@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- severity chip (HIGH) -->
+  <rect x="1360" y="150" width="170" height="44" rx="22" stroke="var(--red)" stroke-width="3" fill="rgba(214,69,58,0.10)"/>
+
+  <!-- ============ THE AI — canonical black-marker robot, receiving the request ============ -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="800" y1="186" x2="800" y2="196"/>
+    <rect x="764" y="196" width="72" height="48" rx="11"/>
+    <rect x="778" y="209" width="44" height="22" rx="6" stroke-width="3"/>
+    <line x1="800" y1="244" x2="800" y2="252"/>
+    <rect x="768" y="252" width="64" height="54" rx="11"/>
+    <line x1="768" y1="270" x2="746" y2="290"/>
+    <line x1="832" y1="270" x2="852" y2="272"/>
+  </g>
+  <rect x="782" y="267" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="800" cy="180" r="5" fill="var(--red)" stroke="var(--red)"/>
+  <circle cx="792" cy="220" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="810" cy="220" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+
+  <!-- request pill: "write a hook" (ink = the request the AI must route) -->
+  <rect x="548" y="196" width="180" height="46" rx="14" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="728" y1="219" x2="764" y2="219" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- coin-flip glyph below the robot = 50/50 which one fires -->
+  <ellipse cx="800" cy="332" rx="22" ry="21" stroke="var(--ink)" stroke-width="3"/>
+  <ellipse cx="800" cy="332" rx="13" ry="21" stroke="var(--dim)" stroke-width="2"/>
+  <path d="M 782 314 A 26 26 0 0 1 820 312" stroke="var(--dim)" stroke-width="2.5"/>
+  <polyline points="813,306 821,311 823,302" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- two DASHED forks: one request could fire EITHER skill -->
+  <line x1="783" y1="340" x2="412" y2="366" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
+  <polyline points="400,356 412,369 424,356" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="817" y1="340" x2="1188" y2="366" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
+  <polyline points="1176,356 1188,369 1200,356" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ============ two DESCRIPTION file-view cards (the real object on disk) ============ -->
+  <rect x="110" y="372" width="600" height="252" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="890" y="372" width="600" height="252" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- red highlight behind the overlapping trigger phrase in BOTH cards -->
+  <rect x="160" y="595" width="216" height="28" rx="6" fill="rgba(214,69,58,0.13)" stroke="none"/>
+  <rect x="940" y="595" width="216" height="28" rx="6" fill="rgba(214,69,58,0.13)" stroke="none"/>
+
+  <!-- bracket joining the two cards = >50% overlap -->
+  <line x1="410" y1="628" x2="410" y2="652" stroke="var(--red)" stroke-width="3"/>
+  <line x1="1190" y1="628" x2="1190" y2="652" stroke="var(--red)" stroke-width="3"/>
+  <line x1="410" y1="652" x2="1190" y2="652" stroke="var(--red)" stroke-width="3"/>
+  <line x1="800" y1="652" x2="800" y2="674" stroke="var(--red)" stroke-width="3"/>
+  <polyline points="792,664 800,676 808,664" stroke="var(--red)" stroke-width="3"/>
+
+  <!-- bottom-strip divider -->
+  <line x1="150" y1="740" x2="1450" y2="740" stroke="var(--dim)" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- magnifier glyph for HOW THE AUDIT SPOTS IT -->
+  <circle cx="612" cy="792" r="12" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="621" y1="801" x2="632" y2="812" stroke="var(--ink)" stroke-width="3.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker -->
+<text x="80" y="60" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">SIGNAL 1 OF 8 &#183; ROUTING PROBLEMS</text>
+
+<!-- title + definition subtitle -->
+<text x="800" y="92" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Duplicate Standalones</text>
+<text x="800" y="132" font-size="26" text-anchor="middle" fill="var(--dim)">Two separate skills doing substantially the same job</text>
+
+<!-- severity chip label -->
+<text x="1445" y="140" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">SEVERITY</text>
+<text x="1445" y="181" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">HIGH</text>
+
+<!-- request + robot vignette -->
+<text x="638" y="212" font-size="16" text-anchor="middle" fill="var(--dim)">user asks</text>
+<text x="638" y="234" font-size="23" font-weight="700" text-anchor="middle" fill="var(--ink)">write a hook</text>
+<text x="800" y="338" font-size="16" font-weight="700" text-anchor="start" fill="var(--dim)" transform="translate(30,0)">50/50</text>
+<text x="800" y="366" font-size="17" text-anchor="middle" fill="var(--dim)">coin flip</text>
+
+<!-- ===== LEFT card: the description file-view (monospace) ===== -->
+<text class="mono" x="138" y="412" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">write-hook/SKILL.md</text>
+<text class="mono" x="138" y="454" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">name: write-hook</text>
+<text class="mono" x="138" y="496" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">description: "Write</text>
+<text class="mono" x="138" y="538" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">  hooks &amp; openings.</text>
+
+<!-- ===== RIGHT card: the description file-view (monospace) ===== -->
+<text class="mono" x="918" y="412" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">hook-writer/SKILL.md</text>
+<text class="mono" x="918" y="454" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">name: hook-writer</text>
+<text class="mono" x="918" y="496" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">description: "Make</text>
+<text class="mono" x="918" y="538" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">  catchy hooks.</text>
+
+<!-- the overlapping trigger lines (drawn last so they sit above highlight rects) -->
+<text class="mono" x="138" y="580" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">  USE WHEN user says</text>
+<text class="mono" x="918" y="580" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">  USE WHEN user says</text>
+<text class="mono" x="167" y="616" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">'write a hook'</text>
+<text class="mono" x="368" y="616" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve"> ..."</text>
+<text class="mono" x="947" y="616" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">'write a hook'</text>
+<text class="mono" x="1148" y="616" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve"> ..."</text>
+
+<!-- overlap verdict under the bracket -->
+<text x="800" y="704" font-size="26" font-weight="700" text-anchor="middle" fill="var(--red)">&gt;50% overlap = duplicate</text>
+
+<!-- ===== HOW THE AUDIT SPOTS IT ===== -->
+<text x="800" y="797" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">HOW THE AUDIT SPOTS IT</text>
+<text x="800" y="832" font-size="25" text-anchor="middle" fill="var(--ink)">It reads every skill's description, then clusters them by overlapping trigger phrases and purpose.</text>
+
+<!-- ===== takeaway ===== -->
+<text x="800" y="906" font-size="27" text-anchor="middle" fill="var(--ink)">Two homes for one job &#8212; your fixes land in one, and the AI sometimes fires the other.</text>
+<text x="800" y="958" font-size="31" font-weight="700" text-anchor="middle" fill="var(--green)">Pick one canonical home &#8212; one job, one skill.</text>
+</svg></body></html>

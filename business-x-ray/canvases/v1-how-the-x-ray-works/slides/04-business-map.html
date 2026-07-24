@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ THE BUSINESS MAP — one framed board, 7 columns ============ -->
+  <rect x="110" y="200" width="1380" height="286" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- column header banners (ink = structure) -->
+  <rect x="128"  y="226" width="183" height="42" rx="10" fill="var(--ink)"/>
+  <rect x="321"  y="226" width="183" height="42" rx="10" fill="var(--ink)"/>
+  <rect x="514"  y="226" width="183" height="42" rx="10" fill="var(--ink)"/>
+  <rect x="707"  y="226" width="183" height="42" rx="10" fill="var(--ink)"/>
+  <rect x="900"  y="226" width="183" height="42" rx="10" fill="var(--ink)"/>
+  <rect x="1093" y="226" width="183" height="42" rx="10" fill="var(--ink)"/>
+  <rect x="1286" y="226" width="183" height="42" rx="10" fill="var(--ink)"/>
+
+  <!-- faint divider guides between columns -->
+  <line x1="507" y1="226" x2="507" y2="474" stroke="var(--dim)" stroke-width="1.2" opacity="0.35"/>
+  <line x1="700" y1="226" x2="700" y2="474" stroke="var(--dim)" stroke-width="1.2" opacity="0.35"/>
+  <line x1="893" y1="226" x2="893" y2="474" stroke="var(--dim)" stroke-width="1.2" opacity="0.35"/>
+  <line x1="1086" y1="226" x2="1086" y2="474" stroke="var(--dim)" stroke-width="1.2" opacity="0.35"/>
+  <line x1="1279" y1="226" x2="1279" y2="474" stroke="var(--dim)" stroke-width="1.2" opacity="0.35"/>
+  <line x1="314" y1="226" x2="314" y2="474" stroke="var(--dim)" stroke-width="1.2" opacity="0.35"/>
+
+  <!-- entry cards (neutral) -->
+  <!-- TRAFFIC (2) -->
+  <rect x="128" y="292" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="128" y="374" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <!-- CONVERTERS (2) -->
+  <rect x="321" y="292" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="321" y="374" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <!-- PRODUCTS (2) -->
+  <rect x="514" y="292" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="514" y="374" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <!-- FUNNELS (2) -->
+  <rect x="707" y="292" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="707" y="374" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <!-- MATH (2) -->
+  <rect x="900" y="292" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="900" y="374" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <!-- TEAM (2) -->
+  <rect x="1093" y="292" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="1093" y="374" width="183" height="68" rx="10" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <!-- GOALS (amber = the target metric) -->
+  <rect x="1286" y="292" width="183" height="68" rx="10" stroke="var(--amber)" stroke-width="2.5" fill="rgba(214,140,40,0.12)"/>
+
+  <!-- ============ YOU — stepping back, looking UP at the whole map ============ -->
+  <g stroke="var(--green)" stroke-width="4">
+    <circle cx="430" cy="650" r="28" fill="rgba(45,140,60,0.06)"/>
+    <line x1="430" y1="678" x2="430" y2="772"/>
+    <line x1="430" y1="702" x2="388" y2="748"/>
+    <line x1="430" y1="702" x2="472" y2="746"/>
+    <line x1="430" y1="772" x2="392" y2="836"/>
+    <line x1="430" y1="772" x2="470" y2="838"/>
+  </g>
+  <!-- gaze up into the board (dim dashed = looking at it) -->
+  <line x1="430" y1="622" x2="430" y2="494" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="9 7"/>
+  <polyline points="422,506 430,492 438,506" stroke="var(--dim)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 2 &#183; SEE THE CURRENT STATE</text>
+<text x="800" y="112" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">Your Whole Business on One Page</text>
+<text x="800" y="152" font-size="26" text-anchor="middle" fill="var(--dim)">Every part of your coaching business &#8212; traffic all the way to goals &#8212; laid out left to right.</text>
+
+<!-- board tag -->
+<text x="110" y="190" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">YOU &#183; BUSINESS COACH</text>
+
+<!-- column headers (white on ink) -->
+<text x="220"  y="253" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">TRAFFIC</text>
+<text x="413"  y="253" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">CONVERTERS</text>
+<text x="606"  y="253" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">PRODUCTS</text>
+<text x="799"  y="253" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">FUNNELS</text>
+<text x="992"  y="253" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">MATH</text>
+<text x="1185" y="253" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">TEAM</text>
+<text x="1378" y="253" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">GOALS</text>
+
+<!-- entry text -->
+<text x="220"  y="334" font-size="21" text-anchor="middle" fill="var(--ink)">YouTube videos</text>
+<text x="220"  y="416" font-size="21" text-anchor="middle" fill="var(--ink)">Client referrals</text>
+
+<text x="413"  y="334" font-size="21" text-anchor="middle" fill="var(--ink)">Free guide</text>
+<text x="413"  y="416" font-size="21" text-anchor="middle" fill="var(--ink)">Discovery call</text>
+
+<text x="606"  y="334" font-size="21" text-anchor="middle" fill="var(--ink)">Mini-course</text>
+<text x="606"  y="402" font-size="21" text-anchor="middle" fill="var(--ink)">1:1 coaching</text>
+<text x="606"  y="428" font-size="19" text-anchor="middle" fill="var(--dim)">$3k / mo</text>
+
+<text x="799"  y="334" font-size="21" text-anchor="middle" fill="var(--ink)">Landing page</text>
+<text x="799"  y="416" font-size="21" text-anchor="middle" fill="var(--ink)">Booking page</text>
+
+<text x="992"  y="320" font-size="21" text-anchor="middle" fill="var(--ink)">Income</text>
+<text x="992"  y="346" font-size="19" text-anchor="middle" fill="var(--dim)">$3.4k / mo</text>
+<text x="992"  y="402" font-size="21" text-anchor="middle" fill="var(--ink)">Net profit</text>
+<text x="992"  y="428" font-size="19" text-anchor="middle" fill="var(--green)">$2.6k / mo</text>
+
+<text x="1185" y="334" font-size="21" text-anchor="middle" fill="var(--ink)">You &#8212; coach</text>
+<text x="1185" y="416" font-size="21" text-anchor="middle" fill="var(--ink)">VA &#8212; part-time</text>
+
+<text x="1378" y="334" font-size="21" font-weight="700" text-anchor="middle" fill="var(--amber)">Book 8 calls/mo</text>
+
+<!-- YOU label (on the head) -->
+<text x="430" y="656" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">YOU</text>
+
+<!-- the realization, beside the figure -->
+<text x="540" y="650" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">First time it's all on one page,</text>
+<text x="540" y="692" font-size="30" text-anchor="start" fill="var(--ink)">not just felt in your gut.</text>
+
+<!-- takeaway bridge -->
+<text x="800" y="904" font-size="27" text-anchor="middle" fill="var(--ink)">That's the anatomy &#8212; every moving part on one page, standing still.</text>
+<text x="800" y="952" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Now watch how a stranger becomes a client moving through it.</text>
+</svg></body></html>

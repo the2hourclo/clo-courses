@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ LEFT PANEL — Level 1, the surface view ============ -->
+  <rect x="80" y="225" width="640" height="430" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- YOU — stick person, owner of the whole flow -->
+  <g stroke="var(--ink)" stroke-width="3">
+    <circle cx="150" cy="300" r="15" fill="none"/>
+    <line x1="150" y1="315" x2="150" y2="352"/>
+    <line x1="130" y1="330" x2="170" y2="330"/>
+    <line x1="150" y1="352" x2="137" y2="378"/>
+    <line x1="150" y1="352" x2="163" y2="378"/>
+  </g>
+
+  <!-- 4 calm phase boxes (ink) -->
+  <rect x="270" y="282" width="290" height="52" rx="10" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="270" y="358" width="290" height="52" rx="10" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="270" y="434" width="290" height="52" rx="10" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="270" y="510" width="290" height="52" rx="10" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- down arrows between phases -->
+  <line x1="415" y1="336" x2="415" y2="354" stroke="var(--ink)" stroke-width="2.5"/>
+  <polyline points="408,347 415,355 422,347" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="415" y1="412" x2="415" y2="430" stroke="var(--ink)" stroke-width="2.5"/>
+  <polyline points="408,423 415,431 422,423" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="415" y1="488" x2="415" y2="506" stroke="var(--ink)" stroke-width="2.5"/>
+  <polyline points="408,499 415,507 422,499" stroke="var(--ink)" stroke-width="2.5"/>
+
+  <!-- ============ GAP — the drill ============ -->
+  <line x1="566" y1="460" x2="872" y2="460" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
+  <polyline points="858,453 872,460 858,467" stroke="var(--ink)" stroke-width="3"/>
+  <!-- magnifier above the drill line -->
+  <circle cx="800" cy="428" r="15" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="811" y1="439" x2="822" y2="450" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ============ RIGHT PANEL — Level 3, inside Draft Proposal ============ -->
+  <rect x="880" y="225" width="640" height="430" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- step 1 (calm) -->
+  <rect x="900" y="282" width="300" height="60" rx="10" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="1050" y1="344" x2="1050" y2="362" stroke="var(--ink)" stroke-width="2.5"/>
+  <polyline points="1043,355 1050,363 1057,355" stroke="var(--ink)" stroke-width="2.5"/>
+
+  <!-- step 2 — THE BOTTLENECK (red, thick) -->
+  <rect x="900" y="368" width="300" height="76" rx="10" stroke="var(--red)" stroke-width="4" fill="rgba(214,69,58,0.08)"/>
+  <!-- amber connector step2 -> tag -->
+  <line x1="1200" y1="406" x2="1223" y2="406" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="7 6"/>
+  <polyline points="1215,401 1224,406 1215,411" stroke="var(--amber)" stroke-width="2.5"/>
+  <!-- amber dashed "the AI could do this" tag -->
+  <rect x="1225" y="372" width="205" height="68" rx="12" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="9 7" fill="rgba(214,140,40,0.06)"/>
+
+  <line x1="1050" y1="446" x2="1050" y2="472" stroke="var(--ink)" stroke-width="2.5"/>
+  <polyline points="1043,463 1050,473 1057,463" stroke="var(--ink)" stroke-width="2.5"/>
+
+  <!-- step 3 (calm) -->
+  <rect x="900" y="476" width="300" height="58" rx="10" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- ============ seed robot — the AI Employee we'll build (Part 5) ============ -->
+  <g stroke="var(--ink)" stroke-width="3">
+    <line x1="500" y1="732" x2="500" y2="740"/>
+    <rect x="478" y="740" width="44" height="32" rx="8"/>
+    <line x1="500" y1="772" x2="500" y2="779"/>
+    <rect x="480" y="779" width="40" height="34" rx="8"/>
+    <line x1="480" y1="791" x2="464" y2="801"/>
+    <line x1="520" y1="791" x2="536" y2="799"/>
+  </g>
+  <rect x="489" y="787" width="22" height="13" rx="3" stroke="var(--dim)" stroke-width="2.5"/>
+  <circle cx="500" cy="726" r="4" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="491" cy="757" r="3.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="509" cy="757" r="3.2" fill="var(--ink)" stroke="var(--ink)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="64" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 2 &#183; SEE THE CURRENT STATE</text>
+<text x="800" y="118" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">The Bottleneck Hides at Level 3</text>
+<text x="800" y="160" font-size="25" text-anchor="middle" fill="var(--dim)">From the surface, your sales flow looks calm &#8212; the jam only shows up three levels down.</text>
+
+<!-- panel headers -->
+<text x="100" y="208" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">LEVEL 1 &#183; THE SURFACE VIEW</text>
+<text x="900" y="208" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">LEVEL 3 &#183; INSIDE &#8220;DRAFT PROPOSAL&#8221;</text>
+
+<!-- YOU label -->
+<text x="150" y="402" font-size="18" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+<text x="150" y="424" font-size="16" text-anchor="middle" fill="var(--dim)">run every step</text>
+
+<!-- left phase labels -->
+<text x="415" y="315" font-size="24" text-anchor="middle" fill="var(--ink)">Call booked</text>
+<text x="415" y="391" font-size="24" text-anchor="middle" fill="var(--ink)">Discovery call</text>
+<text x="415" y="467" font-size="24" text-anchor="middle" fill="var(--ink)">Proposal</text>
+<text x="415" y="543" font-size="24" text-anchor="middle" fill="var(--ink)">Signed</text>
+<text x="415" y="602" font-size="20" text-anchor="middle" fill="var(--dim)">From up here, everything looks fine.</text>
+
+<!-- drill label -->
+<text x="800" y="405" font-size="20" font-weight="700" text-anchor="middle" fill="var(--ink)">OPEN IT UP</text>
+
+<!-- right step labels -->
+<text x="1050" y="311" font-size="23" text-anchor="middle" fill="var(--ink)">Pull call notes</text>
+<text class="mono" x="1050" y="333" font-size="16" text-anchor="middle" fill="var(--dim)">Notion &#183; 2 min</text>
+
+<text x="1050" y="399" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">Assemble the proposal</text>
+<text class="mono" x="1050" y="425" font-size="16" text-anchor="middle" fill="var(--red)">Google Docs &#183; 42 min &#183; manual</text>
+
+<text x="1050" y="504" font-size="23" text-anchor="middle" fill="var(--ink)">Send the proposal</text>
+<text class="mono" x="1050" y="526" font-size="16" text-anchor="middle" fill="var(--dim)">email &#183; 1 min</text>
+
+<text x="1050" y="602" font-size="20" text-anchor="middle" fill="var(--dim)">2 + 42 + 1 = the same 45-minute step from the last board.</text>
+
+<!-- amber tag text -->
+<text x="1327" y="401" font-size="18" font-weight="700" text-anchor="middle" fill="var(--amber)">the AI could</text>
+<text x="1327" y="425" font-size="18" font-weight="700" text-anchor="middle" fill="var(--amber)">do this</text>
+
+<!-- seed for Part 5 -->
+<text x="555" y="772" font-size="20" text-anchor="start" fill="var(--dim)">Build an AI Employee for this &#8212; and this drilled picture is its blueprint.</text>
+
+<!-- takeaway bridge -->
+<text x="800" y="872" font-size="27" text-anchor="middle" fill="var(--ink)">Drill where it hurts &#8212; then mark what you find.</text>
+<text x="800" y="924" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">And marking needs a color language.</text>
+</svg></body></html>

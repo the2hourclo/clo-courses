@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ GROUP BRACKETS over the three port states ============ -->
+  <polyline points="320,244 320,238 1150,238 1150,244" stroke="var(--green)" stroke-width="2.5"/>
+  <polyline points="1170,244 1170,238 1320,238 1320,244" stroke="var(--amber)" stroke-width="2.5"/>
+  <polyline points="1340,244 1340,238 1490,238 1490,244" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- ============ THE AI — canonical black-marker robot, powers the port board ============ -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="185" y1="441" x2="185" y2="451"/>
+    <rect x="149" y="451" width="72" height="48" rx="11"/>
+    <rect x="163" y="464" width="44" height="22" rx="6" stroke-width="3"/>
+    <line x1="185" y1="499" x2="185" y2="507"/>
+    <rect x="153" y="507" width="64" height="54" rx="11"/>
+    <line x1="153" y1="525" x2="131" y2="545"/>
+    <line x1="217" y1="525" x2="237" y2="527"/>
+  </g>
+  <rect x="167" y="522" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="185" cy="435" r="5" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="177" cy="481" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="193" cy="481" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <!-- power cord: robot -> board left end -->
+  <path d="M237,527 C 262,528 282,523 300,521" stroke="var(--ink)" stroke-width="3.5"/>
+
+  <!-- ============ THE PORT BOARD (the AI's ports — where tools plug in) ============ -->
+  <rect x="300" y="478" width="1200" height="84" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.02)"/>
+
+  <!-- ===== GREEN BAYS — plugs in today (Notion 395 · Stripe 565 · YouTube 735) ===== -->
+  <!-- device tiles -->
+  <rect x="320" y="262" width="150" height="94" rx="13" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="490" y="262" width="150" height="94" rx="13" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="660" y="262" width="150" height="94" rx="13" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <!-- bay 395 -->
+  <path d="M395,356 C 390,385 400,410 395,436" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="375" y="436" width="40" height="26" rx="5" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.10)"/>
+  <line x1="382" y1="462" x2="382" y2="478" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="408" y1="462" x2="408" y2="478" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="363" y="470" width="64" height="18" rx="5" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.08)"/>
+  <!-- bay 565 -->
+  <path d="M565,356 C 560,385 570,410 565,436" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="545" y="436" width="40" height="26" rx="5" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.10)"/>
+  <line x1="552" y1="462" x2="552" y2="478" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="578" y1="462" x2="578" y2="478" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="533" y="470" width="64" height="18" rx="5" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.08)"/>
+  <!-- bay 735 -->
+  <path d="M735,356 C 730,385 740,410 735,436" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="715" y="436" width="40" height="26" rx="5" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.10)"/>
+  <line x1="722" y1="462" x2="722" y2="478" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="748" y1="462" x2="748" y2="478" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="703" y="470" width="64" height="18" rx="5" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.08)"/>
+
+  <!-- ===== tiles for Kit 905 · Zoom 1075 (now native green) · Calendly 1245 (adapter) ===== -->
+  <rect x="830" y="262" width="150" height="94" rx="13" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="1000" y="262" width="150" height="94" rx="13" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="1170" y="262" width="150" height="94" rx="13" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <!-- bay 905 (Kit) — native green -->
+  <path d="M905,356 C 900,385 910,410 905,436" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="885" y="436" width="40" height="26" rx="5" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.10)"/>
+  <line x1="892" y1="462" x2="892" y2="478" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="918" y1="462" x2="918" y2="478" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="873" y="470" width="64" height="18" rx="5" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.08)"/>
+  <!-- bay 1075 (Zoom) — native green -->
+  <path d="M1075,356 C 1070,385 1080,410 1075,436" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="1055" y="436" width="40" height="26" rx="5" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.10)"/>
+  <line x1="1062" y1="462" x2="1062" y2="478" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="1088" y1="462" x2="1088" y2="478" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="1043" y="470" width="64" height="18" rx="5" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.08)"/>
+  <!-- bay 1245 (Calendly) — amber adapter (MCP emerging) -->
+  <line x1="1245" y1="356" x2="1245" y2="386" stroke="var(--amber)" stroke-width="3.5"/>
+  <rect x="1221" y="386" width="48" height="26" rx="6" stroke="var(--amber)" stroke-width="3" stroke-dasharray="7 5" fill="rgba(214,140,40,0.08)"/>
+  <line x1="1245" y1="412" x2="1245" y2="436" stroke="var(--amber)" stroke-width="3.5"/>
+  <rect x="1225" y="436" width="40" height="26" rx="5" stroke="var(--amber)" stroke-width="3" fill="rgba(214,140,40,0.10)"/>
+  <line x1="1232" y1="462" x2="1232" y2="478" stroke="var(--amber)" stroke-width="3.5"/>
+  <line x1="1258" y1="462" x2="1258" y2="478" stroke="var(--amber)" stroke-width="3.5"/>
+  <rect x="1213" y="470" width="64" height="18" rx="5" stroke="var(--amber)" stroke-width="2.5" fill="rgba(214,140,40,0.08)"/>
+
+  <!-- ===== GRAY BAY — no port yet (Google Docs 1415), plug dangling above an empty socket ===== -->
+  <rect x="1340" y="262" width="150" height="94" rx="13" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <path d="M1415,356 C 1410,376 1420,392 1415,408" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="1395" y="408" width="40" height="26" rx="5" stroke="var(--dim)" stroke-width="3" fill="rgba(120,120,125,0.07)"/>
+  <line x1="1402" y1="434" x2="1402" y2="447" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1428" y1="434" x2="1428" y2="447" stroke="var(--dim)" stroke-width="3"/>
+  <!-- empty socket: dashed slot + open holes (nothing seated) -->
+  <rect x="1383" y="470" width="64" height="18" rx="5" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="6 5"/>
+  <circle cx="1402" cy="479" r="3.6" stroke="var(--dim)" stroke-width="2"/>
+  <circle cx="1428" cy="479" r="3.6" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- ============ REASSURANCE CALLOUT — the AI resolves each status for you ============ -->
+  <rect x="360" y="676" width="880" height="84" rx="16" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <!-- magnifier over a small directory (the AI looks it up) -->
+  <circle cx="408" cy="712" r="13" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="417" y1="721" x2="428" y2="732" stroke="var(--ink)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 4 &#183; REIMAGINE</text>
+<text x="800" y="120" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Which Tools Can the AI Actually Plug Into?</text>
+<text x="800" y="156" font-size="23" text-anchor="middle" fill="var(--ink)">MCP &#8212; the standard plug that lets an AI Employee operate a tool directly.</text>
+<text x="800" y="186" font-size="20" text-anchor="middle" fill="var(--dim)">You don't install or configure it &#8212; the AI checks each tool for you.</text>
+
+<!-- stack label + group state labels -->
+<text x="80" y="222" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">YOUR STACK</text>
+<text x="735" y="222" font-size="22" font-weight="700" text-anchor="middle" fill="var(--green)">PLUGS IN TODAY</text>
+<text x="1245" y="222" font-size="21" font-weight="700" text-anchor="middle" fill="var(--amber)">VIA ADAPTER</text>
+<text x="1415" y="222" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">NO PORT YET</text>
+
+<!-- tool names + role sub-labels -->
+<text x="395" y="308" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Notion</text>
+<text x="395" y="335" font-size="16" text-anchor="middle" fill="var(--dim)">docs &amp; client CRM</text>
+<text x="565" y="308" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Stripe</text>
+<text x="565" y="335" font-size="16" text-anchor="middle" fill="var(--dim)">payments</text>
+<text x="735" y="308" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">YouTube</text>
+<text x="735" y="335" font-size="16" text-anchor="middle" fill="var(--dim)">content &amp; leads</text>
+<text x="905" y="308" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Kit</text>
+<text x="905" y="335" font-size="16" text-anchor="middle" fill="var(--dim)">email list</text>
+<text x="1075" y="308" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Zoom</text>
+<text x="1075" y="335" font-size="16" text-anchor="middle" fill="var(--dim)">video calls</text>
+<text x="1245" y="308" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Calendly</text>
+<text x="1245" y="335" font-size="16" text-anchor="middle" fill="var(--dim)">call booking</text>
+<text x="1415" y="308" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Google Docs</text>
+<text x="1415" y="335" font-size="16" text-anchor="middle" fill="var(--dim)">proposals</text>
+
+<!-- robot caption -->
+<text x="185" y="592" font-size="18" text-anchor="middle" fill="var(--dim)">the AI plugs</text>
+<text x="185" y="614" font-size="18" text-anchor="middle" fill="var(--dim)">each tool in</text>
+
+<!-- per-state consequence lines (below the board) -->
+<text x="735" y="608" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">The AI operates it directly.</text>
+<text x="735" y="635" font-size="16" text-anchor="middle" fill="var(--dim)">a native plug &#8212; nothing in between</text>
+<text x="1245" y="608" font-size="20" font-weight="700" text-anchor="middle" fill="var(--amber)">one bridge away</text>
+<text x="1245" y="633" font-size="15" text-anchor="middle" fill="var(--dim)">API &#183; MCP soon</text>
+<text x="1415" y="608" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">stays manual</text>
+<text x="1415" y="633" font-size="15" text-anchor="middle" fill="var(--dim)">for now</text>
+
+<!-- reassurance callout text -->
+<text x="452" y="706" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">The AI resolves each tool's status from a directory + a live search.</text>
+<text x="452" y="736" font-size="19" text-anchor="start" fill="var(--dim)">You don't have to know any of this yourself.</text>
+
+<!-- takeaway + bridge -->
+<text x="800" y="812" font-size="26" text-anchor="middle" fill="var(--ink)">The destination is drawn. The plugs are checked.</text>
+<text x="800" y="864" font-size="29" font-weight="700" text-anchor="middle" fill="var(--green)">One question is left &#8212; what do we build FIRST?</text>
+</svg></body></html>

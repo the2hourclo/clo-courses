@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ LEFT — the HEALED library, in a green (healthy) card ============ -->
+  <rect x="70" y="200" width="800" height="412" rx="22" stroke="var(--green)" stroke-width="5" fill="rgba(45,140,60,0.05)"/>
+  <!-- small green "cleaned" tag, top-left of the card -->
+  <rect x="96" y="216" width="150" height="34" rx="9" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.10)"/>
+
+  <!-- green fork icon = workflows/ (locked subfolder legend) snug to its row -->
+  <line x1="428" y1="414" x2="442" y2="414" stroke="var(--green)" stroke-width="3"/>
+  <line x1="442" y1="414" x2="458" y2="403" stroke="var(--green)" stroke-width="3"/>
+  <line x1="442" y1="414" x2="458" y2="425" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="428" cy="414" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="458" cy="403" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="458" cy="425" r="2.6" fill="var(--green)" stroke="none"/>
+
+  <!-- green "healed row" pointers (← toward each fixed row) -->
+  <!-- write-hook/  -> one home -->
+  <line x1="572" y1="322" x2="548" y2="322" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="556,315 546,322 556,329" stroke="var(--green)" stroke-width="3.5"/>
+  <!-- newsletter.md -> orphan gone -->
+  <line x1="572" y1="469" x2="548" y2="469" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="556,462 546,469 556,476" stroke="var(--green)" stroke-width="3.5"/>
+  <!-- writing-humanize/ -> description disambiguated -->
+  <line x1="572" y1="518" x2="548" y2="518" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="556,511 546,518 556,525" stroke="var(--green)" stroke-width="3.5"/>
+
+  <!-- ============ RIGHT — one request, one solid green arrow, one skill ============ -->
+  <!-- request pill -->
+  <rect x="1090" y="196" width="280" height="58" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- feed: request into the AI (short green) -->
+  <line x1="1230" y1="256" x2="1230" y2="278" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="1222,270 1230,282 1238,270" stroke="var(--green)" stroke-width="3.5"/>
+
+  <!-- THE AI — canonical black-marker robot, firing confidently (translated) -->
+  <g transform="translate(606,120)">
+    <g stroke="var(--ink)" stroke-width="4">
+      <line x1="624" y1="166" x2="624" y2="176"/>
+      <rect x="588" y="176" width="72" height="48" rx="11"/>
+      <rect x="602" y="189" width="44" height="22" rx="6" stroke-width="3"/>
+      <line x1="624" y1="224" x2="624" y2="232"/>
+      <rect x="592" y="232" width="64" height="54" rx="11"/>
+      <line x1="592" y1="250" x2="570" y2="270"/>
+      <line x1="656" y1="250" x2="676" y2="252"/>
+    </g>
+    <rect x="606" y="247" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
+    <circle cx="624" cy="160" r="5" fill="var(--green)" stroke="var(--green)"/>
+    <circle cx="616" cy="200" r="4.2" fill="var(--green)" stroke="var(--green)"/>
+    <circle cx="634" cy="200" r="4.2" fill="var(--green)" stroke="var(--green)"/>
+  </g>
+  <!-- confident green check where slide 01 had a red ? -->
+  <polyline points="1300,340 1318,360 1352,320" stroke="var(--green)" stroke-width="5"/>
+
+  <!-- THE ONE solid green arrow: the AI routes straight to the single home -->
+  <line x1="1230" y1="410" x2="1230" y2="470" stroke="var(--green)" stroke-width="6"/>
+  <polyline points="1216,458 1230,476 1244,458" stroke="var(--green)" stroke-width="6"/>
+
+  <!-- write-hook/ = the one home (green box) -->
+  <rect x="1092" y="478" width="276" height="88" rx="18" stroke="var(--green)" stroke-width="5" fill="rgba(45,140,60,0.08)"/>
+  <!-- folder glyph -->
+  <rect x="1120" y="503" width="16" height="8" rx="2" stroke="var(--green)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="1120" y="510" width="34" height="24" rx="3" stroke="var(--green)" stroke-width="3" fill="var(--bg)"/>
+
+  <!-- ============ BOTTOM — why it's better (green band) ============ -->
+  <rect x="90" y="672" width="1420" height="112" rx="18" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.05)"/>
+  <line x1="576" y1="694" x2="576" y2="762" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="1024" y1="694" x2="1024" y2="762" stroke="var(--dim)" stroke-width="2"/>
+  <!-- three green ticks -->
+  <polyline points="132,724 142,736 162,712" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="600,724 610,736 630,712" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="1048,724 1058,736 1078,712" stroke="var(--green)" stroke-width="4"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="74" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">After &#8212; One Home Per Capability</text>
+<text x="800" y="120" font-size="27" text-anchor="middle" fill="var(--dim)">The same soup, healed &#183; the duplicate merged, the orphan deleted, the trigger disambiguated</text>
+
+<!-- LEFT card tag -->
+<text x="171" y="240" font-size="19" font-weight="700" text-anchor="middle" fill="var(--green)">CLEANED</text>
+
+<!-- LEFT — the healed tree (monospace, box-drawing) -->
+<text class="mono" x="110" y="288" font-size="28" font-weight="700" text-anchor="start" fill="var(--ink)">skills/</text>
+<text class="mono" x="110" y="332" font-size="28" text-anchor="start" fill="var(--ink)">&#9500;&#9472;&#9472; write-hook/</text>
+<text class="mono" x="110" y="376" font-size="28" text-anchor="start" fill="var(--ink)">&#9500;&#9472;&#9472; write-content/</text>
+<text class="mono" x="110" y="420" font-size="28" text-anchor="start" fill="var(--ink)">&#9474;&#160;&#160;&#160;&#9492;&#9472;&#9472; <tspan fill="var(--green)" font-weight="700">workflows/</tspan></text>
+<text class="mono" x="110" y="464" font-size="28" text-anchor="start" fill="var(--ink)">&#9474;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#9492;&#9472;&#9472; newsletter.md</text>
+<text class="mono" x="110" y="508" font-size="28" text-anchor="start" fill="var(--ink)">&#9500;&#9472;&#9472; writing-humanize/</text>
+<text class="mono" x="110" y="552" font-size="28" text-anchor="start" fill="var(--ink)">&#9492;&#9472;&#9472; publish-posts/</text>
+
+<!-- LEFT — green healed annotations -->
+<text x="582" y="328" font-size="21" font-weight="700" text-anchor="start" fill="var(--green)">one home</text>
+<text x="582" y="475" font-size="21" font-weight="700" text-anchor="start" fill="var(--green)">orphan gone</text>
+<text x="582" y="524" font-size="21" font-weight="700" text-anchor="start" fill="var(--green)">description disambiguated</text>
+
+<!-- RIGHT — request pill -->
+<text x="1230" y="182" font-size="18" font-weight="700" text-anchor="middle" fill="var(--dim)">THE REQUEST</text>
+<text class="mono" x="1230" y="234" font-size="27" text-anchor="middle" fill="var(--ink)">&#8220;write a hook&#8221;</text>
+
+<!-- RIGHT — robot label + confident cue -->
+<text x="1128" y="372" font-size="18" font-weight="700" text-anchor="middle" fill="var(--dim)">THE AI</text>
+<text x="1366" y="332" font-size="21" font-weight="700" text-anchor="start" fill="var(--green)">no hesitation</text>
+<text x="1366" y="358" font-size="20" text-anchor="start" fill="var(--dim)">one clear match</text>
+
+<!-- RIGHT — the one home -->
+<text class="mono" x="1176" y="516" font-size="26" font-weight="700" text-anchor="start" fill="var(--green)">write-hook/</text>
+<text x="1230" y="548" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">the one home</text>
+
+<!-- BOTTOM — why it's better -->
+<text x="182" y="710" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">One request &#8594;</text>
+<text x="182" y="742" font-size="22" text-anchor="start" fill="var(--dim)">exactly ONE skill fires</text>
+
+<text x="650" y="710" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">One home per capability</text>
+<text x="650" y="742" font-size="22" text-anchor="start" fill="var(--dim)">nothing dead to maintain</text>
+
+<text x="1098" y="710" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">Output ~80% to your standard</text>
+<text x="1098" y="742" font-size="19" text-anchor="start" fill="var(--dim)">predictable &#183; ready to generate revenue</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="852" font-size="29" text-anchor="middle" fill="var(--ink)">A clean library is why the same request gives back the same output &#8212;</text>
+<text x="800" y="900" font-size="32" font-weight="700" text-anchor="middle" fill="var(--green)">the same quality, every single time.</text>
+</svg></body></html>

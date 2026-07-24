@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ---- rising CAPABILITY handrail skimming above the staircase of card tops ---- -->
+  <line x1="300" y1="300" x2="1500" y2="152" stroke="var(--green)" stroke-width="3" stroke-dasharray="7 9"/>
+  <polyline points="1490,144 1503,152 1491,161" stroke="var(--green)" stroke-width="3"/>
+
+  <!-- ---- THE AI (canonical black-marker robot) — scaled + placed upper-left ---- -->
+  <g transform="translate(39,-34) scale(0.78)">
+    <g stroke="var(--ink)" stroke-width="4">
+      <line x1="160" y1="256" x2="160" y2="270"/>
+      <rect x="118" y="270" width="84" height="60" rx="12"/>
+      <rect x="132" y="286" width="56" height="28" rx="7"/>
+      <line x1="160" y1="330" x2="160" y2="340"/>
+      <rect x="124" y="340" width="72" height="72" rx="12"/>
+      <line x1="124" y1="366" x2="96" y2="392"/>
+      <line x1="142" y1="412" x2="136" y2="440"/>
+      <line x1="178" y1="412" x2="184" y2="440"/>
+      <polyline points="196,366 244,388 262,402" fill="none"/>
+      <circle cx="278" cy="414" r="20" stroke-width="5"/>
+      <line x1="264" y1="428" x2="253" y2="439" stroke-width="5"/>
+    </g>
+    <rect x="140" y="356" width="40" height="22" rx="4" stroke="var(--dim)" stroke-width="3"/>
+    <circle cx="160" cy="250" r="6" fill="var(--green)" stroke="var(--green)"/>
+    <circle cx="146" cy="300" r="6" fill="var(--green)" stroke="var(--green)"/>
+    <circle cx="174" cy="300" r="6" fill="var(--green)" stroke="var(--green)"/>
+  </g>
+
+  <!-- =================================================================== -->
+  <!-- CARD 1 — LEVEL 1 (lowest step)  x64..520  top340..880 -->
+  <rect x="64" y="340" width="456" height="540" rx="22" stroke="var(--ink)" stroke-width="4.5" fill="rgba(0,0,0,0.012)"/>
+  <line x1="86" y1="480" x2="498" y2="480" stroke="rgb(210,208,200)" stroke-width="2"/>
+  <!-- SKILL.md object (ink doc glyph) -->
+  <rect x="198" y="596" width="44" height="54" rx="4" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="230,596 230,608 242,608" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="206" y1="618" x2="234" y2="618" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="206" y1="628" x2="234" y2="628" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="206" y1="638" x2="226" y2="638" stroke="var(--dim)" stroke-width="2.5"/>
+  <!-- REQUIRED badge -->
+  <rect x="258" y="648" width="126" height="30" rx="8" stroke="var(--ink)" stroke-width="2.5"/>
+
+  <!-- =================================================================== -->
+  <!-- CARD 2 — LEVEL 2 (middle step)  x572..1028  top274..880 -->
+  <rect x="572" y="274" width="456" height="606" rx="22" stroke="var(--ink)" stroke-width="4.5" fill="rgba(0,0,0,0.012)"/>
+  <line x1="594" y1="414" x2="1006" y2="414" stroke="rgb(210,208,200)" stroke-width="2"/>
+  <!-- four subfolder legend glyphs (fixed colors + icons), one per row -->
+  <!-- workflows/ = GREEN fork : row y=576, icon center ~703,568 -->
+  <line x1="690" y1="568" x2="702" y2="568" stroke="var(--green)" stroke-width="3"/>
+  <line x1="702" y1="568" x2="716" y2="558" stroke="var(--green)" stroke-width="3"/>
+  <line x1="702" y1="568" x2="716" y2="578" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="690" cy="568" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="716" cy="558" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="716" cy="578" r="2.6" fill="var(--green)" stroke="none"/>
+  <!-- scripts/ = AMBER gear : row y=628, icon center ~705,620 -->
+  <circle cx="705" cy="620" r="10" stroke="var(--amber)" stroke-width="2.5" fill="var(--bg)"/>
+  <circle cx="705" cy="620" r="4" stroke="var(--amber)" stroke-width="2"/>
+  <line x1="715" y1="620" x2="719" y2="620" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="695" y1="620" x2="691" y2="620" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="705" y1="610" x2="705" y2="606" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="705" y1="630" x2="705" y2="634" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="712.1" y1="612.9" x2="714.9" y2="610.1" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="712.1" y1="627.1" x2="714.9" y2="629.9" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="697.9" y1="627.1" x2="695.1" y2="629.9" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="697.9" y1="612.9" x2="695.1" y2="610.1" stroke="var(--amber)" stroke-width="2.5"/>
+  <!-- references/ = BLUE open book : row y=680, icon center ~705,672 -->
+  <path d="M705,664 C697,660 690,661 686,664 L686,681 C690,678 697,678 705,682 Z" stroke="var(--blue)" stroke-width="2.5" fill="var(--bg)"/>
+  <path d="M705,664 C713,660 720,661 724,664 L724,681 C720,678 713,678 705,682 Z" stroke="var(--blue)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="705" y1="664" x2="705" y2="682" stroke="var(--blue)" stroke-width="2"/>
+  <!-- assets/ = PURPLE stacked copy : row y=732, icon center ~705,727 -->
+  <rect x="693" y="713" width="18" height="22" rx="3" stroke="var(--purple)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="699" y="719" width="18" height="22" rx="3" stroke="var(--purple)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="703" y1="727" x2="713" y2="727" stroke="var(--purple)" stroke-width="1.8"/>
+  <line x1="703" y1="733" x2="713" y2="733" stroke="var(--purple)" stroke-width="1.8"/>
+
+  <!-- =================================================================== -->
+  <!-- CARD 3 — LEVEL 3 (highest step)  x1080..1536  top208..880 -->
+  <rect x="1080" y="208" width="456" height="672" rx="22" stroke="var(--ink)" stroke-width="4.5" fill="rgba(0,0,0,0.012)"/>
+  <line x1="1102" y1="348" x2="1514" y2="348" stroke="rgb(210,208,200)" stroke-width="2"/>
+  <!-- orchestrator SKILL.md hub (ink doc glyph) -->
+  <rect x="1126" y="424" width="44" height="54" rx="4" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1158,424 1158,436 1170,436" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="1134" y1="446" x2="1162" y2="446" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1134" y1="456" x2="1162" y2="456" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1134" y1="466" x2="1154" y2="466" stroke="var(--dim)" stroke-width="2.5"/>
+  <!-- spine down from the hub -->
+  <line x1="1150" y1="490" x2="1150" y2="742" stroke="var(--dim)" stroke-width="2.5"/>
+  <!-- four branches out to OTHER skills (ink = whole skills, not subfolders) -->
+  <!-- branch 1 -->
+  <line x1="1150" y1="584" x2="1198" y2="584" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="1191,578 1200,584 1191,590" stroke="var(--ink)" stroke-width="3"/>
+  <rect x="1204" y="574" width="14" height="6" rx="2" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="1204" y="580" width="28" height="17" rx="3" stroke="var(--ink)" stroke-width="2.5"/>
+  <!-- branch 2 -->
+  <line x1="1150" y1="636" x2="1198" y2="636" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="1191,630 1200,636 1191,642" stroke="var(--ink)" stroke-width="3"/>
+  <rect x="1204" y="626" width="14" height="6" rx="2" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="1204" y="632" width="28" height="17" rx="3" stroke="var(--ink)" stroke-width="2.5"/>
+  <!-- branch 3 -->
+  <line x1="1150" y1="688" x2="1198" y2="688" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="1191,682 1200,688 1191,694" stroke="var(--ink)" stroke-width="3"/>
+  <rect x="1204" y="678" width="14" height="6" rx="2" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="1204" y="684" width="28" height="17" rx="3" stroke="var(--ink)" stroke-width="2.5"/>
+  <!-- branch 4 -->
+  <line x1="1150" y1="740" x2="1198" y2="740" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="1191,734 1200,740 1191,746" stroke="var(--ink)" stroke-width="3"/>
+  <rect x="1204" y="730" width="14" height="6" rx="2" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="1204" y="736" width="28" height="17" rx="3" stroke="var(--ink)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="60" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">Skills Come in 3 Levels</text>
+<text x="800" y="102" font-size="27" text-anchor="middle" fill="var(--dim)">from a one-file skill &#183; to a folder of jobs &#183; to a Skill System that runs a team of skills</text>
+
+<!-- robot label + capability arrow label -->
+<text x="298" y="204" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">THE AI</text>
+<text x="298" y="234" font-size="19" text-anchor="start" fill="var(--dim)">runs your skills</text>
+<text x="1500" y="118" font-size="24" font-weight="700" text-anchor="end" fill="var(--green)">MORE CAPABLE &#8594;</text>
+
+<!-- ============ CARD 1 — LEVEL 1 · SIMPLE ============ -->
+<text x="98" y="386" font-size="22" font-weight="700" text-anchor="start" fill="var(--green)">LEVEL 1</text>
+<text x="98" y="426" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">Simple</text>
+<text x="98" y="460" font-size="21" text-anchor="start" fill="var(--dim)">one job &#183; one file</text>
+<!-- mini tree -->
+<text class="mono" x="98" y="556" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">summarize-notes/</text>
+<text class="mono" x="120" y="632" font-size="26" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="258" y="632" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">SKILL.md</text>
+<text x="266" y="669" font-size="18" font-weight="700" text-anchor="start" fill="var(--ink)">REQUIRED</text>
+<!-- annotation + caption -->
+<text x="98" y="746" font-size="22" text-anchor="start" fill="var(--dim)">The AI reads it and does the job.</text>
+<text x="98" y="842" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">Most skills only ever need this.</text>
+
+<!-- ============ CARD 2 — LEVEL 2 · WITH WORKFLOWS ============ -->
+<text x="596" y="320" font-size="22" font-weight="700" text-anchor="start" fill="var(--green)">LEVEL 2</text>
+<text x="596" y="360" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">With Workflows</text>
+<text x="596" y="394" font-size="21" text-anchor="start" fill="var(--dim)">several jobs &#183; one skill</text>
+<!-- tree : SKILL.md + all four supporting folders -->
+<text class="mono" x="596" y="470" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">write-content/</text>
+<!-- SKILL.md (required) -->
+<text class="mono" x="636" y="524" font-size="24" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="744" y="524" font-size="23" font-weight="700" text-anchor="start" fill="var(--ink)">SKILL.md</text>
+<text x="892" y="524" font-size="18" text-anchor="start" fill="var(--dim)">required</text>
+<!-- workflows/ (green + fork) -->
+<text class="mono" x="636" y="576" font-size="24" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="744" y="576" font-size="23" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<!-- scripts/ (amber + gear) -->
+<text class="mono" x="636" y="628" font-size="24" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="744" y="628" font-size="23" font-weight="700" text-anchor="start" fill="var(--amber)">scripts/</text>
+<!-- references/ (blue + book) -->
+<text class="mono" x="636" y="680" font-size="24" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="744" y="680" font-size="23" font-weight="700" text-anchor="start" fill="var(--blue)">references/</text>
+<!-- assets/ (purple + copy) -->
+<text class="mono" x="636" y="732" font-size="24" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="744" y="732" font-size="23" font-weight="700" text-anchor="start" fill="var(--purple)">assets/</text>
+<!-- caption -->
+<text x="596" y="790" font-size="19" text-anchor="start" fill="var(--green)">Each job pulls only the folders it needs.</text>
+<text x="596" y="842" font-size="23" font-weight="700" text-anchor="start" fill="var(--ink)">One skill, four supporting folders.</text>
+
+<!-- ============ CARD 3 — LEVEL 3 · SKILL SYSTEM / ORCHESTRATOR ============ -->
+<text x="1108" y="254" font-size="22" font-weight="700" text-anchor="start" fill="var(--green)">LEVEL 3</text>
+<text x="1108" y="294" font-size="30" font-weight="700" text-anchor="start" fill="var(--green)">Skill System</text>
+<text x="1300" y="294" font-size="20" text-anchor="start" fill="var(--dim)">/ Orchestrator</text>
+<text x="1108" y="328" font-size="17" text-anchor="start" fill="var(--dim)">coordinates a team of skills = your AI Employee</text>
+<!-- hub -->
+<text class="mono" x="1108" y="402" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">content-pipeline/</text>
+<text class="mono" x="1182" y="456" font-size="23" font-weight="700" text-anchor="start" fill="var(--ink)">SKILL.md</text>
+<text x="1182" y="500" font-size="18" text-anchor="start" fill="var(--dim)">routes &#183; does little itself</text>
+<text x="1108" y="546" font-size="19" font-weight="700" text-anchor="start" fill="var(--ink)">delegates to other skills:</text>
+<!-- the four coordinated skills -->
+<text class="mono" x="1242" y="590" font-size="21" font-weight="700" text-anchor="start" fill="var(--ink)">write-hook/</text>
+<text class="mono" x="1242" y="642" font-size="21" font-weight="700" text-anchor="start" fill="var(--ink)">write-content/</text>
+<text class="mono" x="1242" y="694" font-size="21" font-weight="700" text-anchor="start" fill="var(--ink)">voice-cleanup/</text>
+<text class="mono" x="1242" y="746" font-size="21" font-weight="700" text-anchor="start" fill="var(--ink)">format-post/</text>
+<!-- caption -->
+<text x="1108" y="842" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">It routes &#8212; the skills do the work.</text>
+
+<!-- ============ one-line takeaway ============ -->
+<text x="800" y="938" font-size="27" text-anchor="middle" fill="var(--ink)">Start simple. Add workflows when one skill does several jobs.</text>
+<text x="800" y="982" font-size="29" font-weight="700" text-anchor="middle" fill="var(--green)">Reach for a Skill System when it coordinates a team of skills.</text>
+</svg></body></html>

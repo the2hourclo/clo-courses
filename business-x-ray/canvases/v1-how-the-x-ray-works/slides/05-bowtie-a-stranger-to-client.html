@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ SHOW: one simple line, Stranger -> Client ============ -->
+  <circle cx="452" cy="212" r="7" fill="var(--ink)" stroke="none"/>
+  <line x1="470" y1="212" x2="1120" y2="212" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="1108,204 1122,212 1108,220" stroke="var(--ink)" stroke-width="3"/>
+  <circle cx="1140" cy="212" r="7" fill="var(--ink)" stroke="none"/>
+
+  <!-- ============ EXTEND: the same line grown into the CAMPAIGN BOW-TIE ============ -->
+
+  <!-- LEFT WING = ACQUISITION (blue) — NARROWS in toward the sale -->
+  <polygon points="170,400 170,640 748,520" fill="rgba(52,120,190,0.10)" stroke="var(--blue)" stroke-width="3"/>
+  <!-- left wing stage dividers (Awareness | Nurturing | Consideration) -->
+  <line x1="363" y1="440" x2="363" y2="600" stroke="var(--blue)" stroke-width="1.6" opacity="0.55"/>
+  <line x1="555" y1="480" x2="555" y2="560" stroke="var(--blue)" stroke-width="1.6" opacity="0.55"/>
+
+  <!-- RIGHT WING = DELIVERY (green) — EXPANDS out after the sale -->
+  <polygon points="852,520 1430,400 1430,640" fill="rgba(45,140,60,0.12)" stroke="var(--green)" stroke-width="3"/>
+  <!-- right wing stage dividers (Onboarding | Launch | Results) -->
+  <line x1="1045" y1="480" x2="1045" y2="560" stroke="var(--green)" stroke-width="1.6" opacity="0.55"/>
+  <line x1="1237" y1="440" x2="1237" y2="600" stroke="var(--green)" stroke-width="1.6" opacity="0.55"/>
+
+  <!-- THE KNOT = COMMIT / CONVERSION (amber diamond) — the sale -->
+  <polygon points="750,520 800,472 850,520 800,568" fill="rgba(214,140,40,0.16)" stroke="var(--amber)" stroke-width="3.5"/>
+
+  <!-- flow arrow INTO the knot (amber) -->
+  <line x1="690" y1="520" x2="742" y2="520" stroke="var(--amber)" stroke-width="3.5"/>
+  <polyline points="732,513 744,520 732,527" stroke="var(--amber)" stroke-width="3.5"/>
+  <!-- flow arrow OUT of the knot (green) -->
+  <line x1="858" y1="520" x2="910" y2="520" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="900,513 912,520 900,527" stroke="var(--green)" stroke-width="3.5"/>
+
+  <!-- POPULATION arc under the shape: many (high) -> few (dips) -> many (high) -->
+  <path d="M210,656 Q800,694 1390,656" stroke="var(--dim)" stroke-width="2" opacity="0.75"/>
+
+  <!-- CLOSING LOOP: Results (right) arcs back to Awareness (left) — dashed green -->
+  <path d="M1372,752 Q800,842 232,752" stroke="var(--green)" stroke-width="2.5" stroke-dasharray="10 8"/>
+  <polyline points="246,743 231,752 245,761" stroke="var(--green)" stroke-width="2.5"/>
+
+  <!-- little green up-trend by the right lesson (money compounds) -->
+  <polyline points="1176,724 1196,712 1214,720 1240,700" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="1232,700 1240,700 1240,708" stroke="var(--green)" stroke-width="3"/>
+
+  <!-- eye glyph by the left lesson (where owners stare) -->
+  <path d="M116,722 Q132,708 148,722 Q132,736 116,722" stroke="var(--blue)" stroke-width="2.4"/>
+  <circle cx="132" cy="722" r="3.4" fill="var(--blue)" stroke="none"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 2 &#183; SEE THE CURRENT STATE</text>
+<text x="800" y="112" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">A Stranger Becomes a Client</text>
+<text x="800" y="152" font-size="26" text-anchor="middle" fill="var(--dim)">Every client you win walks the same path. The bow-tie funnel draws it start to finish.</text>
+
+<!-- SHOW: the simple line labels -->
+<text x="440" y="219" font-size="30" font-weight="700" text-anchor="end" fill="var(--ink)">STRANGER</text>
+<text x="1158" y="219" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">CLIENT</text>
+<text x="800" y="272" font-size="22" text-anchor="middle" fill="var(--dim)">Anyone nods at this. Now let&#8217;s grow that one line into the real path.</text>
+
+<!-- EXTEND: phase banners -->
+<text x="459" y="304" font-size="20" font-weight="700" letter-spacing="3" text-anchor="middle" fill="var(--blue)">ACQUISITION &#8212; it narrows</text>
+<text x="800" y="304" font-size="20" font-weight="700" letter-spacing="3" text-anchor="middle" fill="var(--amber)">COMMIT</text>
+<text x="1141" y="304" font-size="20" font-weight="700" letter-spacing="3" text-anchor="middle" fill="var(--green)">DELIVERY &#8212; it expands</text>
+
+<!-- EXTEND: stage headers (formal name + plain-words gloss + your real asset) -->
+<!-- left wing (blue) -->
+<text x="262" y="345" font-size="18" font-weight="700" text-anchor="middle" fill="var(--blue)">AWARENESS</text>
+<text x="262" y="369" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">they find you</text>
+<text x="262" y="392" font-size="16" font-weight="700" text-anchor="middle" fill="var(--blue)">your YouTube videos</text>
+
+<text x="448" y="345" font-size="18" font-weight="700" text-anchor="middle" fill="var(--blue)">NURTURING</text>
+<text x="448" y="369" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">they hear from you</text>
+<text x="448" y="392" font-size="16" font-weight="700" text-anchor="middle" fill="var(--blue)">your weekly email</text>
+
+<text x="625" y="345" font-size="16" font-weight="700" text-anchor="middle" fill="var(--blue)">CONSIDERATION</text>
+<text x="625" y="369" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">they weigh you up</text>
+<text x="625" y="392" font-size="16" font-weight="700" text-anchor="middle" fill="var(--blue)">a discovery call</text>
+
+<!-- knot (amber) -->
+<text x="800" y="345" font-size="16" font-weight="700" text-anchor="middle" fill="var(--amber)">CONVERSION</text>
+<text x="800" y="369" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">they say yes</text>
+
+<!-- right wing (green) -->
+<text x="975" y="345" font-size="16" font-weight="700" text-anchor="middle" fill="var(--green)">ONBOARDING</text>
+<text x="975" y="369" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">they start</text>
+
+<text x="1152" y="345" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">LAUNCH</text>
+<text x="1152" y="369" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">they get results going</text>
+
+<text x="1338" y="345" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">RESULTS</text>
+<text x="1338" y="369" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">they win &#8594; they refer</text>
+
+<!-- shared example spanning Onboarding + Launch -->
+<text x="1063" y="392" font-size="16" font-weight="700" text-anchor="middle" fill="var(--green)">your 1:1 coaching</text>
+
+<!-- inside-knot label -->
+<text x="800" y="596" font-size="19" font-weight="700" text-anchor="middle" fill="var(--amber)">the moment you get paid</text>
+
+<!-- POPULATION labels (under the population arc) -->
+<text x="265" y="692" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">many strangers</text>
+<text x="800" y="692" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">few buyers</text>
+<text x="1335" y="692" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">many advocates</text>
+
+<!-- the two-wing lesson -->
+<text x="285" y="726" font-size="21" font-weight="700" text-anchor="middle" fill="var(--blue)">Where most owners stare</text>
+<text x="1335" y="726" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">Where the money compounds</text>
+
+<!-- closing-loop label -->
+<text x="800" y="772" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">Happy clients refer you &#8212; the loop closes, and the right wing feeds the left.</text>
+
+<!-- takeaway bridge -->
+<text x="800" y="900" font-size="28" text-anchor="middle" fill="var(--ink)">Every business runs on these same stages &#8212; strangers filter in, clients fan out.</text>
+<text x="800" y="950" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">The interesting part is what happens BETWEEN them.</text>
+</svg></body></html>

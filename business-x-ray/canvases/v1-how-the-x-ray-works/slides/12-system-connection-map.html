@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ CATEGORY ZONES (dashed, like the real map) ============ -->
+  <rect x="80"  y="305" width="380" height="250" rx="18" stroke="var(--ink)" stroke-width="2" stroke-dasharray="7 7" fill="rgba(0,0,0,0.012)"/>
+  <rect x="545" y="255" width="310" height="430" rx="18" stroke="var(--ink)" stroke-width="2" stroke-dasharray="7 7" fill="rgba(0,0,0,0.012)"/>
+  <rect x="1120" y="380" width="340" height="230" rx="18" stroke="var(--ink)" stroke-width="2" stroke-dasharray="7 7" fill="rgba(0,0,0,0.012)"/>
+
+  <!-- ============ TOOL NODES ============ -->
+  <g stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.02)">
+    <rect x="110" y="400" width="150" height="54" rx="12"/>   <!-- YouTube -->
+    <rect x="290" y="400" width="150" height="54" rx="12"/>   <!-- Kit -->
+    <rect x="580" y="310" width="150" height="54" rx="12"/>   <!-- Calendly -->
+    <rect x="580" y="445" width="150" height="54" rx="12"/>   <!-- Zoom -->
+    <rect x="580" y="580" width="150" height="54" rx="12"/>   <!-- Stripe -->
+  </g>
+  <!-- Notion = the hub (thicker) -->
+  <rect x="1190" y="460" width="170" height="64" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="rgba(0,0,0,0.02)"/>
+
+  <!-- ============ GREEN AUTOMATED WIRE: Calendly -> Zoom (runs on its own) ============ -->
+  <path d="M655,366 L655,443" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="649,433 655,445 661,433" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ============ AMBER MANUAL BRIDGE 1: Zoom -> Notion (call notes, by hand) ============ -->
+  <g stroke="var(--amber)" stroke-width="3.2" stroke-dasharray="11 8">
+    <path d="M732,472 L1186,483"/>
+    <path d="M732,480 L1186,491"/>
+  </g>
+  <!-- bridge planks -->
+  <g stroke="var(--amber)" stroke-width="2">
+    <line x1="820" y1="474" x2="820" y2="482"/>
+    <line x1="1080" y1="480" x2="1080" y2="488"/>
+  </g>
+  <polyline points="1178,477 1190,483 1178,489" stroke="var(--amber)" stroke-width="3.5"/>
+
+  <!-- ============ AMBER MANUAL BRIDGE 2: Stripe -> Notion (payment status, by hand) ============ -->
+  <g stroke="var(--amber)" stroke-width="3.2" stroke-dasharray="11 8">
+    <path d="M732,607 L1186,505"/>
+    <path d="M732,615 L1186,513"/>
+  </g>
+  <g stroke="var(--amber)" stroke-width="2">
+    <line x1="820" y1="588" x2="820" y2="596"/>
+    <line x1="1080" y1="530" x2="1080" y2="538"/>
+  </g>
+  <polyline points="1178,499 1190,505 1178,511" stroke="var(--amber)" stroke-width="3.5"/>
+
+  <!-- ============ YOU figure #1 — standing ON bridge 1 (feet ~980,478) ============ -->
+  <g stroke="var(--ink)" stroke-width="3">
+    <circle cx="980" cy="438" r="12" fill="var(--bg)"/>
+    <line x1="980" y1="450" x2="980" y2="468"/>
+    <line x1="962" y1="458" x2="998" y2="458"/>
+    <line x1="980" y1="468" x2="970" y2="478"/>
+    <line x1="980" y1="468" x2="990" y2="478"/>
+  </g>
+
+  <!-- ============ YOU figure #2 — standing ON bridge 2 (feet ~980,552) ============ -->
+  <g stroke="var(--ink)" stroke-width="3">
+    <circle cx="980" cy="512" r="12" fill="var(--bg)"/>
+    <line x1="980" y1="524" x2="980" y2="542"/>
+    <line x1="962" y1="532" x2="998" y2="532"/>
+    <line x1="980" y1="542" x2="970" y2="552"/>
+    <line x1="980" y1="542" x2="990" y2="552"/>
+  </g>
+
+  <!-- ============ DISCONNECTED ISLAND: Google Docs (proposals) ============ -->
+  <ellipse cx="270" cy="636" rx="150" ry="60" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.015)"/>
+  <ellipse cx="270" cy="636" rx="184" ry="84" stroke="var(--red)" stroke-width="2.5" stroke-dasharray="5 9"/>
+  <rect x="185" y="610" width="170" height="52" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.02)"/>
+
+  <!-- ============ LEGEND box (top-right) ============ -->
+  <rect x="1140" y="192" width="412" height="172" rx="14" stroke="var(--dim)" stroke-width="1.5" fill="rgba(0,0,0,0.01)"/>
+  <path d="M1162,270 L1206,270" stroke="var(--green)" stroke-width="4"/>
+  <path d="M1162,312 L1206,312" stroke="var(--amber)" stroke-width="4" stroke-dasharray="10 7"/>
+  <ellipse cx="1184" cy="354" rx="20" ry="12" stroke="var(--red)" stroke-width="2.2" stroke-dasharray="4 6"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="64" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 2 &#183; SEE THE CURRENT STATE</text>
+<text x="640" y="118" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">You Are the Integration Layer</text>
+<text x="640" y="158" font-size="25" text-anchor="middle" fill="var(--dim)">Your seven tools &#8212; how they connect, and where you connect them by hand.</text>
+
+<!-- zone headers -->
+<text x="100" y="340" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">CONTENT &amp; MARKETING</text>
+<text x="565" y="292" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">SALES</text>
+<text x="1140" y="414" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">DELIVERY &amp; OPS</text>
+
+<!-- tool names -->
+<text x="185"  y="435" font-size="25" text-anchor="middle" fill="var(--ink)">YouTube</text>
+<text x="365"  y="435" font-size="25" text-anchor="middle" fill="var(--ink)">Kit</text>
+<text x="655"  y="345" font-size="25" text-anchor="middle" fill="var(--ink)">Calendly</text>
+<text x="655"  y="480" font-size="25" text-anchor="middle" fill="var(--ink)">Zoom</text>
+<text x="655"  y="615" font-size="25" text-anchor="middle" fill="var(--ink)">Stripe</text>
+<text x="1275" y="500" font-size="27" font-weight="700" text-anchor="middle" fill="var(--ink)">Notion</text>
+<text x="270"  y="643" font-size="24" text-anchor="middle" fill="var(--ink)">Google Docs</text>
+
+<!-- content-zone caption (so it reads as top-of-funnel, not an accidental island) -->
+<text x="100" y="528" font-size="18" text-anchor="start" fill="var(--dim)">where audience + leads come from</text>
+
+<!-- Notion sublabel -->
+<text x="1275" y="556" font-size="18" text-anchor="middle" fill="var(--dim)">your system of record</text>
+
+<!-- green wire label — hugs the green Calendly->Zoom arrow on its LEFT, in the gap between the boxes, clear of the amber line's mouth (x=732) and the zone borders -->
+<text x="650" y="398" font-size="19" font-weight="700" text-anchor="end" fill="var(--green)">automatic</text>
+<text x="650" y="421" font-size="16" text-anchor="end" fill="var(--dim)">runs itself</text>
+
+<!-- bridge 1 label + YOU -->
+<text x="980" y="415" font-size="21" font-weight="700" text-anchor="middle" fill="var(--amber)">call notes &#183; by hand</text>
+<text x="934" y="444" font-size="16" font-weight="700" text-anchor="end" fill="var(--ink)">YOU</text>
+
+<!-- bridge 2 label + YOU -->
+<text x="980" y="600" font-size="21" font-weight="700" text-anchor="middle" fill="var(--amber)">payment status &#183; by hand</text>
+<text x="934" y="518" font-size="16" font-weight="700" text-anchor="end" fill="var(--ink)">YOU</text>
+
+<!-- island tags -->
+<text x="270" y="592" font-size="20" font-weight="700" text-anchor="middle" fill="var(--red)">DISCONNECTED</text>
+<text x="270" y="738" font-size="18" text-anchor="middle" fill="var(--dim)">proposals live here &#8212; nothing flows in or out</text>
+
+<!-- legend -->
+<text x="1160" y="228" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">HOW TO READ THIS MAP</text>
+<text x="1220" y="277" font-size="19" text-anchor="start" fill="var(--ink)">Automated &#8212; runs on its own</text>
+<text x="1220" y="319" font-size="19" text-anchor="start" fill="var(--ink)">Manual bridge &#8212; YOU are the wire</text>
+<text x="1220" y="361" font-size="19" text-anchor="start" fill="var(--ink)">Disconnected &#8212; nothing flows</text>
+
+<!-- ===== EXPOSE — count the amber bridges ===== -->
+<text x="800" y="784" font-size="28" text-anchor="middle" fill="var(--ink)">One wire runs itself. The rest is <tspan font-weight="700">YOU</tspan> &#8212;</text>
+<text x="800" y="818" font-size="28" text-anchor="middle" fill="var(--ink)">the <tspan fill="var(--amber)" font-weight="700">integration layer</tspan>, moving data between tools by hand.</text>
+
+<!-- ===== takeaway bridge (to the 24-Assets Scorecard) ===== -->
+<text x="800" y="874" font-size="25" text-anchor="middle" fill="var(--ink)">You've now seen the whole current state &#8212; every tool, every wire, every gap.</text>
+<text x="800" y="920" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Before you automate one bridge, score what you already own.</text>
+</svg></body></html>

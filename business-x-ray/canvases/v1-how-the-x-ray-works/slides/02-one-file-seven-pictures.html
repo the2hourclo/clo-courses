@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ THE FILE — a drawio app window (the deliverable, made tangible) ============ -->
+  <rect x="215" y="198" width="1170" height="452" rx="16" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.012)"/>
+  <!-- title bar divider -->
+  <line x1="215" y1="256" x2="1385" y2="256" stroke="var(--dim)" stroke-width="2"/>
+  <!-- window control dots -->
+  <circle cx="248" cy="227" r="6" stroke="var(--dim)" stroke-width="2"/>
+  <circle cx="270" cy="227" r="6" stroke="var(--dim)" stroke-width="2"/>
+  <circle cx="292" cy="227" r="6" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- ---- the OPEN page (page 1): a faint mini Business Map behind the tabs ---- -->
+  <g opacity="0.5" stroke="var(--dim)">
+    <!-- YOU — the owner, feeding the funnel (faint) -->
+    <circle cx="268" cy="332" r="9" stroke-width="1.8"/>
+    <line x1="268" y1="341" x2="268" y2="372" stroke-width="1.8"/>
+    <line x1="250" y1="354" x2="286" y2="354" stroke-width="1.8"/>
+    <line x1="268" y1="372" x2="257" y2="392" stroke-width="1.8"/>
+    <line x1="268" y1="372" x2="279" y2="392" stroke-width="1.8"/>
+    <!-- 7 faint business-map columns: header cell + one content box each -->
+    <rect x="300" y="302" width="138" height="28" rx="5" stroke-width="1.6" fill="rgba(0,0,0,0.03)"/>
+    <rect x="300" y="340" width="138" height="44" rx="5" stroke-width="1.6"/>
+    <rect x="446" y="302" width="138" height="28" rx="5" stroke-width="1.6" fill="rgba(0,0,0,0.03)"/>
+    <rect x="446" y="340" width="138" height="44" rx="5" stroke-width="1.6"/>
+    <rect x="592" y="302" width="138" height="28" rx="5" stroke-width="1.6" fill="rgba(0,0,0,0.03)"/>
+    <rect x="592" y="340" width="138" height="44" rx="5" stroke-width="1.6"/>
+    <rect x="738" y="302" width="138" height="28" rx="5" stroke-width="1.6" fill="rgba(0,0,0,0.03)"/>
+    <rect x="738" y="340" width="138" height="44" rx="5" stroke-width="1.6"/>
+    <rect x="884" y="302" width="138" height="28" rx="5" stroke-width="1.6" fill="rgba(0,0,0,0.03)"/>
+    <rect x="884" y="340" width="138" height="44" rx="5" stroke-width="1.6"/>
+    <rect x="1030" y="302" width="138" height="28" rx="5" stroke-width="1.6" fill="rgba(0,0,0,0.03)"/>
+    <rect x="1030" y="340" width="138" height="44" rx="5" stroke-width="1.6"/>
+    <rect x="1176" y="302" width="138" height="28" rx="5" stroke-width="1.6" fill="rgba(0,0,0,0.03)"/>
+    <rect x="1176" y="340" width="138" height="44" rx="5" stroke-width="1.6"/>
+    <!-- faint bow-tie hint below the columns (funnel narrowing to a client) -->
+    <polyline points="470,470 640,432 640,508 470,470" stroke-width="1.6"/>
+    <polyline points="810,470 640,432 640,508 810,470" stroke-width="1.6"/>
+    <circle cx="640" cy="470" r="8" stroke-width="1.6"/>
+  </g>
+
+  <!-- ============ PAGE TABS along the bottom (the seven pictures) ============ -->
+  <line x1="215" y1="586" x2="1385" y2="586" stroke="var(--dim)" stroke-width="2"/>
+  <!-- active tab: Business Overview (cream, raised, green "open" accent) -->
+  <rect x="235" y="590" width="156" height="58" rx="8" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="245" y1="593" x2="381" y2="593" stroke="var(--green)" stroke-width="4"/>
+  <!-- inactive tabs -->
+  <rect x="397" y="592" width="156" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+  <rect x="559" y="592" width="156" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+  <rect x="721" y="592" width="156" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+  <rect x="883" y="592" width="156" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+  <rect x="1045" y="592" width="156" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+  <rect x="1207" y="592" width="156" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="64" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 1 &#183; YOU CAN'T SEE IT</text>
+<text x="800" y="120" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">One File. Seven Pictures of Your Business.</text>
+<text x="800" y="163" font-size="25" text-anchor="middle" fill="var(--dim)">The Business X-Ray is one file &#8212; every tab is another view of how your business really runs.</text>
+
+<!-- filename + page count on the title bar -->
+<text class="mono" x="800" y="236" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">your-business-x-ray.drawio</text>
+<text x="1360" y="234" font-size="18" text-anchor="end" fill="var(--dim)">7 pages</text>
+
+<!-- YOU label on the owner in the preview -->
+<text x="268" y="312" font-size="18" font-weight="700" text-anchor="middle" fill="var(--dim)">YOU</text>
+<!-- faint page label -->
+<text x="1305" y="530" font-size="18" text-anchor="end" fill="var(--dim)">page 1 &#183; your whole funnel on one wall</text>
+
+<!-- ===== tab labels ===== -->
+<text x="313"  y="626" font-size="17" font-weight="700" text-anchor="middle" fill="var(--ink)">Business Overview</text>
+<text x="475"  y="626" font-size="17" text-anchor="middle" fill="var(--ink)">Swimlanes</text>
+<text x="637"  y="626" font-size="17" text-anchor="middle" fill="var(--ink)">System Map</text>
+<text x="799"  y="626" font-size="17" text-anchor="middle" fill="var(--ink)">24 Assets</text>
+<text x="961"  y="626" font-size="17" text-anchor="middle" fill="var(--ink)">OS Map</text>
+<text x="1123" y="626" font-size="17" text-anchor="middle" fill="var(--ink)">Roadmap</text>
+<text x="1285" y="626" font-size="17" text-anchor="middle" fill="var(--ink)">Build Plan</text>
+
+<!-- ===== one-line gloss under each tab ===== -->
+<text x="313"  y="700" font-size="18" text-anchor="middle" fill="var(--dim)">the whole funnel</text>
+
+<text x="475"  y="690" font-size="18" text-anchor="middle" fill="var(--dim)">one page per</text>
+<text x="475"  y="712" font-size="18" text-anchor="middle" fill="var(--dim)">process you drill</text>
+
+<text x="637"  y="690" font-size="18" text-anchor="middle" fill="var(--dim)">how your tools</text>
+<text x="637"  y="712" font-size="18" text-anchor="middle" fill="var(--dim)">connect</text>
+
+<text x="799"  y="690" font-size="18" text-anchor="middle" fill="var(--dim)">what you own,</text>
+<text x="799"  y="712" font-size="18" text-anchor="middle" fill="var(--dim)">scored</text>
+
+<text x="961"  y="690" font-size="18" text-anchor="middle" fill="var(--dim)">your future</text>
+<text x="961"  y="712" font-size="18" text-anchor="middle" fill="var(--dim)">AI team</text>
+
+<text x="1123" y="690" font-size="18" text-anchor="middle" fill="var(--dim)">what to fix</text>
+<text x="1123" y="712" font-size="18" text-anchor="middle" fill="var(--dim)">first</text>
+
+<text x="1285" y="690" font-size="18" text-anchor="middle" fill="var(--dim)">the build,</text>
+<text x="1285" y="712" font-size="18" text-anchor="middle" fill="var(--dim)">step by step</text>
+
+<!-- ===== takeaway (bridge to the interview) ===== -->
+<text x="800" y="852" font-size="27" text-anchor="middle" fill="var(--ink)">Seven pictures. One file. The X-Ray is your whole business, drawn.</text>
+<text x="800" y="908" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">But first the AI has to get it out of your head. That starts with an interview.</text>
+</svg></body></html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- =============== LEFT: the terminal tree (HERO) =============== -->
+  <rect x="64" y="192" width="648" height="250" rx="24" stroke="var(--ink)" stroke-width="5"/>
+  <!-- traffic lights (neutral chrome, not accents) -->
+  <circle cx="102" cy="226" r="7" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="128" cy="226" r="7" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="154" cy="226" r="7" stroke="var(--dim)" stroke-width="3"/>
+  <!-- title-bar divider -->
+  <line x1="76" y1="256" x2="700" y2="256" stroke="rgb(214,212,204)" stroke-width="2.5"/>
+  <!-- the single └── connector (only one child) -->
+  <!-- REQUIRED badge frame (ink weight, never a subfolder color) -->
+  <rect x="384" y="378" width="150" height="32" rx="8" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- =============== LEFT-MIDDLE: the four sub-folders, struck out =============== -->
+  <!-- workflows/ = GREEN fork -->
+  <line x1="80" y1="586" x2="92" y2="586" stroke="var(--green)" stroke-width="3"/>
+  <line x1="92" y1="586" x2="106" y2="576" stroke="var(--green)" stroke-width="3"/>
+  <line x1="92" y1="586" x2="106" y2="596" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="80" cy="586" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="106" cy="576" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="106" cy="596" r="2.6" fill="var(--green)" stroke="none"/>
+  <!-- scripts/ = AMBER gear -->
+  <circle cx="264" cy="586" r="10" stroke="var(--amber)" stroke-width="3"/>
+  <circle cx="264" cy="586" r="3.6" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="274" y1="586" x2="279" y2="586" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="254" y1="586" x2="249" y2="586" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="269" y1="594.7" x2="271.5" y2="599" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="259" y1="594.7" x2="256.5" y2="599" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="269" y1="577.3" x2="271.5" y2="573" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="259" y1="577.3" x2="256.5" y2="573" stroke="var(--amber)" stroke-width="3"/>
+  <!-- references/ = BLUE open book -->
+  <line x1="420" y1="578" x2="420" y2="595" stroke="var(--blue)" stroke-width="2.5"/>
+  <path d="M420,578 L407,582 L407,594 L420,590 Z" stroke="var(--blue)" stroke-width="3" fill="var(--bg)"/>
+  <path d="M420,578 L433,582 L433,594 L420,590 Z" stroke="var(--blue)" stroke-width="3" fill="var(--bg)"/>
+  <!-- assets/ = PURPLE stacked copy -->
+  <rect x="592" y="576" width="15" height="19" rx="2" stroke="var(--purple)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="584" y="581" width="15" height="19" rx="2" stroke="var(--purple)" stroke-width="3" fill="var(--bg)"/>
+  <!-- strike-through lines across each name (they are NOT used) -->
+  <line x1="120" y1="583" x2="216" y2="583" stroke="var(--green)" stroke-width="3"/>
+  <line x1="288" y1="583" x2="360" y2="583" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="446" y1="583" x2="556" y2="583" stroke="var(--blue)" stroke-width="3"/>
+  <line x1="616" y1="583" x2="692" y2="583" stroke="var(--purple)" stroke-width="3"/>
+
+  <!-- =============== RIGHT: the SKILL.md file card =============== -->
+  <!-- file tab -->
+  <rect x="792" y="196" width="196" height="44" rx="12" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+  <!-- the card -->
+  <rect x="770" y="238" width="712" height="452" rx="20" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+  <!-- Zone 1: description / trigger (blue tint) -->
+  <rect x="790" y="298" width="676" height="150" rx="12" fill="rgba(52,120,190,0.08)" stroke="var(--blue)" stroke-width="2.5"/>
+  <!-- Zone 2: the body / the one job (plain) -->
+  <rect x="790" y="510" width="676" height="162" rx="12" fill="rgba(0,0,0,0.015)" stroke="var(--ink)" stroke-width="2.5"/>
+
+  <!-- =============== BOTTOM: before / after (the one job in action) =============== -->
+  <!-- grouping container -->
+  <rect x="70" y="706" width="1466" height="228" rx="20" stroke="rgb(216,214,206)" stroke-width="2" fill="rgba(0,0,0,0.010)"/>
+  <!-- input node (messy notes) -->
+  <rect x="110" y="760" width="300" height="150" rx="14" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+  <!-- messy note lines (uneven = unstructured) -->
+  <line x1="132" y1="820" x2="384" y2="820" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="132" y1="844" x2="352" y2="844" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="132" y1="868" x2="390" y2="868" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="132" y1="892" x2="336" y2="892" stroke="var(--dim)" stroke-width="2.5"/>
+  <!-- arrow 1: notes -> the AI -->
+  <line x1="430" y1="826" x2="704" y2="826" stroke="var(--ink)" stroke-width="4"/>
+  <polyline points="694,818 708,826 694,834" stroke="var(--ink)" stroke-width="4"/>
+  <!-- arrow 2: the AI -> summary -->
+  <line x1="856" y1="826" x2="1140" y2="826" stroke="var(--ink)" stroke-width="4"/>
+  <polyline points="1130,818 1144,826 1130,834" stroke="var(--ink)" stroke-width="4"/>
+  <!-- output node (clean summary) -->
+  <rect x="1150" y="760" width="310" height="150" rx="14" fill="rgba(45,140,60,0.05)" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ---- THE AI (canonical black-marker robot, running the skill) ---- -->
+  <g transform="translate(641.8,524) scale(0.8)">
+    <g stroke="var(--ink)" stroke-width="4">
+      <line x1="160" y1="256" x2="160" y2="270"/>
+      <rect x="118" y="270" width="84" height="60" rx="12"/>
+      <rect x="132" y="286" width="56" height="28" rx="7"/>
+      <line x1="160" y1="330" x2="160" y2="340"/>
+      <rect x="124" y="340" width="72" height="72" rx="12"/>
+      <line x1="124" y1="366" x2="96" y2="392"/>
+      <line x1="142" y1="412" x2="136" y2="440"/>
+      <line x1="178" y1="412" x2="184" y2="440"/>
+      <polyline points="196,366 244,384 262,398" fill="none"/>
+    </g>
+    <rect x="140" y="356" width="40" height="22" rx="4" stroke="var(--dim)" stroke-width="3"/>
+    <circle cx="160" cy="250" r="6" fill="var(--green)" stroke="var(--green)"/>
+    <circle cx="146" cy="300" r="6" fill="var(--green)" stroke="var(--green)"/>
+    <circle cx="174" cy="300" r="6" fill="var(--green)" stroke="var(--green)"/>
+  </g>
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- eyebrow + claim-title + subtitle -->
+<text x="800" y="52" font-size="24" font-weight="700" text-anchor="middle" fill="var(--dim)">LEVEL 1 OF 3 &#183; THE SIMPLE SKILL</text>
+<text x="800" y="106" font-size="56" font-weight="700" text-anchor="middle" fill="var(--ink)">A Simple Skill Is Just One File</text>
+<text x="800" y="150" font-size="29" text-anchor="middle" fill="var(--dim)">one job, one SKILL.md &#8212; no folders to add, nothing to wire up</text>
+
+<!-- ===== LEFT: terminal tree ===== -->
+<text class="mono" x="188" y="234" font-size="20" text-anchor="start" fill="var(--dim)">$ tree summarize-notes/</text>
+<text class="mono" x="92" y="318" font-size="32" font-weight="700" text-anchor="start" fill="var(--ink)">summarize-notes/</text>
+<!-- the one child row -->
+<text class="mono" x="120" y="400" font-size="30" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="206" y="400" font-size="32" font-weight="700" text-anchor="start" fill="var(--ink)">SKILL.md</text>
+<text x="396" y="401" font-size="21" font-weight="700" text-anchor="start" fill="var(--ink)">REQUIRED</text>
+<text x="556" y="400" font-size="20" text-anchor="start" fill="var(--dim)"># the one job</text>
+<!-- emptiness note inside the terminal -->
+<text class="mono" x="120" y="430" font-size="18" text-anchor="start" fill="var(--dim)"># nothing else &#8212; that&#8217;s the whole skill</text>
+
+<!-- ===== LEFT-MIDDLE: four sub-folders, none used ===== -->
+<text x="70" y="524" font-size="22" font-weight="700" text-anchor="start" fill="var(--dim)">A simple skill uses NONE of these:</text>
+<text x="120" y="592" font-size="21" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text x="288" y="592" font-size="21" font-weight="700" text-anchor="start" fill="var(--amber)">scripts/</text>
+<text x="446" y="592" font-size="21" font-weight="700" text-anchor="start" fill="var(--blue)">references/</text>
+<text x="616" y="592" font-size="21" font-weight="700" text-anchor="start" fill="var(--purple)">assets/</text>
+<text x="70" y="628" font-size="20" text-anchor="start" fill="var(--dim)">those come later, at Levels 2 and 3 &#8212;</text>
+<text x="70" y="656" font-size="20" text-anchor="start" fill="var(--dim)">skip them until a real need shows up.</text>
+
+<!-- ===== RIGHT: SKILL.md file card ===== -->
+<text x="890" y="226" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">SKILL.md</text>
+<text x="770" y="280" font-size="24" font-weight="700" text-anchor="start" fill="var(--dim)">what the one file holds:</text>
+
+<!-- Zone 1: description = trigger -->
+<text x="800" y="330" font-size="22" font-weight="700" text-anchor="start" fill="var(--blue)">&#9312; THE DESCRIPTION &#8212; its trigger</text>
+<text x="812" y="368" font-size="22" font-weight="700" text-anchor="start" fill="var(--blue)">name:</text>
+<text x="906" y="368" font-size="22" text-anchor="start" fill="var(--ink)">summarize-notes</text>
+<text x="812" y="404" font-size="22" font-weight="700" text-anchor="start" fill="var(--blue)">description:</text>
+<text x="1000" y="404" font-size="22" text-anchor="start" fill="var(--ink)">&#8220;Turn messy meeting</text>
+<text x="812" y="438" font-size="22" text-anchor="start" fill="var(--ink)">notes into a clean summary.&#8221;</text>
+
+<!-- Zone 2: body = the one job -->
+<text x="800" y="498" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">&#9313; THE BODY &#8212; how to do the one job</text>
+<text x="812" y="548" font-size="22" text-anchor="start" fill="var(--dim)">#</text>
+<text x="836" y="548" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">Summarize Notes</text>
+<text x="812" y="588" font-size="21" text-anchor="start" fill="var(--ink)">&#8226; Pull every decision + action item</text>
+<text x="812" y="622" font-size="21" text-anchor="start" fill="var(--ink)">&#8226; Group by topic, cut the chatter</text>
+<text x="812" y="656" font-size="21" text-anchor="start" fill="var(--ink)">&#8226; Return 3&#8211;5 tidy bullets. No preamble.</text>
+
+<!-- ===== BOTTOM: before / after ===== -->
+<text x="96" y="740" font-size="22" font-weight="700" text-anchor="start" fill="var(--dim)">THE ONE JOB, IN ACTION</text>
+
+<!-- input node -->
+<text class="mono" x="132" y="792" font-size="18" text-anchor="start" fill="var(--dim)">raw meeting notes</text>
+<!-- arrow labels -->
+<text x="528" y="810" font-size="18" text-anchor="middle" fill="var(--dim)">reads</text>
+<text x="998" y="810" font-size="18" text-anchor="middle" fill="var(--dim)">returns</text>
+<!-- robot label -->
+<text x="785" y="906" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="785" y="928" font-size="18" text-anchor="middle" fill="var(--dim)">runs summarize-notes/</text>
+<!-- output node -->
+<text x="1172" y="792" font-size="20" font-weight="700" text-anchor="start" fill="var(--green)">clean summary</text>
+<text x="1172" y="826" font-size="20" text-anchor="start" fill="var(--ink)">&#8226; decisions locked</text>
+<text x="1172" y="856" font-size="20" text-anchor="start" fill="var(--ink)">&#8226; action items + owners</text>
+<text x="1172" y="886" font-size="20" text-anchor="start" fill="var(--ink)">&#8226; next steps</text>
+
+<!-- ===== one-line takeaway ===== -->
+<text x="800" y="984" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">One job? One SKILL.md is the whole skill.</text>
+<text x="800" y="1026" font-size="34" font-weight="700" text-anchor="middle" fill="var(--green)">Don&#8217;t add folders you don&#8217;t need.</text>
+</svg></body></html>

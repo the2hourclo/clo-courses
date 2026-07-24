@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --purple:rgb(147,112,219); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ LEFT — the roadmap of chosen fixes feeding in ============ -->
+  <rect x="76" y="452" width="212" height="150" rx="16" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="96" y1="500" x2="268" y2="500" stroke="var(--dim)" stroke-width="2"/>
+  <!-- four item tickets -->
+  <rect x="96" y="512" width="172" height="16" rx="5" stroke="var(--dim)" stroke-width="2"/>
+  <rect x="96" y="536" width="172" height="16" rx="5" stroke="var(--dim)" stroke-width="2"/>
+  <rect x="96" y="560" width="172" height="16" rx="5" stroke="var(--dim)" stroke-width="2"/>
+  <rect x="96" y="584" width="172" height="16" rx="5" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- incoming rail to the switch -->
+  <line x1="288" y1="528" x2="428" y2="528" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ============ THE SWITCH — the router points that sort each fix ============ -->
+  <circle cx="430" cy="528" r="7" fill="var(--ink)" stroke="var(--ink)"/>
+  <line x1="430" y1="528" x2="456" y2="504" stroke="var(--ink)" stroke-width="3.5"/>
+  <circle cx="456" cy="504" r="4.5" fill="var(--ink)" stroke="var(--ink)"/>
+
+  <!-- four diverging switch curves, each in its track color -->
+  <path d="M444,528 C482,500 480,332 508,302" stroke="var(--blue)" stroke-width="3.5"/>
+  <path d="M444,528 C482,516 486,462 508,452" stroke="var(--green)" stroke-width="3.5"/>
+  <path d="M444,528 C482,540 486,594 508,604" stroke="var(--purple)" stroke-width="3.5"/>
+  <path d="M444,528 C482,556 480,726 508,756" stroke="var(--amber)" stroke-width="3.5"/>
+
+  <!-- ============ FOUR RAILS (colored, clean) ============ -->
+  <line x1="505" y1="302" x2="880" y2="302" stroke="var(--blue)" stroke-width="3.5"/>
+  <line x1="505" y1="452" x2="930" y2="452" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="505" y1="604" x2="930" y2="604" stroke="var(--purple)" stroke-width="3.5"/>
+  <line x1="505" y1="756" x2="930" y2="756" stroke="var(--amber)" stroke-width="3.5"/>
+
+  <!-- ============ FOUR CARS — each rides its track with a real example ============ -->
+  <rect x="505" y="260" width="340" height="84" rx="14" stroke="var(--blue)" stroke-width="4" fill="rgba(52,120,190,0.06)"/>
+  <rect x="505" y="410" width="340" height="84" rx="14" stroke="var(--green)" stroke-width="4" fill="rgba(45,140,60,0.06)"/>
+  <rect x="505" y="562" width="340" height="84" rx="14" stroke="var(--purple)" stroke-width="4" fill="rgba(147,112,219,0.06)"/>
+  <rect x="505" y="714" width="340" height="84" rx="14" stroke="var(--amber)" stroke-width="4" fill="rgba(214,140,40,0.06)"/>
+
+  <!-- little wheels under each car (rail-car read) -->
+  <g stroke="var(--dim)" stroke-width="2.5">
+    <circle cx="560" cy="350" r="7"/><circle cx="790" cy="350" r="7"/>
+    <circle cx="560" cy="500" r="7"/><circle cx="790" cy="500" r="7"/>
+    <circle cx="560" cy="652" r="7"/><circle cx="790" cy="652" r="7"/>
+    <circle cx="560" cy="804" r="7"/><circle cx="790" cy="804" r="7"/>
+  </g>
+
+  <!-- each colored track delivers to its endpoint with ONE arrowhead (no overlapping ink arrow) -->
+  <polyline points="868,295 882,302 868,309" stroke="var(--blue)" stroke-width="3.5"/>
+  <polyline points="918,445 932,452 918,459" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="918,597 932,604 918,611" stroke="var(--purple)" stroke-width="3.5"/>
+  <polyline points="918,749 932,756 918,763" stroke="var(--amber)" stroke-width="3.5"/>
+
+  <!-- ============ TRACK 1 endpoint — the CLOSED GATE, then the skill-building system ============ -->
+  <!-- the gate (farm-gate: two posts, top bar, diagonal brace, padlock) -->
+  <line x1="890" y1="268" x2="890" y2="340" stroke="var(--blue)" stroke-width="4"/>
+  <line x1="942" y1="268" x2="942" y2="340" stroke="var(--blue)" stroke-width="4"/>
+  <line x1="890" y1="272" x2="942" y2="272" stroke="var(--blue)" stroke-width="4"/>
+  <line x1="890" y1="340" x2="942" y2="272" stroke="var(--blue)" stroke-width="3"/>
+  <!-- padlock hanging at the gate's center -->
+  <rect x="907" y="299" width="18" height="15" rx="3" stroke="var(--blue)" stroke-width="3" fill="rgba(52,120,190,0.10)"/>
+  <path d="M910,299 Q916,288 922,299" stroke="var(--blue)" stroke-width="2.5"/>
+  <!-- short blue rail from gate to the robot -->
+  <line x1="942" y1="302" x2="988" y2="302" stroke="var(--blue)" stroke-width="3.5"/>
+
+  <!-- THE AI — canonical black-marker robot = the skill-building system -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="1035" y1="266" x2="1035" y2="274"/>
+    <rect x="1007" y="274" width="56" height="38" rx="9"/>
+    <rect x="1018" y="283" width="34" height="18" rx="5" stroke-width="3"/>
+    <line x1="1035" y1="312" x2="1035" y2="318"/>
+    <rect x="1009" y="318" width="52" height="42" rx="9"/>
+    <line x1="1009" y1="332" x2="991" y2="346"/>
+    <line x1="1061" y1="332" x2="1079" y2="346"/>
+  </g>
+  <rect x="1020" y="330" width="30" height="16" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="1035" cy="262" r="4.5" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="1028" cy="292" r="3.6" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="1042" cy="292" r="3.6" fill="var(--ink)" stroke="var(--ink)"/>
+
+  <!-- ============ TRACK 2 endpoint — two tools wired (Stripe -> Notion) ============ -->
+  <rect x="944" y="428" width="88" height="48" rx="10" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.05)"/>
+  <rect x="1096" y="428" width="88" height="48" rx="10" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.05)"/>
+  <line x1="1032" y1="452" x2="1092" y2="452" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="1084,447 1095,452 1084,457" stroke="var(--green)" stroke-width="3.5"/>
+
+  <!-- ============ TRACK 3 endpoint — the material stack (template to write) ============ -->
+  <rect x="958" y="588" width="92" height="58" rx="8" stroke="var(--purple)" stroke-width="2.5" fill="rgba(147,112,219,0.05)"/>
+  <rect x="948" y="580" width="92" height="58" rx="8" stroke="var(--purple)" stroke-width="3" fill="rgba(147,112,219,0.10)"/>
+  <line x1="964" y1="600" x2="1024" y2="600" stroke="var(--purple)" stroke-width="2.5"/>
+  <line x1="964" y1="614" x2="1024" y2="614" stroke="var(--purple)" stroke-width="2.5"/>
+
+  <!-- ============ TRACK 4 endpoint — the doc removed (stop / just decide) ============ -->
+  <rect x="948" y="728" width="86" height="58" rx="6" stroke="var(--amber)" stroke-width="3" fill="rgba(214,140,40,0.05)"/>
+  <line x1="962" y1="744" x2="1020" y2="744" stroke="var(--amber)" stroke-width="2" opacity="0.6"/>
+  <line x1="962" y1="758" x2="1020" y2="758" stroke="var(--amber)" stroke-width="2" opacity="0.6"/>
+  <line x1="962" y1="772" x2="1004" y2="772" stroke="var(--amber)" stroke-width="2" opacity="0.6"/>
+  <!-- amber slash = removed (a decision, not a failure) -->
+  <line x1="940" y1="792" x2="1044" y2="722" stroke="var(--amber)" stroke-width="4"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 5 &#183; ACT ON IT</text>
+<text x="800" y="118" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Four Kinds of Fix &#8212; Each Routes Differently</text>
+<text x="800" y="158" font-size="26" text-anchor="middle" fill="var(--dim)">The roadmap hands you fixes. The router sorts each one onto the track that actually builds it.</text>
+
+<!-- zone labels -->
+<text x="182" y="228" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">THE FIXES YOU CHOSE</text>
+<text x="466" y="228" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">THE ROUTER</text>
+<text x="1120" y="228" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">FOUR TRACKS &#183; EACH BUILDS DIFFERENTLY</text>
+<text x="1215" y="250" font-size="16" text-anchor="middle" fill="var(--dim)">colors = fix TYPE, not diagnosis</text>
+
+<!-- left card labels -->
+<text x="182" y="490" font-size="19" font-weight="700" text-anchor="middle" fill="var(--ink)">90-DAY ROADMAP</text>
+<text x="182" y="630" font-size="19" text-anchor="middle" fill="var(--dim)">your roadmap items go in</text>
+
+<!-- switch caption -->
+<text x="386" y="560" font-size="18" text-anchor="middle" fill="var(--dim)">sorts by type</text>
+
+<!-- ===== TRACK 1 · AI EMPLOYEE ===== -->
+<text x="515" y="248" font-size="21" font-weight="700" text-anchor="start" fill="var(--blue)">AI EMPLOYEE</text>
+<text x="675" y="298" font-size="27" text-anchor="middle" fill="var(--ink)">Proposal drafter</text>
+<text x="675" y="326" font-size="19" text-anchor="middle" fill="var(--dim)">the big build</text>
+<text x="916" y="256" font-size="16" font-weight="700" text-anchor="middle" fill="var(--blue)">BLUEPRINT GATE</text>
+<text x="1035" y="392" font-size="18" text-anchor="middle" fill="var(--dim)">the skill-building system</text>
+<text x="1105" y="298" font-size="23" font-weight="700" text-anchor="start" fill="var(--blue)">Build the AI Employee</text>
+<text x="1105" y="326" font-size="19" text-anchor="start" fill="var(--dim)">the only track with a gate on it</text>
+
+<!-- ===== TRACK 2 · INTEGRATION ===== -->
+<text x="515" y="400" font-size="21" font-weight="700" text-anchor="start" fill="var(--green)">INTEGRATION</text>
+<text x="675" y="448" font-size="27" text-anchor="middle" fill="var(--ink)">Stripe &#8594; Notion sync</text>
+<text x="675" y="476" font-size="19" text-anchor="middle" fill="var(--dim)">a connection, not an employee</text>
+<text x="988" y="458" font-size="19" font-weight="700" text-anchor="middle" fill="var(--green)">Stripe</text>
+<text x="1140" y="458" font-size="19" font-weight="700" text-anchor="middle" fill="var(--green)">Notion</text>
+<text x="1208" y="446" font-size="23" font-weight="700" text-anchor="start" fill="var(--green)">Wire two tools</text>
+<text x="1208" y="474" font-size="19" text-anchor="start" fill="var(--dim)">no employee needed</text>
+
+<!-- ===== TRACK 3 · DIGITAL ASSET ===== -->
+<text x="515" y="552" font-size="21" font-weight="700" text-anchor="start" fill="var(--purple)">DIGITAL ASSET</text>
+<text x="675" y="600" font-size="27" text-anchor="middle" fill="var(--ink)">Proposal template</text>
+<text x="675" y="628" font-size="19" text-anchor="middle" fill="var(--dim)">material to write</text>
+<text x="1070" y="598" font-size="23" font-weight="700" text-anchor="start" fill="var(--purple)">Write the material once</text>
+<text x="1070" y="626" font-size="19" text-anchor="start" fill="var(--dim)">you author it, then reuse it</text>
+
+<!-- ===== TRACK 4 · PROCESS CHANGE ===== -->
+<text x="515" y="704" font-size="21" font-weight="700" text-anchor="start" fill="var(--amber)">PROCESS CHANGE</text>
+<text x="675" y="752" font-size="26" text-anchor="middle" fill="var(--ink)">Stop sending proposals</text>
+<text x="675" y="780" font-size="19" text-anchor="middle" fill="var(--dim)">for the small offer &#8212; just decide</text>
+<text x="1070" y="750" font-size="23" font-weight="700" text-anchor="start" fill="var(--amber)">Nothing to build</text>
+<text x="1070" y="778" font-size="19" text-anchor="start" fill="var(--dim)">the cheapest fix &#8212; a decision</text>
+
+<!-- takeaway + bridge -->
+<text x="800" y="892" font-size="27" text-anchor="middle" fill="var(--ink)">Four fixes, four tracks &#8212; most just get built. Only one carries a gate.</text>
+<text x="800" y="942" font-size="29" font-weight="700" text-anchor="middle" fill="var(--green)">That gate is the blueprint you drilled in Part 2 &#8212; no drilled swimlane, no AI Employee build.</text>
+</svg></body></html>

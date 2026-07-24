@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- centre divider between the two ways to build -->
+  <line x1="800" y1="200" x2="800" y2="792" stroke="var(--dim)" stroke-width="2" stroke-dasharray="4 8" opacity="0.7"/>
+
+  <!-- =================================================================== -->
+  <!-- ============ LEFT PANEL — FRONT FIRST (the usual advice) ========== -->
+  <!-- =================================================================== -->
+
+  <!-- lead FLOOD arrows into the front (blue) -->
+  <line x1="42" y1="440" x2="112" y2="440" stroke="var(--blue)" stroke-width="3"/>
+  <polyline points="100,433 114,440 100,447" stroke="var(--blue)" stroke-width="3"/>
+  <line x1="42" y1="478" x2="112" y2="478" stroke="var(--blue)" stroke-width="3"/>
+  <polyline points="100,471 114,478 100,485" stroke="var(--blue)" stroke-width="3"/>
+  <line x1="42" y1="516" x2="112" y2="516" stroke="var(--blue)" stroke-width="3"/>
+  <polyline points="100,509 114,516 100,523" stroke="var(--blue)" stroke-width="3"/>
+
+  <!-- FRONT wing (blue) = BUILT — solid -->
+  <polygon points="120,400 120,556 356,478" fill="rgba(52,120,190,0.12)" stroke="var(--blue)" stroke-width="3"/>
+  <!-- build FLAG planted on the FRONT -->
+  <line x1="186" y1="400" x2="186" y2="352" stroke="var(--green)" stroke-width="3"/>
+  <polygon points="186,352 230,364 186,377" fill="rgba(45,140,60,0.85)" stroke="var(--green)" stroke-width="2"/>
+
+  <!-- MIDDLE knot (amber) = NOT built — dashed ghost -->
+  <polygon points="376,478 411,443 446,478 411,513" fill="rgba(214,140,40,0.05)" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="7 6"/>
+
+  <!-- BACK wing (green) = NOT built — dashed ghost -->
+  <polygon points="466,478 702,400 702,556" fill="rgba(45,140,60,0.04)" stroke="var(--green)" stroke-width="2.5" stroke-dasharray="9 7"/>
+
+  <!-- leads travel through to the back where nothing catches them -->
+  <line x1="452" y1="478" x2="556" y2="478" stroke="var(--dim)" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <!-- RED rain of leads landing straight onto YOU -->
+  <line x1="562" y1="424" x2="568" y2="474" stroke="var(--red)" stroke-width="3"/>
+  <polyline points="560,464 568,477 576,466" stroke="var(--red)" stroke-width="3"/>
+  <line x1="592" y1="416" x2="592" y2="470" stroke="var(--red)" stroke-width="3"/>
+  <polyline points="584,460 592,473 600,460" stroke="var(--red)" stroke-width="3"/>
+  <line x1="622" y1="424" x2="616" y2="474" stroke="var(--red)" stroke-width="3"/>
+  <polyline points="608,464 616,477 624,466" stroke="var(--red)" stroke-width="3"/>
+
+  <!-- YOU = stick person, buried at the back -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <circle cx="592" cy="502" r="20"/>
+    <line x1="592" y1="522" x2="592" y2="586"/>
+    <line x1="592" y1="540" x2="566" y2="560"/>
+    <line x1="592" y1="540" x2="618" y2="560"/>
+    <line x1="592" y1="586" x2="572" y2="620"/>
+    <line x1="592" y1="586" x2="612" y2="620"/>
+  </g>
+
+  <!-- red consequence rule under the left panel -->
+  <line x1="120" y1="686" x2="700" y2="686" stroke="var(--red)" stroke-width="2" opacity="0.5"/>
+
+  <!-- =================================================================== -->
+  <!-- ============ RIGHT PANEL — BACK FIRST (the X-Ray's order) ========= -->
+  <!-- =================================================================== -->
+
+  <!-- FRONT wing (blue) = NOT built yet — dashed ghost -->
+  <polygon points="882,400 882,556 1116,478" fill="rgba(52,120,190,0.04)" stroke="var(--blue)" stroke-width="2.5" stroke-dasharray="9 7"/>
+
+  <!-- MIDDLE knot (amber) = NOT built yet — dashed ghost -->
+  <polygon points="1136,478 1171,443 1206,478 1171,513" fill="rgba(214,140,40,0.05)" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="7 6"/>
+
+  <!-- BACK wing (green) = BUILT — solid -->
+  <polygon points="1226,478 1462,400 1462,556" fill="rgba(45,140,60,0.14)" stroke="var(--green)" stroke-width="3"/>
+  <!-- build FLAG planted on the BACK -->
+  <line x1="1396" y1="400" x2="1396" y2="352" stroke="var(--green)" stroke-width="3"/>
+  <polygon points="1396,352 1440,364 1396,377" fill="rgba(45,140,60,0.85)" stroke="var(--green)" stroke-width="2"/>
+
+  <!-- same leads arrive — caught by the robot (green) -->
+  <line x1="1176" y1="432" x2="1320" y2="478" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="1306,470 1322,479 1310,486" stroke="var(--green)" stroke-width="3"/>
+  <line x1="1206" y1="412" x2="1322" y2="470" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="1308,462 1324,471 1312,478" stroke="var(--green)" stroke-width="3"/>
+  <line x1="1240" y1="400" x2="1326" y2="462" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="1312,455 1328,463 1316,470" stroke="var(--green)" stroke-width="3"/>
+
+  <!-- ROBOT (canonical black-marker) standing at the Back, arms up, catching -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="1385" y1="404" x2="1385" y2="418"/>
+    <rect x="1343" y="418" width="84" height="58" rx="12"/>
+    <rect x="1357" y="434" width="56" height="26" rx="7" stroke-width="3"/>
+    <line x1="1385" y1="476" x2="1385" y2="486"/>
+    <rect x="1349" y="486" width="72" height="70" rx="12"/>
+    <line x1="1349" y1="506" x2="1324" y2="480"/>
+    <line x1="1421" y1="506" x2="1446" y2="480"/>
+    <line x1="1367" y1="556" x2="1361" y2="586"/>
+    <line x1="1403" y1="556" x2="1409" y2="586"/>
+  </g>
+  <rect x="1365" y="504" width="40" height="22" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="1385" cy="398" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="1371" cy="450" r="5" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="1399" cy="450" r="5" fill="var(--ink)" stroke="var(--ink)"/>
+
+  <!-- green consequence rule under the right panel -->
+  <line x1="900" y1="686" x2="1480" y2="686" stroke="var(--green)" stroke-width="2" opacity="0.5"/>
+
+  <!-- reversed build order chips: 1 BACK -> 2 MIDDLE -> 3 FRONT -->
+  <polyline points="1082,770 1096,780 1082,790" stroke="var(--green)" stroke-width="2.5"/>
+  <polyline points="1274,770 1288,780 1274,790" stroke="var(--green)" stroke-width="2.5"/>
+
+  <!-- ===== the principle — hero box ===== -->
+  <rect x="286" y="828" width="1028" height="64" rx="16" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.06)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 5 &#183; ACT ON IT</text>
+<text x="800" y="116" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">Build It Back to Front</text>
+<text x="800" y="158" font-size="26" text-anchor="middle" fill="var(--dim)">The ordering lens that decides what gets built FIRST &#8212; before a single lead arrives.</text>
+
+<!-- ===== LEFT PANEL headers ===== -->
+<text x="410" y="222" font-size="30" font-weight="700" text-anchor="middle" fill="var(--ink)">FRONT FIRST</text>
+<text x="410" y="252" font-size="21" font-style="italic" text-anchor="middle" fill="var(--dim)">the usual advice</text>
+
+<!-- left: flood label -->
+<text x="42" y="418" font-size="18" font-weight="700" text-anchor="start" fill="var(--blue)">leads flood in</text>
+
+<!-- left: zone labels -->
+<text x="200" y="472" font-size="21" font-weight="700" text-anchor="middle" fill="var(--blue)">FRONT</text>
+<text x="200" y="496" font-size="16" text-anchor="middle" fill="var(--dim)">marketing</text>
+<text x="186" y="342" font-size="16" font-weight="700" text-anchor="middle" fill="var(--green)">built 1st</text>
+<text x="411" y="536" font-size="17" font-weight="700" text-anchor="middle" fill="var(--amber)">MIDDLE</text>
+<text x="411" y="556" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">not built</text>
+<text x="628" y="430" font-size="19" font-weight="700" text-anchor="middle" fill="var(--green)">BACK</text>
+<text x="628" y="451" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">not built</text>
+
+<!-- left: lands on YOU -->
+<text x="592" y="652" font-size="22" font-weight="700" text-anchor="middle" fill="var(--red)">every lead lands on YOU</text>
+
+<!-- left: red consequence -->
+<text x="410" y="722" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">More leads = more late nights.</text>
+<text x="410" y="758" font-size="22" text-anchor="middle" fill="var(--ink)">Growth buries you &#8212; revenue caps at the hours you have.</text>
+
+<!-- ===== RIGHT PANEL headers ===== -->
+<text x="1180" y="222" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">BACK FIRST</text>
+<text x="1180" y="252" font-size="21" font-style="italic" text-anchor="middle" fill="var(--dim)">the X-Ray&#8217;s order</text>
+
+<!-- right: same leads label -->
+<text x="1150" y="398" font-size="18" font-weight="700" text-anchor="start" fill="var(--green)">same leads arrive</text>
+
+<!-- right: zone labels -->
+<text x="998" y="472" font-size="19" font-weight="700" text-anchor="middle" fill="var(--blue)">FRONT</text>
+<text x="998" y="493" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">built last</text>
+<text x="1171" y="536" font-size="17" font-weight="700" text-anchor="middle" fill="var(--amber)">MIDDLE</text>
+<text x="1171" y="556" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">built 2nd</text>
+<text x="1262" y="600" font-size="19" font-weight="700" text-anchor="middle" fill="var(--green)">BACK</text>
+<text x="1262" y="622" font-size="16" text-anchor="middle" fill="var(--dim)">fulfillment</text>
+<text x="1396" y="342" font-size="16" font-weight="700" text-anchor="middle" fill="var(--green)">built 1st</text>
+
+<!-- right: robot catches -->
+<text x="1385" y="652" font-size="22" font-weight="700" text-anchor="middle" fill="var(--green)">the Back catches them &#8212; not you</text>
+
+<!-- right: green consequence -->
+<text x="1180" y="722" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">The Back runs without you.</text>
+<text x="1180" y="758" font-size="22" text-anchor="middle" fill="var(--ink)">Your hours come back &#8212; and those hours build the rest:</text>
+
+<!-- right: reversed order chips -->
+<text x="1028" y="786" font-size="19" font-weight="700" text-anchor="middle" fill="var(--green)">1&#183;BACK</text>
+<text x="1180" y="786" font-size="19" font-weight="700" text-anchor="middle" fill="var(--amber)">2&#183;MIDDLE</text>
+<text x="1360" y="786" font-size="19" font-weight="700" text-anchor="middle" fill="var(--blue)">3&#183;FRONT</text>
+
+<!-- ===== the principle (hero) ===== -->
+<text x="800" y="870" font-size="33" font-weight="700" text-anchor="middle" fill="var(--green)">Build the business backwards so you can spend your time forwards.</text>
+
+<!-- ===== carve-out strip (edge cases) ===== -->
+<text x="800" y="910" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">No clients yet? There&#8217;s nothing to fulfill &#8212; build Front and Middle first.&#8195;&#183;&#8195;Back already runs itself? Then your Back is wherever the manual hours hide.</text>
+
+<!-- ===== takeaway bridge to the roadmap ===== -->
+<text x="800" y="936" font-size="26" text-anchor="middle" fill="var(--ink)">That&#8217;s why your roadmap&#8217;s DO FIRST usually lives at the Back.</text>
+<text x="800" y="978" font-size="28" font-weight="700" text-anchor="middle" fill="var(--green)">The picture that proves it is next.</text>
+</svg></body></html>

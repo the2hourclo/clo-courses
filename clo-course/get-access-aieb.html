@@ -1014,6 +1014,15 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
       ? 'Connected — and notice you typed nothing. That’s what you just bought: work that does itself. Close this tab and keep going in Claude; the connection finishes by itself in a few seconds.'
       : 'Connected — you can close this tab. Back in Claude, just keep going; the connection finishes by itself in a few seconds.';
     try { localStorage.setItem('aieb_device_connected_v1', String(Date.now())); } catch (e) {}
+    // Bank the read-only progress pass the server minted during activation. It is
+    // NOT a license key (the promise above stays true) and NOT the device token —
+    // it can only read this buyer's checkpoint ladder, nothing else. It's what
+    // lets the journey map light up without ever asking them to type a key.
+    try {
+      if (payload.view_token) {
+        localStorage.setItem('aieb_view_token_v1', payload.view_token);
+      }
+    } catch (e) {}
     params.delete('activate');
     var cleanQuery = params.toString();
     history.replaceState({}, '', window.location.pathname + (cleanQuery ? '?' + cleanQuery : '') + window.location.hash);

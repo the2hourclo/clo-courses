@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- severity chip (MEDIUM = amber) -->
+  <rect x="1360" y="150" width="170" height="42" rx="21" stroke="var(--amber)" stroke-width="3" fill="rgba(214,140,40,0.12)"/>
+
+  <!-- ============ THE OVERSTUFFED SKILL — write-content/ straining at the seams ============ -->
+  <rect x="100" y="220" width="660" height="592" rx="22" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- amber count badge inside the container header -->
+  <rect x="548" y="234" width="196" height="36" rx="12" stroke="var(--amber)" stroke-width="2.5" fill="rgba(214,140,40,0.10)"/>
+
+  <!-- workflows/ = GREEN fork icon (fixed subfolder legend), gutter aligned to workflows/ row -->
+  <line x1="108" y1="298" x2="118" y2="298" stroke="var(--green)" stroke-width="3"/>
+  <line x1="118" y1="298" x2="128" y2="291" stroke="var(--green)" stroke-width="3"/>
+  <line x1="118" y1="298" x2="128" y2="305" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="108" cy="298" r="2.4" fill="var(--green)" stroke="none"/>
+  <circle cx="128" cy="291" r="2.4" fill="var(--green)" stroke="none"/>
+  <circle cx="128" cy="305" r="2.4" fill="var(--green)" stroke="none"/>
+
+  <!-- GREEN bracket — the related trio (one job family) -->
+  <line x1="560" y1="330" x2="560" y2="444" stroke="var(--green)" stroke-width="3"/>
+  <line x1="560" y1="330" x2="550" y2="330" stroke="var(--green)" stroke-width="3"/>
+  <line x1="560" y1="444" x2="550" y2="444" stroke="var(--green)" stroke-width="3"/>
+
+  <!-- AMBER bracket — the unrelated tail (different jobs entirely) -->
+  <line x1="560" y1="462" x2="560" y2="790" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="560" y1="462" x2="550" y2="462" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="560" y1="790" x2="550" y2="790" stroke="var(--amber)" stroke-width="3"/>
+
+  <!-- amber STRESS / STRAIN marks — the container bulging at the seams -->
+  <line x1="760" y1="430" x2="778" y2="424" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="760" y1="436" x2="780" y2="436" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="760" y1="442" x2="778" y2="448" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="760" y1="566" x2="778" y2="560" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="760" y1="572" x2="780" y2="572" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="760" y1="578" x2="778" y2="584" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="742" y1="812" x2="748" y2="830" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="750" y1="812" x2="758" y2="828" stroke="var(--amber)" stroke-width="3"/>
+
+  <!-- ============ THE FIX — split into focused skills (green = healthy) ============ -->
+  <!-- split fork arrows from the bloated container to the two focused skills -->
+  <line x1="762" y1="516" x2="852" y2="516" stroke="var(--green)" stroke-width="3"/>
+  <line x1="852" y1="516" x2="884" y2="420" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="874,414 887,420 877,430" stroke="var(--green)" stroke-width="3"/>
+  <line x1="852" y1="516" x2="884" y2="648" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="874,642 887,648 877,658" stroke="var(--green)" stroke-width="3"/>
+
+  <!-- focused skill A -->
+  <rect x="890" y="316" width="560" height="210" rx="18" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.03)"/>
+  <polyline points="1408,346 1416,354 1432,336" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- focused skill B -->
+  <rect x="890" y="560" width="560" height="182" rx="18" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.03)"/>
+  <polyline points="1408,588 1416,596 1432,578" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ============ HOW THE AUDIT SPOTS IT — bottom strip ============ -->
+  <rect x="100" y="846" width="1400" height="66" rx="16" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <!-- magnifier glyph -->
+  <circle cx="252" cy="877" r="13" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="261" y1="886" x2="273" y2="898" stroke="var(--ink)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + claim-title + subtitle -->
+<text x="80" y="60" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">SIGNAL 6 OF 8 &#183; ARCHITECTURE</text>
+<text x="800" y="102" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">One Skill Trying To Do Everything</text>
+<text x="800" y="142" font-size="26" text-anchor="middle" fill="var(--dim)">One skill with 10+ workflows &#8212; and they cover totally unrelated jobs</text>
+
+<!-- severity chip -->
+<text x="1445" y="178" font-size="22" font-weight="700" text-anchor="middle" fill="var(--amber)">MEDIUM</text>
+
+<!-- container header -->
+<text x="120" y="188" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">ONE SKILL, EVERY JOB CRAMMED IN</text>
+<text x="646" y="259" font-size="20" font-weight="700" text-anchor="middle" fill="var(--amber)">11 workflows</text>
+
+<!-- ===== the overstuffed file tree (monospace, box-drawing) ===== -->
+<text class="mono" x="140" y="270" font-size="27" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">write-content/</text>
+<text class="mono" x="140" y="313" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9492;&#9472;&#9472; <tspan fill="var(--green)" font-weight="700">workflows/</tspan></text>
+<text class="mono" x="140" y="356" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9500;&#9472;&#9472; newsletter.md</text>
+<text class="mono" x="140" y="399" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9500;&#9472;&#9472; thread.md</text>
+<text class="mono" x="140" y="442" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9500;&#9472;&#9472; carousel.md</text>
+<text class="mono" x="140" y="485" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9500;&#9472;&#9472; youtube-script.md</text>
+<text class="mono" x="140" y="528" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9500;&#9472;&#9472; invoicing.md</text>
+<text class="mono" x="140" y="571" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9500;&#9472;&#9472; sales-page.md</text>
+<text class="mono" x="140" y="614" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9500;&#9472;&#9472; podcast.md</text>
+<text class="mono" x="140" y="657" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9500;&#9472;&#9472; taxes.md</text>
+<text class="mono" x="140" y="700" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9500;&#9472;&#9472; hiring.md</text>
+<text class="mono" x="140" y="743" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9500;&#9472;&#9472; ad-copy.md</text>
+<text class="mono" x="140" y="786" font-size="27" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9492;&#9472;&#9472; contracts.md</text>
+
+<!-- bracket labels -->
+<text x="574" y="382" font-size="20" font-weight="700" text-anchor="start" fill="var(--green)">one job family</text>
+<text x="574" y="410" font-size="18" text-anchor="start" fill="var(--dim)">writing, close cousins</text>
+<text x="574" y="612" font-size="20" font-weight="700" text-anchor="start" fill="var(--amber)">different jobs</text>
+<text x="574" y="638" font-size="20" font-weight="700" text-anchor="start" fill="var(--amber)">entirely</text>
+<text x="574" y="668" font-size="18" text-anchor="start" fill="var(--dim)">video, money, ops&#8230;</text>
+
+<!-- ===== THE FIX header ===== -->
+<text x="1170" y="250" font-size="23" font-weight="700" text-anchor="middle" fill="var(--green)">THE FIX &#183; SPLIT IT</text>
+<text x="1170" y="282" font-size="20" text-anchor="middle" fill="var(--dim)">2&#8211;3 focused skills, each with one job</text>
+<text x="815" y="503" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">split</text>
+
+<!-- focused skill A (mono) -->
+<text class="mono" x="912" y="358" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">write-content/</text>
+<text class="mono" x="912" y="394" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)" xml:space="preserve">&#9492;&#9472;&#9472; workflows/</text>
+<text class="mono" x="912" y="430" font-size="24" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#160;&#160;&#160; &#9500;&#9472;&#9472; newsletter.md</text>
+<text class="mono" x="912" y="466" font-size="24" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#160;&#160;&#160; &#9500;&#9472;&#9472; thread.md</text>
+<text class="mono" x="912" y="502" font-size="24" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#160;&#160;&#160; &#9492;&#9472;&#9472; carousel.md</text>
+<text x="1288" y="358" font-size="18" font-weight="700" text-anchor="start" fill="var(--green)">writing only</text>
+
+<!-- focused skill B (mono) -->
+<text class="mono" x="912" y="602" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">video-content/</text>
+<text class="mono" x="912" y="638" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)" xml:space="preserve">&#9492;&#9472;&#9472; workflows/</text>
+<text class="mono" x="912" y="674" font-size="24" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#160;&#160;&#160; &#9500;&#9472;&#9472; youtube-script.md</text>
+<text class="mono" x="912" y="710" font-size="24" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#160;&#160;&#160; &#9492;&#9472;&#9472; podcast.md</text>
+<text x="1300" y="602" font-size="18" font-weight="700" text-anchor="start" fill="var(--green)">video only</text>
+
+<!-- ===== HOW THE AUDIT SPOTS IT ===== -->
+<text x="288" y="885" font-size="21" font-weight="700" text-anchor="start" fill="var(--ink)">HOW THE AUDIT SPOTS IT</text>
+<text x="642" y="885" font-size="21" text-anchor="start" fill="var(--dim)">&#8212; counts the workflows in each skill, then flags any that span unrelated jobs.</text>
+
+<!-- ===== takeaway ===== -->
+<text x="800" y="962" font-size="26" text-anchor="middle" fill="var(--ink)">A skill that does everything routes poorly and is impossible to improve.</text>
+<text x="800" y="1008" font-size="29" font-weight="700" text-anchor="middle" fill="var(--green)">Split it into 2&#8211;3 focused skills, each with one clear job.</text>
+</svg></body></html>

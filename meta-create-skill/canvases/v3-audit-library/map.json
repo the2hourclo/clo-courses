@@ -1,0 +1,10 @@
+{
+  "_comment": "Storyboard map for meta-create-skill VIDEO 3: Audit Your Skill Library. 5 diagrams in teaching order — before (skill soup) → the 8 signals → the audit run → the fix → after (clean library).",
+  "columns": [
+    {"label": "1 - BEFORE · SKILL SOUP", "slides": ["01-before-skill-soup"]},
+    {"label": "2 - THE 8 SIGNALS", "slides": ["02-the-eight-signals", "02-1-duplicate-standalones", "02-2-trigger-collisions", "02-3-missing-workflow-routing", "02-4-no-cross-skill-callouts", "02-5-orphan-workflows", "02-6-bloated-orchestrators", "02-7-missing-shared-delegation", "02-8-sediment"]},
+    {"label": "3 - HOW THE AUDIT RUNS", "slides": ["03-how-the-audit-runs"]},
+    {"label": "4 - THE FIX", "slides": ["04-the-fix"]},
+    {"label": "5 - AFTER · CLEAN LIBRARY", "slides": ["05-after-clean-library"]}
+  ]
+}

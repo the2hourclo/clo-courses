@@ -1,0 +1,11 @@
+{
+  "_comment": "Storyboard map for meta-create-skill VIDEO 2: The 3 Levels of Skills. 6 diagrams in teaching order, one column each, left to right.",
+  "columns": [
+    {"label": "1 - THE 3 LEVELS", "slides": ["01-three-levels"]},
+    {"label": "2 - LEVEL 1 · SIMPLE", "slides": ["02-level1-simple"]},
+    {"label": "3 - LEVEL 2 · WITH WORKFLOWS", "slides": ["03-level2-workflows"]},
+    {"label": "4 - LEVEL 3 · SKILL SYSTEM / ORCHESTRATOR", "slides": ["04-level3-orchestrator"]},
+    {"label": "5 - SKILL vs WORKFLOW", "slides": ["05-skill-vs-workflow"]},
+    {"label": "6 - HOW THEY CHAIN", "slides": ["06-how-they-chain"]}
+  ]
+}

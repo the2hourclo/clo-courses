@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245);  --ink:rgb(33,33,33);  --dim:rgb(120,120,125);
+  --green:rgb(45,140,60);  --blue:rgb(52,120,190);  --amber:rgb(214,140,40);  --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);}
+.mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===== SHAPES (wobble) — NO text in here ===== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- terminal window (centered on canvas — brackets removed, tree recentered) -->
+  <rect x="261" y="168" width="1078" height="780" rx="26" stroke="var(--ink)" stroke-width="5"/>
+  <!-- title-bar traffic lights (neutral chrome, not accents) -->
+  <circle cx="301" cy="204" r="8" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="331" cy="204" r="8" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="361" cy="204" r="8" stroke="var(--dim)" stroke-width="3"/>
+  <!-- title-bar divider -->
+  <line x1="273" y1="240" x2="1327" y2="240" stroke="rgb(214,212,204)" stroke-width="2.5"/>
+
+  <!-- continuous tree spine (bridges the gaps between the box-drawing connectors) -->
+  <line x1="331" y1="340" x2="331" y2="842" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- SKILL.md is the one REQUIRED file (NOT a subfolder) — ink badge frame, never a subfolder hue -->
+  <rect x="661" y="382" width="118" height="28" rx="7" stroke="var(--ink)" stroke-width="2.5"/>
+
+  <!-- ===== FIXED SUBFOLDER LEGEND ICONS (locked color + glyph per subfolder) ===== -->
+  <!-- workflows/ = branching paths (fork), GREEN -->
+  <line x1="388" y1="500" x2="399" y2="500" stroke="var(--green)" stroke-width="3"/>
+  <line x1="399" y1="500" x2="413" y2="490" stroke="var(--green)" stroke-width="3"/>
+  <line x1="399" y1="500" x2="413" y2="510" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="399" cy="500" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="413" cy="490" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="413" cy="510" r="2.6" fill="var(--green)" stroke="none"/>
+
+  <!-- scripts/ = gear / cog, AMBER -->
+  <circle cx="401" cy="612" r="10" stroke="var(--amber)" stroke-width="3"/>
+  <circle cx="401" cy="612" r="3.6" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="411" y1="612" x2="416" y2="612" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="391" y1="612" x2="386" y2="612" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="406" y1="620.7" x2="408.5" y2="625" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="396" y1="620.7" x2="393.5" y2="625" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="406" y1="603.3" x2="408.5" y2="599" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="396" y1="603.3" x2="393.5" y2="599" stroke="var(--amber)" stroke-width="3"/>
+
+  <!-- references/ = open book, BLUE -->
+  <line x1="401" y1="716" x2="401" y2="730" stroke="var(--blue)" stroke-width="2.5"/>
+  <path d="M401,716 L388,720 L388,732 L401,728 Z" stroke="var(--blue)" stroke-width="3"/>
+  <path d="M401,716 L414,720 L414,732 L401,728 Z" stroke="var(--blue)" stroke-width="3"/>
+
+  <!-- assets/ = stacked copies / template, PURPLE -->
+  <rect x="397" y="825" width="15" height="19" rx="2" stroke="var(--purple)" stroke-width="3"/>
+  <rect x="389" y="830" width="15" height="19" rx="2" fill="var(--bg)" stroke="var(--purple)" stroke-width="3"/>
+</g>
+
+<!-- ===== TEXT (crisp) — everything below is OUTSIDE the filter ===== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="88" font-size="54" font-weight="700" text-anchor="middle" fill="var(--ink)">A Skill Is Just a Folder of Files</text>
+<text x="800" y="134" font-size="30" text-anchor="middle" fill="var(--dim)">one required file, plus four optional folders &#8212; each holds a different piece</text>
+
+<!-- terminal prompt in the title bar -->
+<text class="mono" x="395" y="212" font-size="22" text-anchor="start" fill="var(--dim)">$ tree skill-name/</text>
+
+<!-- root -->
+<text class="mono" x="281" y="320" font-size="38" font-weight="700" text-anchor="start" fill="var(--ink)">skill-name/</text>
+
+<!-- ROW 1: SKILL.md (required) -->
+<text class="mono" x="323" y="402" font-size="34" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="423" y="402" font-size="34" font-weight="700" text-anchor="start" fill="var(--ink)">SKILL.md</text>
+<text x="673" y="402" font-size="21" font-weight="700" text-anchor="start" fill="var(--ink)">REQUIRED</text>
+<text x="818" y="388" font-size="23" text-anchor="start" fill="var(--dim)"># your conventions &#183; step order +</text>
+<text x="818" y="418" font-size="23" text-anchor="start" fill="var(--dim)"># carve-outs &#183; the routing map</text>
+
+<!-- ROW 2: workflows/ -->
+<text class="mono" x="323" y="512" font-size="34" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="423" y="512" font-size="34" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text x="673" y="512" font-size="21" text-anchor="start" fill="var(--dim)">optional</text>
+<text x="818" y="512" font-size="23" text-anchor="start" fill="var(--dim)"># the ordered steps &#8212; one file per job</text>
+
+<!-- ROW 3: scripts/ -->
+<text class="mono" x="323" y="624" font-size="34" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="423" y="624" font-size="34" font-weight="700" text-anchor="start" fill="var(--amber)">scripts/</text>
+<text x="673" y="624" font-size="21" text-anchor="start" fill="var(--dim)">optional</text>
+<text x="818" y="624" font-size="23" text-anchor="start" fill="var(--dim)"># code for repetitive work &#183; no text loaded</text>
+
+<!-- ROW 4: references/ -->
+<text class="mono" x="323" y="736" font-size="34" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="423" y="736" font-size="34" font-weight="700" text-anchor="start" fill="var(--blue)">references/</text>
+<text x="673" y="736" font-size="21" text-anchor="start" fill="var(--dim)">optional</text>
+<text x="818" y="736" font-size="23" text-anchor="start" fill="var(--dim)"># the deeper gotchas + origins</text>
+
+<!-- ROW 5: assets/ (last) -->
+<text class="mono" x="323" y="848" font-size="34" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="423" y="848" font-size="34" font-weight="700" text-anchor="start" fill="var(--purple)">assets/</text>
+<text x="673" y="848" font-size="21" text-anchor="start" fill="var(--dim)">optional</text>
+<text x="818" y="848" font-size="23" text-anchor="start" fill="var(--dim)"># your gold example + templates</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="1006" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">SKILL.md is the one required file &#183; each folder holds one kind of thing</text>
+</svg></body></html>

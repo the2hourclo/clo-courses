@@ -274,6 +274,10 @@ function renderAll(){
   renderMap();
 }
 renderAll();
+// progress.js paints from localStorage instantly, then checks the server for
+// what was actually BUILT (checkpoints Claude reported). It only fires this when
+// the server knew something this browser didn't — so a repaint here is real news.
+window.addEventListener('aieb:progress-synced', renderAll);
 </script>
 </body>
 </html>

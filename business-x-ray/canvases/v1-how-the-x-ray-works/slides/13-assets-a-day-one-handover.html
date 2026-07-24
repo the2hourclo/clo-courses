@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ LEFT PANEL — the day-one handover scene ============ -->
+  <rect x="56" y="196" width="612" height="610" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- thought cloud — everything still in the head (soft red wash) -->
+  <path d="M118,388 C70,392 60,340 100,326 C92,276 150,254 190,274 C210,232 284,234 300,276 C346,262 388,292 366,330 C402,342 392,392 346,388 Z"
+        stroke="var(--red)" stroke-width="2.5" fill="rgba(214,69,58,0.06)"/>
+  <!-- thought dots trailing down to YOU's head -->
+  <circle cx="250" cy="402" r="6" stroke="var(--red)" stroke-width="2"/>
+  <circle cx="250" cy="418" r="5" stroke="var(--red)" stroke-width="2"/>
+  <circle cx="250" cy="432" r="4" stroke="var(--red)" stroke-width="2"/>
+
+  <!-- YOU — stick figure, arms down -->
+  <g stroke="var(--ink)" stroke-width="3.2">
+    <circle cx="250" cy="470" r="24"/>
+    <line x1="250" y1="494" x2="250" y2="556"/>
+    <line x1="250" y1="508" x2="218" y2="534"/>
+    <line x1="250" y1="508" x2="282" y2="530"/>
+    <line x1="250" y1="556" x2="228" y2="600"/>
+    <line x1="250" y1="556" x2="272" y2="600"/>
+  </g>
+
+  <!-- desk — only 2-3 real things written down -->
+  <rect x="372" y="558" width="152" height="12" rx="3" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="384" y1="570" x2="384" y2="632" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="512" y1="570" x2="512" y2="632" stroke="var(--ink)" stroke-width="2.5"/>
+  <!-- a pricing doc -->
+  <path d="M392,500 L424,500 L436,512 L436,556 L392,556 Z" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.02)"/>
+  <polyline points="424,500 424,512 436,512" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="400" y1="524" x2="428" y2="524" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="400" y1="536" x2="428" y2="536" stroke="var(--dim)" stroke-width="2"/>
+  <!-- scattered call recordings (audio bars) -->
+  <rect x="452" y="516" width="66" height="16" rx="6" stroke="var(--ink)" stroke-width="2.2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="452" y="538" width="66" height="16" rx="6" stroke="var(--ink)" stroke-width="2.2" fill="rgba(0,0,0,0.02)"/>
+  <polyline points="460,524 466,520 472,528 478,522 484,526" stroke="var(--dim)" stroke-width="1.8"/>
+  <polyline points="460,546 466,542 472,550 478,544 484,548" stroke="var(--dim)" stroke-width="1.8"/>
+
+  <!-- dashed handover arrow: desk -> the new hire's open hands -->
+  <path d="M528,544 Q552,516 562,490" stroke="var(--dim)" stroke-width="2.4" stroke-dasharray="8 7"/>
+  <polyline points="553,500 562,486 570,498" stroke="var(--dim)" stroke-width="2.4"/>
+
+  <!-- NEW HIRE — stick figure, open empty hands raised -->
+  <g stroke="var(--ink)" stroke-width="3.2">
+    <circle cx="596" cy="470" r="24"/>
+    <line x1="596" y1="494" x2="596" y2="556"/>
+    <line x1="596" y1="502" x2="558" y2="466"/>
+    <line x1="596" y1="502" x2="634" y2="466"/>
+    <line x1="596" y1="556" x2="576" y2="600"/>
+    <line x1="596" y1="556" x2="616" y2="600"/>
+    <!-- open-hand ticks -->
+    <line x1="558" y1="466" x2="550" y2="458"/>
+    <line x1="558" y1="466" x2="552" y2="474"/>
+    <line x1="634" y1="466" x2="642" y2="458"/>
+    <line x1="634" y1="466" x2="640" y2="474"/>
+  </g>
+
+  <!-- ============ RIGHT PANEL — the 24 Assets checklist ============ -->
+  <rect x="700" y="196" width="844" height="610" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="724" y1="286" x2="1520" y2="286" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- 7 empty checkboxes (unscored — that happens next slide) -->
+  <rect x="730" y="311" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="730" y="377" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="730" y="443" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="730" y="509" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="730" y="575" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="730" y="641" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="730" y="707" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="64" y="58" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 3 &#183; SCORE WHAT YOU HAVE</text>
+<text x="800" y="108" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Imagine You Hire Someone Tomorrow</text>
+<text x="800" y="152" font-size="25" text-anchor="middle" fill="var(--dim)">What can you physically hand them, so they do the work &#8212; without asking you?</text>
+
+<!-- ===== LEFT panel labels ===== -->
+<text x="80" y="228" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">DAY ONE &#183; THE HANDOVER</text>
+
+<!-- trapped-in-head items (red) -->
+<text x="225" y="292" font-size="19" font-weight="700" text-anchor="middle" fill="var(--red)">the offer &amp; pricing logic</text>
+<text x="225" y="320" font-size="19" text-anchor="middle" fill="var(--red)">the real process</text>
+<text x="225" y="348" font-size="19" text-anchor="middle" fill="var(--red)">your client tone</text>
+<text x="225" y="376" font-size="19" text-anchor="middle" fill="var(--red)">the FAQ answers&#8230;</text>
+
+<!-- leader: cloud = head knowledge -->
+<text x="300" y="424" font-size="18" font-weight="700" text-anchor="start" fill="var(--red)">&#8593; still only in your head</text>
+
+<!-- YOU label -->
+<text x="250" y="628" font-size="20" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+
+<!-- desk labels -->
+<text x="448" y="486" font-size="17" font-weight="700" text-anchor="middle" fill="var(--dim)">ON THE DESK</text>
+<text x="448" y="652" font-size="17" text-anchor="middle" fill="var(--dim)">written down</text>
+
+<!-- new hire labels -->
+<text x="596" y="440" font-size="30" font-weight="700" text-anchor="middle" fill="var(--ink)">?</text>
+<text x="596" y="628" font-size="20" font-weight="700" text-anchor="middle" fill="var(--ink)">NEW HIRE</text>
+<text x="596" y="650" font-size="17" text-anchor="middle" fill="var(--dim)">(human or AI)</text>
+
+<!-- ===== RIGHT panel: the 24 Assets ===== -->
+<text x="724" y="242" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">THE 24 ASSETS</text>
+<text x="724" y="274" font-size="20" text-anchor="start" fill="var(--dim)">what a business should be able to hand over &#8212; 7 categories, 24 assets</text>
+
+<!-- 7 category rows: name (ink) + examples (dim) -->
+<text x="772" y="330" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">1 &#183; Intellectual Property</text>
+<text x="772" y="356" font-size="18" text-anchor="start" fill="var(--dim)">Content &#183; Methodology &#183; Registered IP</text>
+
+<text x="772" y="396" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">2 &#183; Brand</text>
+<text x="772" y="422" font-size="18" text-anchor="start" fill="var(--dim)">Philosophy &#183; Identity &#183; Ambassadors</text>
+
+<text x="772" y="462" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">3 &#183; Market</text>
+<text x="772" y="488" font-size="18" text-anchor="start" fill="var(--dim)">Positioning &#183; Channels &#183; Data</text>
+
+<text x="772" y="528" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">4 &#183; Product</text>
+<text x="772" y="554" font-size="18" text-anchor="start" fill="var(--dim)">Gifts &#183; Entry Offer &#183; Core Product &#183; Recurring</text>
+
+<text x="772" y="594" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">5 &#183; Systems</text>
+<text x="772" y="620" font-size="18" text-anchor="start" fill="var(--dim)">Marketing &#183; Admin &#183; Operations</text>
+
+<text x="772" y="660" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">6 &#183; Culture</text>
+<text x="772" y="686" font-size="18" text-anchor="start" fill="var(--dim)">Key People &#183; Sales &#183; Management &#183; Technicians</text>
+
+<text x="772" y="726" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">7 &#183; Funding</text>
+<text x="772" y="752" font-size="18" text-anchor="start" fill="var(--dim)">Business Plan &#183; Valuation &#183; Structure &#183; Risk</text>
+
+<!-- per-category asset counts (sum to 24) -->
+<text x="1500" y="330" font-size="19" font-weight="700" text-anchor="end" fill="var(--dim)">3 assets</text>
+<text x="1500" y="396" font-size="19" font-weight="700" text-anchor="end" fill="var(--dim)">3 assets</text>
+<text x="1500" y="462" font-size="19" font-weight="700" text-anchor="end" fill="var(--dim)">3 assets</text>
+<text x="1500" y="528" font-size="19" font-weight="700" text-anchor="end" fill="var(--dim)">4 assets</text>
+<text x="1500" y="594" font-size="19" font-weight="700" text-anchor="end" fill="var(--dim)">3 assets</text>
+<text x="1500" y="660" font-size="19" font-weight="700" text-anchor="end" fill="var(--dim)">4 assets</text>
+<text x="1500" y="726" font-size="19" font-weight="700" text-anchor="end" fill="var(--dim)">4 assets</text>
+
+<!-- checkbox convention note -->
+<text x="1520" y="790" font-size="17" text-anchor="end" fill="var(--dim)">&#9633; each one gets scored next</text>
+
+<!-- ===== takeaway ===== -->
+<text x="800" y="872" font-size="28" text-anchor="middle" fill="var(--ink)">What&#8217;s still in your head, <tspan fill="var(--red)" font-weight="700">no one &#8212; human or AI &#8212; can run.</tspan></text>
+<text x="800" y="926" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">So let&#8217;s score all 24 &#8212; honestly.</text>
+</svg></body></html>

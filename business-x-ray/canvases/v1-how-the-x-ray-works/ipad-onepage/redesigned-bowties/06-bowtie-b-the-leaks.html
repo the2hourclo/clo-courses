@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ THE CANONICAL BOLD FUNNEL BOW-TIE (same silhouette as slide 05) ============ -->
+
+  <!-- LEFT WING (blue) — ACQUISITION, wide funnel narrowing IN toward the sale -->
+  <polygon points="245,350 748,404 748,456 245,510" fill="rgba(52,120,190,0.10)" stroke="var(--blue)" stroke-width="4.5"/>
+  <!-- left internal divider that does NOT leak: Nurturing | Consideration -->
+  <line x1="578" y1="386" x2="578" y2="474" stroke="var(--blue)" stroke-width="1.6" opacity="0.5"/>
+
+  <!-- THE MIDDLE (amber rectangle neck) — COMMIT / the sale -->
+  <rect x="752" y="402" width="96" height="56" rx="5" fill="rgba(214,140,40,0.16)" stroke="var(--amber)" stroke-width="4.5"/>
+
+  <!-- RIGHT WING (green) — DELIVERY, neck widening OUT after the sale -->
+  <polygon points="852,404 1355,350 1355,510 852,456" fill="rgba(45,140,60,0.12)" stroke="var(--green)" stroke-width="4.5"/>
+  <!-- right internal dividers that do NOT leak: Onboarding | Launch | Results -->
+  <line x1="1022" y1="386" x2="1022" y2="474" stroke="var(--green)" stroke-width="1.6" opacity="0.5"/>
+  <line x1="1188" y1="368" x2="1188" y2="492" stroke="var(--green)" stroke-width="1.6" opacity="0.5"/>
+
+  <!-- ============ POPULATION: many strangers -> few buyers -> many advocates ============ -->
+  <!-- left crowd (many) -->
+  <circle cx="300" cy="538" r="3" fill="var(--dim)" stroke="none"/><circle cx="318" cy="534" r="3" fill="var(--dim)" stroke="none"/>
+  <circle cx="336" cy="540" r="3" fill="var(--dim)" stroke="none"/><circle cx="354" cy="536" r="3" fill="var(--dim)" stroke="none"/>
+  <circle cx="312" cy="550" r="3" fill="var(--dim)" stroke="none"/><circle cx="330" cy="548" r="3" fill="var(--dim)" stroke="none"/><circle cx="348" cy="552" r="3" fill="var(--dim)" stroke="none"/>
+  <!-- center (few) -->
+  <circle cx="790" cy="542" r="3.4" fill="var(--amber)" stroke="none"/><circle cx="811" cy="542" r="3.4" fill="var(--amber)" stroke="none"/>
+  <!-- right crowd (many) -->
+  <circle cx="1230" cy="538" r="3" fill="var(--dim)" stroke="none"/><circle cx="1248" cy="534" r="3" fill="var(--dim)" stroke="none"/>
+  <circle cx="1266" cy="540" r="3" fill="var(--dim)" stroke="none"/><circle cx="1284" cy="536" r="3" fill="var(--dim)" stroke="none"/>
+  <circle cx="1242" cy="550" r="3" fill="var(--dim)" stroke="none"/><circle cx="1260" cy="548" r="3" fill="var(--dim)" stroke="none"/><circle cx="1278" cy="552" r="3" fill="var(--dim)" stroke="none"/>
+
+  <!-- ============ THE CLOSING LOOP (dim) — Results should arc back to Awareness ============ -->
+  <path d="M1330,478 Q800,600 270,478" stroke="var(--dim)" stroke-width="2" stroke-dasharray="7 7"/>
+
+  <!-- ===== LEAK A — Awareness -> Nurturing boundary (x=412): red crack + drips ===== -->
+  <polyline points="412,373 405,401 419,429 407,457 417,485 411,490" stroke="var(--red)" stroke-width="3"/>
+  <circle cx="412" cy="512" r="6" fill="var(--red)" stroke="none"/>
+  <circle cx="403" cy="532" r="4.5" fill="var(--red)" stroke="none"/>
+  <circle cx="419" cy="551" r="7" fill="var(--red)" stroke="none"/>
+
+  <!-- ===== LEAK B — Conversion -> Onboarding boundary (x=851): red crack + drips, CIRCLED ===== -->
+  <polyline points="851,405 844,425 856,441 847,458 852,458" stroke="var(--red)" stroke-width="3"/>
+  <circle cx="851" cy="478" r="6" fill="var(--red)" stroke="none"/>
+  <circle cx="842" cy="498" r="4.5" fill="var(--red)" stroke="none"/>
+  <circle cx="858" cy="517" r="7" fill="var(--red)" stroke="none"/>
+  <!-- the magnifier RING circling this gap -->
+  <circle cx="851" cy="432" r="33" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="875" y1="456" x2="905" y2="486" stroke="var(--ink)" stroke-width="6"/>
+
+  <!-- ===== LEAK C — Results -> loop (the referral never asked): red break on the loop ===== -->
+  <line x1="1136" y1="510" x2="1164" y2="540" stroke="var(--red)" stroke-width="3.2"/>
+  <line x1="1164" y1="510" x2="1136" y2="540" stroke="var(--red)" stroke-width="3.2"/>
+  <circle cx="1150" cy="558" r="5" fill="var(--red)" stroke="none"/>
+  <circle cx="1142" cy="574" r="4" fill="var(--red)" stroke="none"/>
+
+  <!-- ============ THE ZOOM — detail circle: inside the gap is a process YOU run ============ -->
+  <!-- dashed sightline from the circled gap down to the detail circle -->
+  <line x1="851" y1="540" x2="851" y2="711" stroke="var(--dim)" stroke-width="2" stroke-dasharray="8 6"/>
+  <!-- detail lens -->
+  <circle cx="851" cy="795" r="82" stroke="var(--ink)" stroke-width="5" fill="rgba(255,255,255,0.94)"/>
+
+  <!-- inside: YOU (stick figure) hand-running an onboarding step, with a 9-day clock -->
+  <circle cx="812" cy="772" r="10" stroke="var(--ink)" stroke-width="2.6"/>
+  <line x1="812" y1="782" x2="812" y2="810" stroke="var(--ink)" stroke-width="2.6"/>
+  <line x1="798" y1="794" x2="826" y2="794" stroke="var(--ink)" stroke-width="2.6"/>
+  <line x1="812" y1="810" x2="803" y2="828" stroke="var(--ink)" stroke-width="2.6"/>
+  <line x1="812" y1="810" x2="821" y2="828" stroke="var(--ink)" stroke-width="2.6"/>
+  <!-- arrow YOU -> the manual step -->
+  <line x1="828" y1="794" x2="853" y2="794" stroke="var(--ink)" stroke-width="2.6"/>
+  <polyline points="846,789 855,794 846,799" stroke="var(--ink)" stroke-width="2.6"/>
+  <!-- the manual onboarding step -->
+  <rect x="855" y="780" width="46" height="28" rx="7" stroke="var(--ink)" stroke-width="2.6" fill="rgba(33,33,33,0.03)"/>
+  <!-- red clock = the 9-day delay -->
+  <circle cx="882" cy="758" r="11" stroke="var(--red)" stroke-width="2.6"/>
+  <line x1="882" y1="758" x2="882" y2="750" stroke="var(--red)" stroke-width="2.4"/>
+  <line x1="882" y1="758" x2="888" y2="762" stroke="var(--red)" stroke-width="2.4"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="60" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 2 &#183; SEE THE CURRENT STATE</text>
+<text x="800" y="106" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Revenue Leaks Between the Stages</text>
+<text x="800" y="146" font-size="25" text-anchor="middle" fill="var(--dim)">The same bow-tie &#8212; now watch the handoffs, not the stages.</text>
+
+<!-- phase banners -->
+<text x="450" y="248" font-size="20" font-weight="700" letter-spacing="2" text-anchor="middle" fill="var(--blue)">ACQUISITION</text>
+<text x="800" y="248" font-size="20" font-weight="700" letter-spacing="2" text-anchor="middle" fill="var(--amber)">COMMIT</text>
+<text x="1150" y="248" font-size="20" font-weight="700" letter-spacing="2" text-anchor="middle" fill="var(--green)">DELIVERY</text>
+
+<!-- stage labels + plain-words gloss -->
+<text x="335" y="298" font-size="20" font-weight="700" text-anchor="middle" fill="var(--blue)">AWARENESS</text>
+<text x="335" y="320" font-size="17" text-anchor="middle" fill="var(--dim)">they find you</text>
+<text x="500" y="298" font-size="20" font-weight="700" text-anchor="middle" fill="var(--blue)">NURTURING</text>
+<text x="500" y="320" font-size="17" text-anchor="middle" fill="var(--dim)">they hear from you</text>
+<text x="660" y="298" font-size="20" font-weight="700" text-anchor="middle" fill="var(--blue)">CONSIDER</text>
+<text x="660" y="320" font-size="17" text-anchor="middle" fill="var(--dim)">they weigh you up</text>
+
+<text x="800" y="298" font-size="20" font-weight="700" text-anchor="middle" fill="var(--amber)">CONVERT</text>
+<text x="800" y="320" font-size="17" text-anchor="middle" fill="var(--dim)">they say yes</text>
+
+<text x="940" y="298" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">ONBOARD</text>
+<text x="940" y="320" font-size="17" text-anchor="middle" fill="var(--dim)">they start</text>
+<text x="1105" y="298" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">LAUNCH</text>
+<text x="1105" y="320" font-size="17" text-anchor="middle" fill="var(--dim)">they get going</text>
+<text x="1268" y="298" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">RESULTS</text>
+<text x="1268" y="320" font-size="17" text-anchor="middle" fill="var(--dim)">they win &#8594; refer</text>
+
+<!-- population labels -->
+<text x="330" y="576" font-size="17" text-anchor="middle" fill="var(--dim)">many strangers</text>
+<text x="800" y="576" font-size="17" font-weight="700" text-anchor="middle" fill="var(--amber)">few buyers</text>
+<text x="1264" y="576" font-size="17" text-anchor="middle" fill="var(--dim)">many advocates</text>
+
+<!-- loop label (left, off the corridor) -->
+<text x="640" y="628" font-size="16" font-style="italic" text-anchor="middle" fill="var(--dim)">referrals should feed back to Awareness</text>
+
+<!-- ===== leak A callout (left) ===== -->
+<text x="335" y="602" font-size="22" font-weight="700" text-anchor="middle" fill="var(--red)">Watched 3 videos. Never subscribed.</text>
+<text x="335" y="628" font-size="18" text-anchor="middle" fill="var(--dim)">Who follows up? Nobody.</text>
+
+<!-- ===== leak C callout (right) ===== -->
+<text x="1258" y="602" font-size="22" font-weight="700" text-anchor="middle" fill="var(--red)">Got results. Never asked to refer.</text>
+<text x="1258" y="628" font-size="18" text-anchor="middle" fill="var(--dim)">So the loop never closes.</text>
+
+<!-- ===== the camera shift (left flank of the zoom) ===== -->
+<text x="752" y="742" font-size="24" text-anchor="end" fill="var(--ink)">The stages were never</text>
+<text x="752" y="774" font-size="24" text-anchor="end" fill="var(--ink)">the problem.</text>
+<text x="752" y="812" font-size="20" text-anchor="end" fill="var(--dim)">Clients slip through the gaps.</text>
+
+<!-- ===== the DIRECT (right flank of the zoom) ===== -->
+<text x="948" y="742" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">Inside this gap</text>
+<text x="948" y="774" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">is a process.</text>
+<text x="948" y="812" font-size="20" text-anchor="start" fill="var(--dim)">Said yes &#8594; onboarded 9 days late.</text>
+
+<!-- inside-lens labels -->
+<text x="812" y="748" font-size="16" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+<text x="906" y="742" font-size="16" font-weight="700" text-anchor="middle" fill="var(--red)">9 days</text>
+
+<!-- ===== takeaway + bridge ===== -->
+<text x="800" y="936" font-size="27" text-anchor="middle" fill="var(--ink)">Every gap is a process someone runs. Usually you.</text>
+<text x="800" y="984" font-size="29" font-weight="700" text-anchor="middle" fill="var(--green)">Next, we open one up.</text>
+</svg></body></html>

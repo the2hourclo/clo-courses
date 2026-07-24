@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- severity chip (HIGH = red) -->
+  <rect x="1360" y="150" width="172" height="42" rx="14" stroke="var(--red)" stroke-width="2.5" fill="rgba(214,69,58,0.08)"/>
+
+  <!-- ============ LEFT PANEL — the folder on disk ============ -->
+  <rect x="80" y="248" width="440" height="400" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <!-- red highlight on the orphan row -->
+  <rect x="96" y="486" width="410" height="40" rx="8" fill="rgba(214,69,58,0.07)" stroke="none"/>
+
+  <!-- workflows/ = GREEN fork icon (fixed subfolder legend), right of the label -->
+  <line x1="360" y1="380" x2="369" y2="380" stroke="var(--green)" stroke-width="3"/>
+  <line x1="369" y1="380" x2="379" y2="373" stroke="var(--green)" stroke-width="3"/>
+  <line x1="369" y1="380" x2="379" y2="387" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="360" cy="380" r="2.4" fill="var(--green)" stroke="none"/>
+  <circle cx="379" cy="373" r="2.4" fill="var(--green)" stroke="none"/>
+  <circle cx="379" cy="387" r="2.4" fill="var(--green)" stroke="none"/>
+
+  <!-- ============ RIGHT PANEL — the SKILL.md routing table ============ -->
+  <rect x="610" y="248" width="630" height="400" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <!-- separator under the heading -->
+  <line x1="635" y1="384" x2="1215" y2="384" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- ============ anchors ============ -->
+  <circle cx="516" cy="438" r="5" fill="var(--green)" stroke="none"/>
+  <circle cx="516" cy="500" r="5" fill="var(--red)" stroke="none"/>
+
+  <!-- GREEN live wire: newsletter.md -> its routing row -->
+  <path d="M516,438 Q568,430 628,450" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="616,444 630,450 616,456" stroke="var(--green)" stroke-width="3.5"/>
+  <!-- green check above the live wire -->
+  <polyline points="558,412 565,419 580,402" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- RED missing wire: old-promo.md -> nowhere (dead-ends in the gap) -->
+  <line x1="516" y1="500" x2="574" y2="502" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="9 8"/>
+  <line x1="582" y1="493" x2="600" y2="511" stroke="var(--red)" stroke-width="3.5"/>
+  <line x1="600" y1="493" x2="582" y2="511" stroke="var(--red)" stroke-width="3.5"/>
+
+  <!-- ============ THE AI — canonical black-marker robot, beside the table ============ -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="1370" y1="352" x2="1370" y2="362"/>
+    <rect x="1334" y="362" width="72" height="48" rx="11"/>
+    <rect x="1348" y="375" width="44" height="22" rx="6" stroke-width="3"/>
+    <line x1="1370" y1="410" x2="1370" y2="418"/>
+    <rect x="1338" y="418" width="64" height="54" rx="11"/>
+    <line x1="1338" y1="436" x2="1316" y2="456"/>
+    <line x1="1402" y1="436" x2="1422" y2="438"/>
+  </g>
+  <rect x="1352" y="433" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="1370" cy="346" r="5" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="1362" cy="392" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="1380" cy="392" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <!-- gaze: the AI reads the routing table (dashed, into the right panel) -->
+  <line x1="1330" y1="452" x2="1252" y2="452" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="9 6"/>
+  <polyline points="1262,447 1250,452 1262,457" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- magnifier glyph for the audit line -->
+  <circle cx="632" cy="742" r="11" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="640" y1="750" x2="650" y2="760" stroke="var(--ink)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">SIGNAL 5 OF 8 &#183; DEAD WIRING</text>
+<text x="800" y="104" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Orphan Workflows</text>
+<text x="800" y="146" font-size="26" text-anchor="middle" fill="var(--dim)">A workflow on disk that no routing row points to &#8212; so the AI can never reach it.</text>
+
+<!-- severity chip label -->
+<text x="1446" y="180" font-size="22" font-weight="700" text-anchor="middle" fill="var(--red)">HIGH</text>
+
+<!-- panel headers -->
+<text x="80" y="232" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">ON DISK &#183; write-content/workflows/</text>
+<text x="610" y="232" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">IN SKILL.md &#183; THE ROUTING TABLE</text>
+
+<!-- ===== left: the folder tree (monospace, box-drawing) ===== -->
+<text class="mono" x="110" y="326" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">write-content/</text>
+<text class="mono" x="110" y="386" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9492;&#9472;&#9472; <tspan fill="var(--green)" font-weight="700">workflows/</tspan></text>
+<text class="mono" x="110" y="446" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">    &#9500;&#9472;&#9472; newsletter.md</text>
+<text class="mono" x="110" y="506" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">    &#9492;&#9472;&#9472; <tspan fill="var(--red)" font-weight="700">old-promo.md</tspan></text>
+<text x="110" y="586" font-size="20" text-anchor="start" fill="var(--dim)">2 files sit in this folder.</text>
+
+<!-- ===== right: the routing table file-view (monospace) ===== -->
+<text class="mono" x="635" y="326" font-size="28" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">## Workflow Routing</text>
+<text x="635" y="366" font-size="20" text-anchor="start" fill="var(--dim)">the paths the AI will actually load</text>
+<text class="mono" x="635" y="452" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">newsletter  &#8594;  workflows/newsletter.md</text>
+<text class="mono" x="635" y="522" font-size="24" text-anchor="start" fill="var(--red)" xml:space="preserve">&#10007; old-promo.md &#8212; no row</text>
+<text x="635" y="590" font-size="20" text-anchor="start" fill="var(--dim)">one row routed &#183; one file stranded</text>
+
+<!-- ===== robot caption ===== -->
+<text x="1370" y="512" font-size="18" text-anchor="middle" fill="var(--dim)">it routes from the table</text>
+<text x="1370" y="536" font-size="18" font-weight="700" text-anchor="middle" fill="var(--red)">no row = invisible</text>
+
+<!-- ===== orphan meaning callout ===== -->
+<text x="800" y="690" font-size="26" text-anchor="middle" fill="var(--ink)"><tspan fill="var(--red)" font-weight="700">old-promo.md</tspan> &#183; on disk, routed from nowhere, the AI can never reach it.</text>
+
+<!-- ===== how the audit spots it ===== -->
+<text x="800" y="748" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">HOW THE AUDIT SPOTS IT</text>
+<text x="800" y="786" font-size="24" text-anchor="middle" fill="var(--ink)">Diff the folder against the routing table &#8212; any file no row points to is an orphan.</text>
+
+<!-- ===== takeaway ===== -->
+<text x="800" y="854" font-size="27" text-anchor="middle" fill="var(--ink)">An unrouted workflow is dead code you still maintain and never run.</text>
+<text x="800" y="904" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Wire it into the routing table &#8212; or delete it.</text>
+</svg></body></html>

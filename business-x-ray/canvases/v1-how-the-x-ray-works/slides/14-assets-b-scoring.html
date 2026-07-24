@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-4%" y="-4%" width="108%" height="108%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ===== SCORECARD: 7 category bands, left chip + colored asset tiles ===== -->
+
+  <!-- Band 1 · IP -->
+  <rect x="100" y="267" width="140" height="50" rx="9" fill="rgb(60,60,64)" stroke="none"/>
+  <rect x="264" y="267" width="204" height="50" rx="9" fill="rgba(214,140,40,0.16)" stroke="var(--amber)" stroke-width="2.5"/>
+  <rect x="482" y="267" width="204" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+  <rect x="700" y="267" width="204" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+
+  <!-- Band 2 · BRAND -->
+  <rect x="100" y="347" width="140" height="50" rx="9" fill="rgb(60,60,64)" stroke="none"/>
+  <rect x="264" y="347" width="204" height="50" rx="9" fill="rgba(214,140,40,0.16)" stroke="var(--amber)" stroke-width="2.5"/>
+  <rect x="482" y="347" width="204" height="50" rx="9" fill="rgba(214,140,40,0.16)" stroke="var(--amber)" stroke-width="2.5"/>
+  <rect x="700" y="347" width="204" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+
+  <!-- Band 3 · MARKET -->
+  <rect x="100" y="427" width="140" height="50" rx="9" fill="rgb(60,60,64)" stroke="none"/>
+  <rect x="264" y="427" width="204" height="50" rx="9" fill="rgba(214,140,40,0.16)" stroke="var(--amber)" stroke-width="2.5"/>
+  <rect x="482" y="427" width="204" height="50" rx="9" fill="rgba(45,140,60,0.16)" stroke="var(--green)" stroke-width="2.5"/>
+  <rect x="700" y="427" width="204" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+
+  <!-- Band 4 · PRODUCT (4 tiles) -->
+  <rect x="100" y="507" width="140" height="50" rx="9" fill="rgb(60,60,64)" stroke="none"/>
+  <rect x="264" y="507" width="150" height="50" rx="9" fill="rgba(45,140,60,0.16)" stroke="var(--green)" stroke-width="2.5"/>
+  <rect x="428" y="507" width="150" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+  <rect x="592" y="507" width="150" height="50" rx="9" fill="rgba(214,140,40,0.16)" stroke="var(--amber)" stroke-width="2.5"/>
+  <rect x="756" y="507" width="150" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+
+  <!-- Band 5 · SYSTEMS -->
+  <rect x="100" y="587" width="140" height="50" rx="9" fill="rgb(60,60,64)" stroke="none"/>
+  <rect x="264" y="587" width="204" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+  <rect x="482" y="587" width="204" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+  <rect x="700" y="587" width="204" height="50" rx="9" fill="rgba(214,140,40,0.16)" stroke="var(--amber)" stroke-width="2.5"/>
+
+  <!-- Band 6 · CULTURE (4 tiles, all red) -->
+  <rect x="100" y="667" width="140" height="50" rx="9" fill="rgb(60,60,64)" stroke="none"/>
+  <rect x="264" y="667" width="150" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+  <rect x="428" y="667" width="150" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+  <rect x="592" y="667" width="150" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+  <rect x="756" y="667" width="150" height="50" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+
+  <!-- Band 7 · FUNDING (muted / secondary) -->
+  <rect x="100" y="747" width="140" height="50" rx="9" fill="rgb(150,150,154)" stroke="none"/>
+  <rect x="264" y="747" width="150" height="50" rx="9" fill="rgba(120,120,125,0.10)" stroke="var(--dim)" stroke-width="2" stroke-dasharray="7 6"/>
+  <rect x="428" y="747" width="150" height="50" rx="9" fill="rgba(120,120,125,0.10)" stroke="var(--dim)" stroke-width="2" stroke-dasharray="7 6"/>
+  <rect x="592" y="747" width="150" height="50" rx="9" fill="rgba(120,120,125,0.10)" stroke="var(--dim)" stroke-width="2" stroke-dasharray="7 6"/>
+  <rect x="756" y="747" width="150" height="50" rx="9" fill="rgba(120,120,125,0.10)" stroke="var(--dim)" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- ===== SCORING KEY swatches (right column) ===== -->
+  <rect x="978" y="286" width="46" height="46" rx="9" fill="rgba(45,140,60,0.16)" stroke="var(--green)" stroke-width="3"/>
+  <rect x="978" y="396" width="46" height="46" rx="9" fill="rgba(214,140,40,0.16)" stroke="var(--amber)" stroke-width="2.5"/>
+  <rect x="978" y="506" width="46" height="46" rx="9" fill="rgba(214,69,58,0.13)" stroke="var(--red)" stroke-width="2.5"/>
+
+  <!-- ===== EXPOSE reveal band (red, dashed) under the scorecard ===== -->
+  <rect x="100" y="840" width="1400" height="94" rx="16" fill="rgba(214,69,58,0.06)" stroke="var(--red)" stroke-width="2.5" stroke-dasharray="10 8"/>
+
+  <!-- YOU stick figure (marker-circle head), inside the reveal band -->
+  <circle cx="176" cy="878" r="21" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="176" y1="899" x2="176" y2="918" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="176" y1="906" x2="162" y2="900" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="176" y1="906" x2="190" y2="900" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="176" y1="918" x2="166" y2="930" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="176" y1="918" x2="186" y2="930" stroke="var(--ink)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 3 &#183; SCORE WHAT YOU HAVE</text>
+<text x="800" y="112" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Green, Yellow, or Red &#8212; Where Does Each Asset Live?</text>
+<text x="800" y="152" font-size="25" text-anchor="middle" fill="var(--dim)">Every asset in your business, scored by one question: could someone else run it without you?</text>
+<text x="800" y="184" font-size="19" text-anchor="middle" fill="var(--dim)">The AI proposes every score from your interview answers &#8212; you confirm.</text>
+
+<!-- panel headers -->
+<text x="100" y="234" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">YOUR BUSINESS &#183; ALL 24 ASSETS, SCORED</text>
+<text x="970" y="234" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">THE SCORING RULE</text>
+
+<!-- ===== category chip labels (white on dark) ===== -->
+<text x="170" y="298" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">IP</text>
+<text x="170" y="378" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">BRAND</text>
+<text x="170" y="458" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">MARKET</text>
+<text x="170" y="538" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">PRODUCT</text>
+<text x="170" y="618" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">SYSTEMS</text>
+<text x="170" y="698" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">CULTURE</text>
+<text x="170" y="778" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">FUNDING</text>
+
+<!-- ===== labeled asset tiles (the 5 named assets) ===== -->
+<!-- Product: lead magnet (green) + proposal (red) -->
+<text x="339" y="538" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">lead magnet</text>
+<text x="503" y="538" font-size="18" font-weight="700" text-anchor="middle" fill="var(--red)">proposal</text>
+<!-- Systems: sales process + client FAQ (red) + onboarding (amber) -->
+<text x="366" y="618" font-size="18" font-weight="700" text-anchor="middle" fill="var(--red)">sales process</text>
+<text x="584" y="618" font-size="18" font-weight="700" text-anchor="middle" fill="var(--red)">client FAQ</text>
+<text x="802" y="618" font-size="18" font-weight="700" text-anchor="middle" fill="var(--amber)">onboarding</text>
+
+<!-- Funding secondary note -->
+<text x="904" y="778" font-size="17" text-anchor="end" fill="var(--dim)">secondary &#183; later</text>
+
+<!-- ===== scoring key text ===== -->
+<text x="1044" y="304" font-size="23" font-weight="700" text-anchor="start" fill="var(--green)">GREEN</text>
+<text x="1044" y="333" font-size="21" text-anchor="start" fill="var(--ink)">documented &#8212; someone else</text>
+<text x="1044" y="360" font-size="21" text-anchor="start" fill="var(--ink)">could run it without you.</text>
+
+<text x="1044" y="414" font-size="23" font-weight="700" text-anchor="start" fill="var(--amber)">YELLOW</text>
+<text x="1044" y="443" font-size="21" text-anchor="start" fill="var(--ink)">half-written &#8212; it still</text>
+<text x="1044" y="470" font-size="21" text-anchor="start" fill="var(--ink)">needs you in the room.</text>
+
+<text x="1044" y="524" font-size="23" font-weight="700" text-anchor="start" fill="var(--red)">RED</text>
+<text x="1044" y="553" font-size="21" text-anchor="start" fill="var(--ink)">nowhere but your head &#8212;</text>
+<text x="1044" y="580" font-size="21" text-anchor="start" fill="var(--ink)">it only exists when you do.</text>
+
+<!-- one-question reinforcement -->
+<text x="978" y="662" font-size="20" text-anchor="start" fill="var(--dim)">One question per asset, no wishful</text>
+<text x="978" y="690" font-size="20" text-anchor="start" fill="var(--dim)">thinking: is it on paper, or in your head?</text>
+
+<!-- two-languages bridge (asset traffic light vs the four process marks) -->
+<text x="978" y="742" font-size="16" text-anchor="start" fill="var(--dim)">Different question than the four process marks &#8212;</text>
+<text x="978" y="765" font-size="16" text-anchor="start" fill="var(--dim)">this traffic light asks: could someone else run it without you?</text>
+
+<!-- ===== EXPOSE reveal ===== -->
+<text x="222" y="880" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">The red isn&#8217;t scattered &#8212; it&#8217;s every asset that lives only in your head.</text>
+<text x="222" y="914" font-size="24" text-anchor="start" fill="var(--ink)">The business scores red exactly where it can&#8217;t run without you.</text>
+
+<!-- ===== takeaway bridge ===== -->
+<text x="800" y="978" font-size="28" text-anchor="middle" fill="var(--ink)">24 tiles, one honest picture.</text>
+<text x="800" y="1014" font-size="28" text-anchor="middle" fill="var(--ink)">And they all compress into <tspan fill="var(--green)" font-weight="700">a single number.</tspan></text>
+</svg></body></html>

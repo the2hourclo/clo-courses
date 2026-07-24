@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- severity chip (MEDIUM = amber) -->
+  <rect x="1360" y="150" width="170" height="44" rx="22" stroke="var(--amber)" stroke-width="2.5" fill="rgba(214,140,40,0.13)"/>
+
+  <!-- ============ CARD A — write-content/SKILL.md ============ -->
+  <rect x="110" y="200" width="560" height="382" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="128" y1="262" x2="652" y2="262" stroke="var(--dim)" stroke-width="2"/>
+  <!-- amber highlight = the duplicated inline block -->
+  <rect x="125" y="352" width="478" height="150" rx="10" fill="rgba(214,140,40,0.15)" stroke="none"/>
+
+  <!-- ============ CARD B — reel-maker/SKILL.md ============ -->
+  <rect x="930" y="200" width="560" height="382" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="948" y1="262" x2="1472" y2="262" stroke="var(--dim)" stroke-width="2"/>
+  <rect x="945" y="352" width="478" height="150" rx="10" fill="rgba(214,140,40,0.15)" stroke="none"/>
+
+  <!-- amber connector: the SAME block bridging both cards -->
+  <line x1="605" y1="427" x2="943" y2="427" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="605" y1="420" x2="605" y2="436" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="943" y1="420" x2="943" y2="436" stroke="var(--amber)" stroke-width="3"/>
+
+  <!-- ============ FIX BOX (green) — one shared standalone skill ============ -->
+  <rect x="600" y="620" width="400" height="100" rx="16" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.08)"/>
+  <!-- green delegate arrow from CARD A -> fix box -->
+  <line x1="400" y1="588" x2="648" y2="614" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="636,606 651,616 638,622" stroke="var(--green)" stroke-width="3"/>
+  <!-- green delegate arrow from CARD B -> fix box -->
+  <line x1="1200" y1="588" x2="952" y2="614" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="964,606 949,616 962,622" stroke="var(--green)" stroke-width="3"/>
+
+  <!-- magnifier glyph for the audit strip -->
+  <circle cx="553" cy="761" r="11" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="561" y1="769" x2="571" y2="779" stroke="var(--ink)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="46" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">SIGNAL 7 OF 8 &#183; ARCHITECTURE</text>
+<text x="800" y="90" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Missing Shared Delegation</text>
+<text x="800" y="132" font-size="26" text-anchor="middle" fill="var(--dim)">Two skills each keep their OWN copy of the same job &#8212; instead of sharing one home.</text>
+
+<!-- severity chip label -->
+<text x="1445" y="179" font-size="22" font-weight="700" text-anchor="middle" fill="var(--amber)">MEDIUM</text>
+
+<!-- ===== CARD A text ===== -->
+<text class="mono" x="140" y="248" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">write-content/SKILL.md</text>
+<text class="mono" x="140" y="300" font-size="22" text-anchor="start" fill="var(--dim)" xml:space="preserve">## workflow: newsletter</text>
+<text class="mono" x="140" y="334" font-size="23" text-anchor="start" fill="var(--ink)" xml:space="preserve">1  draft the sections</text>
+<text class="mono" x="140" y="386" font-size="23" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">voice cleanup:</text>
+<text class="mono" x="140" y="420" font-size="23" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#183; strip AI-isms</text>
+<text class="mono" x="140" y="454" font-size="23" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#183; fix staccato</text>
+<text class="mono" x="140" y="488" font-size="23" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#183; kill em-dashes</text>
+<text class="mono" x="140" y="536" font-size="23" text-anchor="start" fill="var(--ink)" xml:space="preserve">3  format for substack</text>
+<text x="140" y="567" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">v3 &#183; updated last week</text>
+
+<!-- ===== CARD B text ===== -->
+<text class="mono" x="960" y="248" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">reel-maker/SKILL.md</text>
+<text class="mono" x="960" y="300" font-size="22" text-anchor="start" fill="var(--dim)" xml:space="preserve">## workflow: hook slides</text>
+<text class="mono" x="960" y="334" font-size="23" text-anchor="start" fill="var(--ink)" xml:space="preserve">1  pick the shift</text>
+<text class="mono" x="960" y="386" font-size="23" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">voice cleanup:</text>
+<text class="mono" x="960" y="420" font-size="23" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#183; strip AI-isms</text>
+<text class="mono" x="960" y="454" font-size="23" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#183; fix staccato</text>
+<text class="mono" x="960" y="488" font-size="22" text-anchor="start" fill="var(--red)" xml:space="preserve">&#215; never got em-dash fix</text>
+<text class="mono" x="960" y="536" font-size="23" text-anchor="start" fill="var(--ink)" xml:space="preserve">3  render the slides</text>
+<text x="960" y="567" font-size="19" font-weight="700" text-anchor="start" fill="var(--red)">v1 &#183; never updated</text>
+
+<!-- amber connector label + red drift note -->
+<text x="774" y="410" font-size="19" font-weight="700" text-anchor="middle" fill="var(--amber)">SAME BLOCK, WRITTEN TWICE</text>
+<text x="774" y="527" font-size="20" font-weight="700" text-anchor="middle" fill="var(--red)">the copies already disagree</text>
+
+<!-- ===== FIX BOX text ===== -->
+<text x="590" y="676" font-size="20" font-weight="700" text-anchor="end" fill="var(--green)">THE FIX</text>
+<text x="800" y="663" font-size="27" font-weight="700" text-anchor="middle" fill="var(--green)">humanize-voice/</text>
+<text x="800" y="697" font-size="20" text-anchor="middle" fill="var(--dim)">one home &#183; both skills delegate here</text>
+
+<!-- ===== HOW THE AUDIT SPOTS IT ===== -->
+<text x="578" y="769" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">HOW THE AUDIT SPOTS IT</text>
+<text x="800" y="805" font-size="21" text-anchor="middle" fill="var(--dim)">reads workflow bodies across skills &#8212; flags the same mini-procedure written inline in 2+ parent skills.</text>
+
+<!-- ===== takeaway ===== -->
+<text x="800" y="862" font-size="27" text-anchor="middle" fill="var(--ink)">Every inline copy is a fork &#8212; and each fork rots on its own schedule.</text>
+<text x="800" y="910" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Extract it once, delegate from both. One home, one update, no drift.</text>
+</svg></body></html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ TIER 1 — the whole sales flow (6 boxes) ============ -->
+  <rect x="125"  y="196" width="195" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="353"  y="196" width="195" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="581"  y="196" width="195" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="809"  y="196" width="195" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <!-- Proposal = the zoom target (bold ink border) -->
+  <rect x="1037" y="196" width="195" height="64" rx="12" stroke="var(--ink)" stroke-width="5" fill="rgba(0,0,0,0.02)"/>
+  <rect x="1265" y="196" width="195" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <!-- tier1 arrows -->
+  <line x1="324" y1="228" x2="348" y2="228" stroke="var(--dim)" stroke-width="2.5"/><polyline points="342,222 350,228 342,234" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="552" y1="228" x2="576" y2="228" stroke="var(--dim)" stroke-width="2.5"/><polyline points="570,222 578,228 570,234" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="780" y1="228" x2="804" y2="228" stroke="var(--dim)" stroke-width="2.5"/><polyline points="798,222 806,228 798,234" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1008" y1="228" x2="1032" y2="228" stroke="var(--dim)" stroke-width="2.5"/><polyline points="1026,222 1034,228 1026,234" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1236" y1="228" x2="1260" y2="228" stroke="var(--dim)" stroke-width="2.5"/><polyline points="1254,222 1262,228 1254,234" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- ============ ZOOM CONE 1 : Proposal -> Level 2 ============ -->
+  <polygon points="1037,260 1232,260 1281,436 320,436" fill="rgba(0,0,0,0.018)" stroke="none"/>
+  <line x1="1037" y1="260" x2="320"  y2="436" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="8 7"/>
+  <line x1="1232" y1="260" x2="1281" y2="436" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="8 7"/>
+  <!-- magnifier glyph -->
+  <circle cx="748" cy="344" r="13" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="757" y1="353" x2="767" y2="363" stroke="var(--dim)" stroke-width="3.5"/>
+
+  <!-- ============ TIER 2 — steps inside Proposal (5 boxes) ============ -->
+  <!-- draft = the zoom target (bold ink border) -->
+  <rect x="320"  y="436" width="165" height="64" rx="12" stroke="var(--ink)" stroke-width="5" fill="rgba(0,0,0,0.02)"/>
+  <rect x="519"  y="436" width="165" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="718"  y="436" width="165" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="917"  y="436" width="165" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="1116" y="436" width="165" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <!-- tier2 arrows -->
+  <line x1="489" y1="468" x2="515" y2="468" stroke="var(--dim)" stroke-width="2.5"/><polyline points="509,462 517,468 509,474" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="688" y1="468" x2="714" y2="468" stroke="var(--dim)" stroke-width="2.5"/><polyline points="708,462 716,468 708,474" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="887" y1="468" x2="913" y2="468" stroke="var(--dim)" stroke-width="2.5"/><polyline points="907,462 915,468 907,474" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1086" y1="468" x2="1112" y2="468" stroke="var(--dim)" stroke-width="2.5"/><polyline points="1106,462 1114,468 1106,474" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- ============ ZOOM CONE 2 : draft -> Level 3 ============ -->
+  <polygon points="320,500 485,500 1300,672 300,672" fill="rgba(214,69,58,0.035)" stroke="none"/>
+  <line x1="320" y1="500" x2="300"  y2="672" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="8 7"/>
+  <line x1="485" y1="500" x2="1300" y2="672" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="8 7"/>
+  <!-- magnifier glyph -->
+  <circle cx="452" cy="582" r="13" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="461" y1="591" x2="471" y2="601" stroke="var(--dim)" stroke-width="3.5"/>
+
+  <!-- ============ TIER 3 — the clicks inside 'draft' (the pain zone) ============ -->
+  <!-- red pain-zone wash behind the row -->
+  <rect x="284" y="662" width="1024" height="92" rx="16" stroke="var(--red)" stroke-width="2" stroke-dasharray="7 7" fill="rgba(214,69,58,0.05)"/>
+  <rect x="300"  y="672" width="145" height="70" rx="11" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="471"  y="672" width="145" height="70" rx="11" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="642"  y="672" width="145" height="70" rx="11" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="813"  y="672" width="145" height="70" rx="11" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="984"  y="672" width="145" height="70" rx="11" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1155" y="672" width="145" height="70" rx="11" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <!-- tier3 arrows -->
+  <line x1="449" y1="707" x2="467" y2="707" stroke="var(--dim)" stroke-width="2.2"/><polyline points="462,702 469,707 462,712" stroke="var(--dim)" stroke-width="2.2"/>
+  <line x1="620" y1="707" x2="638" y2="707" stroke="var(--dim)" stroke-width="2.2"/><polyline points="633,702 640,707 633,712" stroke="var(--dim)" stroke-width="2.2"/>
+  <line x1="791" y1="707" x2="809" y2="707" stroke="var(--dim)" stroke-width="2.2"/><polyline points="804,702 811,707 804,712" stroke="var(--dim)" stroke-width="2.2"/>
+  <line x1="962" y1="707" x2="980" y2="707" stroke="var(--dim)" stroke-width="2.2"/><polyline points="975,702 982,707 975,712" stroke="var(--dim)" stroke-width="2.2"/>
+  <line x1="1133" y1="707" x2="1151" y2="707" stroke="var(--dim)" stroke-width="2.2"/><polyline points="1146,702 1153,707 1146,712" stroke="var(--dim)" stroke-width="2.2"/>
+
+  <!-- ============ the 45-min reveal badge (right, where the eye lands last) ============ -->
+  <rect x="1332" y="666" width="252" height="84" rx="14" stroke="var(--red)" stroke-width="3" fill="rgba(214,69,58,0.09)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="48" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 2 &#183; SEE THE CURRENT STATE</text>
+<text x="800" y="96" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Three Levels Deep</text>
+<text x="800" y="136" font-size="25" text-anchor="middle" fill="var(--dim)">Zoom into one stage, then into one step &#8212; until you see the actual work.</text>
+
+<!-- ===== TIER 1 label + boxes ===== -->
+<text x="125" y="180" font-size="22"><tspan font-weight="700" fill="var(--ink)">LEVEL 1 · THE FLOW</tspan><tspan fill="var(--dim)">  —  the whole sales flow</tspan></text>
+<text x="222"  y="235" font-size="23" text-anchor="middle" fill="var(--ink)">Inquiry</text>
+<text x="450"  y="235" font-size="23" text-anchor="middle" fill="var(--ink)">Reply</text>
+<text x="678"  y="235" font-size="22" text-anchor="middle" fill="var(--ink)">Call booked</text>
+<text x="906"  y="235" font-size="22" text-anchor="middle" fill="var(--ink)">Discovery call</text>
+<text x="1134" y="235" font-size="23" font-weight="700" text-anchor="middle" fill="var(--ink)">Proposal</text>
+<text x="1362" y="235" font-size="23" text-anchor="middle" fill="var(--ink)">Signed</text>
+
+<!-- zoom-1 label -->
+<text x="960" y="351" font-size="22" font-weight="700" text-anchor="middle" fill="var(--dim)" letter-spacing="1">ZOOM INTO ONE STAGE</text>
+
+<!-- ===== TIER 2 label + boxes ===== -->
+<text x="320" y="420" font-size="22"><tspan font-weight="700" fill="var(--ink)">LEVEL 2 · THE STEPS</tspan><tspan fill="var(--dim)"> — one stage</tspan></text>
+<text x="402"  y="475" font-size="23" font-weight="700" text-anchor="middle" fill="var(--ink)">draft</text>
+<text x="601"  y="475" font-size="23" text-anchor="middle" fill="var(--ink)">price</text>
+<text x="800"  y="475" font-size="23" text-anchor="middle" fill="var(--ink)">review</text>
+<text x="999"  y="475" font-size="23" text-anchor="middle" fill="var(--ink)">send</text>
+<text x="1198" y="475" font-size="23" text-anchor="middle" fill="var(--ink)">follow up</text>
+
+<!-- zoom-2 label -->
+<text x="648" y="589" font-size="22" font-weight="700" text-anchor="middle" fill="var(--dim)" letter-spacing="1">ZOOM INTO ONE STEP</text>
+
+<!-- ===== TIER 3 label + boxes (the clicks) ===== -->
+<text x="300" y="654" font-size="22"><tspan font-weight="700" fill="var(--red)">LEVEL 3 · THE ACTUAL WORK</tspan></text>
+<text x="372"  y="701" font-size="18" text-anchor="middle" fill="var(--ink)">open last</text>
+<text x="372"  y="723" font-size="18" text-anchor="middle" fill="var(--ink)">proposal</text>
+<text x="543"  y="713" font-size="18" text-anchor="middle" fill="var(--ink)">copy it</text>
+<text x="714"  y="701" font-size="18" text-anchor="middle" fill="var(--ink)">find call</text>
+<text x="714"  y="723" font-size="18" text-anchor="middle" fill="var(--ink)">notes</text>
+<text x="885"  y="701" font-size="18" text-anchor="middle" fill="var(--ink)">rewrite</text>
+<text x="885"  y="723" font-size="18" text-anchor="middle" fill="var(--ink)">scope</text>
+<text x="1056" y="713" font-size="18" text-anchor="middle" fill="var(--ink)">format</text>
+<text x="1227" y="713" font-size="18" text-anchor="middle" fill="var(--ink)">export PDF</text>
+
+<!-- 45-min reveal badge -->
+<text x="1458" y="700" font-size="34" font-weight="700" text-anchor="middle" fill="var(--red)">45 MIN</text>
+<text x="1458" y="725" font-size="18" text-anchor="middle" fill="var(--ink)">by hand</text>
+<text x="1458" y="743" font-size="16" text-anchor="middle" fill="var(--dim)">every proposal</text>
+
+<!-- ===== takeaway + bridge ===== -->
+<text x="800" y="852" font-size="27" text-anchor="middle" fill="var(--ink)">Three levels, each one zoom deeper into the very same process.</text>
+<text x="800" y="902" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Why go all the way down to the clicks? That&#8217;s the next board.</text>
+</svg></body></html>

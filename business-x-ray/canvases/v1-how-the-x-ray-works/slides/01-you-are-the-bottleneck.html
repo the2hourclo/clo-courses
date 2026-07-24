@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ===== spokes: every job routes through the ONE person in the middle ===== -->
+  <line x1="494" y1="432" x2="357" y2="357" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="595" y1="431" x2="724" y2="358" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="487" y1="460" x2="333" y2="460" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="603" y1="460" x2="752" y2="460" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="494" y1="488" x2="367" y2="558" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="595" y1="488" x2="723" y2="558" stroke="var(--ink)" stroke-width="2"/>
+
+  <!-- ===== six task cards ===== -->
+  <rect x="120" y="260" width="250" height="70" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="710" y="260" width="250" height="70" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="80"  y="425" width="250" height="70" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="755" y="425" width="250" height="70" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="130" y="585" width="250" height="70" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <rect x="710" y="585" width="250" height="70" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- ===== hub: the owner in the middle ===== -->
+  <circle cx="545" cy="460" r="60" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <g stroke="var(--ink)" stroke-width="4">
+    <circle cx="545" cy="430" r="20" fill="none"/>
+    <line x1="545" y1="450" x2="545" y2="492"/>
+    <line x1="513" y1="468" x2="577" y2="468"/>
+    <line x1="545" y1="492" x2="526" y2="520"/>
+    <line x1="545" y1="492" x2="564" y2="520"/>
+  </g>
+
+  <!-- ===== EXTEND: the 9-to-5 workday container ===== -->
+  <rect x="1330" y="520" width="120" height="220" rx="16" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <!-- stacked hours — they overflow out the top of the day -->
+  <rect x="1344" y="694" width="92" height="42" rx="7" stroke="var(--amber)" stroke-width="2" fill="rgba(214,140,40,0.14)"/>
+  <rect x="1344" y="646" width="92" height="42" rx="7" stroke="var(--amber)" stroke-width="2" fill="rgba(214,140,40,0.14)"/>
+  <rect x="1344" y="598" width="92" height="42" rx="7" stroke="var(--amber)" stroke-width="2" fill="rgba(214,140,40,0.14)"/>
+  <rect x="1344" y="550" width="92" height="42" rx="7" stroke="var(--amber)" stroke-width="2" fill="rgba(214,140,40,0.14)"/>
+  <rect x="1344" y="502" width="92" height="42" rx="7" stroke="var(--amber)" stroke-width="2" fill="rgba(214,140,40,0.18)"/>
+  <rect x="1344" y="454" width="92" height="42" rx="7" stroke="var(--amber)" stroke-width="2" fill="rgba(214,140,40,0.18)"/>
+  <!-- moon: the work bleeds into the night -->
+  <path d="M1262,420 a20,20 0 1 0 2,36 a24,24 0 0 1 -2,-36 z" stroke="var(--dim)" stroke-width="2.5" fill="none"/>
+  <circle cx="1291" cy="416" r="1.6" fill="var(--dim)" stroke="none"/>
+  <circle cx="1284" cy="440" r="1.4" fill="var(--dim)" stroke="none"/>
+
+  <!-- ===== trap callout box ===== -->
+  <rect x="410" y="756" width="780" height="96" rx="18" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 1 &#183; YOU CAN'T SEE IT</text>
+<text x="800" y="106" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">You Feel It Everywhere. You Can See It Nowhere.</text>
+<text x="800" y="148" font-size="25" text-anchor="middle" fill="var(--dim)">You coach 1:1 clients with one VA. Every job below runs through you &#8212; Monday alone.</text>
+
+<!-- ===== task card labels ===== -->
+<text x="245" y="291" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Record a video</text>
+<text x="245" y="317" font-size="20" text-anchor="middle" fill="var(--amber)">2 hrs</text>
+
+<text x="835" y="291" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">3 discovery calls</text>
+<text x="835" y="317" font-size="20" text-anchor="middle" fill="var(--amber)">2 hrs</text>
+
+<text x="205" y="456" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Reply to 40 emails</text>
+<text x="205" y="482" font-size="20" text-anchor="middle" fill="var(--amber)">1.5 hrs</text>
+
+<text x="880" y="456" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Onboard a client</text>
+<text x="880" y="482" font-size="20" text-anchor="middle" fill="var(--amber)">1 hr</text>
+
+<text x="255" y="616" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Chase 2 invoices</text>
+<text x="255" y="642" font-size="20" text-anchor="middle" fill="var(--amber)">30 min</text>
+
+<text x="835" y="616" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">Fix the funnel</text>
+<text x="835" y="642" font-size="20" text-anchor="middle" fill="var(--amber)">1 hr</text>
+
+<!-- ===== hub label ===== -->
+<text x="545" y="554" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+<text x="545" y="578" font-size="17" text-anchor="middle" fill="var(--dim)">(that's you)</text>
+
+<!-- ===== EXTEND strip labels ===== -->
+<text x="1390" y="292" font-size="22" font-weight="700" text-anchor="middle" fill="var(--dim)">AND THE DAY RUNS OUT</text>
+<text x="1255" y="480" font-size="19" text-anchor="middle" fill="var(--dim)">into evenings</text>
+<text x="1255" y="506" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">+ weekends</text>
+<text x="1466" y="516" font-size="19" text-anchor="start" fill="var(--dim)">5 PM</text>
+<text x="1466" y="746" font-size="19" text-anchor="start" fill="var(--dim)">9 AM</text>
+<text x="1390" y="778" font-size="20" text-anchor="middle" fill="var(--dim)">9-to-5 can't hold it all.</text>
+
+<!-- ===== trap callout ===== -->
+<text x="800" y="798" font-size="26" text-anchor="middle" fill="var(--ink)">Where's the bottleneck? You say <tspan font-weight="700">&#8220;Everywhere.&#8221;</tspan></text>
+<text x="800" y="832" font-size="22" text-anchor="middle" fill="var(--dim)">Pain felt everywhere. Cause visible nowhere.</text>
+
+<!-- ===== takeaway bridge ===== -->
+<text x="800" y="912" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">The problem isn't effort &#8212; it's visibility. You can't fix what you can't see.</text>
+</svg></body></html>

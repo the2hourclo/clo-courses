@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- severity chip -->
+  <rect x="1360" y="150" width="170" height="44" rx="12" stroke="var(--red)" stroke-width="3" fill="rgba(214,69,58,0.10)"/>
+
+  <!-- ============ THE SKILL.md FILE VIEW (the hero object) ============ -->
+  <rect x="140" y="205" width="630" height="605" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- tiny doc glyph beside the filename -->
+  <path d="M150 231 h13 l7 7 v20 h-20 z" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="163" y1="231" x2="163" y2="238" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="163" y1="238" x2="170" y2="238" stroke="var(--dim)" stroke-width="2"/>
+  <!-- header separator under filename -->
+  <line x1="150" y1="270" x2="760" y2="270" stroke="var(--dim)" stroke-width="1.5"/>
+
+  <!-- UNREAD veil over everything below the fold -->
+  <rect x="143" y="668" width="624" height="139" rx="10" fill="rgba(120,120,125,0.12)" stroke="none"/>
+
+  <!-- THE FOLD — where the AI stops reading -->
+  <line x1="150" y1="665" x2="760" y2="665" stroke="var(--ink)" stroke-width="3" stroke-dasharray="11 8"/>
+
+  <!-- ============ THE AI — canonical black-marker robot, reading top-down ============ -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="920" y1="326" x2="920" y2="336"/>
+    <rect x="884" y="336" width="72" height="48" rx="11"/>
+    <rect x="898" y="349" width="44" height="22" rx="6" stroke-width="3"/>
+    <line x1="920" y1="384" x2="920" y2="392"/>
+    <rect x="888" y="392" width="64" height="54" rx="11"/>
+    <line x1="888" y1="410" x2="866" y2="430"/>
+    <line x1="952" y1="410" x2="972" y2="412"/>
+  </g>
+  <rect x="902" y="407" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="920" cy="320" r="5" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="912" cy="360" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="930" cy="360" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+
+  <!-- gaze: the AI reads the TOP of the file -->
+  <line x1="872" y1="378" x2="768" y2="442" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="8 7"/>
+  <polyline points="782,435 766,443 781,452" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- ============ workflows/ FOLDER (green legend) — floating, never called ============ -->
+  <rect x="1170" y="543" width="72" height="18" rx="4" stroke="var(--green)" stroke-width="2.5"/>
+  <rect x="1170" y="558" width="225" height="112" rx="10" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.04)"/>
+  <!-- green fork icon inside the folder -->
+  <line x1="1190" y1="594" x2="1199" y2="594" stroke="var(--green)" stroke-width="3"/>
+  <line x1="1199" y1="594" x2="1209" y2="587" stroke="var(--green)" stroke-width="3"/>
+  <line x1="1199" y1="594" x2="1209" y2="601" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="1190" cy="594" r="2.4" fill="var(--green)" stroke="none"/>
+  <circle cx="1209" cy="587" r="2.4" fill="var(--green)" stroke="none"/>
+  <circle cx="1209" cy="601" r="2.4" fill="var(--green)" stroke="none"/>
+
+  <!-- dashed UNREACHED connection: buried routing -> workflows/ folder -->
+  <line x1="772" y1="730" x2="1166" y2="608" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="9 8"/>
+  <polyline points="1153,600 1167,608 1153,616" stroke="var(--dim)" stroke-width="2.5"/>
+  <!-- red X: never reached -->
+  <line x1="960" y1="661" x2="978" y2="679" stroke="var(--red)" stroke-width="3.5"/>
+  <line x1="978" y1="661" x2="960" y2="679" stroke="var(--red)" stroke-width="3.5"/>
+
+  <!-- magnifier glyph for the HOW strip -->
+  <line x1="80" y1="858" x2="1520" y2="858" stroke="var(--dim)" stroke-width="1.5"/>
+  <circle cx="118" cy="902" r="12" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="127" y1="911" x2="138" y2="922" stroke="var(--dim)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker -->
+<text x="80" y="62" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">SIGNAL 3 OF 8 &#183; ROUTING PROBLEMS</text>
+
+<!-- severity chip -->
+<text x="1445" y="180" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">HIGH</text>
+
+<!-- title + subtitle -->
+<text x="800" y="106" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">The Routing Table Is Buried</text>
+<text x="800" y="146" font-size="25" text-anchor="middle" fill="var(--dim)">Routing that sits below Purpose / Overview never gets read &#8212; so the workflows never fire.</text>
+
+<!-- ===== the SKILL.md file view ===== -->
+<text x="180" y="258" font-size="22" font-weight="700" text-anchor="start" fill="var(--dim)">metrics-report/SKILL.md</text>
+
+<text class="mono" x="165" y="300" font-size="26" text-anchor="start" fill="var(--dim)" xml:space="preserve">---</text>
+<text class="mono" x="165" y="337" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">name: metrics-report</text>
+<text class="mono" x="165" y="374" font-size="26" text-anchor="start" fill="var(--dim)" xml:space="preserve">description: weekly metrics report</text>
+<text class="mono" x="165" y="411" font-size="26" text-anchor="start" fill="var(--dim)" xml:space="preserve">---</text>
+<text class="mono" x="165" y="448" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">## Purpose</text>
+<text class="mono" x="165" y="485" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">Turn raw numbers into a report.</text>
+<text class="mono" x="165" y="522" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">## Overview</text>
+<text class="mono" x="165" y="559" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">Pull GA4 + Kit, group by channel.</text>
+<text class="mono" x="165" y="596" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">## About this skill</text>
+<text class="mono" x="165" y="633" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">Built for the Monday review.</text>
+
+<!-- fold marker -->
+<text x="755" y="657" font-size="22" font-weight="700" text-anchor="end" fill="var(--ink)">reads this far &#9656;</text>
+
+<!-- buried routing (below the fold, dim / unread) -->
+<text class="mono" x="165" y="699" font-size="26" font-weight="700" text-anchor="start" fill="var(--green)" xml:space="preserve">## Workflow Routing</text>
+<text x="450" y="699" font-size="20" font-weight="700" text-anchor="start" fill="var(--red)">&#10005; never read</text>
+<text class="mono" x="165" y="736" font-size="26" text-anchor="start" fill="var(--dim)" xml:space="preserve">weekly  -&gt; workflows/weekly.md</text>
+<text class="mono" x="165" y="773" font-size="26" text-anchor="start" fill="var(--dim)" xml:space="preserve">dive    -&gt; workflows/dive.md</text>
+
+<!-- robot labels -->
+<text x="919" y="478" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">THE AI</text>
+<text x="919" y="504" font-size="18" text-anchor="middle" fill="var(--dim)">reads top-down, stops early</text>
+
+<!-- workflows folder labels -->
+<text x="1228" y="602" font-size="26" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text class="mono" x="1195" y="638" font-size="20" text-anchor="start" fill="var(--dim)">weekly.md</text>
+<text class="mono" x="1195" y="666" font-size="20" text-anchor="start" fill="var(--dim)">dive.md</text>
+<text x="1170" y="702" font-size="19" text-anchor="start" fill="var(--dim)">ready, but never called</text>
+
+<!-- unreached connector label -->
+<text x="905" y="712" font-size="20" font-weight="700" text-anchor="start" fill="var(--red)">never reached</text>
+
+<!-- HOW THE AUDIT SPOTS IT -->
+<text x="150" y="896" font-size="21" font-weight="700" text-anchor="start" fill="var(--dim)">HOW THE AUDIT SPOTS IT</text>
+<text x="150" y="924" font-size="21" text-anchor="start" fill="var(--dim)">Opens each SKILL.md and checks the first heading after the frontmatter &#8212; Purpose / Overview / About first = flagged.</text>
+
+<!-- takeaway -->
+<text x="800" y="972" font-size="27" text-anchor="middle" fill="var(--ink)">Routing buried is routing lost.</text>
+<text x="800" y="1014" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Put the routing table FIRST &#8212; right after the frontmatter &#8212; and the workflows fire.</text>
+</svg></body></html>

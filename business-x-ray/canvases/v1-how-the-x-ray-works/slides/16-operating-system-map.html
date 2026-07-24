@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --purple:rgb(147,112,219); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============================================================= CARD 0 — MARKETING ============================================================= -->
+  <rect x="100" y="218" width="340" height="460" rx="18" stroke="var(--blue)" stroke-width="2.5" fill="rgba(52,120,190,0.02)"/>
+  <rect x="100" y="218" width="340" height="60" rx="18" stroke="var(--blue)" stroke-width="2.5" fill="var(--blue)"/>
+  <!-- zones -->
+  <rect x="112" y="286" width="316" height="126" rx="12" stroke="rgba(52,120,190,0.5)" stroke-width="2" fill="rgba(52,120,190,0.05)"/>
+  <rect x="112" y="420" width="316" height="104" rx="12" stroke="rgba(120,120,125,0.5)" stroke-width="2" fill="rgba(0,0,0,0.015)"/>
+  <rect x="112" y="532" width="316" height="140" rx="12" stroke="rgba(147,112,219,0.5)" stroke-width="2" fill="rgba(147,112,219,0.05)"/>
+  <!-- skill chips -->
+  <rect x="114" y="316" width="312" height="36" rx="9" stroke="var(--blue)" stroke-width="2" fill="#ffffff"/>
+  <rect x="114" y="356" width="312" height="36" rx="9" stroke="var(--blue)" stroke-width="2" fill="#ffffff"/>
+  <!-- tool chips: YouTube=green direct, Kit=amber bridge -->
+  <rect x="114" y="458" width="150" height="44" rx="10" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.07)"/>
+  <rect x="276" y="458" width="150" height="44" rx="10" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="9 6" fill="rgba(214,140,40,0.07)"/>
+  <!-- asset chip + scorecard status dot (green = ready) -->
+  <rect x="114" y="572" width="312" height="48" rx="10" stroke="var(--purple)" stroke-width="2.5" fill="#ffffff"/>
+  <circle cx="138" cy="596" r="8" fill="var(--green)" stroke="var(--green)" stroke-width="2"/>
+  <!-- mini robot (white on blue header) -->
+  <g stroke="#ffffff" stroke-width="3">
+    <line x1="140" y1="227" x2="140" y2="233"/>
+    <rect x="125" y="233" width="30" height="19" rx="5"/>
+    <rect x="127" y="254" width="26" height="17" rx="4"/>
+    <line x1="125" y1="259" x2="117" y2="264"/>
+    <line x1="155" y1="259" x2="163" y2="263"/>
+  </g>
+  <circle cx="140" cy="224" r="3" fill="#ffffff" stroke="#ffffff"/>
+  <circle cx="134" cy="243" r="2.6" fill="#ffffff" stroke="#ffffff"/>
+  <circle cx="146" cy="243" r="2.6" fill="#ffffff" stroke="#ffffff"/>
+
+  <!-- ============================================================= CARD 1 — SALES ============================================================= -->
+  <rect x="630" y="218" width="340" height="460" rx="18" stroke="var(--blue)" stroke-width="2.5" fill="rgba(52,120,190,0.02)"/>
+  <rect x="630" y="218" width="340" height="60" rx="18" stroke="var(--blue)" stroke-width="2.5" fill="var(--blue)"/>
+  <rect x="642" y="286" width="316" height="126" rx="12" stroke="rgba(52,120,190,0.5)" stroke-width="2" fill="rgba(52,120,190,0.05)"/>
+  <rect x="642" y="420" width="316" height="104" rx="12" stroke="rgba(120,120,125,0.5)" stroke-width="2" fill="rgba(0,0,0,0.015)"/>
+  <rect x="642" y="532" width="316" height="140" rx="12" stroke="rgba(147,112,219,0.5)" stroke-width="2" fill="rgba(147,112,219,0.05)"/>
+  <rect x="644" y="316" width="312" height="36" rx="9" stroke="var(--blue)" stroke-width="2" fill="#ffffff"/>
+  <rect x="644" y="356" width="312" height="36" rx="9" stroke="var(--blue)" stroke-width="2" fill="#ffffff"/>
+  <!-- tools: Calendly=amber bridge, Stripe=green direct -->
+  <rect x="644" y="458" width="150" height="44" rx="10" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="9 6" fill="rgba(214,140,40,0.07)"/>
+  <rect x="806" y="458" width="150" height="44" rx="10" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.07)"/>
+  <rect x="644" y="572" width="312" height="48" rx="10" stroke="var(--purple)" stroke-width="2.5" fill="#ffffff"/>
+  <circle cx="668" cy="596" r="8" fill="var(--red)" stroke="var(--red)" stroke-width="2"/>
+  <g stroke="#ffffff" stroke-width="3">
+    <line x1="670" y1="227" x2="670" y2="233"/>
+    <rect x="655" y="233" width="30" height="19" rx="5"/>
+    <rect x="657" y="254" width="26" height="17" rx="4"/>
+    <line x1="655" y1="259" x2="647" y2="264"/>
+    <line x1="685" y1="259" x2="693" y2="263"/>
+  </g>
+  <circle cx="670" cy="224" r="3" fill="#ffffff" stroke="#ffffff"/>
+  <circle cx="664" cy="243" r="2.6" fill="#ffffff" stroke="#ffffff"/>
+  <circle cx="676" cy="243" r="2.6" fill="#ffffff" stroke="#ffffff"/>
+
+  <!-- ============================================================= CARD 2 — DELIVERY ============================================================= -->
+  <rect x="1160" y="218" width="340" height="460" rx="18" stroke="var(--blue)" stroke-width="2.5" fill="rgba(52,120,190,0.02)"/>
+  <rect x="1160" y="218" width="340" height="60" rx="18" stroke="var(--blue)" stroke-width="2.5" fill="var(--blue)"/>
+  <rect x="1172" y="286" width="316" height="126" rx="12" stroke="rgba(52,120,190,0.5)" stroke-width="2" fill="rgba(52,120,190,0.05)"/>
+  <rect x="1172" y="420" width="316" height="104" rx="12" stroke="rgba(120,120,125,0.5)" stroke-width="2" fill="rgba(0,0,0,0.015)"/>
+  <rect x="1172" y="532" width="316" height="140" rx="12" stroke="rgba(147,112,219,0.5)" stroke-width="2" fill="rgba(147,112,219,0.05)"/>
+  <rect x="1174" y="316" width="312" height="36" rx="9" stroke="var(--blue)" stroke-width="2" fill="#ffffff"/>
+  <rect x="1174" y="356" width="312" height="36" rx="9" stroke="var(--blue)" stroke-width="2" fill="#ffffff"/>
+  <!-- tools: Notion=green direct, Zoom=amber bridge -->
+  <rect x="1174" y="458" width="150" height="44" rx="10" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.07)"/>
+  <rect x="1336" y="458" width="150" height="44" rx="10" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="9 6" fill="rgba(214,140,40,0.07)"/>
+  <rect x="1174" y="572" width="312" height="48" rx="10" stroke="var(--purple)" stroke-width="2.5" fill="#ffffff"/>
+  <circle cx="1198" cy="596" r="8" fill="var(--amber)" stroke="var(--amber)" stroke-width="2"/>
+  <g stroke="#ffffff" stroke-width="3">
+    <line x1="1200" y1="227" x2="1200" y2="233"/>
+    <rect x="1185" y="233" width="30" height="19" rx="5"/>
+    <rect x="1187" y="254" width="26" height="17" rx="4"/>
+    <line x1="1185" y1="259" x2="1177" y2="264"/>
+    <line x1="1215" y1="259" x2="1223" y2="263"/>
+  </g>
+  <circle cx="1200" cy="224" r="3" fill="#ffffff" stroke="#ffffff"/>
+  <circle cx="1194" cy="243" r="2.6" fill="#ffffff" stroke="#ffffff"/>
+  <circle cx="1206" cy="243" r="2.6" fill="#ffffff" stroke="#ffffff"/>
+
+  <!-- ============ HANDOFF 0 (Marketing -> Sales): purple asset token + amber arrows ============ -->
+  <rect x="475" y="418" width="120" height="58" rx="12" stroke="var(--purple)" stroke-width="2.5" fill="rgba(147,112,219,0.10)"/>
+  <line x1="440" y1="447" x2="470" y2="447" stroke="var(--amber)" stroke-width="3.5"/>
+  <polyline points="461,441 473,447 461,453" stroke="var(--amber)" stroke-width="3.5"/>
+  <line x1="595" y1="447" x2="626" y2="447" stroke="var(--amber)" stroke-width="3.5"/>
+  <polyline points="617,441 629,447 617,453" stroke="var(--amber)" stroke-width="3.5"/>
+
+  <!-- ============ HANDOFF 1 (Sales -> Delivery) ============ -->
+  <rect x="1005" y="418" width="120" height="58" rx="12" stroke="var(--purple)" stroke-width="2.5" fill="rgba(147,112,219,0.10)"/>
+  <line x1="970" y1="447" x2="1000" y2="447" stroke="var(--amber)" stroke-width="3.5"/>
+  <polyline points="991,441 1003,447 991,453" stroke="var(--amber)" stroke-width="3.5"/>
+  <line x1="1125" y1="447" x2="1156" y2="447" stroke="var(--amber)" stroke-width="3.5"/>
+  <polyline points="1147,441 1159,447 1147,453" stroke="var(--amber)" stroke-width="3.5"/>
+
+  <!-- ============ YOUR GREEN LANE — the one step that stays human ============ -->
+  <!-- YOU stick figure (ink, marker-circle head) -->
+  <circle cx="405" cy="712" r="18" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="405" y1="730" x2="405" y2="766" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="383" y1="742" x2="427" y2="742" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="405" y1="766" x2="389" y2="790" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="405" y1="766" x2="421" y2="790" stroke="var(--ink)" stroke-width="3"/>
+  <!-- green pill = the coaching call -->
+  <rect x="464" y="698" width="692" height="80" rx="18" stroke="var(--green)" stroke-width="3.5" fill="rgba(45,140,60,0.08)"/>
+  <!-- green connector: YOU -> the green step only -->
+  <line x1="427" y1="740" x2="460" y2="740" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="451,734 463,740 451,746" stroke="var(--green)" stroke-width="3.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 4 &#183; REIMAGINE</text>
+<text x="800" y="118" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Your Business, Redrawn as AI Employees</text>
+<text x="800" y="156" font-size="24" text-anchor="middle" fill="var(--dim)">The same work from Act 2 &#8212; now each stage is one AI Employee you build, handing the job down the line.</text>
+
+<!-- legend strip (two lines) -->
+<text x="800" y="184" font-size="16" text-anchor="middle" fill="var(--dim)">Each card, top to bottom: the AI Employee, its skills, its tools, the digital asset it runs on</text>
+<text x="800" y="206" font-size="16" text-anchor="middle" fill="var(--dim)">Tool border: <tspan fill="var(--green)">green = the AI runs it directly</tspan> &#183; <tspan fill="var(--amber)">amber dashed = only through a bridge</tspan></text>
+
+<!-- ============ CARD 0 — MARKETING text ============ -->
+<text x="164" y="245" font-size="16" font-weight="700" text-anchor="start" fill="#ffffff">&#9312; MARKETING EMPLOYEE</text>
+<text x="164" y="266" font-size="16" text-anchor="start" fill="#ffffff">content &amp; lead gen</text>
+<text x="128" y="306" font-size="16" font-weight="700" text-anchor="start" fill="var(--blue)">SKILLS &#8212; jobs it runs</text>
+<text x="270" y="340" font-size="19" text-anchor="middle" fill="var(--blue)">repurpose video &#8594; email</text>
+<text x="270" y="380" font-size="19" text-anchor="middle" fill="var(--blue)">schedule the week's posts</text>
+<text x="128" y="440" font-size="16" font-weight="700" text-anchor="start" fill="var(--dim)">TOOLS &#8212; what it plugs into</text>
+<text x="189" y="486" font-size="19" text-anchor="middle" fill="var(--ink)">YouTube</text>
+<text x="351" y="486" font-size="19" text-anchor="middle" fill="var(--ink)">Kit</text>
+<text x="128" y="552" font-size="16" font-weight="700" text-anchor="start" fill="var(--purple)">RUNS ON &#8212; its digital asset</text>
+<text x="270" y="603" font-size="20" font-weight="700" text-anchor="middle" fill="var(--purple)">Content system</text>
+<text x="270" y="648" font-size="16" text-anchor="middle" fill="var(--green)">documented &#183; ready</text>
+
+<!-- ============ CARD 1 — SALES text ============ -->
+<text x="694" y="245" font-size="16" font-weight="700" text-anchor="start" fill="#ffffff">&#9313; SALES EMPLOYEE</text>
+<text x="694" y="266" font-size="16" text-anchor="start" fill="#ffffff">qualify &amp; close</text>
+<text x="658" y="306" font-size="16" font-weight="700" text-anchor="start" fill="var(--blue)">SKILLS &#8212; jobs it runs</text>
+<text x="800" y="340" font-size="19" text-anchor="middle" fill="var(--blue)">draft proposal from notes</text>
+<text x="800" y="380" font-size="19" text-anchor="middle" fill="var(--blue)">book &amp; remind callers</text>
+<text x="658" y="440" font-size="16" font-weight="700" text-anchor="start" fill="var(--dim)">TOOLS &#8212; what it plugs into</text>
+<text x="719" y="486" font-size="19" text-anchor="middle" fill="var(--ink)">Calendly</text>
+<text x="881" y="486" font-size="19" text-anchor="middle" fill="var(--ink)">Stripe</text>
+<text x="658" y="552" font-size="16" font-weight="700" text-anchor="start" fill="var(--purple)">RUNS ON &#8212; its digital asset</text>
+<text x="800" y="603" font-size="20" font-weight="700" text-anchor="middle" fill="var(--purple)">Offer doc + script</text>
+<text x="800" y="648" font-size="16" text-anchor="middle" fill="var(--red)">head-only &#183; to build first</text>
+
+<!-- ============ CARD 2 — DELIVERY text ============ -->
+<text x="1224" y="245" font-size="16" font-weight="700" text-anchor="start" fill="#ffffff">&#9314; DELIVERY EMPLOYEE</text>
+<text x="1224" y="266" font-size="16" text-anchor="start" fill="#ffffff">onboard &amp; serve</text>
+<text x="1188" y="306" font-size="16" font-weight="700" text-anchor="start" fill="var(--blue)">SKILLS &#8212; jobs it runs</text>
+<text x="1330" y="340" font-size="19" text-anchor="middle" fill="var(--blue)">onboard a new client</text>
+<text x="1330" y="380" font-size="19" text-anchor="middle" fill="var(--blue)">session notes &#8594; recap</text>
+<text x="1188" y="440" font-size="16" font-weight="700" text-anchor="start" fill="var(--dim)">TOOLS &#8212; what it plugs into</text>
+<text x="1249" y="486" font-size="19" text-anchor="middle" fill="var(--ink)">Notion</text>
+<text x="1411" y="486" font-size="19" text-anchor="middle" fill="var(--ink)">Zoom</text>
+<text x="1188" y="552" font-size="16" font-weight="700" text-anchor="start" fill="var(--purple)">RUNS ON &#8212; its digital asset</text>
+<text x="1330" y="603" font-size="20" font-weight="700" text-anchor="middle" fill="var(--purple)">Onboarding SOP</text>
+<text x="1330" y="648" font-size="16" text-anchor="middle" fill="var(--amber)">half-built &#183; finish first</text>
+
+<!-- ============ HANDOFF labels ============ -->
+<text x="535" y="404" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">HANDS &#8594;</text>
+<text x="535" y="444" font-size="16" font-weight="700" text-anchor="middle" fill="var(--purple)">Warm email</text>
+<text x="535" y="464" font-size="16" font-weight="700" text-anchor="middle" fill="var(--purple)">leads</text>
+<text x="1065" y="404" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">HANDS &#8594;</text>
+<text x="1065" y="453" font-size="16" font-weight="700" text-anchor="middle" fill="var(--purple)">Signed client</text>
+
+<!-- ============ YOUR GREEN LANE labels ============ -->
+<text x="405" y="814" font-size="18" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+<text x="810" y="731" font-size="21" text-anchor="middle" fill="var(--ink)">You keep only the <tspan fill="var(--green)" font-weight="700">coaching call</tspan> &#8212;</text>
+<text x="810" y="761" font-size="21" text-anchor="middle" fill="var(--ink)">the high-value work that stays human.</text>
+<text x="855" y="806" font-size="17" text-anchor="middle" fill="var(--dim)">Everything else now runs in the AI Employees above &#8212; same jobs, different hands.</text>
+
+<!-- ============ scorecard-feeds-the-cards teaching line ============ -->
+<text x="800" y="838" font-size="17" text-anchor="middle" fill="var(--dim)">The scorecard feeds these cards &#8212; red assets are build items on your roadmap.</text>
+
+<!-- ============ takeaway bridge into next slide ============ -->
+<text x="800" y="864" font-size="26" text-anchor="middle" fill="var(--ink)">That's the destination &#8212; your whole business as AI Employees that pass the work down the line.</text>
+<text x="800" y="912" font-size="29" font-weight="700" text-anchor="middle" fill="var(--green)">But an AI Employee can only plug into a tool that has a port. Which of yours do? That's next.</text>
+</svg></body></html>

@@ -196,6 +196,9 @@ function renderHome(){
 maybeGate();
 paintSurf();
 renderHome();
+// Repaint if the server reports checkpoints this browser didn't know about
+// (built in Claude, or on another device). Silent no-op when nothing changed.
+window.addEventListener('aieb:progress-synced', renderHome);
 </script>
 </body>
 </html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ THE TWO CHECK-STAMPS — the gate's requirements ============ -->
+  <!-- stamp 1 -->
+  <rect x="576" y="222" width="220" height="60" rx="12" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.06)"/>
+  <polyline points="596,252 607,263 626,238" stroke="var(--green)" stroke-width="4"/>
+  <!-- stamp 2 -->
+  <rect x="808" y="222" width="226" height="60" rx="12" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.06)"/>
+  <polyline points="828,252 839,263 858,238" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ============ THE GATE — beam, posts, floor, raised barrier arm ============ -->
+  <rect x="636" y="300" width="378" height="18" rx="5" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.02)"/>
+  <rect x="636" y="316" width="28" height="286" rx="6" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.03)"/>
+  <rect x="986" y="316" width="28" height="286" rx="6" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.03)"/>
+  <line x1="606" y1="602" x2="1044" y2="602" stroke="var(--ink)" stroke-width="3"/>
+  <!-- raised barrier arm (open for the qualified request) -->
+  <line x1="664" y1="330" x2="556" y2="272" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="600" y1="308" x2="608" y2="294" stroke="var(--green)" stroke-width="2.5"/>
+  <line x1="624" y1="320" x2="632" y2="306" stroke="var(--green)" stroke-width="2.5"/>
+  <circle cx="664" cy="330" r="6" fill="var(--ink)" stroke="var(--ink)"/>
+
+  <!-- ============ VALID REQUEST — carries blueprint + sign-off ============ -->
+  <rect x="80" y="372" width="300" height="134" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <!-- mini swimlane blueprint doc (with red bottleneck row) -->
+  <rect x="100" y="424" width="54" height="58" rx="6" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <line x1="110" y1="440" x2="146" y2="440" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="110" y1="453" x2="146" y2="453" stroke="var(--red)" stroke-width="3.5"/>
+  <line x1="110" y1="466" x2="146" y2="466" stroke="var(--ink)" stroke-width="2"/>
+  <polyline points="142,420 150,428 164,412" stroke="var(--green)" stroke-width="4"/>
+  <!-- signature + tick token -->
+  <line x1="188" y1="472" x2="242" y2="472" stroke="var(--ink)" stroke-width="2"/>
+  <path d="M192,464 q7,-9 14,0 q7,9 14,0 q6,-8 12,-2" stroke="var(--ink)" stroke-width="2"/>
+  <polyline points="222,458 231,468 248,446" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- valid GREEN lane: approach -> into gate -->
+  <line x1="388" y1="438" x2="628" y2="438" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="614,430 632,438 614,446" stroke="var(--green)" stroke-width="4"/>
+  <!-- through the passage + out to the robot -->
+  <line x1="666" y1="438" x2="1146" y2="438" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="1132,430 1150,438 1132,446" stroke="var(--green)" stroke-width="4"/>
+  <!-- pass tick inside the passage -->
+  <polyline points="812,414 824,426 846,396" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ============ SHALLOW REQUEST — funnel-level, no drill ============ -->
+  <rect x="80" y="560" width="300" height="94" rx="14" stroke="var(--red)" stroke-width="2.5" fill="rgba(214,69,58,0.05)"/>
+  <!-- red approach -> hits the gate wall -->
+  <line x1="388" y1="600" x2="622" y2="600" stroke="var(--red)" stroke-width="3.5"/>
+  <!-- red X bounce off the wall -->
+  <line x1="626" y1="586" x2="652" y2="614" stroke="var(--red)" stroke-width="4.5"/>
+  <line x1="652" y1="586" x2="626" y2="614" stroke="var(--red)" stroke-width="4.5"/>
+  <!-- bounce arrow back to the drill step (down into the open lower-left) -->
+  <path d="M624,616 Q300,760 152,782" stroke="var(--red)" stroke-width="3" stroke-dasharray="9 8"/>
+  <polyline points="145,796 152,782 159,796" stroke="var(--red)" stroke-width="3"/>
+  <!-- drill node magnifier -->
+  <circle cx="150" cy="806" r="16" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="162" y1="818" x2="175" y2="831" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ============ THE PAYOFF — AI Employee built from the real blueprint ============ -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="1200" y1="389" x2="1200" y2="392"/>
+    <rect x="1164" y="392" width="72" height="48" rx="11"/>
+    <rect x="1178" y="405" width="44" height="22" rx="6" stroke-width="3"/>
+    <line x1="1200" y1="440" x2="1200" y2="448"/>
+    <rect x="1168" y="448" width="64" height="54" rx="11"/>
+    <line x1="1168" y1="466" x2="1146" y2="484"/>
+    <line x1="1232" y1="466" x2="1256" y2="468"/>
+  </g>
+  <rect x="1182" y="463" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="1200" cy="384" r="5" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="1192" cy="416" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="1208" cy="416" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <!-- output doc it produces (the right thing) -->
+  <rect x="1262" y="452" width="58" height="74" rx="8" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="1274" y1="470" x2="1308" y2="470" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="1274" y1="484" x2="1308" y2="484" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="1274" y1="498" x2="1300" y2="498" stroke="var(--ink)" stroke-width="2"/>
+  <polyline points="1300,448 1310,458 1326,436" stroke="var(--green)" stroke-width="4"/>
+  <!-- loop-back arrow: build isn't the end — it loops -->
+  <path d="M1244,900 a17,17 0 1 1 -3,19" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="1231,916 1241,919 1238,906" stroke="var(--green)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="64" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 5 &#183; ACT ON IT</text>
+<text x="800" y="112" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">No Blueprint, No Build</text>
+<text x="800" y="152" font-size="25" text-anchor="middle" fill="var(--dim)">Before the router builds a single AI Employee, the request has to clear one gate &#8212; two checks, no exceptions.</text>
+
+<!-- gate header + stamps -->
+<text x="800" y="208" font-size="18" font-weight="700" text-anchor="middle" fill="var(--dim)">THE GATE &#183; BOTH STAMPS REQUIRED TO PASS</text>
+<text x="638" y="248" font-size="18" font-weight="700" text-anchor="start" fill="var(--ink)">Drilled swimlane</text>
+<text x="638" y="270" font-size="16" text-anchor="start" fill="var(--dim)">Level 2 / 3 exists</text>
+<text x="870" y="248" font-size="18" font-weight="700" text-anchor="start" fill="var(--ink)">You signed off</text>
+<text x="870" y="270" font-size="16" text-anchor="start" fill="var(--dim)">it matches reality</text>
+
+<!-- sign-off clarifier (dim) -->
+<text x="1060" y="234" font-size="16" text-anchor="start" fill="var(--dim)">your sign-off = a two-minute look</text>
+<text x="1060" y="256" font-size="16" text-anchor="start" fill="var(--dim)">at the drilled picture &#8212;</text>
+<text x="1060" y="278" font-size="16" text-anchor="start" fill="var(--dim)">&#8220;yes, that&#8217;s how it really runs&#8221;</text>
+
+<!-- barrier open label -->
+<text x="534" y="250" font-size="16" font-weight="700" text-anchor="middle" fill="var(--green)">OPEN</text>
+
+<!-- valid request -->
+<text x="100" y="406" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">&#8220;Build the Proposal AI&#8221;</text>
+<text x="100" y="500" font-size="16" text-anchor="start" fill="var(--dim)">drilled blueprint  +  your sign-off</text>
+
+<!-- shallow request -->
+<text x="100" y="592" font-size="21" font-weight="700" text-anchor="start" fill="var(--ink)">&#8220;build me a sales AI&#8221;</text>
+<text x="100" y="616" font-size="16" text-anchor="start" fill="var(--dim)">straight from funnel-level answers</text>
+<text x="100" y="638" font-size="16" font-weight="700" text-anchor="start" fill="var(--red)">no drilled swimlane &#183; no sign-off</text>
+
+<!-- blocked + drill node -->
+<text x="676" y="592" font-size="17" font-weight="700" text-anchor="start" fill="var(--red)">BLOCKED</text>
+<text x="178" y="802" font-size="16" font-weight="700" text-anchor="start" fill="var(--ink)">drill it first</text>
+<text x="178" y="824" font-size="16" text-anchor="start" fill="var(--dim)">back to Part 2</text>
+
+<!-- payoff caption -->
+<text x="1214" y="556" font-size="20" text-anchor="middle" fill="var(--ink)">Built from the real blueprint,</text>
+<text x="1214" y="582" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">it automates the RIGHT thing.</text>
+
+<!-- the principle (the expose) -->
+<text x="800" y="716" font-size="26" text-anchor="middle" fill="var(--ink)">An AI Employee built from a shallow picture</text>
+<text x="800" y="754" font-size="30" font-weight="700" text-anchor="middle" fill="var(--red)">automates the wrong thing &#8212; perfectly.</text>
+
+<!-- takeaway bridge -->
+<text x="800" y="852" font-size="27" text-anchor="middle" fill="var(--ink)">Blueprint confirmed, gate open &#8212; now you build.</text>
+<text x="800" y="902" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">And the X-Ray doesn&#8217;t end at the build. It loops.</text>
+</svg></body></html>

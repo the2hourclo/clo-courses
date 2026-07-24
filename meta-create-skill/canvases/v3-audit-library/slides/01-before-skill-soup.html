@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ TREE CARD — the library on disk today ============ -->
+  <rect x="80" y="182" width="520" height="575" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+
+  <!-- red row-highlights on the guilty rows (red = problem, fill only) -->
+  <rect x="100" y="244" width="440" height="94" rx="10" fill="rgba(214,69,58,0.07)" stroke="none"/>
+  <rect x="312" y="524" width="256" height="44" rx="8" fill="rgba(214,69,58,0.07)" stroke="none"/>
+  <rect x="100" y="580" width="440" height="94" rx="10" fill="rgba(214,69,58,0.07)" stroke="none"/>
+
+  <!-- workflows/ = GREEN fork icon (fixed subfolder legend) in the left gutter -->
+  <line x1="90" y1="428" x2="99" y2="428" stroke="var(--green)" stroke-width="3"/>
+  <line x1="99" y1="428" x2="109" y2="421" stroke="var(--green)" stroke-width="3"/>
+  <line x1="99" y1="428" x2="109" y2="435" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="90" cy="428" r="2.4" fill="var(--green)" stroke="none"/>
+  <circle cx="109" cy="421" r="2.4" fill="var(--green)" stroke="none"/>
+  <circle cx="109" cy="435" r="2.4" fill="var(--green)" stroke="none"/>
+
+  <!-- orphan: red underline under old-promo.md = dead -->
+  <line x1="336" y1="556" x2="552" y2="556" stroke="var(--red)" stroke-width="3"/>
+  <!-- orphan: red pointer from label into the row -->
+  <line x1="612" y1="546" x2="572" y2="548" stroke="var(--red)" stroke-width="3"/>
+  <polyline points="582,542 570,548 582,554" stroke="var(--red)" stroke-width="3"/>
+
+  <!-- healthy: green check on publish-posts/ -->
+  <polyline points="462,712 470,720 486,702" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- collision: red bracket right of humanize/ + writing-humanize/ -->
+  <line x1="598" y1="596" x2="598" y2="664" stroke="var(--red)" stroke-width="3"/>
+  <line x1="598" y1="602" x2="372" y2="602" stroke="var(--red)" stroke-width="3"/>
+  <polyline points="382,596 370,602 382,608" stroke="var(--red)" stroke-width="3"/>
+  <line x1="598" y1="658" x2="516" y2="658" stroke="var(--red)" stroke-width="3"/>
+  <polyline points="526,652 514,658 526,664" stroke="var(--red)" stroke-width="3"/>
+
+  <!-- ============ THE AI — canonical black-marker robot, HESITATING ============ -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="1230" y1="166" x2="1230" y2="176"/>
+    <rect x="1194" y="176" width="72" height="48" rx="11"/>
+    <rect x="1208" y="189" width="44" height="22" rx="6" stroke-width="3"/>
+    <line x1="1230" y1="224" x2="1230" y2="232"/>
+    <rect x="1198" y="232" width="64" height="54" rx="11"/>
+    <line x1="1198" y1="250" x2="1176" y2="270"/>
+    <line x1="1262" y1="250" x2="1282" y2="252"/>
+  </g>
+  <rect x="1212" y="247" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="1230" cy="160" r="5" fill="var(--red)" stroke="var(--red)"/>
+  <circle cx="1222" cy="200" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="1240" cy="200" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+
+  <!-- user request pill: "write a hook" (ink = the request the AI must route) -->
+  <rect x="1040" y="226" width="210" height="48" rx="14" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+
+  <!-- trunk from pill left edge to the fork point -->
+  <line x1="1040" y1="250" x2="812" y2="278" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- fork: two DASHED arrows to BOTH duplicate rows -->
+  <line x1="800" y1="278" x2="426" y2="260" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
+  <polyline points="438,253 424,260 438,267" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="800" y1="278" x2="432" y2="318" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
+  <polyline points="444,311 430,318 444,325" stroke="var(--ink)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="72" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">Skill Soup &#8212; Your Library Rots Quietly</text>
+<text x="800" y="118" font-size="27" text-anchor="middle" fill="var(--dim)">A growing skill library quietly decays &#183; and the AI starts firing the wrong skill</text>
+
+<!-- tree header -->
+<text x="100" y="166" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">THE LIBRARY ON DISK TODAY</text>
+
+<!-- ===== the file tree (monospace, box-drawing) ===== -->
+<text class="mono" x="120" y="210" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">skills/</text>
+<text class="mono" x="120" y="266" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; write-hook/</text>
+<text class="mono" x="120" y="322" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; hook-writer/</text>
+<text class="mono" x="120" y="378" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; write-content/</text>
+<text class="mono" x="120" y="434" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9492;&#9472;&#9472; <tspan fill="var(--green)" font-weight="700">workflows/</tspan></text>
+<text class="mono" x="120" y="490" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;       &#9500;&#9472;&#9472; newsletter.md</text>
+<text class="mono" x="120" y="546" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;       &#9492;&#9472;&#9472; <tspan fill="var(--red)" font-weight="700">old-promo.md</tspan></text>
+<text class="mono" x="120" y="602" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; humanize/</text>
+<text class="mono" x="120" y="658" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; writing-humanize/</text>
+<text class="mono" x="120" y="714" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9492;&#9472;&#9472; <tspan fill="var(--green)" font-weight="700">publish-posts/</tspan></text>
+
+<!-- healthy label -->
+<text x="504" y="722" font-size="20" font-weight="700" text-anchor="start" fill="var(--green)">healthy &#183; one clear home</text>
+
+<!-- ===== PROBLEM 1 · DUPLICATE (the robot scene, upper right) ===== -->
+<text x="1145" y="214" font-size="17" text-anchor="middle" fill="var(--dim)">user asks:</text>
+<text x="1145" y="257" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">write a hook</text>
+<text x="1145" y="322" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">THE AI</text>
+<!-- red "?" at the fork = which one fires? -->
+<text x="792" y="270" font-size="40" font-weight="700" text-anchor="middle" fill="var(--red)">?</text>
+
+<text x="1230" y="384" font-size="23" font-weight="700" text-anchor="middle" fill="var(--red)">PROBLEM 1 &#183; DUPLICATE</text>
+<text x="1230" y="414" font-size="21" text-anchor="middle" fill="var(--ink)">two skills, one job</text>
+<text x="1230" y="442" font-size="20" text-anchor="middle" fill="var(--dim)">the AI picks one &#8212; sometimes the wrong one</text>
+
+<!-- ===== PROBLEM 2 · ORPHAN (right of tree, mid) ===== -->
+<text x="628" y="540" font-size="23" font-weight="700" text-anchor="start" fill="var(--red)">PROBLEM 2 &#183; ORPHAN</text>
+<text x="628" y="568" font-size="20" text-anchor="start" fill="var(--dim)">on disk, never routed from SKILL.md &#8212; dead code</text>
+
+<!-- ===== PROBLEM 3 · COLLISION (right of tree, lower) ===== -->
+<text x="628" y="612" font-size="23" font-weight="700" text-anchor="start" fill="var(--red)">PROBLEM 3 &#183; COLLISION</text>
+<text x="628" y="640" font-size="20" text-anchor="start" fill="var(--dim)">both claim &#8220;humanize this&#8221;</text>
+<text x="628" y="666" font-size="20" text-anchor="start" fill="var(--dim)">which one fires? nobody decided</text>
+
+<!-- ===== one-line takeaway ===== -->
+<text x="800" y="838" font-size="28" text-anchor="middle" fill="var(--ink)">Every skill made sense the day you added it &#8212; nobody ever re-checks the whole shelf.</text>
+<text x="800" y="888" font-size="31" font-weight="700" text-anchor="middle" fill="var(--red)">Skill soup: the shelf rots quietly, and the AI fires the wrong one.</text>
+</svg></body></html>

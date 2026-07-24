@@ -1,0 +1,11 @@
+{
+  "_comment": "Storyboard map for meta-create-skill VIDEO 1: What Is a Skill, and How Is It Built? Final 6-diagram order (routing + progressive disclosure merged into 05-read-and-load). One column each, left to right.",
+  "columns": [
+    {"label": "1 - WHY A SKILL", "slides": ["01-why-a-skill"]},
+    {"label": "2 - THE ANATOMY (TREE)", "slides": ["02-skill-anatomy"]},
+    {"label": "3 - INSIDE SKILL.md", "slides": ["03-inside-skillmd"]},
+    {"label": "4 - THE FOUR SUBFOLDERS", "slides": ["04-the-four-subfolders"]},
+    {"label": "5 - READ & LOAD (ROUTING + TIERS)", "slides": ["05-read-and-load"]},
+    {"label": "6 - FRONTMATTER (CONTROL PANEL)", "slides": ["06-frontmatter-properties"]}
+  ]
+}

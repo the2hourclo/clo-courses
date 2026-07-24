@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{--bg:rgb(250,249,245);--ink:rgb(33,33,33);--dim:rgb(120,120,125);--green:rgb(45,140,60);--blue:rgb(52,120,190);--sans:"Excalifont",Inter,system-ui,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}svg{display:block;}text{font-family:var(--sans);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
+<pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+<rect width="1600" height="1050" fill="var(--bg)"/><rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===== SHAPES (wobble) — no text in here ===== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- file tab -->
+  <rect x="196" y="154" width="216" height="44" rx="12" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+  <!-- the file card -->
+  <rect x="196" y="196" width="774" height="734" rx="20" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+  <!-- Part 1: YAML frontmatter block (blue tint) -->
+  <rect x="214" y="224" width="738" height="208" rx="12" fill="rgba(52,120,190,0.08)" stroke="var(--blue)" stroke-width="2.5"/>
+  <!-- Part 2: routing table (green) -->
+  <rect x="228" y="542" width="724" height="166" rx="10" fill="rgba(45,140,60,0.06)" stroke="var(--green)" stroke-width="4"/>
+  <line x1="560" y1="542" x2="560" y2="708" stroke="var(--green)" stroke-width="3"/>
+  <line x1="228" y1="592" x2="952" y2="592" stroke="var(--green)" stroke-width="3"/>
+  <line x1="228" y1="650" x2="952" y2="650" stroke="var(--green)" stroke-width="2"/>
+  <!-- callout underlines -->
+  <line x1="1044" y1="264" x2="1300" y2="264" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="1044" y1="556" x2="1392" y2="556" stroke="var(--dim)" stroke-width="2"/>
+  <!-- callout arrows (point left into the card) -->
+  <line x1="1032" y1="360" x2="958" y2="360" stroke="var(--blue)" stroke-width="3" stroke-dasharray="6 8"/>
+  <polyline points="976,350 958,360 976,370" stroke="var(--blue)" stroke-width="3"/>
+  <line x1="1032" y1="648" x2="958" y2="648" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="976,638 958,648 976,658" stroke="var(--green)" stroke-width="3"/>
+  <line x1="1032" y1="824" x2="958" y2="824" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="976,814 958,824 976,834" stroke="var(--ink)" stroke-width="3"/>
+</g>
+
+<!-- ===== TEXT (crisp) — everything below is OUTSIDE the filter ===== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="86" font-size="62" font-weight="700" text-anchor="middle" fill="var(--ink)">Every SKILL.md Is Just Two Parts</text>
+<text x="800" y="134" font-size="32" text-anchor="middle" fill="var(--dim)">a few lines of YAML on top, then a plain-markdown body</text>
+
+<!-- file tab label -->
+<text x="304" y="186" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">SKILL.md</text>
+
+<!-- PART 1 — YAML frontmatter, as real lines -->
+<text x="240" y="258" font-size="26" fill="var(--dim)">---</text>
+<text x="240" y="300" font-size="27" font-weight="700" fill="var(--blue)">name:</text>
+<text x="330" y="300" font-size="27" fill="var(--ink)">meta-create-skill</text>
+<text x="240" y="342" font-size="27" font-weight="700" fill="var(--blue)">description:</text>
+<text x="420" y="342" font-size="27" fill="var(--ink)">"Create, validate, test,</text>
+<text x="420" y="382" font-size="27" fill="var(--ink)">upgrade, and improve skills&#8230;"</text>
+<text x="240" y="420" font-size="26" fill="var(--dim)">---</text>
+
+<!-- PART 2 — body: title -->
+<text x="240" y="472" font-size="28" fill="var(--dim)">#</text>
+<text x="268" y="472" font-size="28" font-weight="700" fill="var(--ink)">Create Skill &#8212; Author, Chain, Improve</text>
+
+<!-- body: Workflow Routing section header -->
+<text x="240" y="522" font-size="28" fill="var(--dim)">##</text>
+<text x="286" y="522" font-size="28" font-weight="700" fill="var(--green)">Workflow Routing</text>
+
+<!-- routing table cells -->
+<text x="248" y="578" font-size="25" font-weight="700" fill="var(--ink)">User wants&#8230;</text>
+<text x="576" y="578" font-size="25" font-weight="700" fill="var(--ink)">Load this file</text>
+<text x="248" y="632" font-size="25" fill="var(--ink)">"create a skill"</text>
+<text x="576" y="632" font-size="25" fill="var(--green)">workflows/create-skill.md</text>
+<text x="248" y="688" font-size="25" fill="var(--ink)">"test a skill"</text>
+<text x="576" y="688" font-size="25" fill="var(--green)">workflows/test-skill.md</text>
+
+<!-- body: When to Activate + core instructions -->
+<text x="240" y="756" font-size="28" fill="var(--dim)">##</text>
+<text x="286" y="756" font-size="28" font-weight="700" fill="var(--ink)">When to Activate</text>
+<text x="240" y="800" font-size="25" fill="var(--ink)">Use this when someone says&#8230;</text>
+<text x="240" y="840" font-size="25" fill="var(--dim)">"create a skill", "build a skill for X"&#8230;</text>
+<text x="240" y="878" font-size="25" fill="var(--dim)">&#8230; then the how-to + orientation.</text>
+
+<!-- RIGHT: PART 1 callout (blue) -->
+<text x="1044" y="250" font-size="26" font-weight="700" fill="var(--dim)">PART 1 &#8212; THE HEADER</text>
+<text x="1044" y="302" font-size="28" font-weight="700" fill="var(--blue)">always read first</text>
+<text x="1044" y="344" font-size="25" fill="var(--ink)">name = the skill's id</text>
+<text x="1044" y="384" font-size="25" fill="var(--ink)">description = the ONE field</text>
+<text x="1044" y="422" font-size="25" fill="var(--ink)">that decides if it fires</text>
+<text x="1044" y="462" font-size="24" font-style="italic" fill="var(--dim)">&#8594; "the AI's router landing page"</text>
+<text x="1044" y="494" font-size="24" font-style="italic" fill="var(--dim)">(covered in depth elsewhere)</text>
+
+<!-- RIGHT: PART 2 callouts (green + ink) -->
+<text x="1044" y="540" font-size="26" font-weight="700" fill="var(--dim)">PART 2 &#8212; THE BODY (markdown)</text>
+<text x="1044" y="600" font-size="28" font-weight="700" fill="var(--green)">WORKFLOW ROUTING</text>
+<text x="1044" y="642" font-size="25" fill="var(--ink)">often IS most of the body</text>
+<text x="1044" y="680" font-size="25" fill="var(--ink)">a map: what you want &#8594;</text>
+<text x="1044" y="718" font-size="25" fill="var(--green)">which workflow file to load</text>
+
+<text x="1044" y="772" font-size="28" font-weight="700" fill="var(--ink)">CORE INSTRUCTIONS</text>
+<text x="1044" y="814" font-size="25" fill="var(--dim)">the how-to + orientation</text>
+<text x="1044" y="852" font-size="25" fill="var(--dim)">+ when-to-activate rules</text>
+<text x="1044" y="892" font-size="24" font-style="italic" fill="var(--green)">&#8594; your conventions &#183; step order + carve-outs</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="968" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">The header decides whether the skill fires.</text>
+<text x="800" y="1008" font-size="34" font-weight="700" text-anchor="middle" fill="var(--green)">The body is often just a map into workflows/.</text>
+</svg></body></html>

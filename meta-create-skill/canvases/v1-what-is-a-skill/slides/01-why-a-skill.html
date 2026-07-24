@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{--bg:rgb(250,249,245);--ink:rgb(33,33,33);--dim:rgb(120,120,125);--red:rgb(214,69,58);--green:rgb(45,140,60);--amber:rgb(214,140,40);--blue:rgb(52,120,190);--purple:rgb(147,112,219);--sans:"Excalifont",Inter,system-ui,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}svg{display:block;}text{font-family:var(--sans);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
+<pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+<rect width="1600" height="1050" fill="var(--bg)"/><rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- lane divider (plain, outside filter) -->
+<line x1="492" y1="576" x2="1560" y2="576" stroke="rgb(221,219,211)" stroke-width="2" stroke-dasharray="10 9"/>
+
+<!-- ===== SHAPES (wobble) — NO text in here ===== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- stage header arrows: INPUT -> PROCESS -> OUTPUT -->
+  <line x1="430" y1="140" x2="540" y2="140" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="528,131 543,140 528,149" stroke="var(--ink)" stroke-width="3.5"/>
+  <line x1="1010" y1="140" x2="1130" y2="140" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1118,131 1133,140 1118,149" stroke="var(--ink)" stroke-width="3.5"/>
+
+  <!-- ===== SHARED INPUT (speech bubble = one request) ===== -->
+  <rect x="68" y="498" width="294" height="150" rx="20" stroke="var(--ink)" stroke-width="4" fill="rgba(33,33,33,0.03)"/>
+  <path d="M 128 648 L 116 686 L 176 648" stroke="var(--ink)" stroke-width="4" fill="rgba(33,33,33,0.03)"/>
+
+  <!-- fan arrows: SAME input -> two paths -->
+  <line x1="362" y1="545" x2="486" y2="436" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="479,453 486,436 469,441" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="362" y1="618" x2="486" y2="800" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="484,782 486,800 471,791" stroke="var(--dim)" stroke-width="3.5"/>
+
+  <!-- ================= TOP LANE — WITHOUT A SKILL ================= -->
+  <!-- lane tag -->
+  <rect x="440" y="204" width="240" height="40" rx="20" stroke="var(--red)" stroke-width="3" fill="rgba(214,69,58,0.06)"/>
+
+  <!-- robot = a generic AI (canonical black-marker) -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="560" y1="298" x2="560" y2="278"/>
+    <rect x="512" y="298" width="96" height="72" rx="14"/>
+    <rect x="526" y="316" width="68" height="34" rx="8"/>
+    <line x1="560" y1="370" x2="560" y2="380"/>
+    <rect x="520" y="380" width="80" height="80" rx="12"/>
+    <line x1="520" y1="408" x2="488" y2="438"/>
+    <line x1="600" y1="408" x2="632" y2="438"/>
+    <line x1="538" y1="460" x2="532" y2="490"/>
+    <line x1="582" y1="460" x2="588" y2="490"/>
+  </g>
+  <circle cx="560" cy="272" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="544" cy="333" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="576" cy="333" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <rect x="544" y="400" width="32" height="22" rx="4" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- forking / guessing path (different every time) -->
+  <circle cx="652" cy="392" r="7" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="659" y1="386" x2="846" y2="320" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="9 8"/>
+  <polyline points="834,313 850,318 838,331" stroke="var(--red)" stroke-width="3.5"/>
+  <line x1="662" y1="392" x2="872" y2="392" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="9 8"/>
+  <polyline points="858,384 876,392 858,400" stroke="var(--red)" stroke-width="3.5"/>
+  <line x1="659" y1="398" x2="846" y2="464" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="9 8"/>
+  <polyline points="838,453 850,464 834,469" stroke="var(--red)" stroke-width="3.5"/>
+
+  <!-- process -> output arrow (bad path, red) -->
+  <line x1="905" y1="392" x2="1268" y2="362" stroke="var(--red)" stroke-width="4"/>
+  <polyline points="1254,353 1270,362 1254,371" stroke="var(--red)" stroke-width="4"/>
+
+  <!-- average output doc (plain / dim) -->
+  <rect x="1278" y="300" width="185" height="128" rx="10" stroke="var(--dim)" stroke-width="4"/>
+  <path d="M 1298 342 q 16 -7 32 0 t 32 0 t 32 0 t 28 0" stroke="var(--dim)" stroke-width="3"/>
+  <path d="M 1298 370 q 16 -7 32 0 t 32 0 t 32 0 t 28 0" stroke="var(--dim)" stroke-width="3"/>
+  <path d="M 1298 398 q 16 -7 32 0 t 32 0 t 24 0" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- ================= BOTTOM LANE — WITH A SKILL ================= -->
+  <!-- lane tag -->
+  <rect x="440" y="600" width="210" height="40" rx="20" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.06)"/>
+
+  <!-- SAME robot = an AI Employee -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="560" y1="688" x2="560" y2="668"/>
+    <rect x="512" y="688" width="96" height="72" rx="14"/>
+    <rect x="526" y="706" width="68" height="34" rx="8"/>
+    <line x1="560" y1="760" x2="560" y2="770"/>
+    <rect x="520" y="770" width="80" height="80" rx="12"/>
+    <line x1="520" y1="798" x2="488" y2="828"/>
+    <line x1="600" y1="798" x2="632" y2="828"/>
+    <line x1="538" y1="850" x2="532" y2="880"/>
+    <line x1="582" y1="850" x2="588" y2="880"/>
+  </g>
+  <circle cx="560" cy="662" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="544" cy="723" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="576" cy="723" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <rect x="544" y="790" width="32" height="22" rx="4" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- the skill guides the AI (subtle link) -->
+  <line x1="610" y1="716" x2="712" y2="700" stroke="var(--green)" stroke-width="2.5" stroke-dasharray="6 6"/>
+
+  <!-- THE SKILL = a folder/binder handing over 5 things -->
+  <path d="M 716 662 L 716 646 L 806 646 L 822 662" stroke="var(--green)" stroke-width="5" fill="rgba(45,140,60,0.04)"/>
+  <rect x="706" y="662" width="392" height="252" rx="14" stroke="var(--green)" stroke-width="5" fill="rgba(45,140,60,0.04)"/>
+  <line x1="726" y1="708" x2="1078" y2="708" stroke="var(--dim)" stroke-width="2"/>
+  <!-- 5 element rows: bullet + pill, each in its locked home color -->
+  <circle cx="734" cy="738" r="6" fill="var(--ink)" stroke="var(--ink)"/>
+  <rect x="752" y="722" width="252" height="32" rx="8" stroke="var(--ink)" stroke-width="2.5" fill="rgba(33,33,33,0.05)"/>
+  <circle cx="734" cy="776" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <rect x="752" y="760" width="132" height="32" rx="8" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.07)"/>
+  <circle cx="734" cy="814" r="6" fill="var(--amber)" stroke="var(--amber)"/>
+  <rect x="752" y="798" width="182" height="32" rx="8" stroke="var(--amber)" stroke-width="2.5" fill="rgba(214,140,40,0.09)"/>
+  <circle cx="734" cy="852" r="6" fill="var(--blue)" stroke="var(--blue)"/>
+  <rect x="752" y="836" width="112" height="32" rx="8" stroke="var(--blue)" stroke-width="2.5" fill="rgba(52,120,190,0.07)"/>
+  <circle cx="734" cy="890" r="6" fill="var(--purple)" stroke="var(--purple)"/>
+  <rect x="752" y="874" width="172" height="32" rx="8" stroke="var(--purple)" stroke-width="2.5" fill="rgba(147,112,219,0.09)"/>
+
+  <!-- process -> output arrow (good path, green) -->
+  <line x1="1102" y1="772" x2="1268" y2="760" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="1254,751 1270,760 1254,769" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- strong output doc with a check -->
+  <rect x="1278" y="690" width="185" height="135" rx="10" stroke="var(--green)" stroke-width="5"/>
+  <polyline points="1296,724 1309,738 1334,708" stroke="var(--green)" stroke-width="5"/>
+  <line x1="1348" y1="724" x2="1444" y2="724" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="1298" y1="758" x2="1444" y2="758" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="1298" y1="786" x2="1444" y2="786" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="1298" y1="814" x2="1400" y2="814" stroke="var(--ink)" stroke-width="3"/>
+
+</g>
+
+<!-- ===== TEXT (crisp) — all labels OUTSIDE the filter ===== -->
+<!-- title -->
+<text x="800" y="60" font-size="46" font-weight="700" text-anchor="middle" fill="var(--ink)">Same Input, Same AI — the Skill Changes the Process</text>
+<text x="800" y="100" font-size="28" text-anchor="middle" fill="var(--dim)">a skill makes the HOW predictable, so the output is worth shipping</text>
+
+<!-- stage headers -->
+<text x="215" y="152" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">INPUT</text>
+<text x="770" y="152" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">PROCESS</text>
+<text x="1370" y="152" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">OUTPUT</text>
+<text x="770" y="186" font-size="22" text-anchor="middle" fill="var(--dim)">the skill lives here</text>
+
+<!-- shared input -->
+<text x="215" y="558" font-size="28" text-anchor="middle" fill="var(--ink)">Write this week's</text>
+<text x="215" y="598" font-size="28" text-anchor="middle" fill="var(--ink)">launch email</text>
+<text x="215" y="690" font-size="24" text-anchor="middle" fill="var(--dim)">one request · both paths</text>
+
+<!-- TOP lane labels -->
+<text x="560" y="231" font-size="26" font-weight="700" text-anchor="middle" fill="var(--red)">WITHOUT A SKILL</text>
+<text x="560" y="513" font-size="26" text-anchor="middle" fill="var(--ink)">a generic AI</text>
+<text x="800" y="374" font-size="60" font-weight="700" text-anchor="middle" fill="var(--red)">?</text>
+<text x="690" y="548" font-size="26" text-anchor="middle" fill="var(--dim)">guesses the HOW · different every time · varied</text>
+<text x="1370" y="470" font-size="27" font-weight="700" text-anchor="middle" fill="var(--red)">average at best</text>
+<text x="1370" y="502" font-size="24" text-anchor="middle" fill="var(--dim)">can't be used to generate revenue</text>
+
+<!-- BOTTOM lane labels -->
+<text x="545" y="627" font-size="26" font-weight="700" text-anchor="middle" fill="var(--green)">WITH A SKILL</text>
+<text x="560" y="901" font-size="26" text-anchor="middle" fill="var(--ink)">an AI Employee</text>
+<text x="902" y="695" font-size="27" font-weight="700" text-anchor="middle" fill="var(--green)">THE SKILL</text>
+<!-- 5 element labels (locked home colors) -->
+<text x="764" y="746" font-size="24" font-weight="600" text-anchor="start" fill="var(--ink)">conventions + order</text>
+<text x="764" y="784" font-size="24" font-weight="600" text-anchor="start" fill="var(--green)">the steps</text>
+<text x="764" y="822" font-size="24" font-weight="600" text-anchor="start" fill="var(--amber)">reusable code</text>
+<text x="764" y="860" font-size="24" font-weight="600" text-anchor="start" fill="var(--blue)">gotchas</text>
+<text x="764" y="898" font-size="24" font-weight="600" text-anchor="start" fill="var(--purple)">gold example</text>
+<text x="700" y="936" font-size="26" text-anchor="middle" fill="var(--dim)">predictable + still thinks · knows exactly HOW to do the job</text>
+<text x="1370" y="860" font-size="27" font-weight="700" text-anchor="middle" fill="var(--green)">~80% to your standard</text>
+<text x="1370" y="892" font-size="25" text-anchor="middle" fill="var(--dim)">ready to generate revenue</text>
+
+<!-- ONE-LINE TAKEAWAY -->
+<text x="800" y="1012" font-size="27" font-weight="700" text-anchor="middle" fill="var(--ink)">Same input, same AI — the skill changes the PROCESS, so the output is work you can run your business on.</text>
+</svg></body></html>

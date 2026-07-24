@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ---- the request card ---- -->
+  <rect x="36" y="214" width="232" height="82" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- arrow: request -> the AI -->
+  <path d="M150,300 C150,312 150,320 150,328" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="143,320 150,330 157,320" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ---- THE AI (canonical black-marker robot, reading the request) ---- -->
+  <g transform="translate(35,150) scale(0.72)">
+    <g stroke="var(--ink)" stroke-width="4">
+      <line x1="160" y1="256" x2="160" y2="270"/>
+      <rect x="118" y="270" width="84" height="60" rx="12"/>
+      <rect x="132" y="286" width="56" height="28" rx="7"/>
+      <line x1="160" y1="330" x2="160" y2="340"/>
+      <rect x="124" y="340" width="72" height="72" rx="12"/>
+      <line x1="124" y1="366" x2="96" y2="392"/>
+      <line x1="142" y1="412" x2="136" y2="440"/>
+      <line x1="178" y1="412" x2="184" y2="440"/>
+      <polyline points="196,366 244,388 262,402" fill="none"/>
+      <circle cx="278" cy="414" r="20" stroke-width="5"/>
+      <line x1="264" y1="428" x2="253" y2="439" stroke-width="5"/>
+    </g>
+    <rect x="140" y="356" width="40" height="22" rx="4" stroke="var(--dim)" stroke-width="3"/>
+    <circle cx="160" cy="250" r="6" fill="var(--green)" stroke="var(--green)"/>
+    <circle cx="146" cy="300" r="6" fill="var(--green)" stroke="var(--green)"/>
+    <circle cx="174" cy="300" r="6" fill="var(--green)" stroke="var(--green)"/>
+  </g>
+
+  <!-- arrow (ink): the AI opens the skill -> tree/SKILL.md -->
+  <path d="M236,448 C286,432 306,404 324,380" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="314,378 326,375 324,388" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ============ CENTER-LEFT: the ONE skill on disk (terminal tree) ============ -->
+  <rect x="330" y="214" width="396" height="470" rx="24" stroke="var(--ink)" stroke-width="5"/>
+  <circle cx="364" cy="244" r="7" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="390" cy="244" r="7" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="416" cy="244" r="7" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="346" y1="266" x2="710" y2="266" stroke="rgb(214,212,204)" stroke-width="2.5"/>
+
+  <!-- REQUIRED badge (ink weight — never a subfolder hue) -->
+  <rect x="576" y="352" width="96" height="30" rx="8" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- workflows/ = GREEN fork icon -->
+  <line x1="452" y1="452" x2="463" y2="452" stroke="var(--green)" stroke-width="3"/>
+  <line x1="463" y1="452" x2="477" y2="442" stroke="var(--green)" stroke-width="3"/>
+  <line x1="463" y1="452" x2="477" y2="462" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="452" cy="452" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="477" cy="442" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="477" cy="462" r="2.6" fill="var(--green)" stroke="none"/>
+
+  <!-- nested child spine + the MATCH highlight (newsletter.md) -->
+  <line x1="438" y1="496" x2="438" y2="612" stroke="var(--dim)" stroke-width="2.5"/>
+  <rect x="502" y="490" width="180" height="34" rx="9" stroke="var(--green)" stroke-width="4" fill="rgba(45,140,60,0.10)"/>
+
+  <!-- green drill arrow: SKILL.md routes to the ONE workflow -->
+  <path d="M470,392 C486,432 490,468 500,500" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="490,490 501,503 510,489" stroke="var(--green)" stroke-width="3.5"/>
+
+  <!-- ============ fan-out: the running workflow pulls from three folders ============ -->
+  <path d="M700,500 C742,438 762,332 795,288" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="785,282 797,288 786,298" stroke="var(--green)" stroke-width="3.5"/>
+  <path d="M700,506 C744,488 764,458 795,453" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="785,447 797,453 785,459" stroke="var(--green)" stroke-width="3.5"/>
+  <path d="M700,512 C742,566 764,608 795,618" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="785,612 797,618 785,624" stroke="var(--green)" stroke-width="3.5"/>
+
+  <!-- ============ RIGHT: the other three folders, at work ============ -->
+  <!-- CARD 1 — scripts/ (amber) -->
+  <rect x="800" y="206" width="430" height="150" rx="18" stroke="var(--amber)" stroke-width="3.5" fill="rgba(214,140,40,0.045)"/>
+  <path d="M822,224 L844,224 L850,231 L866,231 L866,254 L822,254 Z" stroke="var(--amber)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="818" y1="272" x2="1212" y2="272" stroke="var(--amber)" stroke-width="1.6"/>
+  <!-- gear glyph (scripts) -->
+  <circle cx="1176" cy="250" r="19" stroke="var(--amber)" stroke-width="3.5" fill="var(--bg)"/>
+  <circle cx="1176" cy="250" r="7" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1195,250 L1203,250" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1189.4,263.4 L1195.1,269.1" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1176,269 L1176,277" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1162.6,263.4 L1156.9,269.1" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1157,250 L1149,250" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1162.6,236.6 L1156.9,230.9" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1176,231 L1176,223" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1189.4,236.6 L1195.1,230.9" stroke="var(--amber)" stroke-width="3"/>
+
+  <!-- CARD 2 — references/ (blue) -->
+  <rect x="800" y="376" width="430" height="150" rx="18" stroke="var(--blue)" stroke-width="3.5" fill="rgba(52,120,190,0.045)"/>
+  <path d="M822,394 L844,394 L850,401 L866,401 L866,424 L822,424 Z" stroke="var(--blue)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="818" y1="442" x2="1212" y2="442" stroke="var(--blue)" stroke-width="1.6"/>
+  <!-- open-book glyph (references) -->
+  <path d="M1176,404 C1162,398 1150,399 1144,404 L1144,434 C1150,429 1162,429 1176,435 Z" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
+  <path d="M1176,404 C1190,398 1202,399 1208,404 L1208,434 C1202,429 1190,429 1176,435 Z" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
+  <path d="M1176,404 L1176,435" stroke="var(--blue)" stroke-width="3"/>
+  <path d="M1153,412 L1170,410" stroke="var(--blue)" stroke-width="2"/>
+  <path d="M1182,410 L1199,412" stroke="var(--blue)" stroke-width="2"/>
+
+  <!-- CARD 3 — assets/ (purple) -->
+  <rect x="800" y="546" width="430" height="150" rx="18" stroke="var(--purple)" stroke-width="3.5" fill="rgba(147,112,219,0.05)"/>
+  <path d="M822,564 L844,564 L850,571 L866,571 L866,594 L822,594 Z" stroke="var(--purple)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="818" y1="612" x2="1212" y2="612" stroke="var(--purple)" stroke-width="1.6"/>
+  <!-- stacked-copy glyph (assets) -->
+  <rect x="1156" y="564" width="30" height="38" rx="4" stroke="var(--purple)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="1166" y="574" width="30" height="38" rx="4" stroke="var(--purple)" stroke-width="3" fill="var(--bg)"/>
+  <path d="M1173,586 L1189,586" stroke="var(--purple)" stroke-width="2.2"/>
+  <path d="M1173,594 L1189,594" stroke="var(--purple)" stroke-width="2.2"/>
+  <path d="M1173,602 L1184,602" stroke="var(--purple)" stroke-width="2.2"/>
+
+  <!-- ============ fan-in: the three folders fold into the finished newsletter ============ -->
+  <path d="M1232,281 C1256,300 1270,392 1286,414" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="1276,406 1288,414 1278,424" stroke="var(--green)" stroke-width="3.5"/>
+  <path d="M1232,451 C1252,451 1270,452 1286,452" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="1276,446 1288,452 1276,458" stroke="var(--green)" stroke-width="3.5"/>
+  <path d="M1232,621 C1256,600 1270,514 1286,494" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="1278,486 1288,494 1276,502" stroke="var(--green)" stroke-width="3.5"/>
+
+  <!-- ============ FAR-RIGHT: the output ============ -->
+  <rect x="1290" y="382" width="272" height="156" rx="18" stroke="var(--green)" stroke-width="4" fill="rgba(45,140,60,0.06)"/>
+  <polyline points="1414,404 1424,416 1444,392" stroke="var(--green)" stroke-width="5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- eyebrow + claim-title + subtitle -->
+<text x="800" y="50" font-size="23" font-weight="700" letter-spacing="1.5" text-anchor="middle" fill="var(--dim)">LEVEL 2 &#183; THE SKILL WITH WORKFLOWS</text>
+<text x="800" y="98" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">One Job, Flowing Through All Four Folders</text>
+<text x="800" y="138" font-size="25" text-anchor="middle" fill="var(--dim)">one skill &#8212; &#8220;write a newsletter&#8221; &#8212; the workflow runs it and pulls from the other three</text>
+
+<!-- request card -->
+<text x="52" y="248" font-size="18" font-weight="700" letter-spacing="0.5" text-anchor="start" fill="var(--dim)">THE REQUEST</text>
+<text x="52" y="282" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">&#8220;write a newsletter&#8221;</text>
+
+<!-- robot label -->
+<text x="178" y="502" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="178" y="526" font-size="18" text-anchor="middle" fill="var(--dim)">reads the request</text>
+<text x="178" y="550" font-size="17" text-anchor="middle" fill="var(--green)">&#8594; opens write-content/</text>
+
+<!-- terminal prompt + tree -->
+<text class="mono" x="448" y="250" font-size="18" text-anchor="start" fill="var(--dim)">$ tree write-content/</text>
+<text class="mono" x="352" y="318" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">write-content/</text>
+
+<!-- ROW: SKILL.md (required, the router) -->
+<text class="mono" x="372" y="378" font-size="26" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="452" y="378" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">SKILL.md</text>
+<text x="586" y="376" font-size="17" font-weight="700" text-anchor="start" fill="var(--ink)">REQUIRED</text>
+<text class="mono" x="452" y="406" font-size="17" text-anchor="start" fill="var(--dim)"># the router</text>
+
+<!-- ROW: workflows/ (green) -->
+<text class="mono" x="372" y="460" font-size="26" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="490" y="460" font-size="26" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+
+<!-- SUB-ROW: newsletter.md (THE MATCH) -->
+<text class="mono" x="430" y="518" font-size="24" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="510" y="518" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">newsletter.md</text>
+
+<!-- SUB-ROW: email.md / thread.md (dim, not this job) -->
+<text class="mono" x="430" y="570" font-size="24" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="510" y="570" font-size="24" text-anchor="start" fill="var(--dim)">email.md</text>
+<text class="mono" x="430" y="622" font-size="24" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="510" y="622" font-size="24" text-anchor="start" fill="var(--dim)">thread.md</text>
+
+<!-- step caption 1 -->
+<text x="336" y="724" font-size="19" text-anchor="start" fill="var(--ink)">&#9312; the router opens the one workflow</text>
+
+<!-- fan verb labels -->
+<text x="756" y="312" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">runs</text>
+<text x="766" y="432" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">reads</text>
+<text x="756" y="590" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">pulls</text>
+
+<!-- support-cluster header -->
+<text x="800" y="192" font-size="18" font-weight="700" text-anchor="start" fill="var(--dim)">&#8230; the other folders in write-content/</text>
+
+<!-- CARD 1 — scripts/ -->
+<text x="880" y="252" font-size="26" font-weight="700" text-anchor="start" fill="var(--amber)">scripts/</text>
+<text x="822" y="302" font-size="21" text-anchor="start" fill="var(--ink)">runs a script &#8212; deterministic work</text>
+<text x="822" y="332" font-size="18" text-anchor="start" fill="var(--dim)">e.g. format dates &#183; count the words</text>
+
+<!-- CARD 2 — references/ -->
+<text x="880" y="422" font-size="26" font-weight="700" text-anchor="start" fill="var(--blue)">references/</text>
+<text x="822" y="472" font-size="21" text-anchor="start" fill="var(--ink)">reads a deeper doc it needs</text>
+<text x="822" y="502" font-size="18" text-anchor="start" fill="var(--dim)">your voice + style guidelines</text>
+
+<!-- CARD 3 — assets/ -->
+<text x="880" y="592" font-size="26" font-weight="700" text-anchor="start" fill="var(--purple)">assets/</text>
+<text x="822" y="642" font-size="21" text-anchor="start" fill="var(--ink)">pulls a template to match</text>
+<text x="822" y="672" font-size="18" text-anchor="start" fill="var(--dim)">your gold newsletter example</text>
+
+<!-- step caption 2 -->
+<text x="792" y="724" font-size="19" text-anchor="start" fill="var(--ink)">&#9313; as it runs, it pulls from three more folders</text>
+
+<!-- OUTPUT -->
+<text x="1364" y="374" font-size="19" font-weight="700" text-anchor="start" fill="var(--green)">&#9314; the result</text>
+<text x="1426" y="454" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">a finished newsletter</text>
+<text x="1426" y="490" font-size="18" text-anchor="middle" fill="var(--dim)">on-brand &#183; right length</text>
+<text x="1426" y="518" font-size="18" text-anchor="middle" fill="var(--green)">ready to send</text>
+
+<!-- ===== one-line takeaway ===== -->
+<text x="800" y="958" font-size="27" text-anchor="middle" fill="var(--ink)">One skill, four folders &#8212; working together on a single job.</text>
+<text x="800" y="1000" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Workflows do the job; scripts, references &amp; assets back it up.</text>
+</svg></body></html>

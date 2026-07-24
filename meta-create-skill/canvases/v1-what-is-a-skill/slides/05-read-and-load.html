@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ---- three depth bands (staircase: each tier indents deeper = loads later) ---- -->
+  <rect x="290" y="170" width="1210" height="320" rx="20" stroke="rgb(200,198,190)" stroke-width="2" fill="rgba(0,0,0,0.012)"/>
+  <rect x="430" y="512" width="1070" height="132" rx="18" stroke="rgb(200,198,190)" stroke-width="2" fill="rgba(0,0,0,0.012)"/>
+  <rect x="560" y="648" width="940"  height="277" rx="18" stroke="rgb(200,198,190)" stroke-width="2" fill="rgba(0,0,0,0.012)"/>
+
+  <!-- ---- tier number badges (1-2-3 = load order) ---- -->
+  <circle cx="314" cy="204" r="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="452" cy="540" r="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="582" cy="686" r="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+
+  <!-- ---- right-side LOAD ORDER spine (subtle down-arrow tying the 3 tiers) ---- -->
+  <line x1="1476" y1="214" x2="1476" y2="878" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="3 12"/>
+  <polyline points="1469,868 1476,880 1483,868" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- ================= TIER 1 — THE LIBRARY ================= -->
+  <!-- root folder glyph -->
+  <rect x="262" y="258" width="16" height="7"  rx="2" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="262" y="264" width="34" height="24" rx="3" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+
+  <!-- scan cue: dim dashed down-arrow along the tree (reads top to bottom) -->
+  <line x1="322" y1="300" x2="322" y2="452" stroke="var(--dim)" stroke-width="2" stroke-dasharray="5 8"/>
+  <polyline points="316,444 322,454 328,444" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- the MATCH highlight (write/ row) -->
+  <rect x="306" y="398" width="744" height="44" rx="10" stroke="var(--green)" stroke-width="4" fill="rgba(45,140,60,0.09)"/>
+
+  <!-- ---- THE AI (canonical black-marker robot, scanning the library) ---- -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="160" y1="256" x2="160" y2="270"/>
+    <rect x="118" y="270" width="84" height="60" rx="12"/>
+    <rect x="132" y="286" width="56" height="28" rx="7"/>
+    <line x1="160" y1="330" x2="160" y2="340"/>
+    <rect x="124" y="340" width="72" height="72" rx="12"/>
+    <line x1="124" y1="366" x2="96" y2="392"/>
+    <line x1="142" y1="412" x2="136" y2="440"/>
+    <line x1="178" y1="412" x2="184" y2="440"/>
+    <polyline points="196,366 244,388 262,402" fill="none"/>
+    <circle cx="278" cy="414" r="20" stroke-width="5"/>
+    <line x1="264" y1="428" x2="253" y2="439" stroke-width="5"/>
+  </g>
+  <rect x="140" y="356" width="40" height="22" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="160" cy="250" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="146" cy="300" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="174" cy="300" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <!-- green pointer from magnifier into the matched row -->
+  <line x1="300" y1="414" x2="316" y2="414" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="308,408 316,414 308,420" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ---- verdict glyphs (the AI's read, row by row) ---- -->
+  <line x1="1144" y1="312" x2="1156" y2="324" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1156" y1="312" x2="1144" y2="324" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1144" y1="360" x2="1156" y2="372" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1156" y1="360" x2="1144" y2="372" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1140,410 1150,420 1166,400" stroke="var(--green)" stroke-width="4"/>
+  <line x1="1144" y1="456" x2="1156" y2="468" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1156" y1="456" x2="1144" y2="468" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- ---- drill-down arrow (1): matched row -> its SKILL.md ---- -->
+  <path d="M472,442 C472,500 480,540 486,572" stroke="var(--ink)" stroke-width="4"/>
+  <polyline points="479,560 487,576 495,560" stroke="var(--ink)" stroke-width="4"/>
+
+  <!-- ================= TIER 2 — the SKILL.md document ================= -->
+  <rect x="470" y="576" width="44" height="52" rx="4" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <polyline points="500,576 500,588 512,588" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="480" y1="597" x2="504" y2="597" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="480" y1="608" x2="504" y2="608" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="480" y1="619" x2="498" y2="619" stroke="var(--dim)" stroke-width="2.5"/>
+  <!-- REQUIRED badge (ink weight, never a subfolder color) -->
+  <rect x="734" y="592" width="134" height="32" rx="8" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- ---- drill-down arrow (2): SKILL.md -> its files ---- -->
+  <path d="M492,630 C500,690 560,720 604,748" stroke="var(--ink)" stroke-width="4"/>
+  <polyline points="596,738 606,752 614,738" stroke="var(--ink)" stroke-width="4"/>
+
+  <!-- ================= TIER 3 — the four subfolders (deepest level) ================= -->
+  <!-- workflows/ = GREEN fork -->
+  <line x1="688" y1="763" x2="700" y2="763" stroke="var(--green)" stroke-width="3"/>
+  <line x1="700" y1="763" x2="714" y2="753" stroke="var(--green)" stroke-width="3"/>
+  <line x1="700" y1="763" x2="714" y2="773" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="688" cy="763" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="714" cy="753" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="714" cy="773" r="2.6" fill="var(--green)" stroke="none"/>
+  <!-- scripts/ = AMBER gear -->
+  <circle cx="700" cy="808" r="10" stroke="var(--amber)" stroke-width="3"/>
+  <circle cx="700" cy="808" r="3.6" stroke="var(--amber)" stroke-width="2.5"/>
+  <line x1="710" y1="808" x2="715" y2="808" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="690" y1="808" x2="685" y2="808" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="705" y1="816.7" x2="707.5" y2="821" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="695" y1="816.7" x2="692.5" y2="821" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="705" y1="799.3" x2="707.5" y2="795" stroke="var(--amber)" stroke-width="3"/>
+  <line x1="695" y1="799.3" x2="692.5" y2="795" stroke="var(--amber)" stroke-width="3"/>
+  <!-- references/ = BLUE open book -->
+  <line x1="700" y1="845" x2="700" y2="862" stroke="var(--blue)" stroke-width="2.5"/>
+  <path d="M700,845 L687,849 L687,861 L700,857 Z" stroke="var(--blue)" stroke-width="3" fill="var(--bg)"/>
+  <path d="M700,845 L713,849 L713,861 L700,857 Z" stroke="var(--blue)" stroke-width="3" fill="var(--bg)"/>
+  <!-- assets/ = PURPLE stacked copy -->
+  <rect x="700" y="889" width="15" height="19" rx="2" stroke="var(--purple)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="692" y="894" width="15" height="19" rx="2" stroke="var(--purple)" stroke-width="3" fill="var(--bg)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="64" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">The AI Reads Every Description, Then Loads Only What It Needs</text>
+<text x="800" y="104" font-size="26" text-anchor="middle" fill="var(--dim)">Routing and progressive loading are one story &#183; the deeper into the tree, the later it loads</text>
+
+<!-- tier numbers -->
+<text x="314" y="212" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">1</text>
+<text x="452" y="548" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">2</text>
+<text x="582" y="694" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">3</text>
+
+<!-- right LOAD ORDER label -->
+<text x="1498" y="200" font-size="22" text-anchor="end" fill="var(--dim)">LOAD ORDER</text>
+
+<!-- ===== TIER 1 header ===== -->
+<text x="352" y="208" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">TIER 1 &#8212; THE LIBRARY</text>
+<text x="352" y="236" font-size="20" text-anchor="start" fill="var(--dim)">every skill&#8217;s name + description &#183; loaded in every conversation &#183; what the AI reads to pick one</text>
+
+<!-- root -->
+<text class="mono" x="306" y="276" font-size="32" font-weight="700" text-anchor="start" fill="var(--ink)">skills/</text>
+
+<!-- library rows: connector + name + description -->
+<text class="mono" x="340" y="324" font-size="30" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="436" y="324" font-size="29" font-weight="700" text-anchor="start" fill="var(--ink)">carousel/</text>
+<text x="640" y="324" font-size="24" text-anchor="start" fill="var(--dim)">&#8220;make a visual carousel&#8221;</text>
+
+<text class="mono" x="340" y="372" font-size="30" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="436" y="372" font-size="29" font-weight="700" text-anchor="start" fill="var(--ink)">email-os/</text>
+<text x="640" y="372" font-size="24" text-anchor="start" fill="var(--dim)">&#8220;add an email to a sequence&#8221;</text>
+
+<text class="mono" x="340" y="420" font-size="30" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="436" y="420" font-size="29" font-weight="700" text-anchor="start" fill="var(--green)">write/</text>
+<text x="640" y="420" font-size="24" text-anchor="start" fill="var(--dim)">&#8220;write an email, thread, carousel&#8221;</text>
+
+<text class="mono" x="340" y="468" font-size="30" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="436" y="468" font-size="29" font-weight="700" text-anchor="start" fill="var(--ink)">publishing/</text>
+<text x="640" y="468" font-size="24" text-anchor="start" fill="var(--dim)">&#8220;schedule / publish posts&#8221;</text>
+
+<!-- robot label -->
+<text x="164" y="474" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="164" y="500" font-size="19" text-anchor="middle" fill="var(--dim)">reads top to bottom</text>
+
+<!-- verdicts -->
+<text x="1180" y="290" font-size="18" text-anchor="start" fill="var(--dim)">AS THE AI READS EACH ROW</text>
+<text x="1180" y="324" font-size="22" text-anchor="start" fill="var(--dim)">carousel? no</text>
+<text x="1180" y="372" font-size="22" text-anchor="start" fill="var(--dim)">&#8216;a sequence&#8217;? no</text>
+<text x="1180" y="414" font-size="26" font-weight="700" text-anchor="start" fill="var(--green)">MATCH</text>
+<text x="1180" y="440" font-size="20" text-anchor="start" fill="var(--dim)">&#8216;write an email&#8217; fits</text>
+<text x="1180" y="468" font-size="22" text-anchor="start" fill="var(--dim)">schedule? no</text>
+
+<!-- ===== TIER 2 header + doc ===== -->
+<text x="486" y="544" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">TIER 2 &#8212; SKILL.md LOADS ON THE MATCH</text>
+<text class="mono" x="548" y="612" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">SKILL.md</text>
+<text x="744" y="614" font-size="20" font-weight="700" text-anchor="start" fill="var(--ink)">REQUIRED</text>
+<text x="900" y="614" font-size="22" text-anchor="start" fill="var(--dim)">conventions &#183; step order &#183; routing map</text>
+
+<!-- ===== TIER 3 header + subfolders ===== -->
+<text x="616" y="690" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">TIER 3 &#8212; ITS FILES LOAD ON DEMAND</text>
+<text x="616" y="716" font-size="20" text-anchor="start" fill="var(--dim)">only as the job needs them &#183; one file at a time, never all at once</text>
+
+<text class="mono" x="606" y="772" font-size="28" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text x="735" y="772" font-size="28" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text x="950" y="772" font-size="22" text-anchor="start" fill="var(--dim)">the ordered steps for each job</text>
+
+<text class="mono" x="606" y="817" font-size="28" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text x="735" y="817" font-size="28" font-weight="700" text-anchor="start" fill="var(--amber)">scripts/</text>
+<text x="950" y="817" font-size="22" text-anchor="start" fill="var(--dim)">code for repetitive work</text>
+
+<text class="mono" x="606" y="862" font-size="28" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text x="735" y="862" font-size="28" font-weight="700" text-anchor="start" fill="var(--blue)">references/</text>
+<text x="950" y="862" font-size="22" text-anchor="start" fill="var(--dim)">deeper docs, only if needed</text>
+
+<text class="mono" x="606" y="907" font-size="28" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text x="735" y="907" font-size="28" font-weight="700" text-anchor="start" fill="var(--purple)">assets/</text>
+<text x="950" y="907" font-size="22" text-anchor="start" fill="var(--dim)">the gold example to copy</text>
+
+<!-- ===== one-line takeaway ===== -->
+<text x="800" y="972" font-size="28" text-anchor="middle" fill="var(--ink)">Read each description to pick ONE skill &#183; load its body &#183; then pull its files only on demand.</text>
+<text x="800" y="1014" font-size="32" font-weight="700" text-anchor="middle" fill="var(--green)">Deeper in the tree = later it loads.</text>
+</svg></body></html>

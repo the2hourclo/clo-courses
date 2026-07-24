@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ THE FILE — a drawio app window (the deliverable, made tangible) ============ -->
+  <rect x="130" y="198" width="1340" height="452" rx="16" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.012)"/>
+  <!-- title bar divider -->
+  <line x1="130" y1="256" x2="1470" y2="256" stroke="var(--dim)" stroke-width="2"/>
+  <!-- window control dots -->
+  <circle cx="163" cy="227" r="6" stroke="var(--dim)" stroke-width="2"/>
+  <circle cx="185" cy="227" r="6" stroke="var(--dim)" stroke-width="2"/>
+  <circle cx="207" cy="227" r="6" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- ============ SEVEN MINI-PICTURE THUMBNAILS (one per page) ============ -->
+  <!-- card frames (centers 258 430 602 774 946 1118 1290) -->
+  <rect x="188"  y="292" width="140" height="228" rx="10" stroke="var(--dim)" stroke-width="1.8" fill="rgba(0,0,0,0.02)"/>
+  <rect x="360"  y="292" width="140" height="228" rx="10" stroke="var(--dim)" stroke-width="1.8" fill="rgba(0,0,0,0.02)"/>
+  <rect x="532"  y="292" width="140" height="228" rx="10" stroke="var(--dim)" stroke-width="1.8" fill="rgba(0,0,0,0.02)"/>
+  <rect x="704"  y="292" width="140" height="228" rx="10" stroke="var(--dim)" stroke-width="1.8" fill="rgba(0,0,0,0.02)"/>
+  <rect x="876"  y="292" width="140" height="228" rx="10" stroke="var(--dim)" stroke-width="1.8" fill="rgba(0,0,0,0.02)"/>
+  <rect x="1048" y="292" width="140" height="228" rx="10" stroke="var(--dim)" stroke-width="1.8" fill="rgba(0,0,0,0.02)"/>
+  <rect x="1220" y="292" width="140" height="228" rx="10" stroke="var(--dim)" stroke-width="1.8" fill="rgba(0,0,0,0.02)"/>
+
+  <!-- number badges -->
+  <circle cx="210" cy="314" r="13" stroke="var(--dim)" stroke-width="1.8" fill="var(--bg)"/>
+  <circle cx="382" cy="314" r="13" stroke="var(--dim)" stroke-width="1.8" fill="var(--bg)"/>
+  <circle cx="554" cy="314" r="13" stroke="var(--dim)" stroke-width="1.8" fill="var(--bg)"/>
+  <circle cx="726" cy="314" r="13" stroke="var(--dim)" stroke-width="1.8" fill="var(--bg)"/>
+  <circle cx="898" cy="314" r="13" stroke="var(--dim)" stroke-width="1.8" fill="var(--bg)"/>
+  <circle cx="1070" cy="314" r="13" stroke="var(--dim)" stroke-width="1.8" fill="var(--bg)"/>
+  <circle cx="1242" cy="314" r="13" stroke="var(--dim)" stroke-width="1.8" fill="var(--bg)"/>
+
+  <!-- (1) BUSINESS OVERVIEW — bow-tie funnel (cx 258) -->
+  <polygon points="200,372 200,452 258,412" stroke="var(--blue)" stroke-width="2.4" fill="rgba(52,120,190,0.08)"/>
+  <polygon points="258,412 316,372 316,452" stroke="var(--green)" stroke-width="2.4" fill="rgba(45,140,60,0.08)"/>
+  <line x1="176" y1="412" x2="198" y2="412" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="318" y1="412" x2="340" y2="412" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- (2) SWIMLANES — three lanes with stepping boxes (cx 430) -->
+  <rect x="372" y="366" width="116" height="92" rx="6" stroke="var(--dim)" stroke-width="1.8"/>
+  <line x1="372" y1="397" x2="488" y2="397" stroke="var(--dim)" stroke-width="1.6"/>
+  <line x1="372" y1="428" x2="488" y2="428" stroke="var(--dim)" stroke-width="1.6"/>
+  <rect x="384" y="373" width="30" height="18" rx="4" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <rect x="430" y="404" width="30" height="18" rx="4" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <rect x="450" y="435" width="30" height="18" rx="4" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+
+  <!-- (3) SYSTEM MAP — connected nodes (cx 602) -->
+  <line x1="602" y1="410" x2="560" y2="372" stroke="var(--dim)" stroke-width="1.8"/>
+  <line x1="602" y1="410" x2="646" y2="374" stroke="var(--dim)" stroke-width="1.8"/>
+  <line x1="602" y1="410" x2="566" y2="450" stroke="var(--dim)" stroke-width="1.8"/>
+  <line x1="602" y1="410" x2="644" y2="450" stroke="var(--dim)" stroke-width="1.8"/>
+  <circle cx="602" cy="410" r="12" stroke="var(--ink)" stroke-width="2.4" fill="var(--bg)"/>
+  <circle cx="558" cy="370" r="9" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <circle cx="648" cy="372" r="9" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <circle cx="564" cy="452" r="9" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <circle cx="646" cy="452" r="9" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+
+  <!-- (4) 24 ASSETS — scored grid (cx 774) -->
+  <!-- row 1 -->
+  <rect x="722" y="366" width="16" height="16" rx="3" stroke="var(--green)" stroke-width="2" fill="rgba(45,140,60,0.35)"/>
+  <rect x="742" y="366" width="16" height="16" rx="3" stroke="var(--ink)" stroke-width="1.6"/>
+  <rect x="762" y="366" width="16" height="16" rx="3" stroke="var(--amber)" stroke-width="2" fill="rgba(214,140,40,0.35)"/>
+  <rect x="782" y="366" width="16" height="16" rx="3" stroke="var(--ink)" stroke-width="1.6"/>
+  <rect x="802" y="366" width="16" height="16" rx="3" stroke="var(--green)" stroke-width="2" fill="rgba(45,140,60,0.35)"/>
+  <!-- row 2 -->
+  <rect x="722" y="386" width="16" height="16" rx="3" stroke="var(--ink)" stroke-width="1.6"/>
+  <rect x="742" y="386" width="16" height="16" rx="3" stroke="var(--red)" stroke-width="2" fill="rgba(214,69,58,0.3)"/>
+  <rect x="762" y="386" width="16" height="16" rx="3" stroke="var(--ink)" stroke-width="1.6"/>
+  <rect x="782" y="386" width="16" height="16" rx="3" stroke="var(--green)" stroke-width="2" fill="rgba(45,140,60,0.35)"/>
+  <rect x="802" y="386" width="16" height="16" rx="3" stroke="var(--ink)" stroke-width="1.6"/>
+  <!-- row 3 -->
+  <rect x="722" y="406" width="16" height="16" rx="3" stroke="var(--amber)" stroke-width="2" fill="rgba(214,140,40,0.35)"/>
+  <rect x="742" y="406" width="16" height="16" rx="3" stroke="var(--ink)" stroke-width="1.6"/>
+  <rect x="762" y="406" width="16" height="16" rx="3" stroke="var(--green)" stroke-width="2" fill="rgba(45,140,60,0.35)"/>
+  <rect x="782" y="406" width="16" height="16" rx="3" stroke="var(--ink)" stroke-width="1.6"/>
+  <rect x="802" y="406" width="16" height="16" rx="3" stroke="var(--red)" stroke-width="2" fill="rgba(214,69,58,0.3)"/>
+  <!-- row 4 -->
+  <rect x="722" y="426" width="16" height="16" rx="3" stroke="var(--ink)" stroke-width="1.6"/>
+  <rect x="742" y="426" width="16" height="16" rx="3" stroke="var(--green)" stroke-width="2" fill="rgba(45,140,60,0.35)"/>
+  <rect x="762" y="426" width="16" height="16" rx="3" stroke="var(--ink)" stroke-width="1.6"/>
+  <rect x="782" y="426" width="16" height="16" rx="3" stroke="var(--amber)" stroke-width="2" fill="rgba(214,140,40,0.35)"/>
+  <rect x="802" y="426" width="16" height="16" rx="3" stroke="var(--ink)" stroke-width="1.6"/>
+
+  <!-- (5) OS MAP — hub + spokes (cx 946) -->
+  <line x1="946" y1="410" x2="898" y2="372" stroke="var(--dim)" stroke-width="1.8"/>
+  <line x1="946" y1="410" x2="994" y2="372" stroke="var(--dim)" stroke-width="1.8"/>
+  <line x1="946" y1="410" x2="902" y2="452" stroke="var(--dim)" stroke-width="1.8"/>
+  <line x1="946" y1="410" x2="990" y2="452" stroke="var(--dim)" stroke-width="1.8"/>
+  <rect x="932" y="396" width="28" height="28" rx="7" stroke="var(--green)" stroke-width="2.4" fill="rgba(45,140,60,0.10)"/>
+  <rect x="884" y="360" width="26" height="22" rx="5" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <rect x="982" y="360" width="26" height="22" rx="5" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <rect x="888" y="442" width="26" height="22" rx="5" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <rect x="978" y="442" width="26" height="22" rx="5" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+
+  <!-- (6) ROADMAP — timeline with staggered bars (cx 1118) -->
+  <line x1="1066" y1="462" x2="1172" y2="462" stroke="var(--dim)" stroke-width="2"/>
+  <circle cx="1082" cy="462" r="4" fill="var(--dim)" stroke="none"/>
+  <circle cx="1118" cy="462" r="4" fill="var(--dim)" stroke="none"/>
+  <circle cx="1154" cy="462" r="4" fill="var(--dim)" stroke="none"/>
+  <rect x="1072" y="366" width="52" height="16" rx="4" stroke="var(--red)" stroke-width="2" fill="rgba(214,69,58,0.18)"/>
+  <rect x="1092" y="390" width="60" height="16" rx="4" stroke="var(--amber)" stroke-width="2" fill="rgba(214,140,40,0.18)"/>
+  <rect x="1108" y="414" width="52" height="16" rx="4" stroke="var(--green)" stroke-width="2" fill="rgba(45,140,60,0.18)"/>
+
+  <!-- (7) BUILD PLAN — numbered steps (cx 1290) -->
+  <circle cx="1250" cy="372" r="10" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <line x1="1266" y1="372" x2="1342" y2="372" stroke="var(--dim)" stroke-width="2.4"/>
+  <circle cx="1250" cy="404" r="10" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <line x1="1266" y1="404" x2="1342" y2="404" stroke="var(--dim)" stroke-width="2.4"/>
+  <circle cx="1250" cy="436" r="10" stroke="var(--ink)" stroke-width="2" fill="var(--bg)"/>
+  <line x1="1266" y1="436" x2="1330" y2="436" stroke="var(--dim)" stroke-width="2.4"/>
+
+  <!-- ============ PAGE TABS along the bottom (the seven pictures) ============ -->
+  <line x1="130" y1="586" x2="1470" y2="586" stroke="var(--dim)" stroke-width="2"/>
+  <!-- active tab: Business Overview (cream, raised, green "open" accent) -->
+  <rect x="188" y="590" width="140" height="58" rx="8" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="198" y1="593" x2="318" y2="593" stroke="var(--green)" stroke-width="4"/>
+  <!-- inactive tabs -->
+  <rect x="360"  y="592" width="140" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+  <rect x="532"  y="592" width="140" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+  <rect x="704"  y="592" width="140" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+  <rect x="876"  y="592" width="140" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+  <rect x="1048" y="592" width="140" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+  <rect x="1220" y="592" width="140" height="56" rx="8" stroke="var(--dim)" stroke-width="2" fill="rgba(0,0,0,0.04)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="64" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 1 &#183; YOU CAN'T SEE IT</text>
+<text x="800" y="120" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">One File. Seven Pictures of Your Business.</text>
+<text x="800" y="163" font-size="25" text-anchor="middle" fill="var(--dim)">The Business X-Ray is one file &#8212; every tab is another view of how your business really runs.</text>
+
+<!-- filename + page count on the title bar -->
+<text class="mono" x="800" y="236" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">your-business-x-ray.drawio</text>
+<text x="1446" y="234" font-size="18" text-anchor="end" fill="var(--dim)">7 pages</text>
+
+<!-- number badges 1-7 -->
+<text x="210"  y="320" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">1</text>
+<text x="382"  y="320" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">2</text>
+<text x="554"  y="320" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">3</text>
+<text x="726"  y="320" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">4</text>
+<text x="898"  y="320" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">5</text>
+<text x="1070" y="320" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">6</text>
+<text x="1242" y="320" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">7</text>
+
+<!-- ===== tab labels ===== -->
+<text x="258"  y="626" font-size="16" font-weight="700" text-anchor="middle" fill="var(--ink)">Business Overview</text>
+<text x="430"  y="626" font-size="16" text-anchor="middle" fill="var(--ink)">Swimlanes</text>
+<text x="602"  y="626" font-size="16" text-anchor="middle" fill="var(--ink)">System Map</text>
+<text x="774"  y="626" font-size="16" text-anchor="middle" fill="var(--ink)">24 Assets</text>
+<text x="946"  y="626" font-size="16" text-anchor="middle" fill="var(--ink)">OS Map</text>
+<text x="1118" y="626" font-size="16" text-anchor="middle" fill="var(--ink)">Roadmap</text>
+<text x="1290" y="626" font-size="16" text-anchor="middle" fill="var(--ink)">Build Plan</text>
+
+<!-- ===== one-line gloss under each tab ===== -->
+<text x="258"  y="700" font-size="18" text-anchor="middle" fill="var(--dim)">the whole funnel</text>
+
+<text x="430"  y="690" font-size="18" text-anchor="middle" fill="var(--dim)">one page per</text>
+<text x="430"  y="712" font-size="18" text-anchor="middle" fill="var(--dim)">process you drill</text>
+
+<text x="602"  y="690" font-size="18" text-anchor="middle" fill="var(--dim)">how your tools</text>
+<text x="602"  y="712" font-size="18" text-anchor="middle" fill="var(--dim)">connect</text>
+
+<text x="774"  y="690" font-size="18" text-anchor="middle" fill="var(--dim)">what you own,</text>
+<text x="774"  y="712" font-size="18" text-anchor="middle" fill="var(--dim)">scored</text>
+
+<text x="946"  y="690" font-size="18" text-anchor="middle" fill="var(--dim)">your future</text>
+<text x="946"  y="712" font-size="18" text-anchor="middle" fill="var(--dim)">AI team</text>
+
+<text x="1118" y="690" font-size="18" text-anchor="middle" fill="var(--dim)">what to fix</text>
+<text x="1118" y="712" font-size="18" text-anchor="middle" fill="var(--dim)">first</text>
+
+<text x="1290" y="690" font-size="18" text-anchor="middle" fill="var(--dim)">the build,</text>
+<text x="1290" y="712" font-size="18" text-anchor="middle" fill="var(--dim)">step by step</text>
+
+<!-- ===== takeaway (bridge to the interview) ===== -->
+<text x="800" y="852" font-size="27" text-anchor="middle" fill="var(--ink)">Seven pictures. One file. The X-Ray is your whole business, drawn.</text>
+<text x="800" y="908" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">But first the AI has to get it out of your head. That starts with an interview.</text>
+</svg></body></html>

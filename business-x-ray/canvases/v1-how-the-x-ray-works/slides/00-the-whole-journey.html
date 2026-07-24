@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ================= LEFT — the tangled business (how it feels) ================= -->
+  <!-- chaotic knot scribble behind the YOU figure -->
+  <g stroke="var(--red)" stroke-width="2.5" opacity="0.55">
+    <path d="M212,452 C186,410 250,398 282,436 C312,472 244,494 234,520 C224,548 296,548 306,512 C316,478 268,458 236,470 C204,482 214,516 252,522"/>
+    <path d="M300,436 C332,414 356,452 330,478 C306,502 342,528 306,540"/>
+  </g>
+  <!-- pull-lines: the owner yanked in every direction -->
+  <g stroke="var(--red)" stroke-width="2.2">
+    <line x1="258" y1="470" x2="176" y2="378"/>
+    <line x1="284" y1="470" x2="366" y2="378"/>
+    <line x1="300" y1="500" x2="392" y2="486"/>
+    <line x1="284" y1="548" x2="332" y2="600"/>
+    <line x1="248" y1="548" x2="182" y2="568"/>
+  </g>
+  <!-- YOU stick figure -->
+  <g stroke="var(--ink)" stroke-width="3.5">
+    <circle cx="270" cy="452" r="26" fill="var(--bg)"/>
+    <line x1="270" y1="478" x2="270" y2="556"/>
+    <line x1="230" y1="510" x2="310" y2="510"/>
+    <line x1="270" y1="556" x2="244" y2="606"/>
+    <line x1="270" y1="556" x2="296" y2="606"/>
+  </g>
+
+  <!-- ================= flow: business enters the scanner ================= -->
+  <line x1="470" y1="470" x2="618" y2="470" stroke="var(--amber)" stroke-width="4"/>
+  <polyline points="604,462 622,470 604,478" stroke="var(--amber)" stroke-width="4"/>
+
+  <!-- ================= CENTER — the X-Ray scanner arch ================= -->
+  <path d="M632,628 L632,442 Q632,320 782,320 Q932,320 932,442 L932,628" stroke="var(--amber)" stroke-width="5"/>
+  <!-- inner rim of the gantry -->
+  <path d="M672,628 L672,452 Q672,360 782,360 Q892,360 892,452 L892,628" stroke="var(--amber)" stroke-width="2.5" opacity="0.55"/>
+  <!-- scan plane sweeping down the opening -->
+  <line x1="700" y1="512" x2="864" y2="512" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="10 7"/>
+  <line x1="720" y1="470" x2="844" y2="470" stroke="var(--amber)" stroke-width="2" stroke-dasharray="6 8" opacity="0.6"/>
+  <line x1="720" y1="554" x2="844" y2="554" stroke="var(--amber)" stroke-width="2" stroke-dasharray="6 8" opacity="0.6"/>
+
+  <!-- THE AI — canonical black-marker robot operating the scanner -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="782" y1="560" x2="782" y2="570"/>
+    <rect x="746" y="570" width="72" height="48" rx="11"/>
+    <rect x="760" y="583" width="44" height="22" rx="6" stroke-width="3"/>
+    <line x1="782" y1="618" x2="782" y2="626"/>
+    <rect x="750" y="626" width="64" height="54" rx="11"/>
+    <line x1="750" y1="644" x2="722" y2="662"/>
+    <line x1="814" y1="644" x2="842" y2="662"/>
+  </g>
+  <rect x="764" y="641" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="782" cy="564" r="5" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="774" cy="600" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <circle cx="790" cy="600" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <!-- the console it drives -->
+  <rect x="702" y="686" width="160" height="26" rx="7" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.02)"/>
+  <circle cx="726" cy="699" r="4" stroke="var(--amber)" stroke-width="2.5"/>
+  <circle cx="748" cy="699" r="4" stroke="var(--amber)" stroke-width="2.5"/>
+
+  <!-- ================= flow: seven pictures come out ================= -->
+  <line x1="946" y1="470" x2="1080" y2="470" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="1066,462 1084,470 1066,478" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ================= RIGHT — the seven-picture stack (film-strip of tabs) ================= -->
+  <!-- green bracket embracing the deliverable stack -->
+  <path d="M1108,268 L1092,268 L1092,678 L1108,678" stroke="var(--green)" stroke-width="3.5"/>
+  <path d="M1512,268 L1528,268 L1528,678 L1512,678" stroke="var(--green)" stroke-width="3.5"/>
+  <!-- 7 page tabs -->
+  <g stroke="var(--ink)" stroke-width="2.5">
+    <rect x="1112" y="275" width="404" height="48" rx="10" fill="rgba(0,0,0,0.015)"/>
+    <rect x="1112" y="333" width="404" height="48" rx="10" fill="rgba(0,0,0,0.015)"/>
+    <rect x="1112" y="391" width="404" height="48" rx="10" fill="rgba(0,0,0,0.015)"/>
+    <rect x="1112" y="449" width="404" height="48" rx="10" fill="rgba(0,0,0,0.015)"/>
+    <rect x="1112" y="507" width="404" height="48" rx="10" fill="rgba(0,0,0,0.015)"/>
+    <rect x="1112" y="565" width="404" height="48" rx="10" fill="rgba(0,0,0,0.015)"/>
+    <rect x="1112" y="623" width="404" height="48" rx="10" fill="rgba(0,0,0,0.015)"/>
+  </g>
+  <!-- number badges -->
+  <g stroke="var(--ink)" stroke-width="2.2" fill="var(--bg)">
+    <circle cx="1140" cy="299" r="16"/>
+    <circle cx="1140" cy="357" r="16"/>
+    <circle cx="1140" cy="415" r="16"/>
+    <circle cx="1140" cy="473" r="16"/>
+    <circle cx="1140" cy="531" r="16"/>
+    <circle cx="1140" cy="589" r="16"/>
+    <circle cx="1140" cy="647" r="16"/>
+  </g>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">THE BUSINESS X-RAY</text>
+<text x="800" y="112" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">One messy business in. Seven clear pictures out.</text>
+<text x="800" y="154" font-size="26" text-anchor="middle" fill="var(--dim)">The X-Ray scans how your business actually runs &#8212; then hands back seven things you can point at.</text>
+
+<!-- zone labels -->
+<text x="270" y="250" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">HOW IT FEELS TODAY</text>
+<text x="782" y="250" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">THE SCANNER</text>
+<text x="1310" y="250" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">WHAT COMES OUT &#183; 7 PICTURES</text>
+
+<!-- YOU label + pull-line labels -->
+<text x="270" y="459" font-size="19" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+<text x="168" y="366" font-size="19" text-anchor="middle" fill="var(--dim)">sales calls</text>
+<text x="376" y="366" font-size="19" text-anchor="middle" fill="var(--dim)">onboarding</text>
+<text x="418" y="490" font-size="19" text-anchor="start" fill="var(--dim)">chasing invoices</text>
+<text x="342" y="620" font-size="19" text-anchor="middle" fill="var(--dim)">all the content</text>
+<text x="158" y="588" font-size="19" text-anchor="middle" fill="var(--dim)">the VA</text>
+<text x="270" y="666" font-size="21" text-anchor="middle" fill="var(--red)">busy everywhere &#183; you can't see WHY</text>
+
+<!-- flow-in label -->
+<text x="544" y="452" font-size="18" text-anchor="middle" fill="var(--dim)">your business</text>
+
+<!-- scanner inner label + robot caption -->
+<text x="782" y="408" font-size="20" text-anchor="middle" fill="var(--amber)">reads how it really runs</text>
+<text x="782" y="748" font-size="19" text-anchor="middle" fill="var(--dim)">the AI runs the scan</text>
+
+<!-- seven picture names -->
+<text x="1140" y="306" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">1</text>
+<text x="1140" y="364" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">2</text>
+<text x="1140" y="422" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">3</text>
+<text x="1140" y="480" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">4</text>
+<text x="1140" y="538" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">5</text>
+<text x="1140" y="596" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">6</text>
+<text x="1140" y="654" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">7</text>
+
+<text x="1170" y="295" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">Business Overview</text>
+<text x="1170" y="314" font-size="16" text-anchor="start" fill="var(--dim)">your map + funnel</text>
+<text x="1170" y="353" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">Swimlanes</text>
+<text x="1170" y="372" font-size="16" text-anchor="start" fill="var(--dim)">inside each process</text>
+<text x="1170" y="411" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">System Map</text>
+<text x="1170" y="430" font-size="16" text-anchor="start" fill="var(--dim)">how your tools connect</text>
+<text x="1170" y="469" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">24 Assets</text>
+<text x="1170" y="488" font-size="16" text-anchor="start" fill="var(--dim)">what you own, scored</text>
+<text x="1170" y="527" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">OS Map</text>
+<text x="1170" y="546" font-size="16" text-anchor="start" fill="var(--dim)">who runs what</text>
+<text x="1170" y="585" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">Roadmap</text>
+<text x="1170" y="604" font-size="16" text-anchor="start" fill="var(--dim)">the next 90 days</text>
+<text x="1170" y="643" font-size="22" font-weight="700" text-anchor="start" fill="var(--ink)">Build Plan</text>
+<text x="1170" y="662" font-size="16" text-anchor="start" fill="var(--dim)">what to build, in order</text>
+
+<!-- takeaway -->
+<text x="800" y="852" font-size="27" text-anchor="middle" fill="var(--ink)">You can't fix what you can't see.</text>
+<text x="800" y="902" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">The X-Ray turns the business in your head into seven pictures you can point at.</text>
+</svg></body></html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ THREE ZONE BANDS (headers over the bow-tie) ============ -->
+  <rect x="120"  y="185" width="440" height="136" rx="18" stroke="var(--blue)"  stroke-width="3" fill="rgba(52,120,190,0.07)"/>
+  <rect x="590"  y="185" width="420" height="136" rx="18" stroke="var(--amber)" stroke-width="3" fill="rgba(214,140,40,0.08)"/>
+  <rect x="1040" y="185" width="440" height="136" rx="18" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.08)"/>
+
+  <!-- band -> wing connectors (down-ticks) -->
+  <line x1="340"  y1="321" x2="340"  y2="356" stroke="var(--blue)"  stroke-width="2.2"/>
+  <polyline points="333,348 340,357 347,348" stroke="var(--blue)"  stroke-width="2.2"/>
+  <line x1="800"  y1="321" x2="800"  y2="360" stroke="var(--amber)" stroke-width="2.2"/>
+  <polyline points="793,352 800,361 807,352" stroke="var(--amber)" stroke-width="2.2"/>
+  <line x1="1260" y1="321" x2="1260" y2="356" stroke="var(--green)" stroke-width="2.2"/>
+  <polyline points="1253,348 1260,357 1267,348" stroke="var(--green)" stroke-width="2.2"/>
+
+  <!-- ============ THE SAME BOW-TIE SILHOUETTE (smaller) ============ -->
+  <!-- LEFT WING = ACQUISITION (blue) — narrows toward the sale -->
+  <polygon points="190,360 190,540 720,450" fill="rgba(52,120,190,0.10)" stroke="var(--blue)" stroke-width="3"/>
+  <line x1="378" y1="392" x2="378" y2="508" stroke="var(--blue)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="548" y1="418" x2="548" y2="482" stroke="var(--blue)" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- RIGHT WING = DELIVERY (green) — expands out after the sale -->
+  <polygon points="880,450 1410,360 1410,540" fill="rgba(45,140,60,0.12)" stroke="var(--green)" stroke-width="3"/>
+  <line x1="1052" y1="418" x2="1052" y2="482" stroke="var(--green)" stroke-width="1.5" opacity="0.5"/>
+  <line x1="1222" y1="392" x2="1222" y2="508" stroke="var(--green)" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- THE KNOT = COMMIT (amber diamond) — the sale -->
+  <polygon points="726,450 800,392 874,450 800,508" fill="rgba(214,140,40,0.16)" stroke="var(--amber)" stroke-width="3.5"/>
+
+  <!-- LEADS IN — big arrow into the wide Front end -->
+  <line x1="72" y1="450" x2="182" y2="450" stroke="var(--blue)" stroke-width="4"/>
+  <polyline points="168,440 184,450 168,460" stroke="var(--blue)" stroke-width="4"/>
+
+  <!-- CLIENTS OUT — big arrow out of the wide Back end -->
+  <line x1="1418" y1="450" x2="1528" y2="450" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="1514,440 1530,450 1514,460" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ============ "who runs it?" slots under each zone ============ -->
+  <rect x="230"  y="575" width="220" height="50" rx="25" stroke="var(--dim)" stroke-width="2" stroke-dasharray="8 6" fill="rgba(0,0,0,0.02)"/>
+  <rect x="690"  y="575" width="220" height="50" rx="25" stroke="var(--dim)" stroke-width="2" stroke-dasharray="8 6" fill="rgba(0,0,0,0.02)"/>
+  <rect x="1150" y="575" width="220" height="50" rx="25" stroke="var(--dim)" stroke-width="2" stroke-dasharray="8 6" fill="rgba(0,0,0,0.02)"/>
+
+  <!-- ONE pair of hands holds all three zones UP: three load-lines rise from the single
+       figure's two hands + head to the three zones (arrows point UP to the zones). -->
+  <line x1="746" y1="664" x2="340"  y2="625" stroke="var(--dim)" stroke-width="2.4"/>
+  <polyline points="354,619 340,625 354,633" stroke="var(--dim)" stroke-width="2.4"/>
+  <line x1="800" y1="648" x2="800"  y2="625" stroke="var(--dim)" stroke-width="2.4"/>
+  <polyline points="793,634 800,624 807,634" stroke="var(--dim)" stroke-width="2.4"/>
+  <line x1="854" y1="664" x2="1260" y2="625" stroke="var(--dim)" stroke-width="2.4"/>
+  <polyline points="1244,619 1260,625 1246,633" stroke="var(--dim)" stroke-width="2.4"/>
+
+  <!-- ============ YOU — ONE figure, one pair of hands, holding all three zones up ============ -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <circle cx="800" cy="670" r="22" fill="none"/>
+    <line x1="800" y1="692" x2="800" y2="750"/>
+    <line x1="800" y1="704" x2="746" y2="664"/>
+    <line x1="800" y1="704" x2="854" y2="664"/>
+    <line x1="800" y1="750" x2="772" y2="794"/>
+    <line x1="800" y1="750" x2="828" y2="794"/>
+  </g>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 2 &#183; SEE THE CURRENT STATE</text>
+<text x="800" y="114" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">Three Zones, Three Jobs</text>
+<text x="800" y="156" font-size="26" text-anchor="middle" fill="var(--dim)">The same bow-tie &#8212; now split into the three jobs every business runs.</text>
+
+<!-- ===== zone band text ===== -->
+<!-- FRONT (blue) -->
+<text x="340" y="234" font-size="34" font-weight="700" text-anchor="middle" fill="var(--blue)">FRONT</text>
+<text x="340" y="266" font-size="19" font-style="italic" text-anchor="middle" fill="var(--dim)">marketing &#183; gets you seen</text>
+<text x="340" y="301" font-size="19" font-weight="700" text-anchor="middle" fill="var(--blue)">your videos &#183; your lead magnet</text>
+
+<!-- MIDDLE (amber) -->
+<text x="800" y="234" font-size="34" font-weight="700" text-anchor="middle" fill="var(--amber)">MIDDLE</text>
+<text x="800" y="266" font-size="19" font-style="italic" text-anchor="middle" fill="var(--dim)">selling &#183; turns interest into payment</text>
+<text x="800" y="301" font-size="19" font-weight="700" text-anchor="middle" fill="var(--amber)">your offer &#183; emails &#183; checkout</text>
+
+<!-- BACK (green) -->
+<text x="1260" y="234" font-size="34" font-weight="700" text-anchor="middle" fill="var(--green)">BACK</text>
+<text x="1260" y="266" font-size="19" font-style="italic" text-anchor="middle" fill="var(--dim)">fulfillment &#183; keeps the client</text>
+<text x="1260" y="301" font-size="19" font-weight="700" text-anchor="middle" fill="var(--green)">onboarding &#183; reports &#183; the work</text>
+
+<!-- ===== the one-word job inside each part of the bow-tie ===== -->
+<text x="400"  y="457" font-size="21" font-weight="700" text-anchor="middle" fill="var(--blue)">GET SEEN</text>
+<text x="800"  y="456" font-size="16" font-weight="700" text-anchor="middle" fill="var(--amber)">GET PAID</text>
+<text x="1180" y="457" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">KEEP THEM</text>
+
+<!-- ===== leads in / clients out ===== -->
+<text x="127" y="429" font-size="20" font-weight="700" text-anchor="middle" fill="var(--blue)">LEADS IN</text>
+<text x="1473" y="429" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">CLIENTS OUT</text>
+
+<!-- ===== "who runs it?" slot labels ===== -->
+<text x="340"  y="606" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">who runs it today?</text>
+<text x="800"  y="606" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">who runs it today?</text>
+<text x="1260" y="606" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">who runs it today?</text>
+
+<!-- ===== caption on the figure — one owner, not three people ===== -->
+<text x="884" y="712" font-size="18" font-style="italic" text-anchor="start" fill="var(--dim)">one pair of hands</text>
+<text x="884" y="736" font-size="18" font-style="italic" text-anchor="start" fill="var(--dim)">under all three</text>
+
+<!-- ===== YOU ===== -->
+<text x="800" y="830" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+<text x="800" y="858" font-size="20" text-anchor="middle" fill="var(--dim)">(honest answer &#8212; right now, usually all three)</text>
+<text x="800" y="887" font-size="17" font-style="italic" text-anchor="middle" fill="var(--dim)">got a team? whoever owns the zone &#8212; it still usually routes through you</text>
+
+<!-- ===== takeaway bridge ===== -->
+<text x="800" y="918" font-size="28" text-anchor="middle" fill="var(--ink)">Three zones. One pair of hands holding all of them up.</text>
+<text x="800" y="963" font-size="29" font-weight="700" text-anchor="middle" fill="var(--green)">Next, the X-Ray walks each zone step by step &#8212; to see what your hands are really doing.</text>
+</svg></body></html>

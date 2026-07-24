@@ -143,11 +143,90 @@
     return stepInfo('cp1').pos > 0;
   }
 
+  /* ── SERVER SYNC — real build progress, not just clicks ─────────────────────
+     Everything above is what the buyer did IN THIS BROWSER. The truth about what
+     they actually BUILT lives on the server: Claude calls report_checkpoint at
+     each verified done-signal, and GET /progress returns the ladder.
+
+     Auth: a read-only view token minted during device activation and banked by
+     the wizard. Deliberately NOT the license key — the portal promises the buyer
+     it stores none, and this token can only read the ladder.
+
+     Design rules, in order of importance:
+       1. NEVER block the render. localStorage paints instantly; this refines it
+          a moment later. A buyer offline, on a different browser, or with no
+          token still gets the full local journey.
+       2. Server completions are ADDITIVE. A checkpoint the server calls done is
+          done. We never un-mark something locally marked — a buyer who clicked
+          through a wizard shouldn't watch progress disappear on refresh.
+       3. Failures are silent. A dark map beats an error message.
+     ────────────────────────────────────────────────────────────────────────── */
+  var VIEW_TOKEN_KEY = 'aieb_view_token_v1';
+  var PROGRESS_URL = 'https://aieb-gated-mcp.vercel.app/progress';
+  // Dev/test hook only: lets a local smoke test point the sync at a local server.
+  // Buyers never have this key set; the default above is the production truth.
+  try { PROGRESS_URL = localStorage.getItem('aieb_progress_url_dev') || PROGRESS_URL; } catch (e) {}
+  // Server ladder keys → this page's spine ids. These are the SAME five
+  // checkpoints under two naming schemes; keep both ends in step if either moves.
+  var LADDER_TO_SPINE = {
+    '1-onboard': 'setup',
+    '2-map': 'cp1',
+    '3-first-skill': 'cp2',
+    '4-system': 'cp3',
+    '5-autonomy': 'cp4'
+  };
+
+  function viewToken() {
+    try { return localStorage.getItem(VIEW_TOKEN_KEY) || ''; } catch (e) { return ''; }
+  }
+
+  // Fetch the server ladder and fold any completed checkpoints into local state.
+  // Resolves to true when something actually changed, so callers can re-render.
+  function syncFromServer() {
+    var token = viewToken();
+    if (!token || typeof fetch !== 'function') return Promise.resolve(false);
+    return fetch(PROGRESS_URL, {
+      method: 'POST',                    // keeps the token out of URLs + infra logs
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ token: token }),
+      cache: 'no-store',
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer'
+    })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (payload) {
+        if (!payload || !payload.ok || !payload.ladder) return false;
+        var changed = false;
+        payload.ladder.forEach(function (cp) {
+          var id = LADDER_TO_SPINE[cp && cp.id];
+          if (!id || cp.status !== 'completed' || isDone(id)) return;
+          markDone(id);
+          changed = true;
+        });
+        return changed;
+      })
+      .catch(function () { return false; });   // silent by design — see rule 3
+  }
+
+  // Fire-and-forget on load: refine the already-painted page, then tell it to
+  // repaint only if the server knew something the browser didn't.
+  function autoSync() {
+    syncFromServer().then(function (changed) {
+      if (!changed) return;
+      try {
+        window.dispatchEvent(new CustomEvent('aieb:progress-synced'));
+      } catch (e) {}
+    });
+  }
+
   window.AIEB = {
     SPINE: SPINE, CHAIN: CHAIN, BUILD: BUILD, META: META, SURFACES: SURFACES,
     read: read, isDone: isDone, markDone: markDone, reset: reset,
     getSurface: getSurface, setSurface: setSurface, surfaceShows: surfaceShows,
     activeId: activeId, stateOf: stateOf, next: next, buildIndex: buildIndex,
-    stepInfo: stepInfo, resume: resume, started: started, overall: overall
+    stepInfo: stepInfo, resume: resume, started: started, overall: overall,
+    syncFromServer: syncFromServer, hasViewToken: function () { return !!viewToken(); }
   };
+
+  autoSync();
 })();

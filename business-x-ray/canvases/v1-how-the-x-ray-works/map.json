@@ -1,0 +1,11 @@
+{
+  "_comment": "Storyboard map for BUSINESS X-RAY video 1: How the X-Ray Works, Start to Finish. Spine = the whole journey. 5 acts as columns; SEED cycles chain across the slides (each act's DIRECT bridges into the next act's SHOW).",
+  "spine": "00-the-whole-journey",
+  "columns": [
+    {"label": "1 - YOU CAN'T SEE IT", "slides": ["01-you-are-the-bottleneck", "02-one-file-seven-pictures", "03-the-interview"]},
+    {"label": "2 - SEE THE CURRENT STATE", "slides": ["04-business-map", "05-bowtie-a-stranger-to-client", "06-bowtie-b-the-leaks", "06b-front-middle-back", "07-department-walk", "08-swimlane-a-lanes", "09-swimlane-b-three-levels", "10-swimlane-c-why-drill", "11-diagnosis-colors", "12-system-connection-map"]},
+    {"label": "3 - SCORE WHAT YOU HAVE", "slides": ["13-assets-a-day-one-handover", "14-assets-b-scoring", "15-leverage-score"]},
+    {"label": "4 - REIMAGINE", "slides": ["16-operating-system-map", "17-mcp-mapping"]},
+    {"label": "5 - ACT ON IT", "slides": ["17b-build-back-to-front", "18-roadmap", "19-implementation-router", "20-blueprint-gate", "21-the-loop"]}
+  ]
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ---- THE AI (canonical black-marker robot, running a skill) ---- -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="160" y1="156" x2="160" y2="170"/>
+    <rect x="118" y="170" width="84" height="60" rx="12"/>
+    <rect x="132" y="186" width="56" height="28" rx="7"/>
+    <line x1="160" y1="230" x2="160" y2="240"/>
+    <rect x="124" y="240" width="72" height="72" rx="12"/>
+    <line x1="124" y1="266" x2="96" y2="292"/>
+    <line x1="142" y1="312" x2="136" y2="340"/>
+    <line x1="178" y1="312" x2="184" y2="340"/>
+    <polyline points="196,266 236,252 256,246" fill="none"/>
+  </g>
+  <rect x="140" y="258" width="40" height="22" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="160" cy="150" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="146" cy="200" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="174" cy="200" r="6" fill="var(--green)" stroke="var(--green)"/>
+  <!-- robot -> orchestrator A ("runs a skill") -->
+  <line x1="258" y1="244" x2="298" y2="216" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="290,209 300,216 291,224" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ================= LEVEL 1 — the two orchestrators ================= -->
+  <!-- orchestrator A: publish-post/ -->
+  <rect x="300" y="176" width="300" height="64" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="322" y="197" width="16" height="6"  rx="2" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="322" y="203" width="32" height="22" rx="3" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- orchestrator B: create-carousel/ -->
+  <rect x="1000" y="176" width="300" height="64" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="1022" y="197" width="16" height="6"  rx="2" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="1022" y="203" width="32" height="22" rx="3" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+
+  <!-- ================= LEVEL 2 — each orchestrator's nested workflows (GREEN) ================= -->
+  <!-- box A -->
+  <rect x="300" y="280" width="300" height="196" rx="16" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.05)"/>
+  <!-- fork icon A -->
+  <line x1="320" y1="314" x2="331" y2="314" stroke="var(--green)" stroke-width="3"/>
+  <line x1="331" y1="314" x2="345" y2="304" stroke="var(--green)" stroke-width="3"/>
+  <line x1="331" y1="314" x2="345" y2="324" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="320" cy="314" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="345" cy="304" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="345" cy="324" r="2.6" fill="var(--green)" stroke="none"/>
+  <!-- tree spine A -->
+  <line x1="334" y1="380" x2="334" y2="456" stroke="var(--dim)" stroke-width="2"/>
+  <!-- box B -->
+  <rect x="1000" y="280" width="300" height="196" rx="16" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.05)"/>
+  <!-- fork icon B -->
+  <line x1="1020" y1="314" x2="1031" y2="314" stroke="var(--green)" stroke-width="3"/>
+  <line x1="1031" y1="314" x2="1045" y2="304" stroke="var(--green)" stroke-width="3"/>
+  <line x1="1031" y1="314" x2="1045" y2="324" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="1020" cy="314" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="1045" cy="304" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="1045" cy="324" r="2.6" fill="var(--green)" stroke="none"/>
+  <!-- tree spine B -->
+  <line x1="1034" y1="380" x2="1034" y2="456" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- GREEN "routes IN" arrows: orchestrator -> its own workflows box -->
+  <line x1="450" y1="242" x2="450" y2="278" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="443,270 450,280 457,270" stroke="var(--green)" stroke-width="4"/>
+  <line x1="1150" y1="242" x2="1150" y2="278" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="1143,270 1150,280 1157,270" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- BLUE "reaches OUT" arrows: BOTH orchestrators -> the SAME shared band -->
+  <path d="M600,214 C 690,240 730,430 762,592" stroke="var(--blue)" stroke-width="4"/>
+  <polyline points="753,584 762,596 771,584" stroke="var(--blue)" stroke-width="4"/>
+  <path d="M1000,214 C 910,240 870,430 838,592" stroke="var(--blue)" stroke-width="4"/>
+  <polyline points="829,584 838,596 847,584" stroke="var(--blue)" stroke-width="4"/>
+
+  <!-- ================= LEVEL 3 — the shared standalone skills (BLUE) ================= -->
+  <!-- neutral shared-zone container -->
+  <rect x="300" y="600" width="1000" height="228" rx="20" stroke="rgb(200,198,190)" stroke-width="2" fill="rgba(0,0,0,0.012)"/>
+  <!-- four standalone skill nodes -->
+  <rect x="332"  y="692" width="210" height="108" rx="16" stroke="var(--blue)" stroke-width="3" fill="rgba(52,120,190,0.05)"/>
+  <rect x="574"  y="692" width="210" height="108" rx="16" stroke="var(--blue)" stroke-width="3" fill="rgba(52,120,190,0.05)"/>
+  <rect x="816"  y="692" width="210" height="108" rx="16" stroke="var(--blue)" stroke-width="3" fill="rgba(52,120,190,0.05)"/>
+  <rect x="1058" y="692" width="210" height="108" rx="16" stroke="var(--blue)" stroke-width="3" fill="rgba(52,120,190,0.05)"/>
+  <!-- node folder glyphs (blue) -->
+  <rect x="421"  y="704" width="14" height="5"  rx="2" stroke="var(--blue)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="421"  y="709" width="30" height="18" rx="3" stroke="var(--blue)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="663"  y="704" width="14" height="5"  rx="2" stroke="var(--blue)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="663"  y="709" width="30" height="18" rx="3" stroke="var(--blue)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="905"  y="704" width="14" height="5"  rx="2" stroke="var(--blue)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="905"  y="709" width="30" height="18" rx="3" stroke="var(--blue)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1147" y="704" width="14" height="5"  rx="2" stroke="var(--blue)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1147" y="709" width="30" height="18" rx="3" stroke="var(--blue)" stroke-width="2.5" fill="var(--bg)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">The Three Levels Compose &#8212; They Don&#8217;t Compete</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">Read the arrows, not the names &#8212; each routes IN to its own workflows, and reaches OUT to shared skills</text>
+
+<!-- LEVEL 1 tags + orchestrator names -->
+<text x="450"  y="166" font-size="16" text-anchor="middle" fill="var(--dim)">SKILL SYSTEM / ORCHESTRATOR &#183; wires the rest</text>
+<text x="1150" y="166" font-size="16" text-anchor="middle" fill="var(--dim)">SKILL SYSTEM / ORCHESTRATOR &#183; wires the rest</text>
+<text class="mono" x="362"  y="224" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">publish-post/</text>
+<text class="mono" x="1058" y="224" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">create-carousel/</text>
+
+<!-- routes IN caption (worked once, on A) -->
+<text x="520" y="262" font-size="18" text-anchor="start" fill="var(--green)">routes IN</text>
+
+<!-- reaches OUT caption (between the two diverging blue arrows) -->
+<text x="800" y="298" font-size="22" font-weight="700" text-anchor="middle" fill="var(--blue)">reaches OUT</text>
+
+<!-- LEVEL 2 — workflows boxes -->
+<text x="356"  y="322" font-size="28" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text x="1056" y="322" font-size="28" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text x="320"  y="348" font-size="17" text-anchor="start" fill="var(--dim)">nested workflows &#183; serve one parent</text>
+<text x="1020" y="348" font-size="17" text-anchor="start" fill="var(--dim)">nested workflows &#183; serve one parent</text>
+
+<!-- box A tree rows -->
+<text class="mono" x="326" y="388" font-size="26" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="408" y="388" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">newsletter</text>
+<text class="mono" x="326" y="424" font-size="26" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="408" y="424" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">email</text>
+<text class="mono" x="326" y="460" font-size="26" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="408" y="460" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">thread</text>
+
+<!-- box B tree rows -->
+<text class="mono" x="1026" y="388" font-size="26" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="1108" y="388" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">cover</text>
+<text class="mono" x="1026" y="424" font-size="26" text-anchor="start" fill="var(--dim)">&#9500;&#9472;&#9472;</text>
+<text class="mono" x="1108" y="424" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">body</text>
+<text class="mono" x="1026" y="460" font-size="26" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="1108" y="460" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">cta</text>
+
+<!-- robot label -->
+<text x="160" y="362" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="160" y="386" font-size="17" text-anchor="middle" fill="var(--dim)">runs one skill per job</text>
+
+<!-- LEVEL 3 — shared band -->
+<text x="800" y="634" font-size="26" font-weight="700" text-anchor="middle" fill="var(--blue)">SHARED STANDALONE SKILLS</text>
+<text x="800" y="662" font-size="20" text-anchor="middle" fill="var(--dim)">reused by many parents &#183; fresh context (fork)</text>
+
+<!-- standalone node names + jobs -->
+<text class="mono" x="437"  y="748" font-size="24" font-weight="700" text-anchor="middle" fill="var(--blue)">writing-logic</text>
+<text x="437"  y="774" font-size="17" text-anchor="middle" fill="var(--dim)">argument structure</text>
+<text class="mono" x="679"  y="748" font-size="24" font-weight="700" text-anchor="middle" fill="var(--blue)">write-hook</text>
+<text x="679"  y="774" font-size="17" text-anchor="middle" fill="var(--dim)">the opening line</text>
+<text class="mono" x="921"  y="748" font-size="24" font-weight="700" text-anchor="middle" fill="var(--blue)">voice-cleanup</text>
+<text x="921"  y="774" font-size="17" text-anchor="middle" fill="var(--dim)">strip AI-isms</text>
+<text class="mono" x="1163" y="748" font-size="24" font-weight="700" text-anchor="middle" fill="var(--blue)">format-post</text>
+<text x="1163" y="774" font-size="17" text-anchor="middle" fill="var(--dim)">platform format</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="972" font-size="27" text-anchor="middle" fill="var(--ink)">Workflows serve ONE parent &#183; standalone skills serve MANY &#183; Skill Systems wire them together.</text>
+<text x="800" y="1012" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">That&#8217;s a skill library that chains.</text>
+</svg></body></html>

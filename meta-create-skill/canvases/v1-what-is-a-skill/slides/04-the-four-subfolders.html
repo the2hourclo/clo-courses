@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{--bg:rgb(250,249,245);--ink:rgb(33,33,33);--dim:rgb(120,120,125);--green:rgb(45,140,60);--amber:rgb(214,140,40);--blue:rgb(52,120,190);--purple:rgb(147,112,219);--sans:"Excalifont",Inter,system-ui,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}svg{display:block;}text{font-family:var(--sans);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
+<pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+<rect width="1600" height="1050" fill="var(--bg)"/><rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ============ SHAPES (all inside #rough; NO text here) ============ -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- CARD 1 - workflows/ (green) : cx=90 cy=195 -->
+  <rect x="90" y="195" width="700" height="350" rx="26" stroke="var(--green)" stroke-width="4" fill="rgba(45,140,60,0.035)"/>
+  <path d="M132,227 L172,227 L182,239 L210,239 L210,281 L132,281 Z" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="132" y1="303" x2="748" y2="303" stroke="var(--green)" stroke-width="2"/>
+  <rect x="132" y="417" width="350" height="58" rx="14" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.08)"/>
+  <!-- fork / branching-paths icon (workflows legend) : center ~706,252 -->
+  <circle cx="676" cy="252" r="5.5" stroke="var(--green)" stroke-width="2" fill="var(--green)"/>
+  <path d="M676,252 L702,252" stroke="var(--green)" stroke-width="3.5"/>
+  <path d="M702,252 L732,230" stroke="var(--green)" stroke-width="3.5"/>
+  <path d="M702,252 L732,274" stroke="var(--green)" stroke-width="3.5"/>
+  <circle cx="736" cy="228" r="5.5" stroke="var(--green)" stroke-width="2" fill="var(--green)"/>
+  <circle cx="736" cy="276" r="5.5" stroke="var(--green)" stroke-width="2" fill="var(--green)"/>
+
+  <!-- CARD 2 - scripts/ (amber) : cx=810 cy=195 -->
+  <rect x="810" y="195" width="700" height="350" rx="26" stroke="var(--amber)" stroke-width="4" fill="rgba(214,140,40,0.04)"/>
+  <path d="M852,227 L892,227 L902,239 L930,239 L930,281 L852,281 Z" stroke="var(--amber)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="852" y1="303" x2="1468" y2="303" stroke="var(--amber)" stroke-width="2"/>
+  <rect x="852" y="417" width="470" height="58" rx="14" stroke="var(--amber)" stroke-width="2.5" fill="rgba(214,140,40,0.10)"/>
+  <!-- gear / cog icon (scripts legend) : center ~1426,252 -->
+  <circle cx="1426" cy="252" r="19" stroke="var(--amber)" stroke-width="3.5" fill="var(--bg)"/>
+  <circle cx="1426" cy="252" r="7" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1445,252 L1453,252" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1439.4,265.4 L1445.1,271.1" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1426,271 L1426,279" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1412.6,265.4 L1406.9,271.1" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1407,252 L1399,252" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1412.6,238.6 L1406.9,232.9" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1426,233 L1426,225" stroke="var(--amber)" stroke-width="3"/>
+  <path d="M1439.4,238.6 L1445.1,232.9" stroke="var(--amber)" stroke-width="3"/>
+
+  <!-- CARD 3 - references/ (blue) : cx=90 cy=560 -->
+  <rect x="90" y="560" width="700" height="350" rx="26" stroke="var(--blue)" stroke-width="4" fill="rgba(52,120,190,0.04)"/>
+  <path d="M132,592 L172,592 L182,604 L210,604 L210,646 L132,646 Z" stroke="var(--blue)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="132" y1="668" x2="748" y2="668" stroke="var(--blue)" stroke-width="2"/>
+  <rect x="132" y="782" width="392" height="58" rx="14" stroke="var(--blue)" stroke-width="2.5" fill="rgba(52,120,190,0.07)"/>
+  <!-- open-book icon (references legend) : center ~706,617 -->
+  <path d="M706,603 C692,597 680,598 674,603 L674,633 C680,628 692,628 706,634 Z" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
+  <path d="M706,603 C720,597 732,598 738,603 L738,633 C732,628 720,628 706,634 Z" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
+  <path d="M706,603 L706,634" stroke="var(--blue)" stroke-width="3"/>
+  <path d="M683,611 L700,609" stroke="var(--blue)" stroke-width="2"/>
+  <path d="M712,609 L729,611" stroke="var(--blue)" stroke-width="2"/>
+
+  <!-- CARD 4 - assets/ (purple) : cx=810 cy=560 -->
+  <rect x="810" y="560" width="700" height="350" rx="26" stroke="var(--purple)" stroke-width="4" fill="rgba(147,112,219,0.05)"/>
+  <path d="M852,592 L892,592 L902,604 L930,604 L930,646 L852,646 Z" stroke="var(--purple)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="852" y1="668" x2="1468" y2="668" stroke="var(--purple)" stroke-width="2"/>
+  <rect x="852" y="782" width="560" height="58" rx="14" stroke="var(--purple)" stroke-width="2.5" fill="rgba(147,112,219,0.08)"/>
+  <!-- stacked-copy / template icon (assets legend) : center ~1426,617 -->
+  <rect x="1409" y="599" width="30" height="38" rx="4" stroke="var(--purple)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="1419" y="609" width="30" height="38" rx="4" stroke="var(--purple)" stroke-width="3" fill="var(--bg)"/>
+  <path d="M1426,621 L1442,621" stroke="var(--purple)" stroke-width="2.2"/>
+  <path d="M1426,629 L1442,629" stroke="var(--purple)" stroke-width="2.2"/>
+  <path d="M1426,637 L1437,637" stroke="var(--purple)" stroke-width="2.2"/>
+
+</g>
+
+<!-- ============ TEXT (all crisp, OUTSIDE #rough) ============ -->
+
+<!-- title + subtitle -->
+<text x="800" y="78" font-size="60" font-weight="700" text-anchor="middle" fill="var(--ink)">Four Optional Folders, Four Different Jobs</text>
+<text x="800" y="132" font-size="29" text-anchor="middle" fill="var(--dim)">what goes in each folder of a skill &#183; real files from meta-create-skill</text>
+
+<!-- CARD 1 - workflows/ -->
+<text x="230" y="272" font-size="44" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text x="132" y="345" font-size="30" font-weight="700" text-anchor="start" fill="var(--green)">which job?</text>
+<text x="132" y="389" font-size="26" text-anchor="start" fill="var(--ink)">One file per job; only the match loads.</text>
+<text x="156" y="454" font-size="26" text-anchor="start" fill="var(--ink)">workflows/test-skill.md</text>
+<text x="132" y="515" font-size="23" text-anchor="start" fill="var(--dim)">the ordered steps for one job &#183; loads on &#8220;test this skill&#8221;</text>
+
+<!-- CARD 2 - scripts/ -->
+<text x="950" y="272" font-size="44" font-weight="700" text-anchor="start" fill="var(--amber)">scripts/</text>
+<text x="852" y="345" font-size="30" font-weight="700" text-anchor="start" fill="var(--amber)">what deterministic work?</text>
+<text x="852" y="389" font-size="26" text-anchor="start" fill="var(--ink)">Deterministic work; source never loads.</text>
+<text x="876" y="454" font-size="26" text-anchor="start" fill="var(--ink)">scripts/generate_eval_viewer.py</text>
+<text x="852" y="515" font-size="23" text-anchor="start" fill="var(--dim)">builds the HTML eval-results viewer</text>
+
+<!-- CARD 3 - references/ -->
+<text x="230" y="637" font-size="44" font-weight="700" text-anchor="start" fill="var(--blue)">references/</text>
+<text x="132" y="710" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">what deeper doc &#8212; only if needed?</text>
+<text x="132" y="754" font-size="26" text-anchor="start" fill="var(--ink)">Deep docs &#8212; loaded only when needed.</text>
+<text x="156" y="819" font-size="26" text-anchor="start" fill="var(--ink)">references/frontmatter.md</text>
+<text x="132" y="880" font-size="23" text-anchor="start" fill="var(--dim)">holds deeper gotchas + origins &#183; the full YAML reference</text>
+
+<!-- CARD 4 - assets/ -->
+<text x="950" y="637" font-size="44" font-weight="700" text-anchor="start" fill="var(--purple)">assets/</text>
+<text x="852" y="710" font-size="30" font-weight="700" text-anchor="start" fill="var(--purple)">what do I copy into the output?</text>
+<text x="852" y="754" font-size="26" text-anchor="start" fill="var(--ink)">Templates &amp; files used in the output.</text>
+<text x="876" y="818" font-size="24" text-anchor="start" fill="var(--ink)">templates/orchestrator-skill-template.md</text>
+<text x="852" y="880" font-size="23" text-anchor="start" fill="var(--dim)">holds your gold example + templates &#183; copied into new skills</text>
+
+<!-- takeaway -->
+<text x="800" y="972" font-size="33" text-anchor="middle" fill="var(--ink)">Same skill, four folders &#8212; each answers a different question,</text>
+<text x="800" y="1018" font-size="33" font-weight="700" text-anchor="middle" fill="var(--green)">so every job loads only the file it needs.</text>
+</svg></body></html>

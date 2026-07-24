@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ LEFT OUTCOME CARD — ITS OWN SKILL (green = build a new thing) ============ -->
+  <rect x="88" y="150" width="452" height="186" rx="22" stroke="var(--green)" stroke-width="5" fill="rgba(45,140,60,0.06)"/>
+  <!-- folder glyph before write-hook/ -->
+  <rect x="150" y="240" width="14" height="7" rx="2" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="150" y="246" width="30" height="22" rx="3" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- REQUIRED badge next to SKILL.md (ink weight, never a subfolder hue) -->
+  <rect x="384" y="288" width="116" height="30" rx="7" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- ============ RIGHT OUTCOME CARD — A WORKFLOW (a file in the parent) ============ -->
+  <rect x="1060" y="150" width="452" height="186" rx="22" stroke="var(--ink)" stroke-width="4" fill="rgba(0,0,0,0.02)"/>
+  <!-- workflows/ = GREEN fork icon (fixed subfolder legend) -->
+  <line x1="1188" y1="290" x2="1199" y2="290" stroke="var(--green)" stroke-width="3"/>
+  <line x1="1199" y1="290" x2="1213" y2="280" stroke="var(--green)" stroke-width="3"/>
+  <line x1="1199" y1="290" x2="1213" y2="300" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="1188" cy="290" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="1213" cy="280" r="2.6" fill="var(--green)" stroke="none"/>
+  <circle cx="1213" cy="300" r="2.6" fill="var(--green)" stroke="none"/>
+
+  <!-- ============ THE AI — canonical black-marker robot, gaining a new capability ============ -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <line x1="624" y1="166" x2="624" y2="176"/>
+    <rect x="588" y="176" width="72" height="48" rx="11"/>
+    <rect x="602" y="189" width="44" height="22" rx="6" stroke-width="3"/>
+    <line x1="624" y1="224" x2="624" y2="232"/>
+    <rect x="592" y="232" width="64" height="54" rx="11"/>
+    <line x1="592" y1="250" x2="570" y2="270"/>
+    <line x1="656" y1="250" x2="676" y2="252"/>
+  </g>
+  <rect x="606" y="247" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
+  <circle cx="624" cy="160" r="5" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="616" cy="200" r="4.2" fill="var(--green)" stroke="var(--green)"/>
+  <circle cx="634" cy="200" r="4.2" fill="var(--green)" stroke="var(--green)"/>
+
+  <!-- the new capability the AI just got (a green spark the robot holds) -->
+  <rect x="664" y="226" width="26" height="26" rx="5" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.08)"/>
+
+  <!-- start node pill: where does this new capability live? -->
+  <rect x="702" y="214" width="256" height="50" rx="14" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- down arrow from start node into the questions -->
+  <line x1="822" y1="266" x2="806" y2="338" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="798,328 806,342 814,328" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ============ THE 5 QUESTIONS (central spine) ============ -->
+  <!-- Q1 -->
+  <rect x="560" y="344" width="480" height="64" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="592" cy="376" r="17" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="558" y1="376" x2="536" y2="376" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="544,369 534,376 544,383" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="1040" y1="376" x2="1062" y2="376" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1054,369 1064,376 1054,383" stroke="var(--ink)" stroke-width="3.5"/>
+  <!-- Q2 -->
+  <rect x="560" y="432" width="480" height="64" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="592" cy="464" r="17" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="558" y1="464" x2="536" y2="464" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="544,457 534,464 544,471" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="1040" y1="464" x2="1062" y2="464" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1054,457 1064,464 1054,471" stroke="var(--ink)" stroke-width="3.5"/>
+  <!-- Q3 -->
+  <rect x="560" y="520" width="480" height="64" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="592" cy="552" r="17" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="558" y1="552" x2="536" y2="552" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="544,545 534,552 544,559" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="1040" y1="552" x2="1062" y2="552" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1054,545 1064,552 1054,559" stroke="var(--ink)" stroke-width="3.5"/>
+  <!-- Q4 -->
+  <rect x="560" y="608" width="480" height="64" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="592" cy="640" r="17" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="558" y1="640" x2="536" y2="640" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="544,633 534,640 544,647" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="1040" y1="640" x2="1062" y2="640" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1054,633 1064,640 1054,647" stroke="var(--ink)" stroke-width="3.5"/>
+  <!-- Q5 -->
+  <rect x="560" y="696" width="480" height="64" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="592" cy="728" r="17" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="558" y1="728" x2="536" y2="728" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="544,721 534,728 544,735" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="1040" y1="728" x2="1062" y2="728" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1054,721 1064,728 1054,735" stroke="var(--ink)" stroke-width="3.5"/>
+
+  <!-- ============ RULE-OF-THUMB CALLOUT (blue = the standing guidance) ============ -->
+  <rect x="196" y="776" width="1208" height="104" rx="18" stroke="var(--blue)" stroke-width="3" fill="rgba(52,120,190,0.06)"/>
+  <!-- small blue book glyph -->
+  <line x1="252" y1="806" x2="252" y2="826" stroke="var(--blue)" stroke-width="2.5"/>
+  <path d="M252,806 L237,810 L237,824 L252,820 Z" stroke="var(--blue)" stroke-width="3"/>
+  <path d="M252,806 L267,810 L267,824 L252,820 Z" stroke="var(--blue)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="74" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">Its Own Skill, or Just a Workflow?</text>
+<text x="800" y="120" font-size="27" text-anchor="middle" fill="var(--dim)">The call every builder hits &#183; five questions decide where a new capability lives</text>
+
+<!-- LEFT outcome card text -->
+<text x="314" y="188" font-size="26" font-weight="700" text-anchor="middle" fill="var(--green)">ITS OWN SKILL</text>
+<text x="314" y="212" font-size="18" text-anchor="middle" fill="var(--dim)">reusable across many skills</text>
+<text class="mono" x="190" y="266" font-size="27" font-weight="700" text-anchor="start" fill="var(--ink)">write-hook/</text>
+<text class="mono" x="190" y="306" font-size="26" text-anchor="start" fill="var(--ink)">&#9492;&#9472;&#9472; SKILL.md</text>
+<text x="442" y="309" font-size="18" font-weight="700" text-anchor="middle" fill="var(--ink)">REQUIRED</text>
+
+<!-- RIGHT outcome card text -->
+<text x="1286" y="188" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">A WORKFLOW</text>
+<text x="1286" y="212" font-size="18" text-anchor="middle" fill="var(--dim)">a file inside one parent skill</text>
+<text class="mono" x="1090" y="256" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">write-content/</text>
+<text class="mono" x="1122" y="296" font-size="25" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="1222" y="296" font-size="25" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text class="mono" x="1160" y="330" font-size="24" text-anchor="start" fill="var(--dim)">&#9492;&#9472;&#9472; newsletter.md</text>
+
+<!-- robot label + new-capability spark -->
+<text x="624" y="308" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">THE AI</text>
+<text x="677" y="247" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">+</text>
+<text x="830" y="246" font-size="24" text-anchor="middle" fill="var(--ink)">a new capability to add</text>
+
+<!-- ===== the 5 questions ===== -->
+<text x="592" y="384" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">1</text>
+<text x="620" y="384" font-size="24" text-anchor="start" fill="var(--ink)">Who needs it?</text>
+<text x="524" y="383" font-size="22" text-anchor="end" fill="var(--green)">MANY skills use it</text>
+<text x="1078" y="383" font-size="22" text-anchor="start" fill="var(--ink)">just ONE parent</text>
+
+<text x="592" y="472" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">2</text>
+<text x="620" y="472" font-size="24" text-anchor="start" fill="var(--ink)">Call it by name?</text>
+<text x="524" y="471" font-size="22" text-anchor="end" fill="var(--green)">yes &#8212; &#8220;humanize this&#8221;</text>
+<text x="1078" y="471" font-size="22" text-anchor="start" fill="var(--ink)">no &#8212; you call the parent</text>
+
+<text x="592" y="560" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">3</text>
+<text x="620" y="560" font-size="24" text-anchor="start" fill="var(--ink)">Universal or specific?</text>
+<text x="524" y="559" font-size="22" text-anchor="end" fill="var(--green)">any content type</text>
+<text x="1078" y="559" font-size="22" text-anchor="start" fill="var(--ink)">one content type only</text>
+
+<text x="592" y="648" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">4</text>
+<text x="620" y="648" font-size="24" text-anchor="start" fill="var(--ink)">Needs a clean read?</text>
+<text x="524" y="647" font-size="22" text-anchor="end" fill="var(--green)">yes &#8212; fresh, unbiased</text>
+<text x="1078" y="647" font-size="22" text-anchor="start" fill="var(--ink)">no &#8212; parent context helps</text>
+
+<text x="592" y="736" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">5</text>
+<text x="620" y="736" font-size="24" text-anchor="start" fill="var(--ink)">Parent works without it?</text>
+<text x="524" y="735" font-size="22" text-anchor="end" fill="var(--green)">yes &#8594; pull it out</text>
+<text x="1078" y="735" font-size="22" text-anchor="start" fill="var(--ink)">no &#8594; keep it nested</text>
+
+<!-- ===== rule-of-thumb callout ===== -->
+<text x="292" y="812" font-size="20" font-weight="700" text-anchor="start" fill="var(--blue)">RULE OF THUMB</text>
+<text x="800" y="843" font-size="23" text-anchor="middle" fill="var(--ink)">Signals mixed? Default to a workflow inside the parent, and pull it out later.</text>
+<text x="800" y="872" font-size="21" text-anchor="middle" fill="var(--dim)">Merging a wrong split back is expensive &#183; extracting one later is cheap.</text>
+
+<!-- ===== one-line takeaway ===== -->
+<text x="800" y="932" font-size="29" text-anchor="middle" fill="var(--ink)">Reusable, named, universal, needs a clean read &#8594; its own skill.</text>
+<text x="800" y="976" font-size="31" font-weight="700" text-anchor="middle" fill="var(--green)">Everything else &#8594; a workflow inside the parent.</text>
+</svg></body></html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{--bg:rgb(250,249,245);--ink:rgb(33,33,33);--dim:rgb(120,120,125);--red:rgb(214,69,58);--green:rgb(45,140,60);--blue:rgb(52,120,190);--sans:"Excalifont",Inter,system-ui,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}svg{display:block;}text{font-family:var(--sans);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
+<pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+<rect width="1600" height="1050" fill="var(--bg)"/><rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===== SHAPES (wobble) — NO text in here ===== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- center divider -->
+  <line x1="720" y1="182" x2="720" y2="882" stroke="rgb(220,218,210)" stroke-width="3"/>
+
+  <!-- LEFT: the required YAML card -->
+  <rect x="110" y="255" width="560" height="320" rx="20" stroke="var(--green)" stroke-width="5" fill="rgba(45,140,60,0.05)"/>
+  <!-- "always on" indicator lights -->
+  <circle cx="150" cy="351" r="7" fill="var(--green)" stroke="none"/>
+  <circle cx="150" cy="424" r="7" fill="var(--green)" stroke="none"/>
+
+  <!-- dashed connector: the card (description) -> router -->
+  <line x1="392" y1="580" x2="392" y2="609" stroke="var(--ink)" stroke-width="2.5" stroke-dasharray="4 8"/>
+  <polyline points="380,594 392,613 404,594" stroke="var(--ink)" stroke-width="2.5"/>
+
+  <!-- router node -->
+  <rect x="150" y="615" width="490" height="150" rx="16" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <circle cx="220" cy="676" r="26" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="238" y1="694" x2="262" y2="720" stroke="var(--ink)" stroke-width="4"/>
+
+  <!-- RIGHT: the control console -->
+  <rect x="758" y="285" width="784" height="575" rx="24" stroke="var(--ink)" stroke-width="4" fill="rgba(52,120,190,0.03)"/>
+  <line x1="790" y1="408" x2="1512" y2="408" stroke="rgb(220,218,210)" stroke-width="2"/>
+  <line x1="790" y1="516" x2="1512" y2="516" stroke="rgb(220,218,210)" stroke-width="2"/>
+  <line x1="790" y1="624" x2="1512" y2="624" stroke="rgb(220,218,210)" stroke-width="2"/>
+  <line x1="790" y1="732" x2="1512" y2="732" stroke="rgb(220,218,210)" stroke-width="2"/>
+
+  <!-- 5 dials (knob = circle + pointer + center dot) -->
+  <circle cx="852" cy="354" r="34" stroke="var(--blue)" stroke-width="5" fill="var(--bg)"/>
+  <line x1="852" y1="354" x2="832" y2="330" stroke="var(--blue)" stroke-width="5"/>
+  <circle cx="852" cy="354" r="6" fill="var(--blue)" stroke="none"/>
+
+  <circle cx="852" cy="462" r="34" stroke="var(--blue)" stroke-width="5" fill="var(--bg)"/>
+  <line x1="852" y1="462" x2="854" y2="428" stroke="var(--blue)" stroke-width="5"/>
+  <circle cx="852" cy="462" r="6" fill="var(--blue)" stroke="none"/>
+
+  <circle cx="852" cy="570" r="34" stroke="var(--blue)" stroke-width="5" fill="var(--bg)"/>
+  <line x1="852" y1="570" x2="874" y2="548" stroke="var(--blue)" stroke-width="5"/>
+  <circle cx="852" cy="570" r="6" fill="var(--blue)" stroke="none"/>
+
+  <circle cx="852" cy="678" r="34" stroke="var(--blue)" stroke-width="5" fill="var(--bg)"/>
+  <line x1="852" y1="678" x2="882" y2="668" stroke="var(--blue)" stroke-width="5"/>
+  <circle cx="852" cy="678" r="6" fill="var(--blue)" stroke="none"/>
+
+  <circle cx="852" cy="786" r="34" stroke="var(--blue)" stroke-width="5" fill="var(--bg)"/>
+  <line x1="852" y1="786" x2="872" y2="810" stroke="var(--blue)" stroke-width="5"/>
+  <circle cx="852" cy="786" r="6" fill="var(--blue)" stroke="none"/>
+
+</g>
+
+<!-- ===== TEXT (crisp) — everything below is OUTSIDE the filter ===== -->
+
+<!-- claim title -->
+<text x="800" y="86" font-size="64" font-weight="700" text-anchor="middle" fill="var(--ink)">Two Fields Required. The Rest Are Dials.</text>
+<text x="800" y="134" font-size="32" text-anchor="middle" fill="var(--dim)">a skill's YAML frontmatter is its control panel</text>
+
+<!-- LEFT header -->
+<text x="385" y="228" font-size="34" font-weight="700" text-anchor="middle" fill="var(--green)">REQUIRED &#8212; always on</text>
+
+<!-- YAML card text -->
+<text x="180" y="306" font-size="26" text-anchor="start" fill="var(--dim)">---</text>
+<text x="180" y="362" font-size="32" font-weight="700" text-anchor="start" fill="var(--ink)">name:</text>
+<text x="352" y="362" font-size="23" text-anchor="start" fill="var(--dim)">what the skill's called</text>
+<text x="180" y="434" font-size="32" font-weight="700" text-anchor="start" fill="var(--ink)">description:</text>
+<text x="200" y="472" font-size="22" text-anchor="start" fill="var(--dim)">a landing page written for a router</text>
+<text x="180" y="536" font-size="26" text-anchor="start" fill="var(--dim)">---</text>
+
+<!-- router node text -->
+<text x="452" y="662" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI'S ROUTER</text>
+<text x="452" y="700" font-size="23" text-anchor="middle" fill="var(--dim)">reads ONLY the description</text>
+<text x="452" y="734" font-size="23" text-anchor="middle" fill="var(--dim)">&#8594; fire this skill, or skip it?</text>
+
+<!-- warning -->
+<text x="385" y="818" font-size="27" font-weight="700" text-anchor="middle" fill="var(--red)">Vague description = skill silently never fires.</text>
+
+<!-- RIGHT header -->
+<text x="1150" y="228" font-size="34" font-weight="700" text-anchor="middle" fill="var(--blue)">OPTIONAL DIALS</text>
+<text x="1150" y="260" font-size="23" text-anchor="middle" fill="var(--dim)">turn these only when the default's wrong</text>
+
+<!-- dial labels -->
+<text x="912" y="348" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">context: fork</text>
+<text x="912" y="380" font-size="22" text-anchor="start" fill="var(--dim)">runs isolated &#8212; fresh context, no bleed-through</text>
+
+<text x="912" y="456" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">model</text>
+<text x="912" y="488" font-size="22" text-anchor="start" fill="var(--dim)">swap the engine: cheap+fast &#8596; most capable</text>
+
+<text x="912" y="564" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">effort</text>
+<text x="912" y="596" font-size="22" text-anchor="start" fill="var(--dim)">how hard it thinks first: low &#8594; max</text>
+
+<text x="912" y="672" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">allowed-tools</text>
+<text x="912" y="704" font-size="22" text-anchor="start" fill="var(--dim)">pre-approves tools &#8212; no pausing to ask mid-run</text>
+
+<text x="912" y="780" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">disable-model-invocation: true</text>
+<text x="912" y="812" font-size="22" text-anchor="start" fill="var(--dim)">manual-only, like a slash command</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="1000" font-size="32" font-weight="700" text-anchor="middle" fill="var(--ink)">Required: name + description &#8212; the rest are dials for when the default's wrong.</text>
+</svg></body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ================= THREE COLUMN CARDS ================= -->
+  <rect x="100" y="190" width="430" height="606" rx="20" stroke="var(--ink)" stroke-width="3" fill="rgba(0,0,0,0.015)"/>
+  <rect x="585" y="190" width="430" height="606" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.012)"/>
+  <rect x="1070" y="190" width="430" height="606" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.012)"/>
+
+  <!-- START-HERE underline on DO FIRST (green = the path) -->
+  <line x1="128" y1="250" x2="250" y2="250" stroke="var(--green)" stroke-width="3.5"/>
+
+  <!-- dividers under each column header -->
+  <line x1="124" y1="286" x2="506" y2="286" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="609" y1="286" x2="991" y2="286" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="1094" y1="286" x2="1476" y2="286" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- ===== COL 1 · item 1 : proposal template (purple PROCESS dot · digital asset) ===== -->
+  <rect x="122" y="296" width="386" height="150" rx="14" stroke="var(--dim)" stroke-width="1.6" fill="rgba(0,0,0,0.02)"/>
+  <rect x="150" y="318" width="26" height="26" rx="6" stroke="var(--ink)" stroke-width="2.5"/>
+  <circle cx="482" cy="328" r="12" fill="var(--purple)" stroke="none"/>
+
+  <!-- ===== COL 1 · item 2 : build the proposal-drafting skill (red PROCESS dot · bottleneck) ===== -->
+  <rect x="122" y="462" width="386" height="150" rx="14" stroke="var(--dim)" stroke-width="1.6" fill="rgba(0,0,0,0.02)"/>
+  <rect x="150" y="484" width="26" height="26" rx="6" stroke="var(--ink)" stroke-width="2.5"/>
+  <circle cx="482" cy="494" r="12" fill="var(--red)" stroke="none"/>
+
+  <!-- dependency arrow: template (item1) -> skill (item2) -->
+  <line x1="166" y1="448" x2="166" y2="460" stroke="var(--purple)" stroke-width="2.5" stroke-dasharray="6 5"/>
+  <polyline points="160,454 166,462 172,454" stroke="var(--purple)" stroke-width="2.5"/>
+
+  <!-- ===== COL 1 · item 3 : stop proposals for the small tier (ink PROCESS dot · process change) ===== -->
+  <rect x="122" y="628" width="386" height="150" rx="14" stroke="var(--dim)" stroke-width="1.6" fill="rgba(0,0,0,0.02)"/>
+  <rect x="150" y="650" width="26" height="26" rx="6" stroke="var(--ink)" stroke-width="2.5"/>
+  <circle cx="482" cy="660" r="12" fill="var(--ink)" stroke="none"/>
+
+  <!-- ===== COL 2 · payment status (amber PROCESS dot · automate) ===== -->
+  <rect x="607" y="300" width="386" height="214" rx="14" stroke="var(--dim)" stroke-width="1.6" fill="rgba(0,0,0,0.02)"/>
+  <rect x="635" y="326" width="30" height="30" rx="6" stroke="var(--ink)" stroke-width="2.5"/>
+  <circle cx="967" cy="340" r="12" fill="var(--amber)" stroke="none"/>
+
+  <!-- ===== COL 2 · email nurture (purple ASSET chip · scorecard red inside) ===== -->
+  <rect x="607" y="536" width="386" height="214" rx="14" stroke="var(--dim)" stroke-width="1.6" fill="rgba(0,0,0,0.02)"/>
+  <rect x="635" y="562" width="30" height="30" rx="6" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="883" y="550" width="92" height="30" rx="15" stroke="var(--purple)" stroke-width="2.5" fill="rgba(147,112,219,0.12)"/>
+  <circle cx="901" cy="565" r="7" fill="var(--red)" stroke="none"/>
+
+  <!-- ===== COL 3 · testimonial capture (purple ASSET chip · scorecard red inside) ===== -->
+  <rect x="1092" y="300" width="386" height="214" rx="14" stroke="var(--dim)" stroke-width="1.6" fill="rgba(0,0,0,0.02)"/>
+  <rect x="1120" y="326" width="30" height="30" rx="6" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="1364" y="314" width="92" height="30" rx="15" stroke="var(--purple)" stroke-width="2.5" fill="rgba(147,112,219,0.12)"/>
+  <circle cx="1382" cy="329" r="7" fill="var(--red)" stroke="none"/>
+
+  <!-- ===== COL 3 · course as self-serve (purple ASSET chip · scorecard yellow inside) ===== -->
+  <rect x="1092" y="536" width="386" height="214" rx="14" stroke="var(--dim)" stroke-width="1.6" fill="rgba(0,0,0,0.02)"/>
+  <rect x="1120" y="562" width="30" height="30" rx="6" stroke="var(--ink)" stroke-width="2.5"/>
+  <rect x="1364" y="550" width="92" height="30" rx="15" stroke="var(--purple)" stroke-width="2.5" fill="rgba(147,112,219,0.12)"/>
+  <circle cx="1382" cy="565" r="7" fill="var(--amber)" stroke="none"/>
+
+  <!-- progression chevrons between columns -->
+  <polyline points="550,476 566,490 550,504" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1035,476 1051,490 1035,504" stroke="var(--dim)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 5 &#183; ACT ON IT</text>
+<text x="800" y="116" font-size="48" font-weight="700" text-anchor="middle" fill="var(--ink)">The 90-Day Roadmap &#8212; Do First, Do Next, Do Later</text>
+<text x="800" y="158" font-size="25" text-anchor="middle" fill="var(--dim)">Every gap we found becomes one dated, checkable action &#8212; ordered so the bottleneck clears first.</text>
+
+<!-- ===== column headers ===== -->
+<text x="128" y="242" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">DO FIRST</text>
+<text x="502" y="240" font-size="21" text-anchor="end" fill="var(--dim)">weeks 1&#8211;2</text>
+<text x="613" y="242" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">DO NEXT</text>
+<text x="987" y="240" font-size="21" text-anchor="end" fill="var(--dim)">weeks 3&#8211;6</text>
+<text x="1098" y="242" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">DO LATER</text>
+<text x="1472" y="240" font-size="21" text-anchor="end" fill="var(--dim)">weeks 7&#8211;12</text>
+
+<!-- ===== COL 1 · item 1 : proposal template (purple asset mark — the dependency, build first) ===== -->
+<text x="194" y="338" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">Write the proposal</text>
+<text x="194" y="368" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">template</text>
+<text x="152" y="404" font-size="17" text-anchor="start" fill="var(--dim)">from your swimlane &#183; the missing asset</text>
+<text x="152" y="430" font-size="17" text-anchor="start" fill="var(--purple)">build once, reuse forever</text>
+
+<!-- ===== COL 1 · item 2 : proposal-drafting skill (red bottleneck source) ===== -->
+<text x="194" y="504" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">Build the proposal-</text>
+<text x="194" y="534" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">drafting skill</text>
+<text x="152" y="570" font-size="17" text-anchor="start" fill="var(--dim)">from your swimlane &#183; the red bottleneck</text>
+<text x="152" y="596" font-size="17" font-weight="700" text-anchor="start" fill="var(--purple)">needs the template above first</text>
+
+<!-- ===== COL 1 · item 3 : stop proposals for the small tier (ink process change) ===== -->
+<text x="194" y="670" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">Stop sending proposals</text>
+<text x="194" y="700" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">for the small tier</text>
+<text x="152" y="736" font-size="17" text-anchor="start" fill="var(--dim)">from your swimlane &#183; a process change</text>
+<text x="152" y="762" font-size="17" text-anchor="start" fill="var(--ink)">decide it live on the call</text>
+
+<!-- ===== COL 2 · payment status (amber — the manual bridge) ===== -->
+<text x="679" y="350" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Connect payment</text>
+<text x="679" y="386" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">status</text>
+<text x="637" y="440" font-size="18" text-anchor="start" fill="var(--dim)">from your system map &#183; manual bridge</text>
+<text x="637" y="476" font-size="18" text-anchor="start" fill="var(--amber)">Stripe &#8594; Notion, no more chasing</text>
+
+<!-- ===== COL 2 · email nurture (ASSET · scorecard red) ===== -->
+<text x="679" y="586" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Email nurture</text>
+<text x="679" y="622" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">sequence</text>
+<text x="637" y="676" font-size="18" text-anchor="start" fill="var(--dim)">from your scorecard &#183; a red asset</text>
+<text x="637" y="712" font-size="18" text-anchor="start" fill="var(--purple)">the list warms itself</text>
+<text x="917" y="570" font-size="16" font-weight="700" text-anchor="start" fill="var(--purple)">asset</text>
+
+<!-- ===== COL 3 · testimonial capture (ASSET · scorecard red) ===== -->
+<text x="1164" y="350" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Testimonial</text>
+<text x="1164" y="386" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">capture system</text>
+<text x="1122" y="440" font-size="18" text-anchor="start" fill="var(--dim)">from your scorecard &#183; a red asset</text>
+<text x="1122" y="476" font-size="18" text-anchor="start" fill="var(--purple)">proof collected on autopilot</text>
+<text x="1398" y="334" font-size="16" font-weight="700" text-anchor="start" fill="var(--purple)">asset</text>
+
+<!-- ===== COL 3 · course as self-serve (ASSET · scorecard yellow to green) ===== -->
+<text x="1164" y="586" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Course as a</text>
+<text x="1164" y="622" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">self-serve offer</text>
+<text x="1122" y="676" font-size="18" text-anchor="start" fill="var(--dim)">from your scorecard &#183; yellow &#8594; green</text>
+<text x="1122" y="712" font-size="18" text-anchor="start" fill="var(--purple)">sells without a call</text>
+<text x="1398" y="570" font-size="16" font-weight="700" text-anchor="start" fill="var(--purple)">asset</text>
+
+<!-- ===== two-language key ===== -->
+<text x="800" y="826" font-size="17" text-anchor="middle" fill="var(--dim)">Round dot = a process step &#183; purple chip = an asset from your scorecard</text>
+
+<!-- ===== ordering logic (the ONE lesson) ===== -->
+<text x="800" y="864" font-size="22" text-anchor="middle" fill="var(--dim)">Ordered by impact on the bottleneck first &#8212; and dependencies before the things that need them.</text>
+
+<!-- ===== takeaway + bridge to routing ===== -->
+<text x="800" y="906" font-size="27" text-anchor="middle" fill="var(--ink)">Every mark from your pictures &#8212; process step or asset &#8212; is now one dated action.</text>
+<text x="800" y="952" font-size="29" font-weight="700" text-anchor="middle" fill="var(--green)">But a list is not a build &#8212; next, each item gets classified and routed to what makes it.</text>
+</svg></body></html>

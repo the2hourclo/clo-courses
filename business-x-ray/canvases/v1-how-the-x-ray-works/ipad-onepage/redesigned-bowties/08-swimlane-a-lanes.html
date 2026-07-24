@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(250,249,245); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(210,208,200)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ TOP: the flat row of steps (SHOW) ============ -->
+  <!-- 6 plain boxes, centers 360 560 760 960 1160 1360 -->
+  <rect x="276" y="224" width="168" height="60" rx="12" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="476" y="224" width="168" height="60" rx="12" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="676" y="224" width="168" height="60" rx="12" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="876" y="224" width="168" height="60" rx="12" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="1076" y="224" width="168" height="60" rx="12" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="1276" y="224" width="168" height="60" rx="12" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <!-- flat arrows between them -->
+  <line x1="444" y1="254" x2="474" y2="254" stroke="var(--dim)" stroke-width="2.5"/>
+  <polyline points="466,248 476,254 466,260" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="644" y1="254" x2="674" y2="254" stroke="var(--dim)" stroke-width="2.5"/>
+  <polyline points="666,248 676,254 666,260" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="844" y1="254" x2="874" y2="254" stroke="var(--dim)" stroke-width="2.5"/>
+  <polyline points="866,248 876,254 866,260" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1044" y1="254" x2="1074" y2="254" stroke="var(--dim)" stroke-width="2.5"/>
+  <polyline points="1066,248 1076,254 1066,260" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1244" y1="254" x2="1274" y2="254" stroke="var(--dim)" stroke-width="2.5"/>
+  <polyline points="1266,248 1276,254 1266,260" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- ============ transition: sort down into lanes ============ -->
+  <line x1="800" y1="340" x2="800" y2="370" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="790,360 800,374 810,360" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ============ BOTTOM: the swimlane (EXTEND) ============ -->
+  <!-- YOU lane highlight (TOP lane, where the eye lands) -->
+  <rect x="262" y="384" width="1216" height="125" fill="rgba(33,33,33,0.05)" stroke="none"/>
+  <!-- pool outer + lane separators + label divider -->
+  <rect x="120" y="384" width="1358" height="375" rx="10" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
+  <line x1="120" y1="509" x2="1478" y2="509" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="120" y1="634" x2="1478" y2="634" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="262" y1="384" x2="262" y2="759" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- YOU lane boxes (TOP lane, y=414): reply 560, the call 960, proposal 1160, signed 1360 -->
+  <rect x="476" y="414" width="168" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="876" y="414" width="168" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1076" y="414" width="168" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1276" y="414" width="168" height="64" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- SYSTEM lane boxes (BOTTOM lane, y=664): inquiry 360, call booked 760 -->
+  <rect x="276" y="664" width="168" height="64" rx="12" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+  <rect x="676" y="664" width="168" height="64" rx="12" stroke="var(--ink)" stroke-width="2" fill="rgba(0,0,0,0.02)"/>
+
+  <!-- handoff arrows (cross-lane = a handoff) -->
+  <!-- A1 inquiry(SYSTEM) -> reply(YOU): up -->
+  <polyline points="444,696 460,696 460,446 476,446" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="464,439 476,446 464,453" stroke="var(--ink)" stroke-width="3"/>
+  <!-- A2 reply(YOU) -> call booked(SYSTEM): down -->
+  <polyline points="644,446 660,446 660,696 676,696" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="664,689 676,696 664,703" stroke="var(--ink)" stroke-width="3"/>
+  <!-- A3 call booked(SYSTEM) -> the call(YOU): up -->
+  <polyline points="844,696 860,696 860,446 876,446" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="864,439 876,446 864,453" stroke="var(--ink)" stroke-width="3"/>
+  <!-- A4 the call -> proposal: same lane -->
+  <line x1="1044" y1="446" x2="1074" y2="446" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="1064,439 1076,446 1064,453" stroke="var(--ink)" stroke-width="3"/>
+  <!-- A5 proposal -> signed: same lane -->
+  <line x1="1244" y1="446" x2="1274" y2="446" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="1264,439 1276,446 1264,453" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- ==== lane label icons ==== -->
+  <!-- YOU stick figure (marker-circle head) — TOP lane -->
+  <circle cx="191" cy="406" r="12" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="191" y1="418" x2="191" y2="442" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="173" y1="428" x2="209" y2="428" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="191" y1="442" x2="181" y2="457" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="191" y1="442" x2="201" y2="457" stroke="var(--ink)" stroke-width="3"/>
+
+  <!-- VA = plain stick figure — MIDDLE lane -->
+  <circle cx="191" cy="536" r="10" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="191" y1="546" x2="191" y2="568" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="175" y1="555" x2="207" y2="555" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="191" y1="568" x2="182" y2="582" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="191" y1="568" x2="200" y2="582" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- SYSTEM = 3 app tiles — BOTTOM lane -->
+  <rect x="158" y="656" width="20" height="20" rx="4" stroke="var(--ink)" stroke-width="2"/>
+  <rect x="182" y="656" width="20" height="20" rx="4" stroke="var(--ink)" stroke-width="2"/>
+  <rect x="206" y="656" width="20" height="20" rx="4" stroke="var(--ink)" stroke-width="2"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- kicker + title + subtitle -->
+<text x="80" y="66" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">PART 2 &#183; SEE THE CURRENT STATE</text>
+<text x="800" y="112" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">How a Swimlane Works</text>
+<text x="800" y="152" font-size="26" text-anchor="middle" fill="var(--dim)">The same six steps, sorted by whose hands each one is in.</text>
+
+<!-- SHOW caption -->
+<text x="800" y="204" font-size="22" font-weight="700" text-anchor="middle" fill="var(--dim)">First &#8212; your sales process, just the steps in a row.</text>
+
+<!-- top row labels -->
+<text x="360" y="261" font-size="21" text-anchor="middle" fill="var(--ink)">Inquiry</text>
+<text x="560" y="261" font-size="21" text-anchor="middle" fill="var(--ink)">Reply</text>
+<text x="760" y="261" font-size="21" text-anchor="middle" fill="var(--ink)">Call booked</text>
+<text x="960" y="261" font-size="21" text-anchor="middle" fill="var(--ink)">Discovery call</text>
+<text x="1160" y="261" font-size="21" text-anchor="middle" fill="var(--ink)">Proposal</text>
+<text x="1360" y="261" font-size="21" text-anchor="middle" fill="var(--ink)">Signed</text>
+
+<!-- transition label -->
+<text x="800" y="326" font-size="22" text-anchor="middle" fill="var(--dim)">Now drop each step into a lane &#8212; one lane per doer: you, your VA, the system.</text>
+
+<!-- lane labels (left column) -->
+<text x="191" y="476" font-size="17" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+<text x="191" y="496" font-size="16" font-weight="700" text-anchor="middle" fill="var(--ink)">4 of 6 steps</text>
+
+<text x="191" y="600" font-size="17" font-weight="700" text-anchor="middle" fill="var(--dim)">VA</text>
+<text x="191" y="620" font-size="16" text-anchor="middle" fill="var(--dim)">0 steps</text>
+
+<text x="191" y="702" font-size="17" font-weight="700" text-anchor="middle" fill="var(--ink)">SYSTEM</text>
+<text x="191" y="722" font-size="16" text-anchor="middle" fill="var(--dim)">Kit &#183; Calendly</text>
+
+<!-- YOU lane box labels (TOP) -->
+<text x="560" y="440" font-size="19" text-anchor="middle" fill="var(--ink)">Reply</text>
+<text x="560" y="461" font-size="16" text-anchor="middle" fill="var(--dim)">your email</text>
+<text x="960" y="440" font-size="19" text-anchor="middle" fill="var(--ink)">Discovery call</text>
+<text x="960" y="461" font-size="16" text-anchor="middle" fill="var(--dim)">Zoom</text>
+<text x="1160" y="440" font-size="19" text-anchor="middle" fill="var(--ink)">Proposal</text>
+<text x="1160" y="461" font-size="16" text-anchor="middle" fill="var(--dim)">Google Doc</text>
+<text x="1360" y="440" font-size="19" text-anchor="middle" fill="var(--ink)">Signed</text>
+<text x="1360" y="461" font-size="16" text-anchor="middle" fill="var(--dim)">Stripe invoice</text>
+
+<!-- VA lane empty note (clear right side) -->
+<text x="1160" y="577" font-size="20" text-anchor="middle" fill="var(--dim)">&#8212; your VA touches none of these steps &#8212;</text>
+
+<!-- SYSTEM lane box labels (BOTTOM) -->
+<text x="360" y="690" font-size="19" text-anchor="middle" fill="var(--ink)">Inquiry</text>
+<text x="360" y="711" font-size="16" text-anchor="middle" fill="var(--dim)">Kit inbox</text>
+<text x="760" y="690" font-size="19" text-anchor="middle" fill="var(--ink)">Call booked</text>
+<text x="760" y="711" font-size="16" text-anchor="middle" fill="var(--dim)">Calendly</text>
+
+<!-- takeaway -->
+<text x="800" y="824" font-size="27" text-anchor="middle" fill="var(--ink)">A swimlane answers one question at a glance &#8212; whose hands is each step in?</text>
+<text x="800" y="884" font-size="23" text-anchor="middle" fill="var(--dim)">Right now, that answer is YOU. But this is still the surface &#8212; the same steps hide deeper systems underneath.</text>
+</svg></body></html>
