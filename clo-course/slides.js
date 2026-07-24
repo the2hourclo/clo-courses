@@ -28,11 +28,13 @@ var CSS =
 /* lightbox */
 '.sv-lb{position:fixed;inset:0;z-index:400;background:rgba(20,20,18,.93);display:flex;align-items:center;justify-content:center;touch-action:pan-y}' +
 '.sv-lb img{max-width:94vw;max-height:88vh;border-radius:8px;background:#fff;display:block}' +
-'.sv-lb .sv-arr{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.45);color:#fff}' +
+/* Solid dark chips, not translucent white: on a phone the slide fills the width, so the
+   controls sit ON white paper — a translucent white button disappears against it. */
+'.sv-lb .sv-arr{background:rgba(20,20,18,.82);border-color:rgba(255,255,255,.7);color:#fff}' +
 '.sv-lb .sv-arr:hover{background:var(--cp,#2D8C3C);border-color:var(--cp,#2D8C3C)}' +
 '.sv-lb .sv-prev{left:14px}.sv-lb .sv-next{right:14px}' +
-'.sv-x{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff;font-size:16px;cursor:pointer;z-index:2}' +
-'.sv-x:hover{background:rgba(255,255,255,.3)}' +
+'.sv-x{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.7);background:rgba(20,20,18,.82);color:#fff;font-size:16px;cursor:pointer;z-index:2}' +
+'.sv-x:hover{background:rgba(20,20,18,.95)}' +
 '.sv-lb .sv-count{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.75);font-size:13px;min-width:0}';
 
 function injectCSS(){
