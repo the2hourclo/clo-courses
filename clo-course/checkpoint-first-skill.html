@@ -113,13 +113,18 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 </div>
 
 <script src="progress.js?v=2"></script>
+<script src="slides.js?v=1"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
    CHECKPOINT WIZARD — reusable template.
    To build another checkpoint: copy this file, change CONFIG, done.
    Each step: { type:'video'|'build'|'gate', title, body(HTML),
-                video?:embedURL, command?:'do this in Claude', gate?:HTML }
+                video?:embedURL, command?:'do this in Claude', gate?:HTML,
+                slides?:[imgURLs] — swipeable deck shown until video lands }
    ═══════════════════════════════════════════════════════════════ */
+function canvas(dir, names){
+  return names.map(function(n){ return '../meta-create-skill/canvases/' + dir + '/slides/' + n + '.png'; });
+}
 var CONFIG = {
   id: 'cp2',
   name: 'Your first skill',
@@ -128,10 +133,12 @@ var CONFIG = {
   steps: [
     { type:'video', title:'What is a skill',
       video:'', slotLabel:'📹 Explainer — coming soon',
+      slides: canvas('v1-what-is-a-skill', ['01-why-a-skill','02-skill-anatomy','03-inside-skillmd','04-the-four-subfolders','05-read-and-load','06-frontmatter-properties']),
       body:'A skill is a <strong>reusable playbook</strong> you write once so the AI does a task your way, every time. Same input, same quality, no re-explaining. It is the unit everything else here is built from.' },
 
     { type:'video', title:'The 3 levels of skills',
       video:'', slotLabel:'📹 Explainer — coming soon',
+      slides: canvas('v2-types-of-skills', ['01-three-levels','02-level1-simple','03-level2-workflows','04-level3-orchestrator','05-skill-vs-workflow','06-how-they-chain']),
       body:'Skills come in three shapes. A <strong>simple</strong> one-file skill, one <strong>with workflows</strong> it loads only when needed, and an <strong>orchestrator</strong> that runs other skills. You start simple.' },
 
     { type:'video', title:'How to create a skill',
@@ -223,6 +230,7 @@ function render(){
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
+  else if (s.slides && window.AIEBSlides){ h += '<div id="svMount"></div>'; }
   else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
   if (s.demo){ h += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
@@ -239,6 +247,8 @@ function render(){
   h += '</div>';
   h += '</div>';
   stage.innerHTML = h;
+  var svm = document.getElementById('svMount');
+  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title }); }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
