@@ -186,10 +186,15 @@ function toggleDocs(){ document.getElementById('docs').classList.toggle('open');
 function renderHome(){
   document.getElementById('oprog').innerHTML = overallHTML();
   var a = AIEB.activeId(), m = AIEB.META[a], cta = document.getElementById('cta');
-  // CTA jumps straight into the next task's wizard; the progress bar (above) opens the board overview.
-  if (a==='setup')      { cta.textContent = 'Start building →';      cta.href = AIEB.META.setup.wizard; }
-  else if (a==='goal')  { cta.textContent = 'Open your board →';     cta.href = 'ai-employee-board.html'; }
-  else                  { cta.textContent = 'Continue → ' + m.name;  cta.href = m.wizard; }
+  // EVERY route off this page lands on the BOARD — never straight into a wizard.
+  // The board is the hub: it shows where you are, then hands you exactly one next
+  // action via its nextbar ("Start setup →" / "Continue →"). Jumping the board
+  // dropped buyers into a wizard with no sense of where it sat in the journey.
+  // The label still says what's next; only the destination is now always the board.
+  cta.href = 'ai-employee-board.html';
+  if (a==='setup')      { cta.textContent = 'Start building →'; }
+  else if (a==='goal')  { cta.textContent = 'Open your board →'; }
+  else                  { cta.textContent = 'Continue → ' + m.name; }
   document.getElementById('docsList').innerHTML = docsHTML();
 }
 

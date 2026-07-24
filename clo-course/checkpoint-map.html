@@ -47,6 +47,14 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-slot{position:relative;width:100%;padding-top:52%;border-radius:var(--radius);border:1px dashed var(--border-2);margin:4px 0 16px;background:var(--surface-2)}
 .video-slot span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-dim)}
+/* Thumbnail link for a video whose owner has embedding disabled — an iframe would
+   render a dead "Video unavailable" box, this always works. */
+.watch{position:relative;display:block;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border-2);margin:4px 0 16px;background:#000}
+.watch img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s,opacity .2s}
+.watch:hover img{transform:scale(1.03);opacity:.82}
+.watch-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:62px;height:62px;border-radius:50%;background:rgba(20,20,18,.82);border:2px solid #fff;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;padding-left:4px}
+.watch:hover .watch-play{background:var(--cp)}
+.watch-label{position:absolute;left:12px;bottom:12px;background:rgba(20,20,18,.86);color:#fff;font-size:12px;font-weight:700;padding:5px 11px;border-radius:20px}
 .cmd{display:flex;align-items:center;gap:10px;background:#070807;border:1px solid var(--border-2);border-radius:var(--radius);padding:12px 14px;margin:6px 0 14px}
 .cmd .txt{flex:1;font-family:var(--font-mono);font-size:14px;color:var(--cp);white-space:pre-wrap;word-break:break-word}
 .copy{flex-shrink:0;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid var(--border-2);background:var(--surface);color:var(--text-muted);cursor:pointer;font-family:var(--font-body);transition:all .15s}
@@ -113,6 +121,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 </div>
 
 <script src="progress.js?v=2"></script>
+<script src="slides.js?v=3"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
    CHECKPOINT WIZARD — reusable template.
@@ -159,8 +168,13 @@ var CONFIG = {
         '<li>Run it with the defaults</li>'+
         '</ul>' },
 
+    /* This video has embedding DISABLED at source (verified via the YouTube API:
+       status.embeddable = false), so an <iframe> renders a dead "Video unavailable"
+       box — on the one step meant to show the payoff. Shipped as a thumbnail link
+       instead, which works either way. If embedding is ever turned back on in
+       YouTube Studio, swap `watch` back to `video:'https://www.youtube.com/embed/S9_nfd-mHV0?rel=0'`. */
     { type:'video', optional:true, title:'See a full X-Ray in action',
-      video:'https://www.youtube.com/embed/S9_nfd-mHV0?rel=0',
+      watch:{ id:'S9_nfd-mHV0', label:'Watch on YouTube · 19 min' },
       body:'<strong>Optional.</strong> A complete Business X-Ray from start to finish, so you know exactly what you\'re about to build. Prefer to just experience it live? Skip ahead — the next step starts yours.' },
 
     { type:'build', surface:'cowork', title:'Run your Business X-Ray',
@@ -261,7 +275,14 @@ function render(){
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
-  else if (s.type==='video'){ h += '<div class="video-slot"><span>🎬 Video coming soon</span></div>'; }
+  else if (s.watch){ h += '<a class="watch" href="https://www.youtube.com/watch?v='+s.watch.id+'" target="_blank" rel="noopener">'+
+      '<img src="https://i.ytimg.com/vi/'+s.watch.id+'/hqdefault.jpg" alt="'+s.title+'" loading="lazy">'+
+      '<span class="watch-play" aria-hidden="true">&#9654;</span>'+
+      '<span class="watch-label">'+(s.watch.label||'Watch on YouTube')+'</span></a>'; }
+  else if (s.slides && window.AIEBSlides){ h += '<div id="svMount"></div>'; }
+  else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
+  if (s.demo){ h += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
+  else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
   if (s.body){ h += '<p>'+s.body+'</p>'; }
   if (s.command){ h += '<div class="cmd"><span class="txt">'+s.command+'</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'; }
   if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
@@ -275,6 +296,11 @@ function render(){
   h += '</div>';
   h += '</div>';
   stage.innerHTML = h;
+  /* Slide steps open the column wider (see slides.js) — the 640px measure renders
+     a 1600px slide at 548px, which kills its teaching layer. */
+  document.body.classList.toggle('slides-step', !!s.slides);
+  var svm = document.getElementById('svMount');
+  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title }); }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 

@@ -8,6 +8,19 @@
 'use strict';
 
 var CSS =
+/* ── The width problem ───────────────────────────────────────────────────────
+   Slides are authored on a 1600px canvas. In a 640px wizard column they render
+   548px wide — a 0.34 scale — so the design system's 26px minimum body text
+   lands at 8.9px and 17px sub-labels at 5.8px. Unreadable.
+   Fix: on a wide viewport the wizard column opens up for slide steps only, and
+   the prose inside it stays at a sane measure. ~1140px puts sub-labels back
+   near 12px. 800px is NOT enough — the annotation tier is still ~8.5px there.
+   The wizard sets body.slides-step when the current step carries a deck.
+   Phones can't be solved by width (390px = 0.24 scale) — that's what the
+   Enlarge chip and the lightbox are for. ────────────────────────────────── */
+'body.slides-step .wrap{max-width:1160px}' +
+'body.slides-step .step-type,body.slides-step .step h2,body.slides-step .step p,' +
+'body.slides-step .step .cmd,body.slides-step .step .gate,body.slides-step .step ul.sub{max-width:680px}' +
 '.sv{position:relative;width:100%;aspect-ratio:1600/1050;border-radius:var(--radius,9px);border:1px solid var(--border-2,#E2E2DC);background:#fff;overflow:hidden;margin:4px 0 8px;user-select:none;-webkit-user-select:none;touch-action:pan-y}' +
 '.sv img.sv-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;cursor:zoom-in;display:block}' +
 '.sv-in-r{animation:svInR .22s cubic-bezier(.2,.7,.2,1) both}' +
@@ -24,6 +37,13 @@ var CSS =
 '.sv-dot{width:7px;height:7px;border-radius:50%;background:var(--border-2,#E2E2DC);border:0;padding:0;cursor:pointer;transition:all .18s}' +
 '.sv-dot.on{background:var(--cp,#2D8C3C);transform:scale(1.25)}' +
 '.sv-hint{font-size:12px;color:var(--text-dim,#9A9A90)}' +
+/* The Enlarge chip is ALWAYS visible. It used to be a text hint that was
+   display:none under 520px — hiding the affordance on phones, the one place
+   width can't rescue legibility and enlarging is the only way to read a slide. */
+'.sv-zoom{position:absolute;right:9px;bottom:9px;z-index:2;display:inline-flex;align-items:center;gap:5px;' +
+'font-family:inherit;font-size:12px;font-weight:700;padding:6px 11px;border-radius:20px;cursor:pointer;' +
+'border:1px solid var(--border-ink,#21211E);background:rgba(255,255,255,.94);color:var(--text,#21211E);transition:all .15s}' +
+'.sv-zoom:hover{background:var(--cp,#2D8C3C);border-color:var(--cp,#2D8C3C);color:#fff}' +
 '@media(max-width:520px){.sv-hint{display:none}}' +
 /* lightbox */
 '.sv-lb{position:fixed;inset:0;z-index:400;background:rgba(20,20,18,.93);display:flex;align-items:center;justify-content:center;touch-action:pan-y}' +
@@ -69,11 +89,12 @@ function mount(el, opts){
       '<img class="sv-img" alt="">' +
       '<button class="sv-arr sv-prev" aria-label="Previous slide">&#8592;</button>' +
       '<button class="sv-arr sv-next" aria-label="Next slide">&#8594;</button>' +
+      '<button class="sv-zoom" aria-label="Enlarge slide">&#10530; Enlarge</button>' +
     '</div>' +
     '<div class="sv-bar">' +
       '<span class="sv-count" aria-live="polite"></span>' +
       '<div class="sv-dots"></div>' +
-      '<span class="sv-hint">swipe, tap to enlarge, or &#8592; &#8594;</span>' +
+      '<span class="sv-hint">swipe, or &#8592; &#8594;</span>' +
     '</div>';
 
   var box   = el.querySelector('.sv');
@@ -168,6 +189,7 @@ function mount(el, opts){
 
   prev.onclick = function(){ go(-1); };
   next.onclick = function(){ go(1); };
+  el.querySelector('.sv-zoom').onclick = function(e){ e.stopPropagation(); openLb(); };
   bindSwipe(box, function(e){ if (e.target === img) openLb(); });
 
   if (!keysBound){ document.addEventListener('keydown', onKey); keysBound = true; }

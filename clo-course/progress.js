@@ -53,7 +53,23 @@
   }
 
   var STORE = 'aieb_progress';
-  var STEP_PREFIX = 'aieb_ckpt_', STEP_SUFFIX = '_v4';
+  // Each wizard bumps its OWN store suffix whenever its step ORDER changes, so the
+  // suffixes drift apart (CP1 is on _v5 after a step was removed; CP2-CP4 are on _v4).
+  // Probing newest-first keeps the board reading real progress instead of silently
+  // seeing zero — which froze CP1's column on "Start" for a buyer three steps in.
+  // Add new suffixes to the FRONT of this list when a wizard bumps.
+  var STEP_PREFIX = 'aieb_ckpt_', STEP_SUFFIXES = ['_v6', '_v5', '_v4'];
+
+  // Read a per-checkpoint step key, trying each suffix newest-first.
+  function readStepKey(id, tail) {
+    for (var i = 0; i < STEP_SUFFIXES.length; i++) {
+      try {
+        var raw = localStorage.getItem(STEP_PREFIX + id + STEP_SUFFIXES[i] + (tail || ''));
+        if (raw !== null) { var n = parseInt(raw, 10); if (!isNaN(n)) return n; }
+      } catch (e) {}
+    }
+    return 0;
+  }
 
   function read() {
     var o = {};
@@ -109,8 +125,8 @@
   // Saved wizard position + step count for a checkpoint (drives live card fill).
   function stepInfo(id) {
     var pos = 0, total = 0;
-    try { pos = parseInt(localStorage.getItem(STEP_PREFIX + id + STEP_SUFFIX), 10) || 0; } catch (e) {}
-    try { total = parseInt(localStorage.getItem(STEP_PREFIX + id + STEP_SUFFIX + '_n'), 10) || 0; } catch (e) {}
+    pos = readStepKey(id, '');
+    total = readStepKey(id, '_n');
     return { pos: pos, total: total };
   }
 

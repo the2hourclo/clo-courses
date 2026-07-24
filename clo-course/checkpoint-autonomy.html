@@ -113,6 +113,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 </div>
 
 <script src="progress.js?v=2"></script>
+<script src="slides.js?v=3"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
    CHECKPOINT WIZARD — reusable template.
@@ -229,6 +230,7 @@ function render(){
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
+  else if (s.slides && window.AIEBSlides){ h += '<div id="svMount"></div>'; }
   else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
   if (s.demo){ h += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
@@ -245,6 +247,11 @@ function render(){
   h += '</div>';
   h += '</div>';
   stage.innerHTML = h;
+  /* Slide steps open the column wider (see slides.js) — the 640px measure renders
+     a 1600px slide at 548px, which kills its teaching layer. */
+  document.body.classList.toggle('slides-step', !!s.slides);
+  var svm = document.getElementById('svMount');
+  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title }); }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
