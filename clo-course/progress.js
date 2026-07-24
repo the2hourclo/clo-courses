@@ -176,6 +176,18 @@
     '5-autonomy': 'cp4'
   };
 
+  // Existing-buyer backfill lane: Claude hands buyers a map link carrying their
+  // read-only pass in the URL FRAGMENT (#vt=…) — a fragment never reaches server
+  // or Pages access logs. Bank it, then scrub the URL so the token doesn't sit
+  // in the address bar / history / a copied link.
+  try {
+    var vtMatch = /(?:^#|[#&])vt=([A-Za-z0-9_\-]+)/.exec(window.location.hash || '');
+    if (vtMatch && vtMatch[1].indexOf('aiebview_v1_') === 0) {
+      localStorage.setItem(VIEW_TOKEN_KEY, vtMatch[1]);
+      history.replaceState({}, '', window.location.pathname + window.location.search);
+    }
+  } catch (e) {}
+
   function viewToken() {
     try { return localStorage.getItem(VIEW_TOKEN_KEY) || ''; } catch (e) { return ''; }
   }
