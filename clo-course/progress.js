@@ -187,15 +187,27 @@
   // Dev/test hook only: lets a local smoke test point the sync at a local server.
   // Buyers never have this key set; the default above is the production truth.
   try { PROGRESS_URL = localStorage.getItem('aieb_progress_url_dev') || PROGRESS_URL; } catch (e) {}
-  // Server ladder keys → this page's spine ids. These are the SAME five
-  // checkpoints under two naming schemes; keep both ends in step if either moves.
+  // Server ladder keys → this page's spine ids. Keep both ends in step if either moves.
+  //
+  // ⚠ 2026-07-24 — the two ends are NO LONGER 1:1. The client split the old cp4 into
+  // cp4 "Make it reliable" (harden + harness) and goal "Your AI Employee" (schedule +
+  // runs on its own). The server ladder still has FIVE rungs and no rung for reliability.
+  // '5-autonomy' means "it runs on its own", which is now GOAL's gate, so it maps there —
+  // mapping it to cp4 would mark the hardening checkpoint done and leave the buyer stuck
+  // at 83% with the checkpoint they just finished still showing as next.
+  // cp4 is client-only until the server ladder gains a reliability rung; IMPLIES below
+  // covers it, since you cannot reach autonomy without passing through reliability.
   var LADDER_TO_SPINE = {
     '1-onboard': 'setup',
     '2-map': 'cp1',
     '3-first-skill': 'cp2',
     '4-system': 'cp3',
-    '5-autonomy': 'cp4'
+    '5-autonomy': 'goal'
   };
+
+  // Spine ids a synced checkpoint implies are ALSO done. The ladder is ordered, so a
+  // server-confirmed rung vouches for the client-only checkpoints that precede it.
+  var IMPLIES = { goal: ['cp4'] };
 
   // Existing-buyer backfill lane: Claude hands buyers a map link carrying their
   // read-only pass in the URL FRAGMENT (#vt=…) — a fragment never reaches server
@@ -232,9 +244,14 @@
         var changed = false;
         payload.ladder.forEach(function (cp) {
           var id = LADDER_TO_SPINE[cp && cp.id];
-          if (!id || cp.status !== 'completed' || isDone(id)) return;
-          markDone(id);
-          changed = true;
+          if (!id || cp.status !== 'completed') return;
+          // mark the mapped checkpoint AND anything it implies (see IMPLIES)
+          var ids = [id].concat(IMPLIES[id] || []);
+          ids.forEach(function (sid) {
+            if (isDone(sid)) return;
+            markDone(sid);
+            changed = true;
+          });
         });
         return changed;
       })
