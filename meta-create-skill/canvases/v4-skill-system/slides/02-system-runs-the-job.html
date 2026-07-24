@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ column divider ============ -->
+  <line x1="780" y1="150" x2="780" y2="850" stroke="rgb(212,212,210)" stroke-width="2" stroke-dasharray="4 10"/>
+
+  <!-- ================================================================= -->
+  <!-- LEFT COLUMN — the same four steps, wired through you              -->
+  <!-- ================================================================= -->
+
+  <!-- the three people standing in the path -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <circle cx="242.5" cy="310" r="19" fill="var(--bg)"/>
+    <line x1="242.5" y1="329" x2="242.5" y2="378"/>
+    <line x1="212.5" y1="350" x2="272.5" y2="350"/>
+    <line x1="242.5" y1="378" x2="220.5" y2="414"/>
+    <line x1="242.5" y1="378" x2="264.5" y2="414"/>
+
+    <circle cx="397.5" cy="310" r="19" fill="var(--bg)"/>
+    <line x1="397.5" y1="329" x2="397.5" y2="378"/>
+    <line x1="367.5" y1="350" x2="427.5" y2="350"/>
+    <line x1="397.5" y1="378" x2="375.5" y2="414"/>
+    <line x1="397.5" y1="378" x2="419.5" y2="414"/>
+
+    <circle cx="552.5" cy="310" r="19" fill="var(--bg)"/>
+    <line x1="552.5" y1="329" x2="552.5" y2="378"/>
+    <line x1="522.5" y1="350" x2="582.5" y2="350"/>
+    <line x1="552.5" y1="378" x2="530.5" y2="414"/>
+    <line x1="552.5" y1="378" x2="574.5" y2="414"/>
+  </g>
+
+  <!-- the detour: out of one step, up through you, back down into the next -->
+  <g stroke="var(--red)" stroke-width="4">
+    <line x1="200" y1="470" x2="235" y2="424"/>
+    <polyline points="232.7,438.6 235,424 221.6,430.1"/>
+    <line x1="250" y1="424" x2="285" y2="470"/>
+    <polyline points="271.6,463.9 285,470 282.7,455.4"/>
+
+    <line x1="355" y1="470" x2="390" y2="424"/>
+    <polyline points="387.7,438.6 390,424 376.6,430.1"/>
+    <line x1="405" y1="424" x2="440" y2="470"/>
+    <polyline points="426.6,463.9 440,470 437.7,455.4"/>
+
+    <line x1="510" y1="470" x2="545" y2="424"/>
+    <polyline points="542.7,438.6 545,424 531.6,430.1"/>
+    <line x1="560" y1="424" x2="595" y2="470"/>
+    <polyline points="581.6,463.9 595,470 592.7,455.4"/>
+  </g>
+
+  <!-- the four step cards (IDENTICAL objects to the right column) -->
+  <g stroke="var(--ink)" stroke-width="3">
+    <rect x="100" y="470" width="130" height="100" rx="10" fill="var(--bg)"/>
+    <rect x="255" y="470" width="130" height="100" rx="10" fill="var(--bg)"/>
+    <rect x="410" y="470" width="130" height="100" rx="10" fill="var(--bg)"/>
+    <rect x="565" y="470" width="130" height="100" rx="10" fill="var(--bg)"/>
+  </g>
+  <g stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)">
+    <rect x="139" y="514" width="20" height="7"  rx="2"/><rect x="139" y="521" width="52" height="32" rx="3"/>
+    <rect x="294" y="514" width="20" height="7"  rx="2"/><rect x="294" y="521" width="52" height="32" rx="3"/>
+    <rect x="449" y="514" width="20" height="7"  rx="2"/><rect x="449" y="521" width="52" height="32" rx="3"/>
+    <rect x="604" y="514" width="20" height="7"  rx="2"/><rect x="604" y="521" width="52" height="32" rx="3"/>
+  </g>
+
+  <!-- tick tying the "already built" tag to step 3 -->
+  <line x1="475" y1="662" x2="475" y2="672" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- ================================================================= -->
+  <!-- RIGHT COLUMN — the same four steps, inside ONE skill system       -->
+  <!-- ================================================================= -->
+
+  <!-- the skill-system container -->
+  <rect x="804" y="300" width="650" height="436" rx="20" stroke="var(--green)" stroke-width="4" fill="rgba(45,140,60,0.05)"/>
+
+  <!-- the lead skill's own folder -->
+  <g stroke="var(--green)" stroke-width="3.5" fill="var(--bg)">
+    <rect x="836" y="330" width="26" height="9"  rx="2"/>
+    <rect x="836" y="339" width="66" height="42" rx="4"/>
+  </g>
+
+  <!-- hairline: the lead skill above, the four steps below -->
+  <line x1="830" y1="434" x2="1428" y2="434" stroke="rgb(223,223,221)" stroke-width="2"/>
+
+  <!-- ONE straight run through all four (drawn first; the cards sit on top) -->
+  <g stroke="var(--green)" stroke-width="4">
+    <line x1="812" y1="520" x2="1444" y2="520"/>
+    <polyline points="817,512 828,520 817,528"/>
+    <polyline points="968,512 979,520 968,528"/>
+    <polyline points="1123,512 1134,520 1123,528"/>
+    <polyline points="1278,512 1289,520 1278,528"/>
+    <polyline points="1433,512 1444,520 1433,528"/>
+  </g>
+
+  <!-- the four step cards (IDENTICAL objects to the left column) -->
+  <g stroke="var(--ink)" stroke-width="3">
+    <rect x="830"  y="470" width="130" height="100" rx="10" fill="var(--bg)"/>
+    <rect x="985"  y="470" width="130" height="100" rx="10" fill="var(--bg)"/>
+    <rect x="1140" y="470" width="130" height="100" rx="10" fill="var(--bg)"/>
+    <rect x="1295" y="470" width="130" height="100" rx="10" fill="var(--bg)"/>
+  </g>
+  <g stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)">
+    <rect x="869"  y="514" width="20" height="7"  rx="2"/><rect x="869"  y="521" width="52" height="32" rx="3"/>
+    <rect x="1024" y="514" width="20" height="7"  rx="2"/><rect x="1024" y="521" width="52" height="32" rx="3"/>
+    <rect x="1179" y="514" width="20" height="7"  rx="2"/><rect x="1179" y="521" width="52" height="32" rx="3"/>
+    <rect x="1334" y="514" width="20" height="7"  rx="2"/><rect x="1334" y="521" width="52" height="32" rx="3"/>
+  </g>
+
+  <!-- tick tying the "already built" tag to step 3 -->
+  <line x1="1205" y1="662" x2="1205" y2="672" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- you — the SAME figure, moved off the path, beside the system -->
+  <g stroke="var(--ink)" stroke-width="4">
+    <circle cx="1525" cy="430" r="19" fill="var(--bg)"/>
+    <line x1="1525" y1="449" x2="1525" y2="498"/>
+    <line x1="1495" y1="470" x2="1555" y2="470"/>
+    <line x1="1525" y1="498" x2="1503" y2="534"/>
+    <line x1="1525" y1="498" x2="1547" y2="534"/>
+  </g>
+  <!-- attached, not carrying -->
+  <line x1="1491" y1="472" x2="1458" y2="506" stroke="rgb(160,160,163)" stroke-width="3" stroke-dasharray="5 9"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">A Skill System Runs the Whole Job, Start to Finish</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">same steps, same AI &#8212; the only thing that changes is the wiring</text>
+
+<!-- column headers -->
+<text x="400"  y="190" font-size="30" font-weight="700" text-anchor="middle" fill="var(--red)">SKILLS THAT DON&#8217;T CHAIN</text>
+<text x="400"  y="222" font-size="20" text-anchor="middle" fill="var(--dim)">same four steps &#183; you carry every hand-off</text>
+<text x="1130" y="190" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">ONE SKILL SYSTEM</text>
+<text x="1130" y="222" font-size="20" text-anchor="middle" fill="var(--dim)">same four steps &#183; the system carries the hand-offs</text>
+
+<!-- LEFT — you, three times, standing in the path -->
+<text x="242.5" y="278" font-size="19" font-weight="700" text-anchor="middle" fill="var(--red)">YOU</text>
+<text x="397.5" y="278" font-size="19" font-weight="700" text-anchor="middle" fill="var(--red)">YOU</text>
+<text x="552.5" y="278" font-size="19" font-weight="700" text-anchor="middle" fill="var(--red)">YOU</text>
+
+<!-- LEFT — step tags inside the cards -->
+<text x="165" y="498" font-size="17" text-anchor="middle" fill="var(--dim)">STEP 1</text>
+<text x="320" y="498" font-size="17" text-anchor="middle" fill="var(--dim)">STEP 2</text>
+<text x="475" y="498" font-size="17" text-anchor="middle" fill="var(--dim)">STEP 3</text>
+<text x="630" y="498" font-size="17" text-anchor="middle" fill="var(--dim)">STEP 4</text>
+
+<!-- LEFT — skill names + what each does -->
+<text class="mono" x="165" y="604" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">pull-stats/</text>
+<text x="165" y="630" font-size="17" text-anchor="middle" fill="var(--dim)">gets last week&#8217;s</text>
+<text x="165" y="650" font-size="17" text-anchor="middle" fill="var(--dim)">numbers</text>
+<text class="mono" x="320" y="604" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">what-worked/</text>
+<text x="320" y="630" font-size="17" text-anchor="middle" fill="var(--dim)">finds the</text>
+<text x="320" y="650" font-size="17" text-anchor="middle" fill="var(--dim)">winners</text>
+<text class="mono" x="475" y="604" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">draft-email/</text>
+<text x="475" y="630" font-size="17" text-anchor="middle" fill="var(--dim)">writes next</text>
+<text x="475" y="650" font-size="17" text-anchor="middle" fill="var(--dim)">week&#8217;s email</text>
+<text class="mono" x="630" y="604" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">qa-draft/</text>
+<text x="630" y="630" font-size="17" text-anchor="middle" fill="var(--dim)">checks it against</text>
+<text x="630" y="650" font-size="17" text-anchor="middle" fill="var(--dim)">your rules</text>
+
+<!-- LEFT — step 3 is the skill from the last checkpoint -->
+<text x="475" y="690" font-size="17" text-anchor="middle" fill="var(--dim)">the skill you</text>
+<text x="475" y="710" font-size="17" text-anchor="middle" fill="var(--dim)">already built</text>
+
+<!-- LEFT — verdict -->
+<text x="400" y="774" font-size="25" font-weight="700" text-anchor="middle" fill="var(--red)">three hand-offs &#183; every one of them yours</text>
+<text x="400" y="808" font-size="20" text-anchor="middle" fill="var(--dim)">the job moves only when you move it</text>
+
+<!-- RIGHT — the lead skill -->
+<text class="mono" x="920" y="372" font-size="30" font-weight="700" text-anchor="start" fill="var(--green)">weekly-email/</text>
+<text x="920" y="404" font-size="19" text-anchor="start" fill="var(--dim)">the lead skill &#183; it owns the order and the hand-offs</text>
+
+<!-- RIGHT — step tags inside the cards -->
+<text x="895"  y="498" font-size="17" text-anchor="middle" fill="var(--dim)">STEP 1</text>
+<text x="1050" y="498" font-size="17" text-anchor="middle" fill="var(--dim)">STEP 2</text>
+<text x="1205" y="498" font-size="17" text-anchor="middle" fill="var(--dim)">STEP 3</text>
+<text x="1360" y="498" font-size="17" text-anchor="middle" fill="var(--dim)">STEP 4</text>
+
+<!-- RIGHT — the SAME skill names + the SAME sub-labels -->
+<text class="mono" x="895"  y="604" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">pull-stats/</text>
+<text x="895"  y="630" font-size="17" text-anchor="middle" fill="var(--dim)">gets last week&#8217;s</text>
+<text x="895"  y="650" font-size="17" text-anchor="middle" fill="var(--dim)">numbers</text>
+<text class="mono" x="1050" y="604" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">what-worked/</text>
+<text x="1050" y="630" font-size="17" text-anchor="middle" fill="var(--dim)">finds the</text>
+<text x="1050" y="650" font-size="17" text-anchor="middle" fill="var(--dim)">winners</text>
+<text class="mono" x="1205" y="604" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">draft-email/</text>
+<text x="1205" y="630" font-size="17" text-anchor="middle" fill="var(--dim)">writes next</text>
+<text x="1205" y="650" font-size="17" text-anchor="middle" fill="var(--dim)">week&#8217;s email</text>
+<text class="mono" x="1360" y="604" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">qa-draft/</text>
+<text x="1360" y="630" font-size="17" text-anchor="middle" fill="var(--dim)">checks it against</text>
+<text x="1360" y="650" font-size="17" text-anchor="middle" fill="var(--dim)">your rules</text>
+
+<!-- RIGHT — step 3 is the skill from the last checkpoint (the system calls it, doesn't rebuild it) -->
+<text x="1205" y="690" font-size="17" text-anchor="middle" fill="var(--dim)">the skill you</text>
+<text x="1205" y="710" font-size="17" text-anchor="middle" fill="var(--dim)">already built</text>
+
+<!-- RIGHT — you, off the path -->
+<text x="1525" y="398" font-size="19" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+<text x="1525" y="570" font-size="18" text-anchor="middle" fill="var(--dim)">your judgment</text>
+<text x="1525" y="594" font-size="18" text-anchor="middle" fill="var(--dim)">the final call</text>
+<text x="1525" y="634" font-size="19" font-weight="700" text-anchor="middle" fill="var(--green)">off the path</text>
+
+<!-- RIGHT — verdict -->
+<text x="1130" y="774" font-size="25" font-weight="700" text-anchor="middle" fill="var(--green)">no hand-offs left for you to carry</text>
+<text x="1130" y="808" font-size="20" text-anchor="middle" fill="var(--dim)">the job runs start to finish</text>
+
+<!-- ===== one-line takeaway ===== -->
+<text x="800" y="938" font-size="28" text-anchor="middle" fill="var(--ink)">Same steps. Same AI. Same four skills.</text>
+<text x="800" y="986" font-size="31" font-weight="700" text-anchor="middle" fill="var(--green)">The difference is who carries them between.</text>
+</svg></body></html>

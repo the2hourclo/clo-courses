@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --orange:#c2410c;
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <!-- REQUIRED by the canonical robot block -->
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- header hairline -->
+  <line x1="60" y1="130" x2="1540" y2="130" stroke="rgb(228,228,226)" stroke-width="2"/>
+
+  <!-- ================= CARD 1 — A Skill (smallest scope) ================= -->
+  <rect x="60" y="316" width="330" height="514" rx="20" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="96" y1="384" x2="354" y2="384" stroke="rgb(228,228,226)" stroke-width="2"/>
+  <!-- one folder -->
+  <rect x="172" y="416" width="48" height="12" rx="4" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="172" y="428" width="106" height="76" rx="8" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <!-- SKILL.md sitting inside it -->
+  <rect x="208" y="444" width="36" height="46" rx="4" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="216" y1="457" x2="236" y2="457" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="216" y1="466" x2="236" y2="466" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="216" y1="475" x2="231" y2="475" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="216" y1="484" x2="236" y2="484" stroke="var(--dim)" stroke-width="2"/>
+  <!-- produces -->
+  <line x1="225" y1="610" x2="225" y2="636" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="217,628 225,639 233,628" stroke="var(--green)" stroke-width="4"/>
+  <!-- one output -->
+  <rect x="181" y="646" width="88" height="70" rx="6" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.05)"/>
+  <line x1="194" y1="667" x2="256" y2="667" stroke="var(--green)" stroke-width="2.5"/>
+  <line x1="194" y1="683" x2="256" y2="683" stroke="var(--green)" stroke-width="2.5"/>
+  <line x1="194" y1="699" x2="242" y2="699" stroke="var(--green)" stroke-width="2.5"/>
+  <!-- ownership band -->
+  <path d="M63,752 H387 V810 a20,20 0 0 1 -20,20 H83 a20,20 0 0 1 -20,-20 Z" stroke="none" fill="rgba(45,140,60,0.06)"/>
+  <line x1="63" y1="752" x2="387" y2="752" stroke="rgb(228,228,226)" stroke-width="2"/>
+
+  <!-- ================= CARD 2 — A Skill System (bigger scope) ================= -->
+  <rect x="424" y="250" width="520" height="580" rx="20" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="460" y1="318" x2="908" y2="318" stroke="rgb(228,228,226)" stroke-width="2"/>
+
+  <!-- the run container -->
+  <rect x="452" y="400" width="464" height="292" rx="16" stroke="rgb(212,212,210)" stroke-width="2" fill="rgba(0,0,0,0.012)"/>
+  <!-- ordered spine -->
+  <line x1="486" y1="438" x2="486" y2="648" stroke="var(--dim)" stroke-width="2"/>
+  <circle cx="486" cy="438" r="17" stroke="var(--dim)" stroke-width="2.5" fill="var(--bg)"/>
+  <circle cx="486" cy="500" r="17" stroke="var(--dim)" stroke-width="2.5" fill="var(--bg)"/>
+  <circle cx="486" cy="573" r="17" stroke="var(--green)" stroke-width="2.5" fill="var(--bg)"/>
+  <circle cx="486" cy="648" r="17" stroke="var(--dim)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- step 1 -->
+  <rect x="516" y="414" width="380" height="48" rx="12" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="534" y="427" width="16" height="6"  rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="534" y="433" width="32" height="22" rx="3" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <!-- step 2 -->
+  <rect x="516" y="476" width="380" height="48" rx="12" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="534" y="489" width="16" height="6"  rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="534" y="495" width="32" height="22" rx="3" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <!-- step 3 — the skill already built in the last checkpoint -->
+  <rect x="516" y="538" width="380" height="70" rx="12" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.06)"/>
+  <rect x="534" y="553" width="16" height="6"  rx="2" stroke="var(--green)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="534" y="559" width="32" height="22" rx="3" stroke="var(--green)" stroke-width="2.5" fill="var(--bg)"/>
+  <!-- step 4 -->
+  <rect x="516" y="624" width="380" height="48" rx="12" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="534" y="637" width="16" height="6"  rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="534" y="643" width="32" height="22" rx="3" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- the run produces -->
+  <line x1="684" y1="700" x2="684" y2="716" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="676,709 684,719 692,709" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ownership band -->
+  <path d="M427,752 H941 V810 a20,20 0 0 1 -20,20 H447 a20,20 0 0 1 -20,-20 Z" stroke="none" fill="rgba(45,140,60,0.06)"/>
+  <line x1="427" y1="752" x2="941" y2="752" stroke="rgb(228,228,226)" stroke-width="2"/>
+
+  <!-- ================= CARD 3 — Your AI Employee (biggest scope) ================= -->
+  <rect x="978" y="182" width="562" height="648" rx="20" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="1014" y1="250" x2="1504" y2="250" stroke="rgb(228,228,226)" stroke-width="2"/>
+
+  <!-- ---- the canonical robot — <g id="canonical-robot"> copied VERBATIM,
+       repositioned via translate(cx-1400*s, feetY-943*s) scale(s):
+       cx=1092, feetY=640, s=1.08 -> translate(-420,-378.44) scale(1.08) ---- -->
+  <g id="canonical-robot" transform="translate(-420,-378.44) scale(1.08)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads (locked identity legend, hardcoded literals) -->
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+  </g>
+
+  <!-- robot -> the skill system it owns -->
+  <line x1="1180" y1="462" x2="1234" y2="462" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="1227,455 1237,462 1227,469" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- the same skill system, small -->
+  <rect x="1248" y="310" width="270" height="310" rx="18" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.05)"/>
+  <rect x="1350" y="372" width="26" height="6"  rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1350" y="378" width="66" height="30" rx="5" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="1383" y1="412" x2="1383" y2="422" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="1377,416 1383,424 1389,416" stroke="var(--green)" stroke-width="3"/>
+  <rect x="1350" y="428" width="26" height="6"  rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1350" y="434" width="66" height="30" rx="5" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="1383" y1="468" x2="1383" y2="478" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="1377,472 1383,480 1389,472" stroke="var(--green)" stroke-width="3"/>
+  <rect x="1350" y="484" width="26" height="6"  rx="2" stroke="var(--green)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1350" y="490" width="66" height="30" rx="5" stroke="var(--green)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="1383" y1="524" x2="1383" y2="534" stroke="var(--green)" stroke-width="3"/>
+  <polyline points="1377,528 1383,536 1389,528" stroke="var(--green)" stroke-width="3"/>
+  <rect x="1350" y="540" width="26" height="6"  rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1350" y="546" width="66" height="30" rx="5" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- the judgment tag — the owner still holds the final call -->
+  <path d="M1044,688 L1080,662 L1466,662 L1466,714 L1080,714 Z" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="1066" cy="688" r="6" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+
+  <!-- ownership band -->
+  <path d="M981,752 H1537 V810 a20,20 0 0 1 -20,20 H1001 a20,20 0 0 1 -20,-20 Z" stroke="none" fill="rgba(45,140,60,0.06)"/>
+  <line x1="981" y1="752" x2="1537" y2="752" stroke="rgb(228,228,226)" stroke-width="2"/>
+
+  <!-- ================= the widening scope wedge ================= -->
+  <polygon points="60,900 1476,880 1476,940 60,920" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.07)"/>
+  <polygon points="1476,868 1538,910 1476,952" stroke="var(--green)" stroke-width="2.5" fill="rgba(45,140,60,0.12)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Skill &#8594; Skill System &#8594; AI Employee</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">Three words, three different sizes of ownership</text>
+
+<!-- ---------- CARD 1 ---------- -->
+<text x="225" y="366" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">A Skill</text>
+<text class="mono" x="225" y="536" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">draft-email/</text>
+<text class="mono" x="225" y="568" font-size="22" text-anchor="middle" fill="var(--dim)">&#9492;&#9472;&#9472; SKILL.md</text>
+<text x="225" y="598" font-size="19" text-anchor="middle" fill="var(--dim)">the skill you already built</text>
+<text x="225" y="742" font-size="22" text-anchor="middle" fill="var(--dim)">the draft</text>
+<text x="225" y="790" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">Owns a TASK.</text>
+<text x="225" y="818" font-size="21" text-anchor="middle" fill="var(--dim)">one job, one folder</text>
+
+<!-- ---------- CARD 2 ---------- -->
+<text x="684" y="300" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">A Skill System</text>
+<text class="mono" x="684" y="356" font-size="26" font-weight="700" text-anchor="middle" fill="var(--green)">weekly-email/</text>
+<text x="684" y="386" font-size="19" text-anchor="middle" fill="var(--dim)">the lead skill &#183; runs these four in order</text>
+<text x="486" y="447" font-size="22" text-anchor="middle" fill="var(--dim)">1</text>
+<text x="486" y="509" font-size="22" text-anchor="middle" fill="var(--dim)">2</text>
+<text x="486" y="582" font-size="22" font-weight="700" text-anchor="middle" fill="var(--green)">3</text>
+<text x="486" y="657" font-size="22" text-anchor="middle" fill="var(--dim)">4</text>
+<text class="mono" x="584" y="447" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">pull-stats/</text>
+<text class="mono" x="584" y="509" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">what-worked/</text>
+<text class="mono" x="584" y="572" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">draft-email/</text>
+<text x="584" y="597" font-size="18" text-anchor="start" fill="var(--dim)">the skill you already built</text>
+<text class="mono" x="584" y="657" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">qa-draft/</text>
+<text x="684" y="740" font-size="22" text-anchor="middle" fill="var(--dim)">next week&#8217;s email, approved</text>
+<text x="684" y="790" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">Owns a FUNCTION.</text>
+<text x="684" y="818" font-size="21" text-anchor="middle" fill="var(--dim)">start to finish, in order</text>
+
+<!-- ---------- CARD 3 ---------- -->
+<text x="1259" y="232" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">Your AI Employee</text>
+<text class="mono" x="1383" y="348" font-size="22" font-weight="700" text-anchor="middle" fill="var(--green)">weekly-email/</text>
+<text x="1207" y="443" font-size="19" text-anchor="middle" fill="var(--green)">runs it</text>
+<text x="1383" y="602" font-size="19" text-anchor="middle" fill="var(--dim)">the same four steps</text>
+<text x="1273" y="697" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">You still make the call.</text>
+<text x="1259" y="738" font-size="19" text-anchor="middle" fill="var(--dim)">it owns the execution &#183; you own the decision</text>
+<text x="1259" y="790" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">Owns the SKILL SYSTEM.</text>
+<text x="1259" y="818" font-size="21" text-anchor="middle" fill="var(--dim)">runs the function &#183; keeps getting better at it</text>
+
+<!-- ---------- scope wedge labels ---------- -->
+<text x="225" y="866" font-size="22" text-anchor="middle" fill="var(--dim)">a task</text>
+<text x="684" y="866" font-size="22" text-anchor="middle" fill="var(--dim)">a function</text>
+<text x="1259" y="866" font-size="22" text-anchor="middle" fill="var(--dim)">a worker who owns it</text>
+<text x="1330" y="919" font-size="26" font-weight="700" text-anchor="middle" fill="var(--green)">SCOPE</text>
+
+<!-- ---------- one-line takeaway ---------- -->
+<text x="800" y="984" font-size="27" text-anchor="middle" fill="var(--ink)">A skill does a task. A skill system runs a function.</text>
+<text x="800" y="1024" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">The thing that owns it is your AI Employee.</text>
+</svg></body></html>

@@ -1,0 +1,14 @@
+{
+  "_comment": "Storyboard map for meta-create-skill VIDEO 4: What a Skill System Is (CP3's explainer). 5 diagrams in teaching order, one column each, left to right. NOTE: the CP3 wizard deck OPENS with two borrowed slides from v2-types-of-skills (05-skill-vs-workflow, 06-how-they-chain) before column 1 below — those files stay in v2 and are referenced, not copied. The deck answers CHAINING and stops; hardening, harnesses and scheduling belong to CP4.",
+  "borrowed_opening": [
+    {"deck": "v2-types-of-skills", "slide": "05-skill-vs-workflow"},
+    {"deck": "v2-types-of-skills", "slide": "06-how-they-chain"}
+  ],
+  "columns": [
+    {"label": "1 - YOU ARE THE WIRING", "slides": ["01-you-are-the-wiring"]},
+    {"label": "2 - A SYSTEM RUNS THE JOB", "slides": ["02-system-runs-the-job"]},
+    {"label": "3 - THE LEAD SKILL RUNS THE REST", "slides": ["03-lead-skill-runs-the-rest"]},
+    {"label": "4 - A REAL SYSTEM", "slides": ["04-a-real-system"]},
+    {"label": "5 - SKILL -> SYSTEM -> AI EMPLOYEE", "slides": ["05-skill-system-employee"]}
+  ]
+}

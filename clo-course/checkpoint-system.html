@@ -113,13 +113,18 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 </div>
 
 <script src="progress.js?v=2"></script>
+<script src="slides.js?v=1"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
    CHECKPOINT WIZARD — reusable template.
    To build another checkpoint: copy this file, change CONFIG, done.
    Each step: { type:'video'|'build'|'gate', title, body(HTML),
-                video?:embedURL, command?:'do this in Claude', gate?:HTML }
+                video?:embedURL, command?:'do this in Claude', gate?:HTML,
+                slides?:[imgURLs] — swipeable deck shown until video lands }
    ═══════════════════════════════════════════════════════════════ */
+function canvas(dir, names){
+  return names.map(function(n){ return '../meta-create-skill/canvases/' + dir + '/slides/' + n + '.png'; });
+}
 var CONFIG = {
   id: 'cp3',
   name: 'A skill system',
@@ -128,6 +133,12 @@ var CONFIG = {
   steps: [
     { type:'video', title:'What a skill system is',
       video:'', slotLabel:'🎬 Explainer — coming soon',
+      /* Opens with the two slides trimmed off CP2's deck — the workflow-vs-skill decision and
+         the chaining topology are this checkpoint's subject, not the first-skill one's. The
+         files stay in v2; only this list references them. Then v4 carries the concept through
+         ONE running example (the Weekly Email employee), the same job the demo below builds. */
+      slides: canvas('v2-types-of-skills', ['05-skill-vs-workflow','06-how-they-chain'])
+        .concat(canvas('v4-skill-system', ['01-you-are-the-wiring','02-system-runs-the-job','03-lead-skill-runs-the-rest','04-a-real-system','05-skill-system-employee'])),
       body:'One skill does one task. A <strong>skill system</strong> chains a few skills together so the AI runs a whole job end to end — that’s the moment a skill becomes an <strong>AI Employee</strong> that owns a function, not just a task. The skill that does this is <strong>build-skill-system</strong>: it maps the job, names every hand-off between steps, and builds the lead skill that runs the rest in order — so you don’t wire anything by hand.' },
 
     { type:'build', title:'Wire your skills into one system',
@@ -215,6 +226,7 @@ function render(){
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
+  else if (s.slides && window.AIEBSlides){ h += '<div id="svMount"></div>'; }
   else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
   if (s.body){ h += '<p>'+s.body+'</p>'; }
   if (s.command){ h += '<div class="cmd"><span class="txt">'+s.command+'</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'; }
@@ -229,6 +241,8 @@ function render(){
   h += '</div>';
   h += '</div>';
   stage.innerHTML = h;
+  var svm = document.getElementById('svMount');
+  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title }); }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 

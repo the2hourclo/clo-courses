@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- header hairline -->
+  <line x1="60" y1="132" x2="1540" y2="132" stroke="rgb(228,228,226)" stroke-width="2"/>
+
+  <!-- ================= THE LEAD SKILL (green folder, left) ================= -->
+  <rect x="60"  y="250" width="112" height="22"  rx="5"  stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="46"  y="272" width="280" height="268" rx="16" stroke="var(--green)" stroke-width="4" fill="rgba(45,140,60,0.05)"/>
+  <line x1="70" y1="404" x2="302" y2="404" stroke="rgb(228,228,226)" stroke-width="2"/>
+
+  <!-- ================= THE SPINE — the run, left to right (green) ================= -->
+  <!-- lead skill -> step 1 (a call, nothing passes yet) -->
+  <line x1="330"  y1="420" x2="396"  y2="420" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="395,411 408,420 395,429" stroke="var(--green)" stroke-width="4"/>
+  <!-- 1 -> 2 -->
+  <line x1="562"  y1="420" x2="676"  y2="420" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="675,411 688,420 675,429" stroke="var(--green)" stroke-width="4"/>
+  <!-- 2 -> 3 -->
+  <line x1="844"  y1="420" x2="958"  y2="420" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="957,411 970,420 957,429" stroke="var(--green)" stroke-width="4"/>
+  <!-- 3 -> 4 -->
+  <line x1="1126" y1="420" x2="1240" y2="420" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="1239,411 1252,420 1239,429" stroke="var(--green)" stroke-width="4"/>
+  <!-- 4 -> out -->
+  <line x1="1408" y1="420" x2="1544" y2="420" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="1543,411 1556,420 1543,429" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ================= THE FOUR CALLED SKILLS (ink folders, sat on the spine) ================= -->
+  <rect x="420"  y="300" width="72"  height="20"  rx="5"  stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="408"  y="320" width="150" height="200" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <circle cx="483" cy="362" r="21" stroke="var(--green)" stroke-width="3.5" fill="var(--bg)"/>
+
+  <rect x="702"  y="300" width="72"  height="20"  rx="5"  stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="690"  y="320" width="150" height="200" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <circle cx="765" cy="362" r="21" stroke="var(--green)" stroke-width="3.5" fill="var(--bg)"/>
+
+  <rect x="984"  y="300" width="72"  height="20"  rx="5"  stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="972"  y="320" width="150" height="200" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <circle cx="1047" cy="362" r="21" stroke="var(--green)" stroke-width="3.5" fill="var(--bg)"/>
+  <!-- step 3 tag tick -->
+  <line x1="1047" y1="522" x2="1047" y2="534" stroke="var(--dim)" stroke-width="2"/>
+
+  <rect x="1266" y="300" width="72"  height="20"  rx="5"  stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="1254" y="320" width="150" height="200" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <circle cx="1329" cy="362" r="21" stroke="var(--green)" stroke-width="3.5" fill="var(--bg)"/>
+
+  <!-- ===== THE HAND-OFF PACKETS — one document riding each arrow ===== -->
+  <!-- gap 1->2 (centre 624) -->
+  <path d="M609,302 H630 L639,311 V338 H609 Z" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <polyline points="630,302 630,311 639,311" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="616" y1="320" x2="632" y2="320" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="616" y1="328" x2="628" y2="328" stroke="var(--dim)" stroke-width="2"/>
+  <!-- gap 2->3 (centre 906) -->
+  <path d="M891,302 H912 L921,311 V338 H891 Z" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <polyline points="912,302 912,311 921,311" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="898" y1="320" x2="914" y2="320" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="898" y1="328" x2="910" y2="328" stroke="var(--dim)" stroke-width="2"/>
+  <!-- gap 3->4 (centre 1188) -->
+  <path d="M1173,302 H1194 L1203,311 V338 H1173 Z" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <polyline points="1194,302 1194,311 1203,311" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="1180" y1="320" x2="1196" y2="320" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="1180" y1="328" x2="1192" y2="328" stroke="var(--dim)" stroke-width="2"/>
+  <!-- out of 4 (centre 1496) -->
+  <path d="M1481,302 H1502 L1511,311 V338 H1481 Z" stroke="var(--green)" stroke-width="2.5" fill="var(--bg)"/>
+  <polyline points="1502,302 1502,311 1511,311" stroke="var(--green)" stroke-width="2"/>
+  <line x1="1488" y1="320" x2="1504" y2="320" stroke="var(--dim)" stroke-width="2"/>
+  <line x1="1488" y1="328" x2="1500" y2="328" stroke="var(--dim)" stroke-width="2"/>
+
+  <!-- ================= TIME AXIS — this is a run through time ================= -->
+  <line x1="483"  y1="578" x2="483"  y2="600" stroke="rgb(212,212,210)" stroke-width="2"/>
+  <line x1="765"  y1="578" x2="765"  y2="600" stroke="rgb(212,212,210)" stroke-width="2"/>
+  <line x1="1047" y1="578" x2="1047" y2="600" stroke="rgb(212,212,210)" stroke-width="2"/>
+  <line x1="1329" y1="578" x2="1329" y2="600" stroke="rgb(212,212,210)" stroke-width="2"/>
+  <line x1="398" y1="600" x2="1544" y2="600" stroke="var(--dim)" stroke-width="2.5"/>
+  <polyline points="1543,592 1556,600 1543,608" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- ============ the lead skill's own file, hanging off the lead folder ============ -->
+  <path d="M186,544 V712 H426" stroke="rgb(168,168,171)" stroke-width="2.5" stroke-dasharray="5 9"/>
+  <polyline points="419,705 431,712 419,719" stroke="rgb(168,168,171)" stroke-width="2.5"/>
+  <path d="M452,668 H1120 L1160,708 V878 Q1160,890 1148,890 H452 Q440,890 440,878 V680 Q440,668 452,668 Z" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <polyline points="1120,668 1120,708 1160,708" stroke="var(--ink)" stroke-width="2.5"/>
+  <line x1="476" y1="726" x2="1124" y2="726" stroke="rgb(228,228,226)" stroke-width="2"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">One Lead Skill Calls the Rest, In Order</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">Read the labels on the arrows &#8212; the order and the hand-offs are what the lead skill actually holds</text>
+
+<!-- the lead skill -->
+<text x="186" y="306" font-size="19" text-anchor="middle" fill="var(--dim)">LEAD SKILL</text>
+<text class="mono" x="186" y="354" font-size="26" font-weight="700" text-anchor="middle" fill="var(--green)">weekly-email/</text>
+<text x="186" y="386" font-size="18" text-anchor="middle" fill="var(--dim)">routes &#183; does little itself</text>
+<text x="70" y="440" font-size="18" text-anchor="start" fill="var(--dim)">IT HOLDS ONLY</text>
+<text x="70" y="476" font-size="20" text-anchor="start" fill="var(--ink)">&#183; the ORDER they run in</text>
+<text x="70" y="508" font-size="20" text-anchor="start" fill="var(--ink)">&#183; WHAT passes between</text>
+
+<!-- the first arrow: a call, not a hand-off -->
+<text x="366" y="400" font-size="19" text-anchor="middle" fill="var(--green)">calls</text>
+
+<!-- the four called skills -->
+<text x="483"  y="371" font-size="28" font-weight="700" text-anchor="middle" fill="var(--green)">1</text>
+<text class="mono" x="483"  y="442" font-size="19" font-weight="700" text-anchor="middle" fill="var(--ink)">pull-stats/</text>
+<text x="483"  y="472" font-size="17" text-anchor="middle" fill="var(--dim)">gets last</text>
+<text x="483"  y="496" font-size="17" text-anchor="middle" fill="var(--dim)">week&#8217;s numbers</text>
+
+<text x="765"  y="371" font-size="28" font-weight="700" text-anchor="middle" fill="var(--green)">2</text>
+<text class="mono" x="765"  y="442" font-size="19" font-weight="700" text-anchor="middle" fill="var(--ink)">what-worked/</text>
+<text x="765"  y="472" font-size="17" text-anchor="middle" fill="var(--dim)">finds the</text>
+<text x="765"  y="496" font-size="17" text-anchor="middle" fill="var(--dim)">winners</text>
+
+<text x="1047" y="371" font-size="28" font-weight="700" text-anchor="middle" fill="var(--green)">3</text>
+<text class="mono" x="1047" y="442" font-size="19" font-weight="700" text-anchor="middle" fill="var(--ink)">draft-email/</text>
+<text x="1047" y="472" font-size="17" text-anchor="middle" fill="var(--dim)">writes next</text>
+<text x="1047" y="496" font-size="17" text-anchor="middle" fill="var(--dim)">week&#8217;s email</text>
+<text x="1047" y="554" font-size="19" text-anchor="middle" fill="var(--dim)">the skill you already built</text>
+
+<text x="1329" y="371" font-size="28" font-weight="700" text-anchor="middle" fill="var(--green)">4</text>
+<text class="mono" x="1329" y="442" font-size="19" font-weight="700" text-anchor="middle" fill="var(--ink)">qa-draft/</text>
+<text x="1329" y="472" font-size="16" text-anchor="middle" fill="var(--dim)">checks it against</text>
+<text x="1329" y="496" font-size="16" text-anchor="middle" fill="var(--dim)">your rules</text>
+
+<!-- the hand-off payloads — THE LESSON: what passes on each arrow -->
+<text x="624"  y="368" font-size="22" font-weight="700" text-anchor="middle" fill="var(--green)">last week&#8217;s</text>
+<text x="624"  y="396" font-size="22" font-weight="700" text-anchor="middle" fill="var(--green)">numbers</text>
+<text x="906"  y="368" font-size="22" font-weight="700" text-anchor="middle" fill="var(--green)">the winning</text>
+<text x="906"  y="396" font-size="22" font-weight="700" text-anchor="middle" fill="var(--green)">angles</text>
+<text x="1188" y="368" font-size="22" font-weight="700" text-anchor="middle" fill="var(--green)">the draft</text>
+<text x="1496" y="368" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">an approved</text>
+<text x="1496" y="396" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">draft</text>
+
+<!-- time axis caption -->
+<text x="971" y="638" font-size="22" text-anchor="middle" fill="var(--dim)">left to right = the order the lead skill runs them, one after another</text>
+
+<!-- the lead skill's own file -->
+<text x="200" y="694" font-size="17" text-anchor="start" fill="var(--dim)">the file inside it</text>
+<text class="mono" x="476" y="708" font-size="23" font-weight="700" text-anchor="start" fill="var(--ink)">weekly-email/SKILL.md</text>
+<text x="1112" y="708" font-size="19" text-anchor="end" fill="var(--dim)">the order, written down</text>
+
+<text class="mono" x="476" y="766" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">1.</text>
+<text class="mono" x="524" y="766" font-size="24" text-anchor="start" fill="var(--ink)">pull-stats/</text>
+<text class="mono" x="712" y="766" font-size="24" text-anchor="start" fill="var(--dim)">hands off</text>
+<text class="mono" x="858" y="766" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">last week&#8217;s numbers</text>
+
+<text class="mono" x="476" y="800" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">2.</text>
+<text class="mono" x="524" y="800" font-size="24" text-anchor="start" fill="var(--ink)">what-worked/</text>
+<text class="mono" x="712" y="800" font-size="24" text-anchor="start" fill="var(--dim)">hands off</text>
+<text class="mono" x="858" y="800" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">the winning angles</text>
+
+<text class="mono" x="476" y="834" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">3.</text>
+<text class="mono" x="524" y="834" font-size="24" text-anchor="start" fill="var(--ink)">draft-email/</text>
+<text class="mono" x="712" y="834" font-size="24" text-anchor="start" fill="var(--dim)">hands off</text>
+<text class="mono" x="858" y="834" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">the draft</text>
+
+<text class="mono" x="476" y="868" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">4.</text>
+<text class="mono" x="524" y="868" font-size="24" text-anchor="start" fill="var(--ink)">qa-draft/</text>
+<text class="mono" x="712" y="868" font-size="24" text-anchor="start" fill="var(--dim)">hands off</text>
+<text class="mono" x="858" y="868" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">an approved draft</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="944" font-size="27" text-anchor="middle" fill="var(--ink)">Each skill does its one job and hands the result forward. None of them knows the next one exists.</text>
+<text x="800" y="990" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">The order and the hand-offs live in the lead skill &#8212; that&#8217;s the whole trick.</text>
+</svg></body></html>
