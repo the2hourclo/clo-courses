@@ -129,20 +129,24 @@ var CONFIG = {
     { type:'video', title:'Review + harden',
       video:'', slotLabel:'📹 Explainer — coming soon',
       demoSlot:true, demoLabel:'🎬 Demo · watch me harden one — coming soon',
+      command:'Harden this skill so it checks its own work and fails loudly instead of handing me something wrong. Walk me through it: find the ways it could quietly produce a bad result, then bake in a self-check that stops and tells me which line is wrong, plus a set of tests so the same mistake can never come back silently.',
       body:'Before you let it run alone, tighten it. <strong>Hardening</strong> makes the skill check its own work and fail loudly instead of quietly, so you can trust the output without re-reading every line. Just say <em>&ldquo;harden this skill&rdquo;</em> — the AI bakes in a self-check gate and a set of tests (an eval scorecard) so a bad result gets caught before it ever reaches you.' },
 
     { type:'video', title:'Build a harness',
       video:'', slotLabel:'📹 Explainer — coming soon',
       demoSlot:true, demoLabel:'🎬 Demo · watch me wrap the rig — coming soon',
+      command:'Build a harness around this skill so its quality holds when I am not watching. I want an independent reviewer that did not write the output, a fix-and-retry loop with a hard cap so it can never run away, and a final check that confirms the work actually landed where it should instead of trusting what the AI reported.',
       body:'A <strong>harness</strong> is the set of guardrails and checks <em>around</em> a skill that hold its quality steady when you are not watching — an independent reviewer, a capped fix-and-retry loop, and a reality-check that confirms the work actually got done. Say <em>&ldquo;build a harness around this&rdquo;</em> and the AI builds the rig. Hardening makes the skill check itself; the harness is the second set of eyes that catches what it missed.' },
 
     { type:'video', title:'Schedule it / autonomy',
       video:'', slotLabel:'📹 Explainer — coming soon',
       demoSlot:true, demoLabel:'🎬 Demo · watch me schedule one — coming soon',
+      command:'Put this skill on a schedule so it runs on its own and reports back. First check it has earned it — that it is proven on real work and safe to run unattended. Then pin the cadence, where it gets its input, where the result lands, and how I get notified. Anything risky must draft for my approval instead of sending on its own.',
       body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask — say <em>&ldquo;schedule this to run every Monday&rdquo;</em>. Anything risky (like sending to a client) drafts for your approval instead of firing on its own. And as your library grows, say <em>&ldquo;audit my skill library&rdquo;</em> — the <strong>audit-library</strong> skill checks every skill for overlaps and gaps and keeps the whole set clean.' },
 
     { type:'build', title:'Run autonomously or self-improve',
       video:'', demoSlot:true, demoLabel:'🎬 Demo · watch a correction stick — coming soon',
+      command:'I want to correct this AI Employee once and have the fix stick for next time. Take the correction I am about to give you, write it back into the skill&#39;s own files so future runs already know it, and show me the exact line you added.',
       body:'Add the harness and the schedule (or just say <em>&ldquo;put this on autopilot&rdquo;</em>). From here the AI runs the function on its own and gets sharper each time you correct it — that is the <strong>retrospective</strong> skill: flag a miss with <em>&ldquo;note-friction&rdquo;</em> (or a win with <em>&ldquo;note-win&rdquo;</em>), then run <em>&ldquo;/review-retro&rdquo;</em> and your correction gets written back into the skill so next time it is already fixed. <strong>You review, it runs.</strong>' },
 
     { type:'gate', title:'It runs on its own',
