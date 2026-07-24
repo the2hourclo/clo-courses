@@ -126,7 +126,8 @@ var FOCUS_LEAD = {
   cp1:'Map how your business runs today and find the one job worth handing off first. You just answer its questions.',
   cp2:'Take that one job and turn it into a reusable skill — the AI does it your way, every time.',
   cp3:'Chain a few skills into a system that runs a whole function from start to finish.',
-  cp4:'Add the guardrails and a schedule so it runs on its own and gets sharper when you correct it.'
+  cp4:'Add the guardrails so it checks its own work and fails loudly instead of quietly.',
+  goal:'Put it on a schedule so it runs the whole function without you starting it.'
 };
 
 var TYPES = {
@@ -152,6 +153,9 @@ var BOARD = [
     { t:'The 3 levels of skills', type:'video' },
     { t:'How to create a skill', type:'video' },
     { t:'Turn 1 real process into a skill', type:'build' },
+    /* Self-improvement sits HERE, not in the goal column — it's the feedback loop that
+       makes every later run better, so it has to land the moment they first run a skill. */
+    { t:'It gets better every time you use it', type:'build' },
     { t:'Skill ran once on real data', type:'gate' }
   ]},
   { id:'cp3', name:'A skill system', color:'#f5a623', cards:[
@@ -159,20 +163,21 @@ var BOARD = [
     { t:'Wire skills into one system', type:'build' },
     { t:'System runs a whole function', type:'gate' }
   ]},
-  { id:'cp4', name:'Make it run itself', color:'#f472b6', cards:[
+  { id:'cp4', name:'Make it reliable', color:'#f472b6', cards:[
     { t:'Review + harden', type:'video' },
     { t:'Build a harness', type:'video' },
-    { t:'Schedule it / autonomy', type:'video' },
-    { t:'Run autonomously or self-improve', type:'build' },
-    { t:'It runs on its own', type:'gate' }
+    { t:'It catches its own mistakes', type:'gate' }
   ]},
+  /* `goal` is a REAL checkpoint now (2026-07-24), not a trophy column: autonomy moved here
+     from cp4, because running without you is what MAKES it an AI Employee. */
   { id:'goal', name:'Your AI Employee', color:'#fbbf24', cards:[
-    { t:'Runs (or self-improves)', type:'outcome' },
-    { t:'Gets better every time you use it', type:'outcome' }
+    { t:'Schedule it / autonomy', type:'video' },
+    { t:'Let it run a full cycle without you', type:'build' },
+    { t:'It runs on its own', type:'gate' }
   ]}
 ];
 var STATUS = { doing:'In progress', done:'Completed' };
-var WIZARDS = { setup:'get-access-aieb.html', cp1:'checkpoint-map.html?v=7', cp2:'checkpoint-first-skill.html', cp3:'checkpoint-system.html', cp4:'checkpoint-autonomy.html' };
+var WIZARDS = { setup:'get-access-aieb.html', cp1:'checkpoint-map.html?v=7', cp2:'checkpoint-first-skill.html', cp3:'checkpoint-system.html', cp4:'checkpoint-autonomy.html', goal:'checkpoint-ai-employee.html' };
 
 /* ---- SURFACE: swappable toggle + first-time gate ---- */
 function surfBarHTML(){
@@ -215,7 +220,10 @@ function overallHTML(){
 /* ---- WHAT TO WORK ON NEXT ---- */
 function nextbarHTML(){
   var id = AIEB.activeId(), m = AIEB.META[id];
-  if (id==='goal'){
+  // `goal` is a real checkpoint now, so only celebrate once it is actually DONE. While it is
+  // merely ACTIVE it needs the normal banner with its own "start this checkpoint" button —
+  // otherwise the last checkpoint has no way in.
+  if (id==='goal' && AIEB.isDone('goal')){
     return '<div class="nextbar" style="--nc:#fbbf24">'+
       '<div class="nb-main"><div class="nb-badge">🎉 You made it</div>'+
       '<div class="nb-title">Your AI Employee is built</div>'+
@@ -223,7 +231,7 @@ function nextbarHTML(){
   }
   var isSetup = id==='setup';
   var lead = isSetup ? 'Install Claude + the plugin and connect — one guided flow, about 30 minutes.' : (FOCUS_LEAD[id]||'');
-  var badge = isSetup ? 'Start here · step 1' : ('Next up · checkpoint '+AIEB.buildIndex(id)+' of 4');
+  var badge = isSetup ? 'Start here · step 1' : ('Next up · checkpoint '+AIEB.buildIndex(id)+' of 5');
   var verb = isSetup ? 'Start setup' : (AIEB.stepInfo(id).pos>0 ? 'Continue' : 'Start this checkpoint');
   return '<div class="nextbar" style="--nc:'+m.color+'">'+
     '<div class="nb-main"><div class="nb-badge">'+badge+'</div>'+

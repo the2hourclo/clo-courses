@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Map the business — AI Employee Builder</title>
-<meta name="description" content="Checkpoint 1 — run your Business X-Ray and pick the highest-leverage thing to automate first.">
+<title>Your AI Employee &mdash; AI Employee Builder</title>
+<meta name="description" content="The final checkpoint - put your skill system on a schedule so it runs a whole function without you.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -122,26 +122,28 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
                 video?:embedURL, command?:'do this in Claude', gate?:HTML }
    ═══════════════════════════════════════════════════════════════ */
 var CONFIG = {
-  id: 'cp4',
-  name: 'Make it reliable',
-  color: '#f472b6',
+  id: 'goal',
+  name: 'Your AI Employee',
+  color: '#fbbf24',
   board: 'ai-employee-board.html',
   steps: [
-    { type:'video', title:'Review + harden',
-      video:'', slotLabel:'📹 Explainer — coming soon',
-      demoSlot:true, demoLabel:'🎬 Demo · watch me harden one — coming soon',
-      command:'Harden this skill so it checks its own work and fails loudly instead of handing me something wrong. Walk me through it: find the ways it could quietly produce a bad result, then bake in a self-check that stops and tells me which line is wrong, plus a set of tests so the same mistake can never come back silently.',
-      body:'Before you let it run alone, tighten it. <strong>Hardening</strong> makes the skill check its own work and fail loudly instead of quietly, so you can trust the output without re-reading every line. Just say <em>&ldquo;harden this skill&rdquo;</em> — the AI bakes in a self-check gate and a set of tests (an eval scorecard) so a bad result gets caught before it ever reaches you.' },
+    /* Moved here from cp4 (2026-07-24): scheduling and running-without-you are what MAKE it an
+       AI Employee, so they belong in this checkpoint rather than the hardening one. cp4 now
+       covers reliability only. */
+    { type:'video', title:'Schedule it / autonomy',
+      video:'', slotLabel:'&#128249; Explainer &mdash; coming soon',
+      demoSlot:true, demoLabel:'&#127916; Demo &middot; watch me schedule one &mdash; coming soon',
+      command:'Put this skill on a schedule so it runs on its own and reports back. First check it has earned it &mdash; that it is proven on real work and safe to run unattended. Then pin the cadence, where it gets its input, where the result lands, and how I get notified. Anything risky must draft for my approval instead of sending on its own.',
+      body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask &mdash; say <em>&ldquo;schedule this to run every Monday&rdquo;</em>. Anything risky (like sending to a client) drafts for your approval instead of firing on its own. <strong>Unattended is not unsupervised</strong> &mdash; you still see everything, you just stop being the one who starts it.' },
 
-    { type:'video', title:'Build a harness',
-      video:'', slotLabel:'📹 Explainer — coming soon',
-      demoSlot:true, demoLabel:'🎬 Demo · watch me wrap the rig — coming soon',
-      command:'Build a harness around this skill so its quality holds when I am not watching. I want an independent reviewer that did not write the output, a fix-and-retry loop with a hard cap so it can never run away, and a final check that confirms the work actually landed where it should instead of trusting what the AI reported.',
-      body:'A <strong>harness</strong> is the set of guardrails and checks <em>around</em> a skill that hold its quality steady when you are not watching — an independent reviewer, a capped fix-and-retry loop, and a reality-check that confirms the work actually got done. Say <em>&ldquo;build a harness around this&rdquo;</em> and the AI builds the rig. Hardening makes the skill check itself; the harness is the second set of eyes that catches what it missed.' },
+    { type:'build', title:'Let it run a full cycle without you',
+      video:'', demoSlot:true, demoLabel:'&#127916; Demo &middot; watch a full unattended run &mdash; coming soon',
+      command:'Run my AI Employee end to end on a real job without me steering any step. Then show me what it produced, what it checked, and anything it flagged for my approval.',
+      body:'Hand it a real job and <strong>stay out of the way</strong>. It pulls what it needs, does the work, runs its own checks, and comes back with the result &mdash; or with a question, if something genuinely needed your call. This is the moment the thing you built stops being a tool you operate and starts being a function that runs.' },
 
-    { type:'gate', title:'It catches its own mistakes',
-      body:'Make the skill fail on purpose — feed it something that should trip the self-check — and confirm it stops and tells you, instead of handing you a wrong answer quietly.',
-      gate:'Your skill <strong>checks its own work</strong> and has a harness around it holding quality when you are not watching. When the AI confirms this, <strong>Your AI Employee</strong> unlocks on your board.' }
+    { type:'gate', title:'It runs on its own',
+      body:'Confirm the system ran a whole function without you kicking off each step &mdash; and that when you corrected it, the fix stuck for next time.',
+      gate:'Your AI Employee runs a whole function <strong>on its own</strong> and gets better every time you use it. That is <strong>Your AI Employee</strong> built. &#127881;' }
   ]
 };
 
@@ -167,7 +169,7 @@ function setSurface(s){
   paintSurface(); render();
 }
 
-var STORE = 'aieb_ckpt_'+CONFIG.id+'_v5'; // bump whenever the step ORDER changes — resets positions saved against the old order (v4: optional "Read & share your X-Ray" step inserted before the gate)
+var STORE = 'aieb_ckpt_'+CONFIG.id+'_v1'; // bump whenever the step ORDER changes — resets positions saved against the old order (v4: optional "Read & share your X-Ray" step inserted before the gate)
 var pos = 0; // current step index (0..steps.length). steps.length = completion screen.
 try { var saved = parseInt(localStorage.getItem(STORE),10); if(!isNaN(saved)) pos = Math.min(saved, activeSteps().length); } catch(e){}
 
@@ -200,8 +202,9 @@ function render(){
       lead = 'That was the last one. Your AI Employee is built — it runs the work and gets sharper every time you use it.';
       cta  = '<a class="btn primary big-cta" href="'+CONFIG.board+'">&#127881; See it on your board &#8594;</a>';
     } else {
-      lead = '<strong>'+CONFIG.name+'</strong> is done.';
-      cta  = '<a class="btn primary big-cta" href="'+CONFIG.board+'">← Back to your board</a>';
+      // Last checkpoint on the spine - the finale, not a hand-off to another wizard.
+      lead = 'That was the last one. <strong>Your AI Employee is built</strong> &mdash; it runs the work, checks itself, and gets sharper every time you correct it. Your job from here is to review, not to run.';
+      cta  = '<a class="btn primary big-cta" href="'+CONFIG.board+'">&#127881; See it on your board &#8594;</a>';
     }
     stage.innerHTML = '<div class="done-screen"><div class="big">🎉</div>'+
       '<h2>Checkpoint complete</h2>'+

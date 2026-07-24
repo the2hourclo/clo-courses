@@ -10,7 +10,8 @@
      aieb_ckpt_<id>_v4        = current step index WITHIN a checkpoint    ← written by each wizard
      aieb_ckpt_<id>_v4_n      = active-step COUNT for that checkpoint     ← written by each wizard
 
-   The spine (fixed order): setup → cp1 → cp2 → cp3 → cp4 → goal.
+   The spine (fixed order): setup → cp1 → cp2 → cp3 → cp4 → goal (goal = the AI Employee
+   checkpoint: schedule / autonomy / runs on its own). All six gate.
    Finishing one marks it done, which unlocks the next. Hand-holding rule:
    the "active" node is always the first not-yet-done step — that's the ONE
    thing we surface; everything after it stays out of the way until reached.
@@ -18,17 +19,20 @@
 (function () {
   'use strict';
 
+  // 2026-07-24: `goal` was a trophy column with no steps. Autonomy (schedule / runs on its
+  // own) moved OUT of cp4 and INTO it, so it is now a REAL checkpoint with its own wizard —
+  // the fifth and last. cp4 keeps hardening only. Order and ids are otherwise unchanged.
   var SPINE = ['setup', 'cp1', 'cp2', 'cp3', 'cp4', 'goal'];
-  var CHAIN = ['setup', 'cp1', 'cp2', 'cp3', 'cp4']; // the gating steps (goal is the reward)
-  var BUILD = ['cp1', 'cp2', 'cp3', 'cp4'];          // the four build checkpoints (for "Checkpoint N of 4")
+  var CHAIN = ['setup', 'cp1', 'cp2', 'cp3', 'cp4', 'goal']; // every gating step — goal now gates too
+  var BUILD = ['cp1', 'cp2', 'cp3', 'cp4', 'goal'];          // the five build checkpoints ("Checkpoint N of 5")
 
   var META = {
     setup: { name: 'Get set up',         short: 'Set up',             wizard: 'get-access-aieb.html',        color: '#4ade80' },
     cp1:   { name: 'Map the business',   short: 'Map the business',   wizard: 'checkpoint-map.html',         color: '#5b9bff' },
     cp2:   { name: 'Your first skill',   short: 'Your first skill',   wizard: 'checkpoint-first-skill.html', color: '#a78bfa' },
     cp3:   { name: 'A skill system',     short: 'A skill system',     wizard: 'checkpoint-system.html',      color: '#f5a623' },
-    cp4:   { name: 'Make it run itself', short: 'Make it run itself', wizard: 'checkpoint-autonomy.html',    color: '#f472b6' },
-    goal:  { name: 'Your AI Employee',   short: 'Your AI Employee',   wizard: null,                          color: '#fbbf24' }
+    cp4:   { name: 'Make it reliable',   short: 'Make it reliable',   wizard: 'checkpoint-autonomy.html',    color: '#f472b6' },
+    goal:  { name: 'Your AI Employee',   short: 'Your AI Employee',   wizard: 'checkpoint-ai-employee.html', color: '#fbbf24' }
   };
 
   /* ── SURFACE (Cowork vs Claude Code) — a global identity, swappable anytime ── */
@@ -88,14 +92,15 @@
     return !!o[id];
   }
   function markDone(id) {
-    if (!META[id] || id === 'goal') return;
+    if (!META[id]) return;
     var o = read();
     if (o[id] === true) return;          // idempotent
     o[id] = true; write(o);
   }
   function reset() { write({}); }        // dev helper: wipe checkpoint progress
 
-  // The active node = the first gating step that isn't done. All done → 'goal'.
+  // The active node = the first gating step that isn't done. Everything done → 'goal',
+  // which by then is itself done, so stateOf('goal') reads 'done' and overall() completes.
   function activeId() {
     for (var i = 0; i < CHAIN.length; i++) {
       if (!isDone(CHAIN[i])) return CHAIN[i];
@@ -103,9 +108,9 @@
     return 'goal';
   }
 
-  // done | active | locked  (goal mirrors cp4: "reached" once cp4 is done)
+  // done | active | locked. `goal` is an ordinary checkpoint now — it earns 'done' by
+  // being completed, not by cp4 finishing.
   function stateOf(id) {
-    if (id === 'goal') return isDone('cp4') ? 'done' : 'locked';
     if (isDone(id)) return 'done';
     if (id === activeId()) return 'active';
     return 'locked';
@@ -138,7 +143,7 @@
   }
 
   // Overall journey completion — for the top "progress to your AI Employee" bar.
-  // Counts the 5 gating steps (setup + cp1..cp4). 100% = the AI Employee is built.
+  // Counts the 6 gating steps (setup + cp1..cp4 + goal). 100% = the AI Employee is built.
   function overall() {
     var done = 0;
     for (var i = 0; i < CHAIN.length; i++) { if (isDone(CHAIN[i])) done++; }
@@ -146,7 +151,7 @@
     return {
       done: done, total: CHAIN.length,
       pct: Math.round(done / CHAIN.length * 100),
-      complete: a === 'goal',
+      complete: isDone('goal'),
       nextId: a, nextName: (META[a] || META.goal).name, nextColor: (META[a] || META.goal).color
     };
   }

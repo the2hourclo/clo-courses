@@ -153,6 +153,12 @@ var CONFIG = {
       command:'/ai-employee-builder:meta-create-skill',
       body:'Pick <strong>one</strong> repetitive task from your X-Ray. Run the command above (or just say <em>&ldquo;build me a skill for this&rdquo;</em>). The AI interviews you, drafts the skill, and you refine it together until the output is right. <strong>You just answer its questions.</strong>' },
 
+    /* Self-improvement belongs HERE — the moment the buyer first RUNS a skill — not at the
+       finish line. It's the feedback loop that makes every later run better, so teaching it
+       after the whole journey wastes every run in between. (Rashid, 2026-07-24.) */
+    { type:'build', title:'It gets better every time you use it',
+      body:'Your skill will get something wrong — that is normal, and it is the point. When a run comes back off, just <strong>say what was wrong in plain words</strong>, like you would to a new hire. The AI writes that correction back into the skill itself, so the next run already has it. <strong>Nothing to remember and no command to learn</strong> — correcting it IS the training. Do this from your very first run and the skill is sharp by the time you chain it into a system.' },
+
     { type:'gate', title:'Skill ran once on real data',
       body:'Run your new skill once on a <strong>real</strong> piece of work, and check the result is something you would actually use.',
       gate:'Your skill exists <strong>and</strong> it ran once on real data with a useful result. When Claude confirms this, <strong>A skill system</strong> unlocks on your board.' }
@@ -181,7 +187,7 @@ function setSurface(s){
   paintSurface(); render();
 }
 
-var STORE = 'aieb_ckpt_'+CONFIG.id+'_v4'; // bump whenever the step ORDER changes — resets positions saved against the old order (v4: optional "Read & share your X-Ray" step inserted before the gate)
+var STORE = 'aieb_ckpt_'+CONFIG.id+'_v5'; // bump whenever the step ORDER changes (v5: self-improvement step added before the gate) — resets positions saved against the old order (v4: optional "Read & share your X-Ray" step inserted before the gate)
 var pos = 0; // current step index (0..steps.length). steps.length = completion screen.
 try { var saved = parseInt(localStorage.getItem(STORE),10); if(!isNaN(saved)) pos = Math.min(saved, activeSteps().length); } catch(e){}
 

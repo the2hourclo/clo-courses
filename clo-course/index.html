@@ -193,7 +193,8 @@ function renderHome(){
   // The label still says what's next; only the destination is now always the board.
   cta.href = 'ai-employee-board.html';
   if (a==='setup')      { cta.textContent = 'Start building →'; }
-  else if (a==='goal')  { cta.textContent = 'Open your board →'; }
+  // `goal` is a real checkpoint now — only say "open your board" once it's actually finished.
+  else if (a==='goal')  { cta.textContent = AIEB.isDone('goal') ? 'Open your board →' : 'Continue → ' + m.name; }
   else                  { cta.textContent = 'Continue → ' + m.name; }
   document.getElementById('docsList').innerHTML = docsHTML();
 }
