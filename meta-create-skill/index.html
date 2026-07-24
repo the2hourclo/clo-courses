@@ -18,12 +18,18 @@
 </style>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* WHITE-EXCALI SKIN (2026-07-24) — token NAMES unchanged so all 378 lines of page CSS
+   below keep resolving; only the VALUES flip dark→paper. Matches clo-course/journey.css.
+   ⚠ This flips the page CHROME only. 726 hardcoded colour attributes inside this file's
+   39 inline SVG diagrams do NOT read these tokens and are still dark-skin — see
+   HANDOFF-white-excali.md in this folder for the exact remaining work. */
 :root{
---bg:#0d0d0d;--surface:#131313;--surface-2:#181818;--surface-3:#1f1f1f;
---border:#1e1e1e;--border-2:#2a2a2a;--border-3:#333;
---text:#e4e5ef;--text-muted:#9ea3ba;--text-dim:#4a4d60;
---accent:#79EA20;--accent-dim:rgba(121,234,32,.12);--accent-border:rgba(121,234,32,.35);
---blue:#5b9cf6;--purple:#c084fc;--orange:#FFA500;--red:#FF6B6B;--green:#4ade80;--cyan:#06b6d4;--yellow:#fde68a;
+--bg:#FAFAFA;--surface:#FFFFFF;--surface-2:#F4F4F0;--surface-3:#EFEFE9;
+--border:#ECECE6;--border-2:#E2E2DC;--border-3:#D4D4CC;
+--text:#21211E;--text-muted:#5F5F57;--text-dim:#9A9A90;
+--accent:#2D8C3C;--accent-dim:#EAF4EC;--accent-border:#2D8C3C;
+--blue:#3B6FB0;--purple:#6B46C1;--orange:#B26B00;--red:#B3402A;--green:#2D8C3C;--cyan:#0E7490;--yellow:#B26B00;
+--ink:#21211E;--paper:#FAFAFA;--card:#FFFFFF;
 --sidebar-w:280px;--radius:8px;--radius-lg:12px;
 }
 html{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
