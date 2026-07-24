@@ -492,13 +492,20 @@ body.activation-mode .container{max-width:620px;width:100%}
   <details class="step post-setup" id="joinstep">
     <summary class="step-sum">
       <span class="step-check"><span class="num">&#128101;</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Join the community</span><span class="step-sub">30 seconds &mdash; so help is one message away while you set up</span></span>
+      <span class="step-titles"><span class="step-t">Join the community &amp; say hi</span><span class="step-sub">2 minutes &mdash; so help is one message away while you set up</span></span>
       <span class="step-meta"><span class="time">~1 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
       <p>Before the install: join the <strong>AI Employee Builders community</strong> (included with your subscription). It's where members and Rashid hang out &mdash; if anything trips during setup, you ask there and someone's on it. Access is instant.</p>
       <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener"><strong>Open the community on Polynet</strong></a> and join &mdash; use the same email you bought with, then come straight back here.</div></div>
-      <div class="callout callout-tip"><strong>Don't introduce yourself yet</strong> &mdash; that's the last step, once your AI Employee Builder is running and you've got something to show.</div>
+      <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Post a short intro while you're there</strong> &mdash; this is the step people skip and regret. Copy this and fill in the blanks:</div></div>
+      <div class="ai-prompt indent" style="margin-top:10px">
+        <button class="copy-prompt" onclick="copyPrompt(this)">Copy intro</button>
+        <pre>Hi, I'm [name] &mdash; I run [what your business does, in one line].
+
+Setting up my AI Employee Builder now. The first thing I want to hand off: [the task you'd love to never do manually again].</pre>
+      </div>
+      <div class="callout callout-tip"><strong>Why this matters:</strong> members who introduce themselves get feedback on their first skill within a day &mdash; and the first skill is where most people either take off or stall.</div>
       <button class="done-btn" id="joinDoneBtn" onclick="markDoneJoin()"><span class="dlabel">I'm in &mdash; next &#8594;</span></button>
     </div>
   </details>
@@ -571,8 +578,12 @@ body.activation-mode .container{max-width:620px;width:100%}
         <figcaption><strong>What you'll see:</strong> search <strong>"Claude Code"</strong> in the Extensions panel and click <strong>Install</strong> on the first result by Anthropic.</figcaption>
       </figure>
 
-      <div class="callout callout-tip"><strong>That's the only manual install.</strong> One more tool (Node.js) is needed later &mdash; but you don't install it yourself. In Step&nbsp;2, Claude sets it up for you from the terminal.</div>
-      <div class="callout callout-info"><strong>Already use Claude Code?</strong> If the extension is installed and you're signed in, tick this and jump to Step&nbsp;2.</div>
+      <!-- These two callouts pointed at "Step 2", a step the Claude Code buyer never sees
+           (#step2 is authored but not in wizSteps()). In the wizard this step IS step 2 of 3,
+           so the old copy pointed the buyer at itself. Both now name the next thing they
+           actually get: the paste-one-prompt card. -->
+      <div class="callout callout-tip"><strong>That's the only manual install.</strong> One more tool (Node.js) is needed later &mdash; but you don't install it yourself. On the next step you paste one prompt and Claude sets it up from the terminal for you.</div>
+      <div class="callout callout-info"><strong>Already use Claude Code?</strong> If the extension is installed and you're signed in, tick this and go straight to the next step.</div>
       <button class="done-btn" onclick="markDone(1)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -604,12 +615,23 @@ Your standing rule: use the simplest path. Try terminal commands when they are a
 
 6. CONFIRM - Confirm the local plugin holds only thin stubs (no paid skill bodies) and that the real instructions are fetched from the MCP server at runtime. If the license is invalid, expired, cancelled, or for the wrong product, tell me plainly and show the renewal/help response instead of trying to bypass it.
 
-7. ONBOARD - once connected and verified, kick off my onboarding so I get my first working AI employee. Run /setup-aieb (or, in the extension, tell me the exact command to type) - it maps how my business runs today (the Business X-Ray is built in) and builds my first custom skill with me. I just answer its questions. My first AI employee is about 30 minutes away.
+7. ONBOARD - once connected and verified, run /setup-aieb (or, in the extension, tell me the exact command to type) to set up my workspace and install my starting skills. Then tell me plainly that setup is done and that the Business X-Ray is the next step, run in a NEW window - do not start the X-Ray in this session.
 
 Important: Do not use SkillStack for this AIEB install. SkillStack was the old delivery path. The current path is thin plugin shell + hosted LemonSqueezy-gated MCP.
 
 After each step, tell me whether it worked, or show the error and exactly how you're fixing it. Start now with step 1.</pre>
     </div>
+    <!-- Claude Code buyers had no way to check their own work: paste 26 lines, then
+         self-report. This spells out the check and what a good result looks like, so the
+         buyer can tell it worked instead of guessing. -->
+    <div class="callout callout-tip"><strong>How to know it actually worked.</strong> When Claude says it's finished, type <code>/check-setup</code> in the chat (or just say <em>&ldquo;check my setup&rdquo;</em>). You're looking for three green ticks:
+      <ul class="sub">
+        <li>the <strong>plugin</strong> is installed</li>
+        <li>the <strong>connection</strong> to your subscription is live</li>
+        <li>your <strong>subscription</strong> is active</li>
+      </ul>
+      If any of them fails, paste the result back to Claude &mdash; it diagnoses and fixes it with you.</div>
+    <div class="callout callout-warning"><strong>Stuck, or Claude went in circles?</strong> Say <code>/whats-next</code> to get back on track, or <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">post in the community</a> &mdash; the builders and Rashid will sort it with you.</div>
     <div class="wiz-auto" id="shortcutConnected" hidden>&#10003; Device connected &mdash; setup verified by the machine, not by you.</div>
     <button class="done-btn wiz-only" type="button" onclick="wizShortcutDone()"><span>Claude finished the setup &mdash; next &#8594;</span></button>
   </div>
@@ -658,7 +680,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <details class="step" id="cwstep2" data-step="2">
       <summary class="step-sum">
         <span class="step-check"><span class="num">2</span><span class="tick">&#10003;</span></span>
-        <span class="step-titles"><span class="step-t">Connect &amp; onboard</span><span class="step-sub">One command connects you, then builds your first skill</span></span>
+        <span class="step-titles"><span class="step-t">Connect &amp; onboard</span><span class="step-sub">One command connects you and sets up your workspace</span></span>
         <span class="step-meta"><span class="time">~12 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
       <div class="step-content">
@@ -674,11 +696,11 @@ After each step, tell me whether it worked, or show the error and exactly how yo
           </ul></div></div>
         <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Back in the chat, <code>/setup-aieb</code> keeps going on its own</strong> &mdash; your guided onboarding:
           <ul class="sub">
-            <li>Sets up your workspace</li>
-            <li>Maps how your business runs today (the <strong>Business X-Ray</strong> is built in &mdash; no separate step)</li>
-            <li>Builds your first custom skill with you &mdash; <strong>you just answer its questions</strong></li>
+            <li>Sets up your workspace &mdash; folders, conventions, your Business OS</li>
+            <li>Installs your starting skills so the AI knows how you work</li>
+            <li>Checks the connection end to end, so you know it's live</li>
           </ul></div></div>
-        <div class="callout callout-tip"><strong>Success looks like:</strong> once you're connected, Claude starts asking about your business &mdash; that's onboarding running. <strong>Your first AI employee is about 30 minutes away.</strong></div>
+        <div class="callout callout-tip"><strong>Success looks like:</strong> the setup finishes and tells you your workspace is ready. That's this step done. <strong>Next up is the Business X-Ray</strong> &mdash; a separate session in a fresh window, and the next checkpoint on your board.</div>
         <div class="callout callout-info"><strong>Don't see the command?</strong> Saying <code>set up my AI Employee Builder</code> in the chat does exactly the same thing.</div>
         <p>The secure page validates your subscription and hands the plugin an opaque device token &mdash; the plugin never sees or stores a license key, and it works immediately with no restart. If the page ever does ask for your key, enter it there only &mdash; <strong>never paste a license key into a Claude chat.</strong></p>
         <div class="callout callout-warning"><strong>Connector didn't light up?</strong> Type <code>/check-setup</code> in any chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a> &mdash; the builders (and Rashid) will sort it with you.</div>
@@ -689,7 +711,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <!-- CW FINISH -->
     <div class="finish" id="cwfinish">
       <h2>&#127881; You're all set</h2>
-      <p>Your AI Employees are connected and onboarding is done. Now run your Business X-Ray. It maps how your business works and names the first work to hand off.</p>
+      <p>You're connected and your workspace is set up. Next: the Business X-Ray &mdash; open a <strong>fresh window</strong> for it. It maps how your business works and names the first work to hand off.</p>
       <a class="finish-cta" href="checkpoint-map.html" onclick="if(window.AIEB)AIEB.markDone('setup')">&#128300; Start the Business X-Ray &#8594;</a>
       <div class="finish-optional" style="margin-top:24px;padding-top:22px;border-top:1.5px dashed var(--border-2);text-align:center">
         <p style="font-family:var(--font-accent);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin-bottom:4px">Optional &middot; watch anytime</p>
@@ -765,7 +787,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   <details class="step cc-only" id="step3" data-step="3">
     <summary class="step-sum">
       <span class="step-check"><span class="num">3</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Connect &amp; onboard</span><span class="step-sub">One command connects you, then builds your first skill</span></span>
+      <span class="step-titles"><span class="step-t">Connect &amp; onboard</span><span class="step-sub">One command connects you and sets up your workspace</span></span>
       <span class="step-meta"><span class="time">~12 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
@@ -781,10 +803,10 @@ After each step, tell me whether it worked, or show the error and exactly how yo
       <p style="margin-top:10px">Once connected, <code>/setup-aieb</code> keeps going on its own &mdash; your guided onboarding:</p>
       <ul class="sub">
         <li>Sets up your authoring workspace</li>
-        <li>Maps how your business runs today (the <strong>Business X-Ray</strong> is built in)</li>
-        <li>Builds your first custom skill with you &mdash; <strong>you just answer its questions</strong></li>
+        <li>Installs your starting skills so the AI knows how you work</li>
+        <li>Checks the connection end to end, so you know it's live</li>
       </ul>
-      <div class="callout callout-tip"><strong>Your first AI employee is about 30 minutes away.</strong> Kick off <code>/setup-aieb</code> now, while everything's fresh, and let it run.</div>
+      <div class="callout callout-tip">Run <code>/setup-aieb</code> now, while everything's fresh, and let it finish. It sets up the workspace &mdash; <strong>the Business X-Ray is the next checkpoint</strong>, run in a fresh window once this is done.</div>
       <button class="done-btn" onclick="markDone(3)"><span class="dlabel">Mark step done</span></button>
     </div>
   </details>
@@ -848,7 +870,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   <div class="finish cc-only" id="finish">
     <div class="finish-emoji">&#127881;</div>
     <div class="finish-h">You're all set up!</div>
-    <div class="finish-p">Your AI Employee Builder is live inside Claude Code and your first skill is running. Now point it at your whole business. The Business X-Ray maps how your business runs and names the exact work to hand your AI Employees first.</div>
+    <div class="finish-p">Your AI Employee Builder is live inside Claude Code and your workspace is set up. Next: the Business X-Ray &mdash; open a <strong>fresh window</strong> for it. It maps how your business runs and names the exact work to hand your AI Employees first.</div>
     <a class="finish-cta" href="checkpoint-map.html">&#128300; Start the Business X-Ray &#8594;</a>
     <div class="finish-optional" style="margin-top:24px;padding-top:22px;border-top:1.5px dashed var(--border-2);text-align:center">
       <p style="font-family:var(--font-accent);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin-bottom:4px">Optional &middot; watch anytime</p>
@@ -858,26 +880,6 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   </div>
 
   <!-- ═══ COMMUNITY STEP (shared by both tracks — the intro post matters) ═══ -->
-  <details class="step post-setup" id="communitystep">
-    <summary class="step-sum">
-      <span class="step-check"><span class="num">&#128075;</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Join the community &amp; introduce yourself</span><span class="step-sub">While your onboarding runs &mdash; say hi where the builders hang out</span></span>
-      <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
-    </summary>
-    <div class="step-content">
-      <p>Claude is onboarding you right now &mdash; perfect moment for this. You joined the community back in step one; now's when you say hi &mdash; members share what they're building, get feedback on their AI Employees' output, and join the monthly group call.</p>
-      <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener"><strong>Head back to the community</strong></a> (same tab you joined in).</div></div>
-      <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Post a short intro</strong> &mdash; this is the step people skip and regret. Copy this and fill in the blanks:</div></div>
-      <div class="ai-prompt indent" style="margin-top:10px">
-        <button class="copy-prompt" onclick="copyPrompt(this)">Copy intro</button>
-        <pre>Hi, I'm [name] — I run [what your business does, in one line].
-
-Just installed my AI Employee Builder. The first thing I want to hand off: [the task you'd love to never do manually again].</pre>
-      </div>
-      <div class="callout callout-tip"><strong>Why this matters:</strong> members who introduce themselves get feedback on their first skill within a day &mdash; and the first skill is where most people either take off or stall.</div>
-      <button class="done-btn" id="communityDoneBtn" onclick="markDoneCommunity()"><span class="dlabel">I've posted my intro</span></button>
-    </div>
-  </details>
 
   <!-- ═══ YOUR ROADMAP ═══ -->
   <div class="ai-card post-setup" id="roadmap-card" style="text-align:center">
@@ -1278,7 +1280,7 @@ function wizConnected(){ try { return !!localStorage.getItem(CONNKEY); } catch(e
 function wizSteps(){
   var s=[];
   if (window.__aiebClaim) s.push({virtual:'claim', min:0, isDone:function(){ return true; }});
-  s.push({el:'joinstep', min:1, isDone:function(){ return wizExtra.has('join'); },
+  s.push({el:'joinstep', min:2, isDone:function(){ return wizExtra.has('join'); },
     mark:function(){ wizExtra.add('join'); wizExtraSave(wizExtra); }});
   if (wizTrackName==='cowork'){
     s.push({el:'cwstep1', min:3, isDone:function(){ return doneCW.has(1); },
@@ -1289,8 +1291,8 @@ function wizSteps(){
       mark:function(){ done.add(1); saveDone(done); render(); }});
     s.push({el:'shortcut', min:15, isDone:function(){ return wizExtra.has('shortcut'); }, connect:true});
   }
-  s.push({el:'communitystep', min:2, isDone:function(){ return wizExtra.has('community'); },
-    mark:function(){ wizExtra.add('community'); wizExtraSave(wizExtra); }});
+  /* The trailing "introduce yourself" step was folded into `joinstep` (2026-07-24) —
+     joining and saying hi are one action at the top of the flow now. */
   return s;
 }
 
@@ -1366,8 +1368,7 @@ function wizRender(){
     if (wizTrackName==='cowork') document.getElementById('cowork').classList.add('wiz-visible');
     var rc=document.getElementById('roadmap-card'), cm=document.getElementById('community-card');
     if (rc) rc.classList.add('wiz-visible');
-    // community card only if the intro step was somehow skipped
-    if (cm && !wizExtra.has('community')) cm.classList.add('wiz-visible');
+    if (cm) cm.classList.add('wiz-visible'); // community card always shows at finish
     return;
   }
   // Displayed step = explicit cursor if the human set one, else the first incomplete step.
@@ -1455,14 +1456,7 @@ function markDoneJoin(){
   if (st) st.classList.toggle('done', wizExtra.has('join'));
   if (wizOn){ if (wizExtra.has('join')) wizStepForward(); else { wizPos=null; wizRender(); } }
 }
-function markDoneCommunity(){
-  if (wizExtra.has('community')) { wizExtra.delete('community'); } else { wizExtra.add('community'); }
-  wizExtraSave(wizExtra);
-  var b=document.getElementById('communityDoneBtn'), st=document.getElementById('communitystep');
-  if (b) b.querySelector('.dlabel').textContent = wizExtra.has('community') ? '✓ Done — tap to undo' : "I've posted my intro";
-  if (st) st.classList.toggle('done', wizExtra.has('community'));
-  if (wizOn){ if (wizExtra.has('community')) wizStepForward(); else { wizPos=null; wizRender(); } }
-}
+/* markDoneCommunity removed 2026-07-24 — the trailing community step was folded into joinstep. */
 function wizSwitchApp(){
   var t = wizTrackName==='cowork' ? 'cc' : 'cowork';
   applyTrack(t, false); wizTrackName=t; wizPos=null; wizRender();
@@ -1504,11 +1498,6 @@ setInterval(function(){
 
 (function initWizard(){
   if (document.body.classList.contains('activation-mode')) return;
-  if (wizExtra.has('community')){
-    var cst=document.getElementById('communitystep'), cbtn=document.getElementById('communityDoneBtn');
-    if (cst) cst.classList.add('done');
-    if (cbtn) cbtn.querySelector('.dlabel').textContent='✓ Done — tap to undo';
-  }
   if (wizExtra.has('join')){
     var jst=document.getElementById('joinstep'), jbtn=document.getElementById('joinDoneBtn');
     if (jst) jst.classList.add('done');
