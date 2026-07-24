@@ -138,7 +138,10 @@ var CONFIG = {
 
     { type:'video', title:'The 3 levels of skills',
       video:'', slotLabel:'📹 Explainer — coming soon',
-      slides: canvas('v2-types-of-skills', ['01-three-levels','02-level1-simple','03-level2-workflows','04-level3-orchestrator','05-skill-vs-workflow','06-how-they-chain']),
+      /* 01-04 ONLY. Slides 05 (skill-vs-workflow) + 06 (how-they-chain) are CP3's subject —
+         a buyer picking their FIRST skill shouldn't meet the system-architecture decision yet.
+         Those two open the CP3 deck instead; the files stay where they are. */
+      slides: canvas('v2-types-of-skills', ['01-three-levels','02-level1-simple','03-level2-workflows','04-level3-orchestrator']),
       body:'Skills come in three shapes. A <strong>simple</strong> one-file skill, one <strong>with workflows</strong> it loads only when needed, and an <strong>orchestrator</strong> that runs other skills. You start simple.' },
 
     { type:'video', title:'How to create a skill',
