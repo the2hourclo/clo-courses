@@ -32,10 +32,33 @@ The **board is the hub**; each **checkpoint is a wizard**. Finish a checkpoint �
 | `ai-employee-board.html` | The hub. `BOARD` array = columns + cards; `WIZARDS` map = each checkpoint's page. **Progress/state is STUBBED** (all "just-onboarded"). |
 | `checkpoint-map.html` | CP1 (Business X-Ray). Also the **reusable checkpoint template** — CONFIG-driven (`var CONFIG = { id, name, color, board, steps:[...] }`). Steps have type `video`/`build`/`share`/`gate`. |
 | `checkpoint-first-skill.html` · `checkpoint-system.html` · `checkpoint-autonomy.html` | CP2 / CP3 / CP4. Built from the template; steps mirror the board's cards. Video slots are empty ("🎬 Video coming soon") — EXCEPT where a step carries `slides:[...]` (see `slides.js`). |
-| `slides.js` | **NEW (2026-07-24).** Swipeable slide viewer that fills a wizard step's video slot until the video is recorded. Give a step `slides: canvas('<canvas-dir>', ['01-…','02-…'])` (PNGs under `meta-create-skill/canvases/<dir>/slides/`) and the wizard renders a swipe / arrow-key / tap-to-enlarge deck instead of the "coming soon" slot. A real `video:` URL always wins over `slides:` — recording a video needs no cleanup. Wired: CP2 step 1 (v1-what-is-a-skill) + step 2 (v2-types-of-skills). |
+| `slides.js` | **NEW (2026-07-24).** Swipeable slide viewer that fills a wizard step's video slot until the video is recorded. Give a step `slides: canvas('<canvas-dir>', ['01-…','02-…'])` (PNGs under `meta-create-skill/canvases/<dir>/slides/`) and the wizard renders a swipe / arrow-key / tap-to-enlarge deck instead of the "coming soon" slot. A real `video:` URL always wins over `slides:` — recording a video needs no cleanup; see the two-homes URL ritual in `product/aieb-onboarding-journey/build-record-roadmap.md`. Deck-to-step map below. |
 | `nav.js` | Sidebar + product config for **two products** (`aieb`, `clo`). Consumed by `shell.js`. |
 | `shell.js` | Portal shell (header, sidebar, ⌘K search). Product = `?product=` OR `<body data-product>`, default `clo`. Propagates `?product=` onto local links. |
 | `progress.js` | **NEW (2026-07-22).** The journey's client-side progress store — the single source of truth for "which checkpoints are done" and "where do I continue". Exposes `window.AIEB` (`SPINE`, `META`, `isDone`, `markDone`, `activeId`, `stateOf`, `next`, `stepInfo`, `resume`, `started`). Loaded by the board, all 4 checkpoints, and home. Swap its localStorage read for a server fetch later. |
+
+## Which deck sits on which checkpoint (2026-07-24)
+
+The split is deliberate. A step's `slides:` list IS the deck, so re-scoping a checkpoint is a
+one-line change and **no files move**.
+
+| Step | Deck |
+|---|---|
+| CP2 step 1 · What is a skill | `v1-what-is-a-skill` 01–06 |
+| CP2 step 2 · The 3 levels of skills | `v2-types-of-skills` **01–04 only** |
+| CP3 step 1 · What a skill system is | `v2-types-of-skills` **05–06** + `v4-skill-system` 01–05 (7 slides) |
+
+v2's 05 (skill-vs-workflow) and 06 (how-they-chain) teach the system-architecture decision, which
+is CP3's subject — showing them at CP2, where the buyer is picking their FIRST skill, is the
+watch-ahead the checkpoint model exists to prevent. They open the CP3 deck instead. **The files
+stay in `v2-types-of-skills`** and are referenced by path; nothing was moved or duplicated.
+
+`v4-skill-system` runs the **locked Weekly Email employee** end to end (`pull-stats/` →
+`what-worked/` → `draft-email/` → `qa-draft/`, lead skill `weekly-email/`) — the same job the CP3
+demo builds seconds later, so the explainer and the demo are one story rather than two examples.
+`draft-email/` is tagged "the skill you already built" wherever it appears, which is the CP2→CP3
+link. The deck answers chaining and **stops**: hardening, harnesses and scheduling are CP4's deck.
+Any new slide added here must use that same running example.
 
 ## Done this session (2026-07-22)
 
