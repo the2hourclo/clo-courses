@@ -148,7 +148,11 @@ var CONFIG = {
     { type:'build', title:'Run autonomously or self-improve',
       video:'', demoSlot:true, demoLabel:'🎬 Demo · watch a correction stick — coming soon',
       command:'I want to correct this AI Employee once and have the fix stick for next time. Take the correction I am about to give you, write it back into the skill&#39;s own files so future runs already know it, and show me the exact line you added.',
-      body:'Add the harness and the schedule (or just say <em>&ldquo;put this on autopilot&rdquo;</em>). From here the AI runs the function on its own and gets sharper each time you correct it — that is the <strong>retrospective</strong> skill: flag a miss with <em>&ldquo;note-friction&rdquo;</em> (or a win with <em>&ldquo;note-win&rdquo;</em>), then run <em>&ldquo;/review-retro&rdquo;</em> and your correction gets written back into the skill so next time it is already fixed. <strong>You review, it runs.</strong>' },
+      /* The old copy told buyers to type "note-friction", "note-win" and "/review-retro".
+         None of the three exist in the shipped plugin — verified against aieb-thin-plugin
+         v0.21.0: its commands/ has no such entries, and the retrospective skill triggers on
+         plain language instead. A buyer typing them got nothing. */
+      body:'Add the harness and the schedule (or just say <em>&ldquo;put this on autopilot&rdquo;</em>). From here the AI runs the function on its own and gets sharper each time you correct it — that is the <strong>retrospective</strong> skill. When a run comes back wrong, just say <em>&ldquo;this skill messed up&rdquo;</em> (or <em>&ldquo;fix this skill&rdquo;</em>) and your correction gets written back into the skill, so next time it is already fixed. <strong>You review, it runs.</strong>' },
 
     { type:'gate', title:'It runs on its own',
       body:'Confirm the system runs without you kicking it off, and that when you correct it, the fix sticks for next time.',

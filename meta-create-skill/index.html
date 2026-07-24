@@ -7,6 +7,16 @@
 <link rel="stylesheet" href="../clo-course/tokens.css">
 <link rel="stylesheet" href="../clo-course/shell.css">
 <style>
+  /* A canvas deck breaks out of the 760px reading column so the slides are legible.
+     UNLIKE the checkpoint wizards (a simple centred column) this page has a fixed
+     sidebar AND a right-hand TOC, so viewport-centring overlaps both. Expand within
+     the gutters only: ~56px each side keeps it clear of the sidebar and the TOC.
+     At this width the slide is a readable PREVIEW; the Enlarge chip carries the fine
+     print, which is why that affordance is always visible. */
+  .deck-wide{width:calc(100% + 112px);margin-left:-56px;margin-top:22px;margin-bottom:8px}
+  @media(max-width:1100px){.deck-wide{width:100%;margin-left:0}}
+</style>
+<style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
 --bg:#0d0d0d;--surface:#131313;--surface-2:#181818;--surface-3:#1f1f1f;
@@ -522,6 +532,22 @@ function renderLesson(id){
   document.getElementById('main').innerHTML = html;
   document.getElementById('main').classList.toggle('lesson-wide', id === 'frontmatter-lab');
   if (typeof updateYamlBuilder === 'function' && document.getElementById('yb-output')) updateYamlBuilder(true);
+  mountAuditDeck();
+}
+
+/* The 13-slide "audit your skill library" canvas, mounted into the progression lesson.
+   Lessons are injected as innerHTML, so the viewer has to be re-mounted on every render. */
+var AUDIT_SLIDES = ['01-before-skill-soup','02-the-eight-signals','02-1-duplicate-standalones',
+  '02-2-trigger-collisions','02-3-missing-workflow-routing','02-4-no-cross-skill-callouts',
+  '02-5-orphan-workflows','02-6-bloated-orchestrators','02-7-missing-shared-delegation',
+  '02-8-sediment','03-how-the-audit-runs','04-the-fix','05-after-clean-library'];
+function mountAuditDeck(){
+  var el = document.getElementById('auditDeck');
+  if (!el || !window.AIEBSlides) return;
+  AIEBSlides.mount(el, {
+    title: 'Audit your skill library',
+    slides: AUDIT_SLIDES.map(function(n){ return 'canvases/v3-audit-library/slides/' + n + '.png'; })
+  });
 }
 
 // ========================================================================
@@ -2827,6 +2853,15 @@ LESSON_CONTENT['progression'] = `
   <strong>The default when uncertain: go standalone.</strong> Extracting a nested workflow into a standalone later is cheap &mdash; you lift the file, wire up delegation, done. Merging a standalone back into its parent is expensive &mdash; you have to re-integrate state, re-test, and update every other skill that was delegating to it. Bias toward extractable from day one.
 </div>
 
+<h3>When the library goes to soup &mdash; and how to clean it</h3>
+<p>Past Stage 3 the friction stops being &ldquo;I need another skill&rdquo; and starts being &ldquo;I can&rsquo;t tell which skill fires.&rdquo; That is a library problem, not a skill problem, and it has its own fix. Swipe through the eight signals below &mdash; if you recognise two or three of them in your own library, run the audit.</p>
+
+<div class="deck-wide" id="auditDeck"></div>
+
+<div class="callout tip">
+  <strong>Run it on your own library:</strong> say <em>&ldquo;audit my skill library&rdquo;</em> (or use <code>/audit-skills</code>). It walks the eight signals against what you actually have and hands back the fix list &mdash; you approve, it repairs.
+</div>
+
 <p style="margin-top:18px">Every skill in that growing library depends on one field to even get loaded. If the router can't find your skill, none of the structure matters. That one field is next.</p>
 `;
 
@@ -4011,6 +4046,7 @@ window.addEventListener('hashchange', () => {
 </script>
 <!-- Shared portal shell (Claude-Docs chrome). Mirrors this SPA's lessons into the shared sidebar; content + JS untouched. Shared files live in ../clo-course/. -->
 <script>window.CLO_COURSE_LESSONS=(typeof LESSONS!=='undefined')?LESSONS:null;window.CLO_COURSE_GOTO_NAME='goToLesson';window.CLO_CURRENT_LESSON=(typeof state!=='undefined'&&state)?state.currentLesson:null;</script>
+<script src="../clo-course/slides.js?v=3"></script>
 <script src="../clo-course/nav.js"></script>
 <script src="../clo-course/toc.js"></script>
 <script src="../clo-course/shell.js"></script>

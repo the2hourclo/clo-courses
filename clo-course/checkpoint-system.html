@@ -141,10 +141,15 @@ var CONFIG = {
         .concat(canvas('v4-skill-system', ['01-you-are-the-wiring','02-system-runs-the-job','03-lead-skill-runs-the-rest','04-a-real-system','05-skill-system-employee'])),
       body:'One skill does one task. A <strong>skill system</strong> chains a few skills together so the AI runs a whole job end to end — that’s the moment a skill becomes an <strong>AI Employee</strong> that owns a function, not just a task. The skill that does this is <strong>build-skill-system</strong>: it maps the job, names every hand-off between steps, and builds the lead skill that runs the rest in order — so you don’t wire anything by hand.' },
 
-    { type:'build', title:'Wire your skills into one system',
+    /* Was "take two or three skills from the same job" — but CP2 hands the buyer exactly
+       ONE, so the step asked for something they don't have. The deck above (and the demo)
+       both show the right shape: the ONE existing skill gets reused as a step, and the
+       system's other steps are built around it. The command now says that explicitly and
+       carries the run-of-show's rail (no scheduling — that's CP4). */
+    { type:'build', title:'Wire your skill into a system',
       video:'', videoSlot:true, slotLabel:'🎬 Demo · watch me build one — coming soon',
-      command:'Build a skill system from the skills I already have — wire them into one AI Employee that runs the whole job end to end. Interview me first: walk me through the operation step by step, name the hand-off between each step, and show me the plan before you build anything.',
-      body:'Take two or three skills from the same job and connect them into one flow, with a lead skill that calls the rest. Just say <em>&ldquo;build a skill system&rdquo;</em> (or <em>&ldquo;wire these into a skill system&rdquo;</em>) and the AI plans it with you, then builds the orchestration — <strong>you direct, it does the wiring</strong>.' },
+      command:'Build a skill system around the skill I already built — wire the whole job into one AI Employee that runs end to end. Reuse my existing skill as one of the steps, don\'t rebuild it. Interview me first: walk me through the job step by step, name the hand-off between each step, and show me the plan before you build anything. Don\'t schedule anything yet.',
+      body:'Start from the <strong>one skill you built last checkpoint</strong> — it becomes a step inside a bigger job. The AI builds the steps around it and a lead skill that runs them in order. Just say <em>&ldquo;build a skill system&rdquo;</em> and it plans it with you first. <strong>You direct, it does the wiring</strong> — and it reuses what you already made instead of rebuilding it.' },
 
     { type:'gate', title:'System runs a whole function',
       body:'Hand the system a real job from start to finish, and watch it run every step without you steering each one.',
