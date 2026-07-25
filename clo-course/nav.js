@@ -29,14 +29,18 @@ var CLO_CONFIG = {
   checkout_url: 'https://chiefleverageofficer.lemonsqueezy.com/checkout/buy/14c15890-c46a-4ab8-ab8d-9e56cd04d38a',
   // grouped left-sidebar nav. `page` matches each page's <body data-page>. hrefs are ROOT-relative.
   nav: [
-    // ── The Build Board is the ONE home base. It used to compete with two other
-    //    "where am I / what's next" surfaces: the launcher (which duplicated its
-    //    progress bar) and ai-employee-roadmap.html (which tracked 7 phases in its
-    //    own aer_* keys against the board's 6 checkpoints in aieb_progress — two
-    //    stores that never synced, so they could disagree). Both are retired; the
-    //    roadmap URL redirects here and its prompt appendix moved to Reference.
+    // ── Two surfaces, deliberately, and they are not the same job:
+    //    Home = the CHOICE screen — where you are in one line, one button to
+    //           continue building, and the docs. This is where the logo lands.
+    //    Build Board = the whole journey laid out, for when you want the map.
+    //    (The third one, ai-employee-roadmap.html, IS retired — it tracked 7
+    //    phases in its own aer_* keys against the board's 6 checkpoints in
+    //    aieb_progress, two stores that never synced and could disagree about
+    //    where you were. Its URL redirects to the board; its prompt appendix
+    //    lives on under Reference.)
     { group: 'Get Started', items: [
-      { label: 'Build Board', page: 'board', href: 'clo-course/ai-employee-board.html', keywords: ['board','build board','home','portal home','start','journey','checkpoints','whats next','next step','path','progress','home base','what to build next','continue building','roadmap','dashboard','overview'] },
+      { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['home','portal home','start','overview','welcome','continue','continue building','whats next','next step','dashboard'] },
+      { label: 'Build Board', page: 'board', href: 'clo-course/ai-employee-board.html', keywords: ['board','build board','journey','checkpoints','path','progress','home base','what to build next','roadmap','map'] },
       { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','cowork','plugin','license','activate','connect','onboard','getting started','first steps'] }
     ]},
     { group: 'Courses', items: [

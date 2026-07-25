@@ -151,7 +151,7 @@ function gateHTML(){
       '</button>'+
     '</div></div>';
 }
-function pickSurface(s){ AIEB.setSurface(s); location.href = 'ai-employee-board.html'; }
+function pickSurface(s){ AIEB.setSurface(s); document.getElementById('gate').hidden = true; renderHome(); }
 function maybeGate(){
   var g = document.getElementById('gate');
   if (!AIEB.getSurface()){ g.innerHTML = gateHTML(); g.hidden = false; }
@@ -201,20 +201,15 @@ function renderHome(){
   document.getElementById('docsList').innerHTML = docsHTML();
 }
 
-/* ── This page is the FRONT DOOR, not a second home. ──────────────────────────
-   Its one job is the surface gate (Cowork vs Claude Code), which has to be asked
-   once before the setup steps make sense. Everything else it used to show — the
-   overall progress bar, the "continue where you left off" CTA, the docs list — is
-   the Build Board's job, and having both meant two pages answering "where am I".
-   So: no surface chosen yet → show the gate. Surface already chosen → you are a
-   returning buyer, go straight to the board. */
-if (AIEB.getSurface()) {
-  location.replace('ai-employee-board.html' + location.search + location.hash);
-} else {
-  maybeGate();
-  paintSurf();
-  renderHome();
-}
+/* ── This page is HOME: the choice screen. ────────────────────────────────────
+   It answers "where am I" in one line, then offers the choice — continue
+   building (straight into the checkpoint you left off at, via the board), or
+   browse the docs. It deliberately does NOT jump you to the board: landing on
+   the full journey map is a lot to take in when all you wanted was the next
+   step. The board is one click away, from both the progress card and the CTA. */
+maybeGate();
+paintSurf();
+renderHome();
 // Repaint if the server reports checkpoints this browser didn't know about
 // (built in Claude, or on another device). Silent no-op when nothing changed.
 window.addEventListener('aieb:progress-synced', renderHome);
