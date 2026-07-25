@@ -902,7 +902,7 @@ function glyphAgent(agent, fork){
     'Plan':            {color:'#6B46C1', inner:'<rect x="69" y="24" width="12" height="16" rx="1" fill="none" stroke="#6B46C1" stroke-width="1.8"/><line x1="71" y1="28" x2="79" y2="28" stroke="#6B46C1" stroke-width="1.2"/><line x1="71" y1="32" x2="79" y2="32" stroke="#6B46C1" stroke-width="1.2"/><line x1="71" y1="36" x2="76" y2="36" stroke="#6B46C1" stroke-width="1.2"/>'}
   };
   const ic = icons[agent] || icons['general-purpose'];
-  const bubble = fork ? '<rect x="8" y="6" width="134" height="52" rx="26" fill="rgba(107,70,193,0.05)" stroke="#6B46C1" stroke-dasharray="4 3" stroke-width="1" stroke-opacity="0.55"/>' : '';
+  const bubble = fork ? '<rect x="8" y="8" width="134" height="42" rx="21" fill="rgba(107,70,193,0.05)" stroke="#6B46C1" stroke-dasharray="4 3" stroke-width="1" stroke-opacity="0.55"/>' : '';
   return '<svg viewBox="0 0 150 70" width="165" height="75">'
     + bubble
     + '<circle cx="75" cy="32" r="18" fill="#FFFFFF" stroke="' + ic.color + '" stroke-width="1.8"/>'
@@ -1867,9 +1867,9 @@ LESSON_CONTENT['disclosure'] = `
 <div class="pyramid-wrap">
 <svg viewBox="0 0 620 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px" aria-label="Progressive disclosure three-tier pyramid">
   <!-- Tier 1: Metadata -->
-  <polygon points="260,20 360,20 410,80 210,80" fill="rgba(45,140,60,.18)" stroke="#2D8C3C" stroke-width="1.5"/>
-  <text x="310" y="46" text-anchor="middle" fill="#21211E" font-size="13" font-weight="700">Tier 1 &middot; Metadata</text>
-  <text x="310" y="64" text-anchor="middle" fill="#6B6B63" font-size="11">YAML name + description (~100 words)</text>
+  <polygon points="244,18 376,18 410,80 210,80" fill="rgba(45,140,60,.18)" stroke="#2D8C3C" stroke-width="1.5"/>
+  <text x="310" y="45" text-anchor="middle" fill="#21211E" font-size="13" font-weight="700">Tier 1 &middot; Metadata</text>
+  <text x="310" y="64" text-anchor="middle" fill="#6B6B63" font-size="10">YAML name + description (~100 words)</text>
 
   <!-- Tier 2: SKILL.md body -->
   <polygon points="210,88 410,88 470,180 150,180" fill="rgba(59,111,176,.15)" stroke="#3B6FB0" stroke-width="1.5"/>
