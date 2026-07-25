@@ -132,8 +132,14 @@ video** anywhere; that's a recording, not a copy fix, and it sits earliest in th
 - **The audit deck's width rule (`.deck-wide`)** on the course page is bounded to the content
   gutters, NOT viewport-centred, because that page has a sidebar AND a right TOC. Don't "simplify"
   it to the wizard's centring trick — it'll overlap both.
-- **`get-access-aieb.finish-preview.html` is untracked** and predates this work — NOT mine to
-  commit or delete. Decide: commit it or `rm` it. It's the only thing in `git status`.
+- ~~**`get-access-aieb.finish-preview.html` is untracked** — decide: commit it or `rm` it.~~
+  **RESOLVED 2026-07-25: deleted** (on Rashid's call). It got committed by accident in the
+  favicon sweep, which published it to Pages. It was a scratch fork of the Get Access wizard
+  frozen at the pre-white-excali skin — it hardcodes its own `:root` palette instead of
+  inheriting tokens.css, so the 2026-07-23 flip never touched it, and it rendered as a
+  near-black content area inside the current light shell with a "PREVIEW" banner on top.
+  716 diff lines behind the live wizard, so not a usable backup either. In git history if
+  it is ever wanted back.
 
 ---
 
