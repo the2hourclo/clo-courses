@@ -2,6 +2,26 @@
 
 **Date:** 2026-07-22 · **Repo:** `product/courses/clo-courses/` (nested git repo — commit inside it) · **Working folder:** `clo-course/`
 
+> **⚠ PARTIALLY SUPERSEDED 2026-07-25 — the portal collapsed to ONE product.** Delivery moved
+> to a single gated MCP server where access is decided by the Lemon Squeezy product ID, so a
+> second portal earns nothing. What changed since this doc was written:
+> - **`?product=` is dead.** No JS reads it, nothing propagates it. Old links still load — the
+>   param is inert. There is no `data-product` attribute anywhere in live code either.
+> - **Everyone sees every course.** Premium (Full Access) courses carry an upgrade CTA instead
+>   of being hidden behind a second nav. Brand is "AI Employee Builder" throughout; the logo is
+>   `clo-course/assets/aieb-avatar-180.png`.
+> - **`ai-employee-roadmap.html` / `roadmap.html` are RETIRED** (redirect stubs → the board).
+>   They counted 7 phases in their own `aer_*` keys against the board's 6 checkpoints in
+>   `aieb_progress` — two stores that never synced. The prompt appendix moved to `prompts.html`.
+> - **Progress is no longer stubbed.** `progress.js` is the real store, and the board also
+>   syncs from the server (`aieb:progress-synced`).
+> - **Serving locally:** use HTTP/1.1. Under HTTP/1.0 Chromium reads the connection close on
+>   the 599KB `meta-create-skill/index.html` as `ERR_CONNECTION_RESET`, the document stalls at
+>   `readyState: 'loading'`, its bottom `<script>` tags never run, and it looks exactly like a
+>   blank-white-page bug that isn't real.
+>
+> The file map and gotchas below are otherwise still accurate. Rows corrected in place.
+
 ---
 
 ## What this is
@@ -27,14 +47,14 @@ The **board is the hub**; each **checkpoint is a wizard**. Finish a checkpoint �
 
 | File | Role |
 |---|---|
-| `index.html` | Portal home. Board-first body. `<body data-product="aieb">` forces the AIEB nav. |
+| `index.html` | Portal home — the **choice screen**: progress card + one "Continue →" button + a Docs & help disclosure. Standalone (no shell, no sidebar, no `data-product`); the shell topbar logo lands here. |
 | `get-access-aieb.html` | Install wizard. **Full-focus, NO sidebar** (permanent `wiz-focus` + a `body[data-page="get-access"]` CSS guard). Two tracks: Cowork / Claude Code. Finish banners (`#cwfinish`, `#finish`) both carry **"🔬 Start the Business X-Ray →" → `checkpoint-map.html`**. |
 | `ai-employee-board.html` | The hub. `BOARD` array = columns + cards; `WIZARDS` map = each checkpoint's page. **Progress/state is STUBBED** (all "just-onboarded"). |
 | `checkpoint-map.html` | CP1 (Business X-Ray). Also the **reusable checkpoint template** — CONFIG-driven (`var CONFIG = { id, name, color, board, steps:[...] }`). Steps have type `video`/`build`/`share`/`gate`. |
 | `checkpoint-first-skill.html` · `checkpoint-system.html` · `checkpoint-autonomy.html` | CP2 / CP3 / CP4. Built from the template; steps mirror the board's cards. Video slots are empty ("🎬 Video coming soon") — EXCEPT where a step carries `slides:[...]` (see `slides.js`). |
 | `slides.js` | **NEW (2026-07-24).** Swipeable slide viewer that fills a wizard step's video slot until the video is recorded. Give a step `slides: canvas('<canvas-dir>', ['01-…','02-…'])` (PNGs under `meta-create-skill/canvases/<dir>/slides/`) and the wizard renders a swipe / arrow-key / tap-to-enlarge deck instead of the "coming soon" slot. A real `video:` URL always wins over `slides:` — recording a video needs no cleanup; see the two-homes URL ritual in `product/aieb-onboarding-journey/build-record-roadmap.md`. Deck-to-step map below. |
-| `nav.js` | Sidebar + product config for **two products** (`aieb`, `clo`). Consumed by `shell.js`. |
-| `shell.js` | Portal shell (header, sidebar, ⌘K search). Product = `?product=` OR `<body data-product>`, default `clo`. Propagates `?product=` onto local links. |
+| `nav.js` | Sidebar + config for the **one** product (2026-07-25). `window.CLO_PRODUCTS` still maps BOTH old keys (`clo`, `aieb`) at the same object — that is a cache shim for stale `shell.js` copies, not a second product. Consumed by `shell.js`. |
+| `shell.js` | Portal shell (header, sidebar, ⌘K search). Reads `window.CLO_PRODUCT`. **No `?product=` and no `data-product`** (2026-07-25) — it neither reads the param nor propagates it onto links; `rewriteContentLinks` is deleted. Old `?product=` URLs still load, the param is simply inert. |
 | `progress.js` | **NEW (2026-07-22).** The journey's client-side progress store — the single source of truth for "which checkpoints are done" and "where do I continue". Exposes `window.AIEB` (`SPINE`, `META`, `isDone`, `markDone`, `activeId`, `stateOf`, `next`, `stepInfo`, `resume`, `started`). Loaded by the board, all 4 checkpoints, and home. Swap its localStorage read for a server fetch later. |
 
 ## Which deck sits on which checkpoint (2026-07-24)

@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="journey.css?v=3">
 <style>
-body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba(121,234,32,.05),transparent 70%),var(--bg)}
+body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba(45,140,60,.05),transparent 70%),var(--bg)}
 
 /* ── TOP BAR (brand + swappable surface toggle; no sidebar) ── */
 /* Resources rail — the way into the wider portal. Deliberately quiet while the
@@ -29,7 +29,7 @@ body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba
 .res-more.open .res-panel{max-height:260px}
 .res-panel .res-links{justify-content:center;padding:12px 2px 4px}
 .res-card{border:2px solid var(--ink);border-radius:15px 4px 15px 4px;background:var(--card);box-shadow:3px 4px 0 rgba(33,33,30,.08);padding:22px 24px}
-.res-card h3{font-family:var(--excali,inherit);font-size:19px;color:var(--ink);margin:0 0 4px}
+.res-card h3{font-family:var(--font-accent,inherit);font-size:19px;color:var(--ink);margin:0 0 4px}
 .res-card p{color:var(--soft);font-size:14px;margin:0 0 16px}
 .res-links{display:flex;flex-wrap:wrap;gap:10px}
 .res-links a{display:inline-block;padding:9px 15px;border:1.5px solid var(--ink);border-radius:12px 3px 12px 3px;background:var(--card);color:var(--ink);text-decoration:none;font-size:13.5px;font-weight:600;transition:transform .13s,box-shadow .13s}
@@ -60,8 +60,8 @@ body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba
 .nb-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--nc);margin-bottom:5px}
 .nb-title{font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-.4px;line-height:1.12}
 .nb-lead{font-size:13.5px;color:var(--text-muted);margin-top:6px;line-height:1.5}
-.nb-go{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:12px;background:var(--nc);color:#0a0a0a;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 12px 30px color-mix(in srgb,var(--nc) 30%,transparent);transition:filter .14s,transform .14s}
-.nb-go:hover{filter:brightness(1.07);transform:translateY(-1px);text-decoration:none;color:#0a0a0a}
+.nb-go{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:12px;background:var(--nc);color:#fff;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 12px 30px color-mix(in srgb,var(--nc) 30%,transparent);transition:filter .14s,transform .14s}
+.nb-go:hover{filter:brightness(1.07);transform:translateY(-1px);text-decoration:none;color:#fff}
 
 .map-label{max-width:1300px;margin:26px auto 0;padding:0 24px;font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--text-dim);text-align:center}
 
@@ -80,11 +80,11 @@ a.col-pill:hover{background:color-mix(in srgb,var(--cp) 28%,transparent);border-
 a.col-pill:hover .open{opacity:1}
 .col-pill .cdot{width:7px;height:7px;border-radius:50%;background:var(--cp);flex-shrink:0}
 .col-state{margin-left:auto;font-size:10.5px;font-weight:700;white-space:nowrap}
-.col-state.done{color:#4ade80}
+.col-state.done{color:var(--accent)}
 .col-state.active{color:var(--cp)}
-.col-state.locked{color:var(--text-dim)}
+.col-state.locked{color:var(--text-400,#6B6B63)}
 .col-body{background:color-mix(in srgb,var(--cp) 5%,var(--surface));border:1px solid var(--border);border-top:3px solid var(--cp);border-radius:var(--radius-lg);padding:10px;display:flex;flex-direction:column;gap:9px;min-height:80px}
-.col.active .col-body{border-color:color-mix(in srgb,var(--cp) 40%,transparent);box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 0 1px color-mix(in srgb,var(--cp) 22%,transparent)}
+.col.active .col-body{border-color:color-mix(in srgb,var(--cp) 40%,transparent);box-shadow:3px 4px 0 rgba(33,33,30,.10),0 0 0 1px color-mix(in srgb,var(--cp) 30%,transparent)}
 .col.locked .col-body{opacity:.7}
 .kcard{background:var(--surface-2);border:1px solid var(--border-2);border-radius:9px;padding:10px 11px;box-shadow:0 1px 3px rgba(0,0,0,.35)}
 .kcard .ktitle{font-size:13px;font-weight:600;color:var(--text);line-height:1.35;display:flex;gap:7px;align-items:flex-start}
@@ -93,8 +93,8 @@ a.col-pill:hover .open{opacity:1}
 .ktags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
 .tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .tag.type{background:var(--surface-3);color:var(--text-muted);border:1px solid var(--border-2)}
-.tag.st-doing{background:rgba(91,155,255,.16);color:#8db4ff}
-.tag.st-done{background:rgba(74,222,128,.15);color:#6fe39a}
+.tag.st-doing{background:rgba(37,99,168,.12);color:#2563A8}
+.tag.st-done{background:var(--accent-dim);color:var(--accent)}
 .tag.st-doing::before{content:'◐';font-size:9px}
 .tag.st-done::before{content:'●';font-size:9px}
 
@@ -102,9 +102,9 @@ a.col-pill:hover .open{opacity:1}
 .footer a{font-weight:600}
 
 /* ── SURFACE GATE (first-time only) ── */
-.surface-gate{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(6,8,6,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.surface-gate{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(33,33,30,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .surface-gate[hidden]{display:none}
-.sg-card{max-width:440px;width:100%;background:var(--surface);border:1px solid var(--border-2);border-radius:var(--radius-lg);padding:30px 26px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+.sg-card{max-width:440px;width:100%;background:var(--surface);border:1px solid var(--border-2);border-radius:var(--radius-lg);padding:30px 26px;text-align:center;box-shadow:5px 6px 0 rgba(33,33,30,.12)}
 .sg-card .eyebrow{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--accent)}
 .sg-card h2{font-family:var(--font-display);font-size:23px;font-weight:800;margin:8px 0 6px}
 .sg-card p{color:var(--text-muted);font-size:14px;margin-bottom:20px}
@@ -153,24 +153,29 @@ var FOCUS_LEAD = {
   goal:'Put it on a schedule so it runs the whole function without you starting it.'
 };
 
+/* Journey palette, paper-strength (2026-07-25). These were the dark-skin pastels
+   (#4ade80 #5b9bff #a78bfa #f5a623 #f472b6 #fbbf24) — fine as glowing text on #0d0d0d,
+   washed out to 1.2-1.8:1 as ink on #FAFAFA. Same six hues, darkened until they read.
+   Anything painting TEXT in a column colour depends on these staying dark: the column
+   pills, the next-up badge, and .nb-go (white text ON the colour). */
 var TYPES = {
   action:{ label:'Action', ic:'⚡' }, video:{ label:'Watch', ic:'📹' },
   build:{ label:'Build', ic:'🔨' }, gate:{ label:'Done-signal', ic:'🎯' }, outcome:{ label:'Outcome', ic:'🌟' }
 };
 var BOARD = [
-  { id:'setup', name:'Get set up', color:'#4ade80', cards:[
+  { id:'setup', name:'Get set up', color:'#2D8C3C', cards:[
     { t:'Join the community', type:'action' },
     { t:'Install the plugin + connect', type:'action' },
     { t:'Onboard — run /setup-aieb', type:'action' },
     { t:'Welcome — what you just built', type:'video' }
   ]},
-  { id:'cp1', name:'Map the business', color:'#5b9bff', cards:[
+  { id:'cp1', name:'Map the business', color:'#2563A8', cards:[
     { t:'Set up Draw.io — connector + app', type:'build' },
     { t:'Why the X-Ray interview works', type:'video' },
     { t:'Run your Business X-Ray', type:'build' },
     { t:'X-Ray map exists + “N hrs/week” baseline', type:'gate' }
   ]},
-  { id:'cp2', name:'Your first skill', color:'#a78bfa', cards:[
+  { id:'cp2', name:'Your first skill', color:'#6B46C1', cards:[
     { t:'What is a skill', type:'video' },
     { t:'The 3 levels of skills', type:'video' },
     { t:'How to create a skill', type:'video' },
@@ -180,19 +185,19 @@ var BOARD = [
     { t:'It gets better every time you use it', type:'build' },
     { t:'Skill ran once on real data', type:'gate' }
   ]},
-  { id:'cp3', name:'A skill system', color:'#f5a623', cards:[
+  { id:'cp3', name:'A skill system', color:'#B26B00', cards:[
     { t:'Build a skill system', type:'video' },
     { t:'Wire skills into one system', type:'build' },
     { t:'System runs a whole function', type:'gate' }
   ]},
-  { id:'cp4', name:'Make it reliable', color:'#f472b6', cards:[
+  { id:'cp4', name:'Make it reliable', color:'#A83A6B', cards:[
     { t:'Review + harden', type:'video' },
     { t:'Build a harness', type:'video' },
     { t:'It catches its own mistakes', type:'gate' }
   ]},
   /* `goal` is a REAL checkpoint now (2026-07-24), not a trophy column: autonomy moved here
      from cp4, because running without you is what MAKES it an AI Employee. */
-  { id:'goal', name:'Your AI Employee', color:'#fbbf24', cards:[
+  { id:'goal', name:'Your AI Employee', color:'#C2410C', cards:[
     { t:'Schedule it / autonomy', type:'video' },
     { t:'Let it run a full cycle without you', type:'build' },
     { t:'It runs on its own', type:'gate' }
@@ -240,13 +245,21 @@ function overallHTML(){
 }
 
 /* ---- WHAT TO WORK ON NEXT ---- */
+// Take the checkpoint colour from BOARD, never from AIEB.META. progress.js still holds
+// the original pastels ON PURPOSE: the checkpoint wizards use them as LIGHT ACCENTS with
+// dark text (`.btn.primary{background:var(--cp);color:#0a0a0a}`), where a pastel is
+// correct and darkening it would put dark text on a dark button. The board is the one
+// place that paints those colours AS TEXT on paper, so it carries its own darker set.
+var CPCOLOR = {};
+BOARD.forEach(function (c) { CPCOLOR[c.id] = c.color; });
+
 function nextbarHTML(){
-  var id = AIEB.activeId(), m = AIEB.META[id];
+  var id = AIEB.activeId(), m = AIEB.META[id], nc = CPCOLOR[id] || 'var(--accent)';
   // `goal` is a real checkpoint now, so only celebrate once it is actually DONE. While it is
   // merely ACTIVE it needs the normal banner with its own "start this checkpoint" button —
   // otherwise the last checkpoint has no way in.
   if (id==='goal' && AIEB.isDone('goal')){
-    return '<div class="nextbar" style="--nc:#fbbf24">'+
+    return '<div class="nextbar" style="--nc:#C2410C">'+
       '<div class="nb-main"><div class="nb-badge">🎉 You made it</div>'+
       '<div class="nb-title">Your AI Employee is built</div>'+
       '<div class="nb-lead">Every step is complete — reopen any checkpoint below to refine it.</div></div></div>';
@@ -255,7 +268,7 @@ function nextbarHTML(){
   var lead = isSetup ? 'Install Claude + the plugin and connect — one guided flow, about 30 minutes.' : (FOCUS_LEAD[id]||'');
   var badge = isSetup ? 'Start here · step 1' : ('Next up · checkpoint '+AIEB.buildIndex(id)+' of 5');
   var verb = isSetup ? 'Start setup' : (AIEB.stepInfo(id).pos>0 ? 'Continue' : 'Start this checkpoint');
-  return '<div class="nextbar" style="--nc:'+m.color+'">'+
+  return '<div class="nextbar" style="--nc:'+nc+'">'+
     '<div class="nb-main"><div class="nb-badge">'+badge+'</div>'+
     '<div class="nb-title">'+m.name+'</div>'+
     '<div class="nb-lead">'+lead+'</div></div>'+

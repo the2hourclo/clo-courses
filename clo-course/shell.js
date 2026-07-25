@@ -241,7 +241,8 @@ window.addEventListener('error', function () {
     }); });
     // every course's lessons (global) — same-course lessons swap in place; others deep-link to their page
     (window.CLO_LESSON_INDEX || []).forEach(function (c) {
-      var sameCourse = c.page === PAGE, gname = window.CLO_COURSE_GOTO_NAME || 'goToLesson';
+      var gname = window.CLO_COURSE_GOTO_NAME || 'goToLesson',
+          sameCourse = c.page === PAGE && typeof window[gname] === 'function';
       c.lessons.forEach(function (l) {
         var act = sameCourse ? { lesson: l.id, gname: gname } : { href: resolveHref(c.href) + '#' + l.id };
         items.push({ type: 'Lesson', label: l.name, sub: c.label + (l.group ? ' · ' + l.group : ''), keywords: [], act: act });
@@ -250,7 +251,12 @@ window.addEventListener('error', function () {
     var inner = document.getElementById('cloInner');
     if (inner) {
       [].slice.call(inner.querySelectorAll('h2[id], h3[id]')).filter(function (h) { return h.offsetParent !== null; }).forEach(function (h) {
-        var t = (h.firstChild && h.firstChild.textContent ? h.firstChild.textContent : h.textContent).trim();
+        // Same icon-led-heading problem as toc.js: reuse its helper so a Section result is
+        // labelled with words a buyer can actually type, not a bare emoji. toc.js is an
+        // optional dependency here, so guard the lookup.
+        var t = (window.CLO_TOC && window.CLO_TOC.headingText)
+              ? window.CLO_TOC.headingText(h)
+              : (h.textContent || '').replace(/\s+/g, ' ').trim();
         if (t) items.push({ type: 'Section', label: t, sub: 'On this page', keywords: [], act: { anchor: h.id } });
       });
     }

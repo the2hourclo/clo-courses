@@ -14,8 +14,17 @@
     return t.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').slice(0, 60);
   }
   function headingText(h) {
-    // first text node = the label without the appended anchor link
-    return (h.firstChild && h.firstChild.textContent ? h.firstChild.textContent : h.textContent).trim();
+    // Deep-clone, drop the appended anchor link and the leading icon chip, keep the rest.
+    // The old version returned h.firstChild's text — "the label without the anchor". That
+    // held only while headings started with a text node. The Claude Code 101 headings are
+    // authored icon-first (<h2><span class="cc-ico">🗺️</span> CLAUDE.md, the most…</h2>),
+    // so firstChild was the icon and the label came back as a bare emoji: 33 of 42 headings
+    // across the 8 CC101 pages, and 100% of them on five, turning the whole "On this page"
+    // rail into an unlabelled emoji column. .cc-sub is NOT stripped — it is real label text.
+    var c = h.cloneNode(true);
+    [].slice.call(c.querySelectorAll('.clo-anchor, .cc-ico')).forEach(function (n) { n.remove(); });
+    // fall back to the raw text if a heading is nothing but decorations
+    return ((c.textContent || h.textContent) || '').replace(/\s+/g, ' ').trim();
   }
 
   function build(scope) {
@@ -63,5 +72,5 @@
       });
     });
   }
-  window.CLO_TOC = { build: build };
+  window.CLO_TOC = { build: build, headingText: headingText };
 })();
