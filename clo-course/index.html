@@ -90,7 +90,7 @@ body{min-height:100vh;background:var(--paper);color:var(--body);font:18px/1.6 "S
 <body>
 
 <div class="topbar">
-  <span class="brand">🤖 AI Employee Builder</span>
+  <span class="brand"><img src="assets/aieb-avatar-180.png" alt="" width="24" height="24">AI Employee Builder</span>
   <div class="surf" id="surfBar"></div>
 </div>
 
@@ -171,11 +171,13 @@ function overallHTML(){
 
 function docsHTML(){
   var cc = AIEB.getSurface()==='claude-code';
+  // ?product=aieb dropped 2026-07-25 — one portal now, the param does nothing.
   var items = [
-    { t:'Business X-Ray (deep wiki)', h:'business-x-ray.html?product=aieb' },
-    { t:'Skill Systems (course)',     h:'../meta-create-skill/index.html?product=aieb' }
+    { t:'Business X-Ray (deep wiki)', h:'business-x-ray.html' },
+    { t:'Skill Systems (course)',     h:'../meta-create-skill/index.html' },
+    { t:'Skill Library',              h:'skill-library.html' }
   ];
-  if (cc) items.push({ t:'Claude Code 101', h:'claude-code-101.html?product=aieb' }); // Claude-Code-only reference
+  if (cc) items.push({ t:'Claude Code 101', h:'claude-code-101.html' }); // Claude-Code-only reference
   items.push({ t:'Ask in the community ↗', h:'https://www.polynet.ai/c/ai-employee-builders', ext:true });
   return items.map(function(it){
     return '<a class="docitem" href="'+it.h+'"'+(it.ext?' target="_blank" rel="noopener"':'')+'>'+it.t+'</a>';

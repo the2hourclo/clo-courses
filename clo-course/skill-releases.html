@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skill Releases — Wiki</title>
+<title>Skill Releases — AI Employee Builder</title>
 <link rel="stylesheet" href="tokens.css?v=3">
 <link rel="stylesheet" href="shell.css?v=3">
 <style>
@@ -31,13 +31,7 @@
 
 <div id="doc-content">
   <h1>Skill Releases</h1>
-  <p>See what skills are live, what's being built, and what's planned. Vote on what matters most to you.</p>
-
-  <div class="rm-stats">
-    <div class="rm-stat released"><div class="rm-stat-num">4</div><div class="rm-stat-label">Released</div></div>
-    <div class="rm-stat progress"><div class="rm-stat-num">1</div><div class="rm-stat-label">In Progress</div></div>
-    <div class="rm-stat planned"><div class="rm-stat-num">4</div><div class="rm-stat-label">Planned</div></div>
-  </div>
+  <p>What's live, what's being built, and what's planned across the <a href="skill-library.html">Skill Library</a>. Full Access members vote on what ships next.</p>
 
   <h2 id="full-roadmap">Full roadmap</h2>
   <div class="rm-embed-head">
@@ -51,13 +45,25 @@
   <h2 id="request">Request a skill</h2>
   <div class="rm-request">
     <h3>Want a skill that doesn't exist yet?</h3>
-    <p>Tell us what you need. The most requested skills get built first.</p>
+    <p>Full Access members tell me what they need, and the most requested skills get built first.</p>
     <a href="https://the2hourman.notion.site/93c0aa14308f4da1aa51cb59b24ffd24" target="_blank" class="btn btn-primary">Submit a Request →</a>
+  </div>
+
+  <div class="rm-request" style="margin-top:16px">
+    <h3>Not on Full Access yet?</h3>
+    <p>The writing and content fleet — newsletter, YouTube, carousel, copywriter — sits one tier above AI Employee Builder.</p>
+    <a class="btn btn-primary" id="upgradeReleases" href="#">Unlock with Full Access →</a>
   </div>
 </div>
 
 <script src="nav.js"></script>
 <script src="toc.js"></script>
 <script src="shell.js"></script>
+<script>
+  (function () {
+    var url = (window.CLO_PRODUCT || {}).checkout_url, a = document.getElementById('upgradeReleases');
+    if (url && a) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; }
+  })();
+</script>
 </body>
 </html>

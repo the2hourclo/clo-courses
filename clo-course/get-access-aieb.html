@@ -405,7 +405,7 @@ body.activation-mode .container{max-width:620px;width:100%}
 </style>
 <link rel="stylesheet" href="excalifont.css">
 </head>
-<body hidden data-page="get-access" data-product="aieb">
+<body hidden data-page="get-access">
 <div class="wrap">
 <div class="container" id="doc-content">
 
@@ -755,116 +755,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <div class="callout callout-info" style="margin-top:14px"><strong>Something not working?</strong> Type <code>/check-setup</code> in any Cowork chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a>.</div>
   </div>
 
-  <!-- ═══════════════ STEP 2 ═══════════════ -->
-  <details class="step cc-only" id="step2" data-step="2">
-    <summary class="step-sum">
-      <span class="step-check"><span class="num">2</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Install the AI Employee Builder plugin</span><span class="step-sub">A small free install &mdash; the paid skills stay on the server</span></span>
-      <span class="step-meta"><span class="time">~3 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
-    </summary>
-    <div class="step-content">
-      <p><strong>What you are installing:</strong> a tiny local shell that sets up the MCP connection and proxy. The AIEB workflows and valuable instructions stay on the server and load only after your license is checked.</p>
-      <div class="callout callout-tip"><strong>Let Claude check Node.js first.</strong> The local MCP proxy runs with Node.js. Paste this into Claude Code if you want it to check for you:<div class="cmd-line" style="margin-top:8px"><span class="cmd-text">Check if Node.js v18+ is installed by running node --version, and if it is missing or older, install the latest LTS for me and confirm it works.</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
-      <div class="m-vscode">
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the plugin manager.</strong> In Claude Code, type <code>/plugin</code>, then click <strong><span class="tag-click">Manage Plugins</span></strong>.</div></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Open the <span class="tag-tab">Marketplaces</span> tab</strong> and add the public thin-shell marketplace:</div></div>
-        <div class="cmd-line indent"><span class="cmd-text">https://github.com/the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Switch to <span class="tag-tab">Plugins</span></strong>, install <strong>ai-employee-builder</strong>, choose <strong>Install for you</strong>, then reload Claude Code.</div></div>
-        <div class="callout callout-tip"><strong>Prefer typing?</strong><div class="cmd-line" style="margin-top:8px"><span class="cmd-text">/plugin marketplace add https://github.com/the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/plugin install ai-employee-builder@aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div><div class="cmd-line"><span class="cmd-text">/reload-plugins</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
-      </div>
-      <div class="m-terminal">
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open Claude Code in a terminal</strong>, then add and install the public thin shell:</div></div>
-        <div class="cmd-line indent"><span class="cmd-text">claude</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="cmd-line indent"><span class="cmd-text">/plugin marketplace add https://github.com/the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="cmd-line indent"><span class="cmd-text">/plugin install ai-employee-builder@aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="cmd-line indent"><span class="cmd-text">/reload-plugins</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      </div>
-      <button class="done-btn" onclick="markDone(2)"><span class="dlabel">Mark step done</span></button>
-    </div>
-  </details>
-
-  <!-- ═══════════════ STEP 3 ═══════════════ -->
-  <details class="step cc-only" id="step3" data-step="3">
-    <summary class="step-sum">
-      <span class="step-check"><span class="num">3</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Connect &amp; onboard</span><span class="step-sub">One command connects you and sets up your workspace</span></span>
-      <span class="step-meta"><span class="time">~12 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
-    </summary>
-    <div class="step-content">
-      <p>The shell connects to the hosted MCP server. Run the setup command; Claude will give you a secure page and short code for connecting this device.</p>
-      <div class="cmd-line"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <ul class="sub" style="margin-top:10px">
-        <li><strong>Click the link</strong> Claude gives you. Same browser you bought in? The page connects by itself &mdash; nothing to enter.</li>
-        <li><strong>Different browser or device?</strong> It asks for the license key from your Lemon Squeezy receipt &mdash; enter it on that page only, <strong>never in Claude or any chat</strong>.</li>
-        <li><strong>Close the tab</strong> and keep going in Claude &mdash; the connection finishes by itself in a few seconds. <em>(If Claude seems unaware, typing <code>done</code> nudges it along.)</em></li>
-      </ul>
-      <p style="margin-top:8px">The plugin stores an opaque device token for the whole machine; it never sees or stores a license key. No restart or config editing.</p>
-      <div class="callout callout-info"><strong>Subscription access:</strong> access stays active while your subscription is active. Cancelling revokes MCP access immediately. If you resume or renew, reconnect and access is restored.</div>
-      <p style="margin-top:10px">Once connected, <code>/setup-aieb</code> keeps going on its own &mdash; your guided onboarding:</p>
-      <ul class="sub">
-        <li>Sets up your authoring workspace</li>
-        <li>Installs your starting skills so the AI knows how you work</li>
-        <li>Checks the connection end to end, so you know it's live</li>
-      </ul>
-      <div class="callout callout-tip">Run <code>/setup-aieb</code> now, while everything's fresh, and let it finish. It sets up the workspace &mdash; <strong>the Business X-Ray is the next checkpoint</strong>, run in a fresh window once this is done.</div>
-      <button class="done-btn" onclick="markDone(3)"><span class="dlabel">Mark step done</span></button>
-    </div>
-  </details>
-
-  <!-- ═══════════════ STEP 4 ═══════════════ -->
-  <details class="step cc-only" id="step4" data-step="4">
-    <summary class="step-sum">
-      <span class="step-check"><span class="num">4</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Check your setup</span><span class="step-sub">One command confirms everything's connected</span></span>
-      <span class="step-meta"><span class="time">~1 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
-    </summary>
-    <div class="step-content">
-      <p>Reload Claude Code, then run the built-in check &mdash; it verifies the plugin and the connection without starting any real work:</p>
-      <div class="cmd-line"><span class="cmd-text">/check-setup</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <p style="margin-top:8px">Plain words work too &mdash; asking <code>check my setup</code> does the same thing. Claude confirms the plugin is installed, the connection is live, and your subscription checks out.</p>
-      <div class="callout callout-tip"><strong>What success looks like:</strong> Claude reports everything healthy &mdash; yet your local plugin folder still holds only thin stubs and the proxy, never the paid skill bodies.</div>
-      <div class="callout callout-info"><strong>Want the low-level check instead?</strong> Ask: <em>"Use the aieb MCP get_skill tool to fetch meta-create-skill with path SKILL.md."</em> Same result, just the manual version.</div>
-      <div class="callout callout-warning"><strong>If it fails:</strong> check that Node.js is installed and run <code>/setup-aieb</code> again. If the secure page asked you for a key (that only happens on a different device or browser than the purchase), make sure it's the key from your AI Employee Builders receipt &mdash; and never paste it into chat.</div>
-      <button class="done-btn" onclick="markDone(4)"><span class="dlabel">Mark step done</span></button>
-    </div>
-  </details>
-
-  <!-- ═══════════════ STEP 5 (optional) ═══════════════ -->
-  <details class="step cc-only" id="step5" data-step="5">
-    <summary class="step-sum">
-      <span class="step-check"><span class="num">5</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Set up Draw.io (optional)</span><span class="step-sub">You'll build maps and diagrams as you go &mdash; this opens them</span></span>
-      <span class="step-meta"><span class="time">~4 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
-    </summary>
-    <div class="step-content">
-      <p>You'll build maps and diagrams as you go &mdash; your onboarding already drew an <strong>AI Employee Map</strong>, a <code>.drawio</code> diagram of your business, and the Business X-Ray draws more over time. Nothing here blocks you; set this up whenever you want to open them. Two quick parts: <strong>install the app</strong> to open the maps, and <strong>connect the Draw.io MCP</strong> so your AI Employees can draw and edit them <em>for</em> you.</p>
-
-      <p style="margin-top:12px"><strong>Part A &mdash; Install Draw.io Desktop</strong> (the free app that opens, edits, and exports <code>.drawio</code> files locally, no browser or account):</p>
-      <div style="text-align:center;margin:6px 0 14px">
-        <a class="dl-btn" href="https://github.com/jgraph/drawio-desktop/releases/tag/v30.2.6" target="_blank" rel="noopener">&#11015;&#65039; Download Draw.io Desktop &#8599;</a>
-      </div>
-      <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Open the releases page</strong> above and scroll down to <strong>Assets</strong>.</div></div>
-      <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Pick your installer:</strong> <code>...-windows-installer.exe</code> for <strong>Windows</strong>, <code>...-universal.dmg</code> for <strong>Mac</strong>, or the <code>.deb</code> / <code>.AppImage</code> for <strong>Linux</strong>.</div></div>
-      <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Run it with the default options.</strong> Once it's installed, any <code>.drawio</code> file opens with a double-click.</div></div>
-
-      <p style="margin-top:16px"><strong>Part B &mdash; Connect the Draw.io MCP</strong> (lets Claude create and edit diagrams live, instead of just handing you a file). It's a standard custom connector at this URL:</p>
-      <div class="cmd-line"><span class="cmd-text">https://mcp.draw.io/mcp</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-      <div class="m-vscode">
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body">In Claude Code, type <code>/mcp</code>, choose <strong>Add connector</strong> (HTTP), and paste the URL above.</div></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Reload Claude Code.</strong> The <code>drawio</code> tools now show up &mdash; say <em>"draw this as a diagram"</em> and Claude builds it in Draw.io.</div></div>
-        <div class="callout callout-tip"><strong>Prefer typing?</strong><div class="cmd-line" style="margin-top:8px"><span class="cmd-text">claude mcp add --transport http drawio https://mcp.draw.io/mcp</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></div>
-      </div>
-      <div class="m-terminal">
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Add the connector from your terminal:</strong></div></div>
-        <div class="cmd-line indent"><span class="cmd-text">claude mcp add --transport http drawio https://mcp.draw.io/mcp</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Reload Claude Code</strong> so the <code>drawio</code> tools load.</div></div>
-      </div>
-
-      <div class="callout callout-info"><strong>On Claude Cowork?</strong> Add the same URL under <em>Settings &rarr; Connectors &rarr; Add custom connector</em> in the desktop app &mdash; see the Cowork section above.</div>
-      <div class="callout callout-tip"><strong>Why local?</strong> Your maps stay on your own machine, and the app opens the exact <code>.drawio</code> files in your workspace folders &mdash; nothing to upload.</div>
-      <button class="done-btn" onclick="markDone(5)"><span class="dlabel">Mark step done</span></button>
-    </div>
-  </details>
+  <!-- Claude Code manual steps removed 2026-07-25 (old #step2 install / #step3 connect / #step4 check-setup / #step5 Draw.io). All four were unreachable (not in wizSteps()) and fully duplicated: the "shortcut" paste-one-prompt card does Node+install+connect+/check-setup+onboard, and Draw.io setup lives at CP1 (checkpoint-map.html). -->
 
   <!-- FINISH BANNER -->
   <div class="finish cc-only" id="finish">
@@ -890,7 +781,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 
   <!-- ═══ JOIN THE COMMUNITY ═══ -->
   <div class="ai-card post-setup" id="community-card" style="text-align:center">
-    <img src="assets/get-access/community-robot.png" alt="AI Employee Builders" width="120" height="120" style="width:120px;height:120px;border-radius:18px;margin:0 auto 14px;display:block;border:1px solid var(--accent-border)" onerror="this.style.display='none'">
+    <img src="assets/aieb-avatar-180.png" alt="AI Employee Builders" width="120" height="120" style="width:120px;height:120px;border-radius:18px;margin:0 auto 14px;display:block;border:1px solid var(--accent-border)" onerror="this.style.display='none'">
     <div class="card-title" style="justify-content:center">&#128101; Join the AI Employee Builders community</div>
     <p>Plug into the people building alongside you &mdash; share what you're building, get feedback on your AI Employees' output, and join the monthly group call. It's included with your subscription.</p>
     <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener" style="display:inline-block;margin-top:14px;padding:13px 28px;background:var(--accent);color:#fff;border-radius:var(--radius);font-weight:800;font-size:14px;text-decoration:none">Open the community &#8599;</a>

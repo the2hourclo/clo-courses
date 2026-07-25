@@ -1,37 +1,47 @@
 /* ============================================================
-   nav.js — portal config manifest (single source of truth for nav + gate)
-   Ported verbatim from the old index.html PRODUCTS block, PLUS a grouped
-   `nav` taxonomy per product for the Claude-Docs-style left sidebar.
-   Switched by ?product= (default: clo). Consumed by shell.js.
+   nav.js — portal config manifest (single source of truth for the nav)
+   ONE product (2026-07-25). The old two-product split (`clo` + `aieb`,
+   switched by ?product=) is GONE: delivery moved to a single gated MCP
+   server where access is decided by the Lemon Squeezy PRODUCT ID, not by
+   which portal you happen to be on. So the portal shows EVERY course to
+   everyone, and the premium (Full Access) courses carry an upgrade CTA
+   instead of being hidden behind a second nav.
+   Consumed by shell.js. Old ?product=aieb links still work — the param is
+   simply ignored now.
+
+   ⚠ WHY THE GLOBAL IS STILL A MAP WITH TWO KEYS (do not "clean this up"):
+   nav.js and shell.js are separate HTTP resources with INDEPENDENT cache
+   entries, and this repo already ships them un-cache-busted on 13 of 14 pages.
+   A browser holding an OLD shell.js does `window.CLO_PRODUCTS[PRODUCT_KEY]`
+   with PRODUCT_KEY of 'clo' or 'aieb'. Every shell page ships <body hidden>,
+   and ONLY shell.js unhides it — so if that lookup returns undefined the next
+   line throws and the buyer gets a SILENT BLANK WHITE PAGE. Pointing both old
+   keys at the one config means a stale shell.js keeps working and simply
+   renders the new merged nav. Collapse the map only once you are certain no
+   old shell.js is cached anywhere, which you cannot be.
    ============================================================ */
-window.CLO_PRODUCTS = {
-  clo: {
-    brand: 'Chief Leverage Officer',
-    title: 'Chief Leverage Officer — Wiki',
-    storageKey: 'clo_community_license',
-    pluginName: 'clo-community',
-    license: { store_id: 10600, product_id: 926993, variant_id: 1457440 },
-    checkout_url: 'https://chiefleverageofficer.lemonsqueezy.com/checkout/buy/14c15890-c46a-4ab8-ab8d-9e56cd04d38a',
-    community: { url: 'clo-community/', label: '← Community', external: false },
-    // quick-start checklist shown in the bottom-right onboarding widget. hrefs ROOT-relative.
-    onboarding: [
-      { label: 'Join the community', href: 'clo-community/', hint: 'Meet the other builders on Polynet' },
-      { label: 'Get access & install', href: 'clo-course/get-access.html', hint: 'Set up Claude Code + the plugin' },
-      { label: 'Run your Business X-Ray', href: 'clo-course/checkpoint-map.html', hint: 'Map your business, find the bottleneck' },
-      { label: 'Build your first Skill System', href: 'meta-create-skill/index.html', hint: 'Ship a skill that chains' }
-    ],
-    // grouped left-sidebar nav. `page` matches each page's <body data-page>. hrefs are ROOT-relative.
-    nav: [
-      { group: 'Get Started', items: [
-        { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
-        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access.html', keywords: ['install','setup','claude code','plugin','license','activate','skillstack','onboard','marketplace','getting started','first steps'] },
-        { label: 'Roadmap', page: 'roadmap', href: 'clo-course/ai-employee-roadmap.html', keywords: ['roadmap','whats next','next step','journey','path','harness','agent','command','routine','what to build next','continue building','ai employee roadmap'] }
-      ]},
-      { group: 'Courses', items: [
-        { label: 'Business X-Ray', page: 'business-x-ray', href: 'clo-course/checkpoint-map.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','funnel','swimlanes','process','assets','asset explorer','score','operating system','digital assets','map my business','where to start'] },
-        { label: 'Skill Systems', page: 'meta-skill', href: 'meta-create-skill/index.html', keywords: ['create skill','build skill','make a skill','meta','capture','automate','skill system','authoring','new skill'] }
-      ]},
-      { group: 'Claude Code 101', items: [
+var CLO_CONFIG = {
+  brand: 'AI Employee Builder',
+  storageKey: 'aieb_license',
+  // The upgrade target for everything in the Skill Library group. Single source
+  // of truth — every "Unlock with Full Access" CTA reads this, none hardcode it.
+  // Matches the `community` tier's upgrade_url in the gated MCP's skills manifest.
+  checkout_url: 'https://chiefleverageofficer.lemonsqueezy.com/checkout/buy/14c15890-c46a-4ab8-ab8d-9e56cd04d38a',
+  // grouped left-sidebar nav. `page` matches each page's <body data-page>. hrefs are ROOT-relative.
+  nav: [
+    { group: 'Get Started', items: [
+      { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
+      { label: 'Build Board', page: 'board', href: 'clo-course/ai-employee-board.html', keywords: ['board','build board','journey','checkpoints','whats next','next step','path','progress','home base','what to build next','continue building'] },
+      { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','cowork','plugin','license','activate','connect','onboard','getting started','first steps'] },
+      { label: 'Roadmap', page: 'roadmap', href: 'clo-course/ai-employee-roadmap.html', keywords: ['roadmap','whats next','journey','path','harness','agent','command','routine','ai employee roadmap'] }
+    ]},
+    { group: 'Courses', items: [
+      // `page:'business-x-ray'` belongs to the deep wiki, which is the page that actually
+      // carries <body data-page="business-x-ray">. The DOING version is a board checkpoint.
+      { label: 'Business X-Ray', page: 'business-x-ray', href: 'clo-course/business-x-ray.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','funnel','swimlanes','process','assets','asset explorer','score','operating system','digital assets','map my business','where to start'] },
+      { label: 'Skill Systems', page: 'meta-skill', href: 'meta-create-skill/index.html', keywords: ['create skill','build skill','make a skill','meta','capture','automate','skill system','authoring','new skill'] }
+    ]},
+    { group: 'Claude Code 101', items: [
         { label: '1 · What Claude Code Is', page: 'cc101-what', href: 'clo-course/cc101-1-what.html', keywords: ['what is claude code','chatbot','ai employee','glass box','vs code','where it lives','agentic loop','how it thinks','terminal','git','github','why claude code'] },
         { label: '2 · The Foundation', page: 'cc101-foundation', href: 'clo-course/cc101-2-foundation.html', keywords: ['tools','built-in tools','read','grep','bash','edit','write','permission','permissions','allow','deny','plan mode','modes','settings','safe'] },
         { label: '3 · Memory', page: 'cc101-memory', href: 'clo-course/cc101-3-memory.html', keywords: ['memory','claude.md','claude md','memory.md','hierarchy','rules','context window','imports','remember','routing'] },
@@ -41,47 +51,31 @@ window.CLO_PRODUCTS = {
         { label: '7 · The Whole Picture', page: 'cc101-whole', href: 'clo-course/cc101-7-whole-picture.html', keywords: ['lifecycle','everything in action','network','quick reference','cheat sheet','best practices','whole picture'] },
         { label: 'All-in-one page (reference)', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['overview','anatomy','ai employee','building blocks','fundamentals','basics','plain english','all in one','reference'] }
       ]},
-      // ── Premium section: CLO-only. AIEB never gets this block, so it stays the base tier.
-      //    When a skill course is built, swap its placeholder href (anchor on the library page)
-      //    for its real page + give it a `page` key so it highlights as active.
+      // ── Skill Library = the FULL ACCESS tier (the `community` tier in the gated MCP's
+      //    skills manifest: write chain, copywriter, excali-graphic, brand tools…).
+      //    Everyone SEES this group — that is the point of the collapse. What they can
+      //    RUN is decided by the MCP off their Lemon Squeezy product ID, so these pages
+      //    carry an "Unlock with Full Access" CTA rather than being hidden from the nav.
+      //    Keywords deliberately avoid entitlement words ('included', 'what you get') so
+      //    ⌘K doesn't answer "what do I get" with a page of things you may not own yet.
+      //    When a skill course is built, swap its placeholder href (anchor on the library
+      //    page) for its real page + give it a `page` key so it highlights as active.
       { group: 'Skill Library', items: [
-        { label: 'Overview', page: 'skill-library', href: 'clo-course/skill-library.html', keywords: ['skill library','skills','premium','library','included','pro','what you get','newsletter','youtube','carousel','copywriter'] },
+        { label: 'Overview', page: 'skill-library', href: 'clo-course/skill-library.html', keywords: ['skill library','skills','library','full access','upgrade','premium','newsletter','youtube','carousel','copywriter'] },
         { label: 'Newsletter', href: 'clo-course/skill-library.html#newsletter', keywords: ['write','newsletter','writing chain','voice','email','substack'] },
         { label: 'YouTube', href: 'clo-course/skill-library.html#youtube', keywords: ['youtube','video','titles','thumbnails','hooks','scripts','channel'] },
         { label: 'Carousel', href: 'clo-course/skill-library.html#carousel', keywords: ['carousel','slides','instagram','visual','svg','charts'] },
         { label: 'Copywriter', href: 'clo-course/skill-library.html#copywriter', keywords: ['copywriter','campaign','offer','sales','emails','vsl','bullets'] },
         { label: 'Skill Releases', page: 'skill-releases', href: 'clo-course/skill-releases.html', keywords: ['release','status','planned','in progress','request','vote','upcoming','feature request','coming soon','skill roadmap'] }
       ]}
-    ]
-  },
-  aieb: {
-    brand: 'Chief Leverage Officer',
-    title: 'Chief Leverage Officer — AI Employee Builder',
-    tierBadge: { label: 'AI Employee Builder', star: false },
-    storageKey: 'aieb_license',
-    pluginName: 'ai-employee-builder',
-    // No license gate on the AIEB portal (removed 2026-07-11 — it shipped as a
-    // dead placeholder with zeroed LS ids). If gating is ever wanted, re-add a
-    // license block with the real store/product/variant ids and a checkout URL.
-    community: { url: 'https://www.polynet.ai/c/ai-employee-builders', label: 'Community ↗', external: true },
-    // No bottom-right onboarding widget on AIEB — the board IS the checklist (removed to cut duplicate nav).
-    nav: [
-      { group: 'Get Started', items: [
-        { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
-        { label: 'Build Board', page: 'roadmap', href: 'clo-course/ai-employee-board.html', keywords: ['board','build board','roadmap','journey','checkpoints','whats next','next step','path','progress','home base','what to build next','continue building','ai employee roadmap'] },
-        { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','plugin','license','activate','onboard','getting started','first steps'] }
-      ]},
-      // ── Reference: kept for people who want the courses, moved out of the build path (owner: "too course heavy").
-      //    Claude Code 101's 7 lessons collapse to the all-in-one page here; every lesson still surfaces in ⌘K search
-      //    via CLO_LESSON_INDEX below. Business X-Ray points at the deep wiki (the DOING version lives on the board).
-      { group: 'Reference', items: [
-        { label: 'Business X-Ray (deep wiki)', page: 'business-x-ray', href: 'clo-course/business-x-ray.html', keywords: ['audit','diagnose','bottleneck','business map','bow-tie','swimlanes','process','assets','score','operating system','x-ray methodology','deep wiki'] },
-        { label: 'Skill Systems (course)', page: 'meta-skill', href: 'meta-create-skill/index.html', keywords: ['create skill','build skill','meta','capture','automate','skill system','authoring'] },
-        { label: 'Claude Code 101', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', surface: 'claude-code', keywords: ['claude code 101','what is claude code','memory','skills','hooks','mcp','agents','harness','fundamentals','basics','plain english','course','tools','permissions','extending'] }
-      ]}
-    ]
-  }
+  ]
 };
+
+// Both legacy product keys resolve to the ONE config — see the cache warning at the
+// top of this file. `?product=aieb` and `?product=clo` now land on the same portal.
+window.CLO_PRODUCTS = { clo: CLO_CONFIG, aieb: CLO_CONFIG };
+// Preferred handle for new code.
+window.CLO_PRODUCT = CLO_CONFIG;
 
 /* ============================================================
    CLO_LESSON_INDEX — every course's lessons, so ⌘K search surfaces ANY

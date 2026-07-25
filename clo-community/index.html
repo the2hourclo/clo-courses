@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='10' y='28' width='80' height='55' rx='16' fill='white' stroke='%2321211E' stroke-width='6'/%3E%3Crect x='22' y='41' width='56' height='28' rx='12' fill='%2321211E'/%3E%3Ccircle cx='40' cy='55' r='6' fill='%232D8C3C'/%3E%3Ccircle cx='60' cy='55' r='6' fill='%232D8C3C'/%3E%3Cline x1='50' y1='28' x2='47' y2='10' stroke='%2321211E' stroke-width='6' stroke-linecap='round'/%3E%3Ccircle cx='46' cy='8' r='7' fill='%232D8C3C'/%3E%3C/svg%3E">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Welcome to the Chief Leverage Officer's Community</title>
+<title>Welcome to AI Employee Builders</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -205,28 +206,21 @@ const PRODUCT = {
 };
 const STORAGE_KEY = 'clo_community_license';
 
-// Community swaps to AI Employee Builders when the onboarding is opened with ?product=aieb
-const IS_AIEB = new URLSearchParams(location.search).get('product') === 'aieb';
-const COMMUNITY = IS_AIEB
-  ? { name: 'AI Employee Builders', handle: 'c/ai-employee-builders', url: 'https://www.polynet.ai/c/ai-employee-builders' }
-  : { name: 'Chief Leverage Officers', handle: 'c/chief-leverage-officers', url: 'https://www.polynet.ai/c/chief-leverage-officers' };
-// aieb branding: robot profile photo as the top logo + community badge, AIEB welcome line
-const BRAND_LOGO = IS_AIEB ? 'assets/community-robot.png' : 'assets/clo-logo-full.png';
-const BRAND_ALT = IS_AIEB ? 'AI Employee Builders' : 'Chief Leverage Officer';
-const WELCOME_NAME = IS_AIEB ? 'AI Employee Builders' : "the Chief Leverage Officer's Community";
-// thread ?product=aieb through the wiki links so they stay in AIEB mode
+// ONE product since 2026-07-25 — the ?product=aieb switch that used to pick between
+// the CLO and AIEB communities is gone. Everything is AI Employee Builders now.
+const COMMUNITY = { name: 'AI Employee Builders', handle: 'c/ai-employee-builders', url: 'https://www.polynet.ai/c/ai-employee-builders' };
+const BRAND_LOGO = '../clo-course/assets/aieb-avatar-180.png';
+const BRAND_ALT = 'AI Employee Builder';
+const WELCOME_NAME = 'AI Employee Builders';
 // Build portal links that carry the real license key ONLY when we actually have one
-// (never the temp-open placeholder), and stay in AIEB mode via product=aieb.
+// (never the temp-open placeholder).
 function wikiHref(key, hash){
-  const parts = [];
-  if (key) parts.push('license_key=' + encodeURIComponent(key));
-  if (IS_AIEB) parts.push('product=aieb');
-  return '../clo-course/' + (parts.length ? '?' + parts.join('&') : '') + (hash || '');
+  const q = key ? '?license_key=' + encodeURIComponent(key) : '';
+  return '../clo-course/' + q + (hash || '');
 }
-// install guide: each product opens its own get-access page at the copy-paste shortcut prompt
+// install guide, opened at the copy-paste shortcut prompt
 function installGuideHref(key){
-  const page = IS_AIEB ? 'get-access-aieb.html' : 'get-access.html';
-  return '../clo-course/' + page + (key ? '?license_key=' + encodeURIComponent(key) : '') + '#shortcut';
+  return '../clo-course/get-access-aieb.html' + (key ? '?license_key=' + encodeURIComponent(key) : '') + '#shortcut';
 }
 
 // ══════════════════════════════════════════════════════
@@ -241,6 +235,17 @@ const app = document.getElementById('app');
   // TEMP 2026-05-28: license gate disabled — change `true` back to `urlParams.get('preview') === 'YES'` to re-enable.
   // Pass the real key through if the invite link carries one; otherwise render with no key (no fake placeholder).
   if (true) {
+    // Lemon Squeezy redirects buyers here as ?license_key=… . The scrub below used to
+    // live after the (now unreachable) validation block, so with the gate open the key
+    // sat in the address bar and browser history permanently. Scrub it unconditionally.
+    if (urlParams.has('license_key')) {
+      try {
+        localStorage.setItem(STORAGE_KEY, licenseKey);
+        urlParams.delete('license_key');
+        const rest = urlParams.toString();
+        history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash);
+      } catch (e) {}
+    }
     return renderUnlocked(licenseKey || localStorage.getItem(STORAGE_KEY) || '');
   }
 
@@ -313,11 +318,11 @@ async function validateLicense(licenseKey) {
 function renderLocked(errorMessage) {
   app.innerHTML = `
     <div class="brand-header">
-      <img class="brand-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
+      <img class="brand-logo" src="../clo-course/assets/aieb-avatar-180.png" alt="AI Employee Builder">
     </div>
     <div class="lock-screen">
       <div class="lock-screen-icon">🔒</div>
-      <h1>The Chief Leverage Officer's Community</h1>
+      <h1>AI Employee Builders</h1>
       <p class="lead">Enter your license key to unlock the onboarding course.</p>
 
       <form class="lock-form" id="unlockForm">
@@ -368,12 +373,12 @@ async function handleUnlock(e) {
 function renderExpired() {
   app.innerHTML = `
     <div class="brand-header">
-      <img class="brand-logo" src="assets/clo-logo-full.png" alt="Chief Leverage Officer">
+      <img class="brand-logo" src="../clo-course/assets/aieb-avatar-180.png" alt="AI Employee Builder">
     </div>
     <div class="lock-screen">
       <div class="lock-screen-icon">⏱</div>
       <h1>Your subscription has ended</h1>
-      <p class="lead">This license is no longer active. Renew to regain access to the course, the community, and the clo-community plugin.</p>
+      <p class="lead">This license is no longer active. Renew to regain access to the course, the community, and your skills in Claude.</p>
       <a href="${PRODUCT.checkout_url}" target="_blank" class="cta cta-solid" style="display:inline-block">Renew Subscription</a>
       <div class="lock-hint" style="margin-top:32px">Already renewed? <button class="footer-logout" onclick="location.reload()">Reload page</button></div>
     </div>

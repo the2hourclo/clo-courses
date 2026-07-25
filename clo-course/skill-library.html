@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skill Library — Wiki</title>
+<title>Skill Library — AI Employee Builder</title>
 <link rel="stylesheet" href="tokens.css?v=3">
 <link rel="stylesheet" href="shell.css?v=3">
 <style>
@@ -20,14 +20,17 @@
 
 <div id="doc-content">
   <div class="clo-hero">
-    <div class="eyebrow">Skill Library</div>
-    <h1>Courses for every skill you've unlocked.</h1>
-    <p>Your membership includes the full library of Skill Systems I use in my own business. These guided courses walk you through each one — install it, wire it to your digital assets, and put it to work. Rolling out now, with new courses added every month.</p>
+    <div class="eyebrow">Full Access</div>
+    <h1>The writing and content Skill Systems I run my business on.</h1>
+    <p>The ones that draft the newsletter, build the carousel, plan the video, and write the campaign. These guided courses walk you through each: what it does, how it's wired, and how to put it to work. Rolling out now, with new courses added every month.</p>
   </div>
 
-  <div class="callout callout--tip">
-    <svg class="callout-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
-    <div>These skills already ship in your plugin — you can use one right now by saying its trigger in Claude Code (e.g. <strong>"write my newsletter"</strong>). These courses add the guided walkthrough for each.</div>
+  <div class="callout callout--info">
+    <svg class="callout-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+    <div>
+      <strong>These skills are part of Full Access.</strong> With it they run inside Claude — you say a trigger like <strong>"write my newsletter"</strong> and the skill does the work. Your AI Employee Builder plan covers the build system (Business X-Ray, skill authoring, the roadmap); the writing fleet below sits one tier up.
+      <div style="margin-top:12px"><a class="btn btn-primary" id="upgradeTop" href="#">Unlock with Full Access →</a></div>
+    </div>
   </div>
 
   <h2 id="courses">The skills</h2>
@@ -59,16 +62,35 @@
 
   </div>
 
+  <div class="callout callout--tip" style="margin-top:24px">
+    <svg class="callout-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+    <div>
+      One subscription covers the whole fleet, and it keeps growing — every new writing or content skill lands here.
+      <div style="margin-top:12px"><a class="btn btn-primary" id="upgradeBottom" href="#">Unlock with Full Access →</a></div>
+    </div>
+  </div>
+
   <h2 id="whats-next">What's coming</h2>
-  <p>The library grows every month. <a href="skill-releases.html">Skill Releases</a> shows what's live, what's being built, and what's planned — and you can vote on what gets a guided course next.</p>
+  <p>The library grows every month. <a href="skill-releases.html">Skill Releases</a> shows what's live, what's being built, and what's planned — Full Access members vote on what gets a guided course next.</p>
   <div class="callout callout--info">
     <svg class="callout-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-    <div>Don't see a skill you want covered? Drop a request in the community — the link's in the top bar — and it'll show up on Skill Releases to vote on.</div>
+    <div>Don't see a skill you want covered? Full Access members request them in the community, and requests show up on Skill Releases to vote on.</div>
   </div>
 </div>
 
 <script src="nav.js"></script>
 <script src="toc.js"></script>
 <script src="shell.js"></script>
+<script>
+  // Every upgrade CTA reads the one checkout URL from nav.js — never hardcode it here.
+  (function () {
+    var url = (window.CLO_PRODUCT || {}).checkout_url;
+    if (!url) return;
+    ['upgradeTop', 'upgradeBottom'].forEach(function (id) {
+      var a = document.getElementById(id);
+      if (a) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; }
+    });
+  })();
+</script>
 </body>
 </html>

@@ -1,26 +1,44 @@
 /* ============================================================
-   shell.js — builds the Claude-Docs-style chrome around each page and
-   owns the license gate (so EVERY page is gated, not just the old shell).
-   Depends on nav.js (window.CLO_PRODUCTS) and optionally toc.js (window.CLO_TOC).
+   shell.js — builds the Claude-Docs-style chrome around each page.
+   Depends on nav.js (window.CLO_PRODUCT) and optionally toc.js (window.CLO_TOC).
    Load order in each page: nav.js → toc.js → shell.js (last).
+
+   ONE product since 2026-07-25 — the `?product=aieb` / data-product switch is
+   gone. Access is decided by the gated MCP off the buyer's Lemon Squeezy
+   product ID, so the portal shows every course to everyone and the Full Access
+   courses carry an upgrade CTA instead of a second nav. Old ?product= links
+   still work; the param is simply ignored.
    ============================================================ */
+
+/* ⚠ LAST-RESORT UNHIDE. Every shell page ships <body hidden> and ONLY this file
+   unhides it, so ANY uncaught error here = a silent blank white page for a buyer.
+   There is no CI on this repo and nav.js/shell.js cache independently, so a bad
+   deploy or a stale-cache pairing would ship exactly that. This listener runs
+   before anything else and converts "blank page" into "unstyled but readable".
+   Registered outside the IIFE so it survives a throw during setup. */
+window.addEventListener('error', function () {
+  try { if (document.body) document.body.hidden = false; } catch (e) {}
+});
+
 (function () {
   'use strict';
 
-  // ── Temp-open flag. Flip to false to re-enable the live license gate
-  //    on EVERY page at once (replaces the old per-page `if (true)`).
-  var GATE_OPEN = true;
-
   var params = new URLSearchParams(location.search);
-  var PRODUCT_KEY = (params.get('product') === 'aieb' || document.body.getAttribute('data-product') === 'aieb') ? 'aieb' : 'clo';
-  var P = window.CLO_PRODUCTS[PRODUCT_KEY];
-  var STORAGE_KEY = P.storageKey;
-  // Surface-aware nav: on AIEB, hide items tagged for the OTHER surface
-  // (e.g. Claude Code 101 while building in Cowork). Undecided surface shows all.
+  // Defensive: tolerate a stale cached nav.js that still exports only the old
+  // two-key map. Never let this be undefined — see the unhide guard above.
+  var P = window.CLO_PRODUCT
+       || (window.CLO_PRODUCTS && (window.CLO_PRODUCTS.clo || window.CLO_PRODUCTS.aieb))
+       || {};
+  if (!P.nav) P.nav = [];
+  // NOTE: nothing in the shell reads a storage key any more (the gate, the sign-out
+  // button and the onboarding widget all went with the collapse). `P.storageKey` is
+  // kept in nav.js only so a stale cached shell.js doesn't trip over its absence.
+  // Surface-aware nav: hide items tagged for the OTHER build surface (Cowork vs
+  // Claude Code). Nothing carries a `surface` tag today — the merged nav shows
+  // every course to everyone — but the mechanism is kept for future use.
   var curSurface = null; try { curSurface = localStorage.getItem('aieb_surface'); } catch (e) {}
-  function surfaceOK(it) { if (!it || !it.surface) return true; if (PRODUCT_KEY !== 'aieb' || !curSurface) return true; return it.surface === curSurface; }
+  function surfaceOK(it) { if (!it || !it.surface) return true; if (!curSurface) return true; return it.surface === curSurface; }
   var PAGE = document.body.getAttribute('data-page') || 'home';
-  document.title = document.title || P.title;
 
   // The AIEB device handoff is a deliberately chrome-free, one-action page.
   // It must stay reachable even when the course license gate is enabled: the
@@ -38,141 +56,37 @@
 
   // Every portal page lives one level under the repo root → prefix '../' to root-relative hrefs.
   var ROOT = '../';
-  var LOGO = ROOT + 'clo-community/assets/clo-logo-full.png';
+  // The AI Employee Builder avatar. 180px asset for a 30px slot (retina headroom);
+  // cut with a transparent circle so it sits on the paper skin with no white box.
+  var LOGO = ROOT + 'clo-course/assets/aieb-avatar-180.png';
   var HOME = 'clo-course/index.html';
+  // Robot favicon — the brand mark in the browser tab. Same robot as the launcher's.
+  // Injected here so all 14 shell pages get it from one place.
+  var FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='10' y='28' width='80' height='55' rx='16' fill='white' stroke='%2321211E' stroke-width='6'/%3E%3Crect x='22' y='41' width='56' height='28' rx='12' fill='%2321211E'/%3E%3Ccircle cx='40' cy='55' r='6' fill='%232D8C3C'/%3E%3Ccircle cx='60' cy='55' r='6' fill='%232D8C3C'/%3E%3Cline x1='50' y1='28' x2='47' y2='10' stroke='%2321211E' stroke-width='6' stroke-linecap='round'/%3E%3Ccircle cx='46' cy='8' r='7' fill='%232D8C3C'/%3E%3C/svg%3E";
 
-  // ════════ INIT / GATE ════════
-  (async function init() {
-    // A product without a `license` block in nav.js is ungated by design
-    // (AIEB's dead placeholder gate was removed 2026-07-11).
-    if (GATE_OPEN || !P.license) return buildShell();
-
-    var key = params.get('license_key') || localStorage.getItem(STORAGE_KEY);
-    // skip re-validation within a session
-    if (key && sessionStorage.getItem(STORAGE_KEY + '_ok') === '1') return buildShell();
-    if (!key) return renderLock();
-
-    var r = await validateLicense(key);
-    if (!r.ok) {
-      localStorage.removeItem(STORAGE_KEY);
-      return r.reason === 'expired' ? renderExpired() : renderLock(r.message);
-    }
-    localStorage.setItem(STORAGE_KEY, key);
-    sessionStorage.setItem(STORAGE_KEY + '_ok', '1');
-    if (params.has('license_key')) {
-      params.delete('license_key');
-      var q = params.toString();
-      history.replaceState(null, '', location.pathname + (q ? '?' + q : '') + location.hash);
-    }
-    buildShell();
-  })();
-
-  // ════════ LICENSE VALIDATION (identical to onboarding page) ════════
-  async function validateLicense(key) {
-    try {
-      var res = await fetch('https://api.lemonsqueezy.com/v1/licenses/validate', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ license_key: key })
-      });
-      var data = await res.json();
-      if (!data.valid) {
-        var st = data.license_key && data.license_key.status;
-        if (st === 'expired' || st === 'disabled' || st === 'inactive') return { ok: false, reason: 'expired' };
-        return { ok: false, reason: 'invalid', message: (data.error || 'Invalid license key.') };
-      }
-      if (data.meta && (data.meta.store_id !== P.license.store_id || data.meta.product_id !== P.license.product_id))
-        return { ok: false, reason: 'wrong_product', message: 'This license is for a different product.' };
-      if (P.license.variant_id && data.meta && data.meta.variant_id !== P.license.variant_id)
-        return { ok: false, reason: 'wrong_variant', message: 'This license is for a different subscription tier.' };
-      if (data.license_key && data.license_key.status && data.license_key.status !== 'active')
-        return { ok: false, reason: 'expired' };
-      return { ok: true };
-    } catch (e) {
-      return { ok: false, reason: 'network', message: 'Could not reach the license server. Check your connection.' };
-    }
-  }
-
-  // ════════ LOCK / EXPIRED ════════
-  function lockShell(inner) {
-    document.getElementById('doc-content') && (document.getElementById('doc-content').hidden = true);
-    var el = document.createElement('div');
-    el.className = 'clo-lock';
-    el.innerHTML = '<div class="clo-lock-card">' + inner + '</div>';
-    document.body.prepend(el);
-    document.body.hidden = false;
-  }
-  function renderLock(msg) {
-    lockShell(
-      '<div class="clo-lock-icon">🔒</div>' +
-      '<h1>' + P.brand + ' Wiki</h1>' +
-      '<p class="clo-lock-lead">Enter your license key to unlock the course library.</p>' +
-      '<form class="clo-lock-form" id="cloUnlock">' +
-        '<label for="cloKey">License key</label>' +
-        '<input type="text" id="cloKey" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" required autofocus>' +
-        '<button type="submit" id="cloUnlockBtn">Unlock Portal</button>' +
-        '<div class="clo-lock-err ' + (msg ? 'show' : '') + '" id="cloErr">' + (msg || '') + '</div>' +
-      '</form>' +
-      '<div class="clo-lock-hint">Find your license key in your purchase confirmation email.</div>' +
-      '<div class="clo-lock-hint">No license yet? <a href="' + P.checkout_url + '" target="_blank">Join the community →</a></div>'
-    );
-    document.getElementById('cloUnlock').addEventListener('submit', handleUnlock);
-  }
-  function renderExpired() {
-    lockShell(
-      '<div class="clo-lock-icon">⏱</div>' +
-      '<h1>Your subscription has ended</h1>' +
-      '<p class="clo-lock-lead">This license is no longer active. Renew to regain access to the course portal and the ' + P.pluginName + ' plugin.</p>' +
-      '<a href="' + P.checkout_url + '" target="_blank" class="btn btn-primary">Renew Subscription</a>' +
-      '<div class="clo-lock-hint" style="margin-top:32px">Already renewed? <a href="javascript:location.reload()">Reload page</a></div>'
-    );
-  }
-  async function handleUnlock(e) {
-    e.preventDefault();
-    var key = document.getElementById('cloKey').value.trim();
-    var err = document.getElementById('cloErr'), btn = document.getElementById('cloUnlockBtn');
-    if (!key) return;
-    btn.disabled = true; btn.textContent = 'Verifying…'; err.classList.remove('show');
-    var r = await validateLicense(key);
-    if (!r.ok) {
-      btn.disabled = false; btn.textContent = 'Unlock Portal';
-      err.textContent = r.reason === 'expired'
-        ? 'This license has expired. Renew your subscription to regain access.'
-        : (r.message || 'Could not verify license. Check the key and try again.');
-      err.classList.add('show');
-      return;
-    }
-    localStorage.setItem(STORAGE_KEY, key);
-    sessionStorage.setItem(STORAGE_KEY + '_ok', '1');
-    location.reload();
-  }
+  // ════════ INIT ════════
+  // The portal itself is OPEN. Entitlement is enforced by the gated MCP server off
+  // the buyer's Lemon Squeezy product ID at the moment a skill actually runs — not
+  // by hiding pages here. The old license gate (validateLicense / renderLock /
+  // renderExpired / handleUnlock, ~100 lines) was already unreachable behind a
+  // permanently-true GATE_OPEN flag and was deleted 2026-07-25 with the product
+  // collapse. `P.checkout_url` survives as the Full Access upgrade target.
+  buildShell();
 
   // ════════ BUILD SHELL ════════
   // nav.js hrefs are authored ROOT-RELATIVE; resolveHref prefixes ROOT ('../') so they work
   // from whichever folder the current page lives in (clo-course/, meta-create-skill/, …).
   function resolveHref(href) {
     if (/^https?:/.test(href)) return href;            // external/absolute — leave alone
-    var out = ROOT + href;
-    if (PRODUCT_KEY === 'aieb' && /\.html(\?|#|$)/.test(href))
-      out += (out.indexOf('?') > -1 ? '&' : '?') + 'product=aieb';
-    return out;
+    return ROOT + href;
   }
 
-  // Keep in-body content links inside the current product. CLO is a no-op (links authored for clo);
-  // in AIEB mode, remap the CLO get-access page to its AIEB twin and carry ?product=aieb on local .html links
-  // so a buyer never clicks through from the AIEB portal into the CLO install flow.
-  function rewriteContentLinks(scope) {
-    if (PRODUCT_KEY !== 'aieb' || !scope) return;
-    scope.querySelectorAll('a[href]').forEach(function (a) {
-      var href = a.getAttribute('href');
-      if (!href || /^(https?:|mailto:|tel:|#|javascript:)/.test(href)) return; // external/anchor — leave alone
-      if (!/\.html(\?|#|$)/.test(href)) return;                                  // only local .html pages
-      href = href.replace('get-access.html', 'get-access-aieb.html');           // CLO install page → AIEB twin
-      var hash = '', q = href, hi = href.indexOf('#');
-      if (hi > -1) { hash = href.slice(hi); q = href.slice(0, hi); }
-      if (!/[?&]product=/.test(q)) q += (q.indexOf('?') > -1 ? '&' : '?') + 'product=aieb';
-      a.setAttribute('href', q + hash);
-    });
-  }
+  // `rewriteContentLinks` was deleted 2026-07-25. It existed to (a) carry ?product=aieb
+  // onto in-body links and (b) remap get-access.html → get-access-aieb.html. (a) is gone
+  // with the product split; (b) is now fixed at source — the 11 stale links in
+  // business-x-ray.html, business-x-ray/index.html and meta-create-skill/index.html point
+  // at the AIEB install page directly. It never actually reached them anyway: on a course
+  // SPA the #main it was handed is still empty when the shell runs.
 
   function buildShell() {
     var MODE = document.body.getAttribute('data-shell') || 'doc';
@@ -203,25 +117,25 @@
         }).join('') + '</div>';
     }).join('');
 
-    // tier badge next to the wordmark — constant CLO brand, swappable tier (AI Employee Builder ↔ ★ Full Access)
-    var tb = P.tierBadge;
-    var tierStyle = 'display:inline-flex;align-items:center;margin-left:4px;font-size:11px;font-weight:800;letter-spacing:.2px;padding:3px 9px;border-radius:99px;white-space:nowrap;';
-    var tierHtml = tb
-      ? '<span class="clo-tier" style="' + tierStyle + (tb.star
-          ? 'color:#0a0a0a;background:var(--accent);border:1px solid var(--accent);'
-          : 'color:var(--text-300);background:var(--bg-100);border:1px solid var(--border-100);') + '">'
-        + (tb.star ? '★ ' : '') + tb.label + '</span>'
-      : '';
+    // The tier badge is gone (2026-07-25). It rendered an "AI Employee Builder" pill
+    // beside the wordmark -- which now IS "AI Employee Builder", so it read twice.
+
+    // Robot favicon on every shell page. Most shipped none at all, so the tab showed a
+    // blank sheet; only the launcher carried one.
+    if (!document.querySelector('link[rel="icon"]')) {
+      var fav = document.createElement('link');
+      fav.rel = 'icon'; fav.href = FAVICON;
+      document.head.appendChild(fav);
+    }
 
     var shell = document.createElement('div');
     shell.className = 'clo-shell';
     shell.innerHTML =
       '<header class="clo-topbar">' +
         '<button class="clo-hamburger" id="cloHam" aria-label="Toggle navigation">' + ICON.menu + '</button>' +
-        '<a class="clo-logo" href="' + resolveHref(HOME) + '"><img src="' + LOGO + '" alt="' + P.brand + '"><span>' + P.brand + '</span></a>' + tierHtml +
+        '<a class="clo-logo" href="' + resolveHref(HOME) + '"><img src="' + LOGO + '" alt="' + P.brand + '"><span>' + P.brand + '</span></a>' +
         '<button class="clo-search-trigger" id="cloSearchBtn" aria-label="Search">' + ICON.search + '<span class="s-label">Search…</span><span class="kbd">⌘K</span></button>' +
         '<span class="clo-topbar-spacer"></span>' +
-        '<button class="clo-signout" id="cloSignout">Sign out</button>' +
       '</header>' +
       '<div class="clo-scrim" id="cloScrim"></div>' +
       '<div class="clo-body">' +
@@ -235,12 +149,11 @@
     var inner = shell.querySelector('#cloInner');
     if (active && PAGE !== 'home')
       inner.insertAdjacentHTML('beforeend', '<div class="clo-breadcrumb">' + active.group + '<span class="sep">/</span>' + active.label + '</div>');
-    if (doc) { doc.hidden = false; inner.appendChild(doc); rewriteContentLinks(doc); }
+    if (doc) { doc.hidden = false; inner.appendChild(doc); }
 
     document.body.hidden = false;
 
     // wire chrome
-    document.getElementById('cloSignout').addEventListener('click', signOut);
     var ham = document.getElementById('cloHam'), sb = document.getElementById('cloSidebar'), scrim = document.getElementById('cloScrim');
     function closeNav() { sb.classList.remove('open'); scrim.classList.remove('open'); }
     ham.addEventListener('click', function () { sb.classList.toggle('open'); scrim.classList.toggle('open'); });
@@ -260,7 +173,6 @@
     }
     enhanceCodeBlocks(MODE === 'course' ? null : doc); // course pages keep their own code styling
     initSearch();
-    buildOnboarding();
     if (window.CLO_TOC) window.CLO_TOC.build(inner); // "On this page" on every page (incl. course lessons)
   }
 
@@ -296,8 +208,6 @@
     if (window.CLO_CURRENT_LESSON) markLesson(window.CLO_CURRENT_LESSON);
   }
 
-  function signOut() { localStorage.removeItem(STORAGE_KEY); sessionStorage.removeItem(STORAGE_KEY + '_ok'); location.reload(); }
-
   // ════════ CODE BLOCK ENHANCE (copy + language label) ════════
   function enhanceCodeBlocks(scope) {
     if (!scope) return;
@@ -321,11 +231,6 @@
   }
 
   // ════════ SEARCH (⌘K — pages + the current course's lessons + this page's sections) ════════
-  function activeCourseLabel() {
-    var found = '';
-    P.nav.forEach(function (g) { g.items.forEach(function (it) { if (it.page === PAGE) found = it.label; }); });
-    return found;
-  }
   function searchItems() {
     var items = [];
     P.nav.forEach(function (g) { g.items.filter(surfaceOK).forEach(function (it) {
@@ -412,49 +317,9 @@
     overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
   }
 
-  // ════════ ONBOARDING CHECKLIST WIDGET (bottom-right) ════════
-  function buildOnboarding() {
-    var steps = P.onboarding || [];
-    if (!steps.length) return;
-    var KEY = STORAGE_KEY + '_onb', done = {};
-    try { done = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { done = {}; }
-    function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
-    function count() { var n = 0; steps.forEach(function (s, i) { if (done[i]) n++; }); return n; }
-
-    var w = document.createElement('div');
-    w.className = 'clo-onb';
-    function render() {
-      var n = count(), total = steps.length, all = n === total;
-      w.innerHTML =
-        '<button class="clo-onb-launch" id="cloOnbLaunch" aria-label="Quick start">' +
-          '<span class="clo-onb-ico">' + (all ? '✓' : '🚀') + '</span>' +
-          '<span class="clo-onb-txt">' + (all ? "You're all set" : 'Getting started') + '</span>' +
-          '<span class="clo-onb-count">' + n + '/' + total + '</span>' +
-        '</button>' +
-        '<div class="clo-onb-panel">' +
-          '<div class="clo-onb-head"><span class="clo-onb-title">Quick start</span>' +
-            '<button class="clo-onb-x" id="cloOnbX" aria-label="Minimize">&times;</button></div>' +
-          '<div class="clo-onb-bar"><span style="width:' + Math.round(n / total * 100) + '%"></span></div>' +
-          steps.map(function (s, i) {
-            return '<div class="clo-onb-item' + (done[i] ? ' done' : '') + '">' +
-              '<button class="clo-onb-check" data-check="' + i + '" aria-label="Toggle done">' + (done[i] ? '✓' : '') + '</button>' +
-              '<a class="clo-onb-link" href="' + resolveHref(s.href) + '"' + (/^https?:/.test(s.href) ? ' target="_blank" rel="noopener"' : '') + '>' +
-                '<span class="clo-onb-step">' + s.label + '</span>' +
-                (s.hint ? '<span class="clo-onb-hint">' + s.hint + '</span>' : '') +
-              '</a></div>';
-          }).join('') +
-        '</div>';
-      w.querySelector('#cloOnbLaunch').addEventListener('click', function () { w.classList.toggle('open'); });
-      var x = w.querySelector('#cloOnbX'); if (x) x.addEventListener('click', function () { w.classList.remove('open'); });
-      w.querySelectorAll('.clo-onb-check').forEach(function (b) {
-        b.addEventListener('click', function (e) {
-          e.preventDefault(); e.stopPropagation();
-          var i = +b.dataset.check; done[i] = !done[i]; save();
-          var wasOpen = w.classList.contains('open'); render(); if (wasOpen) w.classList.add('open');
-        });
-      });
-    }
-    render();
-    document.body.appendChild(w);
-  }
+  // The bottom-right "Getting started 0/4" quick-start widget was removed 2026-07-25.
+  // It only ever existed on the retired CLO product, two of its four links were stale
+  // (the dead SkillStack install page, a checkpoint reached from the board), and the
+  // Build Board is the checklist now. Removing it also drops the last consumer of the
+  // per-product storage key.
 })();
