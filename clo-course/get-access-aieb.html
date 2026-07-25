@@ -755,8 +755,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 
   <!-- ═══════════════ FINAL STEP: WATCH + QUICK QUIZ (before the Business X-Ray) ═══════════════ -->
   <style>
-    #overview .ov-head{text-align:center;font-weight:800;font-size:20px;color:var(--accent-text);margin:2px 0 4px}
-    #overview .ov-lead{text-align:center;color:var(--text-dim);margin-bottom:16px}
+    #overview .ov-lead{color:var(--text-dim);margin:2px 0 16px}
     #overview .recap-box{margin-top:18px;background:var(--green-bg);border:1px solid var(--border-2);border-radius:var(--radius);padding:16px 18px}
     #overview .ov-opt{display:block;padding:9px 12px;margin:6px 0;border:1px solid var(--border-2);border-radius:9px;cursor:pointer;font-size:14px;line-height:1.45;transition:border-color .15s,background .15s}
     #overview .ov-opt:hover{border-color:var(--accent-border)}
@@ -765,32 +764,39 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     #overview #ovProceed[disabled]{opacity:.5;cursor:not-allowed}
   </style>
   <div class="step" id="overview">
-    <div class="step-content" style="padding-top:12px">
-      <div class="ov-head">&#127881; You&rsquo;re all set up!</div>
-      <p class="ov-lead">One last thing before your Business X-Ray &mdash; watch this ~3-min overview, then answer two quick questions.</p>
+    <div class="step-sum">
+      <span class="step-check"><span class="num">&#127909;</span><span class="tick">&#10003;</span></span>
+      <span class="step-titles"><span class="step-t">Watch: how your AI Employee actually works</span><span class="step-sub">The big picture &mdash; then two quick questions to unlock your Business X-Ray</span></span>
+      <span class="step-meta"><span class="time">watch + 2 Qs</span></span>
+    </div>
+    <div class="step-content">
+      <p class="ov-lead">Before the Business X-Ray, watch this overview &mdash; it shows how handing AI <strong>one map of your business</strong> turns it from a tool you babysit into an employee that runs the work. Below the video is exactly <strong>why that map matters and how it works</strong> &mdash; then two quick questions to continue.</p>
       <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/LrONlk3ngGw?rel=0" title="How the AI Employee Builder works" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>
 
       <div class="recap-box">
-        <p style="font-weight:800;margin:0 0 10px">The quick recap</p>
-        <p style="font-weight:700;margin:0 0 4px">What you just did</p>
-        <ul class="sub" style="margin-top:0"><li>Installed AI Employee Builder and connected it</li><li>Ran <code>/setup-aieb</code> &mdash; your workspace is ready</li></ul>
-        <p style="font-weight:700;margin:12px 0 4px">What&rsquo;s next &mdash; the Business X-Ray</p>
-        <ul class="sub" style="margin-top:0"><li>It maps how your business runs today</li><li>It names the first job to hand your AI Employee</li></ul>
+        <p style="font-weight:800;margin:0 0 8px">Why you give your AI a business map</p>
+        <p style="margin:0 0 12px">A business map is one file plus a set of department folders &mdash; a model of how your whole business runs and how it makes money (Leads &rarr; Appointments &rarr; Presentations &rarr; Sales). It's the single thing that turns AI from a <em>tool</em> into an <em>employee</em>.</p>
+        <p style="font-weight:700;margin:0 0 4px">Without a map</p>
+        <ul class="sub" style="margin-top:0"><li>Your AI doesn't know where anything lives or how you make money, so you hand-hold every task. <strong>You stay the router</strong> &mdash; every request runs through you.</li></ul>
+        <p style="font-weight:700;margin:12px 0 4px">With a map (how it works)</p>
+        <ul class="sub" style="margin-top:0"><li>A request comes in &rarr; your AI reads the map, opens the right department, pulls what it needs, and does the work &mdash; the way an employee would. That's how it handles most of your requests <strong>without you in the loop</strong>.</li></ul>
+        <p style="font-weight:700;margin:14px 0 4px">You already started this</p>
+        <ul class="sub" style="margin-top:0"><li>When you ran <code>/setup-aieb</code>, it built your <strong>department folders and your business map file</strong> &mdash; the empty frame.</li><li>The <strong>Business X-Ray</strong> (next) fills it in with <em>your</em> business &mdash; how it actually runs and the first job to hand off.</li></ul>
       </div>
 
       <div id="ovQuiz" style="margin-top:20px">
-        <p style="font-weight:800;margin-bottom:10px">Quick check &mdash; answer both to unlock the X-Ray</p>
+        <p style="font-weight:800;margin-bottom:10px">Quick check &mdash; make sure the mechanism clicked</p>
         <div class="ov-q" style="margin-bottom:16px">
-          <p style="font-weight:700;margin-bottom:6px">1. What does the Business X-Ray do?</p>
-          <label class="ov-opt"><input type="radio" name="ovq1" onchange="wizOverviewCheck()"> Writes your marketing emails for you</label>
-          <label class="ov-opt"><input type="radio" name="ovq1" data-correct onchange="wizOverviewCheck()"> Maps how your business runs and names the first job to hand your AI Employee</label>
-          <label class="ov-opt"><input type="radio" name="ovq1" onchange="wizOverviewCheck()"> Installs plugins and connectors for you</label>
+          <p style="font-weight:700;margin-bottom:6px">1. With your business map in place, what changes about how a request gets handled?</p>
+          <label class="ov-opt"><input type="radio" name="ovq1" onchange="wizOverviewCheck()"> Nothing changes &mdash; you still walk your AI through every step</label>
+          <label class="ov-opt"><input type="radio" name="ovq1" data-correct onchange="wizOverviewCheck()"> Your AI reads the map, opens the right department, and does the work on its own &mdash; instead of every task routing through you</label>
+          <label class="ov-opt"><input type="radio" name="ovq1" onchange="wizOverviewCheck()"> It replies faster, but only for marketing tasks</label>
         </div>
         <div class="ov-q">
-          <p style="font-weight:700;margin-bottom:6px">2. Who does the building?</p>
-          <label class="ov-opt"><input type="radio" name="ovq2" onchange="wizOverviewCheck()"> You write all the code yourself</label>
-          <label class="ov-opt"><input type="radio" name="ovq2" data-correct onchange="wizOverviewCheck()"> You direct in plain words &mdash; your AI Employee builds it</label>
-          <label class="ov-opt"><input type="radio" name="ovq2" onchange="wizOverviewCheck()"> Nothing gets built &mdash; it&rsquo;s just videos to watch</label>
+          <p style="font-weight:700;margin-bottom:6px">2. You already started your map. What did <code>/setup-aieb</code> put in place?</p>
+          <label class="ov-opt"><input type="radio" name="ovq2" onchange="wizOverviewCheck()"> A finished map of your business &mdash; nothing left to do</label>
+          <label class="ov-opt"><input type="radio" name="ovq2" data-correct onchange="wizOverviewCheck()"> Your department folders and business map file &mdash; the empty frame the Business X-Ray fills in with your actual business</label>
+          <label class="ov-opt"><input type="radio" name="ovq2" onchange="wizOverviewCheck()"> Only the license &mdash; the map appears on its own later</label>
         </div>
         <p id="ovQuizMsg" style="color:#b4690e;font-weight:600;font-size:13px;margin-top:10px" hidden></p>
       </div>
@@ -1405,7 +1411,7 @@ function wizOverviewCheck(){
   var btn=document.getElementById('ovProceed');
   if(btn){ btn.disabled=!ok; btn.innerHTML= ok ? '&#128300; Start the Business X-Ray &#8594;' : 'Answer both questions to continue'; }
   var msg=document.getElementById('ovQuizMsg');
-  if(msg){ var both=q1&&q2; msg.hidden=!(both&&!ok); if(!msg.hidden) msg.textContent='Not quite — take another look at the video, then try again.'; }
+  if(msg){ var both=q1&&q2; msg.hidden=!(both&&!ok); if(!msg.hidden) msg.textContent='Not quite — re-read “Why you give your AI a business map” above, then try again.'; }
 }
 function wizOverviewGo(){
   wizExtra.add('overview'); wizExtraSave(wizExtra);
