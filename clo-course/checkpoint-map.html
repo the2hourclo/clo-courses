@@ -15,6 +15,10 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .wrap{max-width:640px;margin:0 auto;padding:0 20px 70px}
 
 /* top bar */
+/* Consistent site nav bar (matches Home + Board + course pages), above the wizard's back+badge row. */
+.site-topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:16px;min-height:56px;padding:8px 24px;background:rgba(250,250,250,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1.5px solid var(--border-2,#e6e6e0)}
+.site-brand{font-size:13px;font-weight:700;letter-spacing:.3px;color:var(--text,#21211E);display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.site-brand img{height:26px;width:auto}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 0 6px;gap:12px}
 .back{font-size:13px;font-weight:700;color:var(--text-muted);display:inline-flex;align-items:center;gap:6px}
 .back:hover{color:var(--cp);text-decoration:none}
@@ -97,6 +101,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 <link rel="stylesheet" href="excalifont.css">
 </head>
 <body>
+<header class="site-topbar"><a class="site-brand" href="index.html"><img src="assets/aieb-avatar-180.png" alt="AI Employee Builder" width="26" height="26">AI Employee Builder</a></header>
 <div class="wrap">
 
   <div class="topbar rise">
