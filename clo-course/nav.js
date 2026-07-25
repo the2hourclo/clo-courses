@@ -29,11 +29,15 @@ var CLO_CONFIG = {
   checkout_url: 'https://chiefleverageofficer.lemonsqueezy.com/checkout/buy/14c15890-c46a-4ab8-ab8d-9e56cd04d38a',
   // grouped left-sidebar nav. `page` matches each page's <body data-page>. hrefs are ROOT-relative.
   nav: [
+    // ── The Build Board is the ONE home base. It used to compete with two other
+    //    "where am I / what's next" surfaces: the launcher (which duplicated its
+    //    progress bar) and ai-employee-roadmap.html (which tracked 7 phases in its
+    //    own aer_* keys against the board's 6 checkpoints in aieb_progress — two
+    //    stores that never synced, so they could disagree). Both are retired; the
+    //    roadmap URL redirects here and its prompt appendix moved to Reference.
     { group: 'Get Started', items: [
-      { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['start','overview','welcome','toolkit','dashboard'] },
-      { label: 'Build Board', page: 'board', href: 'clo-course/ai-employee-board.html', keywords: ['board','build board','journey','checkpoints','whats next','next step','path','progress','home base','what to build next','continue building'] },
-      { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','cowork','plugin','license','activate','connect','onboard','getting started','first steps'] },
-      { label: 'Roadmap', page: 'roadmap', href: 'clo-course/ai-employee-roadmap.html', keywords: ['roadmap','whats next','journey','path','harness','agent','command','routine','ai employee roadmap'] }
+      { label: 'Build Board', page: 'board', href: 'clo-course/ai-employee-board.html', keywords: ['board','build board','home','portal home','start','journey','checkpoints','whats next','next step','path','progress','home base','what to build next','continue building','roadmap','dashboard','overview'] },
+      { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','cowork','plugin','license','activate','connect','onboard','getting started','first steps'] }
     ]},
     { group: 'Courses', items: [
       // `page:'business-x-ray'` belongs to the deep wiki, which is the page that actually
@@ -50,6 +54,9 @@ var CLO_CONFIG = {
         { label: '6 · Hooks', page: 'cc101-hooks', href: 'clo-course/cc101-6-hooks.html', keywords: ['hooks','automatic','automation','autopilot','lifecycle','sequence diagram','events','stop','quality gate','pretooluse','posttooluse','sessionstart','sessionend','triggers','reactions'] },
         { label: '7 · The Whole Picture', page: 'cc101-whole', href: 'clo-course/cc101-7-whole-picture.html', keywords: ['lifecycle','everything in action','network','quick reference','cheat sheet','best practices','whole picture'] },
         { label: 'All-in-one page (reference)', page: 'claude-code-101', href: 'clo-course/claude-code-101.html', keywords: ['overview','anatomy','ai employee','building blocks','fundamentals','basics','plain english','all in one','reference'] }
+      ]},
+      { group: 'Reference', items: [
+        { label: 'Prompts & cheat sheet', page: 'prompts', href: 'clo-course/prompts.html', keywords: ['prompt','prompts','copy paste','cheat sheet','when do i','appendix','every skill','workflow','tune up','keep sharp','harden','eval','what do i type','say to claude'] }
       ]},
       // ── Skill Library = the FULL ACCESS tier (the `community` tier in the gated MCP's
       //    skills manifest: write chain, copywriter, excali-graphic, brand tools…).

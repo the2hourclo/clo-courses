@@ -14,6 +14,18 @@
 body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba(121,234,32,.05),transparent 70%),var(--bg)}
 
 /* ── TOP BAR (brand + swappable surface toggle; no sidebar) ── */
+/* Resources rail — the way into the wider portal. Deliberately quiet while the
+   journey is unfinished (the board is meant to be the focus), and promoted to a
+   full card once everything is built, when the portal becomes the reference library. */
+.res{max-width:1300px;margin:26px auto 0;padding:0 24px}
+.res-quiet{text-align:center;font-size:13.5px;color:var(--soft)}
+.res-quiet a{color:var(--ink);font-weight:600}
+.res-card{border:2px solid var(--ink);border-radius:15px 4px 15px 4px;background:var(--card);box-shadow:3px 4px 0 rgba(33,33,30,.08);padding:22px 24px}
+.res-card h3{font-family:var(--excali,inherit);font-size:19px;color:var(--ink);margin:0 0 4px}
+.res-card p{color:var(--soft);font-size:14px;margin:0 0 16px}
+.res-links{display:flex;flex-wrap:wrap;gap:10px}
+.res-links a{display:inline-block;padding:9px 15px;border:1.5px solid var(--ink);border-radius:12px 3px 12px 3px;background:var(--card);color:var(--ink);text-decoration:none;font-size:13.5px;font-weight:600;transition:transform .13s,box-shadow .13s}
+.res-links a:hover{transform:translate(-1px,-1px);box-shadow:3px 4px 0 rgba(33,33,30,.12)}
 .topbar{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 24px 2px;flex-wrap:wrap}
 .brand{font-size:12px;font-weight:800;letter-spacing:.5px;color:var(--accent);display:inline-flex;align-items:center;gap:7px;text-transform:uppercase}
 .surf{display:inline-flex;align-items:center;gap:9px}
@@ -99,7 +111,7 @@ a.col-pill:hover .open{opacity:1}
 <body>
 
 <div class="topbar rise">
-  <span class="brand">🤖 AI Employee Builder</span>
+  <span class="brand"><img src="assets/aieb-avatar-180.png" alt="" width="22" height="22">AI Employee Builder</span>
   <div class="surf" id="surfBar"></div>
 </div>
 
@@ -110,6 +122,8 @@ a.col-pill:hover .open{opacity:1}
 
 <div class="map-label rise">Your whole journey</div>
 <div class="board-wrap rise"><div class="board" id="board"></div></div>
+
+<div class="rise" id="resources"></div>
 
 <div class="footer">Questions? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Ask in the community ↗</a></div>
 
@@ -242,6 +256,27 @@ function nextbarHTML(){
 }
 function renderNext(){ document.getElementById('nextbar').innerHTML = nextbarHTML(); }
 
+// The portal, offered as a resource library. While there is still something to build
+// this is one quiet line so it can't compete with the next action; once the journey is
+// complete the board has no next action left, so the library becomes the main offer.
+var RES = [
+  ['Business X-Ray',        'business-x-ray.html'],
+  ['Skill Systems',         '../meta-create-skill/index.html'],
+  ['Claude Code 101',       'claude-code-101.html'],
+  ['Prompts & cheat sheet', 'prompts.html'],
+  ['Skill Library',         'skill-library.html']
+];
+function resourcesHTML(){
+  var links = RES.map(function(r){ return '<a href="'+r[1]+'">'+r[0]+'</a>'; }).join('');
+  if (!AIEB.overall().complete)
+    return '<div class="res"><p class="res-quiet">Not sure what to type? <a href="prompts.html">Prompts &amp; cheat sheet</a> &nbsp;·&nbsp; Want the writing skills? <a href="skill-library.html">Skill Library</a></p></div>';
+  return '<div class="res"><div class="res-card">'+
+    '<h3>Your resource library</h3>'+
+    '<p>The journey is done — everything below stays here for whenever you need it.</p>'+
+    '<div class="res-links">'+links+'</div></div></div>';
+}
+function renderResources(){ document.getElementById('resources').innerHTML = resourcesHTML(); }
+
 /* ---- THE FULL BOARD ---- */
 function cardHTML(card, status){
   var ty = TYPES[card.type] || TYPES.action;
@@ -279,6 +314,7 @@ function renderAll(){
   maybeGate();
   paintSurf();
   document.getElementById('oprog').innerHTML = overallHTML();
+  renderResources();
   renderNext();
   renderMap();
 }

@@ -59,7 +59,11 @@ window.addEventListener('error', function () {
   // The AI Employee Builder avatar. 180px asset for a 30px slot (retina headroom);
   // cut with a transparent circle so it sits on the paper skin with no white box.
   var LOGO = ROOT + 'clo-course/assets/aieb-avatar-180.png';
-  var HOME = 'clo-course/index.html';
+  // Clicking the logo goes HOME, and home is the Build Board — the one place that
+  // answers "where am I and what's next". It used to point at the launcher, which is
+  // a chrome-free splash: you'd click the logo from a full portal page and land
+  // somewhere with no sidebar, which reads as leaving the portal rather than going home.
+  var HOME = 'clo-course/ai-employee-board.html';
   // Robot favicon — the brand mark in the browser tab. Same robot as the launcher's.
   // Injected here so all 14 shell pages get it from one place.
   var FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='10' y='28' width='80' height='55' rx='16' fill='white' stroke='%2321211E' stroke-width='6'/%3E%3Crect x='22' y='41' width='56' height='28' rx='12' fill='%2321211E'/%3E%3Ccircle cx='40' cy='55' r='6' fill='%232D8C3C'/%3E%3Ccircle cx='60' cy='55' r='6' fill='%232D8C3C'/%3E%3Cline x1='50' y1='28' x2='47' y2='10' stroke='%2321211E' stroke-width='6' stroke-linecap='round'/%3E%3Ccircle cx='46' cy='8' r='7' fill='%232D8C3C'/%3E%3C/svg%3E";
