@@ -19,6 +19,29 @@
 (function () {
   'use strict';
 
+  /* ── CANONICAL HOST REDIRECT (2026-07-25) ────────────────────────────────
+     The course moved from GitHub Pages to course.chiefleverageofficers.com so
+     it shares a registrable domain with the API and can hold a first-party
+     session. Both hosts still serve, and that is the danger: localStorage is
+     per-ORIGIN, so a buyer with progress on github.io who lands on the new host
+     would see an empty board. One canonical origin or none.
+
+     Path note: Pages served under /clo-courses (the repo name); Vercel serves
+     the repo root, so that prefix is dropped. The query string AND hash are
+     carried over verbatim — the hash matters most, it's where the #vt= view
+     token rides, and losing it would strand the buyer on an unidentified page.
+     ──────────────────────────────────────────────────────────────────────── */
+  try {
+    if (window.location.hostname === 'the2hourclo.github.io') {
+      var path = window.location.pathname.replace(/^\/clo-courses/, '');
+      window.location.replace(
+        'https://course.chiefleverageofficers.com' + path +
+        window.location.search + window.location.hash
+      );
+      return;
+    }
+  } catch (e) {}
+
   // 2026-07-24: `goal` was a trophy column with no steps. Autonomy (schedule / runs on its
   // own) moved OUT of cp4 and INTO it, so it is now a REAL checkpoint with its own wizard —
   // the fifth and last. cp4 keeps hardening only. Order and ids are otherwise unchanged.
@@ -183,7 +206,12 @@
        3. Failures are silent. A dark map beats an error message.
      ────────────────────────────────────────────────────────────────────────── */
   var VIEW_TOKEN_KEY = 'aieb_view_token_v1';
-  var PROGRESS_URL = 'https://aieb-gated-mcp.vercel.app/progress';
+  // Same registrable domain as the page (course.chiefleverageofficers.com) as of
+  // 2026-07-25. That is the whole point of the move: a cookie this host sets is
+  // FIRST-PARTY, so it survives WebKit's 7-day purge of script-writable storage.
+  // The old aieb-gated-mcp.vercel.app origin still answers and stays valid for
+  // any page still served from github.io.
+  var PROGRESS_URL = 'https://api.chiefleverageofficers.com/progress';
   // Dev/test hook only: lets a local smoke test point the sync at a local server.
   // Buyers never have this key set; the default above is the production truth.
   try { PROGRESS_URL = localStorage.getItem('aieb_progress_url_dev') || PROGRESS_URL; } catch (e) {}
