@@ -829,13 +829,13 @@ function renderBizMap() {
   <h3 style="margin-bottom:12px">Why These 7 Columns?</h3>
   <p style="color:var(--text-muted);margin-bottom:16px">Every business &mdash; whether you're a coach, a software company, a freelancer, or a bakery &mdash; needs all 7 of these to function:</p>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-bottom:24px">
-    <div class="card" style="border-left:3px solid #34d399;padding:14px"><strong style="color:#34d399">Traffic</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Without people finding you, nothing else matters. No traffic = no business.</p></div>
-    <div class="card" style="border-left:3px solid #60a5fa;padding:14px"><strong style="color:#60a5fa">Converters</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Traffic without capture is a leaky bucket. You need pages that turn visitors into contacts.</p></div>
-    <div class="card" style="border-left:3px solid #38bdf8;padding:14px"><strong style="color:#38bdf8">Products</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">What you actually sell. Without clear products, you're making it up every time.</p></div>
-    <div class="card" style="border-left:3px solid #c084fc;padding:14px"><strong style="color:#c084fc">Funnels</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">HOW you sell. The asset that does the selling &mdash; a video, a page, a call.</p></div>
-    <div class="card" style="border-left:3px solid #fb7185;padding:14px"><strong style="color:#fb7185">Math</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Does the model actually work? Revenue, costs, margins. No guessing.</p></div>
-    <div class="card" style="border-left:3px solid #fb923c;padding:14px"><strong style="color:#fb923c">Team</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Who or what fills each role? You + AI agents is a legitimate team. The key is intentional assignment.</p></div>
-    <div class="card" style="border-left:3px solid #2dd4bf;padding:14px"><strong style="color:#2dd4bf">Goals</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Recurring actions that keep the engine running. Not dreams &mdash; activities you must do weekly.</p></div>
+    <div class="card" style="border-left:3px solid #34d399;padding:14px"><strong style="color:var(--text-100)">Traffic</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Without people finding you, nothing else matters. No traffic = no business.</p></div>
+    <div class="card" style="border-left:3px solid #60a5fa;padding:14px"><strong style="color:var(--text-100)">Converters</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Traffic without capture is a leaky bucket. You need pages that turn visitors into contacts.</p></div>
+    <div class="card" style="border-left:3px solid #38bdf8;padding:14px"><strong style="color:var(--text-100)">Products</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">What you actually sell. Without clear products, you're making it up every time.</p></div>
+    <div class="card" style="border-left:3px solid #c084fc;padding:14px"><strong style="color:var(--text-100)">Funnels</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">HOW you sell. The asset that does the selling &mdash; a video, a page, a call.</p></div>
+    <div class="card" style="border-left:3px solid #fb7185;padding:14px"><strong style="color:var(--text-100)">Math</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Does the model actually work? Revenue, costs, margins. No guessing.</p></div>
+    <div class="card" style="border-left:3px solid #fb923c;padding:14px"><strong style="color:var(--text-100)">Team</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Who or what fills each role? You + AI agents is a legitimate team. The key is intentional assignment.</p></div>
+    <div class="card" style="border-left:3px solid #2dd4bf;padding:14px"><strong style="color:var(--text-100)">Goals</strong><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Recurring actions that keep the engine running. Not dreams &mdash; activities you must do weekly.</p></div>
   </div>
 
   <div class="callout" style="margin-bottom:24px;border-left:3px solid var(--accent)"><strong>The key insight:</strong> When you see all 7 columns together, gaps become obvious. An empty column means something is missing. A column with only one item means you have a single point of failure.</div>
@@ -941,7 +941,7 @@ function renderBowtie() {
   </div>`;
 }
 function initBowtieSvg(){const svg=document.getElementById('bowtieSvg');const w=105,gap=12;let html='';
-  [{label:'ACQUISITION',color:'#4ade80',start:0,span:3},{label:'COMMIT',color:'#f87171',start:3,span:1},{label:'DELIVERY',color:'#4ade80',start:4,span:3}].forEach(p=>{const x=p.start*(w+gap)+5;const pw=p.span*w+(p.span-1)*gap;html+=`<rect x="${x}" y="0" width="${pw}" height="30" rx="6" fill="${p.color}22" stroke="${p.color}" stroke-width="1.5"/><text x="${x+pw/2}" y="20" text-anchor="middle" fill="${p.color}" font-size="11" font-weight="700" letter-spacing="0.5">${p.label}</text>`;});
+  [{label:'ACQUISITION',color:'#2D8C3C',start:0,span:3},{label:'COMMIT',color:'#B3402A',start:3,span:1},{label:'DELIVERY',color:'#2D8C3C',start:4,span:3}].forEach(p=>{const x=p.start*(w+gap)+5;const pw=p.span*w+(p.span-1)*gap;html+=`<rect x="${x}" y="0" width="${pw}" height="30" rx="6" fill="${p.color}22" stroke="${p.color}" stroke-width="1.5"/><text x="${x+pw/2}" y="20" text-anchor="middle" fill="${p.color}" font-size="11" font-weight="700" letter-spacing="0.5">${p.label}</text>`;});
   const stageHints={awareness:['Content','Ads','Referrals','SEO'],nurturing:['Free value','Email list','Social follow','Trust building'],consideration:['Case studies','Testimonials','Comparisons','Proof'],conversion:['Sales page','Call','Checkout','Payment'],onboarding:['Welcome email','First call','Access setup','Expectations'],launch:['First win','Quick result','Momentum','Engagement'],results:['Transformation','Testimonial','Referral','Retention']};
   BOWTIE_STAGES.forEach((s,i)=>{const x=i*(w+gap)+5;const hints=stageHints[s.id]||[];
     html+=`<g class="svg-stage ${s.id===state.bowtieStage?'active':''}" data-stage="${s.id}" onclick="selectBowtieStage('${s.id}')" style="cursor:pointer"><rect x="${x}" y="42" width="${w}" height="140" rx="8" fill="${s.color}15" stroke="${s.color}66" stroke-width="1.5"/><text x="${x+w/2}" y="66" text-anchor="middle" fill="${s.color}" font-size="12" font-weight="600">${s.label}</text>`;
@@ -1816,7 +1816,7 @@ function initAssetsScoreUI(){
 function initAssetsUI(){
   const am=document.getElementById('assetMap');
   if(am && !am.dataset.built){
-    const colors=['#4ade80','#60a5fa','#c084fc','#f472b6','#fb923c','#fbbf24','#9ea3ba'];
+    const colors=['#2D8C3C','#2563A8','#6B46C1','#A83A6B','#C2410C','#8A6A00','#5F5F57'];
     const catDescs=['Your unique ideas, methods, and legal protections','How people perceive and trust you','Your position in the market and how you reach people','What you sell — from free to recurring','Infrastructure that runs without you','The people who make it all work','Financial readiness and protection'];
     am.innerHTML=CATEGORIES.map((cat,ci)=>{
       const col=colors[ci];
@@ -1836,13 +1836,13 @@ function initAssetsUI(){
   if(document.getElementById('tierFilters')){renderFilterPills();renderAssetGrid();updateLeverageScore();}
 }
 function renderAxPills(){
-  const colors=['#4ade80','#60a5fa','#c084fc','#f472b6','#fb923c','#fbbf24','#9ea3ba'];
+  const colors=['#2D8C3C','#2563A8','#6B46C1','#A83A6B','#C2410C','#8A6A00','#5F5F57'];
   const el=document.getElementById('axPills');if(!el)return;
   const currentCat=ASSETS[state.assetExplorerIdx]?.cat;
   el.innerHTML=CATEGORIES.map((cat,i)=>`<div class="ax-pill ${cat.id===currentCat?'active':''}" style="${cat.id===currentCat?`color:${colors[i]};border-color:${colors[i]}44;background:${colors[i]}15`:''}" onclick="jumpToCategory('${cat.id}')">${cat.name}</div>`).join('');
 }
 function renderAssetCard(idx){
-  const colors=['#4ade80','#60a5fa','#c084fc','#f472b6','#fb923c','#fbbf24','#9ea3ba'];
+  const colors=['#2D8C3C','#2563A8','#6B46C1','#A83A6B','#C2410C','#8A6A00','#5F5F57'];
   const a=ASSETS[idx];if(!a)return;
   const ci=CATEGORIES.findIndex(c=>c.id===a.cat);const col=colors[ci];
   const card=document.getElementById('axCard');if(!card)return;

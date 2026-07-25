@@ -160,7 +160,8 @@ var FOCUS_LEAD = {
    pills, the next-up badge, and .nb-go (white text ON the colour). */
 var TYPES = {
   action:{ label:'Action', ic:'⚡' }, video:{ label:'Watch', ic:'📹' },
-  build:{ label:'Build', ic:'🔨' }, gate:{ label:'Done-signal', ic:'🎯' }, outcome:{ label:'Outcome', ic:'🌟' }
+  build:{ label:'Build', ic:'🔨' }, gate:{ label:'Done-signal', ic:'🎯' }, outcome:{ label:'Outcome', ic:'🌟' },
+  share:{ label:'Share', ic:'🔗' }   // matches checkpoint-map.html's type:'share' step
 };
 var BOARD = [
   { id:'setup', name:'Get set up', color:'#2D8C3C', cards:[
@@ -169,10 +170,16 @@ var BOARD = [
     { t:'Onboard — run /setup-aieb', type:'action' },
     { t:'Welcome — what you just built', type:'video' }
   ]},
+  /* ORDER IS LOad-BEARING: colStatuses() maps card INDEX onto the wizard's step index,
+     so this list must mirror checkpoint-map.html's four active steps 1:1 on both
+     surfaces (Draw.io → Run → Read & share → gate). It previously advertised a video
+     "Why the X-Ray interview works" that had been deleted from the wizard and omitted
+     "Read & share your X-Ray" that it actually has — so the column promised a step that
+     did not exist and every progress tag sat on the wrong card name. */
   { id:'cp1', name:'Map the business', color:'#2563A8', cards:[
     { t:'Set up Draw.io — connector + app', type:'build' },
-    { t:'Why the X-Ray interview works', type:'video' },
     { t:'Run your Business X-Ray', type:'build' },
+    { t:'Read & share your X-Ray', type:'share' },
     { t:'X-Ray map exists + “N hrs/week” baseline', type:'gate' }
   ]},
   { id:'cp2', name:'Your first skill', color:'#6B46C1', cards:[
