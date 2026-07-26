@@ -411,6 +411,27 @@ body.activation-mode .container{max-width:620px;width:100%}
 .footer{text-align:center;margin-top:38px;padding-top:22px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim)}
 </style>
 <link rel="stylesheet" href="excalifont.css">
+<script>
+/* github.io -> first-party, before anything else renders (2026-07-26).
+   The Pages host is not a redirect, it is a second LIVE COPY of this repo, so an
+   activation link minted before the host switch lands on a page that cannot hold
+   a session: the Google sign-in cookie is scoped to chiefleverageofficers.com,
+   and localStorage on github.io is subject to WebKit's 7-day purge. Same file
+   serves both hosts, so this is conditioned on hostname and can never fire on
+   the real one.
+   Search AND hash are both carried over — ?activate= is the activation code and
+   the hash carries one-time tokens (#t=, #vt=); dropping either silently breaks
+   the link it is trying to rescue. */
+(function redirectLegacyHost(){
+  try {
+    if (location.hostname !== 'the2hourclo.github.io') return;
+    var path = location.pathname.replace(/^\/clo-courses/, '');
+    location.replace('https://course.chiefleverageofficers.com' + path + location.search + location.hash);
+  } catch (e) {
+    /* never let a redirect helper stop the page loading */
+  }
+})();
+</script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body hidden data-page="get-access">
