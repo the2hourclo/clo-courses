@@ -57,10 +57,15 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
    text on black is the least legible part of the step. Now a tinted LIGHT chip: ink text
    does the reading, and the checkpoint colour moves to the left rule + border so the chip
    still belongs to this checkpoint. (Rashid, 2026-07-26.) */
-.cmd-block{margin:2px 0 18px}
-.cmd-intro{font-size:14px;color:var(--text-muted);line-height:1.55;margin-bottom:8px}
+/* The command is a DIFFERENT KIND OF THING from the prose around it — it is the one
+   line you actually go and run — so it gets its own bounded, labelled panel instead of a
+   tinted strip that reads as another paragraph. (Rashid, 2026-07-26: "we don't have clear
+   separation of the command, we should point to it.") */
+.cmd-block{margin:20px 0 22px;padding:14px 16px 16px;border:1.5px solid color-mix(in srgb,var(--cp) 32%,transparent);border-radius:var(--radius-lg);background:color-mix(in srgb,var(--cp) 5%,transparent)}
+.cmd-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--cp);background:color-mix(in srgb,var(--cp) 16%,transparent);border:1px solid color-mix(in srgb,var(--cp) 32%,transparent);padding:4px 11px;border-radius:20px;margin-bottom:11px}
+.cmd-intro{font-size:14px;color:var(--text-muted);line-height:1.55;margin-bottom:11px}
 .cmd-intro strong{color:var(--text);font-weight:700}
-.cmd{display:flex;align-items:center;gap:10px;background:color-mix(in srgb,var(--cp) 7%,#fff);border:1px solid color-mix(in srgb,var(--cp) 30%,transparent);border-left:3px solid var(--cp);border-radius:var(--radius);padding:12px 14px;margin:6px 0 14px}
+.cmd{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid color-mix(in srgb,var(--cp) 38%,transparent);border-left:4px solid var(--cp);border-radius:var(--radius);padding:13px 15px;margin:6px 0 14px}
 .cmd-block .cmd{margin:0}
 .cmd .txt{flex:1;font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--text);white-space:pre-wrap;word-break:break-word}
 .copy{flex-shrink:0;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid var(--border-2);background:#fff;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);transition:all .15s}
@@ -204,6 +209,7 @@ var TYPE = { video:'📹 Watch', build:'🔨 Build', share:'📤 Share', gate:'�
    the thing the step is actually asking you to do. (Rashid, 2026-07-26.) */
 function cmdHTML(s){
   return '<div class="cmd-block">' +
+    '<span class="cmd-eyebrow">&#9656; '+(s.commandLabel || 'Run this')+'</span>' +
     (s.commandIntro ? '<p class="cmd-intro">'+s.commandIntro+'</p>' : '') +
     '<div class="cmd"><span class="txt">'+s.command+'</span>' +
     '<button class="copy" onclick="copyCmd(this)">Copy</button></div>' +
