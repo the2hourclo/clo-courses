@@ -63,7 +63,37 @@
       var carried = JSON.parse(b64urlDecode(incoming[1]));
       for (var ck in carried) {
         if (ck.indexOf(MIGRATION_PREFIX) !== 0) continue;   // never import a foreign key
-        if (localStorage.getItem(ck) === null) localStorage.setItem(ck, carried[ck]);
+        var mine = localStorage.getItem(ck);
+        if (mine === null) { localStorage.setItem(ck, carried[ck]); continue; }
+
+        /* MERGE, don't skip. This used to be a bare "only set it if this origin
+           has nothing", which is key-granular and therefore lost real work: the
+           board's five-flag map lives under ONE key, so a single folded ladder
+           rung created `aieb_progress` here and the carried map — potentially
+           four finished checkpoints — was discarded whole. Same for step
+           positions: arriving at step 1 on the new host outranked step 6 carried
+           from the old one.
+
+           Both merges are UNION/MAX and never destructive, which is the only
+           safe direction when two origins each hold partial truth. */
+        /* LITERALS, not the STORE / STEP_PREFIX constants. This block runs at the
+           very top of the file and those are `var`s assigned ~100 lines below, so
+           hoisting makes them `undefined` right here — `ck === STORE` would be
+           `ck === undefined` (never true) and `indexOf(undefined)` would search
+           for the string "undefined" (never 0). Both merges would silently never
+           fire, which is precisely the bug this code exists to fix. Keep these in
+           step with the declarations below if either name's value changes. */
+        if (ck === 'aieb_progress') {
+          try {
+            var theirs = JSON.parse(carried[ck]) || {}, ours = JSON.parse(mine) || {}, merged = {}, mk;
+            for (mk in theirs) if (theirs[mk]) merged[mk] = true;
+            for (mk in ours) if (ours[mk]) merged[mk] = true;
+            localStorage.setItem(ck, JSON.stringify(merged));
+          } catch (e2) {}
+        } else if (ck.indexOf('aieb_ckpt_') === 0) {
+          var t = parseInt(carried[ck], 10), o = parseInt(mine, 10);
+          if (!isNaN(t) && (isNaN(o) || t > o)) localStorage.setItem(ck, String(t));
+        }
       }
       // Scrub, but keep any OTHER fragment params (#vt= rides the same hash and
       // is absorbed further down — dropping it here would undo that lane).
@@ -157,14 +187,37 @@
   // shadowing failure. One key per checkpoint, the one its wizard owns.
   var STEP_WRITE_SUFFIX = { cp1: '_v6', cp2: '_v5', cp3: '_v4', cp4: '_v5', goal: '_v6' };
 
-  // Read a per-checkpoint step key, trying each suffix newest-first.
+  /* Read a per-checkpoint step key. Reads the OWNED suffix first, then treats any
+     older generation as a ONE-SHOT MIGRATION: take its value, write it under the
+     owned key, delete the old one.
+
+     Before this, reads probed _v6 → _v5 → _v4 newest-first while writes were
+     pinned to STEP_WRITE_SUFFIX. So a laptop still holding `cp2_v4 = 6` from
+     before the wizard bumped, with no `_v5` yet, reported pos 6 forever: the
+     server's real 3 was refused by applySnapshot as "older", localHasMoreThan
+     then pushed the stale 6 back up, and the buyer's other device jumped four
+     steps it had never seen. Migrating on read collapses the generations to one
+     key, so the value can never be read again from a suffix nothing writes. */
   function readStepKey(id, tail) {
-    for (var i = 0; i < STEP_SUFFIXES.length; i++) {
-      try {
-        var raw = localStorage.getItem(STEP_PREFIX + id + STEP_SUFFIXES[i] + (tail || ''));
-        if (raw !== null) { var n = parseInt(raw, 10); if (!isNaN(n)) return n; }
-      } catch (e) {}
-    }
+    var suffix = tail || '';
+    var owned = STEP_WRITE_SUFFIX[id];
+    try {
+      if (owned) {
+        var mineRaw = localStorage.getItem(STEP_PREFIX + id + owned + suffix);
+        if (mineRaw !== null) { var mineN = parseInt(mineRaw, 10); if (!isNaN(mineN)) return mineN; }
+      }
+      for (var i = 0; i < STEP_SUFFIXES.length; i++) {
+        if (STEP_SUFFIXES[i] === owned) continue;
+        var key = STEP_PREFIX + id + STEP_SUFFIXES[i] + suffix;
+        var raw = localStorage.getItem(key);
+        if (raw === null) continue;
+        var n = parseInt(raw, 10);
+        localStorage.removeItem(key);                       // one-shot: never read twice
+        if (isNaN(n)) continue;
+        if (owned) localStorage.setItem(STEP_PREFIX + id + owned + suffix, String(n));
+        return n;
+      }
+    } catch (e) {}
     return 0;
   }
 
@@ -432,6 +485,12 @@
   var signedIn = false;
   function isSignedIn() { return signedIn; }
 
+  // null = unknown / not signed in. true = this Google address matched a Lemon
+  // Squeezy purchase. false = signed in, but we could not match them, so we know
+  // nothing about what they built and must not imply otherwise.
+  var courseLinked = null;
+  function isLinked() { return courseLinked; }
+
   /* SESSION STATE IS THREE-VALUED, and collapsing it to a boolean was a bug.
      'in'      — the server affirmatively said signed_in
      'out'     — the server affirmatively said NOT signed in
@@ -556,7 +615,13 @@
         if (!payload || !payload.ok) { sessionState = 'unknown'; signedIn = false; return sessionState; }
         signedIn = !!payload.signed_in;
         sessionState = signedIn ? 'in' : 'out';
-        if (!signedIn) return sessionState;
+        if (!signedIn) { courseLinked = null; return sessionState; }
+        // Whether the server could match this Google address to a purchase. It
+        // has always been sent and never read, which is how a buyer signing in
+        // with a personal address instead of their purchase address got an empty
+        // board and a confident "Start here · step 1" — a claim about their
+        // progress made from an account we could not identify.
+        courseLinked = payload.linked === true;
         var changed = applySnapshot(payload.state);
         // The signed-in lane can also carry the VERIFIED ladder, resolved
         // server-side from this account's email to their member record. That
@@ -659,6 +724,7 @@
     if (pushTimer) { clearTimeout(pushTimer); pushTimer = null; }
     clearLocalState();
     signedIn = false;
+    courseLinked = null;
     sessionState = 'out';
     if (typeof fetch !== 'function') { announce(); return Promise.resolve(); }
     return fetch(AUTH_URL, {
@@ -676,7 +742,7 @@
 
   window.AIEB = {
     SPINE: SPINE, CHAIN: CHAIN, BUILD: BUILD, META: META, SURFACES: SURFACES,
-    isSignedIn: isSignedIn, sessionState: getSessionState, account: function () {
+    isSignedIn: isSignedIn, sessionState: getSessionState, linked: isLinked, account: function () {
       try { return localStorage.getItem(ACCOUNT_HINT_KEY) || ''; } catch (e) { return ''; }
     },
     signInWithGoogle: signInWithGoogle, signOut: signOut,
