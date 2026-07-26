@@ -323,6 +323,28 @@
     try { return localStorage.getItem(VIEW_TOKEN_KEY) || ''; } catch (e) { return ''; }
   }
 
+  // Fold a server ladder (what the buyer demonstrably BUILT, reported by Claude)
+  // into local state. Shared by both lanes that can deliver one: the view-token
+  // sync below, and the signed-in session, which resolves the ladder through the
+  // email -> member_ref link. Additive only — a rung the server confirms is
+  // marked done, and nothing is ever un-marked.
+  function foldLadder(ladder) {
+    if (!ladder || !ladder.forEach) return false;
+    var changed = false;
+    ladder.forEach(function (cp) {
+      var id = LADDER_TO_SPINE[cp && cp.id];
+      if (!id || cp.status !== 'completed') return;
+      // mark the mapped checkpoint AND anything it implies (see IMPLIES)
+      var ids = [id].concat(IMPLIES[id] || []);
+      ids.forEach(function (sid) {
+        if (isDone(sid)) return;
+        markDone(sid);
+        changed = true;
+      });
+    });
+    return changed;
+  }
+
   // Fetch the server ladder and fold any completed checkpoints into local state.
   // Resolves to true when something actually changed, so callers can re-render.
   function syncFromServer() {
@@ -339,19 +361,7 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (payload) {
         if (!payload || !payload.ok || !payload.ladder) return false;
-        var changed = false;
-        payload.ladder.forEach(function (cp) {
-          var id = LADDER_TO_SPINE[cp && cp.id];
-          if (!id || cp.status !== 'completed') return;
-          // mark the mapped checkpoint AND anything it implies (see IMPLIES)
-          var ids = [id].concat(IMPLIES[id] || []);
-          ids.forEach(function (sid) {
-            if (isDone(sid)) return;
-            markDone(sid);
-            changed = true;
-          });
-        });
-        return changed;
+        return foldLadder(payload.ladder);
       })
       .catch(function () { return false; });   // silent by design — see rule 3
   }
@@ -392,8 +402,20 @@
      it, offline and signed-out included. The server is the DURABLE copy. Where
      they disagree the merge below is generous, never destructive.
      ──────────────────────────────────────────────────────────────────────── */
-  var AUTH_URL = 'https://api.chiefleverageofficers.com/auth/google';
-  var COURSE_PROGRESS_URL = 'https://api.chiefleverageofficers.com/course-progress';
+  /* SAME-ORIGIN ON PURPOSE. These are proxy rewrites in the course project's
+     vercel.json, forwarded to api.chiefleverageofficers.com server-side.
+
+     Calling api. directly would have worked, but WebKit caps cookies from a
+     CNAME-cloaked subresource to 7 days: api. is a CNAME to cname.vercel-dns
+     .com, a different registrable domain, which is exactly the shape ITP's
+     CNAME Cloaking Defense targets. The cap is invisible for a week and would
+     have quietly reinstated the very bug this feature exists to fix.
+
+     Proxying through the page's own origin means the Set-Cookie arrives from
+     the document host itself rather than a cloaked third party. It also drops
+     CORS and preflights entirely — same-origin needs neither. */
+  var AUTH_URL = '/auth/google';
+  var COURSE_PROGRESS_URL = '/course-progress';
   try {
     var devApi = localStorage.getItem('aieb_api_base_dev');
     if (devApi) { AUTH_URL = devApi + '/auth/google'; COURSE_PROGRESS_URL = devApi + '/course-progress'; }
@@ -522,6 +544,11 @@
         sessionState = signedIn ? 'in' : 'out';
         if (!signedIn) return sessionState;
         var changed = applySnapshot(payload.state);
+        // The signed-in lane can also carry the VERIFIED ladder, resolved
+        // server-side from this account's email to their member record. That
+        // makes the board work on a device that never held a view token —
+        // previously the only way to see what was actually built.
+        if (foldLadder(payload.ladder)) changed = true;
         // Upload whenever this browser holds something the account does not —
         // on a fresh row AND on a second device joining an existing one.
         if (localHasMoreThan(payload.state)) pushCourseProgress();

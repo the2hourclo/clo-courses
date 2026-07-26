@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/auth/google",
+      "destination": "https://api.chiefleverageofficers.com/auth/google"
+    },
+    {
+      "source": "/course-progress",
+      "destination": "https://api.chiefleverageofficers.com/course-progress"
+    }
+  ]
+}
