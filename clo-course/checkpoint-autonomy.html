@@ -52,9 +52,18 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-slot{position:relative;width:100%;padding-top:52%;border-radius:var(--radius);border:1px dashed var(--border-2);margin:4px 0 16px;background:var(--surface-2)}
 .video-slot span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-dim)}
-.cmd{display:flex;align-items:center;gap:10px;background:#070807;border:1px solid var(--border-2);border-radius:var(--radius);padding:12px 14px;margin:6px 0 14px}
-.cmd .txt{flex:1;font-family:var(--font-mono);font-size:14px;color:var(--cp);white-space:pre-wrap;word-break:break-word}
-.copy{flex-shrink:0;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid var(--border-2);background:var(--surface);color:var(--text-muted);cursor:pointer;font-family:var(--font-body);transition:all .15s}
+/* The command still reads as a thing you RUN, so it stays a distinct chip. But on this
+   light page a near-black block carrying thin --cp mono was a dark island, and coloured
+   text on black is the least legible part of the step. Now a tinted LIGHT chip: ink text
+   does the reading, and the checkpoint colour moves to the left rule + border so the chip
+   still belongs to this checkpoint. (Rashid, 2026-07-26.) */
+.cmd-block{margin:2px 0 18px}
+.cmd-intro{font-size:14px;color:var(--text-muted);line-height:1.55;margin-bottom:8px}
+.cmd-intro strong{color:var(--text);font-weight:700}
+.cmd{display:flex;align-items:center;gap:10px;background:color-mix(in srgb,var(--cp) 7%,#fff);border:1px solid color-mix(in srgb,var(--cp) 30%,transparent);border-left:3px solid var(--cp);border-radius:var(--radius);padding:12px 14px;margin:6px 0 14px}
+.cmd-block .cmd{margin:0}
+.cmd .txt{flex:1;font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--text);white-space:pre-wrap;word-break:break-word}
+.copy{flex-shrink:0;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid var(--border-2);background:#fff;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);transition:all .15s}
 .copy:hover{border-color:var(--cp);color:var(--cp)}
 .copy.copied{background:var(--cp);color:#0a0a0a;border-color:var(--cp)}
 .gate{background:var(--surface-2);border:1px solid var(--border-2);border-left:3px solid var(--cp);border-radius:var(--radius);padding:13px 15px;margin-top:6px}
@@ -187,6 +196,18 @@ function copyCmd(btn){
 }
 var TYPE = { video:'📹 Watch', build:'🔨 Build', share:'📤 Share', gate:'🎯 Done-signal' };
 
+/* The command block, with its optional one-line introduction. A step carrying a DECK
+   renders this ABOVE the deck (see cmdTop in render) — under a 5-slide deck plus its
+   narration the command sat far enough down the page to read as a footnote, when it is
+   the thing the step is actually asking you to do. (Rashid, 2026-07-26.) */
+function cmdHTML(s){
+  return '<div class="cmd-block">' +
+    (s.commandIntro ? '<p class="cmd-intro">'+s.commandIntro+'</p>' : '') +
+    '<div class="cmd"><span class="txt">'+s.command+'</span>' +
+    '<button class="copy" onclick="copyCmd(this)">Copy</button></div>' +
+  '</div>';
+}
+
 function render(){
   var steps = activeSteps();
   var n = steps.length;
@@ -222,6 +243,10 @@ function render(){
   eta.textContent = s.type==='gate' ? 'the gate' : (s.optional ? 'optional — skip anytime' : '');
   fill.style.width = Math.round(100*(pos+1)/n)+'%';
 
+  /* A deck pushes anything after it a long way down the page, so when a step has both a
+     deck and a command the command goes first. Deck-less steps keep it after the body. */
+  var cmdTop = !!(s.slides && s.command && window.AIEBSlides);
+
   var h = '<div class="step">';
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
@@ -231,7 +256,7 @@ function render(){
   if (s.demo){ h += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
   if (s.body){ h += '<p>'+s.body+'</p>'; }
-  if (s.command){ h += '<div class="cmd"><span class="txt">'+s.command+'</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'; }
+  if (s.command && !cmdTop){ h += cmdHTML(s); }
   if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
 
   // nav

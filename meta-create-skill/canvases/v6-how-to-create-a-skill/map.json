@@ -1,0 +1,10 @@
+{
+  "_comment": "Storyboard map for meta-create-skill VIDEO 6: How To Create A Skill (CP2's third explainer). 5 diagrams in teaching order, one column each, left to right. The through-line Rashid asked for (2026-07-26): a good skill starts with CLARITY ABOUT HOW YOU ALREADY WORK, not with prompting. Slides 3-5 then name the four inputs (conventions, the ordered steps, a framework you already follow, your gold standard + digital assets) and land each in its locked subfolder, so this deck pays off the four-subfolder legend taught in v1-what-is-a-skill.",
+  "columns": [
+    {"label": "1 - CLARITY FIRST", "slides": ["01-clarity-first"]},
+    {"label": "2 - IT INTERVIEWS YOU", "slides": ["02-it-interviews-you"]},
+    {"label": "3 - THE FOUR THINGS YOU BRING", "slides": ["03-what-you-bring"]},
+    {"label": "4 - THE GOLD STANDARD", "slides": ["04-gold-standard"]},
+    {"label": "5 - WIRED IN", "slides": ["05-wired-in"]}
+  ]
+}

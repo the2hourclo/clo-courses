@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ LANE A — the vague answer ============ -->
+  <rect x="90" y="196" width="470" height="150" rx="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <path d="M 260 346 L 260 374 L 296 346" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="568" y1="271" x2="612" y2="271" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="604,264 612,271 604,278" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="620" y="196" width="460" height="150" rx="10" stroke="var(--dim)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="620" y1="242" x2="1080" y2="242" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <line x1="1088" y1="271" x2="1132" y2="271" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1124,264 1132,271 1124,278" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="1140" y="216" width="370" height="110" rx="14" stroke="var(--red)" stroke-width="4" fill="var(--bg)"/>
+
+  <!-- divider between the two answers -->
+  <line x1="90" y1="430" x2="1510" y2="430" stroke="rgb(223,223,221)" stroke-width="2.5" stroke-dasharray="12 12"/>
+
+  <!-- ============ LANE B — the specific answer ============ -->
+  <rect x="90" y="500" width="470" height="190" rx="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <path d="M 260 690 L 260 718 L 296 690" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="568" y1="595" x2="612" y2="595" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="604,588 612,595 604,602" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="620" y="500" width="460" height="190" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="620" y1="550" x2="1080" y2="550" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <line x1="1088" y1="595" x2="1132" y2="595" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1124,588 1132,595 1124,602" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="1140" y="540" width="370" height="110" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">A Skill Is Only As Clear As You Are About Your Own Work</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">Same tool and same interview. The difference is what you were able to tell it.</text>
+
+<!-- lane A -->
+<text x="90" y="178" font-size="21" font-weight="700" fill="var(--red)">A VAGUE ANSWER</text>
+<text x="325" y="262" font-size="24" text-anchor="middle" fill="var(--ink)">&#8220;Just write it the way</text>
+<text x="325" y="300" font-size="24" text-anchor="middle" fill="var(--ink)">I normally do.&#8221;</text>
+
+<text class="mono" x="642" y="228" font-size="20" fill="var(--dim)">meeting-notes/SKILL.md</text>
+<text class="mono" x="642" y="284" font-size="20" fill="var(--dim)">- Write it well</text>
+<text class="mono" x="642" y="320" font-size="20" fill="var(--dim)">- Make it professional</text>
+
+<text x="1325" y="258" font-size="22" text-anchor="middle" fill="var(--ink)">average at best</text>
+<text x="1325" y="294" font-size="21" text-anchor="middle" fill="var(--dim)">cannot generate revenue</text>
+
+<!-- lane B -->
+<text x="90" y="482" font-size="21" font-weight="700" fill="var(--green)">A SPECIFIC ANSWER</text>
+<text x="325" y="556" font-size="22" text-anchor="middle" fill="var(--ink)">&#8220;Open with last week&#8217;s</text>
+<text x="325" y="592" font-size="22" text-anchor="middle" fill="var(--ink)">number. Three winners only.</text>
+<text x="325" y="628" font-size="22" text-anchor="middle" fill="var(--ink)">No emojis. Match the</text>
+<text x="325" y="664" font-size="22" text-anchor="middle" fill="var(--ink)">Q3 report.&#8221;</text>
+
+<text class="mono" x="642" y="536" font-size="20" fill="var(--dim)">weekly-report/SKILL.md</text>
+<text class="mono" x="642" y="590" font-size="19" fill="var(--ink)">- Open with the headline number</text>
+<text class="mono" x="642" y="626" font-size="19" fill="var(--ink)">- Three winners, no more</text>
+<text class="mono" x="642" y="662" font-size="19" fill="var(--ink)">- No emojis. Match assets/q3-report.md</text>
+
+<text x="1325" y="582" font-size="22" text-anchor="middle" fill="var(--ink)">~80% to your standard</text>
+<text x="1325" y="618" font-size="21" text-anchor="middle" fill="var(--dim)">ready to generate revenue</text>
+
+<!-- the point, under the fork -->
+<text x="800" y="790" font-size="23" text-anchor="middle" fill="var(--dim)">The AI is the same in both rows. Only the answer it was given changed.</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">The AI can write the file for you.</text>
+<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">It cannot invent how you like the work done.</text>
+</svg></body></html>

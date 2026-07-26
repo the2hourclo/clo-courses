@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219); --orange:#c2410c;
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <!-- REQUIRED by the canonical robot block -->
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============================================================ -->
+  <!-- id="canonical-robot" — copied VERBATIM from
+       .claude/skills/excali-graphic/assets/exemplars/canonical-robot-blackmarker.html
+       Repositioned per its own rule: translate(cx-1400*s, feetY-943*s) scale(s)
+       with s=0.9, cx=170, feetY=700. -->
+  <g id="canonical-robot" transform="translate(-1090.0,-148.70) scale(0.9)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+  </g>
+  <!-- ============================================================ -->
+
+  <line x1="245" y1="460" x2="294" y2="460" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="286,453 294,460 286,467" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- ============ the five questions it asks ============ -->
+  <rect x="300" y="180" width="600" height="92" rx="14" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="300" y="300" width="600" height="92" rx="14" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="300" y="420" width="600" height="92" rx="14" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="300" y="540" width="600" height="92" rx="14" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="300" y="660" width="600" height="92" rx="14" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
+
+  <!-- each answer lands in a section of the file -->
+  <line x1="906" y1="226" x2="954" y2="226" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="946,219 954,226 946,233" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="906" y1="346" x2="954" y2="346" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="946,339 954,346 946,353" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="906" y1="466" x2="954" y2="466" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="946,459 954,466 946,473" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="906" y1="586" x2="954" y2="586" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="946,579 954,586 946,593" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="906" y1="706" x2="954" y2="706" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="946,699 954,706 946,713" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- ============ the file it writes from your answers ============ -->
+  <rect x="960" y="180" width="550" height="600" rx="10" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">You Do Not Write The Skill. It Interviews You.</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">It asks about your own process, and writes the file out of your answers</text>
+
+<!-- the AI -->
+<text x="170" y="742" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="170" y="770" font-size="19" text-anchor="middle" fill="var(--dim)">asks, you answer</text>
+
+<!-- the questions -->
+<text x="600" y="150" font-size="21" font-weight="700" text-anchor="middle" fill="var(--blue)">WHAT IT ASKS YOU</text>
+<text x="330" y="234" font-size="22" fill="var(--ink)">&#8220;How do you start this job?&#8221;</text>
+<text x="330" y="354" font-size="22" fill="var(--ink)">&#8220;What do you always check before it goes out?&#8221;</text>
+<text x="330" y="474" font-size="22" fill="var(--ink)">&#8220;Do you follow a framework or a checklist?&#8221;</text>
+<text x="330" y="594" font-size="22" fill="var(--ink)">&#8220;What does a good one actually look like?&#8221;</text>
+<text x="330" y="714" font-size="22" fill="var(--ink)">&#8220;When would you NOT do it this way?&#8221;</text>
+
+<!-- the file -->
+<text class="mono" x="960" y="160" font-size="20" fill="var(--dim)">weekly-report/SKILL.md</text>
+<text x="982" y="232" font-size="21" font-weight="700" fill="var(--ink)">## How it starts</text>
+<text class="mono" x="1002" y="266" font-size="18" fill="var(--dim)">- pull last week from the dashboard</text>
+<text x="982" y="352" font-size="21" font-weight="700" fill="var(--ink)">## Always check</text>
+<text class="mono" x="1002" y="386" font-size="18" fill="var(--dim)">- the number is in the first line</text>
+<text x="982" y="472" font-size="21" font-weight="700" fill="var(--ink)">## The framework I follow</text>
+<text class="mono" x="1002" y="506" font-size="18" fill="var(--dim)">- see references/our-method.md</text>
+<text x="982" y="592" font-size="21" font-weight="700" fill="var(--ink)">## What good looks like</text>
+<text class="mono" x="1002" y="626" font-size="18" fill="var(--dim)">- match assets/q3-report.md</text>
+<text x="982" y="712" font-size="21" font-weight="700" fill="var(--ink)">## Except when</text>
+<text class="mono" x="1002" y="746" font-size="18" fill="var(--dim)">- a launch week gets its own format</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">You are not writing a prompt.</text>
+<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">You are answering questions about your own work.</text>
+</svg></body></html>

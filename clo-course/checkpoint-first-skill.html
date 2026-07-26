@@ -55,9 +55,18 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-slot{position:relative;width:100%;padding-top:52%;border-radius:var(--radius);border:1px dashed var(--border-2);margin:4px 0 16px;background:var(--surface-2)}
 .video-slot span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-dim)}
-.cmd{display:flex;align-items:center;gap:10px;background:#070807;border:1px solid var(--border-2);border-radius:var(--radius);padding:12px 14px;margin:6px 0 14px}
-.cmd .txt{flex:1;font-family:var(--font-mono);font-size:14px;color:var(--cp);white-space:pre-wrap;word-break:break-word}
-.copy{flex-shrink:0;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid var(--border-2);background:var(--surface);color:var(--text-muted);cursor:pointer;font-family:var(--font-body);transition:all .15s}
+/* The command still reads as a thing you RUN, so it stays a distinct chip. But on this
+   light page a near-black block carrying thin --cp mono was a dark island, and coloured
+   text on black is the least legible part of the step. Now a tinted LIGHT chip: ink text
+   does the reading, and the checkpoint colour moves to the left rule + border so the chip
+   still belongs to this checkpoint. (Rashid, 2026-07-26.) */
+.cmd-block{margin:2px 0 18px}
+.cmd-intro{font-size:14px;color:var(--text-muted);line-height:1.55;margin-bottom:8px}
+.cmd-intro strong{color:var(--text);font-weight:700}
+.cmd{display:flex;align-items:center;gap:10px;background:color-mix(in srgb,var(--cp) 7%,#fff);border:1px solid color-mix(in srgb,var(--cp) 30%,transparent);border-left:3px solid var(--cp);border-radius:var(--radius);padding:12px 14px;margin:6px 0 14px}
+.cmd-block .cmd{margin:0}
+.cmd .txt{flex:1;font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--text);white-space:pre-wrap;word-break:break-word}
+.copy{flex-shrink:0;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;border:1px solid var(--border-2);background:#fff;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);transition:all .15s}
 .copy:hover{border-color:var(--cp);color:var(--cp)}
 .copy.copied{background:var(--cp);color:#0a0a0a;border-color:var(--cp)}
 .gate{background:var(--surface-2);border:1px solid var(--border-2);border-left:3px solid var(--cp);border-radius:var(--radius);padding:13px 15px;margin-top:6px}
@@ -173,7 +182,19 @@ var CONFIG = {
 
     { type:'video', title:'How to create a skill',
       video:'', slotLabel:'📹 Explainer — coming soon',
-      body:'Creating a skill works like the X-Ray in reverse. The <strong>meta-create-skill</strong> skill <strong>interviews you</strong> about how you do the task, writes the playbook, and wires in your own examples so the output sounds like you.' },
+      /* The deck's spine is CLARITY FIRST — a good skill starts with how you already work,
+         not with prompting — then names the four inputs and lands each in its locked
+         subfolder, paying off the legend taught in the "What is a skill" deck.
+         (Rashid, 2026-07-26.) */
+      slides: canvas('v6-how-to-create-a-skill', ['01-clarity-first','02-it-interviews-you','03-what-you-bring','04-gold-standard','05-wired-in']),
+      slideNotes:[
+        'Both rows are the same AI and the same interview. The only thing that changed is what you were able to tell it. Answer <strong>&ldquo;just write it the way I normally do&rdquo;</strong> and it writes a file that says nothing, so it goes on guessing. Answer with the actual rules you work by and the file has something to hold you to.',
+        'You never sit down to write a skill. <strong>It interviews you</strong>, and you answer five plain questions about your own job. Follow the arrows across, because each answer becomes a section of the file. The last question matters more than it looks, since the exceptions are where most skills quietly go wrong.',
+        'Four things, and you already have every one of them. <strong>How you want it done</strong>, <strong>the steps in the order you do them</strong>, <strong>a framework you already follow</strong>, and <strong>your gold standard plus the real files</strong>. Each has a home, so the AI knows where to look when it needs one and can leave the rest closed.',
+        'This is the one that does the most work. On the left you describe the output, and every one of those words means something different to you than to the AI, so it guesses again on every run. On the right you hand over <strong>a real thing you already made</strong>. It stops guessing, because it has something to match.',
+        'Here is the finished folder. Read the notes down the right side, because <strong>almost none of it came from the AI</strong>. Your rules, your steps, your framework, your gold standard, your files. The skill is just the place where how you already work finally got written down.'
+      ],
+      body:'Creating a skill works like the X-Ray in reverse. The <strong>meta-create-skill</strong> skill <strong>interviews you</strong> about how you do the task, writes the playbook, and wires in your own examples so the output sounds like you. Your job is not to prompt it well. Your job is to be clear about how you already work.' },
 
     { type:'build', title:'Turn 1 real process into a skill',
       video:'', demoSlot:true, demoLabel:'🎬 Demo · watch me create one — coming soon',
@@ -195,7 +216,8 @@ var CONFIG = {
         'Each step up is one correction you made once and never had to make again. Four of them, and the same skill is now doing work you would put your name on. <strong>You are not repeating yourself every week. You are training it.</strong>'
       ],
       command:'/ai-employee-builder:retrospective',
-      body:'Your skill will get something wrong on some run, and that is the point. When it does, <strong>say what was wrong in plain words</strong>, the way you would to a new hire. The AI writes that correction into the skill itself, so the next run already has it. You can also call it deliberately with the command below, any time you want it to look back over a run or a whole session.' },
+      commandIntro:'You can also call it on purpose. <strong>Run this whenever a run comes back off</strong>, or at the end of a working session, and it looks back over what happened, drafts the fix, and shows it to you before anything gets written.',
+      body:'Your skill will get something wrong on some run, and that is the point. When it does, <strong>say what was wrong in plain words</strong>, the way you would to a new hire. The AI writes that correction into the skill itself, so the next run already has it.' },
 
     { type:'gate', title:'Skill ran once on real data',
       body:'Run your new skill once on a <strong>real</strong> piece of work, and check the result is something you would actually use.',
@@ -239,6 +261,18 @@ function copyCmd(btn){
 }
 var TYPE = { video:'📹 Watch', build:'🔨 Build', share:'📤 Share', gate:'🎯 Done-signal' };
 
+/* The command block, with its optional one-line introduction. A step carrying a DECK
+   renders this ABOVE the deck (see cmdTop in render) — under a 5-slide deck plus its
+   narration the command sat far enough down the page to read as a footnote, when it is
+   the thing the step is actually asking you to do. (Rashid, 2026-07-26.) */
+function cmdHTML(s){
+  return '<div class="cmd-block">' +
+    (s.commandIntro ? '<p class="cmd-intro">'+s.commandIntro+'</p>' : '') +
+    '<div class="cmd"><span class="txt">'+s.command+'</span>' +
+    '<button class="copy" onclick="copyCmd(this)">Copy</button></div>' +
+  '</div>';
+}
+
 function render(){
   var steps = activeSteps();
   var n = steps.length;
@@ -279,17 +313,22 @@ function render(){
      opening line. Un-narrated steps keep the body below the visual, exactly as before. */
   var narrated = !!(s.slides && s.slideNotes && window.AIEBSlides);
 
+  /* A deck pushes anything after it a long way down the page, so when a step has both a
+     deck and a command the command goes first. Deck-less steps keep it after the body. */
+  var cmdTop = !!(s.slides && s.command && window.AIEBSlides);
+
   var h = '<div class="step">';
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
   if (narrated && s.body){ h += '<p class="lead">'+s.body+'</p>'; }
+  if (cmdTop){ h += cmdHTML(s); }
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.slides && window.AIEBSlides){ h += '<div id="svMount"></div>'; }
   else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
   if (s.demo){ h += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
   if (s.body && !narrated){ h += '<p>'+s.body+'</p>'; }
-  if (s.command){ h += '<div class="cmd"><span class="txt">'+s.command+'</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'; }
+  if (s.command && !cmdTop){ h += cmdHTML(s); }
   if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
 
   // nav

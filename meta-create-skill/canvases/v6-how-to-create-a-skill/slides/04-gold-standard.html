@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ LEFT — describing it ============ -->
+  <rect x="90" y="200" width="630" height="230" rx="14" stroke="var(--red)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="405" y1="448" x2="405" y2="486" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="398,478 405,486 412,478" stroke="var(--dim)" stroke-width="3"/>
+  <!-- the output it guessed at — a generic doc -->
+  <rect x="170" y="500" width="470" height="170" rx="12" stroke="var(--red)" stroke-width="4" fill="var(--bg)"/>
+  <path d="M 210 546 q 40 -12 80 0 t 80 0 t 80 0 t 80 0" stroke="var(--dim)" stroke-width="3"/>
+  <path d="M 210 590 q 40 -12 80 0 t 80 0 t 80 0 t 80 0" stroke="var(--dim)" stroke-width="3"/>
+  <path d="M 210 634 q 40 -12 80 0 t 80 0" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- middle divider -->
+  <line x1="800" y1="170" x2="800" y2="740" stroke="rgb(223,223,221)" stroke-width="2.5" stroke-dasharray="12 12"/>
+
+  <!-- ============ RIGHT — showing it ============ -->
+  <rect x="880" y="200" width="630" height="230" rx="14" stroke="var(--green)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="880" y1="254" x2="1510" y2="254" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <line x1="1195" y1="448" x2="1195" y2="486" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1188,478 1195,486 1202,478" stroke="var(--dim)" stroke-width="3"/>
+  <!-- the output that matches -->
+  <rect x="960" y="500" width="470" height="170" rx="12" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <polyline points="1000,566 1020,588 1060,540" stroke="var(--green)" stroke-width="5"/>
+  <line x1="1090" y1="546" x2="1390" y2="546" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1090" y1="590" x2="1390" y2="590" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1090" y1="634" x2="1290" y2="634" stroke="var(--dim)" stroke-width="3"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">One Real Example Beats A Paragraph Of Adjectives</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">Describing the output is still guessing. Handing over the real thing is not.</text>
+
+<!-- LEFT -->
+<text x="405" y="180" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">DESCRIBING WHAT GOOD LOOKS LIKE</text>
+<text class="mono" x="120" y="252" font-size="20" fill="var(--dim)">- make it professional</text>
+<text class="mono" x="120" y="290" font-size="20" fill="var(--dim)">- keep it punchy</text>
+<text class="mono" x="120" y="328" font-size="20" fill="var(--dim)">- on brand</text>
+<text class="mono" x="120" y="366" font-size="20" fill="var(--dim)">- clean and modern</text>
+<text class="mono" x="120" y="404" font-size="20" fill="var(--dim)">- high quality</text>
+<text x="405" y="712" font-size="23" font-weight="700" text-anchor="middle" fill="var(--red)">every run guesses again</text>
+<text x="405" y="746" font-size="20" text-anchor="middle" fill="var(--dim)">and guesses differently</text>
+
+<!-- RIGHT -->
+<text x="1195" y="180" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">HANDING OVER YOUR GOLD STANDARD</text>
+<text class="mono" x="910" y="240" font-size="20" fill="var(--dim)">assets/q3-report.md</text>
+<text x="910" y="296" font-size="20" font-weight="700" fill="var(--ink)">Revenue up 24% on last quarter</text>
+<text x="910" y="332" font-size="19" fill="var(--dim)">Three wins drove it.</text>
+<text x="910" y="368" font-size="19" fill="var(--dim)">1. Renewals held at 91%</text>
+<text x="910" y="404" font-size="19" fill="var(--dim)">2. The launch email doubled clicks</text>
+<text x="1195" y="712" font-size="23" font-weight="700" text-anchor="middle" fill="var(--green)">every run matches it</text>
+<text x="1195" y="746" font-size="20" text-anchor="middle" fill="var(--dim)">because it has the real thing to copy</text>
+
+<!-- the point -->
+<text x="800" y="826" font-size="23" text-anchor="middle" fill="var(--dim)">You already own your gold standard. It is the last one you were happy to send.</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">Do not try to describe your standard.</text>
+<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Hand it the best one you have already made.</text>
+</svg></body></html>

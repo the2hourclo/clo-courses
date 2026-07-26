@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text =====================
+     Four cards on the LOCKED subfolder legend (design-system §3): the required file is
+     ink+weight, workflows green, references blue, assets purple. Four accents here is the
+     acknowledged legend carve-out, not decoration. -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- 1 — conventions -> SKILL.md -->
+  <rect x="90" y="180" width="690" height="320" rx="16" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="120" y1="296" x2="750" y2="296" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+
+  <!-- 2 — the steps -> workflows/ -->
+  <rect x="820" y="180" width="690" height="320" rx="16" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="850" y1="296" x2="1480" y2="296" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+
+  <!-- 3 — your framework -> references/ -->
+  <rect x="90" y="540" width="690" height="320" rx="16" stroke="var(--blue)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="120" y1="656" x2="750" y2="656" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+
+  <!-- 4 — gold standard + digital assets -> assets/ -->
+  <rect x="820" y="540" width="690" height="320" rx="16" stroke="var(--purple)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="850" y1="656" x2="1480" y2="656" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Four Things You Bring, And Where Each One Lands</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">The interview is really collecting these four, then filing each in the right place</text>
+
+<!-- 1 — conventions -->
+<text x="120" y="232" font-size="28" font-weight="700" fill="var(--ink)">HOW YOU WANT IT DONE</text>
+<text x="120" y="272" font-size="21" fill="var(--dim)">the rules you would tell a new hire on day one</text>
+<text class="mono" x="120" y="336" font-size="19" fill="var(--dim)">no emojis</text>
+<text class="mono" x="120" y="370" font-size="19" fill="var(--dim)">lead with the number</text>
+<text class="mono" x="120" y="404" font-size="19" fill="var(--dim)">never longer than one page</text>
+<text x="120" y="464" font-size="20" font-weight="700" fill="var(--ink)">&#8594; lands in SKILL.md</text>
+
+<!-- 2 — the steps -->
+<text x="850" y="232" font-size="28" font-weight="700" fill="var(--green)">THE STEPS, IN ORDER</text>
+<text x="850" y="272" font-size="21" fill="var(--dim)">what you do first, second, third, and the exceptions</text>
+<text class="mono" x="850" y="336" font-size="19" fill="var(--dim)">1. pull last week&#8217;s numbers</text>
+<text class="mono" x="850" y="370" font-size="19" fill="var(--dim)">2. find the three winners</text>
+<text class="mono" x="850" y="404" font-size="19" fill="var(--dim)">3. draft it, then check it</text>
+<text x="850" y="464" font-size="20" font-weight="700" fill="var(--green)">&#8594; lands in workflows/</text>
+
+<!-- 3 — your framework -->
+<text x="120" y="592" font-size="28" font-weight="700" fill="var(--blue)">A FRAMEWORK YOU ALREADY USE</text>
+<text x="120" y="632" font-size="21" fill="var(--dim)">the method you follow without thinking about it</text>
+<text class="mono" x="120" y="696" font-size="19" fill="var(--dim)">the 5 checks you run on every draft</text>
+<text class="mono" x="120" y="730" font-size="19" fill="var(--dim)">how you decide a week was a win</text>
+<text class="mono" x="120" y="764" font-size="19" fill="var(--dim)">the rules you will not break</text>
+<text x="120" y="824" font-size="20" font-weight="700" fill="var(--blue)">&#8594; lands in references/</text>
+
+<!-- 4 — gold standard + digital assets -->
+<text x="850" y="592" font-size="28" font-weight="700" fill="var(--purple)">YOUR GOLD STANDARD + ASSETS</text>
+<text x="850" y="632" font-size="21" fill="var(--dim)">the real example to match, and the real files to use</text>
+<text class="mono" x="850" y="696" font-size="19" fill="var(--dim)">last quarter&#8217;s report, the one you liked</text>
+<text class="mono" x="850" y="730" font-size="19" fill="var(--dim)">your brand and tone doc</text>
+<text class="mono" x="850" y="764" font-size="19" fill="var(--dim)">the template you always start from</text>
+<text x="850" y="824" font-size="20" font-weight="700" fill="var(--purple)">&#8594; lands in assets/</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">None of these four are things you have to invent.</text>
+<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">You already have all of them. They are just in your head.</text>
+</svg></body></html>
