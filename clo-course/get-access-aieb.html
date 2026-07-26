@@ -616,7 +616,7 @@ Your standing rule: use the simplest path. Try terminal commands when they are a
 
 6. CONFIRM - Confirm the local plugin holds only thin stubs (no paid skill bodies) and that the real instructions are fetched from the MCP server at runtime. If the license is invalid, expired, cancelled, or for the wrong product, tell me plainly and show the renewal/help response instead of trying to bypass it.
 
-7. ONBOARD - once connected and verified, run /setup-aieb (or, in the extension, tell me the exact command to type) to set up my workspace and install my starting skills. Then tell me plainly that setup is done and that the Business X-Ray is the next step, run in a NEW window - do not start the X-Ray in this session.
+7. ONBOARD - once connected and verified, run /setup-aieb (or, in the extension, tell me the exact command to type) to set up my workspace and install my starting skills. Part of that asks me what systems my business runs on - Notion, Google Drive, my email, a CRM - and wires them into my map so you can actually read my live data later; run that, don't skip it, and if I say I have nothing to connect that is a complete answer. Then tell me plainly that setup is done and that the Business X-Ray is the next step, run in a NEW window - do not start the X-Ray in this session.
 
 Important: Do not use SkillStack for this AIEB install. SkillStack was the old delivery path. The current path is thin plugin shell + hosted LemonSqueezy-gated MCP.
 
@@ -701,7 +701,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
             <li>Installs your starting skills so the AI knows how you work</li>
             <li>Checks the connection end to end, so you know it's live</li>
           </ul></div></div>
-        <div class="callout callout-tip"><strong>Success looks like:</strong> the setup finishes and tells you your workspace is ready. That's this step done. <strong>Next up is the Business X-Ray</strong> &mdash; a separate session in a fresh window, and the next checkpoint on your board.</div>
+        <div class="callout callout-tip"><strong>Success looks like:</strong> the setup finishes and tells you your workspace is ready. Along the way it asks what systems your business runs on &mdash; Notion, Drive, your email &mdash; and wires them in, so answer that when it comes. That's this step done. <strong>Next you'll confirm your tools are connected</strong>, then start the Business X-Ray in a fresh window.</div>
         <div class="callout callout-info"><strong>Don't see the command?</strong> Saying <code>set up my AI Employee Builder</code> in the chat does exactly the same thing.</div>
         <p>The secure page validates your subscription and hands the plugin an opaque device token &mdash; the plugin never sees or stores a license key, and it works immediately with no restart. If the page ever does ask for your key, enter it there only &mdash; <strong>never paste a license key into a Claude chat.</strong></p>
         <div class="callout callout-warning"><strong>Connector didn't light up?</strong> Type <code>/check-setup</code> in any chat &mdash; Claude diagnoses the connection with you and offers the fix. Still stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a> &mdash; the builders (and Rashid) will sort it with you.</div>
@@ -752,6 +752,55 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   </div>
 
   <!-- Claude Code manual steps removed 2026-07-25 (old #step2 install / #step3 connect / #step4 check-setup / #step5 Draw.io). All four were unreachable (not in wizSteps()) and fully duplicated: the "shortcut" paste-one-prompt card does Node+install+connect+/check-setup+onboard, and Draw.io setup lives at CP1 (checkpoint-map.html). -->
+
+  <!-- ═══════════════ CONNECT YOUR TOOLS (shared by both tracks) ═══════════════
+       Placed IMMEDIATELY BEFORE #overview, and that is load-bearing rather than
+       tidy: #overview has no `mark` function, so wizMarkSoftDone can never mark
+       it. Append a step AFTER it and firstIncomplete sticks at that index for
+       good — the finish branch never renders, "All set 🎉" never appears, and
+       AIEB.markDone('setup') never fires. That exact bug has stranded buyers on
+       a greyed-out Next twice already (see the comments at wizMarkSoftDone and
+       in wizNext). New steps go BEFORE the overview, always.
+
+       Deliberately NOT `connect:true`. That flag is reserved for device
+       activation, which has a real local signal (aieb_device_connected_v1,
+       absorbed by wizAbsorbConnect). A gate with no machine signal behind it
+       disables Next with no reachable exit. Both buttons here set the same
+       flag because both are genuine completions: "everything's in files" is a
+       first-class answer, not a skip. -->
+  <div class="step" id="connectstep">
+    <div class="step-sum">
+      <span class="step-check"><span class="num">&#128268;</span><span class="tick">&#10003;</span></span>
+      <span class="step-titles"><span class="step-t">Connect your tools</span><span class="step-sub">So your AI can actually read your emails, tasks and clients &mdash; not just your files</span></span>
+      <span class="step-meta"><span class="time">~5 min</span></span>
+    </div>
+    <div class="step-content">
+      <p>Your workspace now knows where your <strong>files</strong> live. It also needs to know where your <strong>live business data</strong> lives &mdash; the emails you've sent, your tasks, your client records, this month's numbers. For most businesses that's in Notion, Google Drive, or an inbox, not in the workspace at all.</p>
+
+      <div class="callout callout-tip"><strong>Setup usually does this for you.</strong> Near the end, Claude asks what systems your business runs on and wires them in. If it did, you'll have been asked something like <em>&ldquo;where does your live data live?&rdquo;</em> &mdash; and you can tick this step and carry on.</div>
+
+      <p><strong>Don't remember being asked?</strong> Paste this into your chat and Claude picks it up &mdash; it asks what your business runs on, goes and <em>finds</em> the real databases and folders, and confirms each one with you before writing anything down. It won't re-ask anything you've already answered:</p>
+
+      <!-- .copy-prompt is absolutely positioned top-right over the <pre> (shared
+           style, line ~133). Every other prompt on this page opens with a short
+           line so the button clears it; this one is a single wrapped paragraph
+           and ran straight underneath. Scoped padding rather than touching the
+           shared rule, which would shift every card on the page. -->
+      <div class="ai-prompt">
+        <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
+        <pre style="padding-top:46px">Connect my business tools. Ask me what systems my business actually runs on, then find the real databases and folders in each one and confirm them with me before writing anything down. For anything not connected yet, walk me through connecting it on my setup. Then prove each one works with a real query.</pre>
+      </div>
+
+      <div class="callout callout-info"><strong>Nothing to connect?</strong> That's a real answer, not a failure. Plenty of businesses run on files and a spreadsheet. Tell Claude &ldquo;everything's in files&rdquo; and it'll note that and move on &mdash; you can always wire something in later by saying <code>connect my tools</code>.</div>
+
+      <div class="callout callout-warning"><strong>Connected it but Claude still can't see anything?</strong> That's almost always the second step, not the first. Notion in particular asks you to <em>tick which pages and databases</em> the connection may read, and it's easy to click past &mdash; so the connection works perfectly and returns nothing. Tell Claude what you're seeing and it'll walk you back through it.</div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+        <button class="done-btn" type="button" onclick="wizConnectDone()"><span class="dlabel">I've connected them</span></button>
+        <button class="done-btn" type="button" onclick="wizConnectDone()" style="background:var(--surface-2);color:var(--text)"><span class="dlabel">Nothing to connect &mdash; everything's in files</span></button>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══════════════ FINAL STEP: WATCH + QUICK QUIZ (before the Business X-Ray) ═══════════════ -->
   <style>
@@ -1229,6 +1278,11 @@ function wizSteps(){
      joining and saying hi are one action at the top of the flow now. */
   // FINAL step for BOTH tracks: the overview video + a 2-question quiz that unlocks the
   // Business X-Ray. Watch-before-you-proceed, shared element, its own done-flag. (2026-07-25)
+  // Connect the tools BEFORE the overview quiz. Must stay above the overview
+  // push — see the comment on #connectstep for why appending after it strands
+  // the buyer on a greyed-out Next.
+  s.push({el:'connectstep', min:5, isDone:function(){ return wizExtra.has('connect'); },
+    mark:function(){ wizExtra.add('connect'); wizExtraSave(wizExtra); }});
   s.push({el:'overview', min:3, isDone:function(){ return wizExtra.has('overview'); }});
   return s;
 }
@@ -1277,7 +1331,7 @@ function wizRender(){
     document.getElementById('wiz-hero').classList.add('wiz-visible');
     document.getElementById('app-chooser').classList.add('wiz-visible');
     count.textContent='Pick your app';
-    eta.textContent='~15 min total';
+    eta.textContent='~20 min total';
     fill.style.width = window.__aiebClaim ? '12%' : '4%';
     if (app) app.hidden = true;
     var navChoose=document.getElementById('wizNav'); if (navChoose) navChoose.hidden = true;
@@ -1417,6 +1471,16 @@ function wizOverviewGo(){
   wizExtra.add('overview'); wizExtraSave(wizExtra);
   if(window.AIEB) AIEB.markDone('setup');   // completing the final step advances the board: Set up → Map the business
   window.location.href='checkpoint-map.html';
+}
+// Both buttons on #connectstep call this — "I've connected them" and "nothing to
+// connect". Same flag on purpose: a files-only business has finished this step,
+// not skipped it, and recording it as a skip would leave the wizard nagging
+// someone who already gave a complete answer.
+function wizConnectDone(){
+  wizExtra.add('connect'); wizExtraSave(wizExtra);
+  var st=document.getElementById('connectstep');
+  if (st) st.classList.add('done');
+  if (wizOn) wizStepForward();
 }
 function wizToggleHelp(){ var h=document.getElementById('wizHelp'); if (h) h.hidden = !h.hidden; }
 function markDoneJoin(){
