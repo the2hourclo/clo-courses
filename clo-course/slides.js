@@ -2,8 +2,16 @@
    Drops a slide deck into a wizard step until its video is recorded:
    swipe / arrow keys / edge buttons to navigate, tap the slide to enlarge.
    Usage: give a step  slides:[ 'url1.png', ... ]  and the wizard's render()
-   calls  AIEBSlides.mount(el, { slides, title })  after painting the stage.
-   Styling follows journey.css (white-excali) and inherits --cp per checkpoint. */
+   calls  AIEBSlides.mount(el, { slides, title, notes })  after painting the stage.
+   Styling follows journey.css (white-excali) and inherits --cp per checkpoint.
+
+   NARRATION (notes) — a step may also carry  slideNotes:[ 'html', ... ]  parallel
+   to its slides. The viewer then prints a caption UNDER the deck that changes as
+   the reader navigates, so the prose walks them through the slide they're looking
+   at instead of one static paragraph covering the whole deck. A deck with no notes
+   behaves exactly as before. (Rashid, 2026-07-26: "if people navigate the slides
+   the text below updates to explain what's going on in the slides itself, as if I
+   was explaining it myself.") */
 (function(){
 'use strict';
 
@@ -37,6 +45,15 @@ var CSS =
 '.sv-dot{width:7px;height:7px;border-radius:50%;background:var(--border-2,#E2E2DC);border:0;padding:0;cursor:pointer;transition:all .18s}' +
 '.sv-dot.on{background:var(--cp,#2D8C3C);transform:scale(1.25)}' +
 '.sv-hint{font-size:12px;color:var(--text-dim,#9A9A90)}' +
+/* the narration under the deck — same measure as the step's prose so the column
+   doesn't jump between a slide step and a plain one. Re-animates on every change
+   so the reader notices the text moved with them. */
+'.sv-note{max-width:680px;margin:-4px 0 6px;padding:2px 0 2px 16px;' +
+'border-left:3px solid color-mix(in srgb,var(--cp,#2D8C3C) 45%,transparent);' +
+'color:var(--text-muted,#6B6B63);font-size:15.5px;line-height:1.62}' +
+'.sv-note strong{color:var(--text,#21211E);font-weight:700}' +
+'.sv-note-in{animation:svNote .26s cubic-bezier(.2,.7,.2,1) both}' +
+'@keyframes svNote{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}' +
 /* The Enlarge chip is ALWAYS visible. It used to be a text hint that was
    display:none under 520px — hiding the affordance on phones, the one place
    width can't rescue legibility and enlarging is the only way to read a slide. */
@@ -82,6 +99,8 @@ function mount(el, opts){
   var slides = (opts && opts.slides) || [];
   if (!el || !slides.length) return null;
   var title = (opts && opts.title) || 'Explainer';
+  var notes = (opts && opts.notes) || null;
+  if (notes && !notes.length) notes = null;
   var i = 0, lb = null;
 
   el.innerHTML =
@@ -95,7 +114,8 @@ function mount(el, opts){
       '<span class="sv-count" aria-live="polite"></span>' +
       '<div class="sv-dots"></div>' +
       '<span class="sv-hint">swipe, or &#8592; &#8594;</span>' +
-    '</div>';
+    '</div>' +
+    (notes ? '<p class="sv-note" aria-live="polite"></p>' : '');
 
   var box   = el.querySelector('.sv');
   var img   = el.querySelector('.sv-img');
@@ -103,6 +123,7 @@ function mount(el, opts){
   var next  = el.querySelector('.sv-next');
   var count = el.querySelector('.sv-count');
   var dots  = el.querySelector('.sv-dots');
+  var note  = el.querySelector('.sv-note');
 
   slides.forEach(function(_, d){
     var b = document.createElement('button');
@@ -112,8 +133,16 @@ function mount(el, opts){
     dots.appendChild(b);
   });
 
+  /* Hold each preloaded Image in `warmed` — a bare `new Image()` inside the function
+     goes out of scope immediately and Chrome can collect it mid-fetch, so the neighbour
+     wasn't reliably warm and the picture lagged a beat behind the caption/counter. */
+  var warmed = [];
   function preload(n){
-    if (n >= 0 && n < slides.length){ var p = new Image(); p.src = slides[n]; }
+    if (n >= 0 && n < slides.length && !warmed[n]){
+      var p = new Image();
+      p.src = slides[n];
+      warmed[n] = p;
+    }
   }
 
   function show(n, dir){
@@ -127,6 +156,12 @@ function mount(el, opts){
     prev.disabled = i === 0;
     next.disabled = i === slides.length - 1;
     [].forEach.call(dots.children, function(d, k){ d.classList.toggle('on', k === i); });
+    if (note){
+      note.innerHTML = notes[i] || '';
+      note.classList.remove('sv-note-in');
+      void note.offsetWidth; /* restart the css animation */
+      note.classList.add('sv-note-in');
+    }
     if (lb){
       lb.img.src = slides[i];
       lb.img.alt = img.alt;

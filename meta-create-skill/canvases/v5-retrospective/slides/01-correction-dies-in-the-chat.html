@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ LANE 1 — THE CHAT ============ -->
+  <rect x="90" y="172" width="1420" height="262" rx="20" stroke="rgb(225,225,223)" stroke-width="3" fill="var(--bg)"/>
+
+  <!-- run 1 — the draft that came back wrong -->
+  <rect x="140" y="240" width="420" height="150" rx="14" stroke="var(--red)" stroke-width="4" fill="var(--bg)"/>
+
+  <!-- your correction — a speech bubble with a tail -->
+  <rect x="610" y="240" width="430" height="150" rx="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <path d="M 800 390 L 800 418 L 836 390" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+
+  <!-- run 2 — the same draft, the same mistake -->
+  <rect x="1090" y="240" width="420" height="150" rx="14" stroke="var(--red)" stroke-width="4" fill="var(--bg)"/>
+
+  <!-- chat flow arrows -->
+  <line x1="566" y1="315" x2="604" y2="315" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="596,308 604,315 596,322" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1046" y1="315" x2="1084" y2="315" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1038,308 1046,315 1038,322" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- ============ THE CORRECTION TRIES TO REACH THE FILE — AND DOES NOT ============ -->
+  <line x1="825" y1="440" x2="825" y2="536" stroke="var(--red)" stroke-width="5" stroke-dasharray="14 12"/>
+  <circle cx="825" cy="570" r="28" stroke="var(--red)" stroke-width="5" fill="var(--bg)"/>
+  <line x1="806" y1="551" x2="844" y2="589" stroke="var(--red)" stroke-width="5"/>
+
+  <!-- ============ LANE 2 — THE SKILL ON DISK ============ -->
+  <rect x="90" y="660" width="1420" height="250" rx="20" stroke="rgb(225,225,223)" stroke-width="3" fill="var(--bg)"/>
+
+  <!-- the real file, open -->
+  <rect x="150" y="692" width="560" height="175" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="150" y1="744" x2="710" y2="744" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+
+  <!-- the stamp -->
+  <rect x="900" y="730" width="400" height="96" rx="8" stroke="var(--dim)" stroke-width="4" fill="var(--bg)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Correcting It In The Chat Does Not Change The Skill</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">The next run opens the same file and makes the same mistake</text>
+
+<!-- lane 1 label -->
+<text x="100" y="158" font-size="21" font-weight="700" fill="var(--dim)">THE CHAT &#183; this conversation only</text>
+
+<!-- run 1 -->
+<text x="350" y="226" font-size="20" font-weight="700" text-anchor="middle" fill="var(--red)">RUN 1 &#183; came back wrong</text>
+<text x="350" y="296" font-size="25" text-anchor="middle" fill="var(--ink)">emojis everywhere,</text>
+<text x="350" y="336" font-size="25" text-anchor="middle" fill="var(--ink)">the number buried at the bottom</text>
+
+<!-- your correction -->
+<text x="825" y="226" font-size="20" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU TYPE BACK</text>
+<text x="825" y="300" font-size="26" text-anchor="middle" fill="var(--ink)">&#8220;Drop the emojis and</text>
+<text x="825" y="340" font-size="26" text-anchor="middle" fill="var(--ink)">lead with the number.&#8221;</text>
+
+<!-- run 2 -->
+<text x="1300" y="226" font-size="20" font-weight="700" text-anchor="middle" fill="var(--red)">RUN 2 &#183; the same mistake</text>
+<text x="1300" y="296" font-size="25" text-anchor="middle" fill="var(--ink)">emojis everywhere,</text>
+<text x="1300" y="336" font-size="25" text-anchor="middle" fill="var(--ink)">the number buried at the bottom</text>
+
+<!-- the blocked correction -->
+<text x="892" y="580" font-size="23" font-weight="700" fill="var(--red)">it never reaches the file</text>
+
+<!-- lane 2 label -->
+<text x="100" y="646" font-size="21" font-weight="700" fill="var(--dim)">THE SKILL ON DISK &#183; what every run actually reads</text>
+
+<!-- the open file -->
+<text class="mono" x="176" y="728" font-size="22" fill="var(--dim)">weekly-report/SKILL.md</text>
+<text class="mono" x="176" y="782" font-size="21" fill="var(--ink)">## Conventions</text>
+<text class="mono" x="176" y="820" font-size="21" fill="var(--dim)">- Keep it under one page</text>
+<text class="mono" x="176" y="852" font-size="21" fill="var(--dim)">- Pull numbers from the dashboard</text>
+
+<!-- the stamp -->
+<text x="1100" y="792" font-size="34" font-weight="700" text-anchor="middle" fill="var(--dim)">NOTHING CHANGED</text>
+<text x="1100" y="862" font-size="21" text-anchor="middle" fill="var(--dim)">run 2 loads this exact file &#8212; that is why it repeats</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">You corrected it once, in a chat that ends.</text>
+<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--red)">The file the next run reads never changed.</text>
+</svg></body></html>

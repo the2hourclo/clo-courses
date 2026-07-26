@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --orange:#c2410c;
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <!-- REQUIRED by the canonical robot block -->
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============================================================ -->
+  <!-- id="canonical-robot" — copied VERBATIM from
+       .claude/skills/excali-graphic/assets/exemplars/canonical-robot-blackmarker.html
+       Repositioned per its own rule: translate(cx-1400*s, feetY-943*s) scale(s)
+       with s=0.95, cx=175, feetY=700. -->
+  <g id="canonical-robot" transform="translate(-1155.0,-195.85) scale(0.95)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+  </g>
+  <!-- ============================================================ -->
+
+  <!-- the AI hands over the proposal -->
+  <line x1="252" y1="480" x2="308" y2="480" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="300,473 308,480 300,487" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- ============ THE PROPOSAL ============ -->
+  <rect x="320" y="180" width="800" height="580" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="320" y1="250" x2="1120" y2="250" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+
+  <!-- before -->
+  <rect x="352" y="282" width="736" height="160" rx="8" stroke="var(--dim)" stroke-width="3" fill="var(--bg)"/>
+  <!-- becomes -->
+  <line x1="720" y1="454" x2="720" y2="482" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="713,474 720,482 727,474" stroke="var(--dim)" stroke-width="3"/>
+  <!-- after -->
+  <rect x="352" y="492" width="736" height="230" rx="8" stroke="var(--green)" stroke-width="3" fill="var(--bg)"/>
+
+  <!-- ============ YOUR CALL — two ways it can go ============ -->
+  <line x1="1126" y1="345" x2="1174" y2="345" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1166,338 1174,345 1166,352" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1126" y1="595" x2="1174" y2="595" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1166,588 1174,595 1166,602" stroke="var(--dim)" stroke-width="3"/>
+
+  <rect x="1180" y="250" width="340" height="190" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="1180" y="500" width="340" height="190" rx="14" stroke="var(--dim)" stroke-width="4" fill="var(--bg)"/>
+
+  <!-- ============ the guard ============ -->
+  <rect x="390" y="810" width="820" height="56" rx="10" stroke="rgb(225,225,223)" stroke-width="3" fill="var(--bg)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">It Proposes The Edit &#8212; You Are The One Who Approves It</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">Nothing is written into your skill until you say yes</text>
+
+<!-- the AI -->
+<text x="175" y="742" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="175" y="772" font-size="19" text-anchor="middle" fill="var(--dim)">drafts the change</text>
+
+<!-- the proposal -->
+<text x="350" y="226" font-size="24" font-weight="700" fill="var(--ink)">PROPOSED CHANGE to weekly-report/SKILL.md</text>
+
+<text x="372" y="316" font-size="20" font-weight="700" fill="var(--dim)">BEFORE</text>
+<text class="mono" x="372" y="366" font-size="21" fill="var(--dim)">- Keep it under one page</text>
+<text class="mono" x="372" y="406" font-size="21" fill="var(--dim)">- Pull numbers from the dashboard</text>
+
+<text x="372" y="528" font-size="20" font-weight="700" fill="var(--green)">AFTER</text>
+<text class="mono" x="372" y="576" font-size="20" fill="var(--dim)">- Keep it under one page</text>
+<text class="mono" x="372" y="612" font-size="20" fill="var(--dim)">- Pull numbers from the dashboard</text>
+<text class="mono" x="372" y="654" font-size="21" font-weight="700" fill="var(--green)">+ - No emojis. Not one.</text>
+<text class="mono" x="372" y="692" font-size="21" font-weight="700" fill="var(--green)">+ - Open with the headline number.</text>
+
+<!-- your call -->
+<text x="1350" y="222" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">YOUR CALL</text>
+
+<text x="1350" y="322" font-size="32" font-weight="700" text-anchor="middle" fill="var(--green)">YES</text>
+<text x="1350" y="374" font-size="21" text-anchor="middle" fill="var(--ink)">the edit is written</text>
+<text x="1350" y="408" font-size="21" text-anchor="middle" fill="var(--ink)">into the file</text>
+
+<text x="1350" y="572" font-size="32" font-weight="700" text-anchor="middle" fill="var(--dim)">NOT YET</text>
+<text x="1350" y="624" font-size="21" text-anchor="middle" fill="var(--dim)">nothing is written,</text>
+<text x="1350" y="658" font-size="21" text-anchor="middle" fill="var(--dim)">the file stays as it was</text>
+
+<!-- the guard -->
+<text x="800" y="846" font-size="23" text-anchor="middle" fill="var(--dim)">It only proposes what it actually saw go wrong &#8212; it never guesses at a fix</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">It drafts the fix and shows you the exact change.</text>
+<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Nothing lands in your skill until you say yes.</text>
+</svg></body></html>

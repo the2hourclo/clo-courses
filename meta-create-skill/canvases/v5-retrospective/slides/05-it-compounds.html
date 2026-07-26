@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- where it started -->
+  <rect x="150" y="250" width="340" height="150" rx="14" stroke="var(--red)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="260" y1="406" x2="260" y2="762" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="10 10"/>
+
+  <!-- the staircase — one tread per version of the same skill -->
+  <polyline points="240,780 420,780 420,696 600,696 600,612 780,612 780,528 960,528 960,444 1140,444"
+            stroke="var(--ink)" stroke-width="5"/>
+
+  <!-- the same skill, later -->
+  <line x1="1146" y1="444" x2="1184" y2="444" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1176,437 1184,444 1176,451" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="1190" y="300" width="340" height="150" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Each Correction Sticks &#8212; So The Skill Gets Sharper Every Run</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">The same skill, a few runs later, with your standards already inside it</text>
+
+<!-- where it started -->
+<text x="320" y="234" font-size="20" font-weight="700" text-anchor="middle" fill="var(--red)">WHERE IT STARTED</text>
+<text x="320" y="310" font-size="23" text-anchor="middle" fill="var(--ink)">average at best</text>
+<text x="320" y="348" font-size="23" text-anchor="middle" fill="var(--ink)">cannot generate revenue</text>
+
+<!-- the versions -->
+<text x="330" y="766" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">v1</text>
+<text x="510" y="682" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">v2</text>
+<text x="690" y="598" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">v3</text>
+<text x="870" y="514" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">v4</text>
+<text x="1050" y="430" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">v5</text>
+
+<!-- what got written in at each step -->
+<text x="430" y="740" font-size="21" font-weight="700" fill="var(--green)">+ no emojis</text>
+<text x="610" y="656" font-size="21" font-weight="700" fill="var(--green)">+ lead with the number</text>
+<text x="790" y="572" font-size="21" font-weight="700" fill="var(--green)">+ cite the source row</text>
+<text x="970" y="488" font-size="21" font-weight="700" fill="var(--green)">+ flag drops over 20%</text>
+
+<!-- the same skill, later -->
+<text x="1360" y="284" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">THE SAME SKILL, LATER</text>
+<text x="1360" y="356" font-size="23" text-anchor="middle" fill="var(--ink)">~80% to your standard</text>
+<text x="1360" y="392" font-size="23" text-anchor="middle" fill="var(--ink)">ready to generate revenue</text>
+
+<!-- the caption under the staircase -->
+<text x="690" y="870" font-size="21" text-anchor="middle" fill="var(--dim)">each one written in the moment you noticed it</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">You are not repeating yourself every week.</text>
+<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">You are training the skill, one correction at a time.</text>
+</svg></body></html>

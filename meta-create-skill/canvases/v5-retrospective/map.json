@@ -1,0 +1,10 @@
+{
+  "_comment": "Storyboard map for meta-create-skill VIDEO 5: The Retrospective (CP2's self-improvement explainer). 5 diagrams in teaching order, one column each, left to right. Arc: Pain (the correction dies in the chat) -> Mechanism (it gets written into the file) -> Trust (nothing lands without your yes) -> How to run it (one command, two modes) -> Payoff (it compounds). The deck lives in CP2 because the loop only pays off if the buyer learns it on their FIRST run, not at the finish line.",
+  "columns": [
+    {"label": "1 - THE CORRECTION DIES IN THE CHAT", "slides": ["01-correction-dies-in-the-chat"]},
+    {"label": "2 - IT WRITES THE FIX INTO THE FILE", "slides": ["02-it-writes-the-fix-into-the-file"]},
+    {"label": "3 - NOTHING LANDS WITHOUT YOUR YES", "slides": ["03-nothing-lands-without-your-yes"]},
+    {"label": "4 - TWO WAYS TO RUN IT", "slides": ["04-two-ways-to-run-it"]},
+    {"label": "5 - IT COMPOUNDS", "slides": ["05-it-compounds"]}
+  ]
+}

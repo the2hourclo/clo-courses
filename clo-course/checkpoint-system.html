@@ -48,6 +48,9 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .step h2{font-family:var(--font-display);font-size:23px;font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:11px}
 .step p{color:var(--text-muted);font-size:15px;line-height:1.6;margin-bottom:12px}
 .step p:last-child{margin-bottom:0}
+/* On a NARRATED deck the body copy moves ABOVE the slides (it opens the step) and the
+   changing per-slide narration takes the spot under the deck — see render(). */
+.step p.lead{color:var(--text);font-size:15.5px;margin-bottom:14px}
 .video{position:relative;width:100%;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border-2);margin:4px 0 16px;background:#000}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-slot{position:relative;width:100%;padding-top:52%;border-radius:var(--radius);border:1px dashed var(--border-2);margin:4px 0 16px;background:var(--surface-2)}
@@ -119,14 +122,18 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 </div>
 
 <script src="progress.js?v=3"></script>
-<script src="slides.js?v=3"></script>
+<script src="slides.js?v=4"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
    CHECKPOINT WIZARD — reusable template.
    To build another checkpoint: copy this file, change CONFIG, done.
    Each step: { type:'video'|'build'|'gate', title, body(HTML),
                 video?:embedURL, command?:'do this in Claude', gate?:HTML,
-                slides?:[imgURLs] — swipeable deck shown until video lands }
+                slides?:[imgURLs] — swipeable deck shown until video lands,
+                slideNotes?:[HTML] — one per slide, printed UNDER the deck and
+                  swapped as the reader navigates, so the prose walks them through
+                  the slide they're on. A deck with notes moves its `body` copy
+                  ABOVE the deck (it becomes the step's opening line). }
    ═══════════════════════════════════════════════════════════════ */
 function canvas(dir, names){
   return names.map(function(n){ return '../meta-create-skill/canvases/' + dir + '/slides/' + n + '.png'; });
@@ -145,6 +152,15 @@ var CONFIG = {
          ONE running example (the Weekly Email employee), the same job the demo below builds. */
       slides: canvas('v2-types-of-skills', ['05-skill-vs-workflow','06-how-they-chain'])
         .concat(canvas('v4-skill-system', ['01-you-are-the-wiring','02-system-runs-the-job','03-lead-skill-runs-the-rest','04-a-real-system','05-skill-system-employee'])),
+      slideNotes:[
+        'Every time you add something new you hit this fork. Five questions settle it. If many skills would use it, if you would call it by name, if it works on any content type, it earns <strong>its own skill</strong>. If only one parent ever needs it, it belongs inside that parent as a <strong>workflow file</strong>. When the answers come out mixed, keep it nested, because pulling it out later is cheap and merging a wrong split back is not.',
+        'Read the arrows rather than the names. Each skill system routes <strong>down</strong> into its own workflows, which only ever serve that one parent, and reaches <strong>out</strong> sideways to the shared skills many parents reuse. Two different systems can both call the same writing skill without either one owning it.',
+        'Four skills that each work fine on their own. Follow the red though. After every step the job comes back up to you, so you copy the output, open the next skill, and re-explain what the last one already knew. The work was never the problem. <strong>You are the wire between the steps.</strong>',
+        'Same four steps on both sides, same AI, same skills. On the left you carry all three hand-offs, so the job moves only when you move it. On the right <strong>the lead skill carries them</strong>, and the only place you appear is at the end, where the judgment call was always yours anyway.',
+        'The lead skill does almost nothing itself. Read the labels on the arrows, because that is all it holds. <strong>The order the skills run in, and what gets passed between them.</strong> Its file is four lines long, and none of the four workers knows the next one exists.',
+        'Here it is on a real weekly email. Four skills run in order without you, and the drafting one in the middle is <strong>the skill you already built</strong>, reused rather than rebuilt. The orange column on the right is the only part still yours, and it is the review before it goes out.',
+        'Three words for three different sizes. A skill owns <strong>one task</strong>. A skill system owns <strong>a whole function</strong>, start to finish. And the thing that runs that function and keeps getting better at it is <strong>your AI Employee</strong>. Watch the scope arrow grow along the bottom while the decision stays with you at every size.'
+      ],
       body:'One skill does one task. A <strong>skill system</strong> chains a few skills together so the AI runs a whole job end to end — that’s the moment a skill becomes an <strong>AI Employee</strong> that owns a function, not just a task. The skill that does this is <strong>build-skill-system</strong>: it maps the job, names every hand-off between steps, and builds the lead skill that runs the rest in order — so you don’t wire anything by hand.' },
 
     /* Was "take two or three skills from the same job" — but CP2 hands the buyer exactly
@@ -234,15 +250,21 @@ function render(){
   eta.textContent = s.type==='gate' ? 'the gate' : (s.optional ? 'optional — skip anytime' : '');
   fill.style.width = Math.round(100*(pos+1)/n)+'%';
 
+  /* A NARRATED deck carries one note per slide, so the changing narration belongs directly
+     under the deck. The step's own body copy then moves ABOVE the slides and reads as the
+     opening line. Un-narrated steps keep the body below the visual, exactly as before. */
+  var narrated = !!(s.slides && s.slideNotes && window.AIEBSlides);
+
   var h = '<div class="step">';
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
+  if (narrated && s.body){ h += '<p class="lead">'+s.body+'</p>'; }
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.slides && window.AIEBSlides){ h += '<div id="svMount"></div>'; }
   else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
   if (s.demo){ h += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
-  if (s.body){ h += '<p>'+s.body+'</p>'; }
+  if (s.body && !narrated){ h += '<p>'+s.body+'</p>'; }
   if (s.command){ h += '<div class="cmd"><span class="txt">'+s.command+'</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'; }
   if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
 
@@ -259,7 +281,7 @@ function render(){
      a 1600px slide at 548px, which kills its teaching layer. */
   document.body.classList.toggle('slides-step', !!s.slides);
   var svm = document.getElementById('svMount');
-  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title }); }
+  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title, notes: s.slideNotes }); }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 

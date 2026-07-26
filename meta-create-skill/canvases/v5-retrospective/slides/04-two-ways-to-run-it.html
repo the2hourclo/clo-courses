@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- the command you can type any time -->
+  <rect x="460" y="138" width="680" height="76" rx="38" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+
+  <!-- it forks into two modes -->
+  <line x1="800" y1="220" x2="800" y2="244" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="440" y1="244" x2="1160" y2="244" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="440" y1="244" x2="440" y2="282" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="433,274 440,282 447,274" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1160" y1="244" x2="1160" y2="282" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1153,274 1160,282 1167,274" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- ============ MODE 1 — fix it now ============ -->
+  <rect x="110" y="290" width="660" height="540" rx="16" stroke="var(--blue)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="140" y1="418" x2="740" y2="418" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <rect x="150" y="480" width="580" height="70" rx="14" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="163" cy="648" r="6" fill="var(--blue)" stroke="none"/>
+  <circle cx="163" cy="700" r="6" fill="var(--blue)" stroke="none"/>
+  <circle cx="163" cy="752" r="6" fill="var(--blue)" stroke="none"/>
+
+  <!-- ============ MODE 2 — review the session ============ -->
+  <rect x="830" y="290" width="660" height="540" rx="16" stroke="var(--amber)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="860" y1="418" x2="1460" y2="418" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <rect x="870" y="480" width="580" height="70" rx="14" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="883" cy="648" r="6" fill="var(--amber)" stroke="none"/>
+  <circle cx="883" cy="700" r="6" fill="var(--amber)" stroke="none"/>
+  <circle cx="883" cy="752" r="6" fill="var(--amber)" stroke="none"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Two Ways To Run It &#8212; Right Now, Or Over The Whole Session</text>
+<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">One command you can type any time &#8212; it picks the mode from what you say</text>
+
+<!-- the command -->
+<text class="mono" x="800" y="188" font-size="30" font-weight="700" text-anchor="middle" fill="var(--ink)">/ai-employee-builder:retrospective</text>
+
+<!-- mode 1 -->
+<text x="440" y="352" font-size="32" font-weight="700" text-anchor="middle" fill="var(--blue)">FIX IT NOW</text>
+<text x="440" y="394" font-size="21" text-anchor="middle" fill="var(--dim)">one run just came back wrong</text>
+<text x="150" y="464" font-size="19" font-weight="700" fill="var(--dim)">YOU SAY</text>
+<text x="440" y="524" font-size="24" text-anchor="middle" fill="var(--ink)">&#8220;that run was wrong &#8212; fix the skill&#8221;</text>
+<text x="150" y="610" font-size="19" font-weight="700" fill="var(--dim)">IT DOES</text>
+<text x="186" y="656" font-size="23" fill="var(--ink)">finds the one skill that ran</text>
+<text x="186" y="708" font-size="23" fill="var(--ink)">proposes one targeted edit</text>
+<text x="186" y="760" font-size="23" fill="var(--ink)">you approve, and it is in</text>
+
+<!-- mode 2 -->
+<text x="1160" y="352" font-size="32" font-weight="700" text-anchor="middle" fill="var(--amber)">REVIEW THE SESSION</text>
+<text x="1160" y="394" font-size="21" text-anchor="middle" fill="var(--dim)">you are done working for the day</text>
+<text x="870" y="464" font-size="19" font-weight="700" fill="var(--dim)">YOU SAY</text>
+<text x="1160" y="524" font-size="24" text-anchor="middle" fill="var(--ink)">&#8220;run a retrospective on today&#8221;</text>
+<text x="870" y="610" font-size="19" font-weight="700" fill="var(--dim)">IT DOES</text>
+<text x="906" y="656" font-size="23" fill="var(--ink)">scans every skill that ran</text>
+<text x="906" y="708" font-size="23" fill="var(--ink)">batches up everything it found</text>
+<text x="906" y="760" font-size="23" fill="var(--ink)">you approve them in one pass</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">There is no process to remember.</text>
+<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Say what went wrong, whenever you notice it.</text>
+</svg></body></html>

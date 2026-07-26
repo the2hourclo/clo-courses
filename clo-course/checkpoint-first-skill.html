@@ -48,6 +48,9 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .step h2{font-family:var(--font-display);font-size:23px;font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:11px}
 .step p{color:var(--text-muted);font-size:15px;line-height:1.6;margin-bottom:12px}
 .step p:last-child{margin-bottom:0}
+/* On a NARRATED deck the body copy moves ABOVE the slides (it opens the step) and the
+   changing per-slide narration takes the spot under the deck — see render(). */
+.step p.lead{color:var(--text);font-size:15.5px;margin-bottom:14px}
 .video{position:relative;width:100%;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border-2);margin:4px 0 16px;background:#000}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-slot{position:relative;width:100%;padding-top:52%;border-radius:var(--radius);border:1px dashed var(--border-2);margin:4px 0 16px;background:var(--surface-2)}
@@ -119,14 +122,18 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 </div>
 
 <script src="progress.js?v=3"></script>
-<script src="slides.js?v=3"></script>
+<script src="slides.js?v=4"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
    CHECKPOINT WIZARD — reusable template.
    To build another checkpoint: copy this file, change CONFIG, done.
    Each step: { type:'video'|'build'|'gate', title, body(HTML),
                 video?:embedURL, command?:'do this in Claude', gate?:HTML,
-                slides?:[imgURLs] — swipeable deck shown until video lands }
+                slides?:[imgURLs] — swipeable deck shown until video lands,
+                slideNotes?:[HTML] — one per slide, printed UNDER the deck and
+                  swapped as the reader navigates, so the prose walks them through
+                  the slide they're on. A deck with notes moves its `body` copy
+                  ABOVE the deck (it becomes the step's opening line). }
    ═══════════════════════════════════════════════════════════════ */
 function canvas(dir, names){
   return names.map(function(n){ return '../meta-create-skill/canvases/' + dir + '/slides/' + n + '.png'; });
@@ -140,6 +147,14 @@ var CONFIG = {
     { type:'video', title:'What is a skill',
       video:'', slotLabel:'📹 Explainer — coming soon',
       slides: canvas('v1-what-is-a-skill', ['01-why-a-skill','02-skill-anatomy','03-inside-skillmd','04-the-four-subfolders','05-read-and-load','06-frontmatter-properties']),
+      slideNotes:[
+        'Look at the two paths. Same request going in, the same AI on both, and the only difference is whether a skill sits in the middle. Without one it <strong>guesses the how</strong> and you get something average you cannot actually send. With one it already knows your conventions and your gold example, so what comes back is most of the way to your standard.',
+        'Here is what a skill actually is on your computer. A <strong>folder</strong> with one file that has to be there, <strong>SKILL.md</strong>, and up to four optional folders around it. Nothing more exotic than that. Most of the skills you build never grow past that first file.',
+        'Open the required file and you find two parts. The few lines at the top are what the AI reads to decide whether this skill should fire at all, and everything below is the actual instructions. Notice how much of the body is a <strong>table pointing at other files</strong>, because a skill spends most of its time routing rather than explaining.',
+        'Each folder answers a different question. <strong>workflows</strong> holds the ordered steps for one job, <strong>scripts</strong> holds code for the repetitive work, <strong>references</strong> holds the deeper notes it opens only when it needs them, and <strong>assets</strong> holds the example you want it to match. Split this way, a job loads only the one file it needs.',
+        'This is how the AI picks. It reads down every skill you have, checks each description against what you asked for, and the moment one matches it opens that skill&rsquo;s SKILL.md. Everything deeper waits until the job actually calls for it, which is why <strong>a big library does not slow anything down</strong>.',
+        'Only two of those top lines are required. The name, and the description doing the real work, because the description is the only thing the router ever reads. Write it vaguely and <strong>the skill silently never fires</strong>, which is the most common reason a skill someone built just sits there doing nothing.'
+      ],
       body:'A skill is a <strong>reusable playbook</strong> you write once so the AI does a task your way, every time. Same input, same quality, no re-explaining. It is the unit everything else here is built from.' },
 
     { type:'video', title:'The 3 levels of skills',
@@ -148,6 +163,12 @@ var CONFIG = {
          a buyer picking their FIRST skill shouldn't meet the system-architecture decision yet.
          Those two open the CP3 deck instead; the files stay where they are. */
       slides: canvas('v2-types-of-skills', ['01-three-levels','02-level1-simple','03-level2-workflows','04-level3-orchestrator']),
+      slideNotes:[
+        'Three shapes, left to right, getting more capable as you go. A <strong>simple</strong> one-file skill, then one carrying supporting folders for several jobs, then a <strong>skill system</strong> that runs a whole team of other skills. Start on the left. Most of what you build never needs to move right.',
+        'Level one, up close. One folder, one SKILL.md, and <strong>none</strong> of the four supporting folders. The file holds the description that triggers it plus a handful of instructions, and along the bottom you can watch the whole thing work. Messy notes go in, a clean summary comes back. <strong>This is what you are about to build.</strong>',
+        'Level two is what happens when one skill does several different jobs. The request comes in, SKILL.md routes to the one workflow file that matches, and as that workflow runs it reaches into the other three folders for a script, a reference doc, and a template. <strong>Everything else stays closed.</strong>',
+        'Level three does none of the work itself. Its whole file is a <strong>routing map</strong>, and it hands the job down to four worker skills that run in order until the post is live. Each worker is a full skill in its own right with its own four folders, and an orchestrator conducting a team like this is what we mean by an <strong>AI Employee</strong>.'
+      ],
       body:'Skills come in three shapes. A <strong>simple</strong> one-file skill, one <strong>with workflows</strong> it loads only when needed, and an <strong>orchestrator</strong> that runs other skills. You start simple.' },
 
     { type:'video', title:'How to create a skill',
@@ -161,9 +182,20 @@ var CONFIG = {
 
     /* Self-improvement belongs HERE — the moment the buyer first RUNS a skill — not at the
        finish line. It's the feedback loop that makes every later run better, so teaching it
-       after the whole journey wastes every run in between. (Rashid, 2026-07-24.) */
+       after the whole journey wastes every run in between. (Rashid, 2026-07-24.)
+       2026-07-26: given its own deck + the retrospective command, so the buyer can also
+       CALL the loop deliberately instead of only stumbling into it. */
     { type:'build', title:'It gets better every time you use it',
-      body:'Your skill will get something wrong — that is normal, and it is the point. When a run comes back off, just <strong>say what was wrong in plain words</strong>, like you would to a new hire. The AI writes that correction back into the skill itself, so the next run already has it. <strong>Nothing to remember and no command to learn</strong> — correcting it IS the training. Do this from your very first run and the skill is sharp by the time you chain it into a system.' },
+      slides: canvas('v5-retrospective', ['01-correction-dies-in-the-chat','02-it-writes-the-fix-into-the-file','03-nothing-lands-without-your-yes','04-two-ways-to-run-it','05-it-compounds']),
+      slideNotes:[
+        'Watch what happens to a correction. Run one comes back wrong, you type the fix, and run two makes the exact same mistake. Your correction lived in the chat, and <strong>the file on disk never moved</strong>. That file is what every run actually reads.',
+        'Same sentence, different destination. You say what was wrong in plain words, and the retrospective turns it into an edit and writes it <strong>into the skill itself</strong>. Look at the two green lines at the bottom of the file, because from here on every run opens a file that already has them.',
+        'It never edits behind your back. It shows you the exact before and after, then waits, and if you do not say yes then nothing changes. It only proposes things it <strong>actually watched go wrong</strong>, so you are never approving a guess.',
+        'One command, and it reads which mode you want from how you ask. Say a run was wrong and it goes after that one skill. Ask it to review the day and it walks back through every skill that ran and brings you the whole batch at once. <strong>You can run it whenever you notice something</strong>, so nothing has to wait.',
+        'Each step up is one correction you made once and never had to make again. Four of them, and the same skill is now doing work you would put your name on. <strong>You are not repeating yourself every week. You are training it.</strong>'
+      ],
+      command:'/ai-employee-builder:retrospective',
+      body:'Your skill will get something wrong on some run, and that is the point. When it does, <strong>say what was wrong in plain words</strong>, the way you would to a new hire. The AI writes that correction into the skill itself, so the next run already has it. You can also call it deliberately with the command below, any time you want it to look back over a run or a whole session.' },
 
     { type:'gate', title:'Skill ran once on real data',
       body:'Run your new skill once on a <strong>real</strong> piece of work, and check the result is something you would actually use.',
@@ -242,15 +274,21 @@ function render(){
   eta.textContent = s.type==='gate' ? 'the gate' : (s.optional ? 'optional — skip anytime' : '');
   fill.style.width = Math.round(100*(pos+1)/n)+'%';
 
+  /* A NARRATED deck carries one note per slide, so the changing narration belongs directly
+     under the deck. The step's own body copy then moves ABOVE the slides and reads as the
+     opening line. Un-narrated steps keep the body below the visual, exactly as before. */
+  var narrated = !!(s.slides && s.slideNotes && window.AIEBSlides);
+
   var h = '<div class="step">';
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
+  if (narrated && s.body){ h += '<p class="lead">'+s.body+'</p>'; }
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.slides && window.AIEBSlides){ h += '<div id="svMount"></div>'; }
   else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
   if (s.demo){ h += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
-  if (s.body){ h += '<p>'+s.body+'</p>'; }
+  if (s.body && !narrated){ h += '<p>'+s.body+'</p>'; }
   if (s.command){ h += '<div class="cmd"><span class="txt">'+s.command+'</span><button class="copy" onclick="copyCmd(this)">Copy</button></div>'; }
   if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
 
@@ -267,7 +305,7 @@ function render(){
      a 1600px slide at 548px, which kills its teaching layer. */
   document.body.classList.toggle('slides-step', !!s.slides);
   var svm = document.getElementById('svMount');
-  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title }); }
+  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title, notes: s.slideNotes }); }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
