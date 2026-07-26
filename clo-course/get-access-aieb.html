@@ -448,6 +448,10 @@ body.activation-mode .container{max-width:620px;width:100%}
       <span class="handoff-node">Skills</span>
     </div>
     <div class="activation-code" id="activation-code"></div>
+    <div class="activation-signin" id="secure-session" hidden>
+      <button class="activation-button" id="secure-session-button" type="button">Connect this device</button>
+      <p class="activation-privacy" style="margin-top:10px">You're signed in already &mdash; nothing to enter.</p>
+    </div>
     <div class="activation-signin" id="secure-signin" hidden>
       <div class="activation-signin-slot" id="secure-google-button"></div>
     </div>
@@ -1016,19 +1020,26 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
   code.textContent = userCode;
 
   async function completeActivation(body){
-    var response = await fetch('https://aieb-gated-mcp.vercel.app/device/complete', {
+    // The session lane MUST go to api.<apex>: the portal cookie is scoped to
+    // chiefleverageofficers.com and is simply not sent to the vercel.app host.
+    // Every other lane carries its own proof in the body, so it keeps sending
+    // no cookies at all.
+    var endpoint = body.use_session
+      ? 'https://api.chiefleverageofficers.com/device/complete'
+      : 'https://aieb-gated-mcp.vercel.app/device/complete';
+    var response = await fetch(endpoint, {
       method: 'POST',
       headers: {'content-type':'application/json'},
       body: JSON.stringify(body),
       cache: 'no-store',
-      credentials: 'omit',
+      credentials: body.use_session ? 'include' : 'omit',
       referrerPolicy: 'no-referrer'
     });
     var payload = await response.json().catch(function(){ return {}; });
     if (!response.ok || !payload.ok) throw new Error(payload.reason || payload.message || payload.error || 'Connection failed. Please try again.');
     form.hidden = true;
     status.className = 'activation-status show success';
-    status.textContent = (body.claim || body.google_id_token)
+    status.textContent = (body.claim || body.google_id_token || body.use_session)
       ? 'Connected — and notice you typed nothing. That’s what you just bought: work that does itself. Close this tab and keep going in Claude; the connection finishes by itself in a few seconds.'
       : 'Connected — you can close this tab. Back in Claude, just keep going; the connection finishes by itself in a few seconds.';
     try { localStorage.setItem('aieb_device_connected_v1', String(Date.now())); } catch (e) {}
@@ -1058,6 +1069,58 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
   var signinWrap = document.getElementById('secure-signin');
   var signinSlot = document.getElementById('secure-google-button');
   var orDivider = document.getElementById('secure-activation-or');
+  var sessionWrap = document.getElementById('secure-session');
+  var sessionButton = document.getElementById('secure-session-button');
+  var sessionLaneOwnsPage = false;
+
+  // ---- Session lane -------------------------------------------------------
+  // Ask the server who is already signed in BEFORE offering anyone a sign-in.
+  // This page used to render a Google button unconditionally, so a buyer who
+  // had signed in on the board thirty seconds earlier was asked to prove the
+  // same thing twice. One portal, one account, one place to authenticate
+  // (Rashid, 2026-07-26 — "why do we have the Google Login here").
+  //
+  // `linked` is the part that matters: signed in is not the same as signed in
+  // WITH THE ADDRESS THEY BOUGHT WITH. Someone on a work Google account is
+  // signed in and still has no purchase behind them, and for them the Google
+  // button and the key box are exactly the right thing to see.
+  fetch('https://api.chiefleverageofficers.com/course-progress', {
+    credentials: 'include',
+    cache: 'no-store'
+  })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      if (!data || !data.signed_in || !data.linked) return;
+      sessionLaneOwnsPage = true;
+      sessionWrap.hidden = false;
+      signinWrap.hidden = true;
+      orDivider.hidden = true;
+      form.hidden = true;
+    })
+    .catch(function () {
+      // No answer means we do not know — leave the page exactly as it was, with
+      // both fallbacks visible. A probe that fails must never take away the
+      // lanes that still work.
+    });
+
+  sessionButton.addEventListener('click', function () {
+    sessionButton.disabled = true;
+    status.className = 'activation-status show working';
+    status.textContent = 'Connecting…';
+    completeActivation({ user_code: userCode, use_session: true })
+      .then(function () { sessionWrap.hidden = true; })
+      .catch(function (error) {
+        sessionButton.disabled = false;
+        status.className = 'activation-status show error';
+        status.textContent = (error && error.message) || 'That did not go through — use your license key below instead.';
+        // Hand the page back to the fallbacks. Whatever went wrong, the buyer
+        // needs a way through that does not depend on the thing that just failed.
+        sessionWrap.hidden = true;
+        signinWrap.hidden = !signinSlot.hasChildNodes();
+        orDivider.hidden = signinWrap.hidden;
+        form.hidden = false;
+      });
+  });
 
   function onGoogleCredential(response){
     if (!response || !response.credential) return;
@@ -1091,8 +1154,13 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
       google.accounts.id.renderButton(signinSlot, {
         theme: 'outline', size: 'large', text: 'continue_with', shape: 'pill', logo_alignment: 'left'
       });
-      signinWrap.hidden = false;
-      orDivider.hidden = false;
+      // The GSI script and the session probe race each other. If the session
+      // already won, mount the button but leave it hidden — otherwise the
+      // second sign-in reappears half a second after we removed it.
+      if (!sessionLaneOwnsPage) {
+        signinWrap.hidden = false;
+        orDivider.hidden = false;
+      }
     } catch (e) {
       // Never let a sign-in convenience take the key form down with it.
     }
