@@ -103,6 +103,13 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .done-screen .big-cta{font-size:15.5px;padding:14px 32px;box-shadow:0 10px 30px color-mix(in srgb,var(--cp) 30%,transparent)}
 .done-screen .board-link{font-size:13px;font-weight:700;color:var(--text-muted)}
 .done-screen .board-link:hover{color:var(--cp);text-decoration:none}
+.cp-help{margin-top:14px;background:var(--surface);border:1px solid var(--border-2);border-radius:var(--radius);padding:12px 16px;font-size:13.5px;color:var(--text-muted)}
+.cp-help>summary{cursor:pointer;font-weight:700;color:var(--text);list-style:none}
+.cp-help>summary::-webkit-details-marker{display:none}
+.cp-help>summary::before{content:"> ";opacity:.6}
+.cp-help[open]>summary::before{content:"v "}
+.cp-help p{margin:.55rem 0 0}
+.cp-help code{background:rgba(127,127,127,.15);padding:.1em .35em;border-radius:3px}
 </style>
 <link rel="stylesheet" href="excalifont.css">
 </head>
@@ -122,6 +129,12 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
       <button class="sbtn" id="sb-cc" onclick="setSurface('claude-code')">Claude Code</button>
     </div>
   </div>
+
+  <details class="cp-help rise">
+    <summary>Stuck? Two ways out, fastest first.</summary>
+    <p><strong>1.</strong> In any Claude chat, type <code>/check-setup</code> (or say &ldquo;check my setup&rdquo;) &mdash; Claude diagnoses it with you and offers the fix.</p>
+    <p><strong>2.</strong> <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a> &mdash; describe what you see, a screenshot helps. The builders and Rashid are in there.</p>
+  </details>
 
   <div class="wizbar rise">
     <div class="wiztop"><span class="wizcount" id="wizCount"></span><span class="wizeta" id="wizEta"></span></div>
