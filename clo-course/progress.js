@@ -19,24 +19,77 @@
 (function () {
   'use strict';
 
-  /* ── CANONICAL HOST REDIRECT (2026-07-25) ────────────────────────────────
+  /* ── CANONICAL HOST REDIRECT + STATE MIGRATION (2026-07-25) ──────────────
      The course moved from GitHub Pages to course.chiefleverageofficers.com so
      it shares a registrable domain with the API and can hold a first-party
      session. Both hosts still serve, and that is the danger: localStorage is
      per-ORIGIN, so a buyer with progress on github.io who lands on the new host
      would see an empty board. One canonical origin or none.
 
+     THE REDIRECT ALONE IS NOT ENOUGH, and shipping it alone was a bug. Crossing
+     origins abandons everything the old origin held: aieb_progress, the surface,
+     every aieb_ckpt_* position, and aieb_view_token_v1. Losing the view token is
+     the worst of it — without it syncFromServer returns early, so the buyer
+     cannot even fall back to the server-confirmed ladder. They arrive at 0%,
+     every column locked, with no self-service way back.
+
+     So we carry the state across in the URL FRAGMENT, the same lane the #vt=
+     token already uses: a fragment never reaches the server, Pages access logs,
+     or a Referer header. On arrival we restore only keys this origin does not
+     already have — a later visit must never clobber fresher local state — then
+     scrub the URL.
+
      Path note: Pages served under /clo-courses (the repo name); Vercel serves
-     the repo root, so that prefix is dropped. The query string AND hash are
-     carried over verbatim — the hash matters most, it's where the #vt= view
-     token rides, and losing it would strand the buyer on an unidentified page.
+     the repo root, so that prefix is dropped.
      ──────────────────────────────────────────────────────────────────────── */
+  var MIGRATION_PREFIX = 'aieb_';
+
+  function b64urlEncode(text) {
+    return btoa(unescape(encodeURIComponent(text)))
+      .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function b64urlDecode(text) {
+    var s = String(text).replace(/-/g, '+').replace(/_/g, '/');
+    while (s.length % 4) s += '=';
+    return decodeURIComponent(escape(atob(s)));
+  }
+
+  // ARRIVAL SIDE — runs first, so restored state is in place before anything
+  // below reads it. Never overwrites: whatever this origin already holds is by
+  // definition more recent than a bookmark pointing at the retired host.
+  try {
+    var incoming = /(?:^#|[#&])m=([A-Za-z0-9_\-]+)/.exec(window.location.hash || '');
+    if (incoming) {
+      var carried = JSON.parse(b64urlDecode(incoming[1]));
+      for (var ck in carried) {
+        if (ck.indexOf(MIGRATION_PREFIX) !== 0) continue;   // never import a foreign key
+        if (localStorage.getItem(ck) === null) localStorage.setItem(ck, carried[ck]);
+      }
+      // Scrub, but keep any OTHER fragment params (#vt= rides the same hash and
+      // is absorbed further down — dropping it here would undo that lane).
+      var keptHash = (window.location.hash || '')
+        .replace(/(^#|&)m=[A-Za-z0-9_\-]+/, '$1').replace(/^#&/, '#').replace(/^#$/, '');
+      history.replaceState({}, '', window.location.pathname + window.location.search + keptHash);
+    }
+  } catch (e) {}
+
+  // DEPARTURE SIDE — pack this origin's state into the fragment and hand off.
+  // Deliberately NOT wrapped in an early `return` on failure: if the redirect
+  // is blocked or throws, falling through leaves the old host working exactly
+  // as it did before, rather than a dead page with no window.AIEB.
   try {
     if (window.location.hostname === 'the2hourclo.github.io') {
+      var carry = {};
+      for (var i = 0; i < localStorage.length; i++) {
+        var lk = localStorage.key(i);
+        if (lk && lk.indexOf(MIGRATION_PREFIX) === 0) carry[lk] = localStorage.getItem(lk);
+      }
       var path = window.location.pathname.replace(/^\/clo-courses/, '');
+      var hash = window.location.hash || '';
+      var payload = Object.keys(carry).length ? b64urlEncode(JSON.stringify(carry)) : '';
+      if (payload) hash = (hash ? hash + '&' : '#') + 'm=' + payload;
       window.location.replace(
-        'https://course.chiefleverageofficers.com' + path +
-        window.location.search + window.location.hash
+        'https://course.chiefleverageofficers.com' + path + window.location.search + hash
       );
       return;
     }
@@ -86,6 +139,23 @@
   // seeing zero — which froze CP1's column on "Start" for a buyer three steps in.
   // Add new suffixes to the FRONT of this list when a wizard bumps.
   var STEP_PREFIX = 'aieb_ckpt_', STEP_SUFFIXES = ['_v6', '_v5', '_v4'];
+
+  // The suffix each wizard ACTUALLY writes, verified against its own STORE line:
+  //   cp1  checkpoint-map.html         _v6
+  //   cp2  checkpoint-first-skill.html _v5
+  //   cp3  checkpoint-system.html      _v4
+  //   cp4  checkpoint-autonomy.html    _v5
+  //   goal checkpoint-ai-employee.html _v6
+  // `setup` (get-access-aieb.html) keeps no step position at all.
+  //
+  // Restoring a position MUST use this map, not STEP_SUFFIXES[0]. Writing every
+  // checkpoint to _v6 puts cp2/cp3/cp4 under a key their wizard never reads, so
+  // the wizard reopens at step 1 — and because readStepKey probes _v6 FIRST, the
+  // orphan then permanently shadows the real key: the buyer advances, the board
+  // stays frozen at the restored number, and snapshot() pushes that stale value
+  // back over the truth on the next write. Writing to every suffix has the same
+  // shadowing failure. One key per checkpoint, the one its wizard owns.
+  var STEP_WRITE_SUFFIX = { cp1: '_v6', cp2: '_v5', cp3: '_v4', cp4: '_v5', goal: '_v6' };
 
   // Read a per-checkpoint step key, trying each suffix newest-first.
   function readStepKey(id, tail) {
@@ -297,8 +367,264 @@
     });
   }
 
+  // Session sync runs alongside the view-token sync above, not instead of it.
+  // They answer different questions — this one "whose board is this", that one
+  // "what did they actually build" — and either can be absent without the other
+  // failing. Both only ever refine an already-painted page.
+  function autoSyncSession() {
+    syncCourseProgress().then(function () {
+      // Always announce: the board needs to repaint even when nothing changed,
+      // because signed-in vs signed-out decides whether it may draw a ladder at
+      // all, and it starts out assuming it may not.
+      announce();
+    });
+  }
+
+  /* ── SIGNED-IN SESSION (2026-07-25) ──────────────────────────────────────
+     Everything above this point is per-BROWSER. That was the bug: WebKit wipes
+     localStorage after 7 days of Safari use without interaction on the site, so
+     a buyer who took a fortnight off lost their board on the device they never
+     left. Signing in with Google moves the durable copy to the server, keyed to
+     the person rather than the browser, and the first-party session cookie is
+     the one storage class that purge exempts.
+
+     Local storage stays the FAST copy — the board still paints instantly from
+     it, offline and signed-out included. The server is the DURABLE copy. Where
+     they disagree the merge below is generous, never destructive.
+     ──────────────────────────────────────────────────────────────────────── */
+  var AUTH_URL = 'https://api.chiefleverageofficers.com/auth/google';
+  var COURSE_PROGRESS_URL = 'https://api.chiefleverageofficers.com/course-progress';
+  try {
+    var devApi = localStorage.getItem('aieb_api_base_dev');
+    if (devApi) { AUTH_URL = devApi + '/auth/google'; COURSE_PROGRESS_URL = devApi + '/course-progress'; }
+  } catch (e) {}
+
+  var signedIn = false;
+  function isSignedIn() { return signedIn; }
+
+  /* SESSION STATE IS THREE-VALUED, and collapsing it to a boolean was a bug.
+     'in'      — the server affirmatively said signed_in
+     'out'     — the server affirmatively said NOT signed in
+     'unknown' — we could not ask: offline, blocked by a shield or ad-blocker,
+                 5xx, DNS failure, database not reachable
+
+     Only 'out' may hide the board. 'unknown' must fall back to whatever local
+     storage holds, because this is a public page with nothing secret behind it —
+     gating it on an auth service being reachable turns any blip into a buyer
+     staring at a sign-in wall with their progress sitting intact one layer down. */
+  var sessionState = 'unknown';
+  function getSessionState() { return sessionState; }
+
+  // The whole board state in one object — completed checkpoints, per-wizard step
+  // positions, chosen surface. Deliberately mirrors what localStorage already
+  // holds so the server never becomes a second, differently-shaped truth.
+  function snapshot() {
+    var steps = {};
+    for (var i = 0; i < CHAIN.length; i++) {
+      var id = CHAIN[i], info = stepInfo(id);
+      if (info.pos || info.total) steps[id] = { pos: info.pos, total: info.total };
+    }
+    return { progress: read(), surface: getSurface(), steps: steps };
+  }
+
+  // Fold a server snapshot into this browser. Rules, in order of importance:
+  //   1. A completed checkpoint NEVER becomes uncompleted. Completions are
+  //      unioned, so a device that has been offline cannot un-finish work done
+  //      elsewhere. This is what makes last-write-wins safe on the server.
+  //   2. Step positions take the furthest of the two — being sent backwards
+  //      through a wizard you already finished is worse than skipping ahead.
+  //   3. A surface already chosen here wins; the server only fills a blank.
+  function applySnapshot(remote) {
+    if (!remote || typeof remote !== 'object') return false;
+    var changed = false;
+
+    var mine = read(), theirs = remote.progress || {};
+    for (var id in theirs) {
+      if (theirs[id] && !mine[id]) { mine[id] = true; changed = true; }
+    }
+    if (changed) write(mine);
+
+    if (!getSurface() && remote.surface) { setSurface(remote.surface); changed = true; }
+
+    var steps = remote.steps || {};
+    for (var sid in steps) {
+      var suffix = STEP_WRITE_SUFFIX[sid];
+      if (!suffix) continue;                     // setup keeps no position
+      var incoming = steps[sid] || {}, local = stepInfo(sid);
+      if ((incoming.pos || 0) > local.pos) {
+        try {
+          localStorage.setItem(STEP_PREFIX + sid + suffix, String(incoming.pos));
+          if (incoming.total) localStorage.setItem(STEP_PREFIX + sid + suffix + '_n', String(incoming.total));
+          changed = true;
+        } catch (e) {}
+      }
+    }
+    return changed;
+  }
+
+  function announce() {
+    try { window.dispatchEvent(new CustomEvent('aieb:progress-synced')); } catch (e) {}
+  }
+
+  // Push the current board state up. Debounced because markDone can fire
+  // several times in a row as a wizard finishes.
+  var pushTimer = null;
+  function pushCourseProgress() {
+    if (!signedIn || typeof fetch !== 'function') return;
+    if (pushTimer) clearTimeout(pushTimer);
+    pushTimer = setTimeout(function () {
+      fetch(COURSE_PROGRESS_URL, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ state: snapshot() }),
+        credentials: 'include',
+        cache: 'no-store',
+        referrerPolicy: 'no-referrer'
+      }).catch(function () {});   // silent: local state is already correct
+    }, 400);
+  }
+
+  // Ask the server who we are and what it holds. Resolves to true when signed
+  // in, so the board can decide between the ladder and the sign-in prompt.
+  // Does this browser hold anything the remote snapshot lacks? Seeding only when
+  // the server row is EMPTY was wrong: the row is created on the first device to
+  // sign in, so a second device's local-only work was never uploaded — the exact
+  // loss this feature exists to prevent.
+  function localHasMoreThan(remote) {
+    var mine = read(), theirs = (remote && remote.progress) || {};
+    for (var id in mine) { if (mine[id] && !theirs[id]) return true; }
+    if (getSurface() && !(remote && remote.surface)) return true;
+    var remoteSteps = (remote && remote.steps) || {};
+    for (var i = 0; i < CHAIN.length; i++) {
+      var sid = CHAIN[i];
+      if (stepInfo(sid).pos > ((remoteSteps[sid] || {}).pos || 0)) return true;
+    }
+    return false;
+  }
+
+  function syncCourseProgress() {
+    if (typeof fetch !== 'function') { sessionState = 'unknown'; return Promise.resolve(sessionState); }
+    return fetch(COURSE_PROGRESS_URL, {
+      method: 'GET',
+      credentials: 'include',
+      cache: 'no-store',
+      referrerPolicy: 'no-referrer'
+    })
+      .then(function (r) {
+        // A 5xx is "we could not ask", not "you are signed out". Only a clean
+        // 200 carries an answer either way.
+        if (!r.ok) return null;
+        return r.json();
+      })
+      .then(function (payload) {
+        if (!payload || !payload.ok) { sessionState = 'unknown'; signedIn = false; return sessionState; }
+        signedIn = !!payload.signed_in;
+        sessionState = signedIn ? 'in' : 'out';
+        if (!signedIn) return sessionState;
+        var changed = applySnapshot(payload.state);
+        // Upload whenever this browser holds something the account does not —
+        // on a fresh row AND on a second device joining an existing one.
+        if (localHasMoreThan(payload.state)) pushCourseProgress();
+        if (changed) announce();
+        return sessionState;
+      })
+      .catch(function () { sessionState = 'unknown'; signedIn = false; return sessionState; });
+  }
+
+  /* WIPE LOCAL STATE. Called when a session ends or when a DIFFERENT account
+     signs in on this browser. Both matter, and omitting either is a real leak:
+     applySnapshot merges the signed-in person's server state INTO localStorage,
+     so after A signs out their board is still sitting there. If B then signs in
+     and the seed fires, A's progress is written into B's account — durably, on
+     every device B owns, with no way for B to undo it. */
+  function clearLocalState() {
+    try {
+      var doomed = [];
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        // The view token is a per-BUYER credential from device activation, not
+        // part of the signed-in session, so it is deliberately left alone.
+        if (k && k.indexOf('aieb_') === 0 && k !== VIEW_TOKEN_KEY) doomed.push(k);
+      }
+      for (var j = 0; j < doomed.length; j++) localStorage.removeItem(doomed[j]);
+    } catch (e) {}
+  }
+
+  var ACCOUNT_HINT_KEY = 'aieb_account_hint';
+
+  // Read the address out of an ID token for COMPARISON AND DISPLAY ONLY. This is
+  // the unverified client-side copy and it decides nothing about access — the
+  // server verifies the same token independently before trusting a byte of it.
+  function accountFromCredential(credential) {
+    try {
+      var body = String(credential).split('.')[1];
+      var json = decodeURIComponent(escape(atob(body.replace(/-/g, '+').replace(/_/g, '/'))));
+      return String(JSON.parse(json).email || '').trim().toLowerCase();
+    } catch (e) { return ''; }
+  }
+
+  // Hand Google's ID token to our server, which verifies it and sets the
+  // first-party cookie. Resolves true on success.
+  function signInWithGoogle(credential) {
+    if (!credential || typeof fetch !== 'function') return Promise.resolve(false);
+
+    // Account switch on a shared browser: drop the previous person's board
+    // BEFORE any merge or upload can carry it into the new account.
+    var account = accountFromCredential(credential);
+    try {
+      var previous = localStorage.getItem(ACCOUNT_HINT_KEY);
+      if (account && previous && previous !== account) clearLocalState();
+      if (account) localStorage.setItem(ACCOUNT_HINT_KEY, account);
+    } catch (e) {}
+
+    return fetch(AUTH_URL, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ credential: credential }),
+      credentials: 'include',
+      cache: 'no-store',
+      referrerPolicy: 'no-referrer'
+    })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (payload) {
+        if (!payload || !payload.ok) return false;
+        signedIn = true;
+        // Pull down anything this person already had elsewhere, then repaint —
+        // signing in on a new laptop should fill the board in, not blank it.
+        return syncCourseProgress().then(function () { announce(); return true; });
+      })
+      .catch(function () { return false; });
+  }
+
+  function signOut() {
+    // Clear locally FIRST and unconditionally. If the DELETE fails (offline, API
+    // down) the person still expects their board gone from this browser — and a
+    // shared machine is exactly where "sign out didn't really sign me out" does
+    // damage. The server row is revoked on a best-effort basis after.
+    clearLocalState();
+    signedIn = false;
+    sessionState = 'out';
+    if (typeof fetch !== 'function') { announce(); return Promise.resolve(); }
+    return fetch(AUTH_URL, {
+      method: 'DELETE', credentials: 'include', cache: 'no-store', referrerPolicy: 'no-referrer'
+    })
+      .catch(function () {})
+      .then(function () { announce(); });
+  }
+
+  // Every local mutation mirrors upward. Wrapping rather than editing the
+  // originals keeps the offline/signed-out path byte-identical to before.
+  var markDoneLocal = markDone, setSurfaceLocal = setSurface;
+  markDone = function (id) { markDoneLocal(id); pushCourseProgress(); };
+  setSurface = function (s) { setSurfaceLocal(s); pushCourseProgress(); };
+
   window.AIEB = {
     SPINE: SPINE, CHAIN: CHAIN, BUILD: BUILD, META: META, SURFACES: SURFACES,
+    isSignedIn: isSignedIn, sessionState: getSessionState, account: function () {
+      try { return localStorage.getItem(ACCOUNT_HINT_KEY) || ''; } catch (e) { return ''; }
+    },
+    signInWithGoogle: signInWithGoogle, signOut: signOut,
+    syncCourseProgress: syncCourseProgress, pushCourseProgress: pushCourseProgress,
     read: read, isDone: isDone, markDone: markDone, reset: reset,
     getSurface: getSurface, setSurface: setSurface, surfaceShows: surfaceShows,
     activeId: activeId, stateOf: stateOf, next: next, buildIndex: buildIndex,
@@ -307,4 +633,5 @@
   };
 
   autoSync();
+  autoSyncSession();
 })();

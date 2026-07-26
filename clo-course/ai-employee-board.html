@@ -34,6 +34,31 @@ body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba
 .res-links{display:flex;flex-wrap:wrap;gap:10px}
 .res-links a{display:inline-block;padding:9px 15px;border:1.5px solid var(--ink);border-radius:12px 3px 12px 3px;background:var(--card);color:var(--ink);text-decoration:none;font-size:13.5px;font-weight:600;transition:transform .13s,box-shadow .13s}
 .res-links a:hover{transform:translate(-1px,-1px);box-shadow:3px 4px 0 rgba(33,33,30,.12)}
+
+/* ── SIGN-IN GATE ─────────────────────────────────────────────────────────
+   The board is buyer-only in practice — people arrive from onboarding or from
+   Claude, never by browsing — so signing in first costs nothing and removes
+   every half-state. Above all it removes the one that mattered: a board that
+   cannot identify you can no longer announce "Start here - step 1" at someone
+   four checkpoints in. It simply is not drawn. */
+/* `display:flex` on the class beats the [hidden] attribute's UA display:none,
+   so without this the checking and sign-in views render stacked on top of each
+   other. Any class here that sets `display` needs the same guard. */
+[hidden]{display:none !important}
+.signin-wrap{min-height:62vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.signin-card{max-width:420px;width:100%;text-align:center;border:2px solid var(--ink);border-radius:18px 5px 18px 5px;background:var(--card);box-shadow:4px 5px 0 rgba(33,33,30,.09);padding:38px 30px}
+.signin-card img{margin-bottom:14px}
+.signin-card h1{font-family:var(--font-accent,inherit);font-size:24px;color:var(--ink);margin:0 0 8px}
+.signin-card p{color:var(--soft);font-size:14.5px;line-height:1.55;margin:0 0 22px}
+.signin-card #gbtn{display:flex;justify-content:center;min-height:44px}
+.signin-err{font-size:13px;color:#b91c1c;margin-top:14px}
+/* The checking state is deliberately almost blank. It exists to stop a flash of
+   the wrong view while the cookie is resolved server-side, not to be noticed. */
+.signin-dots{color:var(--text-dim);font-size:13.5px}
+.whoami{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-dim);margin-left:auto}
+.auth-link{background:none;border:0;font-family:var(--font-body);font-size:12.5px;color:var(--soft);text-decoration:underline;cursor:pointer;padding:2px 4px}
+.auth-link:hover{color:var(--ink)}
+@media (max-width:560px){.whoami{font-size:11.5px}.signin-card{padding:30px 22px}}
 /* Top bar unified with the course-page shell (.clo-topbar): full-width sticky, blurred, one bottom rule, dark 13px brand + 26px logo — reproduced with the board's own tokens so no shell.css import is needed. */
 .topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:8px 24px;background:rgba(250,250,250,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1.5px solid var(--border-2);margin-bottom:20px}
 .brand{font-size:13px;font-weight:700;letter-spacing:.3px;color:var(--ink);display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
@@ -123,8 +148,29 @@ a.col-pill:hover .open{opacity:1}
 <div class="topbar rise">
   <a class="brand" href="index.html"><img src="assets/aieb-avatar-180.png" alt="AI Employee Builder" width="26" height="26">AI Employee Builder</a>
   <div class="surf" id="surfBar"></div>
+  <div class="whoami" id="whoami" hidden></div>
 </div>
 
+<!-- Three mutually exclusive views. The board is NEVER shown to someone we
+     cannot identify — that is the whole point of signing in first, and it is
+     why `checking` exists as its own state rather than defaulting to either
+     one: flashing a ladder and then yanking it back is worse than a half
+     second of nothing. -->
+<div id="checkingview" class="signin-wrap">
+  <div class="signin-card"><div class="signin-dots">Loading your board…</div></div>
+</div>
+
+<div id="signinview" class="signin-wrap" hidden>
+  <div class="signin-card">
+    <img src="assets/aieb-avatar-180.png" alt="" width="56" height="56">
+    <h1>Your build board</h1>
+    <p>Sign in to see your progress. It follows you to any device.</p>
+    <div id="gbtn"></div>
+    <div class="signin-err" id="signinerr" hidden>That didn’t go through. Try again in a moment.</div>
+  </div>
+</div>
+
+<div id="boardview" hidden>
 <div class="head rise">
   <div class="oprog" id="oprog"></div>
 </div>
@@ -134,12 +180,14 @@ a.col-pill:hover .open{opacity:1}
 <div class="board-wrap rise"><div class="board" id="board"></div></div>
 
 <div class="rise" id="resources"></div>
+</div>
 
 <div class="footer">Questions? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Ask in the community ↗</a></div>
 
 <div class="surface-gate" id="gate" hidden></div>
 
-<script src="progress.js?v=2"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="progress.js?v=3"></script>
 <script>
 /* ──────────────────────────────────────────────────────────────
    BOARD PAGE. Top: what to work on NEXT (from progress.js). Below:
@@ -349,7 +397,130 @@ function colHTML(col){
 }
 function renderMap(){ document.getElementById('board').innerHTML = BOARD.map(colHTML).join(''); }
 
+/* ── SIGN IN ───────────────────────────────────────────────────────────────
+   Why this is here at all: progress used to live only in this browser, and
+   WebKit deletes localStorage after 7 days of Safari use without interaction on
+   the site. Signing in moves the durable copy to the server, keyed to the
+   person, behind a first-party cookie the purge exempts.
+
+   The honesty rule this enforces: when the board can identify NOBODY and this
+   browser holds NOTHING, it must not confidently announce "Start here · step 1"
+   — a buyer four checkpoints in would read that as having lost their work. In
+   that one state we lead with the sign-in prompt instead. Every other state
+   renders exactly as before, and someone who never signs in keeps the old
+   local-only behaviour untouched. */
+var GOOGLE_CLIENT_ID = '969669674527-l2s0bluvsnroh5ftvd6s8fuv1h4e9gea.apps.googleusercontent.com';
+var gsiReady = false;
+
+/* checking | in | out | local.
+
+   `checking` — the session lives in an HttpOnly cookie the page cannot read, so
+     only the server can answer. Guessing "out" flashes a sign-in screen at
+     someone already signed in; guessing "in" shows a ladder to a stranger.
+
+   `local` — we could not reach the server AND this browser holds real progress.
+     Show the board from local storage. This page is public with nothing secret
+     behind it, so hiding a working board because an auth service is unreachable
+     is a self-inflicted outage: offline, an ad-blocker, a corporate proxy, or a
+     Vercel blip would each blank a board whose state is sitting right there.
+
+   Only an AFFIRMATIVE "you are not signed in" shows the wall. */
+var authState = 'checking';
+
+function resolveAuthState(){
+  var s = AIEB.sessionState();
+  if (s === 'in') return 'in';
+  if (s === 'out') return 'out';
+  return AIEB.started() ? 'local' : 'out';   // unknown: fall back, don't lock out
+}
+
+function renderAuth(){
+  var boardVisible = authState === 'in' || authState === 'local';
+  document.getElementById('checkingview').hidden = authState !== 'checking';
+  document.getElementById('signinview').hidden  = authState !== 'out';
+  document.getElementById('boardview').hidden   = !boardVisible;
+
+  var who = document.getElementById('whoami');
+  if (authState === 'in') {
+    who.hidden = false;
+    who.innerHTML = '<span>' + (maskedAccount() || 'Signed in') + '</span>'
+                  + '<button type="button" class="auth-link" onclick="doSignOut()">Sign out</button>';
+  } else if (authState === 'local') {
+    // Honest about what it is: their work is here, just not backed up yet.
+    who.hidden = false;
+    who.innerHTML = '<span>Showing this device only</span>'
+                  + '<button type="button" class="auth-link" onclick="retrySignIn()">Sign in</button>';
+  } else {
+    who.hidden = true;
+  }
+
+  if (authState === 'out') mountGoogleButton();
+}
+
+function retrySignIn(){ authState = 'out'; renderAll(); }
+
+// Shown so a beginner can tell it worked, and so signing in as the wrong Google
+// account is visible instead of silent. Kept client-side on purpose: the server
+// stores only a hash of the address, and this is the one place we want the
+// human-readable form — in front of the person it belongs to.
+function maskedAccount(){
+  var raw = AIEB.account();
+  var at = raw ? raw.indexOf('@') : -1;
+  return at > 0 ? 'Saved to ' + raw[0] + '••••' + raw.slice(at) : '';
+}
+
+function mountGoogleButton(){
+  var slot = document.getElementById('gbtn');
+  if (!slot || !window.google || !google.accounts || !google.accounts.id) return;
+  if (!gsiReady) {
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: onGoogleCredential,
+      // FedCM is where Google Identity Services is heading and the legacy path
+      // is being retired; opting in keeps this working as that lands.
+      use_fedcm_for_prompt: true
+    });
+    gsiReady = true;
+  }
+  google.accounts.id.renderButton(slot, {
+    theme: 'outline', size: 'large', text: 'signin_with', shape: 'pill', logo_alignment: 'left'
+  });
+}
+
+function onGoogleCredential(response){
+  if (!response || !response.credential) return;
+  AIEB.signInWithGoogle(response.credential).then(function(){
+    // Trust the round-trip, not the POST's status code. If the cookie was not
+    // actually stored — blocked outright, a wrong cookie domain — the server
+    // still answers "not signed in" on the follow-up, and rendering the board
+    // with a "Saved to…" chip would be a lie: every later write is dropped.
+    authState = resolveAuthState();
+    if (authState !== 'in') document.getElementById('signinerr').hidden = false;
+    renderAll();
+  });
+}
+
+function doSignOut(){
+  // Stop Google from silently re-authenticating on the next paint; without this
+  // "sign out" bounces straight back to signed in and looks broken.
+  try { if (window.google && google.accounts && google.accounts.id) google.accounts.id.disableAutoSelect(); } catch (e) {}
+  AIEB.signOut().then(function(){ authState = 'out'; renderAll(); });
+}
+
+// The GIS script is async, so it can land before or after the first paint.
+// Poll briefly rather than racing it — the button is the only thing waiting.
+(function waitForGsi(tries){
+  if (window.google && google.accounts && google.accounts.id) { renderAuth(); return; }
+  if (tries > 40) return;
+  setTimeout(function(){ waitForGsi(tries + 1); }, 150);
+})(0);
+
 function renderAll(){
+  renderAuth();
+  // Everything below draws the board, so skip it entirely unless the board is
+  // the visible view — rendering a ladder into a hidden node is wasted work at
+  // best, and one refactor away from leaking it into the sign-in screen.
+  if (authState !== 'in') return;
   maybeGate();
   paintSurf();
   document.getElementById('oprog').innerHTML = overallHTML();
@@ -358,10 +529,15 @@ function renderAll(){
   renderMap();
 }
 renderAll();
-// progress.js paints from localStorage instantly, then checks the server for
-// what was actually BUILT (checkpoints Claude reported). It only fires this when
-// the server knew something this browser didn't — so a repaint here is real news.
-window.addEventListener('aieb:progress-synced', renderAll);
+
+// progress.js answers two different questions on load — "whose board is this"
+// (the session) and "what did they actually build" (the view-token ladder) —
+// and fires this when either lands. Re-deriving authState here rather than
+// trusting a local flag keeps the view honest if a session expired server-side.
+window.addEventListener('aieb:progress-synced', function(){
+  authState = resolveAuthState();
+  renderAll();
+});
 </script>
 </body>
 </html>
