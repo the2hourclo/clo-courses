@@ -1,10 +1,19 @@
 {
-  "_comment": "Storyboard map for meta-create-skill VIDEO 6: How To Create A Skill (CP2's third explainer). 5 diagrams in teaching order, one column each, left to right. The through-line Rashid asked for (2026-07-26): a good skill starts with CLARITY ABOUT HOW YOU ALREADY WORK, not with prompting. Slides 3-5 then name the four inputs (conventions, the ordered steps, a framework you already follow, your gold standard + digital assets) and land each in its locked subfolder, so this deck pays off the four-subfolder legend taught in v1-what-is-a-skill.",
+  "_comment": "Storyboard map for meta-create-skill VIDEO 6: How To Create A Skill (CP2's third explainer). 6 diagrams in teaching order, one column each, left to right. The through-line Rashid asked for (2026-07-26): a good skill starts with CLARITY ABOUT HOW YOU ALREADY WORK, not with prompting.",
+  "hard_rule": "NO SUBFOLDER NAMES IN THIS DECK. Do not reintroduce workflows/, references/, scripts/ or assets/ as destinations here. Rashid, 2026-07-26: 'I don't want people to be confused with workflows assets and references — I just want them to know what to give.' Where each input gets filed is the AI's problem; naming the plumbing at the moment someone is being asked to DO something is what made it confusing. The folder anatomy is taught once, in v1-what-is-a-skill, and is not repeated here. The word 'assets' survives only as plain English for 'your real files', never as a folder path.",
+  "the_five_inputs": [
+    "the steps, in the order you do them",
+    "the framework you already follow",
+    "your gold standard (one real example)",
+    "your assets (the real files it works from)",
+    "the edge cases (exceptions + the other situations the same skill covers)"
+  ],
   "columns": [
     {"label": "1 - CLARITY FIRST", "slides": ["01-clarity-first"]},
     {"label": "2 - IT INTERVIEWS YOU", "slides": ["02-it-interviews-you"]},
-    {"label": "3 - THE FOUR THINGS YOU BRING", "slides": ["03-what-you-bring"]},
+    {"label": "3 - THE FIVE THINGS YOU GIVE IT", "slides": ["03-what-you-give"]},
     {"label": "4 - THE GOLD STANDARD", "slides": ["04-gold-standard"]},
-    {"label": "5 - WIRED IN", "slides": ["05-wired-in"]}
+    {"label": "5 - EDGE CASES + OTHER SITUATIONS", "slides": ["05-edge-cases"]},
+    {"label": "6 - IT ALL GOES IN", "slides": ["06-it-all-goes-in"]}
   ]
 }

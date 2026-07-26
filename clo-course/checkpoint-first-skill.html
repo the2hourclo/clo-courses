@@ -183,16 +183,20 @@ var CONFIG = {
     { type:'video', title:'How to create a skill',
       video:'', slotLabel:'📹 Explainer — coming soon',
       /* The deck's spine is CLARITY FIRST — a good skill starts with how you already work,
-         not with prompting — then names the four inputs and lands each in its locked
-         subfolder, paying off the legend taught in the "What is a skill" deck.
-         (Rashid, 2026-07-26.) */
-      slides: canvas('v6-how-to-create-a-skill', ['01-clarity-first','02-it-interviews-you','03-what-you-bring','04-gold-standard','05-wired-in']),
+         not with prompting — then names the FIVE things the buyer hands over.
+         NO subfolder names anywhere in this deck: where each input gets filed is the AI's
+         problem, and naming workflows//references//assets/ at the moment someone is being
+         asked to DO something read as plumbing. (Rashid, 2026-07-26: "I don't want people
+         confused with workflows assets and references — I just want them to know what to
+         give.") The folder anatomy stays where it belongs, in the "What is a skill" deck. */
+      slides: canvas('v6-how-to-create-a-skill', ['01-clarity-first','02-it-interviews-you','03-what-you-give','04-gold-standard','05-edge-cases','06-it-all-goes-in']),
       slideNotes:[
         'Both rows are the same AI and the same interview. The only thing that changed is what you were able to tell it. Answer <strong>&ldquo;just write it the way I normally do&rdquo;</strong> and it writes a file that says nothing, so it goes on guessing. Answer with the actual rules you work by and the file has something to hold you to.',
         'You never sit down to write a skill. <strong>It interviews you</strong>, and you answer five plain questions about your own job. Follow the arrows across, because each answer becomes a section of the file. The last question matters more than it looks, since the exceptions are where most skills quietly go wrong.',
-        'Four things, and you already have every one of them. <strong>How you want it done</strong>, <strong>the steps in the order you do them</strong>, <strong>a framework you already follow</strong>, and <strong>your gold standard plus the real files</strong>. Each has a home, so the AI knows where to look when it needs one and can leave the rest closed.',
+        'Five things, and you already have every one of them. <strong>The steps</strong> in the order you do them, <strong>the framework</strong> you follow without thinking, <strong>your gold standard</strong>, <strong>your real files</strong>, and <strong>the edge cases</strong>. Read the right-hand column, because that is roughly the level of detail worth giving.',
         'This is the one that does the most work. On the left you describe the output, and every one of those words means something different to you than to the AI, so it guesses again on every run. On the right you hand over <strong>a real thing you already made</strong>. It stops guessing, because it has something to match.',
-        'Here is the finished folder. Read the notes down the right side, because <strong>almost none of it came from the AI</strong>. Your rules, your steps, your framework, your gold standard, your files. The skill is just the place where how you already work finally got written down.'
+        'The part almost everyone skips. On the left, <strong>where your normal way does not apply</strong> — a launch week, a bad month, anything going to a client. On the right, <strong>the other jobs this same skill can cover</strong>. Say both and you get one skill that flexes, instead of five near-copies you have to keep in sync.',
+        'Here is everything you handed over, sitting in one place the AI opens on every run. <strong>Almost none of it came from the AI.</strong> Your steps, your framework, your gold standard, your files, your exceptions. The skill is really just where how you already work finally got written down.'
       ],
       body:'Creating a skill works like the X-Ray in reverse. The <strong>meta-create-skill</strong> skill <strong>interviews you</strong> about how you do the task, writes the playbook, and wires in your own examples so the output sounds like you. Your job is not to prompt it well. Your job is to be clear about how you already work.' },
 
