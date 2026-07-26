@@ -393,6 +393,12 @@ body.activation-mode .container{max-width:620px;width:100%}
 .activation-button:hover{filter:brightness(1.06)}
 .activation-button:focus-visible{outline:3px solid var(--border-ink);outline-offset:3px}
 .activation-button:disabled{opacity:.55;cursor:wait}
+/* Sign-in lane. It sits ABOVE the key form because for most people it is the
+   whole interaction — the key is the fallback, and the layout should say so. */
+.activation-signin{margin-bottom:4px}
+.activation-signin-slot{display:flex;justify-content:center;min-height:44px}
+.activation-or{display:flex;align-items:center;gap:12px;margin:18px 0 16px;color:var(--text-dim);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px}
+.activation-or::before,.activation-or::after{content:"";flex:1;height:1px;background:var(--border)}
 .activation-status{display:none;margin-top:14px;padding:12px 14px;border-radius:9px;font-size:13.5px;line-height:1.5}
 .activation-status.show{display:block}
 .activation-status.working{background:var(--blue-bg);color:#24486f;border:1px solid rgba(59,111,176,.4)}
@@ -405,6 +411,7 @@ body.activation-mode .container{max-width:620px;width:100%}
 .footer{text-align:center;margin-top:38px;padding-top:22px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim)}
 </style>
 <link rel="stylesheet" href="excalifont.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body hidden data-page="get-access">
 <div class="wrap">
@@ -413,13 +420,17 @@ body.activation-mode .container{max-width:620px;width:100%}
   <section id="secure-activation" class="activation-panel" hidden aria-labelledby="activation-title">
     <div class="activation-kicker">Secure device handoff</div>
     <h1 id="activation-title">Connect this device</h1>
-    <p class="activation-intro">If this is the browser you bought in, this device connects by itself&mdash;nothing to enter. Otherwise, paste the license key from your Lemon Squeezy receipt below. It goes directly to the AIEB activation service and Lemon Squeezy&mdash;never through Claude or your chat history.</p>
+    <p class="activation-intro">If this is the browser you bought in, this device connects by itself&mdash;nothing to enter. Otherwise, sign in with the email you bought with and we'll find your subscription for you. Nothing goes through Claude or your chat history.</p>
     <div class="handoff-line" aria-hidden="true">
       <span class="handoff-node">Claude</span><span class="handoff-rail"></span>
       <span class="handoff-node live">AIEB</span><span class="handoff-rail"></span>
       <span class="handoff-node">Skills</span>
     </div>
     <div class="activation-code" id="activation-code"></div>
+    <div class="activation-signin" id="secure-signin" hidden>
+      <div class="activation-signin-slot" id="secure-google-button"></div>
+    </div>
+    <div class="activation-or" id="secure-activation-or" hidden>or use your license key</div>
     <form class="activation-form" id="secure-activation-form">
       <label for="secure-license-key">Lemon Squeezy license key</label>
       <input class="activation-input" id="secure-license-key" name="license_key" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" required placeholder="Paste your key">
@@ -995,7 +1006,7 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
     if (!response.ok || !payload.ok) throw new Error(payload.reason || payload.message || payload.error || 'Connection failed. Please try again.');
     form.hidden = true;
     status.className = 'activation-status show success';
-    status.textContent = body.claim
+    status.textContent = (body.claim || body.google_id_token)
       ? 'Connected — and notice you typed nothing. That’s what you just bought: work that does itself. Close this tab and keep going in Claude; the connection finishes by itself in a few seconds.'
       : 'Connected — you can close this tab. Back in Claude, just keep going; the connection finishes by itself in a few seconds.';
     try { localStorage.setItem('aieb_device_connected_v1', String(Date.now())); } catch (e) {}
@@ -1013,6 +1024,58 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
     history.replaceState({}, '', window.location.pathname + (cleanQuery ? '?' + cleanQuery : '') + window.location.hash);
   }
 
+  // ---- Sign-in lane -------------------------------------------------------
+  // The claim lane below only works in the browser the purchase happened in, and
+  // only for seven days. Past that window the license key used to be the only
+  // way through — and the key is the thing people cannot find. Signing in with
+  // the purchase email lets the server resolve their subscription instead.
+  //
+  // This does not log anyone into anything. The token approves THIS pending
+  // activation code, which Claude opened moments ago and which expires with it.
+  var GOOGLE_CLIENT_ID = '969669674527-l2s0bluvsnroh5ftvd6s8fuv1h4e9gea.apps.googleusercontent.com';
+  var signinWrap = document.getElementById('secure-signin');
+  var signinSlot = document.getElementById('secure-google-button');
+  var orDivider = document.getElementById('secure-activation-or');
+
+  function onGoogleCredential(response){
+    if (!response || !response.credential) return;
+    button.disabled = true;
+    status.className = 'activation-status show working';
+    status.textContent = 'Finding your subscription…';
+    completeActivation({ user_code: userCode, google_id_token: response.credential })
+      .catch(function(error){
+        button.disabled = false;
+        status.className = 'activation-status show error';
+        // The server writes this copy for the buyer (wrong address, lapsed plan,
+        // outage) — relaying it verbatim beats inventing a generic failure here.
+        status.textContent = (error && error.message) || 'That sign-in did not go through — you can use your license key below instead.';
+      });
+  }
+
+  // The GSI script is async, so it may land after this runs. Poll briefly rather
+  // than racing it; if it never arrives (blocked script, offline), the key form
+  // is already on the page and nothing needs to change.
+  (function mountGoogleButton(attempt){
+    if (!window.google || !google.accounts || !google.accounts.id) {
+      if (attempt < 40) setTimeout(function(){ mountGoogleButton(attempt + 1); }, 150);
+      return;
+    }
+    try {
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: onGoogleCredential,
+        use_fedcm_for_prompt: true
+      });
+      google.accounts.id.renderButton(signinSlot, {
+        theme: 'outline', size: 'large', text: 'continue_with', shape: 'pill', logo_alignment: 'left'
+      });
+      signinWrap.hidden = false;
+      orDivider.hidden = false;
+    } catch (e) {
+      // Never let a sign-in convenience take the key form down with it.
+    }
+  })(0);
+
   // Zero-typing lane: this browser holds a purchase claim, so connect with it
   // directly. Any failure falls back to the license-key box below.
   var claim = storedClaim();
@@ -1026,11 +1089,8 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
         clearClaim();
         button.disabled = false;
         status.className = 'activation-status show error';
-        status.textContent = 'Automatic connect didn’t go through — paste your license key below instead (it’s in your Lemon Squeezy receipt).';
-        keyInput.focus();
+        status.textContent = 'Automatic connect didn’t go through — sign in with the email you bought with, or paste your license key below.';
       });
-  } else {
-    keyInput.focus();
   }
 
   form.addEventListener('submit', async function(event){
