@@ -520,7 +520,15 @@ function renderAll(){
   // Everything below draws the board, so skip it entirely unless the board is
   // the visible view — rendering a ladder into a hidden node is wasted work at
   // best, and one refactor away from leaking it into the sign-in screen.
-  if (authState !== 'in') return;
+  //
+  // This MUST match renderAuth's `boardVisible` exactly. It used to read
+  // `!== 'in'`, which un-hid the board container for `local` and then never
+  // populated it: #oprog / #nextbar / #board / #resources are empty in the
+  // markup and this is their only writer. So the fallback state added to
+  // survive an auth outage rendered a page with a header, "Showing this device
+  // only", and nothing else — strictly worse than the wall it replaced,
+  // because the work looked deleted rather than merely hidden.
+  if (authState !== 'in' && authState !== 'local') return;
   maybeGate();
   paintSurf();
   document.getElementById('oprog').innerHTML = overallHTML();

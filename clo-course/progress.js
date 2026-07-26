@@ -250,11 +250,18 @@
   }
 
   // Has the buyer done anything at all? (chosen a surface, finished a step, or stepped into one)
+  // Checks EVERY checkpoint's step position, not just cp1's. This decides the
+  // `local` fallback, so under-counting here walls a real buyer out of a working
+  // board on any auth blip: someone mid-way through checkpoint 2, having never
+  // opened checkpoint 1's wizard, read as "never started".
   function started() {
     if (getSurface()) return true;
     var o = read();
     for (var k in o) { if (o[k]) return true; }
-    return stepInfo('cp1').pos > 0;
+    for (var i = 0; i < CHAIN.length; i++) {
+      if (stepInfo(CHAIN[i]).pos > 0) return true;
+    }
+    return false;
   }
 
   /* ── SERVER SYNC — real build progress, not just clicks ─────────────────────
@@ -382,11 +389,12 @@
   // "what did they actually build" — and either can be absent without the other
   // failing. Both only ever refine an already-painted page.
   function autoSyncSession() {
-    syncCourseProgress().then(function () {
+    return syncCourseProgress().then(function () {
       // Always announce: the board needs to repaint even when nothing changed,
       // because signed-in vs signed-out decides whether it may draw a ladder at
       // all, and it starts out assuming it may not.
       announce();
+      return sessionState;
     });
   }
 
@@ -495,6 +503,12 @@
     if (!signedIn || typeof fetch !== 'function') return;
     if (pushTimer) clearTimeout(pushTimer);
     pushTimer = setTimeout(function () {
+      pushTimer = null;
+      // Re-check at FIRE time, not just at schedule time. Sign out lands inside
+      // the 400 ms window easily — the surface toggle and the Sign out link are
+      // adjacent in the header — and this POST would then write an empty
+      // snapshot over the row the DELETE was about to revoke, last-write-wins.
+      if (!signedIn) return;
       fetch(COURSE_PROGRESS_URL, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
@@ -569,13 +583,24 @@
       var doomed = [];
       for (var i = 0; i < localStorage.length; i++) {
         var k = localStorage.key(i);
-        // The view token is a per-BUYER credential from device activation, not
-        // part of the signed-in session, so it is deliberately left alone.
-        if (k && k.indexOf('aieb_') === 0 && k !== VIEW_TOKEN_KEY) doomed.push(k);
+        if (k && k.indexOf('aieb_') === 0) doomed.push(k);
       }
       for (var j = 0; j < doomed.length; j++) localStorage.removeItem(doomed[j]);
     } catch (e) {}
   }
+  /* THE VIEW TOKEN GOES TOO, and exempting it was a hole. The reasoning for
+     keeping it was that it is a per-BUYER credential from device activation
+     rather than part of the signed-in session — true, and exactly why it must
+     not outlive a sign-out on a shared machine. It names whoever ACTIVATED THIS
+     BROWSER, so leaving it behind let the next person's first load fold the
+     previous buyer's build ladder into their own state, and the markDone wrapper
+     then pushed those rungs into the new account's server row. Nothing ever
+     un-marks, so the victim could not undo it on any device.
+
+     Cost of wiping it: a buyer who signs out and never signs back in stops
+     seeing their verified ladder until they re-activate. That is the correct
+     reading of "sign out" — and a signed-IN buyer does not need the token at
+     all, because the session lane resolves the same ladder server-side. */
 
   var ACCOUNT_HINT_KEY = 'aieb_account_hint';
 
@@ -628,6 +653,10 @@
     // down) the person still expects their board gone from this browser — and a
     // shared machine is exactly where "sign out didn't really sign me out" does
     // damage. The server row is revoked on a best-effort basis after.
+    // Kill any debounced push before it can fire against the row we are about
+    // to revoke. `signedIn = false` below makes the callback a no-op too; both,
+    // because this one is cheap and the failure is silent data loss.
+    if (pushTimer) { clearTimeout(pushTimer); pushTimer = null; }
     clearLocalState();
     signedIn = false;
     sessionState = 'out';
@@ -659,6 +688,17 @@
     syncFromServer: syncFromServer, hasViewToken: function () { return !!viewToken(); }
   };
 
-  autoSync();
-  autoSyncSession();
+  /* THE TWO LANES ARE ORDERED, NOT PARALLEL. The session lane answers "whose
+     board is this"; only once it has answered may the view-token lane fold a
+     ladder, because that token names the buyer who ACTIVATED THIS BROWSER, not
+     the person signed in right now. Fired concurrently, the token lane could
+     resolve first and brand its ladder onto whoever was signed in — and the
+     markDone wrapper would push those rungs into their server row permanently.
+
+     A signed-in person never needs this lane: syncCourseProgress already
+     carries their verified ladder, resolved server-side through the email ->
+     member_ref link. So it is strictly the signed-OUT fallback now. */
+  autoSyncSession().then(function () {
+    if (!signedIn) autoSync();
+  });
 })();
