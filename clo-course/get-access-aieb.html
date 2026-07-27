@@ -481,10 +481,10 @@ body.activation-mode .container{max-width:620px;width:100%}
       <button type="button" class="wiz-navbtn" id="wizBackBtn" onclick="wizNav(-1)">&larr; Back</button>
       <button type="button" class="wiz-navbtn primary" id="wizNextBtn" onclick="wizNav(1)">Next &rarr;</button>
     </div>
-    <!-- Open by default. A buyer only reads this when something has already gone
-         wrong, and asking them to find a toggle first is asking the wrong thing
-         of someone who is stuck (2026-07-26 audit). -->
-    <div id="wizHelp">
+    <!-- Behind its Stuck? toggle, deliberately. Help that is always open tells
+         everyone who is NOT stuck that trouble is expected here, and that reads
+         as a warning label on the product (Rashid, 2026-07-27). -->
+    <div id="wizHelp" hidden>
       <b>Two ways out, fastest first:</b>
       <div class="hrow"><span class="hn">1</span><span>In any Claude chat, type <code>/check-setup</code> (or say <em>"check my setup"</em>) &mdash; Claude diagnoses the connection with you and offers the fix.</span></div>
       <div class="hrow"><span class="hn">2</span><span><a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a> &mdash; describe what you see (a screenshot helps); the builders (and Rashid) are in there.</span></div>
