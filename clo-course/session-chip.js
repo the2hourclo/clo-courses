@@ -40,37 +40,54 @@
     return at > 0 ? raw[0] + "••••" + raw.slice(at) : "";
   }
 
-  function injectStyles() {
+  // A page that already has a top bar gets the chip INSIDE it, as an ordinary
+  // flex child. Floating it over the bar looked exactly like a bug — on the home
+  // page it landed on top of the surface toggle. Only pages with no bar of their
+  // own get the floating version.
+  function hostBar() {
+    return document.querySelector(".topbar, .clo-topbar, header.topbar");
+  }
+
+  function injectStyles(inBar) {
     if (document.getElementById("aieb-session-chip-style")) return;
     var css = document.createElement("style");
     css.id = "aieb-session-chip-style";
-    css.textContent = [
-      "#aieb-session-chip{position:fixed;top:10px;right:14px;z-index:2147483000;",
-      "display:flex;align-items:center;gap:8px;padding:5px 11px;border-radius:999px;",
+    var base = [
+      "#aieb-session-chip{display:flex;align-items:center;gap:8px;",
       "font:500 11.5px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;",
-      "background:rgba(250,250,250,.9);border:1px solid rgba(0,0,0,.09);color:#6b6b6b;",
-      "-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:.72;transition:opacity .18s}",
+      "color:#6b6b6b;opacity:.72;transition:opacity .18s;white-space:nowrap}",
       "#aieb-session-chip:hover{opacity:1}",
       "#aieb-session-chip .dot{width:6px;height:6px;border-radius:50%;background:#3fa66a;flex:none}",
       "#aieb-session-chip button{all:unset;cursor:pointer;text-decoration:underline;",
       "text-underline-offset:2px;color:inherit;font:inherit}",
       "#aieb-session-chip button:hover{color:#191919}",
+      "@media (prefers-color-scheme:dark){#aieb-session-chip{color:#a8a8a8}",
+      "#aieb-session-chip button:hover{color:#f2f2f2}}"
+    ];
+    var floating = [
+      "#aieb-session-chip{position:fixed;top:10px;right:14px;z-index:2147483000;",
+      "padding:5px 11px;border-radius:999px;background:rgba(250,250,250,.9);",
+      "border:1px solid rgba(0,0,0,.09);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}",
       "@media (prefers-color-scheme:dark){#aieb-session-chip{background:rgba(23,23,23,.9);",
-      "border-color:rgba(255,255,255,.12);color:#a8a8a8}#aieb-session-chip button:hover{color:#f2f2f2}}",
+      "border-color:rgba(255,255,255,.12)}}",
       "@media (max-width:640px){#aieb-session-chip{top:auto;bottom:10px;right:10px;font-size:11px}}"
-    ].join("");
+    ];
+    var inBarOnly = ["#aieb-session-chip{margin-left:auto;flex:none}"];
+    css.textContent = base.concat(inBar ? inBarOnly : floating).join("");
     document.head.appendChild(css);
   }
 
   function render(label) {
-    injectStyles();
+    var bar = hostBar();
+    injectStyles(Boolean(bar));
     var chip = document.createElement("div");
     chip.id = "aieb-session-chip";
     chip.innerHTML =
       '<span class="dot" aria-hidden="true"></span>' +
       '<span>' + (label ? "Saved to " + label : "Progress saving") + "</span>" +
       '<button type="button" id="aieb-session-signout">Sign out</button>';
-    document.body.appendChild(chip);
+    if (bar) bar.appendChild(chip);
+    else document.body.appendChild(chip);
 
     document.getElementById("aieb-session-signout").addEventListener("click", function () {
       // Clear locally FIRST and unconditionally, exactly as progress.js does. If
