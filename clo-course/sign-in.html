@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Sign in — AI Employee Builder</title>
+<style>
+  :root{
+    --bg:#0f0f0f; --surface:#171717; --surface-2:#1e1e1e; --border:#2a2a2a; --border-2:#343434;
+    --text:#f2f2f2; --text-muted:#b4b4b4; --text-dim:#8a8a8a; --accent:#d97757; --radius:14px;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#fafafa; --surface:#fff; --surface-2:#f4f4f4; --border:#e6e6e6; --border-2:#dcdcdc;
+           --text:#191919; --text-muted:#555; --text-dim:#777; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+       background:var(--bg);color:var(--text);
+       font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .card{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--border);
+        border-radius:var(--radius);padding:32px 28px;text-align:center}
+  .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:800}
+  h1{font-size:22px;line-height:1.25;margin:12px 0 8px;letter-spacing:-.3px}
+  p{margin:0 0 18px;color:var(--text-muted);font-size:14.5px}
+  .slot{display:flex;justify-content:center;min-height:44px;margin:22px 0 6px}
+  .note{font-size:12.5px;color:var(--text-dim);margin:16px 0 0;line-height:1.55}
+  .err{display:none;margin-top:14px;padding:10px 12px;border-radius:10px;font-size:13.5px;
+       background:rgba(217,119,87,.12);border:1px solid rgba(217,119,87,.35);color:var(--text)}
+  .err.show{display:block}
+  .fallback{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim)}
+  .fallback a{color:var(--accent)}
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="kicker">AI Employee Builder</div>
+    <h1>Sign in to pick up where you left off</h1>
+    <p>Use the Google account you bought with. Your progress follows you to any device you sign in on.</p>
+
+    <div class="slot" id="slot"></div>
+    <div class="err" id="err"></div>
+
+    <p class="note">One account, one sign-in. You won't be asked again on this device.</p>
+
+    <div class="fallback">
+      Trouble signing in? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Ask in the community</a> — Rashid is in there.
+    </div>
+  </main>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="progress.js"></script>
+<script>
+(function(){
+  var GOOGLE_CLIENT_ID = '969669674527-l2s0bluvsnroh5ftvd6s8fuv1h4e9gea.apps.googleusercontent.com';
+  var slot = document.getElementById('slot');
+  var err  = document.getElementById('err');
+
+  // Where they were headed before the wall stopped them. Same-origin paths only:
+  // an open redirect on a sign-in page is how a phishing link borrows your domain.
+  function nextPath(){
+    var raw = new URLSearchParams(location.search).get('next') || '/clo-course/checkpoint-map.html';
+    if (raw.charAt(0) !== '/' || raw.charAt(1) === '/') return '/clo-course/checkpoint-map.html';
+    return raw;
+  }
+
+  function fail(message){
+    err.textContent = message;
+    err.className = 'err show';
+  }
+
+  function onCredential(response){
+    if (!response || !response.credential) return;
+    err.className = 'err';
+    if (!window.AIEB || typeof AIEB.signInWithGoogle !== 'function') {
+      fail('Sign-in is not loaded yet. Refresh the page and try once more.');
+      return;
+    }
+    AIEB.signInWithGoogle(response.credential).then(function(ok){
+      // Trust the round trip, not the POST status. If the cookie never actually
+      // stored — blocked third-party cookies, a wrong domain — bouncing them back
+      // through the wall would loop forever, and a redirect loop reads as "the
+      // site is broken" rather than "your browser blocked the cookie".
+      if (!ok) {
+        fail('That signed in with Google, but your browser did not keep the session. Allow cookies for chiefleverageofficers.com and try again.');
+        return;
+      }
+      window.location.replace(nextPath());
+    }).catch(function(){
+      fail('Something went wrong signing you in. Try once more.');
+    });
+  }
+
+  // The GSI script is async, so it can land after this runs. Poll briefly rather
+  // than racing it.
+  (function waitForGsi(tries){
+    if (window.google && google.accounts && google.accounts.id) {
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: onCredential,
+        use_fedcm_for_prompt: true
+      });
+      google.accounts.id.renderButton(slot, {
+        theme: 'outline', size: 'large', text: 'signin_with', shape: 'pill', logo_alignment: 'left'
+      });
+      return;
+    }
+    if (tries > 40) {
+      fail('Google sign-in could not load — an extension or network filter may be blocking accounts.google.com.');
+      return;
+    }
+    setTimeout(function(){ waitForGsi(tries + 1); }, 150);
+  })(0);
+})();
+</script>
+</body>
+</html>
