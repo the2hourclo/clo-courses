@@ -172,9 +172,12 @@ var CONFIG = {
   steps: [
     { type:'video', title:'Review + harden',
       video:'', slotLabel:'📹 Explainer — coming soon',
-      demoSlot:true, demoLabel:'🎬 Demo · watch me harden one — coming soon',
+      body:'Before you let it run alone, tighten it. <strong>Hardening</strong> makes the skill check its own work and fail loudly instead of quietly, so you can trust the output without re-reading every line. An unhardened skill does not break — it hands you something slightly wrong and says nothing.' },
+
+    { type:'build', title:'Harden it — do it',
+      video:'', demoSlot:true, demoLabel:'🎬 Demo · watch me harden one — coming soon',
       command:'Harden this skill so it checks its own work and fails loudly instead of handing me something wrong. Walk me through it: find the ways it could quietly produce a bad result, then bake in a self-check that stops and tells me which line is wrong, plus a set of tests so the same mistake can never come back silently.',
-      body:'Before you let it run alone, tighten it. <strong>Hardening</strong> makes the skill check its own work and fail loudly instead of quietly, so you can trust the output without re-reading every line. Just say <em>&ldquo;harden this skill&rdquo;</em> — the AI bakes in a self-check gate and a set of tests (an eval scorecard) so a bad result gets caught before it ever reaches you.',
+      body:'Say <em>&ldquo;harden this skill&rdquo;</em> and the AI bakes in a self-check gate and a set of tests (an eval scorecard), so a bad result gets caught before it ever reaches you.',
       does:[
         'It reads your skill and lists <strong>the ways it could go wrong quietly</strong> — a made-up number, a missing section, the wrong tone. Quietly is the word that matters: loud failures you already catch.',
         'You confirm which of those actually matter. <strong>Some &ldquo;errors&rdquo; are fine</strong>, and only you know which.',
@@ -186,9 +189,12 @@ var CONFIG = {
 
     { type:'video', title:'Build a harness',
       video:'', slotLabel:'📹 Explainer — coming soon',
-      demoSlot:true, demoLabel:'🎬 Demo · watch me wrap the rig — coming soon',
+      body:'A <strong>harness</strong> is the set of guardrails <em>around</em> a skill that hold its quality steady when you are not watching — an independent reviewer, a capped fix-and-retry loop, and a reality-check that confirms the work actually got done. Hardening makes the skill check itself; the harness is the second set of eyes that catches what it missed.' },
+
+    { type:'build', title:'Build the harness — do it',
+      video:'', demoSlot:true, demoLabel:'🎬 Demo · watch me wrap the rig — coming soon',
       command:'Build a harness around this skill so its quality holds when I am not watching. I want an independent reviewer that did not write the output, a fix-and-retry loop with a hard cap so it can never run away, and a final check that confirms the work actually landed where it should instead of trusting what the AI reported.',
-      body:'A <strong>harness</strong> is the set of guardrails and checks <em>around</em> a skill that hold its quality steady when you are not watching — an independent reviewer, a capped fix-and-retry loop, and a reality-check that confirms the work actually got done. Say <em>&ldquo;build a harness around this&rdquo;</em> and the AI builds the rig. Hardening makes the skill check itself; the harness is the second set of eyes that catches what it missed.',
+      body:'Say <em>&ldquo;build a harness around this&rdquo;</em> and the AI builds the rig around your skill.',
       does:[
         'It adds an <strong>independent reviewer</strong> — a second pass that did not write the output, so it has no reason to like it.',
         'It wires a <strong>fix-and-retry loop</strong> with a hard cap, usually two or three tries. The cap is the point: without one a bad run can loop forever.',

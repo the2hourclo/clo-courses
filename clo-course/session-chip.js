@@ -44,8 +44,15 @@
   // flex child. Floating it over the bar looked exactly like a bug — on the home
   // page it landed on top of the surface toggle. Only pages with no bar of their
   // own get the floating version.
+  //
+  // ORDER MATTERS. `.site-topbar` is the real page header — the sticky one with
+  // the logo, running the full width. `.topbar` on a checkpoint page is a row
+  // INSIDE the centred content column, so matching it first parked the account
+  // halfway down the page next to "Back to board" instead of top-right where it
+  // belongs on every other page. Same place on every page or it is not a
+  // convention (Rashid, 2026-07-28).
   function hostBar() {
-    return document.querySelector(".topbar, .clo-topbar, header.topbar");
+    return document.querySelector("header.site-topbar, .site-topbar, .clo-topbar, .topbar");
   }
 
   function injectStyles(inBar) {
