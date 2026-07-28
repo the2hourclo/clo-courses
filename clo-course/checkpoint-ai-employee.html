@@ -111,6 +111,20 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .cp-help p{margin:.5rem 0 0;line-height:1.55}
 .cp-help code{background:rgba(127,127,127,.12);padding:.05em .3em;border-radius:3px}
 .cp-help a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+/* "What this does" — the placeholder that carries a step until its video exists.
+   A buyer staring at a command they have never run needs to know what is about to
+   happen before they paste it, and "coming soon" answers nothing. Numbered, short,
+   present tense, one beat per line. (Rashid, 2026-07-27) */
+.does{margin:18px 0 4px;padding:15px 17px 16px;border:1px solid var(--border-2);border-radius:var(--radius-lg);background:var(--surface-2,rgba(127,127,127,.04))}
+.does-h{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px}
+.does ol{margin:0;padding-left:0;list-style:none;counter-reset:doesc}
+.does li{counter-increment:doesc;position:relative;padding-left:30px;margin:0 0 9px;font-size:14px;line-height:1.55;color:var(--text-muted)}
+.does li:last-child{margin-bottom:0}
+.does li::before{content:counter(doesc);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:6px;
+  background:color-mix(in srgb,var(--cp) 14%,transparent);border:1px solid color-mix(in srgb,var(--cp) 30%,transparent);
+  color:var(--cp);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.does li strong{color:var(--text);font-weight:700}
+.does-foot{margin-top:11px;font-size:12.5px;color:var(--text-dim);line-height:1.5}
 </style>
 <link rel="stylesheet" href="excalifont.css">
 </head>
@@ -163,12 +177,28 @@ var CONFIG = {
       video:'', slotLabel:'&#128249; Explainer &mdash; coming soon',
       demoSlot:true, demoLabel:'&#127916; Demo &middot; watch me schedule one &mdash; coming soon',
       command:'Put this skill on a schedule so it runs on its own and reports back. First check it has earned it &mdash; that it is proven on real work and safe to run unattended. Then pin the cadence, where it gets its input, where the result lands, and how I get notified. Anything risky must draft for my approval instead of sending on its own.',
-      body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask &mdash; say <em>&ldquo;schedule this to run every Monday&rdquo;</em>. Anything risky (like sending to a client) drafts for your approval instead of firing on its own. <strong>Unattended is not unsupervised</strong> &mdash; you still see everything, you just stop being the one who starts it.' },
+      body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask &mdash; say <em>&ldquo;schedule this to run every Monday&rdquo;</em>. Anything risky (like sending to a client) drafts for your approval instead of firing on its own. <strong>Unattended is not unsupervised</strong> &mdash; you still see everything, you just stop being the one who starts it.',
+      does:[
+        'It checks the skill has <strong>earned</strong> a schedule — proven on real work, hardened, safe to run unattended. If it has not, it says so and stops.',
+        'You pick <strong>the cadence</strong>: every Monday, every morning, or on a trigger like a new file arriving.',
+        'It pins <strong>where the input comes from</strong> and <strong>where the result lands</strong>, so nothing runs against a folder it cannot find.',
+        'It sets <strong>how you get told</strong> — a message, an email, a file waiting for you.',
+        'Anything risky (sending to a client, spending money) is set to <strong>draft for your approval</strong>, never to fire on its own.'
+      ],
+      doesFoot:'Unattended is not unsupervised. You still see everything — you just stop being the one who starts it.' },
 
     { type:'build', title:'Let it run a full cycle without you',
       video:'', demoSlot:true, demoLabel:'&#127916; Demo &middot; watch a full unattended run &mdash; coming soon',
       command:'Run my AI Employee end to end on a real job without me steering any step. Then show me what it produced, what it checked, and anything it flagged for my approval.',
-      body:'Hand it a real job and <strong>stay out of the way</strong>. It pulls what it needs, does the work, runs its own checks, and comes back with the result &mdash; or with a question, if something genuinely needed your call. This is the moment the thing you built stops being a tool you operate and starts being a function that runs.' },
+      body:'Hand it a real job and <strong>stay out of the way</strong>. It pulls what it needs, does the work, runs its own checks, and comes back with the result &mdash; or with a question, if something genuinely needed your call. This is the moment the thing you built stops being a tool you operate and starts being a function that runs.',
+      does:[
+        'You hand it <strong>one real job</strong> and then leave it alone. Steering it halfway through defeats the test.',
+        'It pulls what it needs, runs every step in order, and <strong>does not come back to you between steps</strong>.',
+        'Its own checks run on the output before you ever see it.',
+        'It comes back with <strong>the finished result</strong>, what it checked, and anything it flagged for your call.',
+        'You review once, at the end. <strong>That is the only place you appear now.</strong>'
+      ],
+      doesFoot:'If it stops and asks you something mid-run, that is fine — note what it asked, because that is the next thing worth hardening.' },
 
     { type:'gate', title:'It runs on its own',
       body:'Confirm the system ran a whole function without you kicking off each step &mdash; and that when you corrected it, the fix stuck for next time.',
@@ -275,6 +305,11 @@ function render(){
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
   if (s.body){ h += '<p>'+s.body+'</p>'; }
   if (s.command && !cmdTop){ h += cmdHTML(s); }
+  if (s.does){
+    h += '<div class="does"><div class="does-h">What this does, step by step</div><ol>' +
+         s.does.map(function(d){ return '<li>'+d+'</li>'; }).join('') + '</ol>' +
+         (s.doesFoot ? '<div class="does-foot">'+s.doesFoot+'</div>' : '') + '</div>';
+  }
   if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
 
   // nav

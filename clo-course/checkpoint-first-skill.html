@@ -114,6 +114,20 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .cp-help p{margin:.5rem 0 0;line-height:1.55}
 .cp-help code{background:rgba(127,127,127,.12);padding:.05em .3em;border-radius:3px}
 .cp-help a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+/* "What this does" — the placeholder that carries a step until its video exists.
+   A buyer staring at a command they have never run needs to know what is about to
+   happen before they paste it, and "coming soon" answers nothing. Numbered, short,
+   present tense, one beat per line. (Rashid, 2026-07-27) */
+.does{margin:18px 0 4px;padding:15px 17px 16px;border:1px solid var(--border-2);border-radius:var(--radius-lg);background:var(--surface-2,rgba(127,127,127,.04))}
+.does-h{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px}
+.does ol{margin:0;padding-left:0;list-style:none;counter-reset:doesc}
+.does li{counter-increment:doesc;position:relative;padding-left:30px;margin:0 0 9px;font-size:14px;line-height:1.55;color:var(--text-muted)}
+.does li:last-child{margin-bottom:0}
+.does li::before{content:counter(doesc);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:6px;
+  background:color-mix(in srgb,var(--cp) 14%,transparent);border:1px solid color-mix(in srgb,var(--cp) 30%,transparent);
+  color:var(--cp);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.does li strong{color:var(--text);font-weight:700}
+.does-foot{margin-top:11px;font-size:12.5px;color:var(--text-dim);line-height:1.5}
 </style>
 <link rel="stylesheet" href="excalifont.css">
 </head>
@@ -217,7 +231,15 @@ var CONFIG = {
     { type:'build', title:'Turn 1 real process into a skill',
       video:'', demoSlot:true, demoLabel:'🎬 Demo · watch me create one — coming soon',
       command:'/ai-employee-builder:meta-create-skill',
-      body:'Pick <strong>one</strong> repetitive task from your X-Ray. Run the command above (or just say <em>&ldquo;build me a skill for this&rdquo;</em>). The AI interviews you, drafts the skill, and you refine it together until the output is right. <strong>You just answer its questions.</strong>' },
+      body:'Pick <strong>one</strong> repetitive task from your X-Ray. Run the command above (or just say <em>&ldquo;build me a skill for this&rdquo;</em>). The AI interviews you, drafts the skill, and you refine it together until the output is right. <strong>You just answer its questions.</strong>',
+      does:[
+        'It <strong>interviews you</strong> about the task — the steps in the order you do them, and the rules you follow without thinking.',
+        'It asks for <strong>a real example you already made</strong> — your gold standard. This is the step that does the most work.',
+        'It asks where your normal way <strong>does not</strong> apply, because the exceptions are where most skills quietly go wrong.',
+        'It writes the skill file, then <strong>shows you the plan before building</strong>.',
+        'You run it once on something real and correct what is off. It folds the correction in.'
+      ],
+      doesFoot:'About 20–30 minutes for your first one. Pick a boring, repetitive task — not your hardest one.' },
 
     /* Self-improvement belongs HERE — the moment the buyer first RUNS a skill — not at the
        finish line. It's the feedback loop that makes every later run better, so teaching it
@@ -348,6 +370,11 @@ function render(){
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
   if (s.body && !narrated){ h += '<p>'+s.body+'</p>'; }
   if (s.command && !cmdTop){ h += cmdHTML(s); }
+  if (s.does){
+    h += '<div class="does"><div class="does-h">What this does, step by step</div><ol>' +
+         s.does.map(function(d){ return '<li>'+d+'</li>'; }).join('') + '</ol>' +
+         (s.doesFoot ? '<div class="does-foot">'+s.doesFoot+'</div>' : '') + '</div>';
+  }
   if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
 
   // nav

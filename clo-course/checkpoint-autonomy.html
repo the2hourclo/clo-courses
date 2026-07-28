@@ -111,6 +111,20 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .cp-help p{margin:.5rem 0 0;line-height:1.55}
 .cp-help code{background:rgba(127,127,127,.12);padding:.05em .3em;border-radius:3px}
 .cp-help a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+/* "What this does" — the placeholder that carries a step until its video exists.
+   A buyer staring at a command they have never run needs to know what is about to
+   happen before they paste it, and "coming soon" answers nothing. Numbered, short,
+   present tense, one beat per line. (Rashid, 2026-07-27) */
+.does{margin:18px 0 4px;padding:15px 17px 16px;border:1px solid var(--border-2);border-radius:var(--radius-lg);background:var(--surface-2,rgba(127,127,127,.04))}
+.does-h{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px}
+.does ol{margin:0;padding-left:0;list-style:none;counter-reset:doesc}
+.does li{counter-increment:doesc;position:relative;padding-left:30px;margin:0 0 9px;font-size:14px;line-height:1.55;color:var(--text-muted)}
+.does li:last-child{margin-bottom:0}
+.does li::before{content:counter(doesc);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:6px;
+  background:color-mix(in srgb,var(--cp) 14%,transparent);border:1px solid color-mix(in srgb,var(--cp) 30%,transparent);
+  color:var(--cp);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.does li strong{color:var(--text);font-weight:700}
+.does-foot{margin-top:11px;font-size:12.5px;color:var(--text-dim);line-height:1.5}
 </style>
 <link rel="stylesheet" href="excalifont.css">
 </head>
@@ -160,13 +174,29 @@ var CONFIG = {
       video:'', slotLabel:'📹 Explainer — coming soon',
       demoSlot:true, demoLabel:'🎬 Demo · watch me harden one — coming soon',
       command:'Harden this skill so it checks its own work and fails loudly instead of handing me something wrong. Walk me through it: find the ways it could quietly produce a bad result, then bake in a self-check that stops and tells me which line is wrong, plus a set of tests so the same mistake can never come back silently.',
-      body:'Before you let it run alone, tighten it. <strong>Hardening</strong> makes the skill check its own work and fail loudly instead of quietly, so you can trust the output without re-reading every line. Just say <em>&ldquo;harden this skill&rdquo;</em> — the AI bakes in a self-check gate and a set of tests (an eval scorecard) so a bad result gets caught before it ever reaches you.' },
+      body:'Before you let it run alone, tighten it. <strong>Hardening</strong> makes the skill check its own work and fail loudly instead of quietly, so you can trust the output without re-reading every line. Just say <em>&ldquo;harden this skill&rdquo;</em> — the AI bakes in a self-check gate and a set of tests (an eval scorecard) so a bad result gets caught before it ever reaches you.',
+      does:[
+        'It reads your skill and lists <strong>the ways it could go wrong quietly</strong> — a made-up number, a missing section, the wrong tone. Quietly is the word that matters: loud failures you already catch.',
+        'You confirm which of those actually matter. <strong>Some &ldquo;errors&rdquo; are fine</strong>, and only you know which.',
+        'It writes a <strong>self-check into the skill file itself</strong>, so every future run checks its own output before handing it to you.',
+        'It writes a small set of <strong>tests</strong> — real examples with a known right answer — so the same mistake can never come back unnoticed.',
+        'It runs those tests once in front of you, and you watch it <strong>stop on a bad one</strong> instead of passing it through.'
+      ],
+      doesFoot:'About 10–15 minutes. You answer questions; you write nothing.' },
 
     { type:'video', title:'Build a harness',
       video:'', slotLabel:'📹 Explainer — coming soon',
       demoSlot:true, demoLabel:'🎬 Demo · watch me wrap the rig — coming soon',
       command:'Build a harness around this skill so its quality holds when I am not watching. I want an independent reviewer that did not write the output, a fix-and-retry loop with a hard cap so it can never run away, and a final check that confirms the work actually landed where it should instead of trusting what the AI reported.',
-      body:'A <strong>harness</strong> is the set of guardrails and checks <em>around</em> a skill that hold its quality steady when you are not watching — an independent reviewer, a capped fix-and-retry loop, and a reality-check that confirms the work actually got done. Say <em>&ldquo;build a harness around this&rdquo;</em> and the AI builds the rig. Hardening makes the skill check itself; the harness is the second set of eyes that catches what it missed.' },
+      body:'A <strong>harness</strong> is the set of guardrails and checks <em>around</em> a skill that hold its quality steady when you are not watching — an independent reviewer, a capped fix-and-retry loop, and a reality-check that confirms the work actually got done. Say <em>&ldquo;build a harness around this&rdquo;</em> and the AI builds the rig. Hardening makes the skill check itself; the harness is the second set of eyes that catches what it missed.',
+      does:[
+        'It adds an <strong>independent reviewer</strong> — a second pass that did not write the output, so it has no reason to like it.',
+        'It wires a <strong>fix-and-retry loop</strong> with a hard cap, usually two or three tries. The cap is the point: without one a bad run can loop forever.',
+        'It adds a <strong>reality check</strong> that confirms the work actually landed — the file really saved, the draft really exists — instead of trusting the AI&rsquo;s own report.',
+        'It runs the whole rig once and shows you what each layer caught.',
+        'Anything the harness cannot fix on its own <strong>comes to you</strong> rather than shipping.'
+      ],
+      doesFoot:'Hardening makes the skill check itself. The harness is the second set of eyes.' },
 
     { type:'gate', title:'It catches its own mistakes',
       body:'Make the skill fail on purpose — feed it something that should trip the self-check — and confirm it stops and tells you, instead of handing you a wrong answer quietly.',
@@ -272,6 +302,11 @@ function render(){
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
   if (s.body){ h += '<p>'+s.body+'</p>'; }
   if (s.command && !cmdTop){ h += cmdHTML(s); }
+  if (s.does){
+    h += '<div class="does"><div class="does-h">What this does, step by step</div><ol>' +
+         s.does.map(function(d){ return '<li>'+d+'</li>'; }).join('') + '</ol>' +
+         (s.doesFoot ? '<div class="does-foot">'+s.doesFoot+'</div>' : '') + '</div>';
+  }
   if (s.gate){ h += '<div class="gate"><div class="gl">🔓 Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
 
   // nav
