@@ -172,7 +172,7 @@ var CONFIG = {
   steps: [
     { type:'video', title:'Review + harden',
       video:'', slotLabel:'📹 Explainer — coming soon',
-      body:'Before you let it run alone, tighten it. <strong>Hardening</strong> makes the skill check its own work and fail loudly instead of quietly, so you can trust the output without re-reading every line. An unhardened skill does not break — it hands you something slightly wrong and says nothing.' },
+      body:'Before you let it run alone, tighten it. <strong>Hardening</strong> makes the skill check its own work and fail loudly instead of quietly, so you can trust the output without re-reading every line. An unhardened skill does not break — it hands you something slightly wrong and says nothing. Hardening is really just <strong>writing down the rules you already apply in your head</strong>, so the skill can hold itself to them.' },
 
     { type:'build', title:'Harden it — do it',
       video:'', demoSlot:true, demoLabel:'🎬 Demo · watch me harden one — coming soon',
@@ -189,7 +189,7 @@ var CONFIG = {
 
     { type:'video', title:'Build a harness',
       video:'', slotLabel:'📹 Explainer — coming soon',
-      body:'A <strong>harness</strong> is the set of guardrails <em>around</em> a skill that hold its quality steady when you are not watching — an independent reviewer, a capped fix-and-retry loop, and a reality-check that confirms the work actually got done. Hardening makes the skill check itself; the harness is the second set of eyes that catches what it missed.' },
+      body:'Hardening taught the skill your rules. But some failures are <strong>invisible from the inside</strong> — a draft can follow every rule you wrote and still read like a robot, and a skill that reports &ldquo;saved&rdquo; cannot tell you the file isn&rsquo;t there. A <strong>harness</strong> is the rig <em>around</em> the skill for exactly those: an independent reviewer that never saw the work written, a capped fix-and-retry loop, and a reality-check that goes and looks instead of trusting the report.' },
 
     { type:'build', title:'Build the harness — do it',
       video:'', demoSlot:true, demoLabel:'🎬 Demo · watch me wrap the rig — coming soon',
@@ -202,7 +202,7 @@ var CONFIG = {
         'It runs the whole rig once and shows you what each layer caught.',
         'Anything the harness cannot fix on its own <strong>comes to you</strong> rather than shipping.'
       ],
-      doesFoot:'Hardening makes the skill check itself. The harness is the second set of eyes.' },
+      doesFoot:'Hardening teaches the skill <strong>your rules</strong>, so it can catch itself breaking them. A harness exists for the failures <strong>no skill can see in itself</strong>.' },
 
     { type:'gate', title:'It catches its own mistakes',
       body:'Make the skill fail on purpose — feed it something that should trip the self-check — and confirm it stops and tells you, instead of handing you a wrong answer quietly.',
