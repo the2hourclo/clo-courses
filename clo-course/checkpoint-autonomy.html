@@ -48,6 +48,9 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .step h2{font-family:var(--font-display);font-size:23px;font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:11px}
 .step p{color:var(--text-muted);font-size:15px;line-height:1.6;margin-bottom:12px}
 .step p:last-child{margin-bottom:0}
+/* On a NARRATED deck the body copy moves ABOVE the slides (it opens the step) and the
+   changing per-slide narration takes the spot under the deck — see render(). */
+.step p.lead{color:var(--text);font-size:15.5px;margin-bottom:14px}
 .video{position:relative;width:100%;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border-2);margin:4px 0 16px;background:#000}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-slot{position:relative;width:100%;padding-top:52%;border-radius:var(--radius);border:1px dashed var(--border-2);margin:4px 0 16px;background:var(--surface-2)}
@@ -163,7 +166,15 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
    To build another checkpoint: copy this file, change CONFIG, done.
    Each step: { type:'video'|'build'|'gate', title, body(HTML),
                 video?:embedURL, command?:'do this in Claude', gate?:HTML }
+                slides?:[png paths] — use canvas() below.
+                slideNotes?:[HTML] — one per slide, printed UNDER the deck and
+                  swapped as the reader navigates, so the prose walks them through
+                  the slide they're on. A deck with notes moves its `body` copy
+                  ABOVE the deck (it becomes the step's opening line). }
    ═══════════════════════════════════════════════════════════════ */
+function canvas(dir, names){
+  return names.map(function(n){ return '../meta-create-skill/canvases/' + dir + '/slides/' + n + '.png'; });
+}
 var CONFIG = {
   id: 'cp4',
   name: 'Make it reliable',
@@ -172,6 +183,17 @@ var CONFIG = {
   steps: [
     { type:'video', title:'Review + harden',
       video:'', slotLabel:'📹 Explainer — coming soon',
+      /* Every slide in this deck is about A STATED RULE the skill can check itself against.
+         Anything the skill has no way to know about itself belongs in the harness deck. */
+      slides: canvas('v7-harden', ['01-the-quiet-failure','02-your-rules-are-in-your-head',
+        '03-written-into-the-file','04-it-stops-itself','05-a-fix-that-stays-fixed']),
+      slideNotes:[
+        'Two bad runs, side by side. The one on the left crashes, and you already handle that &mdash; you see it, you fix it, nothing leaves the building. Look at the right-hand one instead, because it came back clean, reads perfectly, and has <strong>one number in it that was never in your data</strong>. That is the run that reaches a client.',
+        'Read the bubble first. Those three rules are real, you apply every one of them to every draft, and you have never once written them down. Now look at the file next to it. The section where they would live is <strong>empty</strong>, and that file is the only thing the skill ever reads.',
+        'Same file, one section longer. The three rules from your head are now sitting on disk, and that alone is most of what hardening means. What matters just as much is the column on the right &mdash; there is now <strong>a step between writing the draft and handing it over</strong>, and that step did not exist before.',
+        'The fabricated number from the first slide, run again against the rule you just wrote. It stops, points at the line, and names which rule it broke. <strong>Nothing else was involved</strong> &mdash; no second AI, no extra tools. It read its own file and checked its own output.',
+        'Five inputs where you already know the right answer, run every time the skill changes. Four green, and the one in red is the interesting one. You edited a line on Tuesday, rule one quietly stopped firing, and <strong>you found out on Tuesday instead of from a client</strong>.'
+      ],
       body:'Before you let it run alone, tighten it. <strong>Hardening</strong> makes the skill check its own work and fail loudly instead of quietly, so you can trust the output without re-reading every line. An unhardened skill does not break — it hands you something slightly wrong and says nothing. Hardening is really just <strong>writing down the rules you already apply in your head</strong>, so the skill can hold itself to them.' },
 
     { type:'build', title:'Harden it — do it',
@@ -189,6 +211,18 @@ var CONFIG = {
 
     { type:'video', title:'Build a harness',
       video:'', slotLabel:'📹 Explainer — coming soon',
+      /* Every slide here is about something the skill CANNOT KNOW ABOUT ITSELF. A slide about
+         a stated rule belongs in the harden deck. Slide 01 is the seam that keeps the two
+         decks from collapsing into each other — it was drawn first, and the rest calibrate to it. */
+      slides: canvas('v8-harness', ['01-what-it-cannot-see','02-it-cannot-judge-its-own-work',
+        '03-the-capped-loop','04-trust-nothing-it-reports','05-the-rig-around-the-skill']),
+      slideNotes:[
+        'Three bad drafts thrown at the skill you just hardened. The first one breaks a rule that is written in the file, so it gets caught &mdash; that is hardening working exactly as designed. Now read the other two, because <strong>hardening did its job and they still got through</strong>. Nothing was broken. There was no rule to break.',
+        'The same draft, read twice. On the left, the one that wrote it says it reads well, and it is stuck in a closed loop &mdash; it chose those words, so it cannot hear them. On the right, a second one reads it cold and catches the tone in a single pass. <strong>It is not smarter. It just never saw the words being chosen.</strong>',
+        'The reviewer sends it back, the skill fixes it, the reviewer reads it again. On the left that loop has a floor under it: three tries, then it stops and brings you the draft with the note attached. On the right there is no floor, and it is still going at try 47. <strong>A runaway loop does not look like a failure &mdash; it looks like it is still working.</strong>',
+        'On the left, what it told you. On the right, what is actually in the folder. It did not lie to you, it reported what it meant to do, and <strong>no rule in the file could have caught this because the skill never looked</strong>. So the harness goes and opens the folder itself.',
+        'Everything at once. Your rules are drawn <strong>inside</strong> the skill&rsquo;s file, and the three harness pieces sit <strong>outside</strong> it, in the dashed box, touching nothing in that file. Read the geometry rather than the labels, because that is the whole distinction. One arrow leaves, carrying only what genuinely needed you.'
+      ],
       body:'Hardening taught the skill your rules. But some failures are <strong>invisible from the inside</strong> — a draft can follow every rule you wrote and still read like a robot, and a skill that reports &ldquo;saved&rdquo; cannot tell you the file isn&rsquo;t there. A <strong>harness</strong> is the rig <em>around</em> the skill for exactly those: an independent reviewer that never saw the work written, a capped fix-and-retry loop, and a reality-check that goes and looks instead of trusting the report.' },
 
     { type:'build', title:'Build the harness — do it',
@@ -294,6 +328,11 @@ function render(){
   eta.textContent = s.type==='gate' ? 'the gate' : (s.optional ? 'optional — skip anytime' : '');
   fill.style.width = Math.round(100*(pos+1)/n)+'%';
 
+  /* A NARRATED deck carries one note per slide, so the changing narration belongs directly
+     under the deck. The step's own body copy then moves ABOVE the slides and reads as the
+     opening line. Un-narrated steps keep the body below the visual, exactly as before. */
+  var narrated = !!(s.slides && s.slideNotes && window.AIEBSlides);
+
   /* A deck pushes anything after it a long way down the page, so when a step has both a
      deck and a command the command goes first. Deck-less steps keep it after the body. */
   var cmdTop = !!(s.slides && s.command && window.AIEBSlides);
@@ -301,12 +340,14 @@ function render(){
   var h = '<div class="step">';
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
+  if (narrated && s.body){ h += '<p class="lead">'+s.body+'</p>'; }
+  if (cmdTop){ h += cmdHTML(s); }
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.slides && window.AIEBSlides){ h += '<div id="svMount"></div>'; }
   else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
   if (s.demo){ h += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
-  if (s.body){ h += '<p>'+s.body+'</p>'; }
+  if (s.body && !narrated){ h += '<p>'+s.body+'</p>'; }
   if (s.command && !cmdTop){ h += cmdHTML(s); }
   if (s.does){
     h += '<div class="does"><div class="does-h">What this does, step by step</div><ol>' +
@@ -328,7 +369,7 @@ function render(){
      a 1600px slide at 548px, which kills its teaching layer. */
   document.body.classList.toggle('slides-step', !!s.slides);
   var svm = document.getElementById('svMount');
-  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title }); }
+  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title, notes: s.slideNotes }); }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 

@@ -1,0 +1,10 @@
+{
+  "_comment": "Storyboard map for meta-create-skill VIDEO 7: Review + Harden (CP4 'Make it reliable', first explainer). 5 diagrams in teaching order, one column each, left to right. Arc: Pain (the quiet failure, not the loud one) -> Diagnosis (your standards exist, just not on disk) -> Mechanism (they go in the file, and they fire at the handover) -> Proof (it stops itself, with nothing else involved) -> Durability (a scorecard so the rule can never quietly lapse). THE DECK'S ONE JOB: every slide is about A STATED RULE the skill can check itself against. A slide about something the skill has no way to know belongs in v8-harness, not here. The deck deliberately closes on 'the skill now holds itself to your standards' - that is the setup v8-harness breaks open.",
+  "columns": [
+    {"label": "1 - THE LOUD FAILURE WAS NEVER THE PROBLEM", "slides": ["01-the-quiet-failure"]},
+    {"label": "2 - YOUR RULES ARE IN YOUR HEAD", "slides": ["02-your-rules-are-in-your-head"]},
+    {"label": "3 - WRITTEN INTO THE FILE, FIRED AT HANDOVER", "slides": ["03-written-into-the-file"]},
+    {"label": "4 - IT STOPS ITSELF", "slides": ["04-it-stops-itself"]},
+    {"label": "5 - A FIX THAT STAYS FIXED", "slides": ["05-a-fix-that-stays-fixed"]}
+  ]
+}

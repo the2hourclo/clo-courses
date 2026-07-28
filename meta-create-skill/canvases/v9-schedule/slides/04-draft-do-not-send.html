@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ the finished work ============ -->
+  <!-- the finished draft - the SAME portrait page object used in v8/05 and v9/05 -->
+  <rect x="100" y="360" width="200" height="240" rx="8" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="126" y1="420" x2="274" y2="420" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="126" y1="458" x2="274" y2="458" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="126" y1="496" x2="274" y2="496" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="126" y1="534" x2="240" y2="534" stroke="var(--dim)" stroke-width="2.5"/>
+
+  <!-- ============ the fork ============ -->
+  <line x1="312" y1="480" x2="440" y2="480" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="440" y1="270" x2="440" y2="690" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="440" y1="270" x2="516" y2="270" stroke="var(--green)" stroke-width="4.5"/>
+  <polyline points="507,261 516,270 507,279" stroke="var(--green)" stroke-width="4.5"/>
+  <line x1="440" y1="690" x2="516" y2="690" stroke="var(--red)" stroke-width="4.5"/>
+  <polyline points="507,681 516,690 507,699" stroke="var(--red)" stroke-width="4.5"/>
+
+  <!-- ============ TOP LANE - internal work, goes on its own ============ -->
+  <rect x="528" y="192" width="470" height="156" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="1010" y1="270" x2="1082" y2="270" stroke="var(--green)" stroke-width="4.5"/>
+  <polyline points="1073,261 1082,270 1073,279" stroke="var(--green)" stroke-width="4.5"/>
+  <rect x="1094" y="192" width="436" height="156" rx="16" stroke="var(--green)" stroke-width="4.5" fill="var(--bg)"/>
+
+  <!-- ============ BOTTOM LANE - anything outward, stops ============ -->
+  <rect x="528" y="612" width="470" height="156" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <!-- the work travels right and visibly TERMINATES at the rail -->
+  <line x1="1010" y1="690" x2="1054" y2="690" stroke="var(--red)" stroke-width="4.5"/>
+  <polyline points="1045,681 1054,690 1045,699" stroke="var(--red)" stroke-width="4.5"/>
+  <!-- the rail: a hard stop -->
+  <line x1="1070" y1="600" x2="1070" y2="780" stroke="var(--red)" stroke-width="8"/>
+  <rect x="1108" y="612" width="422" height="156" rx="16" stroke="var(--red)" stroke-width="4.5" stroke-dasharray="14 12" fill="var(--bg)"/>
+
+  <!-- ============ closing divider ============ -->
+  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Unattended Is Not Unsupervised</text>
+<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">Same finished work, two very different endings &#8212; and the split is not about quality</text>
+
+<!-- the finished work -->
+<text x="200" y="334" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">MONDAY, 7:12AM</text>
+<text x="200" y="644" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">THE WORK IS DONE</text>
+<text x="200" y="676" font-size="21" text-anchor="middle" fill="var(--dim)">checked, and it landed</text>
+
+<!-- TOP lane -->
+<text x="763" y="160" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">IF IT ONLY TOUCHES YOUR OWN WORK</text>
+<text x="763" y="254" font-size="27" text-anchor="middle" fill="var(--ink)">Filing the draft. Updating</text>
+<text x="763" y="292" font-size="27" text-anchor="middle" fill="var(--ink)">your sheet. Writing a summary</text>
+<text x="763" y="330" font-size="27" text-anchor="middle" fill="var(--ink)">nobody outside sees.</text>
+<text x="1312" y="256" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">IT JUST DOES IT</text>
+<text x="1312" y="300" font-size="22" text-anchor="middle" fill="var(--dim)">you find it finished,</text>
+<text x="1312" y="330" font-size="22" text-anchor="middle" fill="var(--dim)">and you never had to say go</text>
+
+<!-- BOTTOM lane -->
+<text x="763" y="580" font-size="21" font-weight="700" text-anchor="middle" fill="var(--red)">IF IT LEAVES THE BUILDING OR COSTS MONEY</text>
+<text x="763" y="674" font-size="27" text-anchor="middle" fill="var(--ink)">Sending to your list. Replying</text>
+<text x="763" y="712" font-size="27" text-anchor="middle" fill="var(--ink)">to a client. Spending. Posting.</text>
+<text x="763" y="750" font-size="27" text-anchor="middle" fill="var(--ink)">Deleting anything.</text>
+<text x="1319" y="676" font-size="30" font-weight="700" text-anchor="middle" fill="var(--red)">IT WAITS FOR YOU</text>
+<text x="1319" y="720" font-size="22" text-anchor="middle" fill="var(--dim)">drafted, ready, and sitting</text>
+<text x="1319" y="750" font-size="22" text-anchor="middle" fill="var(--dim)">there until you say yes</text>
+<text x="1070" y="822" font-size="20" font-weight="700" text-anchor="middle" fill="var(--red)">THE RAIL</text>
+<text x="1070" y="850" font-size="19" text-anchor="middle" fill="var(--dim)">the line it will not cross without you</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">The rail is not about whether you trust it. It is about what a bad run would cost.</text>
+<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">It runs without you. It does not send without you.</text>
+</svg></body></html>

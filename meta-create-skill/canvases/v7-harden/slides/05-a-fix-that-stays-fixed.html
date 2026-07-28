@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ the scorecard ============ -->
+  <rect x="60" y="196" width="1480" height="548" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="60" y1="264" x2="1540" y2="264" stroke="rgb(223,223,221)" stroke-width="3"/>
+  <!-- row rules -->
+  <line x1="60" y1="360" x2="1540" y2="360" stroke="rgb(228,228,226)" stroke-width="2"/>
+  <line x1="60" y1="456" x2="1540" y2="456" stroke="rgb(228,228,226)" stroke-width="2"/>
+  <line x1="60" y1="552" x2="1540" y2="552" stroke="rgb(228,228,226)" stroke-width="2"/>
+  <line x1="60" y1="648" x2="1540" y2="648" stroke="rgb(228,228,226)" stroke-width="2"/>
+  <!-- column rules -->
+  <line x1="640" y1="196" x2="640" y2="744" stroke="rgb(228,228,226)" stroke-width="2"/>
+  <line x1="1200" y1="196" x2="1200" y2="744" stroke="rgb(228,228,226)" stroke-width="2"/>
+  <!-- the failing row - inset so it never sits on the table's own border -->
+  <rect x="88" y="656" width="1424" height="80" rx="8" stroke="var(--red)" stroke-width="3.5" fill="var(--bg)"/>
+
+  <!-- ticks -->
+  <polyline points="1276,312 1288,326 1312,296" stroke="var(--green)" stroke-width="4.5"/>
+  <polyline points="1276,408 1288,422 1312,392" stroke="var(--green)" stroke-width="4.5"/>
+  <polyline points="1276,504 1288,518 1312,488" stroke="var(--green)" stroke-width="4.5"/>
+  <polyline points="1276,600 1288,614 1312,584" stroke="var(--green)" stroke-width="4.5"/>
+  <!-- the cross -->
+  <line x1="1278" y1="680" x2="1310" y2="712" stroke="var(--red)" stroke-width="5"/>
+  <line x1="1310" y1="680" x2="1278" y2="712" stroke="var(--red)" stroke-width="5"/>
+
+  <!-- ============ closing divider ============ -->
+  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">A Rule You Set Once Should Never Quietly Lapse</text>
+<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">Five real inputs, five answers you already know &#8212; run every time the skill changes</text>
+
+<!-- table header -->
+<text x="800" y="170" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">THE SCORECARD</text>
+<text x="104" y="241" font-size="21" font-weight="700" fill="var(--dim)">YOU FEED IT</text>
+<text x="664" y="241" font-size="21" font-weight="700" fill="var(--dim)">WHAT SHOULD COME BACK</text>
+<text x="1224" y="241" font-size="21" font-weight="700" fill="var(--dim)">TUESDAY&#8217;S RUN</text>
+
+<!-- rows - each expected result maps to a rule that is written in the file -->
+<text x="104" y="320" font-size="23" fill="var(--ink)">last week&#8217;s stats + my notes</text>
+<text x="664" y="320" font-size="23" fill="var(--ink)">no number that isn&#8217;t in the stats</text>
+<text x="1420" y="320" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">PASS</text>
+
+<text x="104" y="416" font-size="23" fill="var(--ink)">stats with a week missing</text>
+<text x="664" y="416" font-size="23" fill="var(--ink)">flags the gap, invents nothing</text>
+<text x="1420" y="416" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">PASS</text>
+
+<text x="104" y="512" font-size="23" fill="var(--ink)">notes that never mention the offer</text>
+<text x="664" y="512" font-size="23" fill="var(--ink)">names the offer from the skill file</text>
+<text x="1420" y="512" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">PASS</text>
+
+<text x="104" y="608" font-size="23" fill="var(--ink)">a week with nothing worth saying</text>
+<text x="664" y="608" font-size="23" fill="var(--ink)">still closes with the PS</text>
+<text x="1420" y="608" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">PASS</text>
+
+<text x="104" y="692" font-size="23" fill="var(--ink)">stats with no open rate at all</text>
+<text x="664" y="692" font-size="23" fill="var(--ink)">no open-rate number anywhere</text>
+<text x="1420" y="686" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">FAIL</text>
+<text x="1420" y="716" font-size="20" text-anchor="middle" fill="var(--red)">cited 34% again</text>
+
+<!-- the annotation -->
+<text x="800" y="796" font-size="25" text-anchor="middle" fill="var(--dim)">You edited one line on Tuesday and rule one quietly stopped firing.</text>
+<text x="800" y="832" font-size="25" text-anchor="middle" fill="var(--ink)">The scorecard caught it the same morning, before anything went out.</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">Hardening writes the rule. The scorecard proves it is still there.</text>
+<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">A rule that lapses shows up here, instead of in a client&#8217;s inbox.</text>
+</svg></body></html>

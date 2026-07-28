@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ the clock in the middle ============ -->
+  <circle cx="800" cy="470" r="128" stroke="var(--ink)" stroke-width="4.5" fill="var(--bg)"/>
+  <!-- hands read 7:00 exactly: minute to 12, hour at 210 degrees (down-left) -->
+  <line x1="800" y1="470" x2="800" y2="386" stroke="var(--ink)" stroke-width="5"/>
+  <line x1="800" y1="470" x2="770" y2="522" stroke="var(--ink)" stroke-width="5"/>
+  <circle cx="800" cy="470" r="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="800" y1="352" x2="800" y2="368" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="800" y1="572" x2="800" y2="588" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="682" y1="470" x2="698" y2="470" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="902" y1="470" x2="918" y2="470" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- ============ four slots ============ -->
+  <rect x="90" y="196" width="520" height="150" rx="16" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="990" y="196" width="520" height="150" rx="16" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="90" y="596" width="520" height="150" rx="16" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="990" y="596" width="520" height="150" rx="16" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+
+  <!-- connectors -->
+  <line x1="618" y1="300" x2="700" y2="378" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="982" y1="300" x2="900" y2="378" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="618" y1="642" x2="700" y2="564" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="982" y1="642" x2="900" y2="564" stroke="var(--dim)" stroke-width="3"/>
+
+  <!-- ============ closing divider ============ -->
+  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Four Blanks To Fill Before It Runs Alone</text>
+<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">Every one of them is a question you answer once, in a sentence</text>
+
+<!-- slot 1 - when -->
+<text x="118" y="242" font-size="21" font-weight="700" fill="var(--dim)">1 &#183; WHEN IT RUNS</text>
+<text x="118" y="290" font-size="28" font-weight="700" fill="var(--ink)">Every Monday, 7:00am.</text>
+<text x="118" y="326" font-size="22" fill="var(--dim)">a clock, or a trigger like a new file landing</text>
+
+<!-- slot 2 - input -->
+<text x="1018" y="242" font-size="21" font-weight="700" fill="var(--dim)">2 &#183; WHERE THE INPUT COMES FROM</text>
+<text class="mono" x="1018" y="288" font-size="25" font-weight="700" fill="var(--ink)">/stats/last-week.csv</text>
+<text x="1018" y="326" font-size="22" fill="var(--dim)">plus your notes folder &#8212; named, not vague</text>
+
+<!-- the clock - the label carries the hub's meaning, so it matches the card headers in weight -->
+<text x="800" y="628" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">ONE UNATTENDED RUN</text>
+
+<!-- slot 3 - output -->
+<text x="118" y="642" font-size="21" font-weight="700" fill="var(--dim)">3 &#183; WHERE THE RESULT LANDS</text>
+<text class="mono" x="118" y="688" font-size="25" font-weight="700" fill="var(--ink)">/drafts/weekly-email.md</text>
+<text x="118" y="726" font-size="22" fill="var(--dim)">a real folder that already exists</text>
+
+<!-- slot 4 - notify -->
+<text x="1018" y="642" font-size="21" font-weight="700" fill="var(--dim)">4 &#183; HOW YOU GET TOLD</text>
+<text x="1018" y="690" font-size="28" font-weight="700" fill="var(--ink)">A message when it&#8217;s ready.</text>
+<text x="1018" y="726" font-size="22" fill="var(--dim)">and a message when it could not finish</text>
+
+<!-- the warning -->
+<text x="800" y="808" font-size="24" text-anchor="middle" fill="var(--red)">Leave one blank and the run does not crash. It runs against a folder that isn&#8217;t there, and reports done.</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">You are not configuring software. You are telling it four things.</text>
+<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Name each one out loud, and there is nothing left to assume.</text>
+</svg></body></html>

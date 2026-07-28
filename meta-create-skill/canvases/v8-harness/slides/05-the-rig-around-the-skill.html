@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ the hardened skill - rules INSIDE the file ============ -->
+  <rect x="40" y="238" width="450" height="366" rx="10" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="40" y1="290" x2="490" y2="290" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <rect x="62" y="412" width="406" height="176" rx="8" stroke="var(--green)" stroke-width="3.5" fill="var(--bg)"/>
+
+  <!-- it produces a draft -->
+  <line x1="502" y1="420" x2="540" y2="420" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="531,412 540,420 531,428" stroke="var(--dim)" stroke-width="3.5"/>
+  <rect x="552" y="340" width="140" height="184" rx="8" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="572" y1="382" x2="672" y2="382" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="572" y1="414" x2="672" y2="414" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="572" y1="446" x2="672" y2="446" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="572" y1="478" x2="638" y2="478" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="704" y1="420" x2="742" y2="420" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="733,412 742,420 733,428" stroke="var(--dim)" stroke-width="3.5"/>
+
+  <!-- ============ the harness - three pieces, outside the file ============ -->
+  <rect x="754" y="196" width="586" height="472" rx="18" stroke="var(--ink)" stroke-width="3.5" stroke-dasharray="14 12" fill="var(--bg)"/>
+  <rect x="782" y="266" width="530" height="106" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="782" y="392" width="530" height="106" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="782" y="518" width="530" height="106" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+
+  <!-- ============ one arrow out to you ============ -->
+  <line x1="1352" y1="420" x2="1392" y2="420" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="1383,412 1392,420 1383,428" stroke="var(--green)" stroke-width="4"/>
+  <circle cx="1462" cy="366" r="30" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="1462" y1="396" x2="1462" y2="480" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="1462" y1="424" x2="1414" y2="448" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="1462" y1="424" x2="1510" y2="448" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="1462" y1="480" x2="1430" y2="556" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="1462" y1="480" x2="1494" y2="556" stroke="var(--ink)" stroke-width="4"/>
+
+  <!-- ============ closing divider ============ -->
+  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="52" font-size="42" font-weight="700" text-anchor="middle" fill="var(--ink)">The Skill Guards Its Rules. The Harness Guards Everything Else.</text>
+<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">Read where each piece lives, not what it is called &#8212; that is the whole distinction</text>
+
+<!-- the hardened skill -->
+<text x="265" y="204" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">THE HARDENED SKILL</text>
+<text class="mono" x="62" y="275" font-size="21" fill="var(--dim)">weekly-email/SKILL.md</text>
+<text class="mono" x="62" y="340" font-size="21" fill="var(--ink)">## What this does</text>
+<text class="mono" x="62" y="378" font-size="20" fill="var(--dim)">Writes the weekly email</text>
+<text class="mono" x="78" y="444" font-size="19" font-weight="700" fill="var(--green)">## Self-check before</text>
+<text class="mono" x="78" y="470" font-size="19" font-weight="700" fill="var(--green)">   handing it over</text>
+<text class="mono" x="78" y="506" font-size="18" fill="var(--green)">- never cite a number I didn&#8217;t give it</text>
+<text class="mono" x="78" y="538" font-size="18" fill="var(--green)">- always name the offer</text>
+<text class="mono" x="78" y="570" font-size="18" fill="var(--green)">- never send without the PS</text>
+<text x="265" y="644" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">INSIDE THE FILE:</text>
+<text x="265" y="674" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">THE RULES YOU GAVE IT</text>
+
+<!-- the draft -->
+<text x="622" y="566" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">THE DRAFT</text>
+
+<!-- the harness -->
+<text x="1047" y="164" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">THE HARNESS (THE RIG) &#183; THREE PIECES, NONE OF THEM IN THAT FILE</text>
+<text x="1047" y="308" font-size="25" font-weight="700" text-anchor="middle" fill="var(--ink)">1 &#183; An independent reviewer</text>
+<text x="1047" y="344" font-size="22" text-anchor="middle" fill="var(--dim)">it never saw the draft written</text>
+<text x="1047" y="434" font-size="25" font-weight="700" text-anchor="middle" fill="var(--ink)">2 &#183; A capped fix loop</text>
+<text x="1047" y="470" font-size="22" text-anchor="middle" fill="var(--dim)">three tries, then it stops</text>
+<text x="1047" y="560" font-size="25" font-weight="700" text-anchor="middle" fill="var(--ink)">3 &#183; A reality check</text>
+<text x="1047" y="596" font-size="22" text-anchor="middle" fill="var(--dim)">it opens the folder and looks</text>
+<text x="1047" y="706" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">OUTSIDE IT: EVERYTHING THE SKILL</text>
+<text x="1047" y="736" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">CANNOT SEE ABOUT ITSELF</text>
+
+<!-- you -->
+<text x="1462" y="612" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+<text x="1462" y="648" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">you get only what</text>
+<text x="1462" y="678" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">needed a human</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">Nothing in the dashed box is written in the skill&#8217;s file. That is deliberate.</text>
+<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">A skill cannot check what it cannot see, so the check lives outside it.</text>
+</svg></body></html>

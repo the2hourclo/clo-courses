@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ LEFT: with a cap ============ -->
+  <rect x="70" y="196" width="680" height="82" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="410" y1="280" x2="410" y2="306" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="403,299 410,306 417,299" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="70" y="308" width="680" height="82" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="410" y1="392" x2="410" y2="418" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="403,411 410,418 417,411" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="70" y="420" width="680" height="82" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <!-- the hard floor -->
+  <line x1="60" y1="534" x2="760" y2="534" stroke="var(--green)" stroke-width="7"/>
+  <line x1="410" y1="502" x2="410" y2="528" stroke="var(--green)" stroke-width="3.5"/>
+  <line x1="410" y1="540" x2="410" y2="592" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="402,583 410,592 418,583" stroke="var(--green)" stroke-width="4"/>
+  <rect x="130" y="600" width="560" height="130" rx="16" stroke="var(--green)" stroke-width="4.5" fill="var(--bg)"/>
+
+  <!-- ============ RIGHT: without one ============ -->
+  <rect x="850" y="196" width="680" height="82" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="1190" y1="280" x2="1190" y2="306" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1183,299 1190,306 1197,299" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="850" y="308" width="680" height="82" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="1190" y1="392" x2="1190" y2="418" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1183,411 1190,418 1197,411" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="850" y="420" width="680" height="82" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <!-- no floor - it keeps going -->
+  <line x1="1190" y1="504" x2="1190" y2="546" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="12 11"/>
+  <rect x="850" y="552" width="680" height="82" rx="12" stroke="var(--red)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="1190" y1="636" x2="1190" y2="700" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="12 11"/>
+  <rect x="850" y="706" width="680" height="82" rx="12" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="12 11" fill="var(--bg)"/>
+
+  <!-- ============ closing divider ============ -->
+  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">The Cap Is The Feature</text>
+<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">The reviewer sends it back, the skill fixes it, the reviewer reads it again &#8212; and again</text>
+
+<!-- column headers -->
+<text x="410" y="168" font-size="22" font-weight="700" text-anchor="middle" fill="var(--green)">A HARD CAP OF THREE</text>
+<text x="1190" y="168" font-size="22" font-weight="700" text-anchor="middle" fill="var(--red)">NO CAP AT ALL</text>
+
+<!-- LEFT rows -->
+<text x="96" y="246" font-size="24" font-weight="700" fill="var(--dim)">try 1</text>
+<text x="216" y="246" font-size="24" fill="var(--ink)">reviewer says no &#183; the skill fixes it</text>
+<text x="96" y="358" font-size="24" font-weight="700" fill="var(--dim)">try 2</text>
+<text x="216" y="358" font-size="24" fill="var(--ink)">reviewer says no &#183; the skill fixes it</text>
+<text x="96" y="470" font-size="24" font-weight="700" fill="var(--dim)">try 3</text>
+<text x="216" y="470" font-size="24" fill="var(--ink)">reviewer still says no</text>
+<text x="376" y="576" font-size="21" font-weight="700" text-anchor="end" fill="var(--green)">THE LOOP ENDS HERE</text>
+<text x="410" y="656" font-size="27" text-anchor="middle" fill="var(--ink)">It stops and brings it to you,</text>
+<text x="410" y="698" font-size="27" font-weight="700" text-anchor="middle" fill="var(--green)">with the reviewer&#8217;s note attached.</text>
+
+<!-- RIGHT rows -->
+<text x="876" y="246" font-size="24" font-weight="700" fill="var(--dim)">try 1</text>
+<text x="996" y="246" font-size="24" fill="var(--ink)">reviewer says no &#183; the skill fixes it</text>
+<text x="876" y="358" font-size="24" font-weight="700" fill="var(--dim)">try 2</text>
+<text x="996" y="358" font-size="24" fill="var(--ink)">reviewer says no &#183; the skill fixes it</text>
+<text x="876" y="470" font-size="24" font-weight="700" fill="var(--dim)">try 3</text>
+<text x="996" y="470" font-size="24" fill="var(--ink)">reviewer says no &#183; the skill fixes it</text>
+<text x="876" y="602" font-size="24" font-weight="700" fill="var(--red)">try 47</text>
+<text x="996" y="602" font-size="24" fill="var(--red)">reviewer says no &#183; the skill fixes it</text>
+<text x="1190" y="756" font-size="26" font-weight="700" text-anchor="middle" fill="var(--red)">still running. still nothing to read.</text>
+<text x="1190" y="822" font-size="22" text-anchor="middle" fill="var(--dim)">two AIs can disagree forever, and neither one gets bored</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">A runaway loop does not look like a failure. It looks like it is still working.</text>
+<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">The cap is what turns an argument into something that reaches you.</text>
+</svg></body></html>

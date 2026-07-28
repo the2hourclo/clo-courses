@@ -48,6 +48,9 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .step h2{font-family:var(--font-display);font-size:23px;font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:11px}
 .step p{color:var(--text-muted);font-size:15px;line-height:1.6;margin-bottom:12px}
 .step p:last-child{margin-bottom:0}
+/* On a NARRATED deck the body copy moves ABOVE the slides (it opens the step) and the
+   changing per-slide narration takes the spot under the deck — see render(). */
+.step p.lead{color:var(--text);font-size:15.5px;margin-bottom:14px}
 .video{position:relative;width:100%;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border-2);margin:4px 0 16px;background:#000}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-slot{position:relative;width:100%;padding-top:52%;border-radius:var(--radius);border:1px dashed var(--border-2);margin:4px 0 16px;background:var(--surface-2)}
@@ -163,7 +166,15 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
    To build another checkpoint: copy this file, change CONFIG, done.
    Each step: { type:'video'|'build'|'gate', title, body(HTML),
                 video?:embedURL, command?:'do this in Claude', gate?:HTML }
+                slides?:[png paths] — use canvas() below.
+                slideNotes?:[HTML] — one per slide, printed UNDER the deck and
+                  swapped as the reader navigates, so the prose walks them through
+                  the slide they're on. A deck with notes moves its `body` copy
+                  ABOVE the deck (it becomes the step's opening line). }
    ═══════════════════════════════════════════════════════════════ */
+function canvas(dir, names){
+  return names.map(function(n){ return '../meta-create-skill/canvases/' + dir + '/slides/' + n + '.png'; });
+}
 var CONFIG = {
   id: 'goal',
   name: 'Your AI Employee',
@@ -175,6 +186,18 @@ var CONFIG = {
        covers reliability only. */
     { type:'video', title:'Schedule it / autonomy',
       video:'', slotLabel:'&#128249; Explainer &mdash; coming soon',
+      /* The closing deck of the whole series. It stops at scheduling — hardening and
+         harnesses are cp4's subject and appear here only as things already built.
+         Slide 05 completes the scope arrow from v4-skill-system/05. */
+      slides: canvas('v9-schedule', ['01-you-are-still-the-trigger','02-has-it-earned-it',
+        '03-four-things-to-pin','04-draft-do-not-send','05-you-review-it-runs']),
+      slideNotes:[
+        'The employee is finished and it works. Look at the strip along the bottom, though &mdash; three weeks it ran, four weeks it never happened, and nothing was wrong with the skill on any of those four. The only arrow going in comes from you. <strong>You are still the start button.</strong>',
+        'Three things have to be true before anything runs while you are asleep, and you already built all three in the last checkpoint. That is what they were for. A skill that is missing one <strong>gets told no</strong>, because a schedule multiplies whatever the skill already does &mdash; in both directions.',
+        'Four blanks, and each one is a sentence you say once. When it runs, where the input comes from, where the result lands, how you get told. Name them out loud and there is nothing left to assume, because <strong>an unattended run does not crash when a slot is empty</strong> &mdash; it runs against a folder that isn&rsquo;t there and reports done.',
+        'Same finished work, two endings, and the split is not about how much you trust it. Anything that only touches your own work just happens. Anything that leaves the building or costs money hits the red rail and waits. <strong>It runs without you. It does not send without you.</strong>',
+        'Monday, 7am, and nobody asked it to start. By 7:12 the draft is written, reviewed, and confirmed to actually be in the folder. You show up at nine and say yes. Follow the arrow along the bottom, because that is the whole journey &mdash; a task, then a function, and now <strong>a worker who owns it and starts itself</strong>.'
+      ],
       body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask. <strong>Unattended is not unsupervised</strong> — you still see everything, you just stop being the one who starts it.' },
 
     { type:'build', title:'Schedule it — do it',
@@ -294,6 +317,11 @@ function render(){
   eta.textContent = s.type==='gate' ? 'the gate' : (s.optional ? 'optional — skip anytime' : '');
   fill.style.width = Math.round(100*(pos+1)/n)+'%';
 
+  /* A NARRATED deck carries one note per slide, so the changing narration belongs directly
+     under the deck. The step's own body copy then moves ABOVE the slides and reads as the
+     opening line. Un-narrated steps keep the body below the visual, exactly as before. */
+  var narrated = !!(s.slides && s.slideNotes && window.AIEBSlides);
+
   /* A deck pushes anything after it a long way down the page, so when a step has both a
      deck and a command the command goes first. Deck-less steps keep it after the body. */
   var cmdTop = !!(s.slides && s.command && window.AIEBSlides);
@@ -301,12 +329,14 @@ function render(){
   var h = '<div class="step">';
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
+  if (narrated && s.body){ h += '<p class="lead">'+s.body+'</p>'; }
+  if (cmdTop){ h += cmdHTML(s); }
   if (s.video){ h += '<div class="video"><iframe src="'+s.video+'" title="'+s.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.slides && window.AIEBSlides){ h += '<div id="svMount"></div>'; }
   else if (s.type==='video' || s.videoSlot){ h += '<div class="video-slot"><span>'+(s.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
   if (s.demo){ h += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   else if (s.demoSlot){ h += '<div class="video-slot"><span>'+(s.demoLabel||'🎬 Demo coming soon')+'</span></div>'; }
-  if (s.body){ h += '<p>'+s.body+'</p>'; }
+  if (s.body && !narrated){ h += '<p>'+s.body+'</p>'; }
   if (s.command && !cmdTop){ h += cmdHTML(s); }
   if (s.does){
     h += '<div class="does"><div class="does-h">What this does, step by step</div><ol>' +
@@ -328,7 +358,7 @@ function render(){
      a 1600px slide at 548px, which kills its teaching layer. */
   document.body.classList.toggle('slides-step', !!s.slides);
   var svm = document.getElementById('svMount');
-  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title }); }
+  if (svm){ AIEBSlides.mount(svm, { slides: s.slides, title: s.title, notes: s.slideNotes }); }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 

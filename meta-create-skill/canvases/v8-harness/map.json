@@ -1,0 +1,10 @@
+{
+  "_comment": "Storyboard map for meta-create-skill VIDEO 8: Build a Harness (CP4 'Make it reliable', second explainer). 5 diagrams in teaching order, one column each, left to right. Arc: The seam (hardening did its job and two failures still got through) -> Blind spot 1, judgment (the writer cannot hear its own voice) -> The guard rail on the fix loop (the cap is the feature) -> Blind spot 2, reality (a report is not evidence) -> The assembly (inside the file vs outside it). THE DECK'S ONE JOB: every slide is about something the skill CANNOT KNOW ABOUT ITSELF. A slide about a stated rule belongs in v7-harden, not here. Slide 01 is the load-bearing seam slide and was drawn FIRST - it is what stops this deck collapsing into v7-harden, and every other slide in both decks is calibrated against it. Slide 05's inside/outside geometry is what makes the distinction stick without explanation; it calls back to v4-skill-system/05 ('you still make the call').",
+  "columns": [
+    {"label": "1 - WHAT IT CANNOT SEE (THE SEAM)", "slides": ["01-what-it-cannot-see"]},
+    {"label": "2 - IT CANNOT JUDGE ITS OWN WORK", "slides": ["02-it-cannot-judge-its-own-work"]},
+    {"label": "3 - THE CAPPED LOOP", "slides": ["03-the-capped-loop"]},
+    {"label": "4 - TRUST NOTHING IT REPORTS", "slides": ["04-trust-nothing-it-reports"]},
+    {"label": "5 - THE RIG AROUND THE SKILL", "slides": ["05-the-rig-around-the-skill"]}
+  ]
+}

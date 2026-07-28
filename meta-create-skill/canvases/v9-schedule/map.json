@@ -1,0 +1,10 @@
+{
+  "_comment": "Storyboard map for meta-create-skill VIDEO 9: Schedule It / Autonomy (GOAL 'Your AI Employee', the explainer that closes the whole series). 5 diagrams in teaching order, one column each, left to right. Arc: Pain (the employee works perfectly and you are still the start button) -> Gate (a schedule is earned, and you already earned it in CP4) -> Setup (four blanks to pin) -> Rail (unattended is not unsupervised - internal work goes, anything outward waits) -> End state (it runs Monday, you read the result). The deck stops at scheduling: hardening and harnesses are CP4's subject and are referenced here only as things the buyer has ALREADY built. Slide 05 is the series' closing image and completes the scope arrow from v4-skill-system/05 - task -> function -> employee - with the new final beat 'and now it starts itself'.",
+  "columns": [
+    {"label": "1 - YOU ARE STILL THE TRIGGER", "slides": ["01-you-are-still-the-trigger"]},
+    {"label": "2 - HAS IT EARNED IT", "slides": ["02-has-it-earned-it"]},
+    {"label": "3 - FOUR THINGS TO PIN", "slides": ["03-four-things-to-pin"]},
+    {"label": "4 - DRAFT, DO NOT SEND", "slides": ["04-draft-do-not-send"]},
+    {"label": "5 - YOU REVIEW, IT RUNS", "slides": ["05-you-review-it-runs"]}
+  ]
+}

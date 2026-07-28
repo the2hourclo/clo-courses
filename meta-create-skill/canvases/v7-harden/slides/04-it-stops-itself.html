@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --orange:#c2410c;
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ the draft it just wrote ============ -->
+  <rect x="80" y="178" width="660" height="212" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="80" y1="228" x2="740" y2="228" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <rect x="100" y="292" width="620" height="42" rx="6" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+
+  <!-- ============ the rule it was given ============ -->
+  <rect x="860" y="178" width="660" height="212" rx="10" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="860" y1="228" x2="1520" y2="228" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+
+  <!-- ============ both meet ============ -->
+  <line x1="430" y1="392" x2="430" y2="424" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="430" y1="424" x2="800" y2="424" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="1190" y1="392" x2="1190" y2="424" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="1190" y1="424" x2="800" y2="424" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="800" y1="424" x2="800" y2="466" stroke="var(--red)" stroke-width="4"/>
+  <polyline points="792,457 800,466 808,457" stroke="var(--red)" stroke-width="4"/>
+
+  <!-- ============ the stop ============ -->
+  <rect x="400" y="474" width="800" height="248" rx="16" stroke="var(--red)" stroke-width="4.5" fill="var(--bg)"/>
+  <line x1="400" y1="546" x2="1200" y2="546" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+
+  <!-- ============================================================ -->
+  <!-- id="canonical-robot" - copied VERBATIM from
+       .claude/skills/excali-graphic/assets/exemplars/canonical-robot-blackmarker.html
+       Repositioned per its own rule: translate(cx-1400*s, feetY-943*s) scale(s)
+       with s=0.75, cx=222, feetY=712. -->
+  <g id="canonical-robot" transform="translate(-828.0,4.75) scale(0.75)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+  </g>
+  <!-- ============================================================ -->
+
+  <!-- ============ closing divider ============ -->
+  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">It Catches Itself. Nothing Else Is Involved.</text>
+<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">The same fabricated number from the first slide, meeting the rule you just wrote</text>
+
+<!-- the draft -->
+<text x="410" y="152" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">WHAT IT JUST WROTE</text>
+<text class="mono" x="104" y="213" font-size="22" fill="var(--dim)">drafts/weekly-email.md</text>
+<text x="112" y="268" font-size="24" fill="var(--ink)">Hey &#8212; quick one on last week.</text>
+<text x="112" y="318" font-size="24" fill="var(--ink)">Open rate hit 34%, our best month yet.</text>
+<text x="112" y="368" font-size="24" fill="var(--ink)">The offer closes Friday. PS below.</text>
+
+<!-- the rule -->
+<text x="1190" y="152" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">THE RULE YOU GAVE IT</text>
+<text class="mono" x="884" y="213" font-size="22" fill="var(--dim)">weekly-email/SKILL.md</text>
+<text class="mono" x="884" y="266" font-size="22" font-weight="700" fill="var(--green)">## Self-check before handing it over</text>
+<text class="mono" x="900" y="304" font-size="21" font-weight="700" fill="var(--green)">- never cite a number I didn&#8217;t give it</text>
+<text class="mono" x="900" y="336" font-size="21" fill="var(--dim)">- always name the offer</text>
+<text class="mono" x="900" y="368" font-size="21" fill="var(--dim)">- never send without the PS</text>
+
+<!-- the stop -->
+<text x="800" y="526" font-size="30" font-weight="700" text-anchor="middle" fill="var(--red)">STOPPED BEFORE HANDING IT OVER</text>
+<text x="428" y="600" font-size="24" fill="var(--ink)">Line 2 cites 34%. That number does not appear</text>
+<text x="428" y="638" font-size="24" fill="var(--ink)">in last week&#8217;s stats, so I cannot source it.</text>
+<text class="mono" x="428" y="692" font-size="21" font-weight="700" fill="var(--red)">rule broken:</text>
+<text class="mono" x="586" y="692" font-size="21" fill="var(--dim)">never cite a number I didn&#8217;t give it</text>
+
+<!-- the robot -->
+<text x="222" y="756" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">THE SAME SKILL,</text>
+<text x="222" y="784" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">ON ITS OWN OUTPUT</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">No second AI. No extra tools. Nothing outside the skill.</text>
+<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">It read a rule it was given, and stopped on its own output.</text>
+</svg></body></html>

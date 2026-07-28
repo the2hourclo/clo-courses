@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ the file, one section longer ============ -->
+  <rect x="80" y="190" width="700" height="500" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="80" y1="244" x2="780" y2="244" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <!-- the three rules, added -->
+  <rect x="104" y="460" width="652" height="172" rx="8" stroke="var(--green)" stroke-width="3.5" fill="var(--bg)"/>
+
+  <!-- ============ where it fires ============ -->
+  <line x1="796" y1="427" x2="884" y2="427" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="875,419 884,427 875,435" stroke="var(--green)" stroke-width="4"/>
+
+  <!-- ============ what every run now does ============ -->
+  <rect x="900" y="200" width="620" height="100" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="1210" y1="302" x2="1210" y2="348" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="1202,339 1210,348 1218,339" stroke="var(--dim)" stroke-width="3.5"/>
+
+  <rect x="900" y="356" width="620" height="140" rx="14" stroke="var(--green)" stroke-width="4.5" fill="var(--bg)"/>
+  <line x1="1210" y1="556" x2="1210" y2="584" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="1202,575 1210,584 1218,575" stroke="var(--dim)" stroke-width="3.5"/>
+
+  <rect x="900" y="590" width="620" height="100" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+
+  <!-- ============ closing divider ============ -->
+  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Hardening Is Writing Them Down Where It Reads</text>
+<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">The same three rules &#8212; now on disk, and now with a moment they fire</text>
+
+<!-- the file -->
+<text x="430" y="160" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">THE SAME FILE, ONE SECTION LONGER</text>
+<text class="mono" x="106" y="229" font-size="22" fill="var(--dim)">weekly-email/SKILL.md</text>
+<text class="mono" x="106" y="298" font-size="22" fill="var(--ink)">## What this does</text>
+<text class="mono" x="106" y="340" font-size="21" fill="var(--dim)">Writes the weekly email from</text>
+<text class="mono" x="106" y="374" font-size="21" fill="var(--dim)">last week&#8217;s stats and my notes.</text>
+<text class="mono" x="106" y="438" font-size="22" font-weight="700" fill="var(--green)">## Self-check before handing it over</text>
+<text class="mono" x="124" y="506" font-size="21" font-weight="700" fill="var(--green)">- never cite a number I didn&#8217;t give it</text>
+<text class="mono" x="124" y="552" font-size="21" font-weight="700" fill="var(--green)">- always name the offer</text>
+<text class="mono" x="124" y="598" font-size="21" font-weight="700" fill="var(--green)">- never send without the PS</text>
+
+<!-- what every run now does -->
+<text x="1210" y="160" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">WHAT EVERY RUN NOW DOES</text>
+<text x="1210" y="260" font-size="27" text-anchor="middle" fill="var(--ink)">It writes the draft.</text>
+<text x="1210" y="410" font-size="26" text-anchor="middle" fill="var(--ink)">It reads that block back</text>
+<text x="1210" y="450" font-size="26" text-anchor="middle" fill="var(--ink)">against its own draft.</text>
+<text x="1210" y="524" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">THIS STEP DID NOT EXIST BEFORE</text>
+<text x="1210" y="650" font-size="27" text-anchor="middle" fill="var(--ink)">It hands it to you.</text>
+
+<!-- where it fires - both lines above the arrow, never split by it -->
+<text x="840" y="378" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">fires</text>
+<text x="840" y="404" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">here</text>
+
+<!-- the bridge line -->
+<text x="800" y="780" font-size="25" text-anchor="middle" fill="var(--dim)">The rules stop depending on you being awake and reading the draft.</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">You say the three rules once, in plain words.</text>
+<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Every run from here reads them before it hands you anything.</text>
+</svg></body></html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ RUN A - the terminal that broke ============ -->
+  <rect x="90" y="172" width="680" height="240" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="90" y1="224" x2="770" y2="224" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+
+  <!-- ============ RUN B - the draft that looks perfect ============ -->
+  <rect x="830" y="172" width="680" height="240" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="830" y1="224" x2="1510" y2="224" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <!-- the one fabricated line -->
+  <rect x="852" y="288" width="600" height="42" rx="6" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+
+  <!-- ============ down arrows ============ -->
+  <line x1="430" y1="496" x2="430" y2="548" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="422,539 430,548 438,539" stroke="var(--green)" stroke-width="4"/>
+  <line x1="1170" y1="496" x2="1170" y2="548" stroke="var(--red)" stroke-width="4"/>
+  <polyline points="1162,539 1170,548 1178,539" stroke="var(--red)" stroke-width="4"/>
+
+  <!-- ============ outcomes ============ -->
+  <rect x="190" y="558" width="480" height="164" rx="16" stroke="var(--green)" stroke-width="4.5" fill="var(--bg)"/>
+  <rect x="930" y="558" width="480" height="164" rx="16" stroke="var(--red)" stroke-width="4.5" fill="var(--bg)"/>
+
+  <!-- ============ closing divider ============ -->
+  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">The Loud Failure Was Never The Problem</text>
+<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">Two bad runs of the same skill &#8212; and only one of them ever reaches a client</text>
+
+<!-- column headers -->
+<text x="430" y="150" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">RUN A &#183; IT BREAKS</text>
+<text x="1170" y="150" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">RUN B &#183; IT LOOKS PERFECT</text>
+
+<!-- RUN A body -->
+<text class="mono" x="114" y="209" font-size="22" fill="var(--dim)">terminal</text>
+<text class="mono" x="114" y="270" font-size="23" fill="var(--dim)">&gt; run weekly-email</text>
+<text class="mono" x="114" y="322" font-size="24" fill="var(--red)">Error: cannot read /data/stats.csv</text>
+<text class="mono" x="114" y="366" font-size="24" fill="var(--red)">run failed.</text>
+
+<!-- RUN B body -->
+<text class="mono" x="854" y="209" font-size="22" fill="var(--dim)">drafts/weekly-email.md</text>
+<text x="866" y="270" font-size="24" fill="var(--ink)">Hey &#8212; quick one on last week.</text>
+<text x="866" y="318" font-size="24" fill="var(--ink)">Open rate hit 34%, our best month yet.</text>
+<text x="866" y="368" font-size="24" fill="var(--ink)">The offer closes Friday. PS below.</text>
+
+<!-- what you notice -->
+<text x="430" y="466" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">THE RUN STOPS. YOU SEE IT.</text>
+<text x="1170" y="452" font-size="21" font-weight="700" text-anchor="middle" fill="var(--red)">THAT NUMBER IS NOT IN THE STATS. NOTHING</text>
+<text x="1170" y="480" font-size="21" font-weight="700" text-anchor="middle" fill="var(--red)">FLAGS IT. THE REST OF THE DRAFT IS FINE.</text>
+
+<!-- outcomes -->
+<text x="430" y="622" font-size="28" text-anchor="middle" fill="var(--ink)">You fix it in two minutes.</text>
+<text x="430" y="672" font-size="28" font-weight="700" text-anchor="middle" fill="var(--green)">Nothing shipped.</text>
+<text x="1170" y="622" font-size="28" text-anchor="middle" fill="var(--ink)">It goes out to a client</text>
+<text x="1170" y="672" font-size="28" font-weight="700" text-anchor="middle" fill="var(--red)">with your name on it.</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="800" font-size="25" text-anchor="middle" fill="var(--dim)">Hardening is not about the runs that break. You already catch those.</text>
+<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">A run that breaks costs you two minutes.</text>
+<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--red)">A run that is quietly wrong is the one that reaches a client.</text>
+</svg></body></html>

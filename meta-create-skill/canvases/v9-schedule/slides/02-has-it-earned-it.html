@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
+@font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
+</style></head><body>
+<svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+</defs>
+
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
+<g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- ============ the three checks ============ -->
+  <rect x="90" y="200" width="1000" height="118" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="90" y="342" width="1000" height="118" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="90" y="484" width="1000" height="118" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+
+  <!-- ticks -->
+  <polyline points="126,262 142,280 174,242" stroke="var(--green)" stroke-width="5"/>
+  <polyline points="126,404 142,422 174,384" stroke="var(--green)" stroke-width="5"/>
+  <polyline points="126,546 142,564 174,526" stroke="var(--green)" stroke-width="5"/>
+
+  <!-- ============ the gate ============ -->
+  <line x1="1104" y1="259" x2="1170" y2="259" stroke="var(--green)" stroke-width="4"/>
+  <line x1="1170" y1="259" x2="1170" y2="401" stroke="var(--green)" stroke-width="4"/>
+  <line x1="1104" y1="401" x2="1170" y2="401" stroke="var(--green)" stroke-width="4"/>
+  <line x1="1104" y1="543" x2="1170" y2="543" stroke="var(--green)" stroke-width="4"/>
+  <line x1="1170" y1="401" x2="1170" y2="543" stroke="var(--green)" stroke-width="4"/>
+  <line x1="1170" y1="401" x2="1252" y2="401" stroke="var(--green)" stroke-width="4.5"/>
+  <polyline points="1243,392 1252,401 1243,410" stroke="var(--green)" stroke-width="4.5"/>
+  <rect x="1264" y="316" width="256" height="170" rx="16" stroke="var(--green)" stroke-width="4.5" fill="var(--bg)"/>
+
+  <!-- ============ the one that has not ============ -->
+  <rect x="90" y="672" width="1000" height="118" rx="14" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="13 11" fill="var(--bg)"/>
+  <line x1="130" y1="714" x2="170" y2="754" stroke="var(--red)" stroke-width="5"/>
+  <line x1="170" y1="714" x2="130" y2="754" stroke="var(--red)" stroke-width="5"/>
+  <!-- the leader runs all the way to the box and terminates in an arrowhead, mirroring the
+       green bracket -> arrow -> SCHEDULE IT path above. No second X: the card already has one. -->
+  <line x1="1104" y1="731" x2="1252" y2="731" stroke="var(--red)" stroke-width="4.5" stroke-dasharray="13 11"/>
+  <polyline points="1243,722 1252,731 1243,740" stroke="var(--red)" stroke-width="4.5"/>
+  <!-- both verdicts get a box, so the two outcome slides share one grammar -->
+  <rect x="1264" y="672" width="256" height="118" rx="16" stroke="var(--red)" stroke-width="4.5" stroke-dasharray="14 12" fill="var(--bg)"/>
+
+  <!-- ============ closing divider ============ -->
+  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+
+</g>
+
+<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+
+<!-- claim-title + subtitle -->
+<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">A Schedule Is Earned, Not Switched On</text>
+<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">Three things have to be true before anything runs while you are asleep</text>
+
+<!-- header -->
+<text x="590" y="170" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">THE GATE BEFORE THE CALENDAR</text>
+
+<!-- check 1 -->
+<text x="214" y="248" font-size="28" font-weight="700" fill="var(--ink)">It is proven on real work.</text>
+<text x="214" y="290" font-size="23" fill="var(--dim)">You have run it on real jobs and shipped what came back.</text>
+
+<!-- check 2 -->
+<text x="214" y="390" font-size="28" font-weight="700" fill="var(--ink)">It is hardened.</text>
+<text x="214" y="432" font-size="23" fill="var(--dim)">Your rules are in the file, and you have watched it stop itself on one.</text>
+
+<!-- check 3 -->
+<text x="214" y="532" font-size="28" font-weight="700" fill="var(--ink)">It has a harness on it.</text>
+<text x="214" y="574" font-size="23" fill="var(--dim)">Something that did not write the work checks it, and confirms it landed.</text>
+
+<!-- the gate -->
+<text x="1392" y="392" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">SCHEDULE IT</text>
+<text x="1392" y="436" font-size="22" text-anchor="middle" fill="var(--dim)">all three, or none</text>
+
+<!-- the one that has not -->
+<text x="214" y="720" font-size="28" font-weight="700" fill="var(--dim)">Anything with one of those missing</text>
+<text x="214" y="762" font-size="23" fill="var(--dim)">A skill you have run twice is not ready to run alone for a month.</text>
+<text x="1392" y="722" font-size="28" font-weight="700" text-anchor="middle" fill="var(--red)">NOT YET</text>
+<text x="1392" y="760" font-size="21" text-anchor="middle" fill="var(--dim)">you keep starting it</text>
+
+<!-- one-line takeaway -->
+<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">You already built all three of these. That was the whole point of them.</text>
+<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">A schedule multiplies whatever the skill already does, good or bad.</text>
+</svg></body></html>
