@@ -194,24 +194,62 @@ var CONFIG = {
       slideNotes:[
         'The employee is finished and it works. Look at the strip along the bottom, though &mdash; three weeks it ran, four weeks it never happened, and nothing was wrong with the skill on any of those four. The only arrow going in comes from you. <strong>You are still the start button.</strong>',
         'Three things have to be true before anything runs while you are asleep, and you already built all three in the last checkpoint. That is what they were for. A skill that is missing one <strong>gets told no</strong>, because a schedule multiplies whatever the skill already does &mdash; in both directions.',
-        'Four blanks, and each one is a sentence you say once. When it runs, where the input comes from, where the result lands, how you get told. Name them out loud and there is nothing left to assume, because <strong>an unattended run does not crash when a slot is empty</strong> &mdash; it runs against a folder that isn&rsquo;t there and reports done.',
+        'Four blanks, and each one is a sentence you say once. When it runs, where the input comes from, where the result lands, how you get told. Name them out loud and there is nothing left to assume, because <strong>an unattended run does not crash when a slot is empty</strong> &mdash; it runs against a source that isn&rsquo;t there and reports done. The paths on the slide are what this looks like on your own machine; the next step shows you where they point on the surface you build in.',
         'Same finished work, two endings, and the split is not about how much you trust it. Anything that only touches your own work just happens. Anything that leaves the building or costs money hits the red rail and waits. <strong>It runs without you. It does not send without you.</strong>',
         'Monday, 7am, and nobody asked it to start. By 7:12 the draft is written, reviewed, and confirmed to actually be in the folder. You show up at nine and say yes. Follow the arrow along the bottom, because that is the whole journey &mdash; a task, then a function, and now <strong>a worker who owns it and starts itself</strong>.'
       ],
-      body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask. <strong>Unattended is not unsupervised</strong> — you still see everything, you just stop being the one who starts it.' },
+      body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask. <strong>Unattended is not unsupervised</strong> — you still see everything, you just stop being the one who starts it. <em>Cowork and Claude Code schedule differently, and the difference decides whether your Monday run actually fires — the next step gives you the right one for where you build.</em>' },
 
-    { type:'build', title:'Schedule it — do it',
+    /* SURFACE-SPLIT 2026-07-29. The two products schedule differently enough that one generic
+       step was teaching each half something untrue. Verified against the docs that day:
+         · Cowork scheduled tasks run REMOTELY — laptop can be asleep, app closed. But they
+           cannot be tied to a folder on your computer; input/output must be a connector or
+           files in your Claude account. Setup has an approval-mode field.
+         · Claude Code's sidebar page is "Routines", and New routine forks LOCAL vs CLOUD.
+           Local = your real folders, but fires only while the app is open and the machine is
+           awake. Cloud = laptop off, but it clones a GitHub repo, cannot see local files or
+           local skills, and has NO approval prompts at all — wrong shape for this buyer, so
+           it is named and set aside rather than taught.
+       Do NOT tell a buyer to use `/schedule` for a local task — that creates a CLOUD routine. */
+    { type:'build', surface:'cowork', title:'Schedule it — do it',
       video:'', demoSlot:true, demoLabel:'&#127916; Demo &middot; watch me schedule one &mdash; coming soon',
-      command:'Put this skill on a schedule so it runs on its own and reports back. First check it has earned it &mdash; that it is proven on real work and safe to run unattended. Then pin the cadence, where it gets its input, where the result lands, and how I get notified. Anything risky must draft for my approval instead of sending on its own.',
-      body:'Say <em>&ldquo;schedule this to run every Monday&rdquo;</em>. Anything risky, like sending to a client, drafts for your approval instead of firing on its own.',
+      command:'Put this skill on a schedule so it runs on its own and reports back. First check it has earned it &mdash; proven on real work, hardened, harness on. Then pin the cadence, which connector or saved files it reads, where the result lands, and how I get told. Anything client-facing or costly must draft for my approval instead of sending on its own.',
+      body:'Cowork runs scheduled tasks <strong>on Anthropic&rsquo;s servers</strong>, so they fire whether or not your laptop is on.<br><br><strong>Set it up:</strong>'+
+        '<ul class="sub">'+
+        '<li>Click <strong>Scheduled</strong> in the left sidebar</li>'+
+        '<li>Click <strong>New task</strong> in the upper right, then choose <strong>Create with Claude</strong></li>'+
+        '<li>Describe the job in plain words. Claude asks a few questions and fills in the rest</li>'+
+        '<li>Check the task name, the schedule and the prompt it wrote, then click <strong>Schedule</strong></li>'+
+        '</ul>'+
+        'Or skip the sidebar entirely and just say <em>&ldquo;schedule this to run every Monday&rdquo;</em> in any chat.',
       does:[
-        'It checks the skill has <strong>earned</strong> a schedule — proven on real work, hardened, safe to run unattended. If it has not, it says so and stops.',
-        'You pick <strong>the cadence</strong>: every Monday, every morning, or on a trigger like a new file arriving.',
-        'It pins <strong>where the input comes from</strong> and <strong>where the result lands</strong>, so nothing runs against a folder it cannot find.',
-        'It sets <strong>how you get told</strong> — a message, an email, a file waiting for you.',
-        'Anything risky (sending to a client, spending money) is set to <strong>draft for your approval</strong>, never to fire on its own.'
+        'It checks the skill has <strong>earned</strong> a schedule — proven on real work, hardened, harness on. If it has not, it says so and stops.',
+        'You pick <strong>the cadence</strong> — hourly, daily, weekdays, or weekly.',
+        'You point it at <strong>where the input lives</strong>. A Cowork scheduled task <strong>cannot reach a folder on your computer</strong>, so this has to be a connector (Gmail, Drive, Notion) or files saved to your Claude account. Getting this wrong is the single most common reason a scheduled run comes back empty.',
+        'You set the <strong>approval mode</strong>. That is the draft-don&rsquo;t-send rail from the explainer, and it is a real setting, not a promise you have to trust.',
+        'It runs <strong>remotely</strong> — your computer can be asleep and the app closed, and Monday 7am still happens.'
       ],
-      doesFoot:'Unattended is not unsupervised. You still see everything — you just stop being the one who starts it.' },
+      doesFoot:'Review upcoming and past runs any time under <strong>Scheduled</strong> in the sidebar. Available on every paid plan.' },
+
+    { type:'build', surface:'claude-code', title:'Schedule it — do it',
+      video:'', demoSlot:true, demoLabel:'&#127916; Demo &middot; watch me schedule one &mdash; coming soon',
+      command:'Put this skill on a local scheduled task so it runs on its own and reports back. First check it has earned it &mdash; proven on real work, hardened, harness on. Then pin the cadence, the folder it reads from, where the result lands, and how I get told. Set the permission mode so anything client-facing or costly stops and waits for me instead of sending on its own.',
+      body:'Claude Code offers two kinds. <strong>Local</strong> is the one you want &mdash; it runs on your machine, so it can reach your actual folders.<br><br><strong>Set it up:</strong>'+
+        '<ul class="sub">'+
+        '<li>Click <strong>Routines</strong> in the sidebar</li>'+
+        '<li>Click <strong>New routine</strong>, then choose <strong>Local</strong></li>'+
+        '<li>Fill in the name, the instructions, the folder it works in, and the schedule</li>'+
+        '<li>Click <strong>Run now</strong> once and approve the permission prompts as they appear. Future runs then go through without stalling</li>'+
+        '</ul>'+
+        'Or skip the sidebar entirely and just describe it in any session &mdash; <em>&ldquo;run this every Monday at 7am&rdquo;</em>.',
+      does:[
+        'It checks the skill has <strong>earned</strong> a schedule — proven on real work, hardened, harness on. If it has not, it says so and stops.',
+        'You pick <strong>the cadence</strong> — hourly, daily, weekdays, or weekly, or say a plain-language interval and it sets it.',
+        'You name <strong>the folder it reads</strong> and <strong>where the result lands</strong>. A Local routine sees your real files, so these are the actual paths from the explainer.',
+        'You set the <strong>permission mode</strong>. That is the draft-don&rsquo;t-send rail: in Manual mode a risky step <strong>stalls and waits</strong>, and the session sits in your sidebar until you answer it.',
+        'It fires <strong>only while the app is open and your computer is awake</strong>. Sleep through 7am and the run is skipped — you get one catch-up run when you next wake the machine.'
+      ],
+      doesFoot:'Turn on <strong>Keep computer awake</strong> in Settings, under Desktop app, in General. Closing the lid still sleeps it. <em>(There is also a <strong>Cloud</strong> routine that runs with your laptop off — but it works from a GitHub repo, cannot see your local files or local skills, and has no approval prompts at all. Skip it unless you already work in a repo.)</em>' },
 
     { type:'build', title:'Let it run a full cycle without you',
       video:'', demoSlot:true, demoLabel:'&#127916; Demo &middot; watch a full unattended run &mdash; coming soon',
