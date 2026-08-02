@@ -163,6 +163,34 @@
   }
 
   var STORE = 'aieb_progress';
+  /* ── SUPPRESSION — what makes UNDO actually stick (2026-08-02) ──────────────
+     Everything in this file was built to only ever move progress FORWARD:
+     applySnapshot unions completions, foldLadder marks any rung the server calls
+     built, and neither can un-mark. That is correct for sync (a laptop that has
+     been offline must not un-finish work done on a phone) and it is exactly what
+     makes a naive undo useless — you un-tick a checkpoint, the next load folds
+     the verified ladder back in, and it re-ticks itself.
+
+     So an undo records a SUPPRESSION: "this browser's owner has deliberately
+     reopened this checkpoint; do not let an automatic source re-complete it."
+     Only a deliberate act clears it — finishing the wizard again, or the explicit
+     "Restore verified progress" control on the board.
+
+     It rides in the synced snapshot so an undo on the laptop is an undo on the
+     phone. Unlike completions it is REPLACED on sync rather than unioned: the
+     server row was written by whichever device acted last, and unioning would
+     make a suppression impossible to ever clear from a second device.
+     ────────────────────────────────────────────────────────────────────────── */
+  var SUPPRESS = 'aieb_suppressed';
+  function readSup() {
+    try { return JSON.parse(localStorage.getItem(SUPPRESS) || '{}') || {}; } catch (e) { return {}; }
+  }
+  function writeSup(o) { try { localStorage.setItem(SUPPRESS, JSON.stringify(o)); } catch (e) {} }
+  function isSuppressed(id) { return !!readSup()[id]; }
+  function hasSuppressed() { var o = readSup(); for (var k in o) { if (o[k]) return true; } return false; }
+  function suppress(id) { var o = readSup(); if (o[id]) return; o[id] = true; writeSup(o); }
+  function unsuppress(id) { var o = readSup(); if (!o[id]) return; delete o[id]; writeSup(o); }
+
   // Each wizard bumps its OWN store suffix whenever its step ORDER changes, so the
   // suffixes drift apart (CP1 is on _v5 after a step was removed; CP2-CP4 are on _v4).
   // Probing newest-first keeps the board reading real progress instead of silently
@@ -237,13 +265,125 @@
     if (id === 'setup') return !!(o.setup || o.cp1 || o.cp2 || o.cp3 || o.cp4);
     return !!o[id];
   }
+  function markDoneRaw(id) {
+    if (!META[id]) return false;
+    var o = read();
+    if (o[id] === true) return false;    // idempotent
+    o[id] = true; write(o);
+    return true;
+  }
+
+  // AUTOMATIC completion — the server ladder and the cross-device snapshot. Both
+  // are refused on a suppressed checkpoint; that refusal IS the undo.
+  function markDoneAuto(id) {
+    if (isSuppressed(id)) return false;
+    return markDoneRaw(id);
+  }
+
+  // DELIBERATE completion — a wizard finishing, or a card ticked on the board.
+  // Clears any suppression, because the person just re-did the thing.
   function markDone(id) {
     if (!META[id]) return;
-    var o = read();
-    if (o[id] === true) return;          // idempotent
-    o[id] = true; write(o);
+    unsuppress(id);
+    markDoneRaw(id);
   }
-  function reset() { write({}); }        // dev helper: wipe checkpoint progress
+
+  function reset() { write({}); }        // dev helper: wipe checkpoint progress (local only)
+
+  /* ── UNDO / STEP PLACEMENT ────────────────────────────────────────────────
+     Writing a step position needs the suffix that checkpoint's own wizard reads
+     — see STEP_WRITE_SUFFIX above for why writing to every suffix corrupts it. */
+  function setStepPos(id, pos) {
+    var suffix = STEP_WRITE_SUFFIX[id];
+    if (!suffix) return;                       // `setup` keeps no position
+    try { localStorage.setItem(STEP_PREFIX + id + suffix, String(Math.max(0, pos | 0))); } catch (e) {}
+  }
+  function clearStepPos(id) {
+    var suffix = STEP_WRITE_SUFFIX[id];
+    if (!suffix) return;
+    try {
+      localStorage.removeItem(STEP_PREFIX + id + suffix);
+      localStorage.removeItem(STEP_PREFIX + id + suffix + '_n');
+    } catch (e) {}
+  }
+
+  /* Put a checkpoint at step `pos` (0-based; pos === total means finished).
+     REOPENING CASCADES FORWARD, and it has to. The spine gates: activeId is the
+     first not-done rung, so leaving cp3 "done" while cp2 is reopened produces a
+     board that calls cp2 active and cp3 finished at the same time, with the
+     overall bar counting a checkpoint the buyer can no longer reach. */
+  function setStep(id, pos) {
+    var i = CHAIN.indexOf(id);
+    if (i < 0) return;
+    var total = stepInfo(id).total || 0;
+    pos = Math.max(0, pos | 0);
+    if (total) pos = Math.min(pos, total);
+
+    if (total && pos >= total) {               // finishing it outright
+      setStepPos(id, total);
+      markDone(id);
+      pushCourseProgress();
+      return;
+    }
+
+    var o = read();
+    for (var j = i; j < CHAIN.length; j++) {
+      delete o[CHAIN[j]];
+      suppress(CHAIN[j]);
+      if (j > i) clearStepPos(CHAIN[j]);       // later checkpoints go back to untouched
+    }
+    write(o);
+    setStepPos(id, pos);
+    pushCourseProgress();
+  }
+
+  // Reopen a finished checkpoint: it lands on its LAST step (one tick from done)
+  // rather than back at step 1, because "undo" means undo the completion, not
+  // throw away the walk-through.
+  function unmarkDone(id) {
+    var total = stepInfo(id).total || 0;
+    setStep(id, total ? total - 1 : 0);
+  }
+
+  /* WIPE EVERYTHING — the demo reset. Suppresses every rung as it goes, so the
+     board stays empty across a reload instead of refilling from the verified
+     ladder the moment the next sync lands. The surface goes too: a clean slate
+     should include the "where are you building?" question a new buyer gets. */
+  function resetAll() {
+    for (var i = 0; i < CHAIN.length; i++) {
+      suppress(CHAIN[i]);
+      clearStepPos(CHAIN[i]);
+    }
+    write({});
+    try {
+      localStorage.removeItem(SURFACE_KEY);
+      // The setup wizard keeps its own per-step done-sets, one per track.
+      localStorage.removeItem('aieb_get_access_done_v4');
+      localStorage.removeItem('aieb_get_access_cw_done_v2');
+    } catch (e) {}
+    pushCourseProgress();
+  }
+
+  // The way back from a reset or an undo: drop every suppression, then re-ask
+  // whichever lane can answer. Whatever was genuinely BUILT comes back.
+  function restoreVerified() {
+    writeSup({});
+    var lane = signedIn ? syncCourseProgress() : syncFromServer();
+    return lane.then(function () { announce(); return true; });
+  }
+
+  /* The setup wizard (get-access-aieb.html) predates the position model and keeps
+     a SET of finished steps per track instead. The board still wants a fraction
+     for its column, so read whichever track is live. */
+  function setupInfo() {
+    var cw = getSurface() !== 'claude-code';
+    var key = cw ? 'aieb_get_access_cw_done_v2' : 'aieb_get_access_done_v4';
+    var total = cw ? 4 : 5;
+    try {
+      var list = JSON.parse(localStorage.getItem(key) || '[]');
+      return { pos: (list && list.length) || 0, total: total };
+    } catch (e) { return { pos: 0, total: total }; }
+  }
 
   // The active node = the first gating step that isn't done. Everything done → 'goal',
   // which by then is itself done, so stateOf('goal') reads 'done' and overall() completes.
@@ -398,8 +538,9 @@
       var ids = [id].concat(IMPLIES[id] || []);
       ids.forEach(function (sid) {
         if (isDone(sid)) return;
-        markDone(sid);
-        changed = true;
+        // markDoneAuto, never markDone: a checkpoint the buyer deliberately
+        // reopened must survive the next sync. See SUPPRESS above.
+        if (markDoneAuto(sid)) changed = true;
       });
     });
     return changed;
@@ -513,7 +654,7 @@
       var id = CHAIN[i], info = stepInfo(id);
       if (info.pos || info.total) steps[id] = { pos: info.pos, total: info.total };
     }
-    return { progress: read(), surface: getSurface(), steps: steps };
+    return { progress: read(), surface: getSurface(), steps: steps, suppressed: readSup() };
   }
 
   // Fold a server snapshot into this browser. Rules, in order of importance:
@@ -523,13 +664,38 @@
   //   2. Step positions take the furthest of the two — being sent backwards
   //      through a wizard you already finished is worse than skipping ahead.
   //   3. A surface already chosen here wins; the server only fills a blank.
+  //   4. Suppressions (deliberate undos) are REPLACED by the server's copy, not
+  //      unioned — see SUPPRESS. They are applied FIRST so the completion union
+  //      below already knows which checkpoints must stay reopened.
   function applySnapshot(remote) {
     if (!remote || typeof remote !== 'object') return false;
     var changed = false;
 
-    var mine = read(), theirs = remote.progress || {};
+    var mine = read();
+    if (remote.suppressed && typeof remote.suppressed === 'object') {
+      if (JSON.stringify(remote.suppressed) !== JSON.stringify(readSup())) {
+        writeSup(remote.suppressed);
+        changed = true;
+      }
+      /* An arriving suppression is the ONE thing allowed to un-complete a
+         checkpoint here, and it must be — otherwise a reset on the laptop lands
+         on the phone as a suppression sitting on top of a still-full board, and
+         the two devices disagree forever. The rule it breaks (rule 1) exists to
+         stop STALE devices erasing work; this is the opposite, an explicit
+         instruction from the device that acted last. */
+      var remoteSteps0 = remote.steps || {};
+      for (var sup in remote.suppressed) {
+        if (!remote.suppressed[sup]) continue;
+        if (mine[sup]) { delete mine[sup]; changed = true; }
+        if (!remoteSteps0[sup]) { clearStepPos(sup); }
+        else if (typeof remoteSteps0[sup].pos === 'number') { setStepPos(sup, remoteSteps0[sup].pos); }
+      }
+      write(mine);
+    }
+
+    var theirs = remote.progress || {};
     for (var id in theirs) {
-      if (theirs[id] && !mine[id]) { mine[id] = true; changed = true; }
+      if (theirs[id] && !mine[id] && !isSuppressed(id)) { mine[id] = true; changed = true; }
     }
     if (changed) write(mine);
 
@@ -539,6 +705,15 @@
     for (var sid in steps) {
       var suffix = STEP_WRITE_SUFFIX[sid];
       if (!suffix) continue;                     // setup keeps no position
+      /* A REOPENED checkpoint owns its own position. Rule 2 (take the furthest
+         of the two) is right for two devices racing forward and wrong here: the
+         server still holds the pre-undo position, so it would drag a checkpoint
+         the buyer just reopened at step 3 back to step 6 — leaving a column
+         marked "Now" with every card ticked. The checkpoint-level undo survived
+         this; the step-level one did not, until this line.
+         A suppression arriving FROM the server is already applied above, with
+         the remote position taken verbatim, so this skips that case too. */
+      if (isSuppressed(sid)) continue;
       var incoming = steps[sid] || {}, local = stepInfo(sid);
       if ((incoming.pos || 0) > local.pos) {
         try {
@@ -589,9 +764,15 @@
     var mine = read(), theirs = (remote && remote.progress) || {};
     for (var id in mine) { if (mine[id] && !theirs[id]) return true; }
     if (getSurface() && !(remote && remote.surface)) return true;
+    /* An undo is news too, not just a completion. Without this the device that
+       performed it only ever tells the server via the push fired at click time —
+       so if that one POST was dropped (offline, a closed tab, a 429) the row
+       keeps the pre-undo state and every later load quietly re-imports it. */
+    if (JSON.stringify(readSup()) !== JSON.stringify((remote && remote.suppressed) || {})) return true;
     var remoteSteps = (remote && remote.steps) || {};
     for (var i = 0; i < CHAIN.length; i++) {
       var sid = CHAIN[i];
+      if (isSuppressed(sid)) continue;           // reopened: local position is the truth
       if (stepInfo(sid).pos > ((remoteSteps[sid] || {}).pos || 0)) return true;
     }
     return false;
@@ -748,9 +929,12 @@
     signInWithGoogle: signInWithGoogle, signOut: signOut,
     syncCourseProgress: syncCourseProgress, pushCourseProgress: pushCourseProgress,
     read: read, isDone: isDone, markDone: markDone, reset: reset,
+    // Undo / reset. See the SUPPRESS block for why these need more than a delete.
+    unmarkDone: unmarkDone, setStep: setStep, resetAll: resetAll,
+    restoreVerified: restoreVerified, isSuppressed: isSuppressed, hasSuppressed: hasSuppressed,
     getSurface: getSurface, setSurface: setSurface, surfaceShows: surfaceShows,
     activeId: activeId, stateOf: stateOf, next: next, buildIndex: buildIndex,
-    stepInfo: stepInfo, resume: resume, started: started, overall: overall,
+    stepInfo: stepInfo, setupInfo: setupInfo, resume: resume, started: started, overall: overall,
     syncFromServer: syncFromServer, hasViewToken: function () { return !!viewToken(); }
   };
 

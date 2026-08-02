@@ -39,3 +39,71 @@ strong{font-weight:700;color:var(--text)}
 code{font-family:var(--font-mono);font-size:.9em;background:var(--surface-2);border:1px solid var(--border-2);border-radius:4px;padding:1px 6px;color:#256F30}
 @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .rise{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+
+/* ── MOBILE ────────────────────────────────────────────────────────────────
+   Added 2026-08-02. Until now not one page in the journey carried a media
+   query, so every wizard rendered its desktop measure on a 375px screen: 24px
+   card padding either side of a 640px column, 23px headings that wrapped after
+   three words, and copy buttons well under the 44px a thumb needs.
+
+   These are the SHARED rules — anything the board, the wizards and the setup
+   flow all want. Page-specific layout (the board's column stack) stays in the
+   page that owns it.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* iOS zooms the whole page in when a tapped control's text is under 16px, and
+   never zooms back out. Applies to inputs only, so it costs nothing elsewhere. */
+@media (max-width:760px){
+  input,select,textarea{font-size:16px}
+}
+
+@media (max-width:760px){
+  html{font-size:14.5px}
+  /* A tap that highlights the whole card grey reads as a rendering fault. Our
+     own :active states do the feedback instead. */
+  a,button,summary,[role="button"]{-webkit-tap-highlight-color:transparent}
+  /* Nothing in this journey is wide enough to justify a sideways scroll; when
+     one appears it is a long command or an over-wide grid, and the page rocking
+     left-right is the first thing that makes a site feel broken on a phone. */
+  body{overflow-x:hidden}
+
+  /* Wizard shell */
+  .wrap{padding:0 14px 54px}
+  .step{padding:18px 16px;border-radius:12px}
+  .step h2{font-size:20px;letter-spacing:-.3px}
+  .step p{font-size:14.5px}
+  .step ul.sub li{font-size:14px}
+
+  /* The command line: at 375px the text and the Copy button fought for the same
+     row, and the button won by squeezing the command to an unreadable sliver.
+     Stack them and let Copy be a full-width target. */
+  .cmd{flex-direction:column;align-items:stretch;gap:9px;padding:12px}
+  .cmd .txt{font-size:13px;word-break:break-all}
+  .copy{width:100%;padding:11px 12px;font-size:12.5px;min-height:42px}
+  .cmd-block{padding:12px 12px 14px}
+
+  /* Wizard nav — two buttons that must stay thumb-sized and side by side */
+  .nav{gap:9px}
+  .nav .btn{flex:1;justify-content:center;padding:13px 12px;min-height:46px}
+  .btn{min-height:44px}
+
+  .done-screen{padding:30px 18px}
+  .done-screen h2{font-size:22px}
+  .done-screen .big{font-size:34px}
+  .dl-btn{display:block;text-align:center;padding:13px 18px}
+
+  .site-topbar,.topbar.rise{padding:8px 14px}
+  .video,.video-slot,.watch{margin-left:-2px;margin-right:-2px}
+}
+
+@media (max-width:420px){
+  .step{padding:15px 13px}
+  .step h2{font-size:18.5px}
+}
+
+/* A person who has asked their OS to stop animating means it — the rise-in on
+   every wizard step is exactly the kind of motion that triggers it. */
+@media (prefers-reduced-motion:reduce){
+  .rise{animation:none}
+  *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}

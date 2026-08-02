@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="journey.css?v=3">
+<link rel="stylesheet" href="journey.css?v=4">
 <style>
 body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,color-mix(in srgb,var(--cp) 8%,transparent),transparent 70%),var(--bg)}
 .wrap{max-width:640px;margin:0 auto;padding:0 20px 70px}
@@ -158,7 +158,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 
 </div>
 
-<script src="progress.js?v=3"></script>
+<script src="progress.js?v=4"></script>
 <script src="slides.js?v=4"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
@@ -296,6 +296,25 @@ var STORE = 'aieb_ckpt_'+CONFIG.id+'_v6'; // bump whenever the step ORDER change
 var pos = 0; // current step index (0..steps.length). steps.length = completion screen.
 try { var saved = parseInt(localStorage.getItem(STORE),10); if(!isNaN(saved)) pos = Math.min(saved, activeSteps().length); } catch(e){}
 
+/* ── DEEP LINK: ?step=N ─────────────────────────────────────────────────────
+   The board links every card to its OWN step now, so arriving with ?step=3 has
+   to open step 3 rather than wherever this browser left off. 1-based to match
+   the "Step 3 of 6" printed on the page — this is a URL a person may read.
+
+   Consumed then scrubbed: the position is saved immediately, so leaving the
+   param in the address bar would make a later refresh yank the buyer back to
+   the step they arrived at instead of the one they walked to. */
+(function(){
+  var m = /[?&]step=(\d+)/.exec(window.location.search || '');
+  if (!m) return;
+  var want = parseInt(m[1], 10);
+  if (!isNaN(want) && want >= 1) { pos = Math.min(want - 1, activeSteps().length); save(); }
+  try {
+    var q = (window.location.search || '').replace(/([?&])step=\d+/, '$1').replace(/[?&]$/, '').replace(/\?&/, '?');
+    history.replaceState({}, '', window.location.pathname + (q === '?' ? '' : q) + window.location.hash);
+  } catch (e) {}
+})();
+
 function save(){ try { localStorage.setItem(STORE, String(pos)); localStorage.setItem(STORE+'_n', String(activeSteps().length)); } catch(e){} }
 function copyCmd(btn){
   var t = btn.parentElement.querySelector('.txt').textContent.trim();
@@ -346,7 +365,10 @@ function render(){
       '<h2>Checkpoint complete</h2>'+
       '<p>'+lead+'</p>'+
       '<div class="done-cta">'+cta+'</div>'+
-      '<div class="nav" style="justify-content:center;margin-top:18px"><button class="btn" onclick="back()">← Back</button></div></div>';
+      '<div class="nav" style="justify-content:center;margin-top:18px;gap:10px">'+
+        '<button class="btn" onclick="back()">← Back</button>'+
+        '<button class="btn" onclick="reopen()">&#8634; Mark not done</button>'+
+      '</div></div>';
     return;
   }
 
@@ -400,6 +422,22 @@ function render(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+/* Undo the completion, from the finish screen itself — for someone who clicked
+   Next through a checkpoint faster than they did it. The board offers the same
+   thing on the column header.
+
+   The cascade is not optional: the spine gates on "first checkpoint not done",
+   so leaving later checkpoints marked done behind a reopened one paints a board
+   where a locked checkpoint sits after a finished one. AIEB.unmarkDone does the
+   cascade and, crucially, records a suppression — without it the next server
+   sync folds the verified ladder straight back in and the undo lasts seconds. */
+function reopen(){
+  if (!window.AIEB) return;
+  if (!confirm('Mark \u201C'+CONFIG.name+'\u201D as not done?\n\nIt goes back to in progress and every checkpoint after it re-locks. Nothing you built is deleted.')) return;
+  AIEB.unmarkDone(CONFIG.id);
+  pos = Math.max(0, activeSteps().length - 1);
+  save(); render();
+}
 function next(){ pos = Math.min(pos+1, activeSteps().length); save(); render(); }
 function back(){ if (pos<=0){ window.location.href = CONFIG.board; return; } pos--; save(); render(); }
 

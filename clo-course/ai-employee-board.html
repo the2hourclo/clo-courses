@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="journey.css?v=3">
+<link rel="stylesheet" href="journey.css?v=4">
 <style>
 body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba(45,140,60,.05),transparent 70%),var(--bg)}
 
@@ -95,38 +95,144 @@ body{min-height:100vh;background:radial-gradient(1100px 600px at 50% -260px,rgba
 /* ── FULL BOARD — fits the width, no horizontal scrollbar ── */
 .board-wrap{padding:12px 24px 46px}
 .board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:11px;max-width:1300px;margin:0 auto;align-items:start}
+/* Six → three at tablet width. Below 760px it stops being a grid at all and
+   becomes the collapsible stack at the bottom of this stylesheet — two 150px
+   columns on a phone made every card title wrap after two words. */
 @media(max-width:1120px){.board{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:700px){.board{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .col{display:flex;flex-direction:column;gap:8px;min-width:0}
-.col-head{display:flex;align-items:center;gap:6px;padding:2px 2px 4px;flex-wrap:wrap}
+
+/* The column header is a button so it can be the expander on a phone. On
+   desktop it must look and behave exactly like the label it replaced — hence
+   the full button reset here rather than a class on top of UA styles. */
+.col-head{display:flex;align-items:center;gap:6px;padding:2px 2px 4px;width:100%;
+  background:none;border:0;font-family:inherit;text-align:left;cursor:default;color:inherit}
 .col-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-display);font-size:12px;font-weight:800;padding:4px 9px;border-radius:7px;background:color-mix(in srgb,var(--cp) 16%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 32%,transparent);min-width:0}
 .col-pill span.nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-a.col-pill{cursor:pointer;text-decoration:none;transition:background .13s,border-color .13s}
-a.col-pill:hover{background:color-mix(in srgb,var(--cp) 28%,transparent);border-color:color-mix(in srgb,var(--cp) 55%,transparent);text-decoration:none}
-.col-pill .open{font-weight:800;opacity:.6}
-a.col-pill:hover .open{opacity:1}
 .col-pill .cdot{width:7px;height:7px;border-radius:50%;background:var(--cp);flex-shrink:0}
 .col-state{margin-left:auto;font-size:10.5px;font-weight:700;white-space:nowrap}
 .col-state.done{color:var(--accent)}
 .col-state.active{color:var(--cp)}
 .col-state.locked{color:var(--text-400,#6B6B63)}
+.col-chev{display:none}
 .col-body{background:color-mix(in srgb,var(--cp) 5%,var(--surface));border:1px solid var(--border);border-top:3px solid var(--cp);border-radius:var(--radius-lg);padding:10px;display:flex;flex-direction:column;gap:9px;min-height:80px}
 .col.active .col-body{border-color:color-mix(in srgb,var(--cp) 40%,transparent);box-shadow:3px 4px 0 rgba(33,33,30,.10),0 0 0 1px color-mix(in srgb,var(--cp) 30%,transparent)}
 .col.locked .col-body{opacity:.7}
-.kcard{background:var(--surface-2);border:1px solid var(--border-2);border-radius:9px;padding:10px 11px;box-shadow:0 1px 3px rgba(0,0,0,.35)}
-.kcard .ktitle{font-size:13px;font-weight:600;color:var(--text);line-height:1.35;display:flex;gap:7px;align-items:flex-start}
-.kcard .kic{flex-shrink:0;font-size:14px;line-height:1.3}
+.klist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+
+/* ── STEP CARDS — a real checklist, not a picture of one ──────────────────
+   Each card carries a tick (click = done/not done) and a body that deep-links
+   into that exact step of the wizard. Both targets are ≥40px so a thumb can
+   hit either one without hitting the other. */
+.kcard{position:relative;display:flex;align-items:flex-start;gap:9px;background:var(--surface-2);border:1px solid var(--border-2);border-radius:9px;padding:9px 10px;transition:border-color .13s,box-shadow .13s,transform .13s}
+.kcard.is-live:hover{border-color:color-mix(in srgb,var(--cp) 45%,transparent);box-shadow:2px 3px 0 rgba(33,33,30,.08);transform:translate(-1px,-1px)}
+.kcard:focus-within{border-color:color-mix(in srgb,var(--cp) 55%,transparent)}
+.kcard.is-doing{border-color:color-mix(in srgb,var(--cp) 50%,transparent);background:color-mix(in srgb,var(--cp) 7%,var(--surface))}
+
+.ktick{position:relative;z-index:2;flex-shrink:0;width:20px;height:20px;margin-top:1px;border-radius:50%;border:1.5px solid var(--border-ink);background:var(--surface);
+  color:transparent;font-size:11px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;font-family:var(--font-body)}
+button.ktick{cursor:pointer;transition:background .12s,border-color .12s,transform .12s}
+/* The 20px dot is the visual size; the tap target around it is 40px. Without
+   this a tick is a coin-flip on a phone, and mis-ticking a checkpoint cascades. */
+button.ktick::after{content:'';position:absolute;left:0;top:0;width:40px;height:40px;transform:translate(-10px,-10px)}
+button.ktick:hover{border-color:var(--cp);background:color-mix(in srgb,var(--cp) 14%,var(--surface))}
+button.ktick:active{transform:scale(.9)}
+.kcard.is-done .ktick{background:var(--accent);border-color:var(--accent);color:#fff}
+.kcard.is-doing .ktick{border-color:var(--cp);color:var(--cp);font-size:8px}
+.ktick.static{opacity:.55}
+
+.kbody{flex:1;min-width:0;display:block;color:inherit;text-decoration:none}
+a.kbody:hover{text-decoration:none}
+/* Stretched link: the WHOLE card opens its step, not just the words. Ticking
+   still wins inside its own zone — .ktick is the only positioned child with a
+   z-index, so it sits above this overlay. */
+a.kbody::after{content:'';position:absolute;inset:0;border-radius:9px}
+.kcard .ktitle{display:block;font-size:13px;font-weight:600;color:var(--text);line-height:1.35}
 .kcard.is-done .ktitle{color:var(--text-muted)}
-.ktags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.kgo{position:absolute;right:9px;top:9px;font-size:12px;font-weight:800;color:var(--cp);opacity:0;transition:opacity .13s,transform .13s}
+.kcard.is-live:hover .kgo,.kcard:focus-within .kgo{opacity:.85;transform:translateX(2px)}
+.ktags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
 .tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .tag.type{background:var(--surface-3);color:var(--text-muted);border:1px solid var(--border-2)}
+.tag.opt{background:transparent;color:var(--text-dim);border:1px dashed var(--border-2)}
 .tag.st-doing{background:rgba(37,99,168,.12);color:#2563A8}
 .tag.st-done{background:var(--accent-dim);color:var(--accent)}
 .tag.st-doing::before{content:'◐';font-size:9px}
 .tag.st-done::before{content:'●';font-size:9px}
 
+/* Column footer — the way in, and the way back out of a finished checkpoint */
+.col-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:2px 2px 0;margin-top:1px}
+.col-go{font-size:12px;font-weight:800;color:var(--cp);text-decoration:none}
+.col-go:hover{text-decoration:underline}
+.col-undo,.col-hint{font-family:var(--font-body);font-size:11.5px;color:var(--text-dim)}
+.col-undo{margin-left:auto;background:none;border:0;cursor:pointer;padding:4px 6px;border-radius:6px;transition:color .13s,background .13s}
+.col-undo:hover{color:var(--text);background:var(--surface-3)}
+
+/* ── RESET / RESTORE ──────────────────────────────────────────────────────
+   Quiet on purpose. It is a real control a buyer may want (start the journey
+   over), and the one Rashid drives during a live walkthrough — but it must
+   never read as a next action next to the checkpoint columns. */
+.admin{max-width:1300px;margin:6px auto 0;padding:0 24px;text-align:center}
+.admin-note{display:block;font-size:12.5px;color:#B26B00;margin-bottom:9px}
+.admin-row{display:inline-flex;gap:9px;flex-wrap:wrap;justify-content:center}
+.admin-btn{font-family:var(--font-body);font-size:12.5px;color:var(--text-dim);background:none;border:1px solid transparent;border-radius:8px;padding:8px 13px;cursor:pointer;transition:all .14s;min-height:38px}
+.admin-btn:hover{color:var(--text);border-color:var(--border-2);background:var(--surface)}
+.admin-btn.primary{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 35%,transparent);background:var(--accent-dim)}
+.admin-btn.primary:hover{border-color:var(--accent)}
+
 .footer{text-align:center;padding:6px 24px 54px;font-size:13px;color:var(--text-dim)}
 .footer a{font-weight:600}
+
+/* ── MOBILE: the board becomes a stack of collapsible checkpoints ─────────
+   Six kanban columns squeezed into a 375px viewport gave ~150px each, which
+   turns every card title into four wrapped words and buries the active
+   checkpoint below three finished ones. Stacked and collapsible, the phone
+   shows the checkpoint you are on, open, with the rest one tap away. */
+@media(max-width:760px){
+  .board-wrap{padding:8px 12px 34px}
+  .board{grid-template-columns:1fr;gap:10px}
+  .col{gap:0}
+  .col-head{cursor:pointer;gap:8px;padding:11px 12px;min-height:52px;
+    background:var(--surface);border:1px solid var(--border-2);border-left:4px solid var(--cp);border-radius:11px}
+  .col.open .col-head{border-radius:11px 11px 0 0;border-bottom-color:transparent}
+  .col-pill{font-size:12.5px;padding:3px 8px}
+  .col-chev{display:block;font-size:11px;color:var(--text-dim);transition:transform .2s;flex-shrink:0}
+  .col.open .col-chev{transform:rotate(180deg)}
+  .col-state{margin-left:0}
+  .col-body{display:none;border-radius:0 0 11px 11px;border-top:0;border-left:4px solid var(--cp)}
+  .col.open .col-body{display:flex}
+  .col.active .col-body{box-shadow:none}
+  .kcard{padding:11px 11px}
+  .kcard .ktitle{font-size:14px}
+  .kgo{opacity:.5;position:static;display:block;margin-top:6px;text-align:right}
+  .ktick{width:24px;height:24px;font-size:13px}
+  .col-foot{padding:6px 2px 2px;min-height:38px}
+  .col-go{padding:7px 2px}
+  .col-undo{padding:7px 8px}
+
+  /* Header block */
+  .topbar{padding:8px 13px;gap:10px;min-height:52px}
+  .brand{font-size:12px;gap:8px}
+  .head{padding:0 14px}
+  .map-label{margin-top:20px;padding:0 14px}
+  .nextbar{margin:14px 12px 4px;padding:15px 16px;gap:14px}
+  .nb-title{font-size:19px}
+  .nb-go{width:100%;justify-content:center;padding:14px 20px}
+  .res{padding:0 14px}
+  /* Full-width stacked rows. `flex:1` on an inline-flex row crushed the two
+     buttons to 76px each and wrapped "Reset all progress" over three lines. */
+  .admin{padding:0 14px}
+  .admin-row{display:flex;flex-direction:column;width:100%;gap:8px}
+  .admin-btn{width:100%;border-color:var(--border-2);background:var(--surface)}
+  .signin-card{padding:28px 20px}
+}
+/* Below ~430px the surface toggle and the account chip can no longer share a
+   row with the brand without one of them being clipped. */
+@media(max-width:430px){
+  .topbar{flex-wrap:wrap;padding-bottom:9px}
+  .whoami{margin-left:0;width:100%;justify-content:flex-start;gap:6px}
+  .surf .surface-label{display:none}
+  .sbtn{padding:6px 12px}
+}
 
 /* ── SURFACE GATE (first-time only) ── */
 .surface-gate{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(33,33,30,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
@@ -181,6 +287,7 @@ a.col-pill:hover .open{opacity:1}
 <div class="board-wrap rise"><div class="board" id="board"></div></div>
 
 <div class="rise" id="resources"></div>
+<div class="rise" id="admin"></div>
 </div>
 
 <div class="footer">Questions? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Ask in the community ↗</a></div>
@@ -188,7 +295,7 @@ a.col-pill:hover .open{opacity:1}
 <div class="surface-gate" id="gate" hidden></div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="progress.js?v=3"></script>
+<script src="progress.js?v=4"></script>
 <script>
 /* ──────────────────────────────────────────────────────────────
    BOARD PAGE. Top: what to work on NEXT (from progress.js). Below:
@@ -214,24 +321,40 @@ var TYPES = {
   build:{ label:'Build', ic:'🔨' }, gate:{ label:'Done-signal', ic:'🎯' }, outcome:{ label:'Outcome', ic:'🌟' },
   share:{ label:'Share', ic:'🔗' }   // matches checkpoint-map.html's type:'share' step
 };
+/* ══ THE CARD↔STEP CONTRACT ═══════════════════════════════════════════════
+   Every card below is ONE STEP of that checkpoint's wizard, in the wizard's
+   own order, carrying the wizard's own title and its `surface` filter. That is
+   not a stylistic preference any more — it is load-bearing in two directions:
+
+     · a card's INDEX is its step number, so clicking it deep-links to
+       `<wizard>?step=N` and must land on the step whose title you just read;
+     · a card's STATUS is read straight off the wizard's saved position, so a
+       card the wizard does not have shifts every status after it by one.
+
+   The drift this replaces was real: cp1's column advertised a video deleted
+   from its wizard, cp4 listed 3 cards against 5 steps, and `goal` listed 3
+   against 4 — so the right-hand half of the board narrated a journey nobody
+   was on. When a wizard's steps change, change them here in the same commit.
+   `surface` mirrors the wizard's own field: absent = shown on both.
+   ════════════════════════════════════════════════════════════════════════ */
 var BOARD = [
-  { id:'setup', name:'Get set up', color:'#2D8C3C', cards:[
+  /* `setup` is the exception, and deliberately so. get-access-aieb.html predates
+     the position model and keeps a SET of finished steps per track, with two
+     tracks of different lengths — so these four cards SUMMARISE it rather than
+     mirroring it, and the column is ticked as a whole instead of per card. */
+  { id:'setup', name:'Get set up', color:'#2D8C3C', summary:true, cards:[
     { t:'Join the community', type:'action' },
     { t:'Install the plugin + connect', type:'action' },
     { t:'Onboard — run /setup-aieb', type:'action' },
     { t:'Welcome — what you just built', type:'video' }
   ]},
-  /* ORDER IS LOad-BEARING: colStatuses() maps card INDEX onto the wizard's step index,
-     so this list must mirror checkpoint-map.html's four active steps 1:1 on both
-     surfaces (Draw.io → Run → Read & share → gate). It previously advertised a video
-     "Why the X-Ray interview works" that had been deleted from the wizard and omitted
-     "Read & share your X-Ray" that it actually has — so the column promised a step that
-     did not exist and every progress tag sat on the wrong card name. */
   { id:'cp1', name:'Map the business', color:'#2563A8', cards:[
-    { t:'Set up Draw.io — connector + app', type:'build' },
-    { t:'Run your Business X-Ray', type:'build' },
-    { t:'Read & share your X-Ray', type:'share' },
-    { t:'X-Ray map exists + “N hrs/week” baseline', type:'gate' }
+    { t:'Set up Draw.io — connector + app', type:'build', surface:'cowork' },
+    { t:'Set up Draw.io — MCP + app',       type:'build', surface:'claude-code' },
+    { t:'Run your Business X-Ray', type:'build', surface:'cowork' },
+    { t:'Run your Business X-Ray', type:'build', surface:'claude-code' },
+    { t:'Read &amp; share your X-Ray', type:'share', optional:true },
+    { t:'Lock your first target', type:'gate' }
   ]},
   { id:'cp2', name:'Your first skill', color:'#6B46C1', cards:[
     { t:'What is a skill', type:'video' },
@@ -244,19 +367,23 @@ var BOARD = [
     { t:'Skill ran once on real data', type:'gate' }
   ]},
   { id:'cp3', name:'A skill system', color:'#B26B00', cards:[
-    { t:'Build a skill system', type:'video' },
-    { t:'Wire skills into one system', type:'build' },
+    { t:'What a skill system is', type:'video' },
+    { t:'Wire your skill into a system', type:'build' },
     { t:'System runs a whole function', type:'gate' }
   ]},
   { id:'cp4', name:'Make it reliable', color:'#A83A6B', cards:[
     { t:'Review + harden', type:'video' },
+    { t:'Harden it — do it', type:'build' },
     { t:'Build a harness', type:'video' },
+    { t:'Build the harness — do it', type:'build' },
     { t:'It catches its own mistakes', type:'gate' }
   ]},
   /* `goal` is a REAL checkpoint now (2026-07-24), not a trophy column: autonomy moved here
      from cp4, because running without you is what MAKES it an AI Employee. */
   { id:'goal', name:'Your AI Employee', color:'#C2410C', cards:[
     { t:'Schedule it / autonomy', type:'video' },
+    { t:'Schedule it — do it', type:'build', surface:'cowork' },
+    { t:'Schedule it — do it', type:'build', surface:'claude-code' },
     { t:'Let it run a full cycle without you', type:'build' },
     { t:'It runs on its own', type:'gate' }
   ]}
@@ -366,37 +493,172 @@ function resourcesHTML(){
 function renderResources(){ document.getElementById('resources').innerHTML = resourcesHTML(); }
 
 /* ---- THE FULL BOARD ---- */
-function cardHTML(card, status){
+
+// The cards actually on this board right now — the same surface filter the
+// wizard applies to its own steps, so index N here is step N+1 there.
+function activeCards(col){
+  var surface = AIEB.getSurface();
+  return col.cards.filter(function(c){ return !c.surface || c.surface === surface; });
+}
+
+/* Deep link into a checkpoint at a given card. `?step=N` is 1-based to match
+   the "Step 3 of 6" the wizard prints — a URL a person may well read. */
+function stepHref(id, i){
+  var wiz = WIZARDS[id];
+  if (!wiz) return null;
+  if (i === null || i === undefined) return wiz;
+  return wiz + (wiz.indexOf('?') > -1 ? '&' : '?') + 'step=' + (i + 1);
+}
+
+function cardHTML(col, card, status, i, interactive){
   var ty = TYPES[card.type] || TYPES.action;
-  var h = '<div class="kcard is-'+status+'">';
-  h += '<div class="ktitle"><span class="kic">'+ty.ic+'</span><span>'+card.t+'</span></div>';
-  h += '<div class="ktags"><span class="tag type">'+ty.label+'</span>';
-  if (STATUS[status]) h += '<span class="tag st-'+status+'">'+STATUS[status]+'</span>';
+  var href = interactive ? stepHref(col.id, col.summary ? null : i) : null;
+  var tick = status === 'done' ? '&#10003;' : (status === 'doing' ? '&#9679;' : '');
+
+  var h = '<li class="kcard is-'+status+(interactive?' is-live':'')+'">';
+  // The tick is a real control on step columns and a plain marker on `setup`,
+  // whose wizard keeps its own per-step state we must not fight over.
+  if (interactive && !col.summary){
+    var verb = status==='done' ? 'not done' : 'done';
+    h += '<button type="button" class="ktick" aria-pressed="'+(status==='done')+'" '+
+         'title="Mark '+verb+'" aria-label="Mark &quot;'+stripTags(card.t)+'&quot; '+verb+'" '+
+         'onclick="toggleCard(event,\''+col.id+'\','+i+',\''+status+'\')">'+tick+'</button>';
+  } else {
+    h += '<span class="ktick static" aria-hidden="true">'+tick+'</span>';
+  }
+
+  var inner = '<span class="ktitle">'+card.t+'</span>'+
+    '<span class="ktags"><span class="tag type">'+ty.ic+' '+ty.label+'</span>'+
+    (card.optional ? '<span class="tag opt">Optional</span>' : '')+
+    (STATUS[status] ? '<span class="tag st-'+status+'">'+STATUS[status]+'</span>' : '')+'</span>';
+
+  h += href
+    ? '<a class="kbody" href="'+href+'">'+inner+'<span class="kgo" aria-hidden="true">→</span></a>'
+    : '<span class="kbody">'+inner+'</span>';
+  return h + '</li>';
+}
+
+function stripTags(s){ return String(s).replace(/<[^>]*>/g,'').replace(/"/g,'&quot;'); }
+
+/* Card status now compares INDEXES rather than scaling a fraction. The old
+   `Math.round(pos/total*n)` existed because the card list and the step list
+   were different lengths; now that they are the same list, the honest answer is
+   simply "everything before the saved position is done". */
+function colStatuses(col, state, cards){
+  var n = cards.length;
+  if (state==='locked') return cards.map(function(){ return 'todo'; });
+  if (state==='done')   return cards.map(function(){ return 'done'; });
+  var info = col.summary ? AIEB.setupInfo() : AIEB.stepInfo(col.id);
+  var pos = info.pos || 0;
+  if (col.summary && info.total) pos = Math.round(pos / info.total * n);   // summary column scales
+  pos = Math.max(0, Math.min(n - 1, pos));    // an active column always has one card in play
+  return cards.map(function(c,i){ return i<pos ? 'done' : (i===pos ? 'doing' : 'todo'); });
+}
+
+function colHTML(col){
+  var state = AIEB.stateOf(col.id), cards = activeCards(col);
+  var statuses = colStatuses(col, state, cards);
+  var stateLabel = state==='done' ? '✓ Done' : state==='active' ? '● Now' : '🔒 Locked';
+  var wiz = WIZARDS[col.id], live = (state==='active' || state==='done') && !!wiz;
+  /* MOBILE DEFAULT: exactly one column open — the one you are on. (Desktop
+     ignores `open` entirely; the collapse only exists under 760px.) Opening
+     every non-locked column meant a phone showed three finished checkpoints
+     before the one being worked on, which is the opposite of what the board is
+     for. Comparing against activeId rather than the state also covers the
+     finished journey, where nothing is 'active' and the goal column is the
+     right thing to land on. A column the reader opened by hand wins, and keeps
+     winning through the repaints a progress sync triggers. */
+  var open = colOpen.hasOwnProperty(col.id) ? colOpen[col.id] : (col.id === AIEB.activeId());
+  var pillInner = '<span class="cdot"></span><span class="nm">'+col.name+'</span>';
+
+  var h = '<div class="col '+state+(open?' open':'')+'" style="--cp:'+col.color+'" data-cp="'+col.id+'">';
+
+  /* The whole header is the mobile expander. On desktop the columns are all
+     open and this collapses nothing — it is a phone affordance that costs the
+     desktop layout nothing, which is why it is one control rather than two. */
+  h += '<button type="button" class="col-head" onclick="toggleCol(\''+col.id+'\')" '+
+       'aria-expanded="'+open+'" aria-controls="body-'+col.id+'">';
+  h += '<span class="col-pill">'+pillInner+'</span>';
+  h += '<span class="col-state '+state+'">'+stateLabel+'</span>';
+  h += '<span class="col-chev" aria-hidden="true">▾</span></button>';
+
+  h += '<div class="col-body" id="body-'+col.id+'">';
+  h += '<ul class="klist">'+cards.map(function(c,i){ return cardHTML(col, c, statuses[i], i, live); }).join('')+'</ul>';
+
+  // Column footer — the way in, and the way back out of a finished checkpoint.
+  h += '<div class="col-foot">';
+  if (state==='locked'){
+    h += '<span class="col-hint">Finish the checkpoint before it</span>';
+  } else {
+    var verb = state==='done' ? 'Review' : ((col.summary ? AIEB.setupInfo() : AIEB.stepInfo(col.id)).pos > 0 ? 'Continue' : 'Open');
+    h += '<a class="col-go" href="'+stepHref(col.id, null)+'">'+verb+' →</a>';
+    if (state==='done')
+      h += '<button type="button" class="col-undo" onclick="undoCol(\''+col.id+'\')" '+
+           'title="Reopen this checkpoint">↺ Reopen</button>';
+  }
+  h += '</div>';
+
   h += '</div></div>';
   return h;
 }
-function colStatuses(col, state){
-  var n = col.cards.length;
-  if (state==='locked') return col.cards.map(function(){ return 'todo'; });
-  if (state==='done')   return col.cards.map(function(){ return 'done'; });
-  var info = AIEB.stepInfo(col.id), total = info.total || n;
-  var doneCount = total>0 ? Math.round(info.pos/total*n) : 0;
-  doneCount = Math.max(0, Math.min(n, doneCount));
-  if (doneCount>=n) doneCount = n-1;
-  return col.cards.map(function(c,i){ return i<doneCount ? 'done' : (i===doneCount ? 'doing' : 'todo'); });
-}
-function colHTML(col){
-  var state = AIEB.stateOf(col.id), statuses = colStatuses(col, state);
-  var stateLabel = state==='done' ? '✓ Done' : state==='active' ? '● Now' : '🔒 Locked';
-  var wiz = WIZARDS[col.id], clickable = (state==='active' || state==='done') && wiz;
-  var pillInner = '<span class="cdot"></span><span class="nm">'+col.name+'</span>';
-  var h = '<div class="col '+state+'" style="--cp:'+col.color+'"><div class="col-head">';
-  h += clickable ? '<a class="col-pill" href="'+wiz+'">'+pillInner+'<span class="open">→</span></a>' : '<span class="col-pill">'+pillInner+'</span>';
-  h += '<span class="col-state '+state+'">'+stateLabel+'</span></div>';
-  h += '<div class="col-body">'+col.cards.map(function(c,i){ return cardHTML(c, statuses[i]); }).join('')+'</div></div>';
-  return h;
-}
 function renderMap(){ document.getElementById('board').innerHTML = BOARD.map(colHTML).join(''); }
+
+/* ---- INTERACTION: tick, untick, reopen ---------------------------------
+   Every one of these routes through AIEB so the change is written once, pushed
+   to the server once, and cascades the same way wherever it was triggered. */
+function toggleCard(ev, id, i, status){
+  ev.preventDefault(); ev.stopPropagation();
+  // done → untick THIS card (and everything after it). Otherwise → complete up
+  // to and including it, which is what a checklist tick means.
+  AIEB.setStep(id, status==='done' ? i : i+1);
+  renderAll();
+}
+function undoCol(id){
+  var m = AIEB.META[id];
+  if (!confirm('Reopen “'+m.name+'”?\n\nIt goes back to in-progress, and every checkpoint after it re-locks. Nothing you built is deleted.')) return;
+  AIEB.unmarkDone(id);
+  renderAll();
+}
+
+/* Mobile only. The class is toggled on the live node instead of re-rendering,
+   so opening a column can't be undone by the next progress sync repaint. */
+var colOpen = {};
+function toggleCol(id){
+  var el = document.querySelector('.col[data-cp="'+id+'"]');
+  if (!el) return;
+  var nowOpen = !el.classList.contains('open');
+  el.classList.toggle('open', nowOpen);
+  colOpen[id] = nowOpen;
+  var head = el.querySelector('.col-head');
+  if (head) head.setAttribute('aria-expanded', String(nowOpen));
+}
+
+/* ---- RESET / RESTORE ---------------------------------------------------
+   Built for running a live walkthrough on a real account: wipe the board back
+   to a brand-new buyer, demo the journey, then put the real state back. The
+   restore is the half that makes the reset safe to offer at all — nothing here
+   touches what was actually BUILT, only what the board shows. */
+function resetProgress(){
+  if (!confirm('Reset the whole board?\n\nEvery checkpoint goes back to not-started, as if you just bought. Nothing you built is deleted — "Restore my real progress" brings the board back.')) return;
+  AIEB.resetAll();
+  colOpen = {};
+  renderAll();
+}
+function restoreProgress(){
+  AIEB.restoreVerified().then(renderAll);
+}
+function adminHTML(){
+  var muted = AIEB.hasSuppressed();
+  return '<div class="admin'+(muted?' muted':'')+'">'+
+    (muted
+      ? '<span class="admin-note">This board is showing reset/reopened progress. Your verified build history is untouched.</span>'
+      : '')+
+    '<div class="admin-row">'+
+      '<button type="button" class="admin-btn" onclick="resetProgress()">↺ Reset all progress</button>'+
+      (muted ? '<button type="button" class="admin-btn primary" onclick="restoreProgress()">Restore my real progress</button>' : '')+
+    '</div></div>';
+}
+function renderAdmin(){ document.getElementById('admin').innerHTML = adminHTML(); }
 
 /* ── SIGN IN ───────────────────────────────────────────────────────────────
    Why this is here at all: progress used to live only in this browser, and
@@ -566,6 +828,7 @@ function renderAll(){
   renderResources();
   renderNext();
   renderMap();
+  renderAdmin();
 }
 renderAll();
 
