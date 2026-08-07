@@ -690,7 +690,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   <!-- ═══════════════ CLAUDE COWORK ═══════════════ -->
   <!-- ═══════════════ CLAUDE COWORK TRACK (3 guided steps + 2 optional) ═══════════════ -->
   <!-- CODEX TRACK -->
-  <div class="ai-card codex-only" id="codexsetup">
+  <div class="ai-card codex-only" id="codexinstall">
     <div class="card-title">&#10095; Open Codex, then let it install AIEB</div>
     <p><strong>First, open Codex on the project where you want your AI Employees to work.</strong> If Codex is not installed yet, use OpenAI&rsquo;s current setup guide:</p>
     <p><a class="dl-btn" href="https://developers.openai.com/codex/" target="_blank" rel="noopener">Open the Codex setup guide &#8599;</a></p>
@@ -709,9 +709,20 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 
 Stop after giving me that one fresh-thread instruction. The new thread will open the secure activation page, verify the connection with `get_skill`, and run onboarding. During onboarding, Business OS must ask whether I serve named clients, identify each tool's real account or workspace, keep shared setup in one system record, and create client-to-system backlinks that Claude and Codex read from the same canonical records. Never use SkillStack and never request or repeat my Lemon Squeezy key in chat.</pre>
     </div>
-      <div class="callout callout-tip"><strong>In the fresh Codex thread:</strong> say <code>Set up AIEB</code>. Codex opens the secure page. Sign in with the Google address you bought with; the license key on that page is only the fallback. When the page is done, return to Codex and say <code>done</code>.</div>
-      <div class="callout callout-info"><strong>Success looks like:</strong> Codex confirms <code>ai-employee-map</code> loads from the AIEB server, writes its managed block in <code>AGENTS.md</code>, and uses <code>.agents/skills/</code> for skills you author.</div>
-      <button class="done-btn wiz-only" type="button" onclick="wizCodexDone()"><span>Codex finished setup &mdash; next &#8594;</span></button>
+      <div class="callout callout-info"><strong>Stop when Codex tells you to open a fresh thread.</strong> The next course step gives you the setup command that activates the connection and builds your Business OS.</div>
+      <button class="done-btn wiz-only" type="button" onclick="wizCodexInstallDone()"><span>Plugin installed &mdash; show setup command &#8594;</span></button>
+  </div>
+
+  <div class="ai-card codex-only" id="codexsetup">
+    <div class="card-title">&#10095; Run the Codex setup command</div>
+    <p>Start a <strong>fresh Codex thread in the same project</strong>. Claude uses <code>/setup-aieb</code>; in Codex, the equivalent command is the plain-language skill trigger below:</p>
+    <div class="ai-prompt">
+      <button class="copy-prompt" onclick="copyPrompt(this)">Copy Codex setup command</button>
+      <pre>Set up AIEB</pre>
+    </div>
+    <div class="callout callout-tip"><strong>What happens next:</strong> Codex opens the secure activation page. Sign in with the Google address you bought with; the license key on that page is only the fallback. When the page is done, return to Codex and say <code>done</code> so onboarding can finish.</div>
+    <div class="callout callout-info"><strong>Success looks like:</strong> Codex confirms <code>ai-employee-map</code> loads from the AIEB server, writes its managed block in <code>AGENTS.md</code>, and uses <code>.agents/skills/</code> for skills you author.</div>
+    <button class="done-btn wiz-only" type="button" onclick="wizCodexDone()"><span>Setup finished &mdash; next &#8594;</span></button>
   </div>
 
   <div id="cowork" class="cw-only">
@@ -1412,7 +1423,7 @@ function applyTrack(t, scroll){
   // Carry the track choice into every checkpoint and the build board.
   try { localStorage.setItem('aieb_surface', t === 'cc' ? 'claude-code' : t); } catch(e){}
   if (scroll) {
-    var target = t === 'cc' ? document.getElementById('cc-path-wrap') : (t === 'codex' ? document.getElementById('codexsetup') : document.getElementById('cowork'));
+    var target = t === 'cc' ? document.getElementById('cc-path-wrap') : (t === 'codex' ? document.getElementById('codexinstall') : document.getElementById('cowork'));
     if (target) setTimeout(function(){ target.scrollIntoView({behavior:'smooth', block:'start'}); }, 80);
   }
 }
@@ -1468,6 +1479,7 @@ function wizSteps(){
       mark:function(){ doneCW.add(1); saveDoneCW(doneCW); renderCW(); }});
     s.push({el:'cwstep2', min:12, isDone:function(){ return doneCW.has(2); }, connect:true});
   } else if (wizTrackName==='codex') {
+    s.push({el:'codexinstall', min:8, isDone:function(){ return wizExtra.has('codexinstall'); }});
     s.push({el:'codexsetup', min:10, isDone:function(){ return wizExtra.has('codexsetup'); }, connect:true});
   } else {
     s.push({el:'step1', min:8, isDone:function(){ return done.has(1); },
@@ -1658,6 +1670,7 @@ function wizStepForward(){
 }
 
 function wizShortcutDone(){ wizExtra.add('shortcut'); wizExtraSave(wizExtra); if (wizOn) wizStepForward(); else wizRender(); }
+function wizCodexInstallDone(){ wizExtra.add('codexinstall'); wizExtraSave(wizExtra); if (wizOn) wizStepForward(); else wizRender(); }
 function wizCodexDone(){ wizExtra.add('codexsetup'); wizExtraSave(wizExtra); if (wizOn) wizStepForward(); else wizRender(); }
 // Final overview step: the "Start the Business X-Ray" button unlocks only when both quiz answers are right.
 function wizOverviewCheck(){
