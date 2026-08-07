@@ -295,7 +295,7 @@ a.kbody::after{content:'';position:absolute;inset:0;border-radius:9px}
 <div class="surface-gate" id="gate" hidden></div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="progress.js?v=4"></script>
+<script src="progress.js?v=5"></script>
 <script>
 /* ──────────────────────────────────────────────────────────────
    BOARD PAGE. Top: what to work on NEXT (from progress.js). Below:
@@ -345,14 +345,16 @@ var BOARD = [
   { id:'setup', name:'Get set up', color:'#2D8C3C', summary:true, cards:[
     { t:'Join the community', type:'action' },
     { t:'Install the plugin + connect', type:'action' },
-    { t:'Onboard — run /setup-aieb', type:'action' },
+    { t:'Onboard your Business OS', type:'action' },
     { t:'Welcome — what you just built', type:'video' }
   ]},
   { id:'cp1', name:'Map the business', color:'#2563A8', cards:[
     { t:'Set up Draw.io — connector + app', type:'build', surface:'cowork' },
     { t:'Set up Draw.io — MCP + app',       type:'build', surface:'claude-code' },
+    { t:'Set up Draw.io — MCP + app',       type:'build', surface:'codex' },
     { t:'Run your Business X-Ray', type:'build', surface:'cowork' },
     { t:'Run your Business X-Ray', type:'build', surface:'claude-code' },
+    { t:'Run your Business X-Ray', type:'build', surface:'codex' },
     { t:'Read &amp; share your X-Ray', type:'share', optional:true },
     { t:'Lock your first target', type:'gate' }
   ]},
@@ -384,18 +386,19 @@ var BOARD = [
     { t:'Schedule it / autonomy', type:'video' },
     { t:'Schedule it — do it', type:'build', surface:'cowork' },
     { t:'Schedule it — do it', type:'build', surface:'claude-code' },
+    { t:'Schedule it — do it', type:'build', surface:'codex' },
     { t:'Let it run a full cycle without you', type:'build' },
     { t:'It runs on its own', type:'gate' }
   ]}
 ];
 var STATUS = { doing:'In progress', done:'Completed' };
-var WIZARDS = { setup:'get-access-aieb.html', cp1:'checkpoint-map.html?v=7', cp2:'checkpoint-first-skill.html', cp3:'checkpoint-system.html', cp4:'checkpoint-autonomy.html', goal:'checkpoint-ai-employee.html' };
+var WIZARDS = { setup:'get-access-aieb.html', cp1:'checkpoint-map.html?v=8', cp2:'checkpoint-first-skill.html', cp3:'checkpoint-system.html', cp4:'checkpoint-autonomy.html', goal:'checkpoint-ai-employee.html' };
 
 /* ---- SURFACE: swappable toggle + first-time gate ---- */
 function surfBarHTML(){
   var cur = AIEB.getSurface();
   function btn(k){ return '<button class="sbtn'+(cur===k?' active':'')+'" onclick="swapSurface(\''+k+'\')">'+AIEB.SURFACES[k].label+'</button>'; }
-  return '<span class="surface-label">Building in</span><div class="surface-toggle">'+btn('cowork')+btn('claude-code')+'</div>';
+  return '<span class="surface-label">Building in</span><div class="surface-toggle">'+btn('cowork')+btn('claude-code')+btn('codex')+'</div>';
 }
 function paintSurf(){ document.getElementById('surfBar').innerHTML = surfBarHTML(); }
 function swapSurface(s){ AIEB.setSurface(s); paintSurf(); renderNext(); }
@@ -404,10 +407,11 @@ function gateHTML(){
   return '<div class="sg-card">'+
     '<div class="eyebrow">One quick thing</div>'+
     '<h2>Where are you building?</h2>'+
-    '<p>Pick where you run Claude. You can switch anytime.</p>'+
+    '<p>Pick where you run your AI Employee. You can switch anytime.</p>'+
     '<div class="sg-opts">'+
       '<button onclick="pickSurface(\'cowork\')"><b>Cowork</b><span>'+AIEB.SURFACES.cowork.blurb+'</span></button>'+
       '<button onclick="pickSurface(\'claude-code\')"><b>Claude Code</b><span>'+AIEB.SURFACES['claude-code'].blurb+'</span></button>'+
+      '<button onclick="pickSurface(\'codex\')"><b>Codex</b><span>'+AIEB.SURFACES.codex.blurb+'</span></button>'+
     '</div></div>';
 }
 function pickSurface(s){ AIEB.setSurface(s); document.getElementById('gate').hidden = true; renderAll(); }
@@ -450,7 +454,7 @@ function nextbarHTML(){
       '<div class="nb-lead">Every step is complete — reopen any checkpoint below to refine it.</div></div></div>';
   }
   var isSetup = id==='setup';
-  var lead = isSetup ? 'Install Claude + the plugin and connect — one guided flow, about 30 minutes.' : (FOCUS_LEAD[id]||'');
+  var lead = isSetup ? 'Install your chosen app + the plugin and connect — one guided flow, about 30 minutes.' : (FOCUS_LEAD[id]||'');
   var badge = isSetup ? 'Start here · step 1' : ('Next up · checkpoint '+AIEB.buildIndex(id)+' of 5');
   var verb = isSetup ? 'Start setup' : (AIEB.stepInfo(id).pos>0 ? 'Continue' : 'Start this checkpoint');
   return '<div class="nextbar" style="--nc:'+nc+'">'+

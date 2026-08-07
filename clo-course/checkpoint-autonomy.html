@@ -25,7 +25,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .cp-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display);font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:5px 12px;border-radius:20px;background:color-mix(in srgb,var(--cp) 16%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 34%,transparent)}
 .cp-badge .cdot{width:8px;height:8px;border-radius:50%;background:var(--cp)}
 
-/* surface toggle (Cowork vs Claude Code) */
+/* surface toggle (Cowork, Claude Code, or Codex) */
 .surface-row{display:flex;align-items:center;gap:10px;margin-top:12px}
 .surface-label{font-size:12px;font-weight:700;color:var(--text-dim)}
 .surface-toggle{display:inline-flex;background:var(--surface);border:1px solid var(--border-2);border-radius:20px;padding:3px;gap:3px}
@@ -145,6 +145,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
     <div class="surface-toggle">
       <button class="sbtn" id="sb-cowork" onclick="setSurface('cowork')">Cowork</button>
       <button class="sbtn" id="sb-cc" onclick="setSurface('claude-code')">Claude Code</button>
+      <button class="sbtn" id="sb-codex" onclick="setSurface('codex')">Codex</button>
     </div>
   </div>
 
@@ -158,7 +159,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 
 </div>
 
-<script src="progress.js?v=4"></script>
+<script src="progress.js?v=5"></script>
 <script src="slides.js?v=4"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
@@ -249,17 +250,19 @@ document.getElementById('cpName').textContent = CONFIG.name;
 document.getElementById('backLink').href = CONFIG.board;
 document.title = CONFIG.name + ' — AI Employee Builder';
 
-/* Surface (Cowork vs Claude Code) — shared with the board via localStorage.
-   Steps may carry surface:'cowork'|'claude-code'; no surface = shown on both. */
+/* Surface (Cowork, Claude Code, or Codex) — shared with the board via localStorage.
+   Steps may carry surface:'cowork'|'claude-code'|'codex'; no surface = shown on all. */
 var SURFACE_STORE = 'aieb_surface';
 var surface = 'cowork';
-try { var ss = localStorage.getItem(SURFACE_STORE); if (ss==='cowork'||ss==='claude-code') surface = ss; } catch(e){}
+try { var ss = localStorage.getItem(SURFACE_STORE); if (ss==='cowork'||ss==='claude-code'||ss==='codex') surface = ss; } catch(e){}
 function activeSteps(){ return CONFIG.steps.filter(function(st){ return !st.surface || st.surface===surface; }); }
 function paintSurface(){
   document.getElementById('sb-cowork').classList.toggle('active', surface==='cowork');
   document.getElementById('sb-cc').classList.toggle('active', surface==='claude-code');
+  document.getElementById('sb-codex').classList.toggle('active', surface==='codex');
 }
 function setSurface(s){
+  if (s!=='cowork' && s!=='claude-code' && s!=='codex') return;
   surface = s;
   try { localStorage.setItem(SURFACE_STORE, s); } catch(e){}
   pos = Math.min(pos, activeSteps().length); save();
@@ -419,7 +422,7 @@ render();
 </script>
 <details class="cp-help">
     <summary>Stuck? Two ways out, fastest first.</summary>
-    <p><strong>1.</strong> In any Claude chat, type <code>/check-setup</code> (or say &ldquo;check my setup&rdquo;) &mdash; Claude diagnoses it with you and offers the fix.</p>
+    <p><strong>1.</strong> In the app you chose, say <code>check my AIEB setup</code> &mdash; it diagnoses the connection and offers the fix. In Claude, <code>/check-setup</code> works too.</p>
     <p><strong>2.</strong> <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a> &mdash; describe what you see, a screenshot helps. The builders and Rashid are in there.</p>
   </details>
 <script src="session-chip.js" defer></script>

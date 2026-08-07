@@ -112,7 +112,7 @@ body{min-height:100vh;background:var(--paper);color:var(--body);font:18px/1.6 "S
 
 <div class="surface-gate" id="gate" hidden></div>
 
-<script src="progress.js?v=4"></script>
+<script src="progress.js?v=5"></script>
 <script>
 /* Standalone AIEB launcher. Reads the shared progress store (window.AIEB) to show
    overall progress + the one next action, and carries the swappable surface. */
@@ -120,7 +120,7 @@ body{min-height:100vh;background:var(--paper);color:var(--body);font:18px/1.6 "S
 function surfBarHTML(){
   var cur = AIEB.getSurface();
   function btn(k){ return '<button class="sbtn'+(cur===k?' active':'')+'" onclick="swapSurface(\''+k+'\')">'+AIEB.SURFACES[k].label+'</button>'; }
-  return '<span class="surface-label">Building in</span><div class="surface-toggle">'+btn('cowork')+btn('claude-code')+'</div>';
+  return '<span class="surface-label">Building in</span><div class="surface-toggle">'+btn('cowork')+btn('claude-code')+btn('codex')+'</div>';
 }
 function paintSurf(){ document.getElementById('surfBar').innerHTML = surfBarHTML(); }
 function swapSurface(s){ AIEB.setSurface(s); paintSurf(); renderHome(); }
@@ -148,9 +148,16 @@ function gateHTML(){
         '<span class="sg-if"><em>Pick this if</em> you want full control and customization, you’re comfortable in VS Code, and you want to go deep on AI engineering.</span>'+
         '<span class="sg-go">Build in Claude Code →</span>'+
       '</button>'+
+      '<button class="sg-opt" onclick="pickSurface(\'codex\')">'+
+        '<span class="sg-badge alt">OpenAI path</span>'+
+        '<span class="sg-head"><img class="sg-ic" src="assets/get-access/codex-mark.svg" alt="" onerror="this.style.display=\'none\'"><b>Codex</b></span>'+
+        '<span class="sg-what">Codex works in its desktop app, IDE extension, or terminal, directly with the files in your project.</span>'+
+        '<span class="sg-if"><em>Pick this if</em> you already use OpenAI Codex or want your AI Employee built on the Codex plugin and <code>AGENTS.md</code> workflow.</span>'+
+        '<span class="sg-go">Build in Codex →</span>'+
+      '</button>'+
     '</div></div>';
 }
-function pickSurface(s){ AIEB.setSurface(s); document.getElementById('gate').hidden = true; renderHome(); }
+function pickSurface(s){ AIEB.setSurface(s); document.getElementById('gate').hidden = true; paintSurf(); renderHome(); }
 function maybeGate(){
   var g = document.getElementById('gate');
   if (!AIEB.getSurface()){ g.innerHTML = gateHTML(); g.hidden = false; }

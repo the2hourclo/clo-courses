@@ -25,7 +25,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .cp-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display);font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:5px 12px;border-radius:20px;background:color-mix(in srgb,var(--cp) 16%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 34%,transparent)}
 .cp-badge .cdot{width:8px;height:8px;border-radius:50%;background:var(--cp)}
 
-/* surface toggle (Cowork vs Claude Code) */
+/* surface toggle (Cowork, Claude Code, or Codex) */
 .surface-row{display:flex;align-items:center;gap:10px;margin-top:12px}
 .surface-label{font-size:12px;font-weight:700;color:var(--text-dim)}
 .surface-toggle{display:inline-flex;background:var(--surface);border:1px solid var(--border-2);border-radius:20px;padding:3px;gap:3px}
@@ -145,6 +145,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
     <div class="surface-toggle">
       <button class="sbtn" id="sb-cowork" onclick="setSurface('cowork')">Cowork</button>
       <button class="sbtn" id="sb-cc" onclick="setSurface('claude-code')">Claude Code</button>
+      <button class="sbtn" id="sb-codex" onclick="setSurface('codex')">Codex</button>
     </div>
   </div>
 
@@ -158,7 +159,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 
 </div>
 
-<script src="progress.js?v=4"></script>
+<script src="progress.js?v=5"></script>
 <script src="slides.js?v=4"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
@@ -198,7 +199,7 @@ var CONFIG = {
         'Same finished work, two endings, and the split is not about how much you trust it. Anything that only touches your own work just happens. Anything that leaves the building or costs money hits the red rail and waits. <strong>It runs without you. It does not send without you.</strong>',
         'Monday, 7am, and nobody asked it to start. By 7:12 the draft is written, reviewed, and confirmed to actually be in the folder. You show up at nine and say yes. Follow the arrow along the bottom, because that is the whole journey &mdash; a task, then a function, and now <strong>a worker who owns it and starts itself</strong>.'
       ],
-      body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask. <strong>Unattended is not unsupervised</strong> — you still see everything, you just stop being the one who starts it. <em>Cowork and Claude Code schedule differently, and the difference decides whether your Monday run actually fires — the next step gives you the right one for where you build.</em>' },
+      body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask. <strong>Unattended is not unsupervised</strong> — you still see everything, you just stop being the one who starts it. <em>Cowork, Claude Code, and Codex schedule differently, and the difference decides whether your Monday run actually fires — the next step gives you the right one for where you build.</em>' },
 
     /* SURFACE-SPLIT 2026-07-29. The two products schedule differently enough that one generic
        step was teaching each half something untrue. Verified against the docs that day:
@@ -251,6 +252,26 @@ var CONFIG = {
       ],
       doesFoot:'Turn on <strong>Keep computer awake</strong> in Settings, under Desktop app, in General. Closing the lid still sleeps it. <em>(There is also a <strong>Cloud</strong> routine that runs with your laptop off — but it works from a GitHub repo, cannot see your local files or local skills, and has no approval prompts at all. Skip it unless you already work in a repo.)</em>' },
 
+    { type:'build', surface:'codex', title:'Schedule it — do it',
+      video:'', demoSlot:true, demoLabel:'&#127916; Demo &middot; watch me schedule one &mdash; coming soon',
+      command:'Turn this proven skill into a scheduled Codex task. Pin the cadence, the project and folder it reads, where the result lands, and how I get told. Anything client-facing or costly must stop for my approval instead of sending on its own.',
+      body:'Codex scheduled tasks are managed from the <strong>Codex app</strong>. A task can run against your local project or in an isolated worktree.<br><br><strong>Set it up:</strong>'+
+        '<ul class="sub">'+
+        '<li>Open the Codex app and choose <strong>Scheduled tasks</strong></li>'+
+        '<li>Choose this Business OS project, paste the instructions above, and set the cadence</li>'+
+        '<li>Choose the local project when the employee needs your real folders; use an isolated worktree only when the work belongs in a repository</li>'+
+        '<li>Run it once now, inspect the result, and confirm the approval boundary before relying on the schedule</li>'+
+        '</ul>'+
+        'The Codex CLI and IDE extension can prepare and test the workflow, but scheduled-task management lives in the desktop or web app.',
+      does:[
+        'It checks the skill has <strong>earned</strong> a schedule — proven on real work, hardened, harness on. If it has not, it says so and stops.',
+        'You pick <strong>the cadence</strong> and the exact project the task runs against.',
+        'You name <strong>the folder it reads</strong> and <strong>where the result lands</strong>. Codex loads the project&rsquo;s <code>AGENTS.md</code> and shared <code>.agents/skills/</code> guidance for the run.',
+        'You keep the <strong>draft-don&rsquo;t-send boundary</strong>: client-facing, costly, or irreversible actions wait for approval.',
+        'For local files, the <strong>computer must be awake and the Codex app running</strong> when the task is due.'
+      ],
+      doesFoot:'Review and edit the task under <strong>Scheduled tasks</strong>. If the computer may be off, move the workflow to a repository-backed worktree and make sure every required input is available there.' },
+
     { type:'build', title:'Let it run a full cycle without you',
       video:'', demoSlot:true, demoLabel:'&#127916; Demo &middot; watch a full unattended run &mdash; coming soon',
       command:'Run my AI Employee end to end on a real job without me steering any step. Then show me what it produced, what it checked, and anything it flagged for my approval.',
@@ -275,17 +296,19 @@ document.getElementById('cpName').textContent = CONFIG.name;
 document.getElementById('backLink').href = CONFIG.board;
 document.title = CONFIG.name + ' — AI Employee Builder';
 
-/* Surface (Cowork vs Claude Code) — shared with the board via localStorage.
-   Steps may carry surface:'cowork'|'claude-code'; no surface = shown on both. */
+/* Surface (Cowork, Claude Code, or Codex) — shared with the board via localStorage.
+   Steps may carry surface:'cowork'|'claude-code'|'codex'; no surface = shown on all. */
 var SURFACE_STORE = 'aieb_surface';
 var surface = 'cowork';
-try { var ss = localStorage.getItem(SURFACE_STORE); if (ss==='cowork'||ss==='claude-code') surface = ss; } catch(e){}
+try { var ss = localStorage.getItem(SURFACE_STORE); if (ss==='cowork'||ss==='claude-code'||ss==='codex') surface = ss; } catch(e){}
 function activeSteps(){ return CONFIG.steps.filter(function(st){ return !st.surface || st.surface===surface; }); }
 function paintSurface(){
   document.getElementById('sb-cowork').classList.toggle('active', surface==='cowork');
   document.getElementById('sb-cc').classList.toggle('active', surface==='claude-code');
+  document.getElementById('sb-codex').classList.toggle('active', surface==='codex');
 }
 function setSurface(s){
+  if (s!=='cowork' && s!=='claude-code' && s!=='codex') return;
   surface = s;
   try { localStorage.setItem(SURFACE_STORE, s); } catch(e){}
   pos = Math.min(pos, activeSteps().length); save();
@@ -446,7 +469,7 @@ render();
 </script>
 <details class="cp-help">
     <summary>Stuck? Two ways out, fastest first.</summary>
-    <p><strong>1.</strong> In any Claude chat, type <code>/check-setup</code> (or say &ldquo;check my setup&rdquo;) &mdash; Claude diagnoses it with you and offers the fix.</p>
+    <p><strong>1.</strong> In the app you chose, say <code>check my AIEB setup</code> &mdash; it diagnoses the connection and offers the fix. In Claude, <code>/check-setup</code> works too.</p>
     <p><strong>2.</strong> <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a> &mdash; describe what you see, a screenshot helps. The builders and Rashid are in there.</p>
   </details>
 <script src="session-chip.js" defer></script>

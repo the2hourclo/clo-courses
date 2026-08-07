@@ -5,7 +5,7 @@
    the launcher home, every checkpoint wizard, and the get-access wizard.
 
    Persistence (localStorage, no server):
-     aieb_surface             = 'cowork' | 'claude-code'  ← chosen once, swappable anytime
+     aieb_surface             = 'cowork' | 'claude-code' | 'codex'  ← chosen once, swappable anytime
      aieb_progress            = { setup:true, cp1:true, cp2:false, … }  ← completed checkpoints
      aieb_ckpt_<id>_v4        = current step index WITHIN a checkpoint    ← written by each wizard
      aieb_ckpt_<id>_v4_n      = active-step COUNT for that checkpoint     ← written by each wizard
@@ -141,22 +141,23 @@
     goal:  { name: 'Your AI Employee',   short: 'Your AI Employee',   wizard: 'checkpoint-ai-employee.html', color: '#fbbf24' }
   };
 
-  /* ── SURFACE (Cowork vs Claude Code) — a global identity, swappable anytime ── */
+  /* ── SURFACE (Cowork, Claude Code, or Codex) — a global identity, swappable anytime ── */
   var SURFACE_KEY = 'aieb_surface';
   var SURFACES = {
     'cowork':      { label: 'Cowork',      blurb: 'Claude in your browser — nothing to install to start.' },
-    'claude-code': { label: 'Claude Code', blurb: 'Claude in your code editor or terminal.' }
+    'claude-code': { label: 'Claude Code', blurb: 'Claude in your code editor or terminal.' },
+    'codex':       { label: 'Codex',       blurb: 'OpenAI Codex in the desktop app or terminal, working directly with your project files.' }
   };
   function getSurface() {
-    try { var s = localStorage.getItem(SURFACE_KEY); return (s === 'cowork' || s === 'claude-code') ? s : null; }
+    try { var s = localStorage.getItem(SURFACE_KEY); return (s === 'cowork' || s === 'claude-code' || s === 'codex') ? s : null; }
     catch (e) { return null; }
   }
   function setSurface(s) {
-    if (s !== 'cowork' && s !== 'claude-code') return;
+    if (s !== 'cowork' && s !== 'claude-code' && s !== 'codex') return;
     try { localStorage.setItem(SURFACE_KEY, s); } catch (e) {}
   }
   // true when a piece of content belongs on the current surface.
-  // `only` is 'cowork' | 'claude-code' | undefined (undefined = both surfaces).
+  // `only` is 'cowork' | 'claude-code' | 'codex' | undefined (undefined = all surfaces).
   function surfaceShows(only) {
     if (!only) return true;
     return getSurface() === only;

@@ -41,7 +41,7 @@ var CLO_CONFIG = {
     { group: 'Get Started', items: [
       { label: 'Portal Home', page: 'home', href: 'clo-course/index.html', keywords: ['home','portal home','start','overview','welcome','continue','continue building','whats next','next step','dashboard'] },
       { label: 'Build Board', page: 'board', href: 'clo-course/ai-employee-board.html', keywords: ['board','build board','journey','checkpoints','path','progress','home base','what to build next','roadmap','map'] },
-      { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','cowork','plugin','license','activate','connect','onboard','getting started','first steps'] }
+      { label: 'Get Access', page: 'get-access', href: 'clo-course/get-access-aieb.html', keywords: ['install','setup','claude code','cowork','codex','openai','plugin','license','activate','connect','onboard','getting started','first steps'] }
     ]},
     { group: 'Courses', items: [
       // `page:'business-x-ray'` belongs to the deep wiki, which is the page that actually

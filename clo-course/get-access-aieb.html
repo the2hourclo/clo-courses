@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get Access — Install the AI Employee Builder</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Cdefs%3E%3Cfilter id='rough' x='-6%25' y='-6%25' width='112%25' height='112%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006' numOctaves='2' seed='7' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='7' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3CradialGradient id='eyeGlow' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='rgb(45,140,60)' stop-opacity='0.55'/%3E%3Cstop offset='70%25' stop-color='rgb(45,140,60)' stop-opacity='0.10'/%3E%3Cstop offset='100%25' stop-color='rgb(45,140,60)' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='bgGlow' cx='50%25' cy='46%25' r='62%25'%3E%3Cstop offset='0%25' stop-color='%232D8C3C' stop-opacity='0.13'/%3E%3Cstop offset='62%25' stop-color='%232D8C3C' stop-opacity='0.04'/%3E%3Cstop offset='100%25' stop-color='%23FFFFFF' stop-opacity='0'/%3E%3C/radialGradient%3E%3CclipPath id='disc'%3E%3Ccircle cx='256' cy='256' r='222'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg filter='url(%23rough)' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='256' cy='256' r='222' fill='%23FFFFFF'/%3E%3Ccircle cx='256' cy='256' r='222' fill='url(%23bgGlow)'/%3E%3Cg clip-path='url(%23disc)'%3E%3Cg transform='translate(-2456.5,-1133.8) scale(1.9375)'%3E%3Cline x1='1400' y1='660' x2='1400' y2='640' stroke='%2321211E' stroke-width='4'/%3E%3Ccircle cx='1400' cy='632' r='8' fill='%232D8C3C' stroke='%2321211E' stroke-width='2'/%3E%3Ccircle cx='1400' cy='632' r='15' fill='none' stroke='%232D8C3C' stroke-width='2' stroke-opacity='0.5'/%3E%3Crect x='1356' y='660' width='88' height='80' rx='16' fill='%23FAFAFA' stroke='%2321211E' stroke-width='5'/%3E%3Crect x='1346' y='688' width='11' height='30' rx='4' fill='%23FAFAFA' stroke='%2321211E' stroke-width='4'/%3E%3Crect x='1443' y='688' width='11' height='30' rx='4' fill='%23FAFAFA' stroke='%2321211E' stroke-width='4'/%3E%3Crect x='1368' y='684' width='64' height='40' rx='9' fill='%23FAFAFA' stroke='%2321211E' stroke-width='4'/%3E%3Ccircle cx='1385' cy='704' r='14' fill='url(%23eyeGlow)'/%3E%3Ccircle cx='1415' cy='704' r='14' fill='url(%23eyeGlow)'/%3E%3Ccircle cx='1385' cy='704' r='7' fill='%232D8C3C' stroke='%2321211E' stroke-width='1.5'/%3E%3Ccircle cx='1415' cy='704' r='7' fill='%232D8C3C' stroke='%2321211E' stroke-width='1.5'/%3E%3Crect x='1386' y='740' width='28' height='15' rx='5' fill='%23FAFAFA' stroke='%2321211E' stroke-width='3.5'/%3E%3Crect x='1350' y='755' width='100' height='122' rx='16' fill='%23FAFAFA' stroke='%2321211E' stroke-width='5'/%3E%3Crect x='1370' y='774' width='60' height='48' rx='7' fill='none' stroke='%23c2410c' stroke-width='3.5'/%3E%3Cline x1='1370' y1='790' x2='1430' y2='790' stroke='%23c2410c' stroke-width='2' stroke-opacity='0.6'/%3E%3Ccircle cx='1380' cy='782' r='3' fill='%23c2410c'/%3E%3Ccircle cx='1391' cy='782' r='3' fill='%23c2410c'/%3E%3Ccircle cx='1402' cy='782' r='3' fill='%23c2410c'/%3E%3Cline x1='1352' y1='772' x2='1330' y2='826' stroke='%2321211E' stroke-width='12'/%3E%3Cline x1='1330' y1='826' x2='1344' y2='860' stroke='%2321211E' stroke-width='12'/%3E%3Cline x1='1448' y1='772' x2='1470' y2='826' stroke='%2321211E' stroke-width='12'/%3E%3Cline x1='1470' y1='826' x2='1456' y2='860' stroke='%2321211E' stroke-width='12'/%3E%3C/g%3E%3C/g%3E%3Ccircle cx='256' cy='256' r='222' fill='none' stroke='%2321211E' stroke-width='4'/%3E%3C/g%3E%3C/svg%3E">
-<meta name="description" content="A simple, guided setup to get the AI Employee Builder plugin running inside VS Code. No terminal required, no coding.">
+<meta name="description" content="A guided setup for AI Employee Builder in Codex, Claude Code, or Claude Cowork. Secure connection, no license key in chat.">
 <link rel="stylesheet" href="tokens.css?v=3">
 <link rel="stylesheet" href="shell.css?v=3">
 <style>
@@ -160,10 +160,15 @@ details.step:not([open]) .step-content{display:none}
    one switches the page into that app's track (persisted in localStorage). */
 body:not(.track-cc) .cc-only{display:none!important}
 body:not(.track-cowork) .cw-only{display:none!important}
-body:not(.track-cc):not(.track-cowork) .post-setup{display:none!important}
+body:not(.track-codex) .codex-only{display:none!important}
+body:not(.track-cc):not(.track-cowork):not(.track-codex) .post-setup{display:none!important}
 .fork-card.selected{border-color:var(--accent);background:var(--accent-dim-2);box-shadow:0 0 0 1px var(--accent-border)}
-body.track-cc #chooser-cw,body.track-cowork #chooser-cc{opacity:.45}
-body.track-cc #chooser-cw:hover,body.track-cowork #chooser-cc:hover{opacity:1}
+body.track-cc #chooser-cw,body.track-cc #chooser-codex,
+body.track-cowork #chooser-cc,body.track-cowork #chooser-codex,
+body.track-codex #chooser-cc,body.track-codex #chooser-cw{opacity:.45}
+body.track-cc #chooser-cw:hover,body.track-cc #chooser-codex:hover,
+body.track-cowork #chooser-cc:hover,body.track-cowork #chooser-codex:hover,
+body.track-codex #chooser-cc:hover,body.track-codex #chooser-cw:hover{opacity:1}
 
 /* ── WIZARD MODE (default post-purchase: one step at a time, full focus) ── */
 #wizbar{display:none;margin:26px 0 20px}
@@ -527,6 +532,11 @@ body.activation-mode .container{max-width:620px;width:100%}
       <span class="fork-tx"><span class="fork-badge">Easiest &mdash; no terminal</span><strong>Claude Cowork</strong>Runs in the Claude desktop app &mdash; add our plugin, open its connection page, done. All point-and-click. <em>Pick this if you&rsquo;re not technical and &ldquo;terminal&rdquo; sounds scary.</em></span>
       <span class="fork-go">&#129309; Set up Cowork &rarr;</span>
     </a>
+    <a class="fork-card" id="chooser-codex" href="#codex" onclick="chooseTrack(event,'codex')">
+      <span class="fork-ic"><img src="assets/get-access/codex-mark.svg" alt="Codex"></span>
+      <span class="fork-tx"><span class="fork-badge">New</span><strong>Codex</strong>Runs in the Codex app or CLI and works directly with your project files. <em>Pick this if you use OpenAI Codex as your building workspace.</em></span>
+      <span class="fork-go">Set up Codex &rarr;</span>
+    </a>
   </div>
 
   <!-- ═══ JOIN THE COMMUNITY EARLY (both tracks — help channel opens before the install) ═══ -->
@@ -679,6 +689,31 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 
   <!-- ═══════════════ CLAUDE COWORK ═══════════════ -->
   <!-- ═══════════════ CLAUDE COWORK TRACK (3 guided steps + 2 optional) ═══════════════ -->
+  <!-- CODEX TRACK -->
+  <div class="ai-card codex-only" id="codexsetup">
+    <div class="card-title">&#10095; Open Codex, then let it install AIEB</div>
+    <p><strong>First, open Codex on the project where you want your AI Employees to work.</strong> If Codex is not installed yet, use OpenAI&rsquo;s current setup guide:</p>
+    <p><a class="dl-btn" href="https://developers.openai.com/codex/" target="_blank" rel="noopener">Open the Codex setup guide &#8599;</a></p>
+    <p>Then paste the prompt below into a Codex thread. Codex checks Node.js, adds the AIEB marketplace, installs the plugin, and tells you when to open the one fresh thread required to load it.</p>
+    <div class="ai-prompt">
+      <button class="copy-prompt" onclick="copyPrompt(this)">Copy Codex setup prompt</button>
+      <pre>You are setting up AI Employee Builder in Codex for me. It uses a free thin plugin shell plus a hosted, licensed MCP server. Do as much as you can yourself, verify every step, and never ask me to paste a license key into chat.
+
+1. Check that Node.js 18 or newer is available with `node --version`. If it is missing or outdated, explain the smallest safe install step for my OS and wait for me.
+2. Add the official AIEB plugin marketplace with:
+   codex plugin marketplace add the2hourclo/aieb-thin-plugin
+3. Install the plugin with:
+   codex plugin add ai-employee-builder@aieb-thin-plugin
+4. Verify that the installed plugin contains `.codex-plugin/plugin.json`, `skills/setup-aieb/SKILL.md`, and `.mcp.json`. Do not expect paid skill bodies locally; they are fetched from the licensed MCP at runtime.
+5. Tell me to start one fresh Codex thread in this same project and paste exactly: `Set up AIEB`
+
+Stop after giving me that one fresh-thread instruction. The new thread will open the secure activation page, verify the connection with `get_skill`, and run onboarding. During onboarding, Business OS must ask whether I serve named clients, identify each tool's real account or workspace, keep shared setup in one system record, and create client-to-system backlinks that Claude and Codex read from the same canonical records. Never use SkillStack and never request or repeat my Lemon Squeezy key in chat.</pre>
+    </div>
+      <div class="callout callout-tip"><strong>In the fresh Codex thread:</strong> say <code>Set up AIEB</code>. Codex opens the secure page. Sign in with the Google address you bought with; the license key on that page is only the fallback. When the page is done, return to Codex and say <code>done</code>.</div>
+      <div class="callout callout-info"><strong>Success looks like:</strong> Codex confirms <code>ai-employee-map</code> loads from the AIEB server, writes its managed block in <code>AGENTS.md</code>, and uses <code>.agents/skills/</code> for skills you author.</div>
+      <button class="done-btn wiz-only" type="button" onclick="wizCodexDone()"><span>Codex finished setup &mdash; next &#8594;</span></button>
+  </div>
+
   <div id="cowork" class="cw-only">
 
     <div class="section-rule">Using Claude Cowork &mdash; two steps, all point-and-click (plus two optional)</div>
@@ -902,12 +937,19 @@ After each step, tell me whether it worked, or show the error and exactly how yo
     <a class="finish-cta" href="checkpoint-map.html">&#128300; Start the Business X-Ray &#8594;</a>
   </div>
 
+  <div class="finish codex-only" id="codexfinish">
+    <div class="finish-emoji">&#127881;</div>
+    <div class="finish-h">Codex is connected</div>
+    <div class="finish-p">AI Employee Builder is live in Codex, and your workspace uses Codex-native <code>AGENTS.md</code> and <code>.agents/skills/</code> conventions. Next: open a fresh Codex thread for the Business X-Ray.</div>
+    <a class="finish-cta" href="checkpoint-map.html">&#128300; Start the Business X-Ray &#8594;</a>
+  </div>
+
   <!-- ═══ COMMUNITY STEP (shared by both tracks — the intro post matters) ═══ -->
 
   <!-- ═══ YOUR ROADMAP ═══ -->
   <div class="ai-card post-setup" id="roadmap-card" style="text-align:center">
     <div class="card-title" style="justify-content:center">&#128506;&#65039; Your whole journey on the Build Board</div>
-    <p>You've built your first one. From here the roadmap shows you the whole path &mdash; make it reliable, connect skills into a system, hand work to an agent, put it on autopilot &mdash; one step at a time, with copy-paste prompts for common jobs (content, sales, client delivery, admin). Inside Claude Code you can just say <code>what's next</code> anytime; your board is the map.</p>
+    <p>You've built your first one. From here the roadmap shows you the whole path &mdash; make it reliable, connect skills into a system, hand work to an agent, put it on autopilot &mdash; one step at a time, with copy-paste prompts for common jobs (content, sales, client delivery, admin). In Claude or Codex, you can just say <code>what's next</code> anytime; your board is the map.</p>
     <a href="ai-employee-board.html" style="display:inline-block;margin-top:14px;padding:13px 28px;background:var(--accent);color:#fff;border-radius:var(--radius);font-weight:800;font-size:14px;text-decoration:none">Open your Build Board &#8594;</a>
   </div>
 
@@ -967,13 +1009,13 @@ Check anything you can: Node.js version, whether the thin plugin is installed, a
   <div class="faq">
     <details><summary>Connecting on a different device or browser than the purchase? Here's where your key is</summary><div class="faq-body">Same-browser connections need no key at all &mdash; the page connects by itself. On a different device or browser, the secure page asks for your license key. Find it in the receipt Lemon Squeezy emailed you right after you bought (from <code>noreply@lemonsqueezy.com</code> &mdash; check spam, or search your inbox for <strong>"Chief Leverage Officer"</strong> or <strong>"license"</strong>), or go to <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">app.lemonsqueezy.com/my-orders</a>, enter the email you bought with, click the magic link, and open your order &mdash; the key (with a copy button) is right there. Got your key in an email from Rashid (e.g. a free-access invite)? Use that one. Enter the key on the secure page only &mdash; never in Claude or any chat.</div></details>
     <details><summary>Do I need to know how to code?</summary><div class="faq-body">No. You copy a few short commands into a chat box and click "Install." If you can copy and paste, you can do this &mdash; and the <strong>"Let Claude install it"</strong> prompt up top will walk you through it.</div></details>
-    <details><summary>Why install a thin plugin plus MCP?</summary><div class="faq-body">The thin plugin gives Claude Code setup guidance and a local proxy. The paid instructions stay on the hosted MCP server, so your subscription can be checked at runtime and updates can ship without reinstalling the whole skill library.</div></details>
+    <details><summary>Why install a thin plugin plus MCP?</summary><div class="faq-body">The thin plugin gives Claude Code or Codex the setup guidance and local proxy. The paid instructions stay on the hosted MCP server, so your subscription can be checked at runtime and updates can ship without reinstalling the whole skill library.</div></details>
     <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Your subscription allows a limited number of devices according to the Lemon Squeezy license settings. Each computer connects separately and stores its own opaque device token; the license key is not stored by the plugin.</div></details>
     <details><summary>Why does it need Node.js?</summary><div class="faq-body">The local MCP proxy is a small Node.js script. It starts the secure connection, stores the device token locally, and forwards requests to the hosted MCP server.</div></details>
     <details><summary>How do updates work?</summary><div class="faq-body">Most AIEB skill updates happen on the MCP server. You get the latest instructions automatically the next time a skill runs &mdash; no reinstall, nothing to do. You only reinstall the plugin when the local shell itself changes (new setup behavior, proxy, or hooks), and the plugin will <strong>tell you</strong> when that's needed: it checks the server for the current shell version at startup and, if yours is behind, prompts you with the exact update commands.</div></details>
     <details><summary>Can I use this in Claude Cowork?</summary><div class="faq-body"><strong>Yes &mdash; no Claude Code needed.</strong> Add the <strong>AI Employee Builder plugin</strong> (<em>Customize &rarr; Personal plugins &rarr; + &rarr; Add marketplace &rarr;</em> <code>the2hourclo/aieb-thin-plugin</code>), then say <code>set up my AI Employee Builder</code>. Claude gives you a secure connection link &mdash; in the browser you bought in it connects by itself, and only on a different device does the page ask for your key (enter it there, not in chat). The connection finishes by itself a few seconds after the page says connected. If the connector doesn't light up, type <code>/check-setup</code>. <strong>Don't</strong> paste the MCP URL into <em>Custom Connectors</em>.</div></details>
     <details><summary>What if I cancel or my subscription lapses?</summary><div class="faq-body">Cancelling revokes paid MCP access immediately. Renew or resume at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener">Lemon Squeezy &rarr; My Orders</a>, then run <code>/setup-aieb</code> to reconnect.</div></details>
-    <details><summary>I already use Claude Code &mdash; can I skip ahead?</summary><div class="faq-body">Yes. If the extension and Node.js are installed, tick Step&nbsp;1 and jump to <strong>Step&nbsp;2</strong>.</div></details>
+    <details><summary>I already use Claude Code or Codex &mdash; can I skip ahead?</summary><div class="faq-body">Yes. Pick your app above and follow its plugin-install step. If Node.js is already installed, the guided setup will verify it and continue.</div></details>
     <details><summary>Is the Terminal method different from VS Code?</summary><div class="faq-body">Same result, same commands &mdash; just a different place to type them. The <strong>VS Code</strong> way is click-based and friendly; <strong>Terminal</strong> is for command-line folks. Use the toggle at the top to switch.</div></details>
   </div>
 
@@ -1354,21 +1396,23 @@ function resetProgressCW(){ doneCW = new Set(); saveDoneCW(doneCW); renderCW();
 // ── APP CHOOSER: switch the whole page to one app's track (persisted) ──
 var TRACKKEY = 'aieb_get_access_track';
 function applyTrack(t, scroll){
-  if (t !== 'cc' && t !== 'cowork') return;
+  if (t !== 'cc' && t !== 'cowork' && t !== 'codex') return;
   document.body.classList.toggle('track-cc', t === 'cc');
   document.body.classList.toggle('track-cowork', t === 'cowork');
-  var cc = document.getElementById('chooser-cc'), cw = document.getElementById('chooser-cw');
+  document.body.classList.toggle('track-codex', t === 'codex');
+  var cc = document.getElementById('chooser-cc'), cw = document.getElementById('chooser-cw'), cx = document.getElementById('chooser-codex');
   if (cc) cc.classList.toggle('selected', t === 'cc');
   if (cw) cw.classList.toggle('selected', t === 'cowork');
+  if (cx) cx.classList.toggle('selected', t === 'codex');
   if (t === 'cc') {
     var w = document.getElementById('cc-path-wrap');
     if (w) w.classList.remove('cc-hidden');
   }
   try { localStorage.setItem(TRACKKEY, t); } catch(e){}
-  // Carry the track choice into the checkpoint pages' surface toggle (they read 'aieb_surface' = 'cowork'|'claude-code').
-  try { localStorage.setItem('aieb_surface', t === 'cc' ? 'claude-code' : 'cowork'); } catch(e){}
+  // Carry the track choice into every checkpoint and the build board.
+  try { localStorage.setItem('aieb_surface', t === 'cc' ? 'claude-code' : t); } catch(e){}
   if (scroll) {
-    var target = t === 'cc' ? document.getElementById('cc-path-wrap') : document.getElementById('cowork');
+    var target = t === 'cc' ? document.getElementById('cc-path-wrap') : (t === 'codex' ? document.getElementById('codexsetup') : document.getElementById('cowork'));
     if (target) setTimeout(function(){ target.scrollIntoView({behavior:'smooth', block:'start'}); }, 80);
   }
 }
@@ -1385,10 +1429,11 @@ function chooseTrack(e, t){
   try {
     var s = localStorage.getItem('aieb_surface');
     if (s === 'claude-code') saved = 'cc';
-    else if (s === 'cowork') saved = 'cowork';
+    else if (s === 'cowork' || s === 'codex') saved = s;
   } catch(e){}
   if (!saved){ try { saved = localStorage.getItem(TRACKKEY); } catch(e){} }
   if (location.hash === '#cowork') saved = 'cowork';
+  if (location.hash === '#codex') saved = 'codex';
   if (saved) applyTrack(saved, false);
 })();
 // VS Code / Terminal toggle
@@ -1422,6 +1467,8 @@ function wizSteps(){
     s.push({el:'cwstep1', min:3, isDone:function(){ return doneCW.has(1); },
       mark:function(){ doneCW.add(1); saveDoneCW(doneCW); renderCW(); }});
     s.push({el:'cwstep2', min:12, isDone:function(){ return doneCW.has(2); }, connect:true});
+  } else if (wizTrackName==='codex') {
+    s.push({el:'codexsetup', min:10, isDone:function(){ return wizExtra.has('codexsetup'); }, connect:true});
   } else {
     s.push({el:'step1', min:8, isDone:function(){ return done.has(1); },
       mark:function(){ done.add(1); saveDone(done); render(); }});
@@ -1492,8 +1539,8 @@ function wizRender(){
   }
   if (app){
     app.hidden = false;
-    document.getElementById('wizAppName').textContent = wizTrackName==='cowork' ? 'Claude Cowork' : 'Claude Code';
-    document.getElementById('wizAppIc').src = wizTrackName==='cowork' ? 'assets/get-access/cowork-logo.png' : 'assets/get-access/claude-code-mascot.png';
+    document.getElementById('wizAppName').textContent = wizTrackName==='cowork' ? 'Claude Cowork' : (wizTrackName==='codex' ? 'Codex' : 'Claude Code');
+    document.getElementById('wizAppIc').src = wizTrackName==='cowork' ? 'assets/get-access/cowork-logo.png' : (wizTrackName==='codex' ? 'assets/get-access/codex-mark.svg' : 'assets/get-access/claude-code-mascot.png');
   }
   wizAbsorbConnect();
   var steps=wizSteps(), firstIncomplete=-1, doneCount=0, left=0;
@@ -1517,7 +1564,8 @@ function wizRender(){
       if (fBack){ fBack.hidden=false; fBack.disabled=false; }
       if (fNext) fNext.hidden=true;
     }
-    var fin=document.getElementById(wizTrackName==='cowork'?'cwfinish':'finish');
+    var finishId = wizTrackName==='cowork' ? 'cwfinish' : (wizTrackName==='codex' ? 'codexfinish' : 'finish');
+    var fin=document.getElementById(finishId);
     if (fin){ fin.classList.add('wiz-visible','show'); }
     if (window.AIEB) AIEB.markDone('setup'); // completing Get Access advances the board: Set up → Map the business
     if (wizTrackName==='cowork') document.getElementById('cowork').classList.add('wiz-visible');
@@ -1610,6 +1658,7 @@ function wizStepForward(){
 }
 
 function wizShortcutDone(){ wizExtra.add('shortcut'); wizExtraSave(wizExtra); if (wizOn) wizStepForward(); else wizRender(); }
+function wizCodexDone(){ wizExtra.add('codexsetup'); wizExtraSave(wizExtra); if (wizOn) wizStepForward(); else wizRender(); }
 // Final overview step: the "Start the Business X-Ray" button unlocks only when both quiz answers are right.
 function wizOverviewCheck(){
   var q1=document.querySelector('#overview input[name="ovq1"]:checked');
@@ -1646,7 +1695,7 @@ function markDoneJoin(){
 }
 /* markDoneCommunity removed 2026-07-24 — the trailing community step was folded into joinstep. */
 function wizSwitchApp(){
-  var t = wizTrackName==='cowork' ? 'cc' : 'cowork';
+  var t = wizTrackName==='cowork' ? 'codex' : (wizTrackName==='codex' ? 'cc' : 'cowork');
   applyTrack(t, false); wizTrackName=t; wizPos=null; wizRender();
 }
 function wizStart(e){
@@ -1700,7 +1749,10 @@ setInterval(function(){
     // "Pick your app" — the choice is made once, up front. Fall back to the in-wizard
     // chooser only when no surface is set yet (e.g. a direct deep-link straight to this page).
     var preTrack = null;
-    try { var _s = localStorage.getItem('aieb_surface'); preTrack = _s==='claude-code' ? 'cc' : (_s==='cowork' ? 'cowork' : null); } catch(e){ preTrack=null; }
+    try {
+      var _s = localStorage.getItem('aieb_surface');
+      preTrack = _s==='claude-code' ? 'cc' : ((_s==='cowork' || _s==='codex') ? _s : null);
+    } catch(e){ preTrack=null; }
     if (preTrack){ applyTrack(preTrack, false); wizTrackName = preTrack; }
     else { wizTrackName = null; } // no surface chosen yet → show the app chooser as step 1
     wizRender();
@@ -1715,7 +1767,7 @@ setInterval(function(){
   }
 })();
 </script>
-<script src="progress.js?v=4"></script>
+<script src="progress.js?v=5"></script>
 <script src="nav.js?v=2"></script>
 <script src="toc.js"></script>
 <script src="shell.js?v=2"></script>
