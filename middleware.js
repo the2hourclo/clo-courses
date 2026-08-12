@@ -27,6 +27,11 @@
 const API = "https://api.chiefleverageofficers.com";
 const SESSION_COOKIE = "clo_course_session";
 const SIGN_IN_PATH = "/clo-course/sign-in.html";
+const BOARD_PATH = "/clo-course/ai-employee-board.html";
+
+function isCourseEntry(pathname) {
+  return pathname === "/clo-course" || pathname === "/clo-course/" || pathname === "/clo-course/index.html";
+}
 
 // Set true to require a matching PURCHASE, not merely a Google account. Leave
 // false until the email→member join has proven itself on real traffic; a false
@@ -83,12 +88,19 @@ export default async function middleware(request) {
     }
   }
 
-  if (signedIn) return;
+  // The Build Board is the member's home. A returning signed-in member who uses
+  // the short course URL should land on the journey map immediately.
+  if (signedIn) {
+    if (isCourseEntry(pathname)) {
+      return Response.redirect(new URL(BOARD_PATH, url.origin).toString(), 302);
+    }
+    return;
+  }
 
   // Carry where they were headed, so signing in lands them there and not on a
   // generic home page. A wall that forgets the destination is a wall that makes
   // people give up.
   const target = new URL(SIGN_IN_PATH, url.origin);
-  target.searchParams.set("next", pathname + url.search);
+  target.searchParams.set("next", isCourseEntry(pathname) ? BOARD_PATH : pathname + url.search);
   return Response.redirect(target.toString(), 302);
 }

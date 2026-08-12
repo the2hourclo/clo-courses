@@ -59,8 +59,8 @@
   // Where they were headed before the wall stopped them. Same-origin paths only:
   // an open redirect on a sign-in page is how a phishing link borrows your domain.
   function nextPath(){
-    var raw = new URLSearchParams(location.search).get('next') || '/clo-course/checkpoint-map.html';
-    if (raw.charAt(0) !== '/' || raw.charAt(1) === '/') return '/clo-course/checkpoint-map.html';
+    var raw = new URLSearchParams(location.search).get('next') || '/clo-course/ai-employee-board.html';
+    if (raw.charAt(0) !== '/' || raw.charAt(1) === '/') return '/clo-course/ai-employee-board.html';
     return raw;
   }
 
