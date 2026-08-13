@@ -248,7 +248,7 @@ a.kbody::after{content:'';position:absolute;inset:0;border-radius:9px}
 .sg-opts span{font-size:13px;color:var(--text-muted);line-height:1.45}
 </style>
 <link rel="stylesheet" href="excalifont.css">
-<link rel="stylesheet" href="experience.css?v=6">
+<link rel="stylesheet" href="experience.css?v=7">
 </head>
 <body>
 
@@ -298,7 +298,7 @@ a.kbody::after{content:'';position:absolute;inset:0;border-radius:9px}
 <div class="rise" id="linknote" hidden style="margin:0 0 16px;padding:13px 15px;border-radius:10px;background:rgba(180,105,14,.10);border:1px solid rgba(180,105,14,.28);font-size:13.5px;line-height:1.5"></div>
 <div class="rise" id="nextbar"></div>
 
-<div class="map-label rise">Your whole journey</div>
+<div class="map-label rise"><strong>Your build path</strong><span>Choose a phase to see its steps</span></div>
 <div class="board-wrap rise"><div class="board" id="board"></div></div>
 
 <div class="rise" id="resources"></div>
@@ -579,22 +579,17 @@ function colHTML(col){
   var statuses = colStatuses(col, state, cards);
   var stateLabel = state==='done' ? '✓ Done' : state==='active' ? '● Now' : '🔒 Locked';
   var wiz = WIZARDS[col.id], live = (state==='active' || state==='done') && !!wiz;
-  /* MOBILE DEFAULT: exactly one column open — the one you are on. (Desktop
-     ignores `open` entirely; the collapse only exists under 760px.) Opening
-     every non-locked column meant a phone showed three finished checkpoints
-     before the one being worked on, which is the opposite of what the board is
-     for. Comparing against activeId rather than the state also covers the
-     finished journey, where nothing is 'active' and the goal column is the
-     right thing to land on. A column the reader opened by hand wins, and keeps
-     winning through the repaints a progress sync triggers. */
+  /* Exactly one phase is open — the one you are on. The full path remains
+     visible, but the selected phase gets the readable work area. Comparing
+     against activeId also covers the finished journey, where the goal column
+     is the right place to land. A phase selected by hand wins through syncs. */
   var open = colOpen.hasOwnProperty(col.id) ? colOpen[col.id] : (col.id === AIEB.activeId());
   var pillInner = '<span class="cdot"></span><span class="nm">'+col.name+'</span>';
 
   var h = '<div class="col '+state+(open?' open':'')+'" style="--cp:'+col.color+'" data-cp="'+col.id+'">';
 
-  /* The whole header is the mobile expander. On desktop the columns are all
-     open and this collapses nothing — it is a phone affordance that costs the
-     desktop layout nothing, which is why it is one control rather than two. */
+  /* The whole header selects the phase on every screen, so the journey has one
+     learned interaction instead of separate desktop and mobile controls. */
   h += '<button type="button" class="col-head" onclick="toggleCol(\''+col.id+'\')" '+
        'aria-expanded="'+open+'" aria-controls="body-'+col.id+'">';
   h += '<span class="col-pill">'+pillInner+'</span>';
@@ -639,17 +634,23 @@ function undoCol(id){
   renderAll();
 }
 
-/* Mobile only. The class is toggled on the live node instead of re-rendering,
-   so opening a column can't be undone by the next progress sync repaint. */
+/* Keep one selected phase. Toggle the live node instead of re-rendering so a
+   manual selection survives the next progress-sync repaint. */
 var colOpen = {};
 function toggleCol(id){
   var el = document.querySelector('.col[data-cp="'+id+'"]');
   if (!el) return;
-  var nowOpen = !el.classList.contains('open');
-  el.classList.toggle('open', nowOpen);
-  colOpen[id] = nowOpen;
+  if (el.classList.contains('open')) return;
+  document.querySelectorAll('.col.open').forEach(function(openCol){
+    openCol.classList.remove('open');
+    colOpen[openCol.getAttribute('data-cp')] = false;
+    var oldHead = openCol.querySelector('.col-head');
+    if (oldHead) oldHead.setAttribute('aria-expanded', 'false');
+  });
+  el.classList.add('open');
+  colOpen[id] = true;
   var head = el.querySelector('.col-head');
-  if (head) head.setAttribute('aria-expanded', String(nowOpen));
+  if (head) head.setAttribute('aria-expanded', 'true');
 }
 
 /* ---- RESET / RESTORE ---------------------------------------------------
@@ -863,6 +864,6 @@ window.addEventListener('aieb:progress-synced', function(){
 });
 </script>
 <script src="session-chip.js?v=3" defer></script>
-<script src="experience.js?v=2"></script>
+<script src="experience.js?v=5"></script>
 </body>
 </html>

@@ -82,7 +82,7 @@
   function mountBoard(){
     var board=document.getElementById('board');if(!board)return;
     document.body.classList.add('aieb-redesign','aieb-board');
-    var label=document.querySelector('.map-label');if(label)label.textContent='The full build · each card is one real step inside the course';
+    var label=document.querySelector('.map-label');if(label)label.innerHTML='<strong>Your build path</strong><span>Choose a phase to see its steps</span>';
     board.setAttribute('aria-label','Your six-stage AI Employee build journey');
   }
   function mountHome(){if(document.querySelector('.home'))document.body.classList.add('aieb-redesign','aieb-home')}
