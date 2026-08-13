@@ -49,7 +49,7 @@
     var surface=wrap.querySelector('.surface-row'),wiz=wrap.querySelector('.wizbar');
     if(!surface||!wiz)return;
     var win=document.createElement('section');win.className='checkpoint-window';win.setAttribute('aria-label',CONFIG.name+' checkpoint');
-    var bar=document.createElement('div');bar.className='checkpoint-windowbar';bar.innerHTML='<div class="checkpoint-brand"><i>AE</i><span>AI Employee Builder</span></div><div class="checkpoint-progress-label" aria-live="polite"></div>';
+    var bar=document.createElement('div');bar.className='checkpoint-windowbar';bar.innerHTML='<div class="checkpoint-brand"><img src="assets/aieb-avatar-180.png" alt=""><span>AI Employee Builder</span></div><div class="checkpoint-progress-label" aria-live="polite"></div>';
     var grid=document.createElement('div');grid.className='checkpoint-grid';
     var rail=document.createElement('aside');rail.className='learning-rail';rail.innerHTML='<span class="learning-rail-label">Your active checkpoint</span><h1></h1><div class="rail-steps" aria-label="Checkpoint steps"></div><div class="rail-note"><b>No prerequisite course.</b><span>The lesson appears inside the checkpoint where you use it.</span></div>';
     rail.querySelector('h1').textContent=CONFIG.name;
