@@ -13,7 +13,7 @@ body.aieb-setup .setup-brand img{width:32px;height:32px;border:1px solid #D9DDD5
 body.aieb-setup .setup-progress-label{color:var(--aieb-soft);font:700 11px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace}
 body.aieb-setup .setup-grid{display:grid;grid-template-columns:minmax(260px,300px) minmax(0,1fr);min-height:660px}
 body.aieb-setup .setup-rail{padding:22px 16px;background:#FBFCF8;border-right:1px solid #DDE2DA}
-body.aieb-setup .setup-rail-label{display:block;margin:0 8px 9px;color:var(--cp);font:800 9.5px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.09em;text-transform:uppercase}
+body.aieb-setup .setup-rail-label{display:block;margin:0 8px 9px;color:var(--cp);font:400 12px/1.2 var(--font-accent);letter-spacing:.07em;text-transform:uppercase}
 body.aieb-setup .setup-rail h1{margin:0 8px 4px;color:var(--aieb-ink);font-family:var(--font-display);font-size:20px;line-height:1.2}
 body.aieb-setup .setup-rail-subtitle{margin:0 8px 17px;color:var(--aieb-soft);font-size:11px;font-weight:700}
 body.aieb-setup .setup-rail-step{position:relative;display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;padding:11px 9px;border-radius:11px;color:var(--aieb-soft)}
@@ -44,6 +44,7 @@ body.aieb-setup .step-t{font-size:19px;line-height:1.25}
 body.aieb-setup .step-sub{font-size:13.5px;line-height:1.45}
 body.aieb-setup .step-content{font-size:15px;line-height:1.65}
 body.aieb-setup .wiz-navbtn{padding:11px 18px;font-size:14px}
+body.aieb-setup .wiz-go,body.aieb-setup .done-btn{font-family:var(--font-accent);font-size:17px;font-weight:400}
 body.aieb-setup .wiz-hero-inner h1{font-size:clamp(27px,3vw,34px)}
 body.aieb-setup .wiz-hero-inner p{font-size:15px}
 body.aieb-setup .fork-card{max-width:none}
@@ -89,7 +90,7 @@ body.aieb-setup .fork-card{max-width:none}
   body.aieb-setup .step-content{padding-left:15px;padding-right:15px;font-size:14.5px}
   body.aieb-setup .setup-mobile-dock{position:fixed;z-index:80;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:10px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);border-top:1px solid #D8DDD5;box-shadow:0 -8px 24px rgba(33,33,30,.08);backdrop-filter:blur(12px)}
   body.aieb-setup .setup-mobile-dock button{min-height:44px;padding:10px 18px;border:1px solid #D1D6CE;border-radius:10px;background:#fff;color:var(--aieb-ink);font:800 14px/1 var(--font-body)}
-  body.aieb-setup .setup-mobile-dock .dock-next{margin-left:auto;background:var(--cp);border-color:var(--cp);color:#fff}
+  body.aieb-setup .setup-mobile-dock .dock-next{margin-left:auto;background:var(--cp);border-color:var(--cp);color:#fff;font-family:var(--font-accent);font-size:16px;font-weight:400}
   body.aieb-setup .setup-mobile-dock button:disabled{opacity:.38}
   body.aieb-setup .setup-mobile-dock[hidden]{display:none!important}
 }

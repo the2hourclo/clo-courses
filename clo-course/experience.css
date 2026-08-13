@@ -11,7 +11,7 @@ body.aieb-redesign .sbtn.active{background:color-mix(in srgb,var(--cp,#2D8C3C) 1
 .board-loader-mark{position:relative;width:92px;height:92px;margin:0 auto 18px;display:grid;place-items:center}
 .board-loader-mark img{position:relative;z-index:1;width:76px;height:76px;border-radius:50%;background:#fff;box-shadow:0 10px 28px rgba(33,33,30,.1)}
 .board-loader-orbit{position:absolute;inset:0;border:2px solid #DDE7DE;border-top-color:#2D8C3C;border-radius:50%;animation:aieb-loader-orbit 1.4s linear infinite}
-.board-loader-kicker{margin-bottom:7px;color:#2D8C3C;font:800 10.5px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.1em;text-transform:uppercase}
+.board-loader-kicker{margin-bottom:7px;color:#2D8C3C;font:400 13px/1.2 var(--font-accent,'Excalifont',system-ui,sans-serif);letter-spacing:.08em;text-transform:uppercase}
 .board-loader h1{margin:0 0 8px;color:var(--aieb-ink);font-family:var(--font-display,"Segoe UI",system-ui,sans-serif);font-size:clamp(25px,3vw,31px);line-height:1.12;letter-spacing:-.035em}
 .board-loader p{margin:0 auto 24px;max-width:330px;color:var(--aieb-soft);font-size:14px;line-height:1.55}
 .board-loader-track{height:7px;overflow:hidden;border-radius:999px;background:#E8EDE7}
@@ -24,11 +24,12 @@ body.aieb-checkpoint .topbar{padding:18px 2px 10px}
 body.aieb-checkpoint .checkpoint-window{overflow:hidden;border:1.5px solid #CFD6CC;border-radius:22px;background:#F5F7F1;box-shadow:var(--aieb-shadow)}
 body.aieb-checkpoint .checkpoint-windowbar{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 18px;background:#fff;border-bottom:1px solid #DDE2DA}
 body.aieb-checkpoint .checkpoint-brand{display:flex;align-items:center;gap:10px;color:var(--aieb-ink);font-size:14px;font-weight:800}
+body.aieb-checkpoint .cp-badge{font-family:var(--font-accent);font-size:13px;font-weight:400;letter-spacing:.06em}
 body.aieb-checkpoint .checkpoint-brand img{width:32px;height:32px;border:1px solid #D9DDD5;border-radius:50%;background:#fff;box-shadow:0 4px 12px rgba(33,33,30,.08)}
 body.aieb-checkpoint .checkpoint-progress-label{color:var(--aieb-soft);font:700 11px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace}
 body.aieb-checkpoint .checkpoint-grid{display:grid;grid-template-columns:minmax(260px,300px) minmax(0,1fr);min-height:660px}
 body.aieb-checkpoint .learning-rail{padding:22px 16px;background:#FBFCF8;border-right:1px solid #DDE2DA}
-body.aieb-checkpoint .learning-rail-label{display:block;margin:0 8px 13px;color:var(--cp);font:800 9.5px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.09em;text-transform:uppercase}
+body.aieb-checkpoint .learning-rail-label{display:block;margin:0 8px 13px;color:var(--cp);font:400 12px/1.2 var(--font-accent);letter-spacing:.07em;text-transform:uppercase}
 body.aieb-checkpoint .learning-rail h1{margin:0 8px 18px;color:var(--aieb-ink);font-family:var(--font-display);font-size:20px;line-height:1.2}
 body.aieb-checkpoint .rail-step{position:relative;display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;padding:11px 9px;border-radius:11px;color:var(--aieb-soft)}
 body.aieb-checkpoint .rail-step+.rail-step{margin-top:4px}
@@ -51,12 +52,12 @@ body.aieb-checkpoint .step{padding:24px;background:#fff;border:1px solid color-m
 body.aieb-checkpoint .step h2{font-size:clamp(23px,3vw,29px)}
 body.aieb-checkpoint .cmd-block,body.aieb-checkpoint .gatebox,body.aieb-checkpoint .does{background:color-mix(in srgb,var(--cp) 4%,#fff);border-color:color-mix(in srgb,var(--cp) 28%,var(--aieb-line))}
 body.aieb-checkpoint .btn.primary{color:#fff!important;box-shadow:0 9px 22px color-mix(in srgb,var(--cp) 18%,transparent)}
-body.aieb-board{--font-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--font-body:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;--font-mono:"SF Mono","Consolas",monospace;font-family:var(--font-body)}
+body.aieb-board{--font-display:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;--font-body:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;--font-accent:'Excalifont',"Segoe UI",system-ui,sans-serif;--font-mono:"SF Mono","Consolas",monospace;font-family:var(--font-body)}
 body.aieb-board #boardview{width:100%;min-height:calc(100vh - 58px);margin:0;overflow:hidden;border:0;border-radius:0;background:#FAFAFA;box-shadow:none}
 body.aieb-board .head{max-width:none;padding:18px 24px 15px;background:#fff}
 body.aieb-board .board-identity{display:flex;align-items:center;gap:13px;margin:0 0 16px}
 body.aieb-board .board-identity img{width:58px;height:58px;border:1.5px solid #D9DDD5;border-radius:50%;background:#fff;box-shadow:0 6px 18px rgba(33,33,30,.08)}
-body.aieb-board .board-identity span{display:block;margin-bottom:2px;color:var(--green,#2D8C3C);font:800 11px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.09em;text-transform:uppercase}
+body.aieb-board .board-identity span{display:block;margin-bottom:2px;color:var(--green,#2D8C3C);font:400 13px/1.2 var(--font-accent);letter-spacing:.08em;text-transform:uppercase}
 body.aieb-board .board-identity h1{margin:0;color:var(--aieb-ink);font-family:var(--font-display);font-size:clamp(24px,2vw,30px);line-height:1.05;letter-spacing:-.035em}
 body.aieb-board .oprog{margin:0}
 body.aieb-board .oprog-bar{height:7px;border-radius:999px;background:#E8EAE5}
@@ -64,7 +65,7 @@ body.aieb-board .oprog-label,body.aieb-board .oprog-pct{font-size:15px}
 body.aieb-board .oprog-next{text-align:left;font-size:13px;line-height:1.45;margin-top:8px}
 body.aieb-board #nextbar{padding:0 24px}
 body.aieb-board .nextbar{max-width:none;margin:0 0 18px;padding:15px 17px;border-left:5px solid var(--nc);border-radius:12px;background:color-mix(in srgb,var(--nc) 6%,#fff);box-shadow:none}
-body.aieb-board .nb-badge{font-family:var(--font-mono);font-size:11px;line-height:1.3}body.aieb-board .nb-title{font-family:var(--font-display);font-size:22px}body.aieb-board .nb-lead{font-size:14px;line-height:1.5}body.aieb-board .nb-go{padding:12px 17px;border-radius:9px;font-family:var(--font-body);font-size:14px;box-shadow:none}
+body.aieb-board .nb-badge{font-family:var(--font-accent);font-size:13px;font-weight:400;line-height:1.3;letter-spacing:.06em}body.aieb-board .nb-title{font-family:var(--font-display);font-size:22px}body.aieb-board .nb-lead{font-size:14px;line-height:1.5}body.aieb-board .nb-go{padding:12px 17px;border-radius:9px;font-family:var(--font-accent);font-size:17px;font-weight:400;box-shadow:none}
 body.aieb-board .map-label{margin:0 24px 12px;font-family:var(--font-body);font-size:11px;font-weight:800;line-height:1.3;letter-spacing:0}
 body.aieb-board .board-wrap{padding:0 24px 22px}body.aieb-board .board{max-width:none;gap:12px;align-items:stretch}body.aieb-board .col{gap:6px;height:100%}body.aieb-board .col-head{padding:4px 3px 7px}
 body.aieb-board .col-pill{font-size:clamp(12px,.68vw,13px);padding:6px 9px}body.aieb-board .col-state{font-size:10px}body.aieb-board .col-body{flex:1;min-height:clamp(330px,calc(100vh - 420px),590px);padding:11px;gap:9px;border-radius:13px;background:color-mix(in srgb,var(--cp) 4%,#fff)}
@@ -72,10 +73,11 @@ body.aieb-board .col.active .col-body{box-shadow:3px 4px 0 rgba(33,33,30,.09)}bo
 body.aieb-board .kcard.is-doing{background:color-mix(in srgb,var(--cp) 7%,#fff)}body.aieb-board .ktick{width:21px;height:21px;font-size:12px}body.aieb-board .kcard .ktitle{font-size:clamp(13px,.74vw,14px);line-height:1.38}
 body.aieb-board .ktags{gap:4px;margin-top:8px}body.aieb-board .tag{padding:3px 7px;border-radius:5px;font-size:10.5px}body.aieb-board .col-go,body.aieb-board .col-hint,body.aieb-board .col-undo{font-size:12px}
 body.aieb-board .col-foot{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;width:100%}
-body.aieb-board .col-go{display:flex;align-items:center;justify-content:center;width:100%;min-height:42px;padding:9px 12px;border-radius:9px;background:var(--cp);color:#fff;font-family:var(--font-body);font-size:13.5px;font-weight:800;line-height:1.2;text-align:center;text-decoration:none}
+body.aieb-board .col-go{display:flex;align-items:center;justify-content:center;width:100%;min-height:42px;padding:9px 12px;border-radius:9px;background:var(--cp);color:#fff;font-family:var(--font-accent);font-size:16px;font-weight:400;line-height:1.2;text-align:center;text-decoration:none}
 body.aieb-board .col-go:hover{filter:brightness(.94);text-decoration:none}
 body.aieb-board .col-undo{justify-self:center;margin:0}
 body.aieb-board .col-hint{display:block;width:100%;line-height:1.4;text-align:center}
+body.aieb-board .sg-go{font-family:var(--font-accent);font-size:16px;font-weight:400}
 body.aieb-board #resources,body.aieb-board #admin{background:#fff}
 @media(min-width:761px){
   body.aieb-board .head{display:grid;grid-template-columns:minmax(280px,.72fr) minmax(440px,1.28fr);align-items:center;gap:48px;padding-top:20px;padding-bottom:20px}
@@ -86,7 +88,7 @@ body.aieb-board #resources,body.aieb-board #admin{background:#fff}
   body.aieb-board .board{gap:12px;align-items:stretch}
   body.aieb-board .col{display:flex;height:100%}
   body.aieb-board .col-head{min-height:43px;padding:3px 3px 7px;cursor:default}
-  body.aieb-board .col-pill{font-family:var(--font-display);font-size:13px;padding:6px 9px}
+  body.aieb-board .col-pill{font-family:var(--font-accent);font-size:14px;font-weight:400;padding:6px 9px}
   body.aieb-board .col-state{margin-left:auto;padding:5px 8px;border:1px solid #D9DDD5;border-radius:999px;background:#F4F5F1;color:var(--aieb-soft);font-size:11px;line-height:1}
   body.aieb-board .col-state.done{border-color:#2D8C3C;background:#2D8C3C;color:#fff;font-size:13px;padding:6px 10px}
   body.aieb-board .col-state.active{border-color:color-mix(in srgb,var(--cp) 36%,transparent);background:color-mix(in srgb,var(--cp) 12%,#fff);color:var(--cp);font-size:12px}
@@ -99,15 +101,16 @@ body.aieb-board #resources,body.aieb-board #admin{background:#fff}
   body.aieb-board .kcard .ktitle{font-size:14.5px;line-height:1.4}
   body.aieb-board .tag{font-size:10.5px}
   body.aieb-board .col-foot{margin-top:auto;padding:10px 2px 1px;border-top:1px solid color-mix(in srgb,var(--cp) 18%,var(--aieb-line))}
-  body.aieb-board .col-go{min-height:42px;padding:9px 11px;font-size:13px}
+  body.aieb-board .col-go{min-height:42px;padding:9px 11px;font-size:16px}
   body.aieb-board .col-hint,body.aieb-board .col-undo{font-size:12px}
 }
 @media(min-width:761px) and (max-width:1120px){body.aieb-board .head{grid-template-columns:1fr;gap:16px}body.aieb-board .col-body,body.aieb-board .col.open .col-body{min-height:360px}body.aieb-board .kcard .ktitle{font-size:15px}}
 body.aieb-home .home{max-width:720px}body.aieb-home .oprog{border:1.5px solid var(--aieb-line);border-radius:16px;box-shadow:var(--aieb-shadow)}body.aieb-home .oprog-bar{height:9px;border:0;background:#E8EAE5}
-body.aieb-home .cta{border:0;border-radius:12px;box-shadow:0 12px 28px rgba(45,140,60,.2);font-family:"Segoe UI",system-ui,sans-serif;font-size:17px;font-weight:800}
+body.aieb-home .cta{border:0;border-radius:12px;box-shadow:0 12px 28px rgba(45,140,60,.2);font-family:var(--font-accent,var(--excali,'Excalifont',system-ui,sans-serif));font-size:20px;font-weight:400}
+body.aieb-checkpoint .btn.primary{font-family:var(--font-accent);font-size:16px;font-weight:400}
 @media(max-width:1100px){body.aieb-checkpoint .checkpoint-grid{grid-template-columns:minmax(0,1fr);min-height:0}body.aieb-checkpoint .learning-rail,body.aieb-checkpoint .checkpoint-main{min-width:0;max-width:100%}body.aieb-checkpoint .learning-rail{border-right:0;border-bottom:1px solid #DDE2DA}body.aieb-checkpoint .learning-rail h1{margin-bottom:12px}body.aieb-checkpoint .rail-steps{display:flex;width:100%;max-width:100%;gap:7px;overflow-x:auto;padding:1px 0 8px;scroll-snap-type:x proximity;scrollbar-width:thin}body.aieb-checkpoint .rail-step{flex:0 0 min(260px,72vw);scroll-snap-align:start}body.aieb-checkpoint .rail-step+.rail-step{margin-top:0}body.aieb-checkpoint .rail-step+.rail-step:before{display:none}body.aieb-checkpoint .rail-note{margin-top:8px}}
 @media(max-width:959px){body.aieb-board .map-label{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 7px;text-transform:none;letter-spacing:0}body.aieb-board .map-label strong{color:var(--aieb-ink);font-family:var(--font-display);font-size:14px}body.aieb-board .map-label span{font-size:11px;font-weight:600}}
-@media(max-width:760px){body.aieb-board .head{padding:14px 12px}body.aieb-board .board-identity{margin-bottom:14px}body.aieb-board .board-identity img{width:50px;height:50px}body.aieb-board .board-identity h1{font-size:25px}body.aieb-board #nextbar{padding:0}body.aieb-board .map-label{margin-left:14px;margin-right:14px}body.aieb-board .board-wrap{padding:0 10px 14px}body.aieb-board .col-head{padding:11px 12px}body.aieb-board .col-pill{font-size:13px}body.aieb-board .col-state{font-size:11px}body.aieb-board .col-body{min-height:0}body.aieb-board .kcard .ktitle{font-size:15px}body.aieb-board .tag{font-size:10.5px}body.aieb-board .col-go{min-height:46px;font-size:14px}body.aieb-board .col-hint,body.aieb-board .col-undo{font-size:12px}}
+@media(max-width:760px){body.aieb-board .head{padding:14px 12px}body.aieb-board .board-identity{margin-bottom:14px}body.aieb-board .board-identity img{width:50px;height:50px}body.aieb-board .board-identity h1{font-size:25px}body.aieb-board #nextbar{padding:0}body.aieb-board .map-label{margin-left:14px;margin-right:14px}body.aieb-board .board-wrap{padding:0 10px 14px}body.aieb-board .col-head{padding:11px 12px}body.aieb-board .col-pill{font-size:14px}body.aieb-board .col-state{font-size:11px}body.aieb-board .col-body{min-height:0}body.aieb-board .kcard .ktitle{font-size:15px}body.aieb-board .tag{font-size:10.5px}body.aieb-board .col-go{min-height:46px;font-size:17px}body.aieb-board .col-hint,body.aieb-board .col-undo{font-size:12px}}
 @media(max-width:580px){
   html,body{max-width:100%;overflow-x:hidden}
   .board-loader{padding:34px 22px 29px;border-radius:18px}.board-loader-mark{width:82px;height:82px}.board-loader-mark img{width:68px;height:68px}.board-loader-steps{font-size:9.5px}
@@ -140,7 +143,7 @@ body.aieb-home .cta{border:0;border-radius:12px;box-shadow:0 12px 28px rgba(45,1
   body.aieb-checkpoint .step>.nav{display:none}
   body.aieb-checkpoint .mobile-course-dock{position:fixed;z-index:80;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:10px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);border-top:1px solid #D8DDD5;box-shadow:0 -8px 24px rgba(33,33,30,.08);backdrop-filter:blur(12px)}
   body.aieb-checkpoint .mobile-course-dock button{min-height:44px;padding:10px 18px;border:1px solid #D1D6CE;border-radius:10px;background:#fff;color:var(--aieb-ink);font:800 14px/1 var(--font-body)}
-  body.aieb-checkpoint .mobile-course-dock .dock-next{margin-left:auto;background:var(--cp);border-color:var(--cp);color:#fff}
+  body.aieb-checkpoint .mobile-course-dock .dock-next{margin-left:auto;background:var(--cp);border-color:var(--cp);color:#fff;font-family:var(--font-accent);font-size:16px;font-weight:400}
   body.aieb-board>.topbar{display:grid;grid-template-columns:minmax(0,1fr) auto}
   body.aieb-board>.topbar .surf{grid-column:1/-1;grid-row:2;width:100%}
   body.aieb-board>.topbar .whoami{grid-column:2;grid-row:1}

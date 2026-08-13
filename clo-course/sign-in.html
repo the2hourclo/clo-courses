@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Sign in — AI Employee Builder</title>
+<link rel="stylesheet" href="excalifont.css">
 <style>
   :root{
     --bg:#0f0f0f; --surface:#171717; --surface-2:#1e1e1e; --border:#2a2a2a; --border-2:#343434;
-    --text:#f2f2f2; --text-muted:#b4b4b4; --text-dim:#8a8a8a; --accent:#d97757; --radius:14px;
+    --text:#f2f2f2; --text-muted:#b4b4b4; --text-dim:#8a8a8a; --accent:#2D8C3C; --radius:14px;
+    --font-body:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
+    --font-accent:'Excalifont',"Segoe UI",system-ui,sans-serif;
   }
   @media (prefers-color-scheme: light){
     :root{ --bg:#fafafa; --surface:#fff; --surface-2:#f4f4f4; --border:#e6e6e6; --border-2:#dcdcdc;
@@ -17,10 +20,10 @@
   *{box-sizing:border-box}
   body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
        background:var(--bg);color:var(--text);
-       font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+       font:16px/1.6 var(--font-body)}
   .card{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--border);
         border-radius:var(--radius);padding:32px 28px;text-align:center}
-  .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:800}
+  .kicker{font-family:var(--font-accent);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
   h1{font-size:22px;line-height:1.25;margin:12px 0 8px;letter-spacing:-.3px}
   p{margin:0 0 18px;color:var(--text-muted);font-size:14.5px}
   .slot{display:flex;justify-content:center;min-height:44px;margin:22px 0 6px}
