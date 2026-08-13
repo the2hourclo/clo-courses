@@ -23,9 +23,11 @@
   var API_AUTH = "/auth/google";
   var ACCOUNT_HINT_KEY = "aieb_account_hint";
 
-  // The board already draws its own chip in its top bar. Two badges saying the
-  // same thing in different places reads as a bug, so defer to the page.
-  if (document.querySelector("#signout, [onclick*=\"doSignOut\"]")) return;
+  // The board already owns #whoami and fills it after its async session check.
+  // Checking only for its eventual Sign out button races that request: the
+  // shared chip can mount first, then the board adds a second account label.
+  // The stable slot is the page contract, so defer as soon as it exists.
+  if (document.querySelector("#whoami, #signout, [onclick*=\"doSignOut\"]")) return;
 
   function accountHint() {
     try { return localStorage.getItem(ACCOUNT_HINT_KEY) || ""; } catch (e) { return ""; }
