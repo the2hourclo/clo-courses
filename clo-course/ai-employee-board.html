@@ -248,7 +248,7 @@ a.kbody::after{content:'';position:absolute;inset:0;border-radius:9px}
 .sg-opts span{font-size:13px;color:var(--text-muted);line-height:1.45}
 </style>
 <link rel="stylesheet" href="excalifont.css">
-<link rel="stylesheet" href="experience.css?v=4">
+<link rel="stylesheet" href="experience.css?v=5">
 </head>
 <body>
 
@@ -264,7 +264,17 @@ a.kbody::after{content:'';position:absolute;inset:0;border-radius:9px}
      one: flashing a ladder and then yanking it back is worse than a half
      second of nothing. -->
 <div id="checkingview" class="signin-wrap">
-  <div class="signin-card"><div class="signin-dots">Loading your board…</div></div>
+  <div class="board-loader" role="status" aria-live="polite" aria-label="Opening your Build Board">
+    <div class="board-loader-mark">
+      <span class="board-loader-orbit" aria-hidden="true"></span>
+      <img src="assets/aieb-avatar-180.png" alt="" width="76" height="76">
+    </div>
+    <div class="board-loader-kicker">AI Employee Builder</div>
+    <h1>Opening your Build Board</h1>
+    <p>Bringing in your saved progress and next checkpoint.</p>
+    <div class="board-loader-track" aria-hidden="true"><span></span></div>
+    <div class="board-loader-steps" aria-hidden="true"><span>Sign-in</span><span>Progress</span><span>Next step</span></div>
+  </div>
 </div>
 
 <div id="signinview" class="signin-wrap" hidden>
