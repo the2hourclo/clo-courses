@@ -524,20 +524,20 @@ body.activation-mode .container{max-width:620px;width:100%}
   <!-- APP CHOOSER (the real fork — switches the whole page to one track) -->
   <div class="section-rule rise d2" style="margin-top:6px">First, which app are you using?</div>
   <div class="fork rise d2" id="app-chooser">
+    <a class="fork-card alt" id="chooser-codex" href="#codex" onclick="chooseTrack(event,'codex')">
+      <span class="fork-ic"><img src="assets/get-access/codex-mark.svg" alt="ChatGPT Codex"></span>
+      <span class="fork-tx"><span class="fork-badge">Recommended</span><strong>ChatGPT Codex</strong>Runs in the Codex app or CLI and works directly with your project files. <em>Pick this for our recommended OpenAI building workflow.</em></span>
+      <span class="fork-go">Set up ChatGPT Codex &rarr;</span>
+    </a>
     <a class="fork-card" id="chooser-cc" href="#claude-code-path" onclick="chooseTrack(event,'cc')">
       <span class="fork-ic"><img src="assets/get-access/claude-code-mascot.png" alt="Claude Code"></span>
       <span class="fork-tx"><strong>Claude Code</strong>Runs in your code editor (VS Code) or terminal, on your own computer. <em>Pick this if you want full control, customization, and to go deep on AI engineering.</em></span>
       <span class="fork-go">Use Claude Code &rarr;</span>
     </a>
-    <a class="fork-card alt" id="chooser-cw" href="#cowork" onclick="chooseTrack(event,'cowork')">
+    <a class="fork-card" id="chooser-cw" href="#cowork" onclick="chooseTrack(event,'cowork')">
       <span class="fork-ic"><img src="assets/get-access/cowork-logo.png" alt="Claude Cowork"></span>
-      <span class="fork-tx"><span class="fork-badge">Easiest &mdash; no terminal</span><strong>Claude Cowork</strong>Runs in the Claude desktop app &mdash; add our plugin, open its connection page, done. All point-and-click. <em>Pick this if you&rsquo;re not technical and &ldquo;terminal&rdquo; sounds scary.</em></span>
+      <span class="fork-tx"><span class="fork-badge">Simplest path</span><strong>Claude Cowork</strong>Runs in the Claude desktop app &mdash; add our plugin, open its connection page, done. All point-and-click. <em>Pick this if you prefer a guided experience with no terminal.</em></span>
       <span class="fork-go">&#129309; Set up Cowork &rarr;</span>
-    </a>
-    <a class="fork-card" id="chooser-codex" href="#codex" onclick="chooseTrack(event,'codex')">
-      <span class="fork-ic"><img src="assets/get-access/codex-mark.svg" alt="Codex"></span>
-      <span class="fork-tx"><span class="fork-badge">New</span><strong>Codex</strong>Runs in the Codex app or CLI and works directly with your project files. <em>Pick this if you use OpenAI Codex as your building workspace.</em></span>
-      <span class="fork-go">Set up Codex &rarr;</span>
     </a>
   </div>
 
@@ -1787,6 +1787,6 @@ setInterval(function(){
 <script src="toc.js"></script>
 <script src="shell.js?v=2"></script>
 <script src="session-chip.js?v=3" defer></script>
-<script src="setup-experience.js?v=2"></script>
+<script src="setup-experience.js?v=3"></script>
 </body>
 </html>
