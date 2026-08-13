@@ -21,7 +21,7 @@
    old shell.js is cached anywhere, which you cannot be.
    ============================================================ */
 var CLO_CONFIG = {
-  brand: 'AI Employee Builder',
+  brand: 'AI Employee Builders',
   storageKey: 'aieb_license',
   // The upgrade target for everything in the Skill Library group. Single source
   // of truth — every "Unlock with Full Access" CTA reads this, none hardcode it.
