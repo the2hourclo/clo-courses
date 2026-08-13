@@ -1,20 +1,45 @@
 ﻿/* Presentation adapter for the invitation-page course UI. */
 (function(){
   'use strict';
-  function phase(){
-    if(!window.CONFIG||!Array.isArray(CONFIG.steps))return'learn';
-    var steps=typeof activeSteps==='function'?activeSteps():CONFIG.steps;
-    var at=typeof pos==='number'?Math.min(pos,Math.max(0,steps.length-1)):0;
-    var type=(steps[at]||{}).type;
-    return type==='gate'?'prove':(type==='build'||type==='share'?'build':'learn');
+  function stepKind(type){
+    return {video:'Learn',build:'Build',share:'Share',gate:'Prove'}[type]||'Step';
+  }
+  function plainTitle(value){
+    var decoder=document.createElement('textarea');
+    decoder.innerHTML=String(value||'Untitled step');
+    return decoder.value;
+  }
+  function makeRailStep(step,index,current,total){
+    var item=document.createElement('div');
+    var state=index<current?'complete':(index===current&&current<total?'active':'upcoming');
+    item.className='rail-step '+state;
+    if(state==='active')item.setAttribute('aria-current','step');
+    var number=document.createElement('span');
+    number.className='n';
+    number.textContent=state==='complete'?'✓':String(index+1);
+    var copy=document.createElement('div');
+    var title=document.createElement('b');
+    title.textContent=plainTitle(step.title);
+    var meta=document.createElement('small');
+    meta.textContent=stepKind(step.type)+(step.optional?' · Optional':'');
+    copy.appendChild(title);copy.appendChild(meta);
+    item.appendChild(number);item.appendChild(copy);
+    return item;
   }
   function updateRail(){
-    var p=phase();
-    document.querySelectorAll('.rail-step').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-phase')===p)});
+    if(!window.CONFIG)return;
+    var steps=typeof activeSteps==='function'?activeSteps():CONFIG.steps;
+    var current=Math.min(typeof pos==='number'?pos:0,steps.length);
+    var list=document.querySelector('.rail-steps');
+    if(list){
+      list.replaceChildren();
+      steps.forEach(function(step,index){list.appendChild(makeRailStep(step,index,current,steps.length))});
+    }
     var label=document.querySelector('.checkpoint-progress-label');
-    if(label&&window.CONFIG&&typeof activeSteps==='function'){
-      var n=activeSteps().length,current=Math.min((typeof pos==='number'?pos:0)+1,n);
-      label.textContent='Step '+current+' of '+n+' · '+p;
+    if(label){
+      label.textContent=current>=steps.length
+        ? 'Checkpoint complete'
+        : 'Step '+(current+1)+' of '+steps.length+' · '+stepKind((steps[current]||{}).type).toLowerCase();
     }
   }
   function mountCheckpoint(){
@@ -26,7 +51,8 @@
     var win=document.createElement('section');win.className='checkpoint-window';win.setAttribute('aria-label',CONFIG.name+' checkpoint');
     var bar=document.createElement('div');bar.className='checkpoint-windowbar';bar.innerHTML='<div class="checkpoint-brand"><i>AE</i><span>AI Employee Builder</span></div><div class="checkpoint-progress-label" aria-live="polite"></div>';
     var grid=document.createElement('div');grid.className='checkpoint-grid';
-    var rail=document.createElement('aside');rail.className='learning-rail';rail.innerHTML='<span class="learning-rail-label">Your active checkpoint</span><h1>'+CONFIG.name+'</h1><div class="rail-steps"><div class="rail-step" data-phase="learn"><span class="n">1</span><div><b>Learn</b><small>See the concept you need now</small></div></div><div class="rail-step" data-phase="build"><span class="n">2</span><div><b>Build</b><small>Use it on one real process</small></div></div><div class="rail-step" data-phase="prove"><span class="n">3</span><div><b>Prove it works</b><small>Run it on real business data</small></div></div></div><div class="rail-note"><b>No prerequisite course.</b><span>The lesson appears inside the checkpoint where you use it.</span></div>';
+    var rail=document.createElement('aside');rail.className='learning-rail';rail.innerHTML='<span class="learning-rail-label">Your active checkpoint</span><h1></h1><div class="rail-steps" aria-label="Checkpoint steps"></div><div class="rail-note"><b>No prerequisite course.</b><span>The lesson appears inside the checkpoint where you use it.</span></div>';
+    rail.querySelector('h1').textContent=CONFIG.name;
     var main=document.createElement('main');main.className='checkpoint-main';
     wrap.insertBefore(win,surface);win.appendChild(bar);win.appendChild(grid);grid.appendChild(rail);grid.appendChild(main);main.appendChild(surface);main.appendChild(wiz);main.appendChild(stage);
     updateRail();new MutationObserver(updateRail).observe(stage,{childList:true,subtree:true});
