@@ -248,7 +248,7 @@ a.kbody::after{content:'';position:absolute;inset:0;border-radius:9px}
 .sg-opts span{font-size:13px;color:var(--text-muted);line-height:1.45}
 </style>
 <link rel="stylesheet" href="excalifont.css">
-<link rel="stylesheet" href="experience.css?v=5">
+<link rel="stylesheet" href="experience.css?v=6">
 </head>
 <body>
 
@@ -723,6 +723,8 @@ function renderAuth(){
   document.getElementById('boardview').hidden   = !boardVisible;
 
   var who = document.getElementById('whoami');
+  who.classList.toggle('is-signed-in', authState === 'in');
+  who.classList.toggle('is-local', authState === 'local');
   if (authState === 'in') {
     who.hidden = false;
     who.innerHTML = '<span>' + (maskedAccount() || 'Signed in') + '</span>'
@@ -860,7 +862,7 @@ window.addEventListener('aieb:progress-synced', function(){
   renderAll();
 });
 </script>
-<script src="session-chip.js?v=2" defer></script>
+<script src="session-chip.js?v=3" defer></script>
 <script src="experience.js?v=2"></script>
 </body>
 </html>

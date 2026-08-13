@@ -29,6 +29,9 @@
     if (!list) return;
     var progress = document.querySelector('.setup-progress-label');
     var subtitle = document.querySelector('.setup-rail-subtitle');
+    var mobileTitle = document.querySelector('.setup-mobile-title');
+    var mobileCount = document.querySelector('.setup-mobile-count');
+    var mobileDots = document.querySelector('.setup-mobile-dots');
     var currentId = visibleStepId();
     var steps = [];
     try { steps = window.wizTrackName && typeof window.wizSteps === 'function' ? window.wizSteps() : []; } catch (e) {}
@@ -43,8 +46,16 @@
       choose.innerHTML = '<span class="n">1</span><span><b>Choose where you\u2019ll build</b><small>Cowork, Claude Code, or Codex</small></span>';
       list.appendChild(choose);
       if (progress) progress.textContent = 'Choose your build app';
+      if (mobileTitle) mobileTitle.textContent = 'Choose where you\u2019ll build';
+      if (mobileCount) mobileCount.textContent = 'Start here';
+      var emptySurface = document.querySelector('.setup-mobile-surface-select');
+      if (emptySurface) emptySurface.value = '';
+      var emptyDock = document.querySelector('.setup-mobile-dock');
+      if (emptyDock) emptyDock.hidden = true;
       return;
     }
+    var mobileDock = document.querySelector('.setup-mobile-dock');
+    if (mobileDock) mobileDock.hidden = false;
 
     var activeIndex = steps.findIndex(function (step) { return step.el === currentId; });
     if (activeIndex < 0 && typeof window.wizCurIdx === 'number') activeIndex = Math.min(window.wizCurIdx, steps.length - 1);
@@ -75,6 +86,30 @@
     if (progress) {
       progress.textContent = allDone ? 'Setup complete' : 'Step ' + (activeIndex + 1) + ' of ' + steps.length + ' \u00b7 ' + trackLabel();
     }
+    if (mobileTitle) mobileTitle.textContent = allDone ? 'Setup complete' : titleFor(steps[activeIndex] || {});
+    if (mobileCount) mobileCount.textContent = allDone ? 'Done' : 'Step ' + (activeIndex + 1) + ' of ' + steps.length;
+    if (mobileDots) {
+      mobileDots.replaceChildren();
+      steps.forEach(function (step, index) {
+        var dot = document.createElement('span');
+        var done = false;
+        try { done = step.isDone(); } catch (e) {}
+        dot.className = index === activeIndex && !allDone ? 'active' : done ? 'complete' : 'upcoming';
+        mobileDots.appendChild(dot);
+      });
+    }
+    var mobileSurface = document.querySelector('.setup-mobile-surface-select');
+    if (mobileSurface && window.wizTrackName) mobileSurface.value = window.wizTrackName;
+    var sourceBack = document.getElementById('wizBackBtn');
+    var sourceNext = document.getElementById('wizNextBtn');
+    var dockBack = document.querySelector('.setup-mobile-dock .dock-back');
+    var dockNext = document.querySelector('.setup-mobile-dock .dock-next');
+    if (dockBack) dockBack.disabled = !!(sourceBack && sourceBack.disabled);
+    if (dockNext) {
+      dockNext.disabled = !!(sourceNext && sourceNext.disabled);
+      dockNext.hidden = !!(sourceNext && sourceNext.hidden);
+      dockNext.textContent = sourceNext ? sourceNext.textContent.trim() : 'Next \u2192';
+    }
   }
 
   function mount() {
@@ -97,9 +132,24 @@
     var win = document.createElement('section');
     win.className = 'setup-window';
     win.setAttribute('aria-label', 'Get set up checkpoint');
-    win.innerHTML = '<div class="setup-windowbar"><div class="setup-brand"><img src="assets/aieb-avatar-180.png" alt=""><span>AI Employee Builder</span></div><div class="setup-progress-label" aria-live="polite"></div></div><div class="setup-grid"><aside class="setup-rail"><span class="setup-rail-label">Your active checkpoint</span><h1>Get set up</h1><p class="setup-rail-subtitle"></p><div class="setup-rail-steps" aria-label="Setup steps"></div><div class="setup-rail-note"><b>Set up once. Build from the Board.</b><span>Your progress is saved as you connect your chosen app.</span></div></aside><main class="setup-main"></main></div>';
+    win.innerHTML = '<div class="setup-windowbar"><div class="setup-brand"><img src="assets/aieb-avatar-180.png" alt=""><span>AI Employee Builder</span></div><div class="setup-progress-label" aria-live="polite"></div></div><div class="setup-grid"><aside class="setup-rail"><span class="setup-rail-label">Your active checkpoint</span><h1>Get set up</h1><p class="setup-rail-subtitle"></p><div class="setup-mobile-summary"><div><span class="setup-mobile-count"></span><b class="setup-mobile-title"></b></div><div class="setup-mobile-dots" aria-hidden="true"></div></div><div class="setup-rail-steps" aria-label="Setup steps"></div><div class="setup-rail-note"><b>Set up once. Build from the Board.</b><span>Your progress is saved as you connect your chosen app.</span></div></aside><main class="setup-main"><label class="setup-mobile-surface"><span>Building in</span><select class="setup-mobile-surface-select" aria-label="Choose where you build"><option value="">Choose an app</option><option value="cowork">Claude Cowork</option><option value="cc">Claude Code</option><option value="codex">Codex</option></select></label></main></div><nav class="setup-mobile-dock" aria-label="Setup navigation"><button type="button" class="dock-back">\u2190 Back</button><button type="button" class="dock-next">Next \u2192</button></nav>';
+    var boardBack = document.createElement('a');
+    boardBack.className = 'setup-back';
+    boardBack.href = 'ai-employee-board.html';
+    boardBack.textContent = '\u2190 Back to board';
+    inner.appendChild(boardBack);
     inner.appendChild(win);
     win.querySelector('.setup-main').appendChild(doc);
+    win.querySelector('.setup-mobile-surface-select').addEventListener('change', function () {
+      if (!this.value) return;
+      applyTrack(this.value, false); wizTrackName = this.value; wizPos = null; wizRender();
+    });
+    win.querySelector('.setup-mobile-dock .dock-back').addEventListener('click', function () {
+      var source = document.getElementById('wizBackBtn'); if (source) source.click();
+    });
+    win.querySelector('.setup-mobile-dock .dock-next').addEventListener('click', function () {
+      var source = document.getElementById('wizNextBtn'); if (source && !source.disabled) source.click();
+    });
 
     if (typeof window.wizRender === 'function') {
       var originalRender = window.wizRender;

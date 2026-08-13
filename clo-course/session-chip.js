@@ -79,7 +79,10 @@
       "border:1px solid rgba(0,0,0,.09);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}",
       "@media (prefers-color-scheme:dark){#aieb-session-chip{background:rgba(23,23,23,.9);",
       "border-color:rgba(255,255,255,.12)}}",
-      "@media (max-width:640px){#aieb-session-chip{top:auto;bottom:10px;right:10px;font-size:11px}}"
+      "@media (max-width:640px){#aieb-session-chip{max-width:110px;gap:5px;font-size:10.5px;opacity:1}",
+      "#aieb-session-chip>.dot,#aieb-session-chip>span{display:none}",
+      "#aieb-session-chip:before{content:'● Saved';color:#2D8C3C;font-weight:800;white-space:nowrap}",
+      "#aieb-session-chip button{font-size:10.5px;white-space:nowrap}}"
     ];
     var inBarOnly = ["#aieb-session-chip{margin-left:auto;flex:none}"];
     css.textContent = base.concat(inBar ? inBarOnly : floating).join("");
