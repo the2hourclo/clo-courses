@@ -510,7 +510,7 @@ function nextbarHTML(){
     '<div class="nb-main"><div class="nb-badge">'+badge+'</div>'+
     '<div class="nb-title">'+m.name+'</div>'+
     '<div class="nb-lead">'+lead+'</div></div>'+
-    '<a class="nb-go" href="'+(WIZARDS[id]||m.wizard)+'">'+verb+' →</a></div>';
+    '<a class="nb-go" href="'+(WIZARDS[id]||m.wizard)+'">'+verb+'</a></div>';
 }
 function renderNext(){ document.getElementById('nextbar').innerHTML = nextbarHTML(); }
 
@@ -638,7 +638,7 @@ function colHTML(col){
     h += '<span class="col-hint">Finish the checkpoint before it</span>';
   } else {
     var verb = state==='done' ? 'Review' : ((col.summary ? AIEB.setupInfo() : AIEB.stepInfo(col.id)).pos > 0 ? 'Continue' : 'Open');
-    h += '<a class="col-go" href="'+stepHref(col.id, null)+'">'+verb+' →</a>';
+    h += '<a class="col-go" href="'+stepHref(col.id, null)+'">'+verb+'</a>';
     if (state==='done')
       h += '<button type="button" class="col-undo" onclick="undoCol(\''+col.id+'\')" '+
            'title="Reopen this checkpoint">↺ Reopen</button>';
