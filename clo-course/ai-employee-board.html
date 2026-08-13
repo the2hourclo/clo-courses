@@ -274,7 +274,7 @@ body.surface-gate-open{overflow:hidden}
 }
 </style>
 <link rel="stylesheet" href="excalifont.css">
-<link rel="stylesheet" href="experience.css?v=7">
+<link rel="stylesheet" href="experience.css?v=8">
 </head>
 <body>
 
@@ -324,7 +324,7 @@ body.surface-gate-open{overflow:hidden}
 <div class="rise" id="linknote" hidden style="margin:0 0 16px;padding:13px 15px;border-radius:10px;background:rgba(180,105,14,.10);border:1px solid rgba(180,105,14,.28);font-size:13.5px;line-height:1.5"></div>
 <div class="rise" id="nextbar"></div>
 
-<div class="map-label rise"><strong>Your build path</strong><span>Choose a phase to see its steps</span></div>
+<div class="map-label rise"><strong>Your build path</strong><span>Every card is one real step</span></div>
 <div class="board-wrap rise"><div class="board" id="board"></div></div>
 
 <div class="rise" id="resources"></div>
@@ -613,19 +613,18 @@ function colHTML(col){
   var statuses = colStatuses(col, state, cards);
   var stateLabel = state==='done' ? '✓ Done' : state==='active' ? '● Now' : '🔒 Locked';
   var wiz = WIZARDS[col.id], live = (state==='active' || state==='done') && !!wiz;
-  /* Exactly one phase is open — the one you are on. The full path remains
-     visible, but the selected phase gets the readable work area. Comparing
-     against activeId also covers the finished journey, where the goal column
-     is the right place to land. A phase selected by hand wins through syncs. */
+  /* Mobile opens exactly one phase — the one you are on. Desktop keeps the
+     full Kanban visible. A mobile phase selected by hand wins through syncs. */
   var open = colOpen.hasOwnProperty(col.id) ? colOpen[col.id] : (col.id === AIEB.activeId());
   var pillInner = '<span class="cdot"></span><span class="nm">'+col.name+'</span>';
 
   var h = '<div class="col '+state+(open?' open':'')+'" style="--cp:'+col.color+'" data-cp="'+col.id+'">';
 
-  /* The whole header selects the phase on every screen, so the journey has one
-     learned interaction instead of separate desktop and mobile controls. */
+  var collapsible = window.matchMedia && window.matchMedia('(max-width:760px)').matches;
+  /* On mobile the whole header selects the phase. Desktop presents the full
+     Kanban, so every column is exposed and the header is informational. */
   h += '<button type="button" class="col-head" onclick="toggleCol(\''+col.id+'\')" '+
-       'aria-expanded="'+open+'" aria-controls="body-'+col.id+'">';
+       'aria-expanded="'+(collapsible ? open : true)+'" aria-controls="body-'+col.id+'">';
   h += '<span class="col-pill">'+pillInner+'</span>';
   h += '<span class="col-state '+state+'">'+stateLabel+'</span>';
   h += '<span class="col-chev" aria-hidden="true">▾</span></button>';
@@ -668,10 +667,10 @@ function undoCol(id){
   renderAll();
 }
 
-/* Keep one selected phase. Toggle the live node instead of re-rendering so a
-   manual selection survives the next progress-sync repaint. */
+/* Mobile only: keep one selected phase. Desktop always shows the full Kanban. */
 var colOpen = {};
 function toggleCol(id){
+  if (window.matchMedia && window.matchMedia('(min-width:761px)').matches) return;
   var el = document.querySelector('.col[data-cp="'+id+'"]');
   if (!el) return;
   if (el.classList.contains('open')) return;
@@ -898,6 +897,6 @@ window.addEventListener('aieb:progress-synced', function(){
 });
 </script>
 <script src="session-chip.js?v=3" defer></script>
-<script src="experience.js?v=5"></script>
+<script src="experience.js?v=6"></script>
 </body>
 </html>
