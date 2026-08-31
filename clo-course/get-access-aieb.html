@@ -635,7 +635,7 @@ Setting up my AI Employee Builder now. The first thing I want to hand off: [the 
     <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude installs the thin plugin and verifies its hosted AIEB connector. If the host asks you to connect, finish the secure browser step with the Google address attached to your purchase. Returning members are recognized from the AIEB account already stored on the server; a license key is only a fallback on that secure page.</p>
     <div class="ai-prompt">
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
-      <pre>You are setting up AI Employee Builder v0.30.0 or newer in my Claude Code for me. It uses a thin plugin shell plus a hosted remote OAuth MCP server. Do as much as you can yourself, verify every step, and only hand work to me when Claude Code requires a human click or slash command.
+      <pre>You are setting up AI Employee Builder v0.31.0 or newer in my Claude Code for me. It uses a thin plugin shell plus a hosted remote OAuth MCP server. Do as much as you can yourself, verify every step, and only hand work to me when Claude Code requires a human click or slash command.
 
 MY SETUP - read carefully: I'm in the Claude Code VS Code extension. You CANNOT type slash commands into my chat for me. When something can ONLY be done by me, give me a short numbered "do this" instruction with the exact safe text to paste or exact thing to click, then STOP and wait for me to confirm. Never ask me to paste a license key into chat.
 
@@ -646,15 +646,15 @@ Your standing rule: use the simplest path. Try terminal commands when they are a
    claude plugin install ai-employee-builder@aieb-thin-plugin --scope user
    If that fails, walk me through `/plugin` -&gt; Manage Plugins -&gt; Marketplaces -&gt; add the GitHub marketplace -&gt; Plugins -&gt; install `ai-employee-builder` -&gt; choose "Install for you" -&gt; reload.
 
-2. RELOAD - Run /reload-plugins (or reload the window), then confirm the installed shell reports v0.30.0 or newer.
+2. RELOAD - Run /reload-plugins (or reload the window), then confirm the installed shell reports v0.31.0 or newer.
 
-3. CONNECT - Call the paid `get_skill` tool for `meta-create-skill`, path `SKILL.md`. If Claude Code asks me to authenticate AIEB, tell me to click its native Connect action and finish the secure browser page. The page should recognize an existing course session or the Google address attached to my purchase before offering a Lemon Squeezy key fallback. Never request or repeat a key in chat. Do not look for `connect_aieb`, `finish_aieb_connection`, a local device token, or `~/.aieb-mcp`; those belong to the pre-0.30 connector.
+3. CONNECT FIRST - Trigger the AIEB connector with a protected tool call. If Claude Code asks me to authenticate AIEB, tell me to click its native Connect action and finish the secure browser page. The page should recognize a valid course session or the Google address attached to my purchase before offering a Lemon Squeezy key fallback. Never request or repeat a key in chat. Do not look for retired local connection commands, a local device token, or a local-runtime toggle.
 
-4. TEST - Tell me to type /check-setup (or say "check my setup") and confirm the plugin, remote connector, and subscription all check out.
+4. ONBOARD - After the browser connection succeeds, run /setup-aieb (or tell me the exact command to type). Check for saved Get Access intake before asking anything. If my four onboarding answers are already saved, do not ask them again. If they are missing, ask these four questions conversationally, one at a time: what my business sells and to whom; which recurring job I want the first AI Employee to take over; how often it happens and how much time it takes; and what a good finished result looks like. Once I answer all four, call `complete_aieb_onboarding` with `business_offer`, `recurring_job`, `frequency_and_time`, and `good_result`, then confirm it succeeded.
 
-5. CONFIRM - Confirm the local plugin holds only thin stubs and that paid instructions come from `https://api.chiefleverageofficers.com/mcp`. If access is expired, cancelled, or for the wrong product, explain the renewal/help response instead of bypassing it.
+5. BUILD THE WORKSPACE - Continue /setup-aieb to set up my workspace and starting skills. Ask what systems my business runs on and wire them into the map; if I have nothing to connect, accept that answer.
 
-6. ONBOARD - once connected and verified, run /setup-aieb (or tell me the exact command to type) to set up my workspace and starting skills. Ask what systems my business runs on and wire them into the map; if I have nothing to connect, accept that answer. Then tell me setup is done and that the Business X-Ray is next in a NEW window; do not start it in this session.
+6. TEST AND CONFIRM - Tell me to type /check-setup (or say "check my setup") and confirm the plugin, connection, subscription, and onboarding all check out. If access is expired, cancelled, or for the wrong product, explain the renewal/help response instead of bypassing it. Then tell me setup is done and that the Business X-Ray is next in a NEW window; do not start it in this session.
 
 Important: Do not use SkillStack for this AIEB install. SkillStack was the old delivery path. The current path is thin plugin shell + hosted LemonSqueezy-gated MCP.
 
@@ -734,7 +734,13 @@ After each step, tell me whether it worked, or show the error and exactly how yo
             <li><strong>If the purchase cannot be matched,</strong> use the Lemon Squeezy key from your receipt on the secure page only. Never paste it into Claude.</li>
             <li><strong>Return to Cowork</strong> when the browser says connected. The paid tool retries with the host-managed connection.</li>
           </ul></div></div>
-        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Back in the chat, <code>/setup-aieb</code> keeps going on its own</strong> &mdash; your guided onboarding:
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Back in the chat, <code>/setup-aieb</code> checks your saved Get Access intake.</strong>
+          <ul class="sub">
+            <li><strong>Already completed it?</strong> Claude uses the four saved answers and does not ask them again.</li>
+            <li><strong>Not completed yet?</strong> Claude asks what your business sells and to whom, which recurring job you want to remove, how often it happens and how much time it takes, and what a good finished result looks like.</li>
+            <li>After the fourth answer, Claude calls <code>complete_aieb_onboarding</code> before continuing.</li>
+          </ul></div></div>
+        <div class="substep"><div class="substep-badge">4</div><div class="substep-body"><strong>Setup builds your workspace</strong> &mdash; then it:
           <ul class="sub">
             <li>Sets up your workspace &mdash; folders, conventions, your Business OS</li>
             <li>Installs your starting skills so the AI knows how you work</li>
@@ -742,8 +748,8 @@ After each step, tell me whether it worked, or show the error and exactly how yo
           </ul></div></div>
         <div class="callout callout-tip"><strong>Success looks like:</strong> the setup finishes and tells you your workspace is ready. Along the way it asks what systems your business runs on &mdash; Notion, Drive, your email &mdash; and wires them in, so answer that when it comes. That's this step done. <strong>Next you'll confirm your tools are connected</strong>, then start the Business X-Ray in a fresh window.</div>
         <div class="callout callout-info"><strong>Don't see the command?</strong> Saying <code>set up my AI Employee Builder</code> in the chat does exactly the same thing.</div>
-        <p>The remote connector uses short-lived access tokens and rotating refresh tokens managed by Cowork. No local Node process, local-runtime toggle, or <code>~/.aieb-mcp</code> device file is required. If the secure page asks for your key, enter it there only &mdash; <strong>never paste a license key into a Claude chat.</strong></p>
-        <div class="callout callout-warning"><strong>Connector didn't light up?</strong> Update AI Employee Builder to v0.30.0 or newer, start a fresh Cowork session, and type <code>/check-setup</code>. A cooldown on the old connector is not a reason to keep waiting; the updated plugin uses the hosted connector instead. Still stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a>.</div>
+        <p>Cowork manages the secure connection for you. You do not need Node, a local-runtime toggle, or connector configuration files. If the secure page asks for your key, enter it there only &mdash; <strong>never paste a license key into a Claude chat.</strong></p>
+        <div class="callout callout-warning"><strong>Connector didn't light up?</strong> Update AI Employee Builder to v0.31.0 or newer, start a fresh Cowork session, and type <code>/check-setup</code>. A cooldown on the old connector is not a reason to keep waiting; the updated plugin uses the hosted connector instead. Still stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a>.</div>
         <button class="done-btn" onclick="markDoneCW(2)"><span class="dlabel">Mark step done</span></button>
       </div>
     </details>
@@ -931,10 +937,11 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 Here's what happened: [describe the error or what you see on screen].
 
 Please help me fix it. Background on how this install works:
-- The local plugin must be v0.30.0 or newer. It is a thin shell with a remote HTTP MCP declaration, not a local Node proxy and not the paid skill bodies.
+- The local plugin must be v0.31.0 or newer. It is a thin shell with a remote HTTP MCP declaration, not a local Node proxy and not the paid skill bodies.
 - Paid AIEB instructions come from https://api.chiefleverageofficers.com/mcp through `get_skill`.
 - A paid tool call triggers the host's native OAuth Connect flow when authentication is missing. The secure page first recognizes an existing course session or the Google address attached to the purchase; a Lemon Squeezy key is only a secure-page fallback.
 - Returning members already verified in AIEB should reconnect from the server-side member and entitlement records. Do not ask them to delete local files or spend another activation just because the host changed.
+- Connect AIEB before onboarding. If Get Access intake is incomplete, `/setup-aieb` asks the four business-context questions and calls `complete_aieb_onboarding`; if those answers are already saved, it must not repeat them.
 - Do not look for `connect_aieb`, `finish_aieb_connection`, `~/.aieb-mcp/config.json`, or a local-runtime toggle. Those belong to the pre-0.30 connector.
 - Do not use SkillStack for this AIEB install. That was the old delivery path.
 
@@ -949,7 +956,7 @@ Check the installed plugin version, its remote `.mcp.json`, whether `get_skill` 
       <thead><tr><th>What you see</th><th>The fix</th></tr></thead>
       <tbody>
         <tr><td>A new command doesn't appear</td><td>You skipped a reload. Type <code>/reload-plugins</code>, or reload the window (<span class="kbd">Ctrl/Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> &rarr; "Reload Window").</td></tr>
-        <tr><td>Install or connector fails mentioning <code>node</code></td><td>You are on the legacy local connector. Update AI Employee Builder to v0.30.0 or newer, reload, and verify its MCP URL is <code>https://api.chiefleverageofficers.com/mcp</code>.</td></tr>
+        <tr><td>Install or connector fails mentioning <code>node</code></td><td>You are on the legacy local connector. Update AI Employee Builder to v0.31.0 or newer, reload, and verify its MCP URL is <code>https://api.chiefleverageofficers.com/mcp</code>.</td></tr>
         <tr><td>The MCP says <strong>401</strong> or unauthorized</td><td>Use the host's AIEB <strong>Connect</strong> action, finish the secure browser flow, then retry. Use your purchase Google address first; never paste a key into chat.</td></tr>
         <tr><td>"Key bound to other plugin"</td><td>That key is for a different product &mdash; each key activates one plugin. Re-check the key in your Lemon Squeezy email.</td></tr>
         <tr><td>"Expired" or "Revoked"</td><td>Your subscription lapsed. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">My Orders</a>, then reload Claude Code and try the MCP call again.</td></tr>
@@ -969,11 +976,11 @@ Check the installed plugin version, its remote `.mcp.json`, whether `get_skill` 
     <details><summary>Do I need to know how to code?</summary><div class="faq-body">No. You copy a few short commands into a chat box and click "Install." If you can copy and paste, you can do this &mdash; and the <strong>"Let Claude install it"</strong> prompt up top will walk you through it.</div></details>
     <details><summary>Why install a thin plugin plus MCP?</summary><div class="faq-body">The thin plugin gives each supported host the setup guidance and remote connector declaration. Paid instructions stay on the hosted MCP server, so your subscription is checked at runtime and content updates ship without reinstalling the library.</div></details>
     <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Your subscription's connection limit still applies. Each host receives its own server-side connector grant, but a returning member's first remote connection can adopt the existing legacy device activation rather than consuming an extra slot. The license key is never stored by the plugin.</div></details>
-    <details><summary>Why doesn't it need Node.js anymore?</summary><div class="faq-body">AIEB v0.30.0 connects directly to the hosted HTTPS MCP and uses the app's native OAuth support. The old plugin launched a local Node proxy; that design remains temporarily only for already-installed legacy versions.</div></details>
+    <details><summary>Why doesn't it need Node.js anymore?</summary><div class="faq-body">AIEB v0.31.0 connects directly to the hosted HTTPS MCP and uses the app's native OAuth support. Older plugin versions used a local connector, so update before starting a new setup.</div></details>
     <details><summary>How do updates work?</summary><div class="faq-body">Most AIEB skill updates happen on the MCP server. You get the latest instructions automatically the next time a skill runs &mdash; no reinstall, nothing to do. You only reinstall the plugin when the local shell itself changes (new setup behavior, proxy, or hooks), and the plugin will <strong>tell you</strong> when that's needed: it checks the server for the current shell version at startup and, if yours is behind, prompts you with the exact update commands.</div></details>
     <details><summary>Can I use this in Claude Cowork?</summary><div class="faq-body"><strong>Yes &mdash; no Claude Code or local-runtime toggle needed.</strong> Update and install the <strong>AI Employee Builder plugin</strong> (<em>Customize &rarr; Personal plugins &rarr; + &rarr; Add marketplace &rarr;</em> <code>the2hourclo/aieb-thin-plugin</code>), start a fresh session, then say <code>set up my AI Employee Builder</code>. If Cowork shows Connect, finish its secure browser flow and return. Type <code>/check-setup</code> if the paid tool does not retry.</div></details>
     <details><summary>What if I cancel or my subscription lapses?</summary><div class="faq-body">Cancelling revokes paid MCP access immediately. Renew or resume at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener">Lemon Squeezy &rarr; My Orders</a>, then run <code>/setup-aieb</code> to reconnect.</div></details>
-    <details><summary>I already use Claude Code &mdash; can I skip ahead?</summary><div class="faq-body">Yes. If the extension and Node.js are installed, tick Step&nbsp;1 and jump to <strong>Step&nbsp;2</strong>.</div></details>
+    <details><summary>I already use Claude Code &mdash; can I skip ahead?</summary><div class="faq-body">Yes. Install or update to v0.31.0 or newer, start a fresh session, and run the setup trigger. AIEB connects first, then setup reuses your saved Get Access answers or asks the four questions once if they are missing.</div></details>
     <details><summary>Is the Terminal method different from VS Code?</summary><div class="faq-body">Same result, same commands &mdash; just a different place to type them. The <strong>VS Code</strong> way is click-based and friendly; <strong>Terminal</strong> is for command-line folks. Use the toggle at the top to switch.</div></details>
   </div>
 
