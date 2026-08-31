@@ -6,7 +6,7 @@
   var mounted = false;
 
   function titleFor(step) {
-    if (step.virtual === 'claim') return 'Confirm your access';
+    if (step.virtual === 'claim') return window.__aiebTrialSetupComplete ? 'Trial setup complete' : 'Confirm your access';
     var el = step.el && document.getElementById(step.el);
     var title = el && el.querySelector('.step-t, .card-title, h1, h2, h3, strong');
     return title ? title.textContent.trim() : 'Complete this setup step';
@@ -14,7 +14,7 @@
 
   function trackLabel() {
     return window.wizTrackName === 'cowork' ? 'Claude Cowork'
-      : window.wizTrackName === 'codex' ? 'Codex'
+      : window.wizTrackName === 'codex' ? 'ChatGPT Codex'
       : window.wizTrackName === 'cc' ? 'Claude Code'
       : 'Choose your build app';
   }
@@ -40,14 +40,21 @@
     list.replaceChildren();
 
     if (!steps.length) {
+      document.body.classList.remove('community-step-pending');
+      if (window.__aiebTrialSetupComplete) {
+        var intake = document.createElement('div');
+        intake.className = 'setup-rail-step complete';
+        intake.innerHTML = '<span class="n">\u2713</span><span><b>Trial setup complete</b><small>Intake + licence \u00b7 saved</small></span>';
+        list.appendChild(intake);
+      }
       var choose = document.createElement('div');
       choose.className = 'setup-rail-step active';
       choose.setAttribute('aria-current', 'step');
-      choose.innerHTML = '<span class="n">1</span><span><b>Choose where you\u2019ll build</b><small>Cowork, Claude Code, or Codex</small></span>';
+      choose.innerHTML = '<span class="n">'+(window.__aiebTrialSetupComplete ? '2' : '1')+'</span><span><b>Choose where you\u2019ll build</b><small>New here? We recommend ChatGPT Codex</small></span>';
       list.appendChild(choose);
-      if (progress) progress.textContent = 'Choose your build app';
+      if (progress) progress.textContent = window.__aiebTrialSetupComplete ? 'Next: choose your build app' : 'Choose your build app';
       if (mobileTitle) mobileTitle.textContent = 'Choose where you\u2019ll build';
-      if (mobileCount) mobileCount.textContent = 'Start here';
+      if (mobileCount) mobileCount.textContent = window.__aiebTrialSetupComplete ? 'Next step' : 'Start here';
       var emptySurface = document.querySelector('.setup-mobile-surface-select');
       if (emptySurface) emptySurface.value = '';
       var emptyDock = document.querySelector('.setup-mobile-dock');
@@ -60,6 +67,9 @@
     var activeIndex = steps.findIndex(function (step) { return step.el === currentId; });
     if (activeIndex < 0 && typeof window.wizCurIdx === 'number') activeIndex = Math.min(window.wizCurIdx, steps.length - 1);
     var allDone = steps.every(function (step) { try { return step.isDone(); } catch (e) { return false; } });
+    var activeDone = false;
+    try { activeDone = !!(steps[activeIndex] && steps[activeIndex].isDone()); } catch (e) {}
+    document.body.classList.toggle('community-step-pending', currentId === 'joinstep' && !activeDone);
 
     steps.forEach(function (step, index) {
       var done = false;
@@ -75,7 +85,9 @@
       var title = document.createElement('b');
       title.textContent = titleFor(step);
       var meta = document.createElement('small');
-      meta.textContent = step.connect ? 'Connect \u00b7 required' : (step.min ? '~' + step.min + ' min' : 'Access check');
+      meta.textContent = step.virtual === 'claim' && window.__aiebTrialSetupComplete
+        ? 'Intake + licence \u00b7 saved'
+        : step.connect ? 'Connect \u00b7 required' : (step.min ? '~' + step.min + ' min' : 'Access check');
       copy.appendChild(title);
       copy.appendChild(meta);
       item.appendChild(number);
@@ -108,7 +120,7 @@
     if (dockNext) {
       dockNext.disabled = !!(sourceNext && sourceNext.disabled);
       dockNext.hidden = !!(sourceNext && sourceNext.hidden);
-      dockNext.textContent = sourceNext ? sourceNext.textContent.trim() : 'Next \u2192';
+      dockNext.textContent = sourceNext && sourceNext.disabled ? 'Finish the action above' : (sourceNext ? sourceNext.textContent.trim() : 'Next \u2192');
     }
   }
 

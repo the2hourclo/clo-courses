@@ -143,6 +143,7 @@
 
   /* ── SURFACE (Cowork, Claude Code, or Codex) — a global identity, swappable anytime ── */
   var SURFACE_KEY = 'aieb_surface';
+  var TRIAL_SETUP_KEY = 'aieb_trial_setup_complete_v1';
   var SURFACES = {
     'cowork':      { label: 'Cowork',      blurb: 'Claude in your browser — nothing to install to start.' },
     'claude-code': { label: 'Claude Code', blurb: 'Claude in your code editor or terminal.' },
@@ -155,6 +156,10 @@
   function setSurface(s) {
     if (s !== 'cowork' && s !== 'claude-code' && s !== 'codex') return;
     try { localStorage.setItem(SURFACE_KEY, s); } catch (e) {}
+  }
+  function trialSetupComplete() {
+    try { return !!localStorage.getItem(TRIAL_SETUP_KEY); }
+    catch (e) { return false; }
   }
   // true when a piece of content belongs on the current surface.
   // `only` is 'cowork' | 'claude-code' | 'codex' | undefined (undefined = all surfaces).
@@ -655,7 +660,16 @@
       var id = CHAIN[i], info = stepInfo(id);
       if (info.pos || info.total) steps[id] = { pos: info.pos, total: info.total };
     }
-    return { progress: read(), surface: getSurface(), steps: steps, suppressed: readSup() };
+    return {
+      progress: read(),
+      surface: getSurface(),
+      steps: steps,
+      suppressed: readSup(),
+      // This is presentation state only. Trial access still gates on the
+      // server-side intake + terms rows; this flag merely lets the Board show
+      // the already-finished onboarding item on every signed-in device.
+      trial_setup_complete: trialSetupComplete()
+    };
   }
 
   // Fold a server snapshot into this browser. Rules, in order of importance:
@@ -701,6 +715,9 @@
     if (changed) write(mine);
 
     if (!getSurface() && remote.surface) { setSurface(remote.surface); changed = true; }
+    if (remote.trial_setup_complete && !trialSetupComplete()) {
+      try { localStorage.setItem(TRIAL_SETUP_KEY, String(Date.now())); changed = true; } catch (e) {}
+    }
 
     var steps = remote.steps || {};
     for (var sid in steps) {
@@ -765,6 +782,7 @@
     var mine = read(), theirs = (remote && remote.progress) || {};
     for (var id in mine) { if (mine[id] && !theirs[id]) return true; }
     if (getSurface() && !(remote && remote.surface)) return true;
+    if (trialSetupComplete() && !(remote && remote.trial_setup_complete)) return true;
     /* An undo is news too, not just a completion. Without this the device that
        performed it only ever tells the server via the push fired at click time —
        so if that one POST was dropped (offline, a closed tab, a 429) the row
@@ -934,6 +952,7 @@
     unmarkDone: unmarkDone, setStep: setStep, resetAll: resetAll,
     restoreVerified: restoreVerified, isSuppressed: isSuppressed, hasSuppressed: hasSuppressed,
     getSurface: getSurface, setSurface: setSurface, surfaceShows: surfaceShows,
+    trialSetupComplete: trialSetupComplete,
     activeId: activeId, stateOf: stateOf, next: next, buildIndex: buildIndex,
     stepInfo: stepInfo, setupInfo: setupInfo, resume: resume, started: started, overall: overall,
     syncFromServer: syncFromServer, hasViewToken: function () { return !!viewToken(); }
