@@ -4,7 +4,7 @@ An honest inventory of the visual assets the two Get Access pages could still us
 
 **The pages these assets power:**
 
-- `clo-course/get-access-aieb.html` — **AI Employee Builders** (thin plugin from the `the2hourclo/aieb-thin-plugin` GitHub marketplace + `/setup-aieb` device activation + gated MCP). Tracks: Claude Code and Claude Cowork.
+- `clo-course/get-access-aieb.html` — **AI Employee Builders** (thin plugin from the `the2hourclo/aieb-thin-plugin` GitHub marketplace + hosted OAuth activation + gated MCP). Cowork selects `/ai-employee-builder:setup-aieb` (the selected chip may display `/setup-aieb`); Claude Code uses `/setup-aieb`; Codex uses the natural-language `Set up AIEB` trigger.
 - `clo-course/get-access.html` — **CLO community** (SkillStack + `clo-community` plugin).
 
 Screenshots live in `clo-course/assets/get-access/`.
@@ -31,7 +31,7 @@ None of these are wired into the pages yet — each one needs both the capture *
 ### For get-access-aieb.html (the main funnel)
 
 - [ ] **Walkthrough video (~5 min), Claude Code track** — install extension → add `the2hourclo/aieb-thin-plugin` marketplace → install `ai-employee-builder` → `/setup-aieb` → secure device-activation page → first skill run. Blur the license key on the activation page. Requires re-adding a video embed slot to the page.
-- [ ] **Cowork track screenshots** — Customize → Personal plugins with the marketplace add dialog open; `/setup-aieb` printing the secure link; the device activation page (key blurred); a skill responding in chat.
+- [ ] **Cowork track screenshots** — Browse plugins → Personal → `aieb-thin-plugin` → three-dot menu with **Check for updates**; the installed AI Employee Builder page with its **Update** button; `/ai-employee-builder:setup-aieb` selected and started (the chip may display `/setup-aieb`); the hosted OAuth page (key blurred if the fallback is shown); a skill responding in chat.
 - [ ] **Claude Code track screenshots** — `/plugin` Marketplaces tab with the aieb-thin-plugin marketplace added; `/setup-aieb` output; `/check-setup` passing.
 
 ### For get-access.html (community buyers)
@@ -54,4 +54,4 @@ You already have everything installed on your main account. **Do NOT uninstall t
 4. Run the real buyer flow with a test license key, capture as you go. Start any screen recorder **inside** the clo-demo session.
 5. Switch back and delete `clo-demo` when done (Settings → Accounts → Other users → Remove).
 
-**Zero-effort alternative:** the typed commands and panels look identical whether or not things are already installed — capture the `/plugin` panel and `/setup-aieb` moment on your normal account and crop before any account-specific output.
+**Zero-effort alternative:** the typed commands and panels look identical whether or not things are already installed — capture the `/plugin` panel and the runtime-correct setup moment on your normal account, then crop before any account-specific output.

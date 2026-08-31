@@ -759,6 +759,7 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
         <p>Everything happens in the Claude <strong>desktop app</strong> (Pro, Max, or Team) &mdash; no terminal, nothing to download.</p>
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body">After you paste the marketplace name, click <strong>Sync</strong>.</div></div>
         <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Install <strong>AI Employee Builder</strong>. When it appears in your plugins, this step is complete.</div></div>
+        <div class="callout callout-tip"><strong>Already installed AIEB?</strong> Open <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin</strong>, click the <strong>three dots (&hellip;)</strong>, then choose <strong>Check for updates</strong>. Return to <strong>Customize &rarr; Plugins &rarr; AI Employee Builder</strong> and click <strong>Update</strong> if that button appears. Start a fresh Cowork task after the update.</div>
         <div class="callout callout-info"><strong>You'll see a red &ldquo;make sure you trust this plugin&rdquo; notice.</strong> That's Claude's standard warning for every non-Anthropic plugin &mdash; this one is ours.</div>
         <div class="callout callout-tip"><strong>Don't see &ldquo;Personal plugins&rdquo; in Customize?</strong> Update the Claude desktop app first (quit and reopen usually does it), then look again. On a managed Team/Enterprise account, an admin may have to allow personal plugins first.</div>
         <button class="done-btn" onclick="markDoneCW(1)"><span class="dlabel">Mark step done</span></button>
@@ -777,10 +778,10 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
           <span class="do-now-kicker">Do this now</span>
           <strong>Open a Cowork chat and run one command.</strong>
           <p>Leave this page open. Claude connects AIEB first; if Cowork shows a Connect action, finish the secure browser step and return to the chat. Then setup checks whether your Get Access answers are already complete.</p>
-          <div class="cmd-line"><span class="cmd-text">/setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy command</button></div>
+          <div class="cmd-line"><span class="cmd-text">/ai-employee-builder:setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy command</button></div>
         </div>
         <details class="setup-watch"><summary>Prefer to watch first? Open the 10-minute walkthrough</summary><div class="video-embed"><iframe src="https://share.descript.com/embed/3oxZO3lcgGI" title="Connect and onboard" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div></details>
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body">Run <code>/setup-aieb</code> in your <strong>Cowork</strong> chat.</div></div>
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body">In your <strong>Cowork</strong> chat, type <code>/ai-employee-builder:setup-aieb</code> and select that plugin skill. Then press <strong>Enter</strong> again (or click <strong>Start task</strong>) to run it. After selection, Cowork may shorten the chip to <code>/setup-aieb</code> &mdash; that is normal. If slash commands are unavailable, say <em>&ldquo;Set up AIEB&rdquo;</em>.</div></div>
         <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>If Cowork shows an AIEB Connect action, click it.</strong>
           <ul class="sub">
             <li><strong>Already signed into this course?</strong> Continue with that account. The server matches the verified member and active subscription already stored in AIEB.</li>
@@ -788,7 +789,7 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
             <li><strong>If the purchase cannot be matched,</strong> use the Lemon Squeezy key from your receipt on the secure page only. Never paste it into Claude.</li>
             <li><strong>Return to Cowork</strong> when the browser says connected. The paid tool retries with the host-managed connection.</li>
           </ul></div></div>
-        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Back in the chat, <code>/setup-aieb</code> checks your Get Access intake.</strong>
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Back in the chat, the setup task checks your Get Access intake.</strong>
           <ul class="sub">
             <li><strong>Already completed it?</strong> Claude uses the four saved answers and does not ask them again.</li>
             <li><strong>Not completed yet?</strong> Claude asks, one at a time, what your business sells, which recurring job you want to remove, how often it happens and how much time it takes, and what a good finished result looks like.</li>
@@ -803,7 +804,7 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
         <div class="callout callout-tip"><strong>Success looks like:</strong> the setup finishes and tells you your workspace is ready. Along the way it asks what systems your business runs on &mdash; Notion, Drive, your email &mdash; and wires them in, so answer that when it comes. That's this step done. <strong>Next you'll confirm your tools are connected</strong>, then start the Business X-Ray in a fresh window.</div>
         <div class="callout callout-info"><strong>Don't see the command?</strong> Saying <code>set up my AI Employee Builder</code> in the chat does exactly the same thing.</div>
         <p>Cowork manages the secure connection for you. You do not need Node, a local-runtime toggle, or any configuration files. If the secure page asks for your key, enter it there only &mdash; <strong>never paste a license key into a Claude chat.</strong></p>
-        <div class="callout callout-warning"><strong>Connector didn't light up?</strong> Update AI Employee Builder to v0.31.0 or newer, start a fresh Cowork session, and type <code>/check-setup</code>. A cooldown on the old connector is not a reason to keep waiting; the updated plugin uses the hosted connector instead. Still stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a>.</div>
+        <div class="callout callout-warning"><strong>Connector didn't light up?</strong> In <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin</strong>, use <strong>&hellip; &rarr; Check for updates</strong>. Then open the installed <strong>AI Employee Builder</strong> plugin, click <strong>Update</strong> if offered, start a fresh Cowork task, and type <code>/check-setup</code>. A cooldown on the old connector is not a reason to keep waiting; the updated plugin uses the hosted connector instead. Still stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a>.</div>
         <button class="done-btn" onclick="markDoneCW(2)"><span class="dlabel">My workspace is ready &mdash; continue &rarr;</span></button>
       </div>
     </details>
