@@ -12,6 +12,8 @@ the moment the file exists (until then it shows a dashed "Screenshot to add" pla
 | `05-activate-license.png` | ⬜ needed | `/activate-license` succeeded — the success message + the two install commands it printed. |
 | `06-clo-community-installed.png` | ⬜ needed | clo-community installed/enabled (the `/plugins` → Plugins tab is ideal). |
 | `07-onboard.png` | ⬜ needed | Claude beginning the `onboard me` interview. |
+| `cowork-aieb-check-for-updates.png` | ✅ done | Cowork's **Browse plugins → Personal → aieb-thin-plugin** screen with the three-dot menu open on **Check for updates**. Used by `get-access-aieb.html`. |
+| `cowork-aieb-install-update.png` | ✅ done | The installed **AI Employee Builder** plugin screen with its **Update** button visible. Used by `get-access-aieb.html`. |
 
 **Format:** PNG, ~1600px wide is plenty. Crop to the relevant part of the screen. Blur any real license key.
 

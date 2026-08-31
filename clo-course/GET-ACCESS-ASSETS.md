@@ -31,7 +31,8 @@ None of these are wired into the pages yet — each one needs both the capture *
 ### For get-access-aieb.html (the main funnel)
 
 - [ ] **Walkthrough video (~5 min), Claude Code track** — install extension → add `the2hourclo/aieb-thin-plugin` marketplace → install `ai-employee-builder` → `/setup-aieb` → secure device-activation page → first skill run. Blur the license key on the activation page. Requires re-adding a video embed slot to the page.
-- [ ] **Cowork track screenshots** — Browse plugins → Personal → `aieb-thin-plugin` → three-dot menu with **Check for updates**; the installed AI Employee Builder page with its **Update** button; `/ai-employee-builder:setup-aieb` selected and started (the chip may display `/setup-aieb`); the hosted OAuth page (key blurred if the fallback is shown); a skill responding in chat.
+- [x] **Cowork plugin-update screenshots** — Browse plugins → Personal → `aieb-thin-plugin` → three-dot menu with **Check for updates**; the installed AI Employee Builder page with its **Update** button.
+- [ ] **Remaining Cowork connection screenshots** — `/ai-employee-builder:setup-aieb` selected and started (the chip may display `/setup-aieb`); the hosted OAuth page (key blurred if the fallback is shown); a skill responding in chat.
 - [ ] **Claude Code track screenshots** — `/plugin` Marketplaces tab with the aieb-thin-plugin marketplace added; `/setup-aieb` output; `/check-setup` passing.
 
 ### For get-access.html (community buyers)
