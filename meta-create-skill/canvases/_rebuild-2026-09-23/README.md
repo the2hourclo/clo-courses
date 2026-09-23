@@ -100,8 +100,19 @@ Portal preview: serve `clo-courses/` and open `clo-course/checkpoint-first-skill
   in the new order with the matching narration per slide; only 404 is the `/course-progress` sync API
   (absent on a static server). DESIGN-SYSTEM §3b updated (tan sediment fill retired).
 - **2026-09-23** — Committed in `clo-courses` (this rebuild's paths only; the four checkpoint pages were
-  staged as HEAD + this rebuild's hunks, so the other session's Sept-4 work stays unstaged). NOT pushed —
-  pushing publishes to GitHub Pages (buyers see it), so it waits for Rashid's go.
+  staged as HEAD + this rebuild's hunks, so the other session's Sept-4 work stays unstaged).
 - **Open:** v1–v3 storyboard files are stale; v7/v8 use ink rather than green for good outcomes (optional
   polish); the main workspace's re-rendered `excali-graphic/assets/exemplars/canonical-robot-blackmarker.png`
   is uncommitted in the main repo (that repo has lots of other uncommitted work on its branch).
+- **2026-09-23 — DEPLOYED** (Rashid: "you can deploy the courses"). Buyers use
+  **course.chiefleverageofficers.com** = Vercel project `clo-courses`, deployed by hand with the CLI —
+  NOT GitHub Pages (Pages serves `main`, 36 commits behind `live`; not buyer-facing). Pushed `513065c` to
+  `origin/live`, then deployed a CLEAN worktree of `513065c` (not the working tree, which holds the
+  Sept-4 session's uncommitted work) → `clo-courses-q5639nu9x-rashid-s-projects12.vercel.app`, aliased to
+  course.chiefleverageofficers.com. Pre-check: all 6 public files the Sept-4 session changed were served
+  as the COMMITTED version, so the live site = committed code and the clean deploy rolled nothing back.
+  Post-check: new slide PNGs match the commit, retired v4-04 returns 404, progress.js /
+  setup-experience.css unchanged. **Rollback:** `vercel rollback` or promote
+  `clo-courses-hqjvkhcfz-rashid-s-projects12.vercel.app` (the Sept-2 production deploy).
+- **Trap:** a worktree under the session scratchpad fails on Windows path length (business-x-ray canvases);
+  use a short path (`%TEMP%\ccd-deploy`) + `core.longpaths=true`.
