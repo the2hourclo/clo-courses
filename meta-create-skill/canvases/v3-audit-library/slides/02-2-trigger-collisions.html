@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -17,106 +17,139 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
   <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
 </defs>
 
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- card chrome: signal tag + severity badge (identical on all eight cards) -->
+  <rect x="50" y="28" width="402" height="46" rx="23" stroke="var(--dim)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1250" y="28" width="300" height="46" rx="23" stroke="var(--ink)" stroke-width="3" fill="var(--ink)"/>
 
-  <!-- severity chip (HIGH = red) -->
-  <rect x="1360" y="150" width="170" height="40" rx="20" fill="rgba(214,69,58,0.12)" stroke="var(--red)" stroke-width="2.5"/>
-  <circle cx="1388" cy="170" r="6" fill="var(--red)" stroke="none"/>
-
-  <!-- request pill: "humanize this" (ink = the phrase the user types) -->
-  <rect x="670" y="205" width="260" height="48" rx="14" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
-
-  <!-- two DASHED RED arrows fanning to BOTH description cards (the collision) -->
-  <line x1="745" y1="255" x2="415" y2="350" stroke="var(--red)" stroke-width="3" stroke-dasharray="9 8"/>
-  <polyline points="401,336 415,353 431,345" stroke="var(--red)" stroke-width="3"/>
-  <line x1="855" y1="255" x2="1185" y2="350" stroke="var(--red)" stroke-width="3" stroke-dasharray="9 8"/>
-  <polyline points="1169,345 1185,353 1199,336" stroke="var(--red)" stroke-width="3"/>
-
-  <!-- ============ LEFT description card: humanize/ ============ -->
-  <rect x="180" y="360" width="460" height="260" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
-  <!-- red highlight behind the shared phrase -->
-  <rect x="225" y="532" width="240" height="30" rx="7" fill="rgba(214,69,58,0.12)" stroke="none"/>
-
-  <!-- ============ RIGHT description card: writing-humanize/ ============ -->
-  <rect x="960" y="360" width="460" height="260" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
-  <!-- red highlight behind the shared phrase ONLY (its 2nd phrase is fine) -->
-  <rect x="1005" y="532" width="240" height="30" rx="7" fill="rgba(214,69,58,0.12)" stroke="none"/>
-
-  <!-- ============ THE AI — canonical black-marker robot, HESITATING (echo slide 01) ============ -->
-  <g stroke="var(--ink)" stroke-width="4">
-    <line x1="800" y1="430" x2="800" y2="440"/>
-    <rect x="764" y="440" width="72" height="48" rx="11"/>
-    <rect x="778" y="453" width="44" height="22" rx="6" stroke-width="3"/>
-    <line x1="800" y1="488" x2="800" y2="496"/>
-    <rect x="768" y="496" width="64" height="54" rx="11"/>
-    <line x1="768" y1="514" x2="746" y2="534"/>
-    <line x1="832" y1="514" x2="852" y2="516"/>
+  <!-- the request -> the AI -->
+  <rect x="90" y="230" width="320" height="56" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="250" y1="288" x2="250" y2="330" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="242,320 250,332 258,320" stroke="var(--ink)" stroke-width="3"/>
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=250 feetY=620 s=0.8 -->
+  <g id="canonical-robot" transform="translate(-870.00,-134.40) scale(0.8)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <rect x="782" y="511" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
-  <circle cx="800" cy="424" r="5" fill="var(--red)" stroke="var(--red)"/>
-  <circle cx="792" cy="464" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
-  <circle cx="810" cy="464" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
 
-  <!-- ============ the audit's phrase map (a tiny table object) ============ -->
-  <rect x="500" y="648" width="600" height="92" rx="12" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
-  <line x1="515" y1="694" x2="1085" y2="694" stroke="var(--dim)" stroke-width="1.6"/>
+  <!-- card 1: draft-email/ - its job is WRITING -->
+  <rect x="560" y="180" width="980" height="210" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="560" y1="242" x2="1540" y2="242" stroke="var(--ink)" stroke-width="2"/>
+  <rect x="612" y="338" width="264" height="38" rx="7" fill="rgba(214,69,58,0.12)" stroke="none"/>
+  <!-- card 2: qa-draft/ - its job is CHECKING -->
+  <rect x="560" y="430" width="980" height="210" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="560" y1="492" x2="1540" y2="492" stroke="var(--ink)" stroke-width="2"/>
+  <rect x="612" y="588" width="264" height="38" rx="7" fill="rgba(214,69,58,0.12)" stroke="none"/>
 
-  <!-- magnifier glyph for the detection strip -->
-  <circle cx="660" cy="786" r="9" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="667" y1="793" x2="678" y2="804" stroke="var(--dim)" stroke-width="3"/>
+  <!-- red dashed arrows: the one phrase matches BOTH descriptions -->
+  <path d="M 318 460 Q 440 380 552 360" stroke="var(--red)" stroke-width="3" stroke-dasharray="9 8"/>
+  <polyline points="538,352 554,360 540,370" stroke="var(--red)" stroke-width="3"/>
+  <path d="M 318 490 Q 440 580 552 606" stroke="var(--red)" stroke-width="3" stroke-dasharray="9 8"/>
+  <polyline points="540,596 554,606 538,614" stroke="var(--red)" stroke-width="3"/>
+
+  <!-- the fix, inside the description: strike the shared words out of draft-email/ -->
+  <line x1="884" y1="899" x2="1104" y2="899" stroke="var(--red)" stroke-width="3.5"/>
+  <!-- THE FIX box (same place on all eight cards) -->
+  <rect x="50" y="812" width="1500" height="156" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.02)"/>
+  <line x1="276" y1="834" x2="276" y2="946" stroke="rgb(223,223,221)" stroke-width="2"/>
+  <polyline points="84,888 96,902 120,872" stroke="var(--green)" stroke-width="5"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+<!-- card chrome text -->
+<text x="72" y="60" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">SIGNAL 2 OF 8 &#183; COLLISIONS</text>
+<text x="1400" y="60" font-size="24" font-weight="700" text-anchor="middle" fill="var(--bg)">SEVERITY &#183; HIGH</text>
 
-<!-- kicker + claim-title + definition subtitle -->
-<text x="80" y="54" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">SIGNAL 2 OF 8 &#183; ROUTING PROBLEMS</text>
-<text x="800" y="102" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Trigger Collisions</text>
-<text x="800" y="140" font-size="26" text-anchor="middle" fill="var(--dim)">Two different skills claim the SAME trigger phrase &#8212; the AI can&#8217;t tell which to load.</text>
+<text x="800" y="140" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Two Jobs, Same Words &#8212; the Wrong Skill Answers</text>
 
-<!-- severity chip label -->
-<text x="1408" y="177" font-size="21" font-weight="700" text-anchor="start" fill="var(--red)">HIGH</text>
+<!-- request -->
+<text x="90" y="218" font-size="24" text-anchor="start" fill="var(--dim)">you ask:</text>
+<text x="250" y="268" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">Check my email</text>
+<text x="352" y="388" font-size="54" font-weight="700" text-anchor="middle" fill="var(--red)">?</text>
 
-<!-- request pill -->
-<text x="800" y="192" font-size="18" text-anchor="middle" fill="var(--dim)">the user types:</text>
-<text x="800" y="238" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">&#8220;humanize this&#8221;</text>
+<!-- robot caption -->
+<text x="250" y="660" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="250" y="692" font-size="24" text-anchor="middle" fill="var(--dim)">both skills say they fit</text>
 
-<!-- LEFT card: humanize/ -->
-<text x="205" y="398" font-size="28" font-weight="700" text-anchor="start" fill="var(--ink)">humanize/</text>
-<text class="mono" x="205" y="446" font-size="22" text-anchor="start" fill="var(--dim)">description:</text>
-<text class="mono" x="205" y="482" font-size="22" text-anchor="start" fill="var(--ink)">&#8220;cleans messy text.</text>
-<text class="mono" x="205" y="518" font-size="22" text-anchor="start" fill="var(--dim)">USE WHEN</text>
-<text class="mono" x="245" y="554" font-size="22" font-weight="700" text-anchor="start" fill="var(--red)">&#8216;humanize this&#8217;&#8221;</text>
+<!-- card 1 -->
+<text class="mono" x="588" y="222" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">draft-email/SKILL.md</text>
+<text x="1515" y="222" font-size="26" font-weight="700" text-anchor="end" fill="var(--ink)">its job: WRITES the email</text>
+<text class="mono" x="588" y="286" font-size="26" text-anchor="start" fill="var(--dim)">description:</text>
+<text class="mono" x="617" y="326" font-size="26" text-anchor="start" fill="var(--ink)">Writes this week&#8217;s email.</text>
+<text class="mono" x="617" y="366" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">Check my email.</text>
 
-<!-- RIGHT card: writing-humanize/ -->
-<text x="985" y="398" font-size="28" font-weight="700" text-anchor="start" fill="var(--ink)">writing-humanize/</text>
-<text class="mono" x="985" y="446" font-size="22" text-anchor="start" fill="var(--dim)">description:</text>
-<text class="mono" x="985" y="482" font-size="22" text-anchor="start" fill="var(--ink)">&#8220;scrubs AI tells + voice.</text>
-<text class="mono" x="985" y="518" font-size="22" text-anchor="start" fill="var(--dim)">USE WHEN</text>
-<text class="mono" x="1025" y="554" font-size="22" font-weight="700" text-anchor="start" fill="var(--red)">&#8216;humanize this&#8217;,</text>
-<text class="mono" x="1025" y="590" font-size="22" text-anchor="start" fill="var(--ink)">&#8216;clean AI-isms&#8217;&#8221;</text>
+<!-- card 2 -->
+<text class="mono" x="588" y="472" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">qa-draft/SKILL.md</text>
+<text x="1515" y="472" font-size="26" font-weight="700" text-anchor="end" fill="var(--ink)">its job: CHECKS the email</text>
+<text class="mono" x="588" y="536" font-size="26" text-anchor="start" fill="var(--dim)">description:</text>
+<text class="mono" x="617" y="576" font-size="26" text-anchor="start" fill="var(--ink)">Checks the draft against my rules.</text>
+<text class="mono" x="617" y="616" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">Check my email.</text>
 
-<!-- robot label -->
-<text x="800" y="470" font-size="44" font-weight="700" text-anchor="start" fill="var(--red)" dx="62">?</text>
-<text x="800" y="592" font-size="18" font-weight="700" text-anchor="middle" fill="var(--dim)">THE AI &#183; can&#8217;t decide</text>
+<!-- consequence -->
+<text x="1050" y="706" font-size="28" font-weight="700" text-anchor="middle" fill="var(--red)">Sometimes the writer answers when you wanted the checker.</text>
 
-<!-- phrase-map table -->
-<text x="530" y="682" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">PHRASE</text>
-<text x="1070" y="682" font-size="19" font-weight="700" text-anchor="end" fill="var(--dim)">CLAIMANTS</text>
-<text x="530" y="726" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">&#8220;humanize this&#8221;</text>
-<text x="1070" y="726" font-size="25" font-weight="700" text-anchor="end" fill="var(--red)">2 &#8594; collision</text>
+<!-- the fix -->
+<text x="300" y="858" font-size="28" font-weight="700" text-anchor="start" fill="var(--ink)">Delete the shared words from one description:</text>
+<text class="mono" x="300" y="908" font-size="26" text-anchor="start" fill="var(--ink)">draft-email/ &#8594; Writes this week&#8217;s email.</text>
+<text class="mono" x="886.3" y="908" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">Check my email.</text>
+<text x="300" y="950" font-size="24" text-anchor="start" fill="var(--dim)">Now &#8220;check my email&#8221; has one owner: qa-draft/.</text>
 
-<!-- HOW THE AUDIT SPOTS IT -->
-<text x="690" y="792" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">HOW THE AUDIT SPOTS IT</text>
-<text x="800" y="828" font-size="24" text-anchor="middle" fill="var(--dim)">Pull every USE-WHEN phrase, map phrase &#8594; who claims it. Any phrase with 2+ owners is a collision.</text>
-
-<!-- takeaway -->
-<text x="800" y="898" font-size="27" text-anchor="middle" fill="var(--ink)">Two owners means the AI picks one somewhat at random &#8212; sometimes the wrong skill fires.</text>
-<text x="800" y="950" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">The fix: a &#8220;Do NOT use when &#8594; sibling&#8221; line, so every phrase has exactly one owner.</text>
+<text x="132" y="900" font-size="28" font-weight="700" text-anchor="start" fill="var(--ink)">THE FIX</text>
 </svg></body></html>

@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --orange:#c2410c;
+  --green:rgb(45,140,60); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -28,18 +28,19 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- v5-03 (rebuilt 2026-09-23). ONE job: it proposes the edit, you approve it. Same file + same NEW
+     lines as v5-02. The guard note is now the AI's role caption (it overflowed its box and was a third prose line); NOT YET
+     sits level with BEFORE and YES level with AFTER; the repeated bottom takeaway is cut (it restated
+     the subtitle). "YOUR CALL" is ink (a human step never borrows a legend colour). -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
 
-  <!-- ============================================================ -->
-  <!-- id="canonical-robot" — copied VERBATIM from
-       .claude/skills/excali-graphic/assets/exemplars/canonical-robot-blackmarker.html
-       Repositioned per its own rule: translate(cx-1400*s, feetY-943*s) scale(s)
-       with s=0.95, cx=175, feetY=700. -->
-  <g id="canonical-robot" transform="translate(-1155.0,-195.85) scale(0.95)">
+  <!-- the AI -->
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=175 feetY=700 s=0.95 -->
+  <g id="canonical-robot" transform="translate(-1155.00,-195.85) scale(0.95)">
     <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
     <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
-    <circle cx="1400" cy="632" r="15" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
     <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
     <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
     <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
@@ -49,9 +50,13 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
-    <rect x="1370" y="774" width="60" height="48" rx="7" stroke="var(--orange)" stroke-width="3.5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
     <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
     <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
     <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
@@ -72,6 +77,8 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
     <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
     <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
     <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
@@ -79,76 +86,58 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <!-- ============================================================ -->
-
-  <!-- the AI hands over the proposal -->
-  <line x1="252" y1="480" x2="308" y2="480" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="262" y1="480" x2="308" y2="480" stroke="var(--dim)" stroke-width="3"/>
   <polyline points="300,473 308,480 300,487" stroke="var(--dim)" stroke-width="3"/>
 
   <!-- ============ THE PROPOSAL ============ -->
-  <rect x="320" y="180" width="800" height="580" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="320" y1="250" x2="1120" y2="250" stroke="rgb(223,223,221)" stroke-width="2.5"/>
-
+  <rect x="320" y="170" width="800" height="600" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="320" y1="240" x2="1120" y2="240" stroke="rgb(223,223,221)" stroke-width="2.5"/>
   <!-- before -->
-  <rect x="352" y="282" width="736" height="160" rx="8" stroke="var(--dim)" stroke-width="3" fill="var(--bg)"/>
-  <!-- becomes -->
-  <line x1="720" y1="454" x2="720" y2="482" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="713,474 720,482 727,474" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="352" y="266" width="736" height="170" rx="8" stroke="var(--dim)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="720" y1="446" x2="720" y2="478" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="713,470 720,478 727,470" stroke="var(--dim)" stroke-width="3"/>
   <!-- after -->
-  <rect x="352" y="492" width="736" height="230" rx="8" stroke="var(--green)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="352" y="488" width="736" height="256" rx="8" stroke="var(--green)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="374" y="634" width="72" height="34" rx="8" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.10)"/>
+  <rect x="374" y="686" width="72" height="34" rx="8" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.10)"/>
 
-  <!-- ============ YOUR CALL — two ways it can go ============ -->
+  <!-- ============ YOUR CALL - two ways it can go ============ -->
   <line x1="1126" y1="345" x2="1174" y2="345" stroke="var(--dim)" stroke-width="3"/>
   <polyline points="1166,338 1174,345 1166,352" stroke="var(--dim)" stroke-width="3"/>
   <line x1="1126" y1="595" x2="1174" y2="595" stroke="var(--dim)" stroke-width="3"/>
   <polyline points="1166,588 1174,595 1166,602" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="1180" y="250" width="340" height="190" rx="14" stroke="var(--dim)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="1180" y="500" width="340" height="190" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
 
-  <rect x="1180" y="250" width="340" height="190" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
-  <rect x="1180" y="500" width="340" height="190" rx="14" stroke="var(--dim)" stroke-width="4" fill="var(--bg)"/>
-
-  <!-- ============ the guard ============ -->
-  <rect x="390" y="810" width="820" height="56" rx="10" stroke="rgb(225,225,223)" stroke-width="3" fill="var(--bg)"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
-
-<!-- claim-title + subtitle -->
 <text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">It Proposes The Edit &#8212; You Are The One Who Approves It</text>
-<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">Nothing is written into your skill until you say yes</text>
+<text x="800" y="104" font-size="28" text-anchor="middle" fill="var(--dim)">Nothing is written into your skill until you say yes.</text>
 
-<!-- the AI -->
-<text x="175" y="742" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
-<text x="175" y="772" font-size="19" text-anchor="middle" fill="var(--dim)">drafts the change</text>
+<text x="175" y="742" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">the AI</text>
+<text x="175" y="774" font-size="24" text-anchor="middle" fill="var(--dim)">drafts a fix only for</text>
+<text x="175" y="804" font-size="24" text-anchor="middle" fill="var(--dim)">what it saw go wrong</text>
 
-<!-- the proposal -->
-<text x="350" y="226" font-size="24" font-weight="700" fill="var(--ink)">PROPOSED CHANGE to weekly-report/SKILL.md</text>
+<text x="350" y="216" font-size="24" font-weight="700" fill="var(--ink)">PROPOSED CHANGE to draft-email/SKILL.md</text>
+<text x="374" y="302" font-size="24" font-weight="700" fill="var(--dim)">BEFORE</text>
+<text class="mono" x="374" y="352" font-size="24" fill="var(--dim)">## The framework you follow</text>
+<text class="mono" x="374" y="398" font-size="24" fill="var(--dim)">- problem &#8594; one story &#8594; one ask</text>
+<text x="374" y="524" font-size="24" font-weight="700" fill="var(--green)">AFTER</text>
+<text class="mono" x="374" y="572" font-size="24" fill="var(--dim)">## The framework you follow</text>
+<text class="mono" x="374" y="614" font-size="24" fill="var(--dim)">- problem &#8594; one story &#8594; one ask</text>
+<text x="410" y="659" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">NEW</text>
+<text x="410" y="711" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">NEW</text>
+<text class="mono" x="464" y="659" font-size="24" font-weight="700" fill="var(--green)">No emojis. Not one.</text>
+<text class="mono" x="464" y="711" font-size="24" font-weight="700" fill="var(--green)">Lead with last week&#8217;s number.</text>
 
-<text x="372" y="316" font-size="20" font-weight="700" fill="var(--dim)">BEFORE</text>
-<text class="mono" x="372" y="366" font-size="21" fill="var(--dim)">- Keep it under one page</text>
-<text class="mono" x="372" y="406" font-size="21" fill="var(--dim)">- Pull numbers from the dashboard</text>
+<text x="1350" y="222" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">YOUR CALL</text>
+<text x="1350" y="322" font-size="32" font-weight="700" text-anchor="middle" fill="var(--dim)">NOT YET</text>
+<text x="1350" y="372" font-size="24" text-anchor="middle" fill="var(--dim)">nothing is written,</text>
+<text x="1350" y="406" font-size="24" text-anchor="middle" fill="var(--dim)">the file stays as it was</text>
+<text x="1350" y="572" font-size="32" font-weight="700" text-anchor="middle" fill="var(--green)">YES</text>
+<text x="1350" y="622" font-size="24" text-anchor="middle" fill="var(--ink)">the edit is written</text>
+<text x="1350" y="656" font-size="24" text-anchor="middle" fill="var(--ink)">into the file</text>
 
-<text x="372" y="528" font-size="20" font-weight="700" fill="var(--green)">AFTER</text>
-<text class="mono" x="372" y="576" font-size="20" fill="var(--dim)">- Keep it under one page</text>
-<text class="mono" x="372" y="612" font-size="20" fill="var(--dim)">- Pull numbers from the dashboard</text>
-<text class="mono" x="372" y="654" font-size="21" font-weight="700" fill="var(--green)">+ - No emojis. Not one.</text>
-<text class="mono" x="372" y="692" font-size="21" font-weight="700" fill="var(--green)">+ - Open with the headline number.</text>
-
-<!-- your call -->
-<text x="1350" y="222" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">YOUR CALL</text>
-
-<text x="1350" y="322" font-size="32" font-weight="700" text-anchor="middle" fill="var(--green)">YES</text>
-<text x="1350" y="374" font-size="21" text-anchor="middle" fill="var(--ink)">the edit is written</text>
-<text x="1350" y="408" font-size="21" text-anchor="middle" fill="var(--ink)">into the file</text>
-
-<text x="1350" y="572" font-size="32" font-weight="700" text-anchor="middle" fill="var(--dim)">NOT YET</text>
-<text x="1350" y="624" font-size="21" text-anchor="middle" fill="var(--dim)">nothing is written,</text>
-<text x="1350" y="658" font-size="21" text-anchor="middle" fill="var(--dim)">the file stays as it was</text>
-
-<!-- the guard -->
-<text x="800" y="846" font-size="23" text-anchor="middle" fill="var(--dim)">It only proposes what it actually saw go wrong &#8212; it never guesses at a fix</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">It drafts the fix and shows you the exact change.</text>
-<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">Nothing lands in your skill until you say yes.</text>
 </svg></body></html>

@@ -1,10 +1,12 @@
 {
-  "_comment": "Storyboard map for meta-create-skill VIDEO 3: Audit Your Skill Library. 5 diagrams in teaching order — before (skill soup) → the 8 signals → the audit run → the fix → after (clean library).",
+  "_comment": "Storyboard map for meta-create-skill VIDEO 3: Audit Your Skill Library (rebuilt 2026-09-23). Final viewing order: main path 01 -> 02 -> 02-1 -> 02-2 -> 02-5 -> 03 -> 04 -> 05, then an appendix of the other five signal cards (02-3, 02-4, 02-6, 02-7, 02-8). Filenames kept (the portal references slides by filename). Running example: the Weekly Email library (DESIGN-SYSTEM section 9) grown messy.",
   "columns": [
-    {"label": "1 - BEFORE · SKILL SOUP", "slides": ["01-before-skill-soup"]},
-    {"label": "2 - THE 8 SIGNALS", "slides": ["02-the-eight-signals", "02-1-duplicate-standalones", "02-2-trigger-collisions", "02-3-missing-workflow-routing", "02-4-no-cross-skill-callouts", "02-5-orphan-workflows", "02-6-bloated-orchestrators", "02-7-missing-shared-delegation", "02-8-sediment"]},
-    {"label": "3 - HOW THE AUDIT RUNS", "slides": ["03-how-the-audit-runs"]},
-    {"label": "4 - THE FIX", "slides": ["04-the-fix"]},
-    {"label": "5 - AFTER · CLEAN LIBRARY", "slides": ["05-after-clean-library"]}
+    {"label": "1 - BEFORE · A MESSY LIBRARY", "slides": ["01-before-skill-soup"]},
+    {"label": "2 - THE 8 SIGNALS", "slides": ["02-the-eight-signals"]},
+    {"label": "3 - THE THREE IN THE LIBRARY · 1 DUPLICATE SKILLS · 2 COLLISIONS · 5 ORPHAN WORKFLOWS", "slides": ["02-1-duplicate-standalones", "02-2-trigger-collisions", "02-5-orphan-workflows"]},
+    {"label": "4 - THE AUDIT READS EVERY SKILL", "slides": ["03-how-the-audit-runs"]},
+    {"label": "5 - FIX WHAT THE AUDIT FOUND", "slides": ["04-the-fix"]},
+    {"label": "6 - AFTER · EVERY REQUEST FINDS ONE SKILL", "slides": ["05-after-clean-library"]},
+    {"label": "APPENDIX - THE OTHER FIVE SIGNALS · 3 BURIED ROUTING · 4 MISSING POINTERS · 6 OVERLOADED SKILL · 7 COPIED STEPS · 8 STALE RULES", "slides": ["02-3-missing-workflow-routing", "02-4-no-cross-skill-callouts", "02-6-bloated-orchestrators", "02-7-missing-shared-delegation", "02-8-sediment"]}
   ]
 }

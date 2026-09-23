@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -17,119 +17,143 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
   <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
 </defs>
 
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- card chrome: signal tag + severity badge (identical on all eight cards) -->
+  <rect x="50" y="28" width="487" height="46" rx="23" stroke="var(--dim)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="1250" y="28" width="300" height="46" rx="23" stroke="var(--ink)" stroke-width="3" fill="var(--ink)"/>
 
-  <!-- severity chip (HIGH) -->
-  <rect x="1360" y="150" width="170" height="44" rx="22" stroke="var(--red)" stroke-width="3" fill="rgba(214,69,58,0.10)"/>
-
-  <!-- ============ THE AI — canonical black-marker robot, receiving the request ============ -->
-  <g stroke="var(--ink)" stroke-width="4">
-    <line x1="800" y1="186" x2="800" y2="196"/>
-    <rect x="764" y="196" width="72" height="48" rx="11"/>
-    <rect x="778" y="209" width="44" height="22" rx="6" stroke-width="3"/>
-    <line x1="800" y1="244" x2="800" y2="252"/>
-    <rect x="768" y="252" width="64" height="54" rx="11"/>
-    <line x1="768" y1="270" x2="746" y2="290"/>
-    <line x1="832" y1="270" x2="852" y2="272"/>
+  <!-- the request -> the AI -->
+  <rect x="560" y="178" width="480" height="56" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="800" y1="236" x2="800" y2="278" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="792,268 800,280 808,268" stroke="var(--ink)" stroke-width="3"/>
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=800 feetY=566 s=0.8 -->
+  <g id="canonical-robot" transform="translate(-320.00,-188.40) scale(0.8)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <rect x="782" y="267" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
-  <circle cx="800" cy="180" r="5" fill="var(--red)" stroke="var(--red)"/>
-  <circle cx="792" cy="220" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
-  <circle cx="810" cy="220" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
+  <!-- prop: a coin at the right gripper (separate shape, never part of the robot block) -->
+  <circle cx="892" cy="494" r="28" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <circle cx="892" cy="494" r="17" stroke="var(--dim)" stroke-width="2.5"/>
+  <path d="M 870 452 Q 892 434 914 452" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="905,442 915,453 902,456" stroke="var(--dim)" stroke-width="3"/>
 
-  <!-- request pill: "write a hook" (ink = the request the AI must route) -->
-  <rect x="548" y="196" width="180" height="46" rx="14" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
-  <line x1="728" y1="219" x2="764" y2="219" stroke="var(--ink)" stroke-width="3"/>
+  <!-- two dashed "maybe" arrows: either skill could be picked -->
+  <line x1="730" y1="420" x2="664" y2="420" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
+  <polyline points="676,412 662,420 676,428" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="870" y1="420" x2="936" y2="420" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
+  <polyline points="924,412 938,420 924,428" stroke="var(--ink)" stroke-width="3"/>
 
-  <!-- coin-flip glyph below the robot = 50/50 which one fires -->
-  <ellipse cx="800" cy="332" rx="22" ry="21" stroke="var(--ink)" stroke-width="3"/>
-  <ellipse cx="800" cy="332" rx="13" ry="21" stroke="var(--dim)" stroke-width="2"/>
-  <path d="M 782 314 A 26 26 0 0 1 820 312" stroke="var(--dim)" stroke-width="2.5"/>
-  <polyline points="813,306 821,311 823,302" stroke="var(--dim)" stroke-width="2.5"/>
+  <!-- the two skill headers (real file views) -->
+  <rect x="60" y="300" width="590" height="240" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="60" y1="362" x2="650" y2="362" stroke="var(--ink)" stroke-width="2"/>
+  <rect x="112" y="460" width="372" height="38" rx="7" fill="rgba(214,69,58,0.10)" stroke="none"/>
+  <rect x="950" y="300" width="590" height="240" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="950" y1="362" x2="1540" y2="362" stroke="var(--ink)" stroke-width="2"/>
+  <rect x="1002" y="460" width="416" height="38" rx="7" fill="rgba(214,69,58,0.10)" stroke="none"/>
 
-  <!-- two DASHED forks: one request could fire EITHER skill -->
-  <line x1="783" y1="340" x2="412" y2="366" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
-  <polyline points="400,356 412,369 424,356" stroke="var(--ink)" stroke-width="3"/>
-  <line x1="817" y1="340" x2="1188" y2="366" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
-  <polyline points="1176,356 1188,369 1200,356" stroke="var(--ink)" stroke-width="3"/>
+  <!-- bracket: the two descriptions are the same job -->
+  <line x1="355" y1="606" x2="355" y2="672" stroke="var(--red)" stroke-width="3"/>
+  <line x1="355" y1="672" x2="1245" y2="672" stroke="var(--red)" stroke-width="3"/>
+  <line x1="1245" y1="606" x2="1245" y2="672" stroke="var(--red)" stroke-width="3"/>
 
-  <!-- ============ two DESCRIPTION file-view cards (the real object on disk) ============ -->
-  <rect x="110" y="372" width="600" height="252" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
-  <rect x="890" y="372" width="600" height="252" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
-
-  <!-- red highlight behind the overlapping trigger phrase in BOTH cards -->
-  <rect x="160" y="595" width="216" height="28" rx="6" fill="rgba(214,69,58,0.13)" stroke="none"/>
-  <rect x="940" y="595" width="216" height="28" rx="6" fill="rgba(214,69,58,0.13)" stroke="none"/>
-
-  <!-- bracket joining the two cards = >50% overlap -->
-  <line x1="410" y1="628" x2="410" y2="652" stroke="var(--red)" stroke-width="3"/>
-  <line x1="1190" y1="628" x2="1190" y2="652" stroke="var(--red)" stroke-width="3"/>
-  <line x1="410" y1="652" x2="1190" y2="652" stroke="var(--red)" stroke-width="3"/>
-  <line x1="800" y1="652" x2="800" y2="674" stroke="var(--red)" stroke-width="3"/>
-  <polyline points="792,664 800,676 808,664" stroke="var(--red)" stroke-width="3"/>
-
-  <!-- bottom-strip divider -->
-  <line x1="150" y1="740" x2="1450" y2="740" stroke="var(--dim)" stroke-width="1.5" opacity="0.6"/>
-
-  <!-- magnifier glyph for HOW THE AUDIT SPOTS IT -->
-  <circle cx="612" cy="792" r="12" stroke="var(--ink)" stroke-width="3"/>
-  <line x1="621" y1="801" x2="632" y2="812" stroke="var(--ink)" stroke-width="3.5"/>
+  <!-- THE FIX box (same place on all eight cards) -->
+  <rect x="50" y="812" width="1500" height="156" rx="18" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.02)"/>
+  <line x1="276" y1="834" x2="276" y2="946" stroke="rgb(223,223,221)" stroke-width="2"/>
+  <polyline points="84,888 96,902 120,872" stroke="var(--green)" stroke-width="5"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+<!-- card chrome text -->
+<text x="72" y="60" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">SIGNAL 1 OF 8 &#183; DUPLICATE SKILLS</text>
+<text x="1400" y="60" font-size="24" font-weight="700" text-anchor="middle" fill="var(--bg)">SEVERITY &#183; HIGH</text>
 
-<!-- kicker -->
-<text x="80" y="60" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">SIGNAL 1 OF 8 &#183; ROUTING PROBLEMS</text>
+<text x="800" y="140" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Two Skills Doing One Job &#8212; the AI Flips a Coin</text>
 
-<!-- title + definition subtitle -->
-<text x="800" y="92" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Duplicate Standalones</text>
-<text x="800" y="132" font-size="26" text-anchor="middle" fill="var(--dim)">Two separate skills doing substantially the same job</text>
+<!-- request -->
+<text x="545" y="215" font-size="24" text-anchor="end" fill="var(--dim)">you ask:</text>
+<text x="800" y="216" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">Write this week&#8217;s email</text>
 
-<!-- severity chip label -->
-<text x="1445" y="140" font-size="16" font-weight="700" text-anchor="middle" fill="var(--dim)">SEVERITY</text>
-<text x="1445" y="181" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">HIGH</text>
+<!-- robot caption -->
+<text x="800" y="604" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="800" y="636" font-size="24" text-anchor="middle" fill="var(--dim)">flips a coin</text>
 
-<!-- request + robot vignette -->
-<text x="638" y="212" font-size="16" text-anchor="middle" fill="var(--dim)">user asks</text>
-<text x="638" y="234" font-size="23" font-weight="700" text-anchor="middle" fill="var(--ink)">write a hook</text>
-<text x="800" y="338" font-size="16" font-weight="700" text-anchor="start" fill="var(--dim)" transform="translate(30,0)">50/50</text>
-<text x="800" y="366" font-size="17" text-anchor="middle" fill="var(--dim)">coin flip</text>
+<!-- left file -->
+<text class="mono" x="88" y="342" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">draft-email/SKILL.md</text>
+<text class="mono" x="88" y="404" font-size="26" text-anchor="start" fill="var(--ink)">name: draft-email</text>
+<text class="mono" x="88" y="446" font-size="26" text-anchor="start" fill="var(--dim)">description:</text>
+<text class="mono" x="117" y="488" font-size="26" text-anchor="start" fill="var(--ink)">Writes this week&#8217;s email.</text>
 
-<!-- ===== LEFT card: the description file-view (monospace) ===== -->
-<text class="mono" x="138" y="412" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">write-hook/SKILL.md</text>
-<text class="mono" x="138" y="454" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">name: write-hook</text>
-<text class="mono" x="138" y="496" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">description: "Write</text>
-<text class="mono" x="138" y="538" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">  hooks &amp; openings.</text>
+<!-- right file -->
+<text class="mono" x="978" y="342" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">email-writer/SKILL.md</text>
+<text class="mono" x="978" y="404" font-size="26" text-anchor="start" fill="var(--ink)">name: email-writer</text>
+<text class="mono" x="978" y="446" font-size="26" text-anchor="start" fill="var(--dim)">description:</text>
+<text class="mono" x="1007" y="488" font-size="26" text-anchor="start" fill="var(--ink)">Drafts my weekly newsletter.</text>
 
-<!-- ===== RIGHT card: the description file-view (monospace) ===== -->
-<text class="mono" x="918" y="412" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">hook-writer/SKILL.md</text>
-<text class="mono" x="918" y="454" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">name: hook-writer</text>
-<text class="mono" x="918" y="496" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">description: "Make</text>
-<text class="mono" x="918" y="538" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">  catchy hooks.</text>
+<!-- consequences -->
+<text x="355" y="586" font-size="24" text-anchor="middle" fill="var(--ink)">you keep improving this one&#8230;</text>
+<text x="1245" y="586" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">&#8230;but sometimes the AI picks this one</text>
+<text x="800" y="720" font-size="30" font-weight="700" text-anchor="middle" fill="var(--red)">same job, different words</text>
 
-<!-- the overlapping trigger lines (drawn last so they sit above highlight rects) -->
-<text class="mono" x="138" y="580" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">  USE WHEN user says</text>
-<text class="mono" x="918" y="580" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">  USE WHEN user says</text>
-<text class="mono" x="167" y="616" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">'write a hook'</text>
-<text class="mono" x="368" y="616" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve"> ..."</text>
-<text class="mono" x="947" y="616" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">'write a hook'</text>
-<text class="mono" x="1148" y="616" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve"> ..."</text>
+<!-- the fix -->
+<text x="300" y="876" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">Keep one skill for the job: merge email-writer/ into draft-email/.</text>
+<text x="300" y="922" font-size="26" text-anchor="start" fill="var(--dim)">Now every fix you make lands in the skill the AI actually uses.</text>
 
-<!-- overlap verdict under the bracket -->
-<text x="800" y="704" font-size="26" font-weight="700" text-anchor="middle" fill="var(--red)">&gt;50% overlap = duplicate</text>
-
-<!-- ===== HOW THE AUDIT SPOTS IT ===== -->
-<text x="800" y="797" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">HOW THE AUDIT SPOTS IT</text>
-<text x="800" y="832" font-size="25" text-anchor="middle" fill="var(--ink)">It reads every skill's description, then clusters them by overlapping trigger phrases and purpose.</text>
-
-<!-- ===== takeaway ===== -->
-<text x="800" y="906" font-size="27" text-anchor="middle" fill="var(--ink)">Two homes for one job &#8212; your fixes land in one, and the AI sometimes fires the other.</text>
-<text x="800" y="958" font-size="31" font-weight="700" text-anchor="middle" fill="var(--green)">Pick one canonical home &#8212; one job, one skill.</text>
+<text x="132" y="900" font-size="28" font-weight="700" text-anchor="start" fill="var(--ink)">THE FIX</text>
 </svg></body></html>

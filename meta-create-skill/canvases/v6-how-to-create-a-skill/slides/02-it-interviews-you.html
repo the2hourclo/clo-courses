@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219); --orange:#c2410c;
+  --green:rgb(45,140,60); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -28,18 +28,18 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- v6-02 (rebuilt 2026-09-23). ONE job: the AI interviews you and writes the file out of your
+     answers. The five questions map 1:1 onto the five things you give (v6-03) and onto the five
+     file headings, which use the ONE label set shared with v6-03 and v6-06. No subfolder names. -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
 
-  <!-- ============================================================ -->
-  <!-- id="canonical-robot" — copied VERBATIM from
-       .claude/skills/excali-graphic/assets/exemplars/canonical-robot-blackmarker.html
-       Repositioned per its own rule: translate(cx-1400*s, feetY-943*s) scale(s)
-       with s=0.9, cx=170, feetY=700. -->
-  <g id="canonical-robot" transform="translate(-1090.0,-148.70) scale(0.9)">
+  <!-- the AI, asking -->
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=128 feetY=690 s=0.8 -->
+  <g id="canonical-robot" transform="translate(-992.00,-64.40) scale(0.8)">
     <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
     <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
-    <circle cx="1400" cy="632" r="15" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
     <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
     <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
     <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
@@ -49,9 +49,13 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
-    <rect x="1370" y="774" width="60" height="48" rx="7" stroke="var(--orange)" stroke-width="3.5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
     <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
     <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
     <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
@@ -72,6 +76,8 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
     <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
     <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
     <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
@@ -79,67 +85,65 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <!-- ============================================================ -->
+  <!-- ONE speech box holding all five questions, its tail to the AI -->
+  <rect x="222" y="190" width="530" height="735" rx="22" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <path d="M 223 478 L 184 496 L 223 516" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="245" y1="330" x2="730" y2="330" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <line x1="245" y1="470" x2="730" y2="470" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <line x1="245" y1="610" x2="730" y2="610" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <line x1="245" y1="750" x2="730" y2="750" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <!-- each question -> your answer -> its own section of the file -->
+  <line x1="762" y1="256" x2="926" y2="256" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="918,249 926,256 918,263" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="762" y1="396" x2="926" y2="396" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="918,389 926,396 918,403" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="762" y1="536" x2="926" y2="536" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="918,529 926,536 918,543" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="762" y1="676" x2="926" y2="676" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="918,669 926,676 918,683" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="762" y1="816" x2="926" y2="816" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="918,809 926,816 918,823" stroke="var(--dim)" stroke-width="3"/>
 
-  <line x1="245" y1="460" x2="294" y2="460" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="286,453 294,460 286,467" stroke="var(--dim)" stroke-width="3"/>
-
-  <!-- ============ the five questions it asks ============ -->
-  <rect x="300" y="180" width="600" height="92" rx="14" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
-  <rect x="300" y="300" width="600" height="92" rx="14" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
-  <rect x="300" y="420" width="600" height="92" rx="14" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
-  <rect x="300" y="540" width="600" height="92" rx="14" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
-  <rect x="300" y="660" width="600" height="92" rx="14" stroke="var(--blue)" stroke-width="3.5" fill="var(--bg)"/>
-
-  <!-- each answer lands in a section of the file -->
-  <line x1="906" y1="226" x2="954" y2="226" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="946,219 954,226 946,233" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="906" y1="346" x2="954" y2="346" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="946,339 954,346 946,353" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="906" y1="466" x2="954" y2="466" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="946,459 954,466 946,473" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="906" y1="586" x2="954" y2="586" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="946,579 954,586 946,593" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="906" y1="706" x2="954" y2="706" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="946,699 954,706 946,713" stroke="var(--dim)" stroke-width="3"/>
-
-  <!-- ============ the file it writes from your answers ============ -->
-  <rect x="960" y="180" width="550" height="600" rx="10" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <!-- the file: draft-email/SKILL.md (identical on v6-02 and v6-06) -->
+  <rect x="938" y="146" width="330" height="48" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="938" y="190" width="600" height="735" rx="12" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="956" y1="330" x2="1520" y2="330" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <line x1="956" y1="470" x2="1520" y2="470" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <line x1="956" y1="610" x2="1520" y2="610" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <line x1="956" y1="750" x2="1520" y2="750" stroke="rgb(228,228,226)" stroke-width="2.5"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
-
-<!-- claim-title + subtitle -->
-<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">You Do Not Write The Skill. It Interviews You.</text>
-<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">It asks about your own process, and writes the file out of your answers</text>
-
-<!-- the AI -->
-<text x="170" y="742" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
-<text x="170" y="770" font-size="19" text-anchor="middle" fill="var(--dim)">asks, you answer</text>
-
-<!-- the questions -->
-<text x="600" y="150" font-size="21" font-weight="700" text-anchor="middle" fill="var(--blue)">WHAT IT ASKS YOU</text>
-<text x="330" y="234" font-size="22" fill="var(--ink)">&#8220;How do you start this job?&#8221;</text>
-<text x="330" y="354" font-size="22" fill="var(--ink)">&#8220;What do you always check before it goes out?&#8221;</text>
-<text x="330" y="474" font-size="22" fill="var(--ink)">&#8220;Do you follow a framework or a checklist?&#8221;</text>
-<text x="330" y="594" font-size="22" fill="var(--ink)">&#8220;What does a good one actually look like?&#8221;</text>
-<text x="330" y="714" font-size="22" fill="var(--ink)">&#8220;When would you NOT do it this way?&#8221;</text>
-
-<!-- the file -->
-<text class="mono" x="960" y="160" font-size="20" fill="var(--dim)">weekly-report/SKILL.md</text>
-<text x="982" y="232" font-size="21" font-weight="700" fill="var(--ink)">## How it starts</text>
-<text class="mono" x="1002" y="266" font-size="18" fill="var(--dim)">- pull last week from the dashboard</text>
-<text x="982" y="352" font-size="21" font-weight="700" fill="var(--ink)">## Always check</text>
-<text class="mono" x="1002" y="386" font-size="18" fill="var(--dim)">- the number is in the first line</text>
-<text x="982" y="472" font-size="21" font-weight="700" fill="var(--ink)">## The framework I follow</text>
-<text class="mono" x="1002" y="506" font-size="18" fill="var(--dim)">- the 5 checks we run on a draft</text>
-<text x="982" y="592" font-size="21" font-weight="700" fill="var(--ink)">## What good looks like</text>
-<text class="mono" x="1002" y="626" font-size="18" fill="var(--dim)">- match the Q3 report I sent</text>
-<text x="982" y="712" font-size="21" font-weight="700" fill="var(--ink)">## Except when</text>
-<text class="mono" x="1002" y="746" font-size="18" fill="var(--dim)">- a launch week gets its own format</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">You are not writing a prompt.</text>
-<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">You are answering questions about your own work.</text>
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">You Don&#8217;t Write The Skill. It Interviews You.</text>
+<text x="800" y="104" font-size="28" text-anchor="middle" fill="var(--dim)">Not a prompt &#8212; just questions about how you already do the job.</text>
+<text x="128" y="728" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">the AI</text>
+<text x="128" y="760" font-size="24" text-anchor="middle" fill="var(--dim)">asking you</text>
+<text x="252" y="265" font-size="26" fill="var(--ink)">&#8220;What do you do first, then next?&#8221;</text>
+<text x="842" y="240" font-size="24" text-anchor="middle" fill="var(--dim)">your answer</text>
+<text x="252" y="405" font-size="26" fill="var(--ink)">&#8220;What method do you follow?&#8221;</text>
+<text x="842" y="380" font-size="24" text-anchor="middle" fill="var(--dim)">your answer</text>
+<text x="252" y="545" font-size="26" fill="var(--ink)">&#8220;Show me your best one so far.&#8221;</text>
+<text x="842" y="520" font-size="24" text-anchor="middle" fill="var(--dim)">your answer</text>
+<text x="252" y="685" font-size="26" fill="var(--ink)">&#8220;What files do you work from?&#8221;</text>
+<text x="842" y="660" font-size="24" text-anchor="middle" fill="var(--dim)">your answer</text>
+<text x="252" y="825" font-size="26" fill="var(--ink)">&#8220;When do you NOT do it this way?&#8221;</text>
+<text x="842" y="800" font-size="24" text-anchor="middle" fill="var(--dim)">your answer</text>
+<text class="mono" x="958" y="179" font-size="24" fill="var(--ink)">draft-email/SKILL.md</text>
+<text x="956" y="240" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="1002" y="240" font-size="26" font-weight="700" fill="var(--ink)">The steps, in the order you do them</text>
+<text class="mono" x="978" y="284" font-size="24" fill="var(--ink)">- numbers &#8594; 3 winners &#8594; draft &#8594; check</text>
+<text x="956" y="380" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="1002" y="380" font-size="26" font-weight="700" fill="var(--ink)">The framework you follow</text>
+<text class="mono" x="978" y="424" font-size="24" fill="var(--ink)">- problem &#8594; one story &#8594; one ask</text>
+<text x="956" y="520" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="1002" y="520" font-size="26" font-weight="700" fill="var(--ink)">Your gold standard</text>
+<text class="mono" x="978" y="564" font-size="24" fill="var(--ink)">- match best-email.md</text>
+<text x="956" y="660" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="1002" y="660" font-size="26" font-weight="700" fill="var(--ink)">Your real files</text>
+<text class="mono" x="978" y="704" font-size="24" fill="var(--ink)">- read stats/last-week.csv</text>
+<text x="956" y="800" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="1002" y="800" font-size="26" font-weight="700" fill="var(--ink)">The exceptions</text>
+<text class="mono" x="978" y="844" font-size="24" fill="var(--ink)">- launch week &#8594; its own format</text>
+<text class="mono" x="978" y="886" font-size="24" fill="var(--ink)">- holiday week &#8594; five lines</text>
 </svg></body></html>

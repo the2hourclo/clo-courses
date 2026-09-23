@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219); --orange:#c2410c;
+  --green:rgb(45,140,60); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -28,44 +28,27 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text =====================
-     Closes the deck on the FIVE INPUTS, not on a folder tree. Where the AI files each one
-     is its own business; the buyer's job ends at handing them over. -->
+<!-- v6-06 (rebuilt 2026-09-23). The payoff: the SAME file view v6-02 built (identical content,
+     shifted left) -> the AI -> this week's email at ~80% to your standard. -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
 
-  <!-- the skill, as one thing you own -->
-  <rect x="110" y="200" width="770" height="580" rx="16" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <rect x="150" y="184" width="120" height="22" rx="6" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="110" y1="284" x2="880" y2="284" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <!-- the file: draft-email/SKILL.md (identical on v6-02 and v6-06) -->
+  <rect x="70" y="146" width="330" height="48" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="70" y="190" width="600" height="735" rx="12" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="88" y1="330" x2="652" y2="330" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <line x1="88" y1="470" x2="652" y2="470" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <line x1="88" y1="610" x2="652" y2="610" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <line x1="88" y1="750" x2="652" y2="750" stroke="rgb(228,228,226)" stroke-width="2.5"/>
 
-  <!-- the five things inside it -->
-  <rect x="150" y="310" width="690" height="76" rx="10" stroke="rgb(225,225,223)" stroke-width="3" fill="var(--bg)"/>
-  <rect x="150" y="400" width="690" height="76" rx="10" stroke="rgb(225,225,223)" stroke-width="3" fill="var(--bg)"/>
-  <rect x="150" y="490" width="690" height="76" rx="10" stroke="rgb(225,225,223)" stroke-width="3" fill="var(--bg)"/>
-  <rect x="150" y="580" width="690" height="76" rx="10" stroke="rgb(225,225,223)" stroke-width="3" fill="var(--bg)"/>
-  <rect x="150" y="670" width="690" height="76" rx="10" stroke="rgb(225,225,223)" stroke-width="3" fill="var(--bg)"/>
-
-  <!-- each one ticked off -->
-  <polyline points="782,344 794,357 816,332" stroke="var(--green)" stroke-width="4"/>
-  <polyline points="782,434 794,447 816,422" stroke="var(--green)" stroke-width="4"/>
-  <polyline points="782,524 794,537 816,512" stroke="var(--green)" stroke-width="4"/>
-  <polyline points="782,614 794,627 816,602" stroke="var(--green)" stroke-width="4"/>
-  <polyline points="782,704 794,717 816,692" stroke="var(--green)" stroke-width="4"/>
-
-  <!-- the AI reads all of it -->
-  <line x1="1092" y1="430" x2="1152" y2="430" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="1144,423 1152,430 1144,437" stroke="var(--dim)" stroke-width="3"/>
-  <rect x="1160" y="336" width="350" height="188" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
-
-  <!-- ============================================================ -->
-  <!-- id="canonical-robot" — copied VERBATIM from
-       .claude/skills/excali-graphic/assets/exemplars/canonical-robot-blackmarker.html
-       Repositioned per its own rule: translate(cx-1400*s, feetY-943*s) scale(s)
-       with s=0.75, cx=1000, feetY=580. -->
-  <g id="canonical-robot" transform="translate(-50.0,-127.25) scale(0.75)">
+  <!-- the skill -> the AI -->
+  <line x1="682" y1="540" x2="762" y2="540" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="753,532 762,540 753,548" stroke="var(--ink)" stroke-width="3.5"/>
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=868 feetY=670 s=0.85 -->
+  <g id="canonical-robot" transform="translate(-322.00,-131.55) scale(0.85)">
     <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
     <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
-    <circle cx="1400" cy="632" r="15" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
     <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
     <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
     <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
@@ -75,9 +58,13 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
-    <rect x="1370" y="774" width="60" height="48" rx="7" stroke="var(--orange)" stroke-width="3.5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
     <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
     <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
     <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
@@ -98,6 +85,8 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
     <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
     <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
     <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
@@ -105,40 +94,43 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <!-- ============================================================ -->
+  <!-- the AI -> this week's email -->
+  <line x1="972" y1="540" x2="1052" y2="540" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1043,532 1052,540 1043,548" stroke="var(--ink)" stroke-width="3.5"/>
+  <!-- the result: this week's email -->
+  <rect x="1062" y="400" width="468" height="280" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="1062" y1="458" x2="1530" y2="458" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <line x1="1096" y1="512" x2="1470" y2="512" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1096" y1="556" x2="1490" y2="556" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1096" y1="600" x2="1420" y2="600" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1096" y1="644" x2="1300" y2="644" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1420,636 1440,656 1484,608" stroke="var(--green)" stroke-width="6"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
-
-<!-- claim-title + subtitle -->
-<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">All Five, In One Place It Reads Every Time</text>
-<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">You say it once. You do not maintain it, and you do not repeat it.</text>
-
-<!-- the skill -->
-<text x="210" y="200" font-size="17" font-weight="700" text-anchor="middle" fill="var(--ink)">YOUR SKILL</text>
-<text x="495" y="252" font-size="30" font-weight="700" text-anchor="middle" fill="var(--ink)">the weekly report</text>
-
-<text x="185" y="356" font-size="23" fill="var(--ink)">The steps, in your order</text>
-<text x="185" y="446" font-size="23" fill="var(--ink)">The framework you follow</text>
-<text x="185" y="536" font-size="23" fill="var(--ink)">Your gold standard</text>
-<text x="185" y="626" font-size="23" fill="var(--ink)">Your real files</text>
-<text x="185" y="716" font-size="23" fill="var(--ink)">The edge cases</text>
-
-<!-- the AI -->
-<text x="1000" y="622" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
-<text x="1000" y="650" font-size="18" text-anchor="middle" fill="var(--dim)">reads all of it, every run</text>
-
-<!-- what comes back -->
-<text x="1335" y="318" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">WHAT COMES BACK</text>
-<text x="1335" y="400" font-size="23" text-anchor="middle" fill="var(--ink)">~80% to your standard</text>
-<text x="1335" y="438" font-size="21" text-anchor="middle" fill="var(--dim)">ready to generate revenue</text>
-<text x="1335" y="486" font-size="19" text-anchor="middle" fill="var(--dim)">and it sounds like you</text>
-
-<!-- the point -->
-<text x="495" y="826" font-size="20" text-anchor="middle" fill="var(--dim)">every line of it came out of your own answers</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">Almost none of this came from the AI.</text>
-<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">It came from how you already work, written down at last.</text>
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Everything You Told It Now Lives In One File</text>
+<text class="mono" x="90" y="179" font-size="24" fill="var(--ink)">draft-email/SKILL.md</text>
+<text x="88" y="240" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="134" y="240" font-size="26" font-weight="700" fill="var(--ink)">The steps, in the order you do them</text>
+<text class="mono" x="110" y="284" font-size="24" fill="var(--ink)">- numbers &#8594; 3 winners &#8594; draft &#8594; check</text>
+<text x="88" y="380" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="134" y="380" font-size="26" font-weight="700" fill="var(--ink)">The framework you follow</text>
+<text class="mono" x="110" y="424" font-size="24" fill="var(--ink)">- problem &#8594; one story &#8594; one ask</text>
+<text x="88" y="520" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="134" y="520" font-size="26" font-weight="700" fill="var(--ink)">Your gold standard</text>
+<text class="mono" x="110" y="564" font-size="24" fill="var(--ink)">- match best-email.md</text>
+<text x="88" y="660" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="134" y="660" font-size="26" font-weight="700" fill="var(--ink)">Your real files</text>
+<text class="mono" x="110" y="704" font-size="24" fill="var(--ink)">- read stats/last-week.csv</text>
+<text x="88" y="800" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="134" y="800" font-size="26" font-weight="700" fill="var(--ink)">The exceptions</text>
+<text class="mono" x="110" y="844" font-size="24" fill="var(--ink)">- launch week &#8594; its own format</text>
+<text class="mono" x="110" y="886" font-size="24" fill="var(--ink)">- holiday week &#8594; five lines</text>
+<text x="868" y="708" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">the AI</text>
+<text x="868" y="740" font-size="24" text-anchor="middle" fill="var(--dim)">reads it every week</text>
+<text x="1090" y="440" font-size="26" font-weight="700" fill="var(--ink)">this week&#8217;s email</text>
+<text x="1296" y="728" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">~80% to your standard</text>
+<text x="1296" y="764" font-size="24" text-anchor="middle" fill="var(--dim)">ready to use</text>
+<text x="800" y="1002" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">You say it once. It keeps it.</text>
 </svg></body></html>

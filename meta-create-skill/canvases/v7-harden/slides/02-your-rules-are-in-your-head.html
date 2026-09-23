@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -17,6 +17,11 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
   <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
 </defs>
 
 <rect width="1600" height="1050" fill="var(--bg)"/>
@@ -24,75 +29,118 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 
 <!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g transform="translate(0,36)">
 
-  <!-- ============ you, reviewing today's draft ============ -->
-  <circle cx="185" cy="462" r="34" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="185" y1="496" x2="185" y2="594" stroke="var(--ink)" stroke-width="4"/>
-  <line x1="185" y1="528" x2="122" y2="554" stroke="var(--ink)" stroke-width="4"/>
-  <line x1="185" y1="528" x2="248" y2="554" stroke="var(--ink)" stroke-width="4"/>
-  <line x1="185" y1="594" x2="145" y2="684" stroke="var(--ink)" stroke-width="4"/>
-  <line x1="185" y1="594" x2="225" y2="684" stroke="var(--ink)" stroke-width="4"/>
-  <!-- the draft in hand -->
-  <rect x="58" y="518" width="70" height="90" rx="5" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="72" y1="540" x2="114" y2="540" stroke="var(--dim)" stroke-width="2.5"/>
-  <line x1="72" y1="560" x2="114" y2="560" stroke="var(--dim)" stroke-width="2.5"/>
-  <line x1="72" y1="580" x2="100" y2="580" stroke="var(--dim)" stroke-width="2.5"/>
+  <!-- ============ LEFT - the skill file (same geometry as slide 03) ============ -->
+  <rect x="50" y="160" width="760" height="680" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="50" y1="216" x2="810" y2="216" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <!-- where the rules came from: bracket over the first three, pointer at the fourth -->
+  <path d="M 566 296 L 578 296 L 578 420 L 566 420" stroke="var(--dim)" stroke-width="2.5"/>
+  <!-- the self-check section: EMPTY -->
+  <rect x="76" y="570" width="708" height="240" rx="10" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="12 10" fill="var(--bg)"/>
 
-  <!-- ============ the thought bubble: your rules ============ -->
-  <circle cx="248" cy="424" r="10" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
-  <circle cx="276" cy="398" r="14" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
-  <rect x="300" y="182" width="560" height="228" rx="46" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <!-- ============ RIGHT - what happens each week ============ -->
+  <!-- the AI reads the file -->
+  <line x1="818" y1="238" x2="946" y2="238" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="937,230 946,238 937,246" stroke="var(--dim)" stroke-width="3.5"/>
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=1010 feetY=410 s=0.75 -->
+  <g id="canonical-robot" transform="translate(-40.00,-297.25) scale(0.75)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+  </g>
 
-  <!-- ============ the gap it never crosses ============ -->
-  <line x1="892" y1="296" x2="936" y2="296" stroke="var(--red)" stroke-width="4" stroke-dasharray="12 12"/>
-  <line x1="984" y1="296" x2="1028" y2="296" stroke="var(--red)" stroke-width="4" stroke-dasharray="12 12"/>
-  <line x1="946" y1="278" x2="974" y2="314" stroke="var(--red)" stroke-width="5"/>
-  <line x1="974" y1="278" x2="946" y2="314" stroke="var(--red)" stroke-width="5"/>
+  <!-- step A: it writes the draft -->
+  <rect x="944" y="450" width="606" height="92" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="1247" y1="542" x2="1247" y2="570" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="1239,561 1247,570 1255,561" stroke="var(--dim)" stroke-width="3.5"/>
+  <!-- step B: MISSING - no check -->
+  <rect x="944" y="576" width="606" height="108" rx="14" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="12 10" fill="var(--bg)"/>
+  <line x1="1247" y1="684" x2="1247" y2="712" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="1239,703 1247,712 1255,703" stroke="var(--dim)" stroke-width="3.5"/>
+  <!-- step C: it hands it to you -->
+  <rect x="944" y="718" width="606" height="122" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
 
-  <!-- ============ the file on disk ============ -->
-  <rect x="1060" y="182" width="490" height="470" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="1060" y1="234" x2="1550" y2="234" stroke="rgb(223,223,221)" stroke-width="2.5"/>
-  <!-- the empty conventions section -->
-  <rect x="1086" y="458" width="438" height="112" rx="8" stroke="var(--red)" stroke-width="3" stroke-dasharray="11 10" fill="var(--bg)"/>
+  <!-- the empty section in the file = the missing step -->
+  <line x1="786" y1="630" x2="940" y2="630" stroke="var(--red)" stroke-width="3.5" stroke-dasharray="10 9"/>
 
-  <!-- ============ closing divider ============ -->
-  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
-
+</g>
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
 
-<!-- claim-title + subtitle -->
-<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">You Already Have Standards. They Are Nowhere On Disk.</text>
-<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">The rules you apply to every draft, and the file that has never heard of them</text>
+<!-- claim-title + subtitle (the only two prose lines) -->
+<text x="800" y="60" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Your Rules Are in the File. Nothing Checks the Draft.</text>
+<text x="800" y="106" font-size="27" text-anchor="middle" fill="var(--dim)">Your interview and your corrections put the rules in. One section is still empty.</text>
 
-<!-- the thought bubble -->
-<text x="580" y="140" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">IN YOUR HEAD</text>
-<text x="580" y="228" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">WHAT YOU CHECK WITHOUT THINKING</text>
-<text x="580" y="288" font-size="25" text-anchor="middle" fill="var(--ink)">never cite a number I didn&#8217;t give it</text>
-<text x="580" y="333" font-size="25" text-anchor="middle" fill="var(--ink)">always name the offer</text>
-<text x="580" y="378" font-size="25" text-anchor="middle" fill="var(--ink)">never send without the PS</text>
-
-<!-- you -->
-<text x="185" y="740" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">YOU, ON EVERY DRAFT</text>
-
-<!-- the gap -->
-<text x="960" y="248" font-size="21" font-weight="700" text-anchor="middle" fill="var(--red)">never crossed</text>
-
+<g transform="translate(0,36)">
 <!-- the file -->
-<text x="1305" y="140" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">ON DISK</text>
-<text class="mono" x="1084" y="219" font-size="22" fill="var(--dim)">weekly-email/SKILL.md</text>
-<text class="mono" x="1084" y="286" font-size="22" fill="var(--ink)">## What this does</text>
-<text class="mono" x="1084" y="328" font-size="21" fill="var(--dim)">Writes the weekly email from</text>
-<text class="mono" x="1084" y="362" font-size="21" fill="var(--dim)">last week&#8217;s stats and my notes.</text>
-<text class="mono" x="1084" y="430" font-size="22" fill="var(--ink)">## Conventions</text>
-<text x="1305" y="527" font-size="27" text-anchor="middle" fill="var(--red)">nothing here</text>
+<text class="mono" x="76" y="198" font-size="26" fill="var(--ink)">draft-email/SKILL.md</text>
+<text class="mono" x="76" y="270" font-size="26" font-weight="700" fill="var(--ink)">## Your rules</text>
+<text class="mono" x="76" y="320" font-size="26" fill="var(--ink)">- only use numbers from the stats</text>
+<text class="mono" x="76" y="366" font-size="26" fill="var(--ink)">- always name the offer</text>
+<text class="mono" x="76" y="412" font-size="26" fill="var(--ink)">- always close with a PS</text>
+<text class="mono" x="76" y="458" font-size="26" fill="var(--ink)">- no emojis. Not one.</text>
+<text x="594" y="352" font-size="24" fill="var(--dim)">from your</text>
+<text x="594" y="382" font-size="24" fill="var(--dim)">interview</text>
+<text x="566" y="458" font-size="24" fill="var(--dim)">&#8592; your correction</text>
 
-<!-- the point -->
-<text x="1305" y="712" font-size="21" font-weight="700" text-anchor="middle" fill="var(--red)">NOT ONE OF YOUR THREE RULES IS IN THIS FILE</text>
-<text x="1305" y="748" font-size="21" text-anchor="middle" fill="var(--dim)">and this file is all the skill ever reads</text>
+<text class="mono" x="76" y="544" font-size="26" font-weight="700" fill="var(--ink)">## Self-check before handing it over</text>
+<text x="430" y="704" font-size="34" font-weight="700" text-anchor="middle" fill="var(--red)">empty</text>
 
-<!-- one-line takeaway -->
-<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">You already know exactly how the draft should come back.</text>
-<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--red)">The skill can only hold itself to a rule you actually wrote down.</text>
+<!-- the AI -->
+<text x="1096" y="276" font-size="30" font-weight="700" fill="var(--ink)">the AI</text>
+<text x="1096" y="314" font-size="24" fill="var(--dim)">reads this file,</text>
+<text x="1096" y="346" font-size="24" fill="var(--dim)">then writes the draft</text>
+
+<!-- the three steps -->
+<text x="1247" y="506" font-size="28" text-anchor="middle" fill="var(--ink)">It writes this week&#8217;s draft.</text>
+<text x="1247" y="640" font-size="30" font-weight="700" text-anchor="middle" fill="var(--red)">no check here</text>
+<text x="1247" y="768" font-size="28" text-anchor="middle" fill="var(--ink)">It hands it to you &#8212;</text>
+<text x="1247" y="812" font-size="28" font-weight="700" text-anchor="middle" fill="var(--red)">34% and all.</text>
+</g>
 </svg></body></html>

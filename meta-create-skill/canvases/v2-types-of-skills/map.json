@@ -1,11 +1,11 @@
 {
-  "_comment": "Storyboard map for meta-create-skill VIDEO 2: The 3 Levels of Skills. 6 diagrams in teaching order, one column each, left to right.",
+  "_comment": "Storyboard map for meta-create-skill VIDEO 2: Types of Skills. Rebuilt 2026-09-23 on the Weekly Email running example (DESIGN-SYSTEM §9-§11). Final viewing order: 01-04 in CP2 ('Your first skill'), then 06 BEFORE 05 in CP3 ('A skill system'), right before v4-skill-system. Filenames unchanged (the portal references slides by filename).",
   "columns": [
-    {"label": "1 - THE 3 LEVELS", "slides": ["01-three-levels"]},
-    {"label": "2 - LEVEL 1 · SIMPLE", "slides": ["02-level1-simple"]},
-    {"label": "3 - LEVEL 2 · WITH WORKFLOWS", "slides": ["03-level2-workflows"]},
-    {"label": "4 - LEVEL 3 · SKILL SYSTEM / ORCHESTRATOR", "slides": ["04-level3-orchestrator"]},
-    {"label": "5 - SKILL vs WORKFLOW", "slides": ["05-skill-vs-workflow"]},
-    {"label": "6 - HOW THEY CHAIN", "slides": ["06-how-they-chain"]}
+    {"label": "1 - A SKILL GROWS IN THREE LEVELS (CP2)", "slides": ["01-three-levels"]},
+    {"label": "2 - LEVEL 1 · A SIMPLE SKILL IS JUST ONE FILE (CP2)", "slides": ["02-level1-simple"]},
+    {"label": "3 - LEVEL 2 · ONE SKILL, SEVERAL VERSIONS OF THE JOB (CP2)", "slides": ["03-level2-workflows"]},
+    {"label": "4 - LEVEL 3 · ONE SKILL RUNS THE OTHERS, IN ORDER (CP2)", "slides": ["04-level3-orchestrator"]},
+    {"label": "5 - WORKFLOWS SERVE ONE SKILL, SHARED SKILLS SERVE MANY (CP3)", "slides": ["06-how-they-chain"]},
+    {"label": "6 - ITS OWN SKILL, OR A WORKFLOW INSIDE ONE? (CP3)", "slides": ["05-skill-vs-workflow"]}
   ]
 }

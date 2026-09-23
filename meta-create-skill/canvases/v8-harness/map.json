@@ -1,10 +1,10 @@
 {
-  "_comment": "Storyboard map for meta-create-skill VIDEO 8: Build a Harness (CP4 'Make it reliable', second explainer). 5 diagrams in teaching order, one column each, left to right. Arc: The seam (hardening did its job and two failures still got through) -> Blind spot 1, judgment (the writer cannot hear its own voice) -> The guard rail on the fix loop (the cap is the feature) -> Blind spot 2, reality (a report is not evidence) -> The assembly (inside the file vs outside it). THE DECK'S ONE JOB: every slide is about something the skill CANNOT KNOW ABOUT ITSELF. A slide about a stated rule belongs in v7-harden, not here. Slide 01 is the load-bearing seam slide and was drawn FIRST - it is what stops this deck collapsing into v7-harden, and every other slide in both decks is calibrated against it. Slide 05's inside/outside geometry is what makes the distinction stick without explanation; it calls back to v4-skill-system/05 ('you still make the call').",
+  "_comment": "Storyboard map for meta-create-skill VIDEO 8: Build a Harness (CP4 'Make it reliable', second explainer). Rebuilt 2026-09-23 on the locked running example (DESIGN-SYSTEM §9): draft-email/ writes the draft, qa-draft/ is the reviewer (the step in the weekly-email/ system that never saw the draft being written), and the retry cap + the reality check live in weekly-email/, the lead skill. 5 diagrams in teaching order, one column each. Arc: The seam (three bad runs of the hardened skill: the self-check stopped the 34%, a press-release draft and a false 'Done' got through) -> The reviewer, part 1 (the same AI twice: the writer marks its own homework, qa-draft/ reads it cold) -> The reviewer, part 2 (the retry cap: sent back at most 3 times, then it comes to you) -> The reality check (it opens drafts/ and finds it empty, so the job comes back unfinished) -> The assembly (inside the skill: your rules, the self-check, the scorecard; outside it, the harness: 1 reviewer -> 2 retry cap -> 3 reality check -> you, each showing where it lives). THE DECK'S ONE JOB: every slide is about something the skill CANNOT KNOW ABOUT ITSELF. A slide about a stated rule belongs in v7-harden.",
   "columns": [
-    {"label": "1 - WHAT IT CANNOT SEE (THE SEAM)", "slides": ["01-what-it-cannot-see"]},
-    {"label": "2 - IT CANNOT JUDGE ITS OWN WORK", "slides": ["02-it-cannot-judge-its-own-work"]},
-    {"label": "3 - THE CAPPED LOOP", "slides": ["03-the-capped-loop"]},
-    {"label": "4 - TRUST NOTHING IT REPORTS", "slides": ["04-trust-nothing-it-reports"]},
-    {"label": "5 - THE RIG AROUND THE SKILL", "slides": ["05-the-rig-around-the-skill"]}
+    {"label": "1 - HARDENING DID ITS JOB. TWO GOT THROUGH ANYWAY.", "slides": ["01-what-it-cannot-see"]},
+    {"label": "2 - THE REVIEWER, PART 1: THE WRITER CAN'T HEAR ITS OWN VOICE", "slides": ["02-it-cannot-judge-its-own-work"]},
+    {"label": "3 - THE REVIEWER, PART 2: SENDS IT BACK THREE TIMES, MAX", "slides": ["03-the-capped-loop"]},
+    {"label": "4 - \"DONE\" IS NOT PROOF: THE REALITY CHECK OPENS THE FOLDER", "slides": ["04-trust-nothing-it-reports"]},
+    {"label": "5 - THE SKILL GUARDS ITS RULES. THE HARNESS GUARDS THE REST.", "slides": ["05-the-rig-around-the-skill"]}
   ]
 }

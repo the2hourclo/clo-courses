@@ -547,10 +547,14 @@ function renderLesson(id){
 
 /* The 13-slide "audit your skill library" canvas, mounted into the progression lesson.
    Lessons are injected as innerHTML, so the viewer has to be re-mounted on every render. */
+/* Main path first: the three problems actually visible in the soup (signals 1, 2, 5), then the
+   audit, the fix and the clean library. The other five signal cards follow as an appendix so the
+   payoff isn't nine slides away from its setup. (Slide rebuild, 2026-09-23.) */
 var AUDIT_SLIDES = ['01-before-skill-soup','02-the-eight-signals','02-1-duplicate-standalones',
-  '02-2-trigger-collisions','02-3-missing-workflow-routing','02-4-no-cross-skill-callouts',
-  '02-5-orphan-workflows','02-6-bloated-orchestrators','02-7-missing-shared-delegation',
-  '02-8-sediment','03-how-the-audit-runs','04-the-fix','05-after-clean-library'];
+  '02-2-trigger-collisions','02-5-orphan-workflows','03-how-the-audit-runs','04-the-fix',
+  '05-after-clean-library',
+  '02-3-missing-workflow-routing','02-4-no-cross-skill-callouts','02-6-bloated-orchestrators',
+  '02-7-missing-shared-delegation','02-8-sediment'];
 function mountAuditDeck(){
   var el = document.getElementById('auditDeck');
   if (!el || !window.AIEBSlides) return;

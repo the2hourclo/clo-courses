@@ -1,10 +1,11 @@
 {
-  "_comment": "Storyboard map for meta-create-skill VIDEO 5: The Retrospective (CP2's self-improvement explainer). 5 diagrams in teaching order, one column each, left to right. Arc: Pain (the correction dies in the chat) -> Mechanism (it gets written into the file) -> Trust (nothing lands without your yes) -> How to run it (one command, two modes) -> Payoff (it compounds). The deck lives in CP2 because the loop only pays off if the buyer learns it on their FIRST run, not at the finish line.",
+  "_comment": "Storyboard map for meta-create-skill VIDEO 5: The Retrospective (CP2, shown AFTER the buyer builds their first skill: v6 -> build step -> v5). 5 diagrams in teaching order, one column each, left to right. Rebuilt 2026-09-23 on the running example draft-email/ (DESIGN-SYSTEM section 9) and the one correction 'Drop the emojis and lead with the number.' Arc: Pain (this week's correction never reaches the file, so next week - in a new chat - repeats the mistake) -> Mechanism (the retrospective writes it into the file, after your yes) -> Trust (you approve every edit) -> How to ask (two things you just say, no command on the slide) -> Payoff (starts at ~80%, a strong first draft; one correction per step to work you'd put your name on). Wording lock (DESIGN-SYSTEM 9): the email draft-email/ writes is always 'this week's email'; 'next week' only names the FOLLOWING run.",
+  "hard_rule": "No slash command, terminal or 'session' on any slide (DESIGN-SYSTEM 11.8 - the buyer may be on Cowork, Claude Code or Codex). The retrospective, the two ways to ask and 'your call' are ink, never a subfolder-legend colour. 01 and 02 share one layout on purpose: this week top-left, next week top-right, the file bottom-left.",
   "columns": [
-    {"label": "1 - THE CORRECTION DIES IN THE CHAT", "slides": ["01-correction-dies-in-the-chat"]},
-    {"label": "2 - IT WRITES THE FIX INTO THE FILE", "slides": ["02-it-writes-the-fix-into-the-file"]},
-    {"label": "3 - NOTHING LANDS WITHOUT YOUR YES", "slides": ["03-nothing-lands-without-your-yes"]},
-    {"label": "4 - TWO WAYS TO RUN IT", "slides": ["04-two-ways-to-run-it"]},
-    {"label": "5 - IT COMPOUNDS", "slides": ["05-it-compounds"]}
+    {"label": "1 - FIXING IT IN THE CHAT DOESN'T FIX THE SKILL", "slides": ["01-correction-dies-in-the-chat"]},
+    {"label": "2 - THIS TIME, YOUR CORRECTION LANDS IN THE SKILL FILE (the retrospective, defined)", "slides": ["02-it-writes-the-fix-into-the-file"]},
+    {"label": "3 - IT PROPOSES THE EDIT, YOU APPROVE IT", "slides": ["03-nothing-lands-without-your-yes"]},
+    {"label": "4 - JUST SAY WHAT WENT WRONG: RIGHT AWAY, OR AT DAY'S END", "slides": ["04-two-ways-to-run-it"]},
+    {"label": "5 - EVERY CORRECTION STICKS, AND THEY ADD UP", "slides": ["05-it-compounds"]}
   ]
 }

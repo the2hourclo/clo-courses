@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190);
+  --green:rgb(45,140,60);
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -22,57 +22,46 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- v5-05 (rebuilt 2026-09-23). ONE job: corrections add up. Starts where v6 left the skill (~80%, a
+     strong first draft - never "average at best") and ends at "work you'd put your name on". One step per
+     correction; the v5-02/03 correction ("drop the emojis and lead with the number") is ONE step. Weeks,
+     not versions. The title does not claim it improves "every run" - only when you correct it. -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
 
-  <!-- where it started -->
-  <rect x="150" y="250" width="340" height="150" rx="14" stroke="var(--red)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="260" y1="406" x2="260" y2="762" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="10 10"/>
+  <!-- where it starts -->
+  <rect x="100" y="620" width="300" height="100" rx="14" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="300" y1="728" x2="300" y2="792" stroke="var(--dim)" stroke-width="2.5" stroke-dasharray="8 8"/>
 
-  <!-- the staircase — one tread per version of the same skill -->
-  <polyline points="240,780 420,780 420,696 600,696 600,612 780,612 780,528 960,528 960,444 1140,444"
-            stroke="var(--ink)" stroke-width="5"/>
+  <!-- the staircase - one tread per week, one riser per correction -->
+  <polyline points="300,800 480,800 480,710 660,710 660,620 840,620 840,530 1020,530 1020,440 1200,440" stroke="var(--ink)" stroke-width="5"/>
 
-  <!-- the same skill, later -->
-  <line x1="1146" y1="444" x2="1184" y2="444" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="1176,437 1184,444 1176,451" stroke="var(--dim)" stroke-width="3"/>
-  <rect x="1190" y="300" width="340" height="150" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <!-- by week 5 -->
+  <line x1="1200" y1="434" x2="1200" y2="360" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="1192,369 1200,360 1208,369" stroke="var(--green)" stroke-width="3.5"/>
+  <rect x="1000" y="250" width="400" height="100" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Every Correction Sticks &#8212; And They Add Up</text>
+<text x="800" y="104" font-size="28" text-anchor="middle" fill="var(--dim)">One fix each time you notice something. Said once, kept for good.</text>
 
-<!-- claim-title + subtitle -->
-<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Each Correction Sticks &#8212; So The Skill Gets Sharper Every Run</text>
-<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">The same skill, a few runs later, with your standards already inside it</text>
+<text x="250" y="602" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">WHERE IT STARTS</text>
+<text x="250" y="662" font-size="30" font-weight="700" text-anchor="middle" fill="var(--ink)">~80%</text>
+<text x="250" y="700" font-size="24" text-anchor="middle" fill="var(--ink)">a strong first draft</text>
 
-<!-- where it started -->
-<text x="320" y="234" font-size="20" font-weight="700" text-anchor="middle" fill="var(--red)">WHERE IT STARTED</text>
-<text x="320" y="310" font-size="23" text-anchor="middle" fill="var(--ink)">average at best</text>
-<text x="320" y="348" font-size="23" text-anchor="middle" fill="var(--ink)">cannot generate revenue</text>
+<text x="390" y="784" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">week 1</text>
+<text x="570" y="694" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">week 2</text>
+<text x="750" y="604" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">week 3</text>
+<text x="930" y="514" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">week 4</text>
+<text x="1110" y="424" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">week 5</text>
+<text x="494" y="774" font-size="24" font-weight="700" fill="var(--green)">+ no emojis, number first</text>
+<text x="674" y="684" font-size="24" font-weight="700" fill="var(--green)">+ plain text, no images</text>
+<text x="854" y="594" font-size="24" font-weight="700" fill="var(--green)">+ sign off with your first name</text>
+<text x="1034" y="504" font-size="24" font-weight="700" fill="var(--green)">+ subject line under six words</text>
 
-<!-- the versions -->
-<text x="330" y="766" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">v1</text>
-<text x="510" y="682" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">v2</text>
-<text x="690" y="598" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">v3</text>
-<text x="870" y="514" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">v4</text>
-<text x="1050" y="430" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">v5</text>
+<text x="1200" y="232" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">BY WEEK 5</text>
+<text x="1200" y="310" font-size="25" text-anchor="middle" fill="var(--ink)">work you&#8217;d put your name on</text>
 
-<!-- what got written in at each step -->
-<text x="430" y="740" font-size="21" font-weight="700" fill="var(--green)">+ no emojis</text>
-<text x="610" y="656" font-size="21" font-weight="700" fill="var(--green)">+ lead with the number</text>
-<text x="790" y="572" font-size="21" font-weight="700" fill="var(--green)">+ cite the source row</text>
-<text x="970" y="488" font-size="21" font-weight="700" fill="var(--green)">+ flag drops over 20%</text>
-
-<!-- the same skill, later -->
-<text x="1360" y="284" font-size="20" font-weight="700" text-anchor="middle" fill="var(--green)">THE SAME SKILL, LATER</text>
-<text x="1360" y="356" font-size="23" text-anchor="middle" fill="var(--ink)">~80% to your standard</text>
-<text x="1360" y="392" font-size="23" text-anchor="middle" fill="var(--ink)">ready to generate revenue</text>
-
-<!-- the caption under the staircase -->
-<text x="690" y="870" font-size="21" text-anchor="middle" fill="var(--dim)">each one written in the moment you noticed it</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">You are not repeating yourself every week.</text>
-<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">You are training the skill, one correction at a time.</text>
 </svg></body></html>

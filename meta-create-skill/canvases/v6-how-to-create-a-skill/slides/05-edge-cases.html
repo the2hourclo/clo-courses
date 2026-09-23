@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --green:rgb(45,140,60); --red:rgb(214,69,58);
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -22,74 +22,67 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- v6-05 (rebuilt 2026-09-23). ONE lesson: name where the job changes (the exceptions) and ONE skill
+     covers every version - "one job, several versions" (DESIGN-SYSTEM section 10), never "more than one
+     job". ONE number everywhere: three. Headings ink; red = the failure path, green = the good outcome.
+     No subfolder names (draft-email/ is the skill itself, not a subfolder). -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
 
-  <!-- ============ LEFT — the exceptions ============ -->
-  <rect x="90" y="250" width="690" height="400" rx="14" stroke="var(--amber)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="120" y1="386" x2="750" y2="386" stroke="rgb(228,228,226)" stroke-width="2.5"/>
-  <line x1="120" y1="518" x2="750" y2="518" stroke="rgb(228,228,226)" stroke-width="2.5"/>
-
   <!-- middle divider -->
-  <line x1="800" y1="160" x2="800" y2="720" stroke="rgb(223,223,221)" stroke-width="2.5" stroke-dasharray="12 12"/>
+  <line x1="800" y1="150" x2="800" y2="870" stroke="rgb(223,223,221)" stroke-width="2.5" stroke-dasharray="12 12"/>
 
-  <!-- ============ RIGHT — the other situations ============ -->
-  <rect x="830" y="272" width="250" height="76" rx="12" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
-  <rect x="830" y="412" width="250" height="76" rx="12" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
-  <rect x="830" y="552" width="250" height="76" rx="12" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- ============ LEFT - leave them out: three near-copies ============ -->
+  <rect x="120" y="240" width="520" height="120" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="138" y="222" width="110" height="22" rx="6" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="150" y="405" width="520" height="120" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="168" y="387" width="110" height="22" rx="6" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="180" y="570" width="520" height="120" rx="12" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="198" y="552" width="110" height="22" rx="6" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
 
-  <!-- three situations converging on ONE skill -->
-  <line x1="1088" y1="310" x2="1146" y2="392" stroke="var(--green)" stroke-width="3.5"/>
-  <line x1="1088" y1="450" x2="1146" y2="450" stroke="var(--green)" stroke-width="3.5"/>
-  <line x1="1088" y1="590" x2="1146" y2="508" stroke="var(--green)" stroke-width="3.5"/>
-  <polyline points="1134,384 1146,394 1132,398" stroke="var(--green)" stroke-width="3.5"/>
-  <polyline points="1138,443 1146,450 1138,457" stroke="var(--green)" stroke-width="3.5"/>
-  <polyline points="1132,502 1146,506 1134,516" stroke="var(--green)" stroke-width="3.5"/>
-
-  <!-- the one skill, drawn as a folder -->
-  <rect x="1156" y="366" width="340" height="168" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
-  <rect x="1184" y="350" width="84" height="20" rx="5" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <!-- ============ RIGHT - name them once: one file, three versions ============ -->
+  <rect x="850" y="232" width="330" height="46" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="850" y="276" width="660" height="214" rx="12" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <!-- fork: one file -> three versions -->
+  <line x1="1180" y1="498" x2="1180" y2="540" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="947" y1="540" x2="1413" y2="540" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="947" y1="540" x2="947" y2="586" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="940,578 947,586 954,578" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1180" y1="540" x2="1180" y2="586" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1173,578 1180,586 1187,578" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="1413" y1="540" x2="1413" y2="586" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1406,578 1413,586 1420,578" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="850" y="596" width="195" height="100" rx="12" stroke="var(--green)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="1082" y="596" width="196" height="100" rx="12" stroke="var(--green)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="1315" y="596" width="195" height="100" rx="12" stroke="var(--green)" stroke-width="3.5" fill="var(--bg)"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
-
-<!-- claim-title + subtitle -->
-<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Tell It Where The Job Changes, And What Else It Covers</text>
-<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">This is the part everyone skips, and it is why people end up with five near-copies</text>
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Tell It Where The Job Changes &#8212; One Skill, Every Version</text>
+<text x="800" y="104" font-size="28" text-anchor="middle" fill="var(--dim)">The exceptions are the fifth thing you give, and the one people skip.</text>
 
 <!-- LEFT -->
-<text x="435" y="180" font-size="26" font-weight="700" text-anchor="middle" fill="var(--amber)">THE EXCEPTIONS</text>
-<text x="435" y="214" font-size="20" text-anchor="middle" fill="var(--dim)">when your normal way does not apply</text>
-
-<text x="120" y="318" font-size="23" font-weight="700" fill="var(--ink)">a launch week</text>
-<text x="120" y="352" font-size="20" fill="var(--dim)">gets its own format, not the usual one</text>
-
-<text x="120" y="450" font-size="23" font-weight="700" fill="var(--ink)">a bad month</text>
-<text x="120" y="484" font-size="20" fill="var(--dim)">open with the fix, not the number</text>
-
-<text x="120" y="582" font-size="23" font-weight="700" fill="var(--ink)">going to a client</text>
-<text x="120" y="616" font-size="20" fill="var(--dim)">strip the internal metrics out of it</text>
-
-<text x="435" y="696" font-size="20" text-anchor="middle" fill="var(--dim)">without these it applies the normal way to everything</text>
+<text x="410" y="178" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">LEAVE THEM OUT</text>
+<text class="mono" x="150" y="310" font-size="26" fill="var(--ink)">draft-email/</text>
+<text class="mono" x="180" y="475" font-size="26" fill="var(--ink)">draft-launch-email/</text>
+<text class="mono" x="210" y="640" font-size="26" fill="var(--ink)">draft-holiday-email/</text>
+<text class="mono" x="616" y="310" font-size="24" text-anchor="end" fill="var(--dim)">SKILL.md</text>
+<text class="mono" x="646" y="475" font-size="24" text-anchor="end" fill="var(--dim)">SKILL.md</text>
+<text class="mono" x="676" y="640" font-size="24" text-anchor="end" fill="var(--dim)">SKILL.md</text>
+<text x="410" y="790" font-size="28" font-weight="700" text-anchor="middle" fill="var(--red)">three near-copies to keep in sync</text>
+<text x="410" y="828" font-size="24" text-anchor="middle" fill="var(--dim)">fix one, and the other two drift</text>
 
 <!-- RIGHT -->
-<text x="1165" y="180" font-size="26" font-weight="700" text-anchor="middle" fill="var(--green)">THE OTHER SITUATIONS</text>
-<text x="1165" y="214" font-size="20" text-anchor="middle" fill="var(--dim)">the same skill doing more than one job</text>
-
-<text x="955" y="318" font-size="22" text-anchor="middle" fill="var(--ink)">the weekly</text>
-<text x="955" y="458" font-size="22" text-anchor="middle" fill="var(--ink)">the monthly roll-up</text>
-<text x="955" y="598" font-size="22" text-anchor="middle" fill="var(--ink)">the board update</text>
-
-<text class="mono" x="1326" y="434" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">one skill</text>
-<text x="1326" y="476" font-size="21" text-anchor="middle" fill="var(--dim)">handles all three</text>
-
-<text x="1165" y="696" font-size="20" text-anchor="middle" fill="var(--dim)">one skill you keep sharpening, not three you keep syncing</text>
-
-<!-- the point -->
-<text x="800" y="812" font-size="23" text-anchor="middle" fill="var(--dim)">Say these out loud during the interview and the skill covers your real job, not the tidy version of it.</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">Your work has exceptions. So should your skill.</text>
-<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">One skill that flexes beats five that drift apart.</text>
+<text x="1180" y="178" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">NAME THEM ONCE</text>
+<text class="mono" x="868" y="264" font-size="24" fill="var(--ink)">draft-email/SKILL.md</text>
+<text x="872" y="334" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="918" y="334" font-size="26" font-weight="700" fill="var(--ink)">The exceptions</text>
+<text class="mono" x="890" y="392" font-size="24" fill="var(--ink)">- launch week &#8594; its own format</text>
+<text class="mono" x="890" y="446" font-size="24" fill="var(--ink)">- holiday week &#8594; five lines</text>
+<text x="947" y="654" font-size="24" text-anchor="middle" fill="var(--ink)">weekly email</text>
+<text x="1180" y="654" font-size="24" text-anchor="middle" fill="var(--ink)">launch email</text>
+<text x="1413" y="654" font-size="24" text-anchor="middle" fill="var(--ink)">holiday email</text>
+<text x="1180" y="790" font-size="28" font-weight="700" text-anchor="middle" fill="var(--green)">one job, several versions</text>
+<text x="1180" y="828" font-size="24" text-anchor="middle" fill="var(--dim)">one file covers all three</text>
 </svg></body></html>

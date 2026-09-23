@@ -1,11 +1,11 @@
 {
-  "_comment": "Storyboard map for meta-create-skill VIDEO 1: What Is a Skill, and How Is It Built? Final 6-diagram order (routing + progressive disclosure merged into 05-read-and-load). One column each, left to right.",
+  "_comment": "Storyboard map for meta-create-skill VIDEO 1: What Is a Skill. Rebuilt 2026-09-23 on the draft-email/ running example (DESIGN-SYSTEM §9). Final viewing order: 01 → 02 → 03 → 06 → 04 → 05 (the header is taught in one run: 03 then 06). Filenames kept so the portal wizard still resolves them; the wizard slides array is reordered by the main thread.",
   "columns": [
-    {"label": "1 - WHY A SKILL", "slides": ["01-why-a-skill"]},
-    {"label": "2 - THE ANATOMY (TREE)", "slides": ["02-skill-anatomy"]},
-    {"label": "3 - INSIDE SKILL.md", "slides": ["03-inside-skillmd"]},
-    {"label": "4 - THE FOUR SUBFOLDERS", "slides": ["04-the-four-subfolders"]},
-    {"label": "5 - READ & LOAD (ROUTING + TIERS)", "slides": ["05-read-and-load"]},
-    {"label": "6 - FRONTMATTER (CONTROL PANEL)", "slides": ["06-frontmatter-properties"]}
+    {"label": "1 - SAME REQUEST, SAME AI (WHY A SKILL)", "slides": ["01-why-a-skill"]},
+    {"label": "2 - A FOLDER WITH ONE REQUIRED FILE", "slides": ["02-skill-anatomy"]},
+    {"label": "3 - HEADER DECIDES, BODY SAYS HOW", "slides": ["03-inside-skillmd"]},
+    {"label": "4 - THE HEADER: TWO LINES + OPTIONAL SETTINGS", "slides": ["06-frontmatter-properties"]},
+    {"label": "5 - EACH FOLDER ANSWERS ONE QUESTION", "slides": ["04-the-four-subfolders"]},
+    {"label": "6 - READS EVERY DESCRIPTION, OPENS ONLY WHAT IT NEEDS", "slides": ["05-read-and-load"]}
   ]
 }

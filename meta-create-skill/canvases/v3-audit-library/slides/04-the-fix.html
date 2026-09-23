@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58); --blue:rgb(52,120,190);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -17,175 +17,168 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
   <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
 </defs>
 
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-
-  <!-- ============ LEFT COLUMN — the causal flow: report -> gate -> robot ============ -->
-
-  <!-- report object (from slide 03), small: a document with red findings -->
-  <rect x="235" y="175" width="220" height="158" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="rgba(0,0,0,0.02)"/>
-  <line x1="235" y1="212" x2="455" y2="212" stroke="var(--ink)" stroke-width="2.5"/>
-  <circle cx="262" cy="240" r="5" fill="var(--red)" stroke="none"/>
-  <circle cx="262" cy="271" r="5" fill="var(--red)" stroke="none"/>
-  <circle cx="262" cy="302" r="5" fill="var(--red)" stroke="none"/>
-
-  <!-- report -> gate arrow -->
-  <line x1="345" y1="335" x2="345" y2="356" stroke="var(--ink)" stroke-width="3"/>
-  <polyline points="337,348 345,360 353,348" stroke="var(--ink)" stroke-width="3"/>
-
-  <!-- gate pill (owner-gated checkpoint) — ink, not red -->
-  <rect x="55" y="362" width="580" height="92" rx="20" stroke="var(--ink)" stroke-width="3.5" fill="rgba(33,33,33,0.03)"/>
-  <!-- shield + check gate icon -->
-  <path d="M100,383 L124,391 L124,415 C124,428 112,434 100,440 C88,434 76,428 76,415 L76,391 Z" stroke="var(--ink)" stroke-width="3"/>
-  <polyline points="90,410 98,420 112,398" stroke="var(--green)" stroke-width="4"/>
-
-  <!-- gate -> robot arrow -->
-  <line x1="345" y1="456" x2="345" y2="489" stroke="var(--ink)" stroke-width="3"/>
-  <polyline points="337,481 345,493 353,481" stroke="var(--ink)" stroke-width="3"/>
-
-  <!-- THE AI — canonical black-marker robot, now repairing (holds a green marker) -->
-  <g stroke="var(--ink)" stroke-width="4">
-    <line x1="345" y1="501" x2="345" y2="511"/>
-    <rect x="309" y="511" width="72" height="48" rx="11"/>
-    <rect x="323" y="524" width="44" height="22" rx="6" stroke-width="3"/>
-    <line x1="345" y1="559" x2="345" y2="567"/>
-    <rect x="313" y="567" width="64" height="54" rx="11"/>
-    <line x1="313" y1="585" x2="291" y2="605"/>
-    <line x1="377" y1="585" x2="397" y2="587"/>
+  <!-- ============ LEFT: you ask, the AI asks before each change ============ -->
+  <!-- speech bubble with a tail to YOU -->
+  <rect x="40" y="184" width="372" height="62" rx="18" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <polyline points="210,246 226,276 240,246" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <!-- YOU = ink stick figure -->
+  <circle cx="226" cy="306" r="22" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="226" y1="328" x2="226" y2="400" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="188" y1="352" x2="264" y2="352" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="226" y1="400" x2="198" y2="452" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="226" y1="400" x2="254" y2="452" stroke="var(--ink)" stroke-width="4"/>
+  <!-- you -> the AI -->
+  <line x1="226" y1="506" x2="226" y2="542" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="218,532 226,544 234,532" stroke="var(--ink)" stroke-width="3"/>
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=226 feetY=806 s=0.75 -->
+  <g id="canonical-robot" transform="translate(-824.00,98.75) scale(0.75)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <rect x="327" y="582" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
-  <circle cx="345" cy="495" r="5" fill="var(--green)" stroke="var(--green)"/>
-  <circle cx="337" cy="535" r="4.2" fill="var(--green)" stroke="var(--green)"/>
-  <circle cx="353" cy="535" r="4.2" fill="var(--green)" stroke="var(--green)"/>
-  <!-- green repair marker in the robot's hand -->
-  <line x1="397" y1="587" x2="432" y2="571" stroke="var(--green)" stroke-width="5"/>
-  <polygon points="432,571 440,569 436,577" fill="var(--green)" stroke="var(--green)" stroke-width="2"/>
-  <!-- green spark -->
-  <line x1="448" y1="556" x2="458" y2="556" stroke="var(--green)" stroke-width="3"/>
-  <line x1="453" y1="551" x2="453" y2="561" stroke="var(--green)" stroke-width="3"/>
+  <!-- the AI -> the three repairs -->
+  <line x1="292" y1="598" x2="436" y2="527" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="422,524 438,526 429,540" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="450" y1="196" x2="450" y2="846" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="450" y1="196" x2="462" y2="196" stroke="var(--ink)" stroke-width="3"/>
+  <line x1="450" y1="846" x2="462" y2="846" stroke="var(--ink)" stroke-width="3"/>
 
-  <!-- flow arrow: robot makes the 3 repairs -> ops column -->
-  <line x1="452" y1="592" x2="655" y2="592" stroke="var(--ink)" stroke-width="3"/>
-  <polyline points="647,584 659,592 647,600" stroke="var(--ink)" stroke-width="3"/>
+  <!-- ============ RIGHT: three repairs (before -> after), one per finding ============ -->
+  <!-- signal badges -->
+  <circle cx="496" cy="208" r="17" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="496" cy="428" r="17" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="496" cy="648" r="17" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
 
-  <!-- faint column divider -->
-  <line x1="665" y1="235" x2="665" y2="892" stroke="var(--dim)" stroke-width="1.5" stroke-dasharray="3 9"/>
+  <!-- repair 1: merge the duplicate -->
+  <rect x="480" y="236" width="410" height="132" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="902" y1="302" x2="1086" y2="302" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1074,294 1088,302 1074,310" stroke="var(--ink)" stroke-width="3.5"/>
+  <rect x="1100" y="236" width="440" height="132" rx="14" stroke="var(--ink)" stroke-width="3" fill="rgba(0,0,0,0.015)"/>
 
-  <!-- ============ RIGHT COLUMN — the 3 repairs ============ -->
+  <!-- repair 2: take the shared words out of ONE description -->
+  <rect x="480" y="456" width="410" height="132" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="508" y1="555" x2="706" y2="555" stroke="var(--red)" stroke-width="3.5"/>
+  <line x1="902" y1="522" x2="1086" y2="522" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1074,514 1088,522 1074,530" stroke="var(--ink)" stroke-width="3.5"/>
+  <rect x="1100" y="456" width="440" height="132" rx="14" stroke="var(--ink)" stroke-width="3" fill="rgba(0,0,0,0.015)"/>
 
-  <!-- op 1 MERGE : chip -->
-  <circle cx="722" cy="322" r="22" stroke="var(--green)" stroke-width="3.5" fill="rgba(45,140,60,0.06)"/>
-  <!-- red collision brace linking the two duplicate rows -->
-  <path d="M844,298 C830,298 830,360 844,360" stroke="var(--red)" stroke-width="3"/>
-  <!-- folder glyphs -->
-  <rect x="855" y="296" width="13" height="6" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
-  <rect x="855" y="301" width="28" height="19" rx="3" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
-  <rect x="855" y="343" width="13" height="6" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
-  <rect x="855" y="348" width="28" height="19" rx="3" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
-  <!-- converging green arrows into the single home -->
-  <line x1="1208" y1="309" x2="1252" y2="326" stroke="var(--green)" stroke-width="3.5"/>
-  <line x1="1208" y1="351" x2="1252" y2="330" stroke="var(--green)" stroke-width="3.5"/>
-  <line x1="1258" y1="328" x2="1300" y2="328" stroke="var(--green)" stroke-width="3.5"/>
-  <polyline points="1292,320 1304,328 1292,336" stroke="var(--green)" stroke-width="3.5"/>
-  <!-- after box (green = one home) -->
-  <rect x="1305" y="298" width="252" height="62" rx="12" stroke="var(--green)" stroke-width="3.5" fill="rgba(45,140,60,0.06)"/>
+  <!-- repair 3: delete the orphan -->
+  <rect x="480" y="676" width="410" height="170" rx="14" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="902" y1="760" x2="1086" y2="760" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1074,752 1088,760 1074,768" stroke="var(--ink)" stroke-width="3.5"/>
+  <rect x="1100" y="676" width="440" height="170" rx="14" stroke="var(--ink)" stroke-width="3" fill="rgba(0,0,0,0.015)"/>
+  <line x1="558" y1="812" x2="722" y2="812" stroke="var(--red)" stroke-width="3.5"/>
+  <line x1="506" y1="281" x2="696" y2="281" stroke="var(--red)" stroke-width="3.5"/>
 
-  <!-- op 2 DELETE : chip -->
-  <circle cx="722" cy="524" r="22" stroke="var(--green)" stroke-width="3.5" fill="rgba(45,140,60,0.06)"/>
-  <!-- folder glyph for write-content/ -->
-  <rect x="852" y="459" width="13" height="6" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
-  <rect x="852" y="464" width="28" height="19" rx="3" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
-  <!-- red strike-through over the orphan row -->
-  <line x1="898" y1="561" x2="1078" y2="561" stroke="var(--red)" stroke-width="3"/>
-  <!-- arrow to after -->
-  <line x1="1210" y1="516" x2="1300" y2="516" stroke="var(--green)" stroke-width="3.5"/>
-  <polyline points="1292,508 1304,516 1292,524" stroke="var(--green)" stroke-width="3.5"/>
-  <!-- after box -->
-  <rect x="1305" y="486" width="252" height="66" rx="12" stroke="var(--green)" stroke-width="3.5" fill="rgba(45,140,60,0.06)"/>
-
-  <!-- op 3 DISAMBIGUATE : chip -->
-  <circle cx="722" cy="742" r="22" stroke="var(--green)" stroke-width="3.5" fill="rgba(45,140,60,0.06)"/>
-  <!-- folder glyph -->
-  <rect x="852" y="663" width="13" height="6" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
-  <rect x="852" y="668" width="28" height="19" rx="3" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
-  <!-- description snippet doc -->
-  <rect x="850" y="694" width="432" height="120" rx="9" stroke="var(--ink)" stroke-width="3" fill="rgba(0,0,0,0.02)"/>
-  <!-- the ADDED disambiguation line marker (green +) -->
-  <line x1="868" y1="772" x2="882" y2="772" stroke="var(--green)" stroke-width="3.5"/>
-  <line x1="875" y1="765" x2="875" y2="779" stroke="var(--green)" stroke-width="3.5"/>
-  <!-- arrow to after -->
-  <line x1="1288" y1="752" x2="1300" y2="752" stroke="var(--green)" stroke-width="3.5"/>
-  <polyline points="1292,744 1304,752 1292,760" stroke="var(--green)" stroke-width="3.5"/>
-  <!-- after box -->
-  <rect x="1305" y="712" width="252" height="82" rx="12" stroke="var(--green)" stroke-width="3.5" fill="rgba(45,140,60,0.06)"/>
+  <!-- "after your yes" check marks on each arrow -->
+  <polyline points="938,340 946,348 960,332" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="938,560 946,568 960,552" stroke="var(--green)" stroke-width="3.5"/>
+  <polyline points="938,798 946,806 960,790" stroke="var(--green)" stroke-width="3.5"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+<text x="800" y="96" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">Fix What the Audit Found &#8212; One Yes at a Time</text>
 
-<!-- claim-title + subtitle -->
-<text x="800" y="74" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">The Fix &#8212; From Report to Repair</text>
-<text x="800" y="118" font-size="26" text-anchor="middle" fill="var(--dim)">The audit only diagnosed. Now the upgrade step repairs the library &#8212; and it asks YOU before every change.</text>
+<!-- left column -->
+<text x="226" y="224" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">Fix what the audit found.</text>
+<text x="226" y="492" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU</text>
+<text x="226" y="844" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="226" y="876" font-size="24" text-anchor="middle" fill="var(--dim)">asks before each change</text>
 
-<!-- report object text -->
-<text x="345" y="203" font-size="19" font-weight="700" text-anchor="middle" fill="var(--ink)">AUDIT REPORT</text>
-<text x="278" y="246" font-size="18" text-anchor="start" fill="var(--red)">HIGH &#183; duplicate</text>
-<text x="278" y="277" font-size="18" text-anchor="start" fill="var(--red)">HIGH &#183; orphan</text>
-<text x="278" y="308" font-size="18" text-anchor="start" fill="var(--red)">HIGH &#183; collision</text>
+<!-- repair 1 -->
+<text x="496" y="217" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">1</text>
+<text x="524" y="218" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">DUPLICATE SKILLS</text>
+<text class="mono" x="508" y="290" font-size="26" text-anchor="start" fill="var(--red)">email-writer/</text>
+<text class="mono" x="508" y="336" font-size="26" text-anchor="start" fill="var(--ink)">draft-email/</text>
+<text x="994" y="282" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">merge</text>
+<text x="968" y="348" font-size="24" text-anchor="start" fill="var(--dim)">your yes</text>
+<text class="mono" x="1126" y="290" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">draft-email/</text>
+<text x="1126" y="336" font-size="24" text-anchor="start" fill="var(--dim)">email-writer/ merged in</text>
 
-<!-- gate pill text -->
-<text x="150" y="401" font-size="24" font-weight="700" text-anchor="start" fill="var(--ink)">OWNER-GATED</text>
-<text x="150" y="433" font-size="21" text-anchor="start" fill="var(--dim)">asks YOU before every change</text>
+<!-- repair 2 -->
+<text x="496" y="437" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">2</text>
+<text x="524" y="438" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">COLLISIONS</text>
+<text class="mono" x="508" y="494" font-size="24" text-anchor="start" fill="var(--dim)">draft-email/ description:</text>
+<text class="mono" x="508" y="528" font-size="24" text-anchor="start" fill="var(--ink)">Writes this week&#8217;s email.</text>
+<text class="mono" x="508" y="564" font-size="24" font-weight="700" text-anchor="start" fill="var(--red)">Check my email.</text>
+<text x="994" y="502" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">cut 3 words</text>
+<text x="968" y="568" font-size="24" text-anchor="start" fill="var(--dim)">your yes</text>
+<text class="mono" x="1126" y="494" font-size="24" text-anchor="start" fill="var(--dim)">draft-email/ description:</text>
+<text class="mono" x="1126" y="528" font-size="24" text-anchor="start" fill="var(--ink)">Writes this week&#8217;s email.</text>
+<text x="1126" y="566" font-size="24" text-anchor="start" fill="var(--dim)">qa-draft/ now owns that phrase</text>
 
-<!-- robot labels -->
-<text x="345" y="648" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">THE AI &#183; upgrade step</text>
-<text x="345" y="674" font-size="19" text-anchor="middle" fill="var(--dim)">repairs the library</text>
-<text x="472" y="580" font-size="18" font-weight="700" text-anchor="start" fill="var(--ink)">makes 3 repairs</text>
+<!-- repair 3 -->
+<text x="496" y="657" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">5</text>
+<text x="524" y="658" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">ORPHAN WORKFLOWS</text>
+<text class="mono" x="508" y="716" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">draft-email/workflows/</text>
+<text class="mono" x="508" y="752" font-size="24" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; weekly.md</text>
+<text class="mono" x="508" y="786" font-size="24" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; launch.md</text>
+<text class="mono" x="508" y="820" font-size="24" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9492;&#9472;&#9472;</text>
+<text class="mono" x="560.8" y="820" font-size="24" font-weight="700" text-anchor="start" fill="var(--red)">old-promo.md</text>
+<text x="994" y="740" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">delete</text>
+<text x="968" y="806" font-size="24" text-anchor="start" fill="var(--dim)">your yes</text>
+<text class="mono" x="1126" y="716" font-size="24" font-weight="700" text-anchor="start" fill="var(--green)">draft-email/workflows/</text>
+<text class="mono" x="1126" y="752" font-size="24" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; weekly.md</text>
+<text class="mono" x="1126" y="786" font-size="24" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9492;&#9472;&#9472; launch.md</text>
+<text x="1126" y="824" font-size="24" text-anchor="start" fill="var(--dim)">old-promo.md deleted</text>
 
-<!-- ===== OP 1 — MERGE ===== -->
-<text x="722" y="330" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">1</text>
-<text x="722" y="368" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">MERGE</text>
-<text class="mono" x="895" y="317" font-size="24" text-anchor="start" fill="var(--ink)">write-hook/</text>
-<text x="1095" y="317" font-size="18" text-anchor="start" fill="var(--red)">&#183; duplicate A</text>
-<text class="mono" x="895" y="363" font-size="24" text-anchor="start" fill="var(--ink)">hook-writer/</text>
-<text x="1095" y="363" font-size="18" text-anchor="start" fill="var(--red)">&#183; same trigger</text>
-<text class="mono" x="1322" y="322" font-size="22" font-weight="700" text-anchor="start" fill="var(--green)">write-hook/</text>
-<text x="1322" y="347" font-size="17" text-anchor="start" fill="var(--dim)">one home &#183; fires first time</text>
-
-<!-- ===== OP 2 — DELETE ===== -->
-<text x="722" y="532" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">2</text>
-<text x="722" y="570" font-size="18" font-weight="700" text-anchor="middle" fill="var(--green)">DELETE</text>
-<text class="mono" x="892" y="480" font-size="23" text-anchor="start" fill="var(--ink)">write-content/</text>
-<text class="mono" x="906" y="513" font-size="22" text-anchor="start" fill="var(--dim)">&#9492;&#9472;</text>
-<text class="mono" x="946" y="513" font-size="22" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
-<text class="mono" x="928" y="546" font-size="22" text-anchor="start" fill="var(--dim)">&#9500;&#9472;</text>
-<text class="mono" x="968" y="546" font-size="22" text-anchor="start" fill="var(--ink)">newsletter.md</text>
-<text class="mono" x="928" y="567" font-size="22" text-anchor="start" fill="var(--dim)">&#9492;&#9472;</text>
-<text class="mono" x="968" y="567" font-size="22" text-anchor="start" fill="var(--red)">old-promo.md</text>
-<text x="968" y="593" font-size="17" text-anchor="start" fill="var(--red)">orphan &#183; never routed from SKILL.md</text>
-<text class="mono" x="1322" y="508" font-size="21" font-weight="700" text-anchor="start" fill="var(--green)">write-content/</text>
-<text class="mono" x="1338" y="534" font-size="20" text-anchor="start" fill="var(--dim)">&#9492;&#9472; newsletter.md</text>
-<text x="1322" y="576" font-size="17" font-weight="700" text-anchor="start" fill="var(--green)">orphan deleted</text>
-
-<!-- ===== OP 3 — DISAMBIGUATE ===== -->
-<text x="722" y="750" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">3</text>
-<text x="722" y="788" font-size="16" font-weight="700" text-anchor="middle" fill="var(--green)">DISAMBIGUATE</text>
-<text class="mono" x="892" y="680" font-size="23" text-anchor="start" fill="var(--ink)">writing-humanize/</text>
-<text x="1108" y="680" font-size="17" text-anchor="start" fill="var(--red)">&#183; collides with humanize/</text>
-<text class="mono" x="868" y="722" font-size="17" text-anchor="start" fill="var(--dim)">description:</text>
-<text class="mono" x="868" y="748" font-size="18" text-anchor="start" fill="var(--ink)">&#8220;&#8230;humanize this.&#8221;</text>
-<text class="mono" x="892" y="776" font-size="18" font-weight="700" text-anchor="start" fill="var(--green)">Do NOT use when &#8594; install voice</text>
-<text class="mono" x="892" y="800" font-size="16" text-anchor="start" fill="var(--green)">= use writing-voice</text>
-<text class="mono" x="1322" y="742" font-size="20" font-weight="700" text-anchor="start" fill="var(--green)">writing-humanize/</text>
-<text x="1322" y="767" font-size="17" text-anchor="start" fill="var(--dim)">one home &#183; description</text>
-<text x="1322" y="788" font-size="17" text-anchor="start" fill="var(--dim)">disambiguated</text>
-
-<!-- ===== one-line takeaway ===== -->
-<text x="800" y="948" font-size="29" text-anchor="middle" fill="var(--ink)">The audit finds it. The upgrade step fixes it.</text>
-<text x="800" y="990" font-size="31" font-weight="700" text-anchor="middle" fill="var(--green)">And nothing changes without your yes.</text>
+<!-- one-line takeaway -->
+<text x="800" y="960" font-size="30" text-anchor="middle" fill="var(--ink)">Every fix removes the problem itself, so the next audit won&#8217;t find it again.</text>
 </svg></body></html>

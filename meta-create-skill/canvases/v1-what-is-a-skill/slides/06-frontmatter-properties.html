@@ -1,111 +1,80 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
-:root{--bg:rgb(255,255,255);--ink:rgb(33,33,33);--dim:rgb(120,120,125);--red:rgb(214,69,58);--green:rgb(45,140,60);--blue:rgb(52,120,190);--sans:"Excalifont",Inter,system-ui,sans-serif;}
-*{box-sizing:border-box;margin:0;padding:0;}html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}svg{display:block;}text{font-family:var(--sans);}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
 </style></head><body>
 <svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
 <defs>
-<filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
-<pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
 </defs>
-<rect width="1600" height="1050" fill="var(--bg)"/><rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===== SHAPES (wobble) — NO text in here ===== -->
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===== SHAPES (wobble) - NO text in here ===== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- file tab + card: the top of draft-email/SKILL.md -->
+  <rect x="110" y="200" width="318" height="46" rx="12" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+  <rect x="110" y="242" width="1380" height="732" rx="20" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
 
-  <!-- center divider -->
-  <line x1="720" y1="182" x2="720" y2="882" stroke="rgb(228,228,226)" stroke-width="3"/>
+  <!-- REQUIRED pill (same badge as 02) + the two required lines in an ink box -->
+  <rect x="150" y="318" width="178" height="40" rx="9" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="134" y="370" width="1332" height="142" rx="12" fill="rgba(33,33,33,0.035)" stroke="var(--ink)" stroke-width="4"/>
 
-  <!-- LEFT: the required YAML card -->
-  <rect x="110" y="255" width="560" height="320" rx="20" stroke="var(--green)" stroke-width="5" fill="rgba(45,140,60,0.05)"/>
-  <!-- "always on" indicator lights -->
-  <circle cx="150" cy="351" r="7" fill="var(--green)" stroke="none"/>
-  <circle cx="150" cy="424" r="7" fill="var(--green)" stroke="none"/>
-
-  <!-- dashed connector: the card (description) -> router -->
-  <line x1="392" y1="580" x2="392" y2="609" stroke="var(--ink)" stroke-width="2.5" stroke-dasharray="4 8"/>
-  <polyline points="380,594 392,613 404,594" stroke="var(--ink)" stroke-width="2.5"/>
-
-  <!-- router node -->
-  <rect x="150" y="615" width="490" height="150" rx="16" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <circle cx="220" cy="676" r="26" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="238" y1="694" x2="262" y2="720" stroke="var(--ink)" stroke-width="4"/>
-
-  <!-- RIGHT: the control console -->
-  <rect x="758" y="285" width="784" height="575" rx="24" stroke="var(--ink)" stroke-width="4" fill="rgba(52,120,190,0.03)"/>
-  <line x1="790" y1="408" x2="1512" y2="408" stroke="rgb(228,228,226)" stroke-width="2"/>
-  <line x1="790" y1="516" x2="1512" y2="516" stroke="rgb(228,228,226)" stroke-width="2"/>
-  <line x1="790" y1="624" x2="1512" y2="624" stroke="rgb(228,228,226)" stroke-width="2"/>
-  <line x1="790" y1="732" x2="1512" y2="732" stroke="rgb(228,228,226)" stroke-width="2"/>
-
-  <!-- 5 dials (knob = circle + pointer + center dot) -->
-  <circle cx="852" cy="354" r="34" stroke="var(--blue)" stroke-width="5" fill="var(--bg)"/>
-  <line x1="852" y1="354" x2="832" y2="330" stroke="var(--blue)" stroke-width="5"/>
-  <circle cx="852" cy="354" r="6" fill="var(--blue)" stroke="none"/>
-
-  <circle cx="852" cy="462" r="34" stroke="var(--blue)" stroke-width="5" fill="var(--bg)"/>
-  <line x1="852" y1="462" x2="854" y2="428" stroke="var(--blue)" stroke-width="5"/>
-  <circle cx="852" cy="462" r="6" fill="var(--blue)" stroke="none"/>
-
-  <circle cx="852" cy="570" r="34" stroke="var(--blue)" stroke-width="5" fill="var(--bg)"/>
-  <line x1="852" y1="570" x2="874" y2="548" stroke="var(--blue)" stroke-width="5"/>
-  <circle cx="852" cy="570" r="6" fill="var(--blue)" stroke="none"/>
-
-  <circle cx="852" cy="678" r="34" stroke="var(--blue)" stroke-width="5" fill="var(--bg)"/>
-  <line x1="852" y1="678" x2="882" y2="668" stroke="var(--blue)" stroke-width="5"/>
-  <circle cx="852" cy="678" r="6" fill="var(--blue)" stroke="none"/>
-
-  <circle cx="852" cy="786" r="34" stroke="var(--blue)" stroke-width="5" fill="var(--bg)"/>
-  <line x1="852" y1="786" x2="872" y2="810" stroke="var(--blue)" stroke-width="5"/>
-  <circle cx="852" cy="786" r="6" fill="var(--blue)" stroke="none"/>
-
+  <!-- dotted leaders: each line -> its plain-words meaning -->
+  <line x1="452" y1="417" x2="836" y2="417" stroke="rgb(200,200,198)" stroke-width="2.5" stroke-dasharray="2 9"/>
+  <line x1="732" y1="477" x2="836" y2="477" stroke="rgb(200,200,198)" stroke-width="2.5" stroke-dasharray="2 9"/>
+  <line x1="316" y1="623" x2="836" y2="623" stroke="rgb(200,200,198)" stroke-width="2.5" stroke-dasharray="2 9"/>
+  <line x1="378" y1="685" x2="836" y2="685" stroke="rgb(200,200,198)" stroke-width="2.5" stroke-dasharray="2 9"/>
+  <line x1="394" y1="747" x2="836" y2="747" stroke="rgb(200,200,198)" stroke-width="2.5" stroke-dasharray="2 9"/>
+  <line x1="456" y1="809" x2="836" y2="809" stroke="rgb(200,200,198)" stroke-width="2.5" stroke-dasharray="2 9"/>
+  <line x1="676" y1="871" x2="836" y2="871" stroke="rgb(200,200,198)" stroke-width="2.5" stroke-dasharray="2 9"/>
 </g>
 
-<!-- ===== TEXT (crisp) — everything below is OUTSIDE the filter ===== -->
+<!-- ===== TEXT (crisp) - everything below is OUTSIDE the filter ===== -->
+<text x="800" y="80" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">The Header Needs Two Lines. The Rest Can Wait.</text>
+<text x="800" y="126" font-size="28" text-anchor="middle" fill="var(--dim)">the header, called frontmatter, is everything between the two --- lines</text>
 
-<!-- claim title -->
-<text x="800" y="86" font-size="64" font-weight="700" text-anchor="middle" fill="var(--ink)">Two Fields Required. The Rest Are Dials.</text>
-<text x="800" y="134" font-size="32" text-anchor="middle" fill="var(--dim)">a skill's YAML frontmatter is its control panel</text>
+<text class="mono" x="269" y="231" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">draft-email/SKILL.md</text>
 
-<!-- LEFT header -->
-<text x="385" y="228" font-size="34" font-weight="700" text-anchor="middle" fill="var(--green)">REQUIRED &#8212; always on</text>
+<text class="mono" x="160" y="298" font-size="28" fill="var(--dim)">---</text>
+<text x="239" y="347" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">REQUIRED</text>
 
-<!-- YAML card text -->
-<text x="180" y="306" font-size="26" text-anchor="start" fill="var(--dim)">---</text>
-<text x="180" y="362" font-size="32" font-weight="700" text-anchor="start" fill="var(--ink)">name:</text>
-<text x="352" y="362" font-size="23" text-anchor="start" fill="var(--dim)">what the skill's called</text>
-<text x="180" y="434" font-size="32" font-weight="700" text-anchor="start" fill="var(--ink)">description:</text>
-<text x="200" y="472" font-size="22" text-anchor="start" fill="var(--dim)">a landing page written for a router</text>
-<text x="180" y="536" font-size="26" text-anchor="start" fill="var(--dim)">---</text>
+<!-- required -->
+<text class="mono" x="160" y="426" font-size="28" font-weight="700" fill="var(--ink)">name:</text>
+<text class="mono" x="262" y="426" font-size="28" fill="var(--ink)">draft-email</text>
+<text x="860" y="426" font-size="27" fill="var(--ink)">its name &#8212; the same as its folder</text>
+<text class="mono" x="160" y="486" font-size="28" font-weight="700" fill="var(--ink)">description:</text>
+<text x="380" y="486" font-size="27" fill="var(--ink)">Writes this week&#8217;s email&#8230;</text>
+<text x="860" y="486" font-size="27" fill="var(--ink)">tells the AI when to use it</text>
 
-<!-- router node text -->
-<text x="452" y="662" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI'S ROUTER</text>
-<text x="452" y="700" font-size="23" text-anchor="middle" fill="var(--dim)">reads ONLY the description</text>
-<text x="452" y="734" font-size="23" text-anchor="middle" fill="var(--dim)">&#8594; fire this skill, or skip it?</text>
+<!-- optional: grey, regular weight -->
+<text x="160" y="570" font-size="26" fill="rgb(138,138,138)">optional &#183; safe to ignore for now</text>
+<text class="mono" x="160" y="632" font-size="28" fill="rgb(138,138,138)">model:</text>
+<text class="mono" x="280" y="632" font-size="28" fill="rgb(138,138,138)">&#8230;</text>
+<text x="860" y="632" font-size="27" fill="rgb(138,138,138)">which AI model runs it</text>
+<text class="mono" x="160" y="694" font-size="28" fill="rgb(138,138,138)">effort:</text>
+<text class="mono" x="296" y="694" font-size="28" fill="rgb(138,138,138)">high</text>
+<text x="860" y="694" font-size="27" fill="rgb(138,138,138)">how hard it thinks</text>
+<text class="mono" x="160" y="756" font-size="28" fill="rgb(138,138,138)">context:</text>
+<text class="mono" x="312" y="756" font-size="28" fill="rgb(138,138,138)">fork</text>
+<text x="860" y="756" font-size="27" fill="rgb(138,138,138)">starts with a clean slate</text>
+<text class="mono" x="160" y="818" font-size="28" fill="rgb(138,138,138)">allowed-tools:</text>
+<text class="mono" x="422" y="818" font-size="28" fill="rgb(138,138,138)">&#8230;</text>
+<text x="860" y="818" font-size="27" fill="rgb(138,138,138)">which tools it may use</text>
+<text class="mono" x="160" y="880" font-size="28" fill="rgb(138,138,138)">disable-model-invocation:</text>
+<text class="mono" x="594" y="880" font-size="28" fill="rgb(138,138,138)">true</text>
+<text x="860" y="880" font-size="27" fill="rgb(138,138,138)">only runs when you ask for it by name</text>
 
-<!-- warning -->
-<text x="385" y="818" font-size="27" font-weight="700" text-anchor="middle" fill="var(--red)">Vague description = skill silently never fires.</text>
-
-<!-- RIGHT header -->
-<text x="1150" y="228" font-size="34" font-weight="700" text-anchor="middle" fill="var(--blue)">OPTIONAL DIALS</text>
-<text x="1150" y="260" font-size="23" text-anchor="middle" fill="var(--dim)">turn these only when the default's wrong</text>
-
-<!-- dial labels -->
-<text x="912" y="348" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">context: fork</text>
-<text x="912" y="380" font-size="22" text-anchor="start" fill="var(--dim)">runs isolated &#8212; fresh context, no bleed-through</text>
-
-<text x="912" y="456" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">model</text>
-<text x="912" y="488" font-size="22" text-anchor="start" fill="var(--dim)">swap the engine: cheap+fast &#8596; most capable</text>
-
-<text x="912" y="564" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">effort</text>
-<text x="912" y="596" font-size="22" text-anchor="start" fill="var(--dim)">how hard it thinks first: low &#8594; max</text>
-
-<text x="912" y="672" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">allowed-tools</text>
-<text x="912" y="704" font-size="22" text-anchor="start" fill="var(--dim)">pre-approves tools &#8212; no pausing to ask mid-run</text>
-
-<text x="912" y="780" font-size="30" font-weight="700" text-anchor="start" fill="var(--blue)">disable-model-invocation: true</text>
-<text x="912" y="812" font-size="22" text-anchor="start" fill="var(--dim)">manual-only, like a slash command</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="1000" font-size="32" font-weight="700" text-anchor="middle" fill="var(--ink)">Required: name + description &#8212; the rest are dials for when the default's wrong.</text>
+<text class="mono" x="160" y="940" font-size="28" fill="var(--dim)">---</text>
 </svg></body></html>

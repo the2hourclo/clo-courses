@@ -30,36 +30,29 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 <!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
 
-  <!-- ============ the draft it just wrote ============ -->
-  <rect x="80" y="178" width="660" height="212" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="80" y1="228" x2="740" y2="228" stroke="rgb(223,223,221)" stroke-width="2.5"/>
-  <rect x="100" y="292" width="620" height="42" rx="6" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <!-- ============ the draft it just wrote (same draft as slide 01) ============ -->
+  <rect x="60" y="200" width="700" height="282" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="60" y1="252" x2="760" y2="252" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <rect x="80" y="336" width="660" height="50" rx="7" stroke="var(--red)" stroke-width="3.5" fill="var(--bg)"/>
 
-  <!-- ============ the rule it was given ============ -->
-  <rect x="860" y="178" width="660" height="212" rx="10" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="860" y1="228" x2="1520" y2="228" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <!-- ============ the file it checks against ============ -->
+  <rect x="840" y="200" width="700" height="282" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="840" y1="252" x2="1540" y2="252" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <!-- the one rule this draft breaks -->
+  <rect x="858" y="312" width="664" height="42" rx="6" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
 
-  <!-- ============ both meet ============ -->
-  <line x1="430" y1="392" x2="430" y2="424" stroke="var(--dim)" stroke-width="3.5"/>
-  <line x1="430" y1="424" x2="800" y2="424" stroke="var(--dim)" stroke-width="3.5"/>
-  <line x1="1190" y1="392" x2="1190" y2="424" stroke="var(--dim)" stroke-width="3.5"/>
-  <line x1="1190" y1="424" x2="800" y2="424" stroke="var(--dim)" stroke-width="3.5"/>
-  <line x1="800" y1="424" x2="800" y2="466" stroke="var(--red)" stroke-width="4"/>
-  <polyline points="792,457 800,466 808,457" stroke="var(--red)" stroke-width="4"/>
+  <!-- ============ the AI reads both ============ -->
+  <line x1="410" y1="484" x2="410" y2="514" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="1190" y1="484" x2="1190" y2="514" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="200" y1="514" x2="1190" y2="514" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="200" y1="514" x2="200" y2="558" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="192,549 200,558 208,549" stroke="var(--dim)" stroke-width="3.5"/>
 
-  <!-- ============ the stop ============ -->
-  <rect x="400" y="474" width="800" height="248" rx="16" stroke="var(--red)" stroke-width="4.5" fill="var(--bg)"/>
-  <line x1="400" y1="546" x2="1200" y2="546" stroke="rgb(228,228,226)" stroke-width="2.5"/>
-
-  <!-- ============================================================ -->
-  <!-- id="canonical-robot" - copied VERBATIM from
-       .claude/skills/excali-graphic/assets/exemplars/canonical-robot-blackmarker.html
-       Repositioned per its own rule: translate(cx-1400*s, feetY-943*s) scale(s)
-       with s=0.75, cx=222, feetY=712. -->
-  <g id="canonical-robot" transform="translate(-828.0,4.75) scale(0.75)">
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=200 feetY=830 s=0.8 -->
+  <g id="canonical-robot" transform="translate(-920.00,75.60) scale(0.8)">
     <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
     <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
-    <circle cx="1400" cy="632" r="15" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
     <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
     <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
     <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
@@ -69,9 +62,13 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
-    <rect x="1370" y="774" width="60" height="48" rx="7" stroke="var(--orange)" stroke-width="3.5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
     <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
     <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
     <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
@@ -92,6 +89,8 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
     <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
     <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
     <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
@@ -99,46 +98,44 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <!-- ============================================================ -->
 
-  <!-- ============ closing divider ============ -->
-  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
+  <!-- ============ what it says: STOPPED (speech box, tail to the AI) ============ -->
+  <rect x="400" y="566" width="1140" height="270" rx="18" stroke="var(--ink)" stroke-width="5" fill="rgb(246,246,245)"/>
+  <path d="M 406 664 L 292 664 L 406 712" stroke="var(--ink)" stroke-width="5" fill="rgb(246,246,245)"/>
+  <line x1="402" y1="644" x2="1538" y2="644" stroke="rgb(218,218,216)" stroke-width="2.5"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
 
-<!-- claim-title + subtitle -->
-<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">It Catches Itself. Nothing Else Is Involved.</text>
-<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">The same fabricated number from the first slide, meeting the rule you just wrote</text>
+<!-- claim-title + subtitle (the only two prose lines) -->
+<text x="800" y="62" font-size="46" font-weight="700" text-anchor="middle" fill="var(--ink)">The Self-Check Stops the 34% Before You See It</text>
+<text x="800" y="110" font-size="28" text-anchor="middle" fill="var(--dim)">The same draft from the first slide, with the self-check now in the file</text>
 
 <!-- the draft -->
-<text x="410" y="152" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">WHAT IT JUST WROTE</text>
-<text class="mono" x="104" y="213" font-size="22" fill="var(--dim)">drafts/weekly-email.md</text>
-<text x="112" y="268" font-size="24" fill="var(--ink)">Hey &#8212; quick one on last week.</text>
-<text x="112" y="318" font-size="24" fill="var(--ink)">Open rate hit 34%, our best month yet.</text>
-<text x="112" y="368" font-size="24" fill="var(--ink)">The offer closes Friday. PS below.</text>
+<text x="410" y="182" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">WHAT IT JUST WROTE</text>
+<text class="mono" x="84" y="236" font-size="24" fill="var(--ink)">drafts/weekly-email.md</text>
+<text x="96" y="310" font-size="28" fill="var(--ink)">Hey &#8212; quick one on last week.</text>
+<text x="96" y="371" font-size="28" fill="var(--ink)">Open rate hit 34%, our best month yet.</text>
+<text x="96" y="436" font-size="28" fill="var(--ink)">The offer closes Friday. PS below.</text>
 
-<!-- the rule -->
-<text x="1190" y="152" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">THE RULE YOU GAVE IT</text>
-<text class="mono" x="884" y="213" font-size="22" fill="var(--dim)">weekly-email/SKILL.md</text>
-<text class="mono" x="884" y="266" font-size="22" font-weight="700" fill="var(--green)">## Self-check before handing it over</text>
-<text class="mono" x="900" y="304" font-size="21" font-weight="700" fill="var(--green)">- never cite a number I didn&#8217;t give it</text>
-<text class="mono" x="900" y="336" font-size="21" fill="var(--dim)">- always name the offer</text>
-<text class="mono" x="900" y="368" font-size="21" fill="var(--dim)">- never send without the PS</text>
+<!-- the file -->
+<text x="1190" y="182" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">THE RULES IT CHECKS AGAINST</text>
+<text class="mono" x="864" y="236" font-size="24" fill="var(--ink)">draft-email/SKILL.md</text>
+<text class="mono" x="870" y="294" font-size="24" font-weight="700" fill="var(--ink)">## Your rules</text>
+<text class="mono" x="870" y="341" font-size="24" font-weight="700" fill="var(--ink)">- only use numbers from the stats</text>
+<text class="mono" x="870" y="383" font-size="24" fill="var(--dim)">- always name the offer</text>
+<text class="mono" x="870" y="419" font-size="24" fill="var(--dim)">- always close with a PS</text>
+<text class="mono" x="870" y="455" font-size="24" fill="var(--dim)">- no emojis. Not one.</text>
 
-<!-- the stop -->
-<text x="800" y="526" font-size="30" font-weight="700" text-anchor="middle" fill="var(--red)">STOPPED BEFORE HANDING IT OVER</text>
-<text x="428" y="600" font-size="24" fill="var(--ink)">Line 2 cites 34%. That number does not appear</text>
-<text x="428" y="638" font-size="24" fill="var(--ink)">in last week&#8217;s stats, so I cannot source it.</text>
-<text class="mono" x="428" y="692" font-size="21" font-weight="700" fill="var(--red)">rule broken:</text>
-<text class="mono" x="586" y="692" font-size="21" fill="var(--dim)">never cite a number I didn&#8217;t give it</text>
+<!-- the AI -->
+<text x="200" y="876" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">the AI</text>
+<text x="200" y="910" font-size="24" text-anchor="middle" fill="var(--dim)">checking its own draft</text>
 
-<!-- the robot -->
-<text x="222" y="756" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">THE SAME SKILL,</text>
-<text x="222" y="784" font-size="20" font-weight="700" text-anchor="middle" fill="var(--dim)">ON ITS OWN OUTPUT</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">No second AI. No extra tools. Nothing outside the skill.</text>
-<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">It read a rule it was given, and stopped on its own output.</text>
+<!-- what it says -->
+<text x="970" y="620" font-size="32" font-weight="700" text-anchor="middle" fill="var(--ink)">STOPPED &#183; before it reached you</text>
+<text x="970" y="708" font-size="30" text-anchor="middle" fill="var(--ink)">&#8220;Line 2 says 34%. That number isn&#8217;t in</text>
+<text x="970" y="752" font-size="30" text-anchor="middle" fill="var(--ink)">last week&#8217;s stats, so I stopped here.&#8221;</text>
+<text x="666" y="808" font-size="26" font-weight="700" fill="var(--red)">rule broken:</text>
+<text class="mono" x="832" y="808" font-size="26" fill="var(--ink)">only use numbers from the stats</text>
 </svg></body></html>

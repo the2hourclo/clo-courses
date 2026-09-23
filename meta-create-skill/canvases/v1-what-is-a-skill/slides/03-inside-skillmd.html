@@ -1,103 +1,103 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
-:root{--bg:rgb(255,255,255);--ink:rgb(33,33,33);--dim:rgb(120,120,125);--green:rgb(45,140,60);--blue:rgb(52,120,190);--sans:"Excalifont",Inter,system-ui,sans-serif;}
-*{box-sizing:border-box;margin:0;padding:0;}html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}svg{display:block;}text{font-family:var(--sans);}
+:root{
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
+  --green:rgb(45,140,60); --purple:rgb(147,112,219);
+  --sans:"Excalifont",Inter,system-ui,sans-serif;
+  --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
+svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
 </style></head><body>
 <svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
 <defs>
-<filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
-<pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
 </defs>
-<rect width="1600" height="1050" fill="var(--bg)"/><rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===== SHAPES (wobble) — no text in here ===== -->
+<rect width="1600" height="1050" fill="var(--bg)"/>
+<rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
+
+<!-- ===== SHAPES (wobble) - no text in here ===== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <!-- file tab -->
-  <rect x="196" y="154" width="216" height="44" rx="12" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
-  <!-- the file card -->
-  <rect x="196" y="196" width="774" height="734" rx="20" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
-  <!-- Part 1: YAML frontmatter block (blue tint) -->
-  <rect x="214" y="224" width="738" height="208" rx="12" fill="rgba(52,120,190,0.08)" stroke="var(--blue)" stroke-width="2.5"/>
-  <!-- Part 2: routing table (green) -->
-  <rect x="228" y="542" width="724" height="166" rx="10" fill="rgba(45,140,60,0.06)" stroke="var(--green)" stroke-width="4"/>
-  <line x1="560" y1="542" x2="560" y2="708" stroke="var(--green)" stroke-width="3"/>
-  <line x1="228" y1="592" x2="952" y2="592" stroke="var(--green)" stroke-width="3"/>
-  <line x1="228" y1="650" x2="952" y2="650" stroke="var(--green)" stroke-width="2"/>
-  <!-- callout underlines -->
-  <line x1="1044" y1="264" x2="1300" y2="264" stroke="var(--dim)" stroke-width="2"/>
-  <line x1="1044" y1="556" x2="1392" y2="556" stroke="var(--dim)" stroke-width="2"/>
-  <!-- callout arrows (point left into the card) -->
-  <line x1="1032" y1="360" x2="958" y2="360" stroke="var(--blue)" stroke-width="3" stroke-dasharray="6 8"/>
-  <polyline points="976,350 958,360 976,370" stroke="var(--blue)" stroke-width="3"/>
-  <line x1="1032" y1="648" x2="958" y2="648" stroke="var(--green)" stroke-width="3"/>
-  <polyline points="976,638 958,648 976,658" stroke="var(--green)" stroke-width="3"/>
-  <line x1="1032" y1="824" x2="958" y2="824" stroke="var(--ink)" stroke-width="3"/>
-  <polyline points="976,814 958,824 976,834" stroke="var(--ink)" stroke-width="3"/>
+  <!-- file tab + the file card -->
+  <rect x="130" y="156" width="318" height="46" rx="12" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+  <rect x="130" y="198" width="800" height="752" rx="20" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+
+  <!-- THE HEADER: ink box (never a subfolder colour) -->
+  <rect x="150" y="220" width="760" height="266" rx="12" fill="rgba(33,33,33,0.035)" stroke="var(--ink)" stroke-width="3.5"/>
+
+  <!-- the "which version" table -->
+  <rect x="164" y="784" width="732" height="134" rx="8" stroke="rgb(190,190,188)" stroke-width="2.5"/>
+  <line x1="164" y1="828" x2="896" y2="828" stroke="rgb(190,190,188)" stroke-width="2.5"/>
+  <line x1="164" y1="873" x2="896" y2="873" stroke="rgb(212,212,210)" stroke-width="2"/>
+  <line x1="444" y1="784" x2="444" y2="918" stroke="rgb(190,190,188)" stroke-width="2.5"/>
+
+  <!-- the body: a thin dashed outline, so it reads box against box with the header -->
+  <rect x="150" y="500" width="760" height="436" rx="12" stroke="rgb(190,190,188)" stroke-width="2.5" stroke-dasharray="8 8"/>
+
+  <!-- callouts: arrowheads stop outside the card (x 945) -->
+  <line x1="1006" y1="356" x2="947" y2="356" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="961,346 944,356 961,366" stroke="var(--ink)" stroke-width="3.5"/>
+  <line x1="1006" y1="541" x2="947" y2="541" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="961,531 944,541 961,551" stroke="var(--ink)" stroke-width="3.5"/>
+  <!-- right-side brackets: all three steps / both table rows -->
+  <path d="M 944 612 L 958 612 L 958 722 L 944 722" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="958" y1="667" x2="1034" y2="667" stroke="var(--dim)" stroke-width="3"/>
+  <path d="M 944 828 L 958 828 L 958 918 L 944 918" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="958" y1="873" x2="1034" y2="873" stroke="var(--dim)" stroke-width="3"/>
 </g>
 
-<!-- ===== TEXT (crisp) — everything below is OUTSIDE the filter ===== -->
+<!-- ===== TEXT (crisp) - everything below is OUTSIDE the filter ===== -->
+<text x="800" y="80" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">The Header Decides If It Runs. The Body Says How.</text>
+<text x="800" y="126" font-size="28" text-anchor="middle" fill="var(--dim)">SKILL.md is a plain text file &#8212; you write it in ordinary words</text>
 
-<!-- claim-title + subtitle -->
-<text x="800" y="86" font-size="62" font-weight="700" text-anchor="middle" fill="var(--ink)">Every SKILL.md Is Just Two Parts</text>
-<text x="800" y="134" font-size="32" text-anchor="middle" fill="var(--dim)">a few lines of YAML on top, then a plain-markdown body</text>
+<!-- file tab -->
+<text class="mono" x="289" y="187" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">draft-email/SKILL.md</text>
 
-<!-- file tab label -->
-<text x="304" y="186" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">SKILL.md</text>
+<!-- THE HEADER, as real lines -->
+<text class="mono" x="176" y="258" font-size="26" fill="var(--dim)">---</text>
+<text class="mono" x="176" y="300" font-size="26" font-weight="700" fill="var(--ink)">name:</text>
+<text class="mono" x="272" y="300" font-size="26" fill="var(--ink)">draft-email</text>
+<text class="mono" x="176" y="342" font-size="26" font-weight="700" fill="var(--ink)">description:</text>
+<text x="380" y="342" font-size="26" fill="var(--ink)">Writes this week&#8217;s email in your voice.</text>
+<text x="380" y="382" font-size="26" fill="var(--ink)">Use when asked to write or redo the</text>
+<text x="380" y="422" font-size="26" fill="var(--ink)">weekly or launch email.</text>
+<text class="mono" x="176" y="464" font-size="26" fill="var(--dim)">---</text>
 
-<!-- PART 1 — YAML frontmatter, as real lines -->
-<text x="240" y="258" font-size="26" fill="var(--dim)">---</text>
-<text x="240" y="300" font-size="27" font-weight="700" fill="var(--blue)">name:</text>
-<text x="330" y="300" font-size="27" fill="var(--ink)">meta-create-skill</text>
-<text x="240" y="342" font-size="27" font-weight="700" fill="var(--blue)">description:</text>
-<text x="420" y="342" font-size="27" fill="var(--ink)">"Create, validate, test,</text>
-<text x="420" y="382" font-size="27" fill="var(--ink)">upgrade, and improve skills&#8230;"</text>
-<text x="240" y="420" font-size="26" fill="var(--dim)">---</text>
+<!-- THE BODY -->
+<text x="170" y="536" font-size="30" fill="var(--dim)">#</text>
+<text x="206" y="536" font-size="30" font-weight="700" fill="var(--ink)">Draft Email</text>
 
-<!-- PART 2 — body: title -->
-<text x="240" y="472" font-size="28" fill="var(--dim)">#</text>
-<text x="268" y="472" font-size="28" font-weight="700" fill="var(--ink)">Create Skill &#8212; Author, Chain, Improve</text>
+<text x="170" y="592" font-size="28" fill="var(--dim)">##</text>
+<text x="224" y="592" font-size="28" font-weight="700" fill="var(--ink)">Steps</text>
+<text x="176" y="634" font-size="26" fill="var(--ink)">1. Pick the one thing worth saying</text>
+<text x="176" y="674" font-size="26" fill="var(--ink)">2. Write it like</text>
+<text class="mono" x="370" y="674" font-size="24" font-weight="700" fill="var(--purple)">assets/best-email.md</text>
+<text x="176" y="714" font-size="26" fill="var(--ink)">3. Save it as a draft.</text>
 
-<!-- body: Workflow Routing section header -->
-<text x="240" y="522" font-size="28" fill="var(--dim)">##</text>
-<text x="286" y="522" font-size="28" font-weight="700" fill="var(--green)">Workflow Routing</text>
+<text x="170" y="766" font-size="28" fill="var(--dim)">##</text>
+<text x="224" y="766" font-size="28" font-weight="700" fill="var(--ink)">Which version</text>
+<text x="184" y="815" font-size="25" font-weight="700" fill="var(--ink)">Asked for&#8230;</text>
+<text x="464" y="815" font-size="25" font-weight="700" fill="var(--ink)">Open this file</text>
+<text x="184" y="860" font-size="25" fill="var(--ink)">this week&#8217;s email</text>
+<text class="mono" x="464" y="860" font-size="24" font-weight="700" fill="var(--green)">workflows/weekly.md</text>
+<text x="184" y="905" font-size="25" fill="var(--ink)">a launch email</text>
+<text class="mono" x="464" y="905" font-size="24" font-weight="700" fill="var(--green)">workflows/launch.md</text>
 
-<!-- routing table cells -->
-<text x="248" y="578" font-size="25" font-weight="700" fill="var(--ink)">User wants&#8230;</text>
-<text x="576" y="578" font-size="25" font-weight="700" fill="var(--ink)">Load this file</text>
-<text x="248" y="632" font-size="25" fill="var(--ink)">"create a skill"</text>
-<text x="576" y="632" font-size="25" fill="var(--green)">workflows/create-skill.md</text>
-<text x="248" y="688" font-size="25" fill="var(--ink)">"test a skill"</text>
-<text x="576" y="688" font-size="25" fill="var(--green)">workflows/test-skill.md</text>
+<!-- RIGHT: the header callout -->
+<text x="1024" y="318" font-size="32" font-weight="700" fill="var(--ink)">the header</text>
+<text x="1024" y="364" font-size="26" fill="var(--dim)">the AI reads this to decide</text>
+<text x="1024" y="400" font-size="26" fill="var(--dim)">whether to use the skill</text>
 
-<!-- body: When to Activate + core instructions -->
-<text x="240" y="756" font-size="28" fill="var(--dim)">##</text>
-<text x="286" y="756" font-size="28" font-weight="700" fill="var(--ink)">When to Activate</text>
-<text x="240" y="800" font-size="25" fill="var(--ink)">Use this when someone says&#8230;</text>
-<text x="240" y="840" font-size="25" fill="var(--dim)">"create a skill", "build a skill for X"&#8230;</text>
-<text x="240" y="878" font-size="25" fill="var(--dim)">&#8230; then the how-to + orientation.</text>
-
-<!-- RIGHT: PART 1 callout (blue) -->
-<text x="1044" y="250" font-size="26" font-weight="700" fill="var(--dim)">PART 1 &#8212; THE HEADER</text>
-<text x="1044" y="302" font-size="28" font-weight="700" fill="var(--blue)">always read first</text>
-<text x="1044" y="344" font-size="25" fill="var(--ink)">name = the skill's id</text>
-<text x="1044" y="384" font-size="25" fill="var(--ink)">description = the ONE field</text>
-<text x="1044" y="422" font-size="25" fill="var(--ink)">that decides if it fires</text>
-<text x="1044" y="462" font-size="24" font-style="italic" fill="var(--dim)">&#8594; "the AI's router landing page"</text>
-<text x="1044" y="494" font-size="24" font-style="italic" fill="var(--dim)">(covered in depth elsewhere)</text>
-
-<!-- RIGHT: PART 2 callouts (green + ink) -->
-<text x="1044" y="540" font-size="26" font-weight="700" fill="var(--dim)">PART 2 &#8212; THE BODY (markdown)</text>
-<text x="1044" y="600" font-size="28" font-weight="700" fill="var(--green)">WORKFLOW ROUTING</text>
-<text x="1044" y="642" font-size="25" fill="var(--ink)">often IS most of the body</text>
-<text x="1044" y="680" font-size="25" fill="var(--ink)">a map: what you want &#8594;</text>
-<text x="1044" y="718" font-size="25" fill="var(--green)">which workflow file to load</text>
-
-<text x="1044" y="772" font-size="28" font-weight="700" fill="var(--ink)">CORE INSTRUCTIONS</text>
-<text x="1044" y="814" font-size="25" fill="var(--dim)">the how-to + orientation</text>
-<text x="1044" y="852" font-size="25" fill="var(--dim)">+ when-to-activate rules</text>
-<text x="1044" y="892" font-size="24" font-style="italic" fill="var(--green)">&#8594; your conventions &#183; step order + carve-outs</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="968" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">The header decides whether the skill fires.</text>
-<text x="800" y="1008" font-size="34" font-weight="700" text-anchor="middle" fill="var(--green)">The body is often just a map into workflows/.</text>
+<!-- RIGHT: the body callouts -->
+<text x="1024" y="552" font-size="32" font-weight="700" fill="var(--ink)">the body</text>
+<text x="1024" y="592" font-size="26" fill="var(--dim)">your instructions, in plain words</text>
+<text x="1048" y="676" font-size="26" fill="var(--dim)">the order to work in</text>
+<text x="1048" y="866" font-size="26" fill="var(--dim)">which file to open</text>
+<text x="1048" y="902" font-size="26" fill="var(--dim)">for each version</text>
 </svg></body></html>

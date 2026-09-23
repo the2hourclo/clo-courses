@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --orange:#c2410c;
+  --green:rgb(45,140,60); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -28,25 +28,31 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- v5-02 (rebuilt 2026-09-23). ONE job: the retrospective writes your correction INTO the skill file.
+     Subtitle = the one-line definition (DESIGN-SYSTEM section 10). The arrow into the file says
+     "written in - after your yes" so v5-03 is not a backtrack. Green NEW tags replace "+ -". -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
 
-  <!-- ============ you say what was wrong ============ -->
-  <rect x="150" y="210" width="470" height="150" rx="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <path d="M 330 360 L 330 388 L 366 360" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <!-- you -->
+  <circle cx="110" cy="300" r="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="110" y1="318" x2="110" y2="382" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="338" x2="80" y2="366" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="338" x2="140" y2="366" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="382" x2="86" y2="432" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="382" x2="134" y2="432" stroke="var(--ink)" stroke-width="4"/>
+  <!-- what you say, a speech bubble with its tail to you -->
+  <rect x="165" y="210" width="430" height="190" rx="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <path d="M 166 286 L 134 300 L 166 316" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="605" y1="302" x2="690" y2="302" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="682,295 690,302 682,309" stroke="var(--dim)" stroke-width="3"/>
 
-  <line x1="630" y1="285" x2="700" y2="285" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="692,278 700,285 692,292" stroke="var(--dim)" stroke-width="3"/>
-
-  <!-- ============================================================ -->
-  <!-- id="canonical-robot" — copied VERBATIM from
-       .claude/skills/excali-graphic/assets/exemplars/canonical-robot-blackmarker.html
-       Repositioned per its own rule: translate(cx-1400*s, feetY-943*s) scale(s)
-       with s=0.72, cx=790, feetY=430. -->
-  <g id="canonical-robot" transform="translate(-218.0,-248.96) scale(0.72)">
+  <!-- the AI, running the retrospective -->
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=790 feetY=470 s=0.85 -->
+  <g id="canonical-robot" transform="translate(-400.00,-331.55) scale(0.85)">
     <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
     <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
-    <circle cx="1400" cy="632" r="15" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
     <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
     <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
     <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
@@ -56,9 +62,13 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
-    <rect x="1370" y="774" width="60" height="48" rx="7" stroke="var(--orange)" stroke-width="3.5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
     <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
     <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
     <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
@@ -79,6 +89,8 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
     <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
     <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
     <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
@@ -86,67 +98,54 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <!-- ============================================================ -->
 
-  <line x1="852" y1="285" x2="894" y2="285" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="886,278 894,285 886,292" stroke="var(--dim)" stroke-width="3"/>
+  <!-- written in - after your yes -->
+  <line x1="790" y1="556" x2="790" y2="600" stroke="var(--green)" stroke-width="4"/>
+  <polyline points="782,591 790,600 798,591" stroke="var(--green)" stroke-width="4"/>
 
-  <!-- ============ it runs the retrospective ============ -->
-  <rect x="900" y="210" width="550" height="150" rx="14" stroke="var(--blue)" stroke-width="4" fill="var(--bg)"/>
+  <!-- the file, now carrying the correction; its label sits ON the file (a tab) -->
+  <rect x="150" y="606" width="330" height="46" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="150" y="650" width="700" height="270" rx="12" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="172" y="786" width="72" height="34" rx="8" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.10)"/>
+  <rect x="172" y="844" width="72" height="34" rx="8" stroke="var(--green)" stroke-width="3" fill="rgba(45,140,60,0.10)"/>
 
-  <!-- ============ the elbow: the edit travels DOWN into the file ============ -->
-  <line x1="940" y1="366" x2="940" y2="486" stroke="var(--green)" stroke-width="4"/>
-  <line x1="940" y1="486" x2="500" y2="486" stroke="var(--green)" stroke-width="4"/>
-  <line x1="500" y1="486" x2="500" y2="537" stroke="var(--green)" stroke-width="4"/>
-  <polyline points="493,529 500,537 507,529" stroke="var(--green)" stroke-width="4"/>
-
-  <!-- ============ the file, now carrying the correction ============ -->
-  <rect x="150" y="545" width="700" height="300" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="150" y1="600" x2="850" y2="600" stroke="rgb(223,223,221)" stroke-width="2.5"/>
-  <!-- the two added lines, boxed -->
-  <rect x="164" y="752" width="668" height="82" rx="6" stroke="var(--green)" stroke-width="3" fill="var(--bg)"/>
-
-  <!-- ============ every run after this ============ -->
-  <line x1="858" y1="690" x2="994" y2="690" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="986,683 994,690 986,697" stroke="var(--dim)" stroke-width="3"/>
-  <rect x="1000" y="620" width="490" height="150" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <!-- the following week's email (top-right, same place as v5-01's "next week" box) -->
+  <rect x="1050" y="222" width="480" height="210" rx="12" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="1050" y1="276" x2="1530" y2="276" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <!-- next week opens the updated file -->
+  <line x1="858" y1="780" x2="1290" y2="780" stroke="var(--ink)" stroke-width="3.5"/>
+  <line x1="1290" y1="780" x2="1290" y2="446" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1282,455 1290,446 1298,455" stroke="var(--ink)" stroke-width="3.5"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">This Time, Your Correction Lands In The Skill File</text>
+<text x="800" y="104" font-size="26" text-anchor="middle" fill="var(--dim)">The retrospective: the AI looks back at what went wrong and edits the skill file.</text>
 
-<!-- claim-title + subtitle -->
-<text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">The Retrospective Writes Your Correction Into The File</text>
-<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">The same sentence you would say to a new hire &#8212; it lands in the skill, not the chat</text>
+<text x="380" y="192" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU SAY WHAT WAS WRONG</text>
+<text x="380" y="270" font-size="27" text-anchor="middle" fill="var(--ink)">&#8220;Drop the emojis and</text>
+<text x="380" y="310" font-size="27" text-anchor="middle" fill="var(--ink)">lead with the number.</text>
+<text x="380" y="350" font-size="27" text-anchor="middle" fill="var(--ink)">Fix the skill.&#8221;</text>
+<text x="110" y="464" font-size="24" text-anchor="middle" fill="var(--dim)">you</text>
 
-<!-- you say what was wrong -->
-<text x="385" y="194" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU SAY WHAT WAS WRONG</text>
-<text x="385" y="272" font-size="27" text-anchor="middle" fill="var(--ink)">&#8220;Drop the emojis and</text>
-<text x="385" y="312" font-size="27" text-anchor="middle" fill="var(--ink)">lead with the number.&#8221;</text>
+<text x="790" y="506" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">the AI</text>
+<text x="790" y="538" font-size="24" text-anchor="middle" fill="var(--dim)">running the retrospective</text>
+<text x="816" y="588" font-size="24" font-weight="700" fill="var(--green)">written in &#8212; after your yes</text>
 
-<!-- it runs the retrospective -->
-<text x="1175" y="194" font-size="21" font-weight="700" text-anchor="middle" fill="var(--blue)">IT RUNS THE RETROSPECTIVE</text>
-<text class="mono" x="1175" y="268" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">retrospective/</text>
-<text x="1175" y="312" font-size="21" text-anchor="middle" fill="var(--dim)">turns what you said into an edit to the file</text>
+<text class="mono" x="170" y="637" font-size="24" fill="var(--ink)">draft-email/SKILL.md</text>
+<text x="170" y="704" font-size="26" font-weight="700" fill="var(--dim)">##</text>
+<text x="216" y="704" font-size="26" font-weight="700" fill="var(--ink)">The framework you follow</text>
+<text class="mono" x="190" y="752" font-size="24" fill="var(--ink)">- problem &#8594; one story &#8594; one ask</text>
+<text x="208" y="811" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">NEW</text>
+<text x="208" y="869" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">NEW</text>
+<text class="mono" x="262" y="811" font-size="24" font-weight="700" fill="var(--green)">No emojis. Not one.</text>
+<text class="mono" x="262" y="869" font-size="24" font-weight="700" fill="var(--green)">Lead with last week&#8217;s number.</text>
 
-<!-- the lane + the elbow -->
-<text x="100" y="452" font-size="21" font-weight="700" fill="var(--dim)">THE SKILL ON DISK</text>
-<text x="600" y="468" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">written into the file</text>
-
-<!-- the file -->
-<text class="mono" x="176" y="585" font-size="22" fill="var(--dim)">weekly-report/SKILL.md</text>
-<text class="mono" x="176" y="644" font-size="22" fill="var(--ink)">## Conventions</text>
-<text class="mono" x="176" y="688" font-size="21" fill="var(--dim)">- Keep it under one page</text>
-<text class="mono" x="176" y="728" font-size="21" fill="var(--dim)">- Pull numbers from the dashboard</text>
-<text class="mono" x="182" y="784" font-size="22" font-weight="700" fill="var(--green)">+ - No emojis. Not one.</text>
-<text class="mono" x="182" y="820" font-size="22" font-weight="700" fill="var(--green)">+ - Open with the headline number.</text>
-
-<!-- every run after this -->
-<text x="1245" y="604" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">EVERY RUN AFTER THIS</text>
-<text x="1245" y="678" font-size="25" text-anchor="middle" fill="var(--ink)">no emojis, number first &#8212;</text>
-<text x="1245" y="718" font-size="25" text-anchor="middle" fill="var(--ink)">without you saying it again</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">You say it in plain words, once.</text>
-<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">It becomes part of the skill from then on.</text>
+<text x="1290" y="204" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">GETS IT RIGHT</text>
+<text x="1070" y="259" font-size="24" font-weight="700" fill="var(--ink)">the email it writes</text>
+<text x="1070" y="324" font-size="24" fill="var(--ink)">no emojis,</text>
+<text x="1070" y="362" font-size="24" fill="var(--ink)">last week&#8217;s number up top</text>
+<text x="1070" y="408" font-size="24" fill="var(--dim)">without you saying it again</text>
+<text x="1074" y="764" font-size="24" text-anchor="middle" fill="var(--ink)">next week opens the updated file</text>
 </svg></body></html>

@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --red:rgb(214,69,58);
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -24,90 +24,71 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 
 <!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g transform="translate(0,52)">
 
-  <!-- ============ the hardened skill: a real file view ============ -->
-  <rect x="380" y="152" width="840" height="228" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="380" y1="203" x2="1220" y2="203" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <!-- ============ the hardened skill: the same file v7 built ============ -->
+  <rect x="400" y="150" width="800" height="300" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="400" y1="202" x2="1200" y2="202" stroke="rgb(223,223,221)" stroke-width="2.5"/>
 
-  <!-- ============ fan-out: the same skill meets three failures ============ -->
-  <line x1="800" y1="382" x2="800" y2="412" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="270" y1="412" x2="1330" y2="412" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="270" y1="412" x2="270" y2="440" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="263,432 270,440 277,432" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="800" y1="412" x2="800" y2="440" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="793,432 800,440 807,432" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="1330" y1="412" x2="1330" y2="440" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="1323,432 1330,440 1337,432" stroke="var(--dim)" stroke-width="3"/>
+  <!-- ============ fan-out: three runs come OUT of the skill ============ -->
+  <line x1="800" y1="452" x2="800" y2="482" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="275" y1="482" x2="1325" y2="482" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="275" y1="482" x2="275" y2="512" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="267,503 275,512 283,503" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="800" y1="482" x2="800" y2="512" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="792,503 800,512 808,503" stroke="var(--dim)" stroke-width="3.5"/>
+  <line x1="1325" y1="482" x2="1325" y2="512" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="1317,503 1325,512 1333,503" stroke="var(--dim)" stroke-width="3.5"/>
 
-  <!-- ============ FAILURE 1 - the draft card ============ -->
-  <rect x="50" y="452" width="440" height="152" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="270" y1="676" x2="270" y2="708" stroke="var(--green)" stroke-width="4"/>
-  <polyline points="262,699 270,708 278,699" stroke="var(--green)" stroke-width="4"/>
-  <rect x="120" y="714" width="300" height="64" rx="14" stroke="var(--green)" stroke-width="4.5" fill="var(--bg)"/>
+  <!-- ============ the three bad runs ============ -->
+  <rect x="50" y="520" width="450" height="210" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="575" y="520" width="450" height="210" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <rect x="1100" y="520" width="450" height="210" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
 
-  <!-- ============ FAILURE 2 - the draft card ============ -->
-  <rect x="580" y="452" width="440" height="152" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="800" y1="676" x2="800" y2="708" stroke="var(--red)" stroke-width="4"/>
-  <polyline points="792,699 800,708 808,699" stroke="var(--red)" stroke-width="4"/>
-  <rect x="620" y="714" width="360" height="64" rx="14" stroke="var(--red)" stroke-width="4.5" fill="var(--bg)"/>
+  <!-- ============ verdicts ============ -->
+  <line x1="275" y1="732" x2="275" y2="768" stroke="var(--ink)" stroke-width="4"/>
+  <polyline points="267,759 275,768 283,759" stroke="var(--ink)" stroke-width="4"/>
+  <rect x="140" y="776" width="270" height="76" rx="14" stroke="var(--ink)" stroke-width="4.5" fill="var(--bg)"/>
+  <line x1="800" y1="732" x2="800" y2="768" stroke="var(--red)" stroke-width="4"/>
+  <polyline points="792,759 800,768 808,759" stroke="var(--red)" stroke-width="4"/>
+  <rect x="610" y="776" width="380" height="76" rx="14" stroke="var(--red)" stroke-width="4.5" fill="var(--bg)"/>
+  <line x1="1325" y1="732" x2="1325" y2="768" stroke="var(--red)" stroke-width="4"/>
+  <polyline points="1317,759 1325,768 1333,759" stroke="var(--red)" stroke-width="4"/>
+  <rect x="1135" y="776" width="380" height="76" rx="14" stroke="var(--red)" stroke-width="4.5" fill="var(--bg)"/>
 
-  <!-- ============ FAILURE 3 - the draft card ============ -->
-  <rect x="1110" y="452" width="440" height="152" rx="14" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="1330" y1="676" x2="1330" y2="708" stroke="var(--red)" stroke-width="4"/>
-  <polyline points="1322,699 1330,708 1338,699" stroke="var(--red)" stroke-width="4"/>
-  <rect x="1150" y="714" width="360" height="64" rx="14" stroke="var(--red)" stroke-width="4.5" fill="var(--bg)"/>
-
-  <!-- ============ closing divider ============ -->
-  <line x1="300" y1="908" x2="1300" y2="908" stroke="rgb(228,228,226)" stroke-width="2.5"/>
-
+</g>
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
 
-<!-- claim-title + subtitle -->
-<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">Hardening Did Its Job. Two Got Through Anyway.</text>
-<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">Three bad drafts thrown at the skill you just hardened</text>
+<!-- claim-title + subtitle (the only two prose lines) -->
+<text x="800" y="62" font-size="46" font-weight="700" text-anchor="middle" fill="var(--ink)">Hardening Did Its Job. Two Got Through Anyway.</text>
+<text x="800" y="110" font-size="28" text-anchor="middle" fill="var(--dim)">Three bad runs of the hardened skill</text>
 
+<g transform="translate(0,52)">
 <!-- the hardened skill -->
-<text x="800" y="136" font-size="21" font-weight="700" text-anchor="middle" fill="var(--ink)">THE SKILL YOU JUST HARDENED</text>
-<text class="mono" x="404" y="188" font-size="22" fill="var(--dim)">weekly-email/SKILL.md</text>
-<text class="mono" x="404" y="245" font-size="22" fill="var(--ink)">## Self-check before handing it over</text>
-<text class="mono" x="404" y="288" font-size="21" fill="var(--dim)">- never cite a number I didn&#8217;t give it</text>
-<text class="mono" x="404" y="323" font-size="21" fill="var(--dim)">- always name the offer</text>
-<text class="mono" x="404" y="358" font-size="21" fill="var(--dim)">- never send without the PS</text>
+<text class="mono" x="424" y="186" font-size="24" fill="var(--ink)">draft-email/SKILL.md</text>
+<text class="mono" x="430" y="244" font-size="24" font-weight="700" fill="var(--ink)">## Your rules</text>
+<text class="mono" x="430" y="280" font-size="24" fill="var(--ink)">- only use numbers from the stats</text>
+<text class="mono" x="430" y="314" font-size="24" fill="var(--ink)">- always name the offer</text>
+<text class="mono" x="430" y="348" font-size="24" fill="var(--ink)">- &#8230;</text>
+<text class="mono" x="430" y="394" font-size="24" font-weight="700" fill="var(--ink)">## Self-check before handing it over</text>
+<text class="mono" x="430" y="428" font-size="24" fill="var(--ink)">- read the draft against every rule</text>
 
-<!-- ---------- FAILURE 1 ---------- -->
-<text x="270" y="514" font-size="26" text-anchor="middle" fill="var(--ink)">&#8220;Open rate hit 34%</text>
-<text x="270" y="554" font-size="26" text-anchor="middle" fill="var(--ink)">last month.&#8221;</text>
-<text x="270" y="628" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">THAT NUMBER IS</text>
-<text x="270" y="656" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">NOWHERE IN THE DATA.</text>
-<text x="270" y="758" font-size="32" font-weight="700" text-anchor="middle" fill="var(--green)">CAUGHT</text>
-<text x="270" y="812" font-size="21" text-anchor="middle" fill="var(--ink)">The rule is written in the file,</text>
-<text x="270" y="844" font-size="21" text-anchor="middle" fill="var(--ink)">so the skill could check</text>
-<text x="270" y="876" font-size="21" text-anchor="middle" fill="var(--ink)">itself against it.</text>
+<!-- run 1 -->
+<text x="275" y="614" font-size="30" text-anchor="middle" fill="var(--ink)">&#8220;Open rate hit 34%,</text>
+<text x="275" y="660" font-size="30" text-anchor="middle" fill="var(--ink)">our best month yet.&#8221;</text>
+<text x="275" y="827" font-size="34" font-weight="700" text-anchor="middle" fill="var(--ink)">STOPPED</text>
 
-<!-- ---------- FAILURE 2 ---------- -->
-<text x="800" y="496" font-size="26" text-anchor="middle" fill="var(--ink)">&#8220;We are pleased to share</text>
-<text x="800" y="534" font-size="26" text-anchor="middle" fill="var(--ink)">this week&#8217;s key learnings</text>
-<text x="800" y="572" font-size="26" text-anchor="middle" fill="var(--ink)">and actionable insights.&#8221;</text>
-<text x="800" y="628" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">EVERY RULE FOLLOWED.</text>
-<text x="800" y="656" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">READS LIKE A ROBOT.</text>
-<text x="800" y="758" font-size="32" font-weight="700" text-anchor="middle" fill="var(--red)">GOT THROUGH</text>
-<text x="800" y="812" font-size="21" text-anchor="middle" fill="var(--ink)">No rule was broken. The thing</text>
-<text x="800" y="844" font-size="21" text-anchor="middle" fill="var(--ink)">that chose those words has</text>
-<text x="800" y="876" font-size="21" text-anchor="middle" fill="var(--ink)">no distance from them.</text>
+<!-- run 2 -->
+<text x="800" y="592" font-size="30" text-anchor="middle" fill="var(--ink)">&#8220;We are pleased to share</text>
+<text x="800" y="636" font-size="30" text-anchor="middle" fill="var(--ink)">this week&#8217;s key learnings</text>
+<text x="800" y="680" font-size="30" text-anchor="middle" fill="var(--ink)">and actionable insights.&#8221;</text>
+<text x="800" y="827" font-size="34" font-weight="700" text-anchor="middle" fill="var(--red)">GOT THROUGH</text>
 
-<!-- ---------- FAILURE 3 ---------- -->
-<text x="1330" y="514" font-size="26" text-anchor="middle" fill="var(--ink)">&#8220;Draft saved to</text>
-<text class="mono" x="1330" y="556" font-size="23" text-anchor="middle" fill="var(--ink)">/drafts/weekly-email.md&#8221;</text>
-<text x="1330" y="628" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">IT SAYS SAVED.</text>
-<text x="1330" y="656" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">THE FOLDER IS EMPTY.</text>
-<text x="1330" y="758" font-size="32" font-weight="700" text-anchor="middle" fill="var(--red)">GOT THROUGH</text>
-<text x="1330" y="812" font-size="21" text-anchor="middle" fill="var(--ink)">No rule was broken. The skill</text>
-<text x="1330" y="844" font-size="21" text-anchor="middle" fill="var(--ink)">can only see its own output,</text>
-<text x="1330" y="876" font-size="21" text-anchor="middle" fill="var(--ink)">never the folder.</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">The skill held itself to every rule you gave it.</text>
-<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">A harness exists for the failures no skill can see in itself.</text>
+<!-- run 3 -->
+<text x="1325" y="614" font-size="30" text-anchor="middle" fill="var(--ink)">&#8220;Done &#8212; saved to</text>
+<text class="mono" x="1325" y="660" font-size="26" text-anchor="middle" fill="var(--ink)">drafts/weekly-email.md&#8221;</text>
+<text x="1325" y="827" font-size="34" font-weight="700" text-anchor="middle" fill="var(--red)">GOT THROUGH</text>
+</g>
 </svg></body></html>

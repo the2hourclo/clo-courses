@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58); --amber:rgb(214,140,40); --blue:rgb(52,120,190); --purple:rgb(147,112,219);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -17,78 +17,203 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
   <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <!-- REQUIRED by the canonical robot block -->
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
 </defs>
 
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- v6-01 (rebuilt 2026-09-23). ONE job: what you tell it is the only thing that changes the
+     result. Same person, same AI, same file name in both rows - only the answer differs.
+     Running example = draft-email/ (DESIGN-SYSTEM section 9). The specific answer deliberately
+     does NOT mention emojis or leading with the number: that is the correction v5 teaches. -->
+
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
 
-  <!-- ============ LANE A — the vague answer ============ -->
-  <rect x="90" y="196" width="470" height="150" rx="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <path d="M 260 346 L 260 374 L 296 346" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="568" y1="271" x2="612" y2="271" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="604,264 612,271 604,278" stroke="var(--dim)" stroke-width="3"/>
-  <rect x="620" y="196" width="460" height="150" rx="10" stroke="var(--dim)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="620" y1="242" x2="1080" y2="242" stroke="rgb(223,223,221)" stroke-width="2.5"/>
-  <line x1="1088" y1="271" x2="1132" y2="271" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="1124,264 1132,271 1124,278" stroke="var(--dim)" stroke-width="3"/>
-  <rect x="1140" y="216" width="370" height="110" rx="14" stroke="var(--red)" stroke-width="4" fill="var(--bg)"/>
+  <!-- ============ ROW A - the vague answer ============ -->
+  <!-- you -->
+  <circle cx="110" cy="348" r="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="110" y1="366" x2="110" y2="430" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="386" x2="80" y2="414" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="386" x2="140" y2="414" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="430" x2="86" y2="480" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="430" x2="134" y2="480" stroke="var(--ink)" stroke-width="4"/>
+  <!-- your answer, a speech bubble with its tail to you -->
+  <rect x="165" y="280" width="350" height="160" rx="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <path d="M 166 334 L 134 348 L 166 362" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="525" y1="360" x2="577" y2="360" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="569,353 577,360 569,367" stroke="var(--dim)" stroke-width="3"/>
+  <!-- the file it writes -->
+  <rect x="585" y="270" width="360" height="180" rx="10" stroke="var(--dim)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="585" y1="317" x2="945" y2="317" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <line x1="953" y1="360" x2="1000" y2="360" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="992,353 1000,360 992,367" stroke="var(--dim)" stroke-width="3"/>
+  <!-- the AI -->
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=1075 feetY=480 s=0.72 -->
+  <g id="canonical-robot" transform="translate(67.00,-198.96) scale(0.72)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+  </g>
+  <line x1="1150" y1="360" x2="1184" y2="360" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1176,353 1184,360 1176,367" stroke="var(--dim)" stroke-width="3"/>
+  <!-- what comes back -->
+  <rect x="1192" y="295" width="338" height="130" rx="14" stroke="var(--red)" stroke-width="4" fill="var(--bg)"/>
 
   <!-- divider between the two answers -->
-  <line x1="90" y1="430" x2="1510" y2="430" stroke="rgb(223,223,221)" stroke-width="2.5" stroke-dasharray="12 12"/>
+  <line x1="80" y1="552" x2="1530" y2="552" stroke="rgb(223,223,221)" stroke-width="2.5" stroke-dasharray="12 12"/>
 
-  <!-- ============ LANE B — the specific answer ============ -->
-  <rect x="90" y="500" width="470" height="190" rx="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <path d="M 260 690 L 260 718 L 296 690" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="568" y1="595" x2="612" y2="595" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="604,588 612,595 604,602" stroke="var(--dim)" stroke-width="3"/>
-  <rect x="620" y="500" width="460" height="190" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
-  <line x1="620" y1="550" x2="1080" y2="550" stroke="rgb(223,223,221)" stroke-width="2.5"/>
-  <line x1="1088" y1="595" x2="1132" y2="595" stroke="var(--dim)" stroke-width="3"/>
-  <polyline points="1124,588 1132,595 1124,602" stroke="var(--dim)" stroke-width="3"/>
-  <rect x="1140" y="540" width="370" height="110" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <!-- ============ ROW B - the specific answer ============ -->
+  <circle cx="110" cy="753" r="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="110" y1="771" x2="110" y2="835" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="791" x2="80" y2="819" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="791" x2="140" y2="819" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="835" x2="86" y2="885" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="110" y1="835" x2="134" y2="885" stroke="var(--ink)" stroke-width="4"/>
+  <rect x="165" y="670" width="350" height="190" rx="18" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <path d="M 166 739 L 134 753 L 166 767" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="525" y1="765" x2="577" y2="765" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="569,758 577,765 569,772" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="585" y="665" width="360" height="200" rx="10" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <line x1="585" y1="712" x2="945" y2="712" stroke="rgb(223,223,221)" stroke-width="2.5"/>
+  <line x1="953" y1="765" x2="1000" y2="765" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="992,758 1000,765 992,772" stroke="var(--dim)" stroke-width="3"/>
+  <!-- the SAME AI -->
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=1075 feetY=885 s=0.72 -->
+  <g id="canonical-robot-2" transform="translate(67.00,206.04) scale(0.72)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+  </g>
+  <line x1="1150" y1="765" x2="1184" y2="765" stroke="var(--dim)" stroke-width="3"/>
+  <polyline points="1176,758 1184,765 1176,772" stroke="var(--dim)" stroke-width="3"/>
+  <rect x="1192" y="700" width="338" height="130" rx="14" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
 
-<!-- claim-title + subtitle -->
+<!-- claim-title + subtitle (the only two prose lines) -->
 <text x="800" y="58" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">A Skill Is Only As Clear As You Are About Your Own Work</text>
-<text x="800" y="100" font-size="25" text-anchor="middle" fill="var(--dim)">Same tool and same interview. The difference is what you were able to tell it.</text>
+<text x="800" y="104" font-size="28" text-anchor="middle" fill="var(--dim)">Same AI. Only what you told it changed.</text>
 
-<!-- lane A -->
-<text x="90" y="178" font-size="21" font-weight="700" fill="var(--red)">A VAGUE ANSWER</text>
-<text x="325" y="262" font-size="24" text-anchor="middle" fill="var(--ink)">&#8220;Just write it the way</text>
-<text x="325" y="300" font-size="24" text-anchor="middle" fill="var(--ink)">I normally do.&#8221;</text>
+<!-- row A -->
+<text x="80" y="242" font-size="24" font-weight="700" fill="var(--ink)">A VAGUE ANSWER</text>
+<text x="110" y="516" font-size="24" text-anchor="middle" fill="var(--dim)">you</text>
+<text x="340" y="352" font-size="26" text-anchor="middle" fill="var(--ink)">&#8220;Just write it the way</text>
+<text x="340" y="390" font-size="26" text-anchor="middle" fill="var(--ink)">I normally do.&#8221;</text>
+<text class="mono" x="605" y="303" font-size="24" fill="var(--dim)">draft-email/SKILL.md</text>
+<text class="mono" x="605" y="368" font-size="24" fill="var(--dim)">- Write it well</text>
+<text class="mono" x="605" y="410" font-size="24" fill="var(--dim)">- Make it professional</text>
+<text x="1075" y="514" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">the AI</text>
+<text x="1361" y="353" font-size="26" text-anchor="middle" fill="var(--ink)">a generic email</text>
+<text x="1361" y="389" font-size="24" text-anchor="middle" fill="var(--dim)">still guessing</text>
 
-<text class="mono" x="642" y="228" font-size="20" fill="var(--dim)">meeting-notes/SKILL.md</text>
-<text class="mono" x="642" y="284" font-size="20" fill="var(--dim)">- Write it well</text>
-<text class="mono" x="642" y="320" font-size="20" fill="var(--dim)">- Make it professional</text>
-
-<text x="1325" y="258" font-size="22" text-anchor="middle" fill="var(--ink)">average at best</text>
-<text x="1325" y="294" font-size="21" text-anchor="middle" fill="var(--dim)">cannot generate revenue</text>
-
-<!-- lane B -->
-<text x="90" y="482" font-size="21" font-weight="700" fill="var(--green)">A SPECIFIC ANSWER</text>
-<text x="325" y="556" font-size="22" text-anchor="middle" fill="var(--ink)">&#8220;Open with last week&#8217;s</text>
-<text x="325" y="592" font-size="22" text-anchor="middle" fill="var(--ink)">number. Three winners only.</text>
-<text x="325" y="628" font-size="22" text-anchor="middle" fill="var(--ink)">No emojis. Match the</text>
-<text x="325" y="664" font-size="22" text-anchor="middle" fill="var(--ink)">Q3 report.&#8221;</text>
-
-<text class="mono" x="642" y="536" font-size="20" fill="var(--dim)">weekly-report/SKILL.md</text>
-<text class="mono" x="642" y="590" font-size="19" fill="var(--ink)">- Open with the headline number</text>
-<text class="mono" x="642" y="626" font-size="19" fill="var(--ink)">- Three winners, no more</text>
-<text class="mono" x="642" y="662" font-size="19" fill="var(--ink)">- No emojis. Match the Q3 report</text>
-
-<text x="1325" y="582" font-size="22" text-anchor="middle" fill="var(--ink)">~80% to your standard</text>
-<text x="1325" y="618" font-size="21" text-anchor="middle" fill="var(--dim)">ready to generate revenue</text>
-
-<!-- the point, under the fork -->
-<text x="800" y="790" font-size="23" text-anchor="middle" fill="var(--dim)">The AI is the same in both rows. Only the answer it was given changed.</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="962" font-size="27" text-anchor="middle" fill="var(--ink)">The AI can write the file for you.</text>
-<text x="800" y="1006" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">It cannot invent how you like the work done.</text>
+<!-- row B -->
+<text x="80" y="612" font-size="24" font-weight="700" fill="var(--ink)">A SPECIFIC ANSWER</text>
+<text x="110" y="921" font-size="24" text-anchor="middle" fill="var(--dim)">you</text>
+<text x="340" y="727" font-size="26" text-anchor="middle" fill="var(--ink)">&#8220;Three winners, no more.</text>
+<text x="340" y="765" font-size="26" text-anchor="middle" fill="var(--ink)">Under 300 words. Match</text>
+<text x="340" y="803" font-size="26" text-anchor="middle" fill="var(--ink)">the best one I&#8217;ve sent.&#8221;</text>
+<text class="mono" x="605" y="698" font-size="24" fill="var(--dim)">draft-email/SKILL.md</text>
+<text class="mono" x="605" y="760" font-size="24" fill="var(--ink)">- Three winners, no more</text>
+<text class="mono" x="605" y="802" font-size="24" fill="var(--ink)">- Under 300 words</text>
+<text class="mono" x="605" y="844" font-size="24" fill="var(--ink)">- Match best-email.md</text>
+<text x="1075" y="919" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">the same AI</text>
+<text x="1361" y="758" font-size="25" text-anchor="middle" fill="var(--ink)">~80% to your standard</text>
+<text x="1361" y="794" font-size="24" text-anchor="middle" fill="var(--dim)">ready to use</text>
 </svg></body></html>

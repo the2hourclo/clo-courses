@@ -1,8 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><style>
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
-  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58); --orange:#c2410c;
+  --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125); --green:rgb(45,140,60); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -10,6 +9,7 @@
 html,body{width:1600px;height:1050px;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;}
 svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono);}
 </style></head><body>
+<!-- v9-05 - closing image: the Monday run, then the ladder band (same words as v4-05) marked YOU ARE HERE on the top rung -->
 <svg viewBox="0 0 1600 1050" width="1600" height="1050" xmlns="http://www.w3.org/2000/svg">
 <defs>
   <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
@@ -17,6 +17,7 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
   <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <!-- REQUIRED by the canonical block -->
   <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
     <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
     <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
@@ -27,72 +28,23 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
+<!-- ===================== SHAPES (all inside #rough) - no text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-
-  <!-- ============ 7:00 - the schedule fires ============ -->
-  <circle cx="172" cy="404" r="54" stroke="var(--ink)" stroke-width="4.5" fill="var(--bg)"/>
-  <!-- hands read 7:00 exactly, matching slide 03: minute to 12, hour at 210 degrees,
-       hour hand ~65% of the minute hand so the two never fuse into one bent line -->
-  <line x1="172" y1="404" x2="172" y2="360" stroke="var(--ink)" stroke-width="4"/>
-  <line x1="172" y1="404" x2="158" y2="429" stroke="var(--ink)" stroke-width="4"/>
-  <circle cx="172" cy="404" r="4.5" fill="var(--ink)" stroke="var(--ink)" stroke-width="2"/>
-  <line x1="172" y1="350" x2="172" y2="358" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="172" y1="450" x2="172" y2="458" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="118" y1="404" x2="126" y2="404" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="218" y1="404" x2="226" y2="404" stroke="var(--dim)" stroke-width="3"/>
-  <line x1="242" y1="404" x2="292" y2="404" stroke="var(--dim)" stroke-width="3.5"/>
-  <polyline points="283,395 292,404 283,413" stroke="var(--dim)" stroke-width="3.5"/>
-
-  <!-- ============ 7:12 - the result lands ============ -->
-  <line x1="540" y1="404" x2="590" y2="404" stroke="var(--dim)" stroke-width="3.5"/>
-  <polyline points="581,395 590,404 581,413" stroke="var(--dim)" stroke-width="3.5"/>
-  <rect x="700" y="326" width="200" height="240" rx="10" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="726" y1="386" x2="874" y2="386" stroke="var(--dim)" stroke-width="2.5"/>
-  <line x1="726" y1="424" x2="874" y2="424" stroke="var(--dim)" stroke-width="2.5"/>
-  <line x1="726" y1="462" x2="874" y2="462" stroke="var(--dim)" stroke-width="2.5"/>
-  <line x1="726" y1="500" x2="820" y2="500" stroke="var(--dim)" stroke-width="2.5"/>
-  <polyline points="856,286 870,302 900,268" stroke="var(--green)" stroke-width="5"/>
-
-  <!-- ============ 9:00 - you ============ -->
-  <line x1="1010" y1="404" x2="1060" y2="404" stroke="var(--dim)" stroke-width="3.5"/>
-  <polyline points="1051,395 1060,404 1051,413" stroke="var(--dim)" stroke-width="3.5"/>
-  <circle cx="1120" cy="342" r="32" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="1120" y1="374" x2="1120" y2="466" stroke="var(--ink)" stroke-width="4"/>
-  <line x1="1120" y1="404" x2="1068" y2="432" stroke="var(--ink)" stroke-width="4"/>
-  <line x1="1120" y1="466" x2="1084" y2="544" stroke="var(--ink)" stroke-width="4"/>
-  <line x1="1120" y1="466" x2="1156" y2="544" stroke="var(--ink)" stroke-width="4"/>
-  <!-- the draft they are reading -->
-  <rect x="1210" y="326" width="180" height="216" rx="8" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
-  <line x1="1236" y1="380" x2="1364" y2="380" stroke="var(--dim)" stroke-width="2.5"/>
-  <line x1="1236" y1="418" x2="1364" y2="418" stroke="var(--dim)" stroke-width="2.5"/>
-  <line x1="1236" y1="456" x2="1364" y2="456" stroke="var(--dim)" stroke-width="2.5"/>
-  <line x1="1236" y1="494" x2="1306" y2="494" stroke="var(--dim)" stroke-width="2.5"/>
-  <!-- the reading arm is drawn AFTER the page so the hand sits ON its edge. It STOPS at the
-       page border, above the first ruled line, so no stroke ever sits between the rules. -->
-  <line x1="1120" y1="404" x2="1196" y2="360" stroke="var(--ink)" stroke-width="4"/>
-  <path d="M 1196 360 Q 1210 352 1214 364" stroke="var(--ink)" stroke-width="4" fill="none"/>
-  <!-- the mug of coffee -->
-  <path d="M 1432 466 L 1440 540 L 1500 540 L 1508 466 Z" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
-  <path d="M 1508 480 Q 1538 500 1506 522" stroke="var(--ink)" stroke-width="3.5" fill="none"/>
-  <line x1="1434" y1="480" x2="1506" y2="480" stroke="var(--dim)" stroke-width="2.5"/>
-  <!-- steam: S-curve wisps centred over the mug body, taller than wide -->
-  <path d="M 1456 458 C 1444 444 1468 432 1456 418 C 1448 408 1460 400 1456 392" stroke="var(--dim)" stroke-width="3" fill="none"/>
-  <path d="M 1486 458 C 1474 444 1498 432 1486 418 C 1478 408 1490 400 1486 392" stroke="var(--dim)" stroke-width="3" fill="none"/>
-
-  <!-- ============ the scope arrow, completed ============ -->
-  <path d="M 80 800 L 1340 774 L 1340 750 L 1440 792 L 1340 834 L 1340 810 Z" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
-
-  <!-- ============ closing divider ============ -->
-  <line x1="300" y1="880" x2="1300" y2="880" stroke="rgb(228,228,226)" stroke-width="2.5"/>
-
-  <!-- ============================================================ -->
-  <!-- id="canonical-robot" - VERBATIM. translate(cx-1400*s, feetY-943*s) scale(s)
-       s=0.68, cx=390, feetY=540 -->
-  <g id="canonical-robot" transform="translate(-562.0,-101.24) scale(0.68)">
+<circle cx="150" cy="300" r="52" stroke="var(--ink)" stroke-width="4.5" fill="var(--bg)"/>
+  <line x1="150" y1="300" x2="150" y2="260" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="150" y1="300" x2="137" y2="324" stroke="var(--ink)" stroke-width="4"/>
+  <circle cx="150" cy="300" r="4.5" stroke="var(--ink)" stroke-width="2" fill="var(--ink)"/>
+  <line x1="150" y1="258" x2="150" y2="251" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="150" y1="342" x2="150" y2="349" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="108" y1="300" x2="101" y2="300" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="192" y1="300" x2="199" y2="300" stroke="var(--dim)" stroke-width="3"/>
+  <line x1="214" y1="300" x2="266" y2="300" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="254.9,306.8 266.0,300.0 254.9,293.2" stroke="var(--dim)" stroke-width="3.5"/>
+    <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=380 feetY=432 s=0.78 -->
+  <g id="canonical-robot" transform="translate(-712.00,-303.54) scale(0.78)">
     <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
     <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
-    <circle cx="1400" cy="632" r="15" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
     <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
     <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
     <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
@@ -102,9 +54,13 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
-    <rect x="1370" y="774" width="60" height="48" rx="7" stroke="var(--orange)" stroke-width="3.5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
     <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
     <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
     <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
     <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
@@ -125,6 +81,8 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
     <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
     <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
     <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
     <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
@@ -132,38 +90,70 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
     <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <!-- ============================================================ -->
-
+  <line x1="500" y1="300" x2="556" y2="300" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="544.9,306.8 556.0,300.0 544.9,293.2" stroke="var(--dim)" stroke-width="3.5"/>
+  <rect x="700" y="180" width="190" height="228" rx="8" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="724.7" y1="230.16" x2="865.3" y2="230.16" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="724.7" y1="265.5" x2="865.3" y2="265.5" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="724.7" y1="300.84" x2="865.3" y2="300.84" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="724.7" y1="336.18" x2="817.8" y2="336.18" stroke="var(--dim)" stroke-width="2.5"/>
+  <polyline points="916.0,204.0 929.0,218.0 956.0,186.0" stroke="var(--green)" stroke-width="5"/>
+  <line x1="990" y1="300" x2="1046" y2="300" stroke="var(--dim)" stroke-width="3.5"/>
+  <polyline points="1034.9,306.8 1046.0,300.0 1034.9,293.2" stroke="var(--dim)" stroke-width="3.5"/>
+  <circle cx="1110" cy="228" r="30" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="1110" y1="258" x2="1110" y2="346" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="1110" y1="286" x2="1060" y2="314" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="1110" y1="346" x2="1076" y2="420" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="1110" y1="346" x2="1144" y2="420" stroke="var(--ink)" stroke-width="4"/>
+  <rect x="1196" y="196" width="172" height="206" rx="8" stroke="var(--green)" stroke-width="4" fill="var(--bg)"/>
+  <line x1="1218.36" y1="241.32" x2="1345.64" y2="241.32" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1218.36" y1="273.25" x2="1345.64" y2="273.25" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1218.36" y1="305.18" x2="1345.64" y2="305.18" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1218.36" y1="337.11" x2="1302.64" y2="337.11" stroke="var(--dim)" stroke-width="2.5"/>
+  <line x1="1110" y1="286" x2="1184" y2="246" stroke="var(--ink)" stroke-width="4"/>
+  <path d="M 1184 246 Q 1198 238 1202 250" stroke="var(--ink)" stroke-width="4" fill="none"/>
+  <path d="M 1410 340 L 1418 410 L 1474 410 L 1482 340 Z" stroke="var(--ink)" stroke-width="3.5" fill="var(--bg)"/>
+  <path d="M 1482 354 Q 1510 372 1480 392" stroke="var(--ink)" stroke-width="3.5" fill="none"/>
+  <path d="M 1434 330 C 1422 316 1446 304 1434 290 C 1426 280 1438 272 1434 264" stroke="var(--dim)" stroke-width="3" fill="none"/>
+  <path d="M 1460 330 C 1448 316 1472 304 1460 290 C 1452 280 1464 272 1460 264" stroke="var(--dim)" stroke-width="3" fill="none"/>
+  <line x1="80" y1="552" x2="620" y2="552" stroke="rgb(212,212,210)" stroke-width="2.5"/>
+  <line x1="980" y1="552" x2="1520" y2="552" stroke="rgb(212,212,210)" stroke-width="2.5"/>
+  <rect x="80" y="700" width="400" height="184" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="540" y="668" width="440" height="216" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="1040" y="636" width="480" height="248" rx="16" stroke="var(--ink)" stroke-width="4.5" fill="var(--bg)"/>
+  <line x1="488" y1="800" x2="532" y2="800" stroke="var(--ink)" stroke-width="4"/>
+  <polyline points="520.9,806.8 532.0,800.0 520.9,793.2" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="988" y1="790" x2="1032" y2="790" stroke="var(--ink)" stroke-width="4"/>
+  <polyline points="1020.9,796.8 1032.0,790.0 1020.9,783.2" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="1360" y1="612" x2="1360" y2="632" stroke="var(--ink)" stroke-width="3.5"/>
+  <polyline points="1354.3,622.6 1360.0,632.0 1365.7,622.6" stroke="var(--ink)" stroke-width="3.5"/>
 </g>
 
-<!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
-
-<!-- claim-title + subtitle -->
-<text x="800" y="52" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">It Runs Monday Morning. You Read The Result.</text>
-<text x="800" y="94" font-size="25" text-anchor="middle" fill="var(--dim)">One appearance from you, at the end, on work that is already finished and checked</text>
-
-<!-- 7:00 -->
-<text x="290" y="266" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">MONDAY, 7:00AM</text>
-<text x="290" y="614" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">It starts itself.</text>
-<text x="290" y="650" font-size="22" text-anchor="middle" fill="var(--dim)">nobody asked it to</text>
-
-<!-- 7:12 -->
-<text x="800" y="266" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">7:12AM</text>
-<text x="800" y="614" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">The draft is in the folder.</text>
-<text x="800" y="650" font-size="22" text-anchor="middle" fill="var(--dim)">reviewed, and confirmed to be there</text>
-
-<!-- 9:00 -->
-<text x="1300" y="266" font-size="22" font-weight="700" text-anchor="middle" fill="var(--ink)">9:00AM</text>
-<text x="1300" y="614" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">You read it and say yes.</text>
-<text x="1300" y="650" font-size="22" text-anchor="middle" fill="var(--dim)">the only place you appear</text>
-
-<!-- the scope arrow -->
-<text x="230" y="700" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">A SKILL &#183; a task</text>
-<text x="700" y="700" font-size="21" font-weight="700" text-anchor="middle" fill="var(--dim)">A SKILL SYSTEM &#183; a function</text>
-<text x="1180" y="700" font-size="21" font-weight="700" text-anchor="middle" fill="var(--green)">YOUR AI EMPLOYEE &#183; a worker who owns it</text>
-<text x="1180" y="734" font-size="24" font-weight="700" text-anchor="middle" fill="var(--green)">and now it starts itself</text>
-
-<!-- one-line takeaway -->
-<text x="800" y="946" font-size="27" text-anchor="middle" fill="var(--ink)">You went from doing the work, to running the work, to reviewing it.</text>
-<text x="800" y="994" font-size="30" font-weight="700" text-anchor="middle" fill="var(--green)">That is your AI Employee.</text>
+<!-- ===================== TEXT (crisp, outside #rough) ===================== -->
+<text x="800" y="64" font-size="44" font-weight="700" text-anchor="middle" fill="var(--ink)">It Runs Monday Morning. You Read the Result.</text>
+<text x="290" y="150" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">MONDAY, 7:00AM</text>
+<text x="800" y="150" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">7:12AM</text>
+<text x="1300" y="150" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">9:00AM</text>
+<text x="290" y="464" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">Your AI Employee starts itself.</text>
+<text x="290" y="498" font-size="24" text-anchor="middle" fill="var(--dim)">nobody asked it to</text>
+<text x="800" y="464" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">The draft is in the folder.</text>
+<text x="800" y="498" font-size="24" text-anchor="middle" fill="var(--dim)">checked, and confirmed it saved</text>
+<text x="1300" y="464" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">You read it and say yes.</text>
+<text x="1300" y="498" font-size="24" text-anchor="middle" fill="var(--dim)">the only step that&#8217;s yours</text>
+<text x="800" y="561" font-size="24" font-weight="700" text-anchor="middle" fill="var(--dim)">HOW FAR YOU&#8217;VE COME</text>
+<text x="280" y="744" font-size="30" font-weight="700" text-anchor="middle" fill="var(--ink)">Skill</text>
+<text class="mono" x="280" y="780" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">draft-email/</text>
+<text x="280" y="820" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">a task</text>
+<text x="280" y="854" font-size="24" text-anchor="middle" fill="var(--dim)">one step, when you ask</text>
+<text x="760" y="712" font-size="30" font-weight="700" text-anchor="middle" fill="var(--ink)">Skill system</text>
+<text class="mono" x="760" y="748" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">weekly-email/</text>
+<text x="760" y="820" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">a function</text>
+<text x="760" y="854" font-size="24" text-anchor="middle" fill="var(--dim)">one whole job, when you ask</text>
+<text x="1280" y="680" font-size="30" font-weight="700" text-anchor="middle" fill="var(--ink)">AI Employee</text>
+<text class="mono" x="1280" y="716" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">weekly-email/</text>
+<text x="1280" y="748" font-size="24" text-anchor="middle" fill="var(--dim)">same folder, now on a schedule</text>
+<text x="1280" y="820" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">owns the function</text>
+<text x="1280" y="854" font-size="28" font-weight="700" text-anchor="middle" fill="var(--ink)">and starts itself</text>
+<text x="1240" y="620" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">YOU ARE HERE</text>
+<text x="800" y="956" font-size="30" font-weight="700" text-anchor="middle" fill="var(--ink)">You went from doing the work, to running it, to reviewing it.</text>
 </svg></body></html>

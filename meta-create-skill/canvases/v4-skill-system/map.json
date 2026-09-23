@@ -1,14 +1,13 @@
 {
-  "_comment": "Storyboard map for meta-create-skill VIDEO 4: What a Skill System Is (CP3's explainer). 5 diagrams in teaching order, one column each, left to right. NOTE: the CP3 wizard deck OPENS with two borrowed slides from v2-types-of-skills (05-skill-vs-workflow, 06-how-they-chain) before column 1 below — those files stay in v2 and are referenced, not copied. The deck answers CHAINING and stops; hardening, harnesses and scheduling belong to CP4.",
+  "_comment": "Storyboard map for meta-create-skill VIDEO 4: What a Skill System Is (CP3's explainer). 4 diagrams in teaching order, one column each, left to right (rebuilt 2026-09-23: old 04-a-real-system was folded into 02 and deleted). 01 and 02 share ONE layout so the swipe reads before -> after: same robot, same four boxes; in 01 you stand in every gap, in 02 the lead skill weekly-email/ carries every hand-off and you appear once, at the end ('your call'). 03 opens weekly-email/ (SKILL.md holds the order + every hand-off; the four skills inside only talk to it). 05 is the ladder - skill = a task -> skill system = a function -> AI Employee = owns the function and starts itself - with CP3 marked YOU ARE HERE on rung 2; v9-schedule/05 closes the series with the same wording on rung 3. NOTE: the CP3 wizard deck OPENS with two borrowed slides from v2-types-of-skills before column 1 below - those files stay in v2 and are referenced, not copied. The deck answers CHAINING and stops; hardening, harnesses and scheduling belong to CP4 and the goal checkpoint.",
   "borrowed_opening": [
-    {"deck": "v2-types-of-skills", "slide": "05-skill-vs-workflow"},
-    {"deck": "v2-types-of-skills", "slide": "06-how-they-chain"}
+    {"deck": "v2-types-of-skills", "slide": "06-how-they-chain"},
+    {"deck": "v2-types-of-skills", "slide": "05-skill-vs-workflow"}
   ],
   "columns": [
-    {"label": "1 - YOU ARE THE WIRING", "slides": ["01-you-are-the-wiring"]},
-    {"label": "2 - A SYSTEM RUNS THE JOB", "slides": ["02-system-runs-the-job"]},
-    {"label": "3 - THE LEAD SKILL RUNS THE REST", "slides": ["03-lead-skill-runs-the-rest"]},
-    {"label": "4 - A REAL SYSTEM", "slides": ["04-a-real-system"]},
-    {"label": "5 - SKILL -> SYSTEM -> AI EMPLOYEE", "slides": ["05-skill-system-employee"]}
+    {"label": "1 - SEPARATE SKILLS LEAVE EVERY HAND-OFF TO YOU", "slides": ["01-you-are-the-wiring"]},
+    {"label": "2 - THE LEAD SKILL CARRIES THE HAND-OFFS", "slides": ["02-system-runs-the-job"]},
+    {"label": "3 - THE LEAD SKILL HOLDS THE ORDER + EVERY HAND-OFF", "slides": ["03-lead-skill-runs-the-rest"]},
+    {"label": "4 - SKILL -> SKILL SYSTEM -> AI EMPLOYEE", "slides": ["05-skill-system-employee"]}
   ]
 }

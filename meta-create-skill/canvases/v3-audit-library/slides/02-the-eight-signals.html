@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --amber:rgb(214,140,40); --red:rgb(214,69,58);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -17,136 +17,163 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
   <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
 </defs>
 
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-
-  <!-- ============ THE AI — canonical black-marker robot, running the inspection ============ -->
-  <g stroke="var(--ink)" stroke-width="4">
-    <line x1="190" y1="388" x2="190" y2="402"/>
-    <rect x="150" y="402" width="80" height="54" rx="12"/>
-    <line x1="190" y1="456" x2="190" y2="466"/>
-    <rect x="154" y="466" width="72" height="64" rx="12"/>
-    <line x1="154" y1="486" x2="126" y2="512"/>
-    <line x1="226" y1="486" x2="262" y2="470"/>
-    <line x1="176" y1="530" x2="176" y2="552"/>
-    <line x1="204" y1="530" x2="204" y2="552"/>
+  <!-- ============ THE AI - running the audit, magnifier at the right gripper (separate prop) ============ -->
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=190 feetY=700 s=0.8 -->
+  <g id="canonical-robot" transform="translate(-930.00,-54.40) scale(0.8)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <rect x="166" y="418" width="48" height="24" rx="6" stroke="var(--dim)" stroke-width="3"/>
-  <rect x="170" y="484" width="40" height="26" rx="5" stroke="var(--dim)" stroke-width="3"/>
-  <circle cx="190" cy="382" r="6" fill="var(--ink)" stroke="var(--ink)"/>
-  <circle cx="176" cy="430" r="5" fill="var(--ink)" stroke="var(--ink)"/>
-  <circle cx="204" cy="430" r="5" fill="var(--ink)" stroke="var(--ink)"/>
-  <!-- magnifier in the pointing hand (the audit HUNTS) -->
-  <circle cx="288" cy="452" r="17" stroke="var(--ink)" stroke-width="3"/>
-  <line x1="300" y1="464" x2="318" y2="482" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="240" y1="630" x2="270" y2="590" stroke="var(--ink)" stroke-width="7"/>
+  <circle cx="287" cy="566" r="27" stroke="var(--ink)" stroke-width="5" fill="rgba(255,255,255,0.7)"/>
+  <path d="M 272 556 A 17 17 0 0 1 290 548" stroke="var(--dim)" stroke-width="3"/>
 
-  <!-- ============ THE DIAGNOSTIC CLIPBOARD (a mechanic's inspection sheet) ============ -->
-  <!-- clamp -->
-  <rect x="922" y="150" width="36" height="12" rx="4" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
-  <rect x="858" y="158" width="164" height="34" rx="11" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
-  <!-- board -->
-  <rect x="380" y="175" width="1120" height="715" rx="22" stroke="var(--ink)" stroke-width="4" fill="rgba(0,0,0,0.015)"/>
+  <!-- ============ THE CHECKLIST (an inspection clipboard) ============ -->
+  <rect x="890" y="150" width="120" height="14" rx="5" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="840" y="158" width="220" height="36" rx="12" stroke="var(--ink)" stroke-width="4" fill="var(--bg)"/>
+  <rect x="360" y="176" width="1180" height="714" rx="22" stroke="var(--ink)" stroke-width="4" fill="rgba(0,0,0,0.015)"/>
+  <line x1="390" y1="254" x2="1510" y2="254" stroke="rgb(228,228,226)" stroke-width="2"/>
 
-  <!-- ===== cluster divider rules (dim, thin) ===== -->
-  <line x1="660" y1="252" x2="1460" y2="252" stroke="var(--dim)" stroke-width="1.5" opacity="0.5"/>
-  <line x1="610" y1="514" x2="1460" y2="514" stroke="var(--dim)" stroke-width="1.5" opacity="0.5"/>
-  <line x1="620" y1="626" x2="1460" y2="626" stroke="var(--dim)" stroke-width="1.5" opacity="0.5"/>
-  <line x1="580" y1="788" x2="1460" y2="788" stroke="var(--dim)" stroke-width="1.5" opacity="0.5"/>
+  <!-- row dividers (hairline) -->
+  <line x1="390" y1="331" x2="1510" y2="331" stroke="rgb(236,236,234)" stroke-width="1.5"/>
+  <line x1="390" y1="407" x2="1510" y2="407" stroke="rgb(236,236,234)" stroke-width="1.5"/>
+  <line x1="390" y1="483" x2="1510" y2="483" stroke="rgb(236,236,234)" stroke-width="1.5"/>
+  <line x1="390" y1="559" x2="1510" y2="559" stroke="rgb(236,236,234)" stroke-width="1.5"/>
+  <line x1="390" y1="635" x2="1510" y2="635" stroke="rgb(236,236,234)" stroke-width="1.5"/>
+  <line x1="390" y1="711" x2="1510" y2="711" stroke="rgb(236,236,234)" stroke-width="1.5"/>
+  <line x1="390" y1="787" x2="1510" y2="787" stroke="rgb(236,236,234)" stroke-width="1.5"/>
 
-  <!-- ===== 8 checkbox squares (empty — the checks the audit runs) ===== -->
-  <rect x="432" y="288" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
-  <rect x="432" y="338" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
-  <rect x="432" y="388" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
-  <rect x="432" y="438" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
-  <rect x="432" y="550" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
-  <rect x="432" y="662" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
-  <rect x="432" y="712" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
-  <rect x="432" y="824" width="26" height="26" rx="5" stroke="var(--ink)" stroke-width="2.5"/>
+  <!-- number circles: red = the three in the messy library (01), ink = the other five -->
+  <circle cx="414" cy="293" r="19" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="414" cy="369" r="19" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="414" cy="445" r="19" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <circle cx="414" cy="521" r="19" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <circle cx="414" cy="597" r="19" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="414" cy="673" r="19" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <circle cx="414" cy="749" r="19" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <circle cx="414" cy="825" r="19" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
 
-  <!-- ===== severity chips (red=HIGH · amber=MEDIUM · dim=LOW) ===== -->
-  <!-- R1 HIGH -->
-  <rect x="1322" y="287" width="120" height="34" rx="9" stroke="var(--red)" stroke-width="3" fill="rgba(214,69,58,0.10)"/>
-  <!-- R2 HIGH -->
-  <rect x="1322" y="337" width="120" height="34" rx="9" stroke="var(--red)" stroke-width="3" fill="rgba(214,69,58,0.10)"/>
-  <!-- R3 HIGH -->
-  <rect x="1322" y="387" width="120" height="34" rx="9" stroke="var(--red)" stroke-width="3" fill="rgba(214,69,58,0.10)"/>
-  <!-- R4 LOW -->
-  <rect x="1322" y="437" width="120" height="34" rx="9" stroke="var(--dim)" stroke-width="3" fill="rgba(120,120,125,0.08)"/>
-  <!-- R5 HIGH -->
-  <rect x="1322" y="549" width="120" height="34" rx="9" stroke="var(--red)" stroke-width="3" fill="rgba(214,69,58,0.10)"/>
-  <!-- R6 MEDIUM -->
-  <rect x="1322" y="661" width="120" height="34" rx="9" stroke="var(--amber)" stroke-width="3" fill="rgba(214,140,40,0.10)"/>
-  <!-- R7 MEDIUM -->
-  <rect x="1322" y="711" width="120" height="34" rx="9" stroke="var(--amber)" stroke-width="3" fill="rgba(214,140,40,0.10)"/>
-  <!-- R8 MEDIUM -->
-  <rect x="1322" y="823" width="120" height="34" rx="9" stroke="var(--amber)" stroke-width="3" fill="rgba(214,140,40,0.10)"/>
+  <!-- severity badges - ONE style: HIGH = ink fill, MEDIUM = ink outline, LOW = grey outline -->
+  <rect x="1370" y="273" width="130" height="40" rx="20" stroke="var(--ink)" stroke-width="3" fill="var(--ink)"/>
+  <rect x="1370" y="349" width="130" height="40" rx="20" stroke="var(--ink)" stroke-width="3" fill="var(--ink)"/>
+  <rect x="1370" y="425" width="130" height="40" rx="20" stroke="var(--ink)" stroke-width="3" fill="var(--ink)"/>
+  <rect x="1370" y="501" width="130" height="40" rx="20" stroke="var(--dim)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="1370" y="577" width="130" height="40" rx="20" stroke="var(--ink)" stroke-width="3" fill="var(--ink)"/>
+  <rect x="1370" y="653" width="130" height="40" rx="20" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="1370" y="729" width="130" height="40" rx="20" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <rect x="1370" y="805" width="130" height="40" rx="20" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+<!-- claim-title -->
+<text x="800" y="86" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">The Audit Checks Every Skill for Eight Problems</text>
 
-<!-- claim-title + subtitle -->
-<text x="800" y="74" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">The 8 Signals &#8212; What the Audit Hunts</text>
-<text x="800" y="120" font-size="27" text-anchor="middle" fill="var(--dim)">The audit isn&#8217;t a vibe &#183; it checks for eight specific problems, each with a severity</text>
+<!-- robot caption (by role) -->
+<text x="190" y="740" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="190" y="772" font-size="24" text-anchor="middle" fill="var(--dim)">running the audit</text>
 
-<!-- robot label -->
-<text x="190" y="590" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">THE AI</text>
-<text x="190" y="614" font-size="17" text-anchor="middle" fill="var(--dim)">runs the inspection</text>
+<!-- column headers -->
+<text x="400" y="238" font-size="26" font-weight="700" text-anchor="start" fill="var(--dim)">SIGNAL</text>
+<text x="790" y="238" font-size="26" font-weight="700" text-anchor="start" fill="var(--dim)">WHAT IT LOOKS LIKE</text>
+<text x="1435" y="238" font-size="26" font-weight="700" text-anchor="middle" fill="var(--dim)">SEVERITY</text>
 
-<!-- clipboard header -->
-<text x="430" y="222" font-size="21" font-weight="700" text-anchor="start" fill="var(--ink)">INSPECTION CHECKLIST</text>
-<text x="1460" y="222" font-size="18" text-anchor="end" fill="var(--dim)">severity = how badly it breaks routing</text>
+<!-- numbers -->
+<text x="414" y="302" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">1</text>
+<text x="414" y="378" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">2</text>
+<text x="414" y="454" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">3</text>
+<text x="414" y="530" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">4</text>
+<text x="414" y="606" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">5</text>
+<text x="414" y="682" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">6</text>
+<text x="414" y="758" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">7</text>
+<text x="414" y="834" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">8</text>
 
-<!-- ===== cluster: ROUTING PROBLEMS ===== -->
-<text x="430" y="258" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">ROUTING PROBLEMS &#183; 4</text>
-<!-- R1 -->
-<text x="478" y="310" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Duplicate standalones</text>
-<text x="828" y="310" font-size="20" text-anchor="start" fill="var(--dim)">two skills, one job</text>
-<text x="1382" y="311" font-size="19" font-weight="700" text-anchor="middle" fill="var(--red)">HIGH</text>
-<!-- R2 -->
-<text x="478" y="360" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Trigger collisions</text>
-<text x="828" y="360" font-size="20" text-anchor="start" fill="var(--dim)">same phrase fires two skills</text>
-<text x="1382" y="361" font-size="19" font-weight="700" text-anchor="middle" fill="var(--red)">HIGH</text>
-<!-- R3 -->
-<text x="478" y="410" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Missing workflow routing</text>
-<text x="828" y="410" font-size="20" text-anchor="start" fill="var(--dim)">routing buried, not read first</text>
-<text x="1382" y="411" font-size="19" font-weight="700" text-anchor="middle" fill="var(--red)">HIGH</text>
-<!-- R4 -->
-<text x="478" y="460" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">No cross-skill callouts</text>
-<text x="828" y="460" font-size="20" text-anchor="start" fill="var(--dim)">a skill that ignores its siblings</text>
-<text x="1382" y="461" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">LOW</text>
+<!-- signal names (identical on every card, the report and the fix) -->
+<text x="452" y="303" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">Duplicate skills</text>
+<text x="452" y="379" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">Collisions</text>
+<text x="452" y="455" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">Buried routing</text>
+<text x="452" y="531" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">Missing pointers</text>
+<text x="452" y="607" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">Orphan workflows</text>
+<text x="452" y="683" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">Overloaded skill</text>
+<text x="452" y="759" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">Copied steps</text>
+<text x="452" y="835" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)">Stale rules</text>
 
-<!-- ===== cluster: DEAD WIRING ===== -->
-<text x="430" y="520" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">DEAD WIRING &#183; 1</text>
-<!-- R5 -->
-<text x="478" y="572" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Orphan workflows</text>
-<text x="828" y="572" font-size="20" text-anchor="start" fill="var(--dim)">files the AI can never find</text>
-<text x="1382" y="573" font-size="19" font-weight="700" text-anchor="middle" fill="var(--red)">HIGH</text>
+<!-- what it looks like -->
+<text x="790" y="302" font-size="26" text-anchor="start" fill="var(--dim)">two skills do the same job</text>
+<text x="790" y="378" font-size="26" text-anchor="start" fill="var(--dim)">two different jobs claim the same words</text>
+<text x="790" y="454" font-size="26" text-anchor="start" fill="var(--dim)">the routing table sits too low in SKILL.md</text>
+<text x="790" y="530" font-size="26" text-anchor="start" fill="var(--dim)">a skill never says &#8220;not me &#8212; use that one&#8221;</text>
+<text x="790" y="606" font-size="26" text-anchor="start" fill="var(--dim)">a workflow file nothing points to</text>
+<text x="790" y="682" font-size="26" text-anchor="start" fill="var(--dim)">one skill doing unrelated jobs</text>
+<text x="790" y="758" font-size="26" text-anchor="start" fill="var(--dim)">the same step pasted into two skills</text>
+<text x="790" y="834" font-size="26" text-anchor="start" fill="var(--dim)">old rules nobody re-checks</text>
 
-<!-- ===== cluster: ARCHITECTURE ===== -->
-<text x="430" y="632" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">ARCHITECTURE &#183; 2</text>
-<!-- R6 -->
-<text x="478" y="684" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Bloated orchestrators</text>
-<text x="828" y="684" font-size="20" text-anchor="start" fill="var(--dim)">one skill tries to do everything</text>
-<text x="1382" y="685" font-size="19" font-weight="700" text-anchor="middle" fill="var(--amber)">MEDIUM</text>
-<!-- R7 -->
-<text x="478" y="734" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Missing shared delegation</text>
-<text x="828" y="734" font-size="20" text-anchor="start" fill="var(--dim)">same sub-step copied everywhere</text>
-<text x="1382" y="735" font-size="19" font-weight="700" text-anchor="middle" fill="var(--amber)">MEDIUM</text>
+<!-- severity words -->
+<text x="1435" y="302" font-size="24" font-weight="700" text-anchor="middle" fill="var(--bg)">HIGH</text>
+<text x="1435" y="378" font-size="24" font-weight="700" text-anchor="middle" fill="var(--bg)">HIGH</text>
+<text x="1435" y="454" font-size="24" font-weight="700" text-anchor="middle" fill="var(--bg)">HIGH</text>
+<text x="1435" y="530" font-size="24" font-weight="700" text-anchor="middle" fill="var(--dim)">LOW</text>
+<text x="1435" y="606" font-size="24" font-weight="700" text-anchor="middle" fill="var(--bg)">HIGH</text>
+<text x="1435" y="682" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">MEDIUM</text>
+<text x="1435" y="758" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">MEDIUM</text>
+<text x="1435" y="834" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">MEDIUM</text>
 
-<!-- ===== cluster: SEDIMENT ===== -->
-<text x="430" y="794" font-size="19" font-weight="700" text-anchor="start" fill="var(--dim)">SEDIMENT &#183; 1</text>
-<!-- R8 -->
-<text x="478" y="846" font-size="25" font-weight="700" text-anchor="start" fill="var(--ink)">Stale rules</text>
-<text x="828" y="846" font-size="20" text-anchor="start" fill="var(--dim)">rules that stopped earning their place</text>
-<text x="1382" y="847" font-size="19" font-weight="700" text-anchor="middle" fill="var(--amber)">MEDIUM</text>
-
-<!-- ===== one-line takeaway ===== -->
-<text x="800" y="948" font-size="29" text-anchor="middle" fill="var(--ink)">Eight named problems &#8212; each with real evidence and a severity.</text>
-<text x="800" y="992" font-size="31" font-weight="700" text-anchor="middle" fill="var(--ink)">A real answer to &#8220;are my skills a mess?&#8221; &#8212; not a feeling.</text>
+<!-- one-line takeaway (the deck map, since this deck has no narration) -->
+<text x="800" y="966" font-size="30" text-anchor="middle" fill="var(--ink)">Red = the three in the messy library, up next. The other five close the deck.</text>
 </svg></body></html>

@@ -2,7 +2,7 @@
 @font-face{font-family:'Excalifont';src:url('Excalifont-Regular.woff2') format('woff2');}
 :root{
   --bg:rgb(255,255,255); --ink:rgb(33,33,33); --dim:rgb(120,120,125);
-  --green:rgb(45,140,60); --red:rgb(214,69,58);
+  --green:rgb(45,140,60); --red:rgb(214,69,58); --orange:#c2410c;
   --sans:"Excalifont",Inter,system-ui,sans-serif;
   --mono:"Consolas","Cascadia Mono","DejaVu Sans Mono",ui-monospace,monospace;
 }
@@ -17,120 +17,168 @@ svg{display:block;} text{font-family:var(--sans);} .mono{font-family:var(--mono)
     <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
   <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="17" cy="17" r="1.2" fill="rgb(224,224,222)"/></pattern>
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="rgb(45,140,60)" stop-opacity="0.55"/>
+    <stop offset="70%" stop-color="rgb(45,140,60)" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="rgb(45,140,60)" stop-opacity="0"/>
+  </radialGradient>
 </defs>
 
 <rect width="1600" height="1050" fill="var(--bg)"/>
 <rect width="1600" height="1050" fill="url(#dots)" opacity="0.5"/>
 
-<!-- ===================== SHAPES (all inside #rough) — NO text ===================== -->
+<!-- ===================== SHAPES (all inside #rough) - NO text ===================== -->
 <g filter="url(#rough)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- ============ THE LIBRARY - a plain folder view (title bar = folder name) ============ -->
+  <rect x="40" y="140" width="980" height="700" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <line x1="40" y1="192" x2="1020" y2="192" stroke="var(--ink)" stroke-width="2"/>
+  <circle cx="70" cy="166" r="6" fill="var(--dim)" stroke="none"/>
+  <circle cx="92" cy="166" r="6" fill="var(--dim)" stroke="none"/>
+  <circle cx="114" cy="166" r="6" fill="var(--dim)" stroke="none"/>
+  <rect x="145" y="154" width="16" height="7" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <rect x="145" y="160" width="34" height="22" rx="3" stroke="var(--ink)" stroke-width="2.5" fill="var(--bg)"/>
+  <line x1="60" y1="244" x2="1000" y2="244" stroke="rgb(228,228,226)" stroke-width="2"/>
 
-  <!-- ============ TREE CARD — the library on disk today ============ -->
-  <rect x="80" y="182" width="520" height="575" rx="20" stroke="var(--ink)" stroke-width="2.5" fill="rgba(0,0,0,0.015)"/>
+  <!-- signal 1: the duplicate PAIR (email-writer/ + draft-email/) - faint red band -->
+  <rect x="54" y="428" width="952" height="108" rx="10" fill="rgba(214,69,58,0.07)" stroke="none"/>
+  <!-- signal 5: the orphan row -->
+  <rect x="54" y="716" width="952" height="44" rx="10" fill="rgba(214,69,58,0.07)" stroke="none"/>
 
-  <!-- red row-highlights on the guilty rows (red = problem, fill only) -->
-  <rect x="100" y="244" width="440" height="94" rx="10" fill="rgba(214,69,58,0.07)" stroke="none"/>
-  <rect x="312" y="524" width="256" height="44" rx="8" fill="rgba(214,69,58,0.07)" stroke="none"/>
-  <rect x="100" y="580" width="440" height="94" rx="10" fill="rgba(214,69,58,0.07)" stroke="none"/>
+  <!-- workflows/ = GREEN fork icon (fixed subfolder legend), right of the label -->
+  <line x1="400" y1="567" x2="409" y2="567" stroke="var(--green)" stroke-width="3"/>
+  <line x1="409" y1="567" x2="419" y2="560" stroke="var(--green)" stroke-width="3"/>
+  <line x1="409" y1="567" x2="419" y2="574" stroke="var(--green)" stroke-width="3"/>
+  <circle cx="400" cy="567" r="2.4" fill="var(--green)" stroke="none"/>
+  <circle cx="419" cy="560" r="2.4" fill="var(--green)" stroke="none"/>
+  <circle cx="419" cy="574" r="2.4" fill="var(--green)" stroke="none"/>
 
-  <!-- workflows/ = GREEN fork icon (fixed subfolder legend) in the left gutter -->
-  <line x1="90" y1="428" x2="99" y2="428" stroke="var(--green)" stroke-width="3"/>
-  <line x1="99" y1="428" x2="109" y2="421" stroke="var(--green)" stroke-width="3"/>
-  <line x1="99" y1="428" x2="109" y2="435" stroke="var(--green)" stroke-width="3"/>
-  <circle cx="90" cy="428" r="2.4" fill="var(--green)" stroke="none"/>
-  <circle cx="109" cy="421" r="2.4" fill="var(--green)" stroke="none"/>
-  <circle cx="109" cy="435" r="2.4" fill="var(--green)" stroke="none"/>
+  <!-- signal-number badges in the left gutter (red = a problem) -->
+  <circle cx="80" cy="482" r="17" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="80" cy="737" r="17" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <!-- signal 2 badges sit right after the phrase both skills claim -->
+  <circle cx="984" cy="518" r="17" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="984" cy="803" r="17" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
 
-  <!-- orphan: red underline under old-promo.md = dead -->
-  <line x1="336" y1="556" x2="552" y2="556" stroke="var(--red)" stroke-width="3"/>
-  <!-- orphan: red pointer from label into the row -->
-  <line x1="612" y1="546" x2="572" y2="548" stroke="var(--red)" stroke-width="3"/>
-  <polyline points="582,542 570,548 582,554" stroke="var(--red)" stroke-width="3"/>
+  <!-- ============ THE KEY (right) - same badges ============ -->
+  <circle cx="1064" cy="283" r="17" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="1064" cy="403" r="17" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
+  <circle cx="1064" cy="523" r="17" stroke="var(--red)" stroke-width="3" fill="var(--bg)"/>
 
-  <!-- healthy: green check on publish-posts/ -->
-  <polyline points="462,712 470,720 486,702" stroke="var(--green)" stroke-width="4"/>
-
-  <!-- collision: red bracket right of humanize/ + writing-humanize/ -->
-  <line x1="598" y1="596" x2="598" y2="664" stroke="var(--red)" stroke-width="3"/>
-  <line x1="598" y1="602" x2="372" y2="602" stroke="var(--red)" stroke-width="3"/>
-  <polyline points="382,596 370,602 382,608" stroke="var(--red)" stroke-width="3"/>
-  <line x1="598" y1="658" x2="516" y2="658" stroke="var(--red)" stroke-width="3"/>
-  <polyline points="526,652 514,658 526,664" stroke="var(--red)" stroke-width="3"/>
-
-  <!-- ============ THE AI — canonical black-marker robot, HESITATING ============ -->
-  <g stroke="var(--ink)" stroke-width="4">
-    <line x1="1230" y1="166" x2="1230" y2="176"/>
-    <rect x="1194" y="176" width="72" height="48" rx="11"/>
-    <rect x="1208" y="189" width="44" height="22" rx="6" stroke-width="3"/>
-    <line x1="1230" y1="224" x2="1230" y2="232"/>
-    <rect x="1198" y="232" width="64" height="54" rx="11"/>
-    <line x1="1198" y1="250" x2="1176" y2="270"/>
-    <line x1="1262" y1="250" x2="1282" y2="252"/>
+  <!-- ============ THE AI - asked a phrase two skills claim ============ -->
+  <rect x="1046" y="652" width="200" height="54" rx="16" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
+  <line x1="1248" y1="679" x2="1276" y2="679" stroke="var(--ink)" stroke-width="3"/>
+  <polyline points="1266,672 1278,679 1266,686" stroke="var(--ink)" stroke-width="3"/>
+  <!-- canonical AI Employee robot, verbatim via _tools/robot.py - cx=1340 feetY=872 s=0.8 -->
+  <g id="canonical-robot" transform="translate(220.00,117.60) scale(0.8)">
+    <line x1="1400" y1="660" x2="1400" y2="640" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1400" cy="632" r="8" fill="var(--green)" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="1400" cy="632" r="15" fill="none" stroke="var(--green)" stroke-width="2" stroke-opacity="0.5"/>
+    <rect x="1356" y="660" width="88" height="80" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1346" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1443" y="688" width="11" height="30" rx="4" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <rect x="1368" y="684" width="64" height="40" rx="9" fill="var(--bg)" stroke="var(--ink)" stroke-width="4"/>
+    <circle cx="1385" cy="704" r="14" fill="url(#eyeGlow)"/><circle cx="1415" cy="704" r="14" fill="url(#eyeGlow)"/>
+    <circle cx="1385" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1415" cy="704" r="7" fill="var(--green)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1386" y="740" width="28" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1350" y="755" width="100" height="122" rx="16" fill="var(--bg)" stroke="var(--ink)" stroke-width="5"/>
+    <rect x="1370" y="774" width="60" height="48" rx="7" fill="none" stroke="var(--orange)" stroke-width="3.5"/>
+    <line x1="1370" y1="790" x2="1430" y2="790" stroke="var(--orange)" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="1380" cy="782" r="3" fill="var(--orange)"/><circle cx="1391" cy="782" r="3" fill="var(--orange)"/><circle cx="1402" cy="782" r="3" fill="var(--orange)"/>
+    <!-- SKILLS toolbelt — 5 pockets, 5 tool heads peeking above (amber wrench · green playbook ·
+         blue screwdriver · purple playbook · red hammer), the light-bg port of the dark canonical's
+         SKILLS belt. Tool colors are HARDCODED literals on purpose: the copied block must never
+         add :root dependencies beyond --ink/--bg/--green/--orange. Part of the verbatim block. -->
+    <rect x="1354.5" y="823" width="5" height="13" rx="2" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <circle cx="1357" cy="821" r="5.5" fill="rgb(214,140,40)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1354" y="815.5" width="6" height="5.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1.2"/>
+    <path d="M 1372 820 L 1382 820 L 1385.5 823.5 L 1385.5 836 L 1372 836 Z" fill="rgb(45,140,60)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1382 820 L 1382 823.5 L 1385.5 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1398" y="817" width="4" height="9" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1396" y="826" width="8" height="10" rx="2.5" fill="rgb(52,120,190)" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1414.5 820 L 1424.5 820 L 1428 823.5 L 1428 836 L 1414.5 836 Z" fill="#9333ea" stroke="var(--ink)" stroke-width="1.5"/>
+    <path d="M 1424.5 820 L 1424.5 823.5 L 1428 823.5" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1436" y="817" width="14" height="6.5" rx="2" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.5"/>
+    <rect x="1440.5" y="823.5" width="4.5" height="12.5" fill="rgb(214,69,58)" stroke="var(--ink)" stroke-width="1.2"/>
+    <rect x="1346" y="836" width="108" height="22" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <line x1="1368" y1="836" x2="1368" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1389" y1="836" x2="1389" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1411" y1="836" x2="1411" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1432" y1="836" x2="1432" y2="858" stroke="var(--ink)" stroke-width="2.5"/>
+    <line x1="1382" y1="877" x2="1380" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <line x1="1418" y1="877" x2="1420" y2="930" stroke="var(--ink)" stroke-width="13"/>
+    <rect x="1360" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <rect x="1402" y="928" width="40" height="15" rx="5" fill="var(--bg)" stroke="var(--ink)" stroke-width="3.5"/>
+    <!-- arms: simple mirrored hanging-gripper pose (the source's document/gear props are optional
+         "doing work" extras — see patterns.md pattern #12 — drop or keep per scene) -->
+    <line x1="1352" y1="772" x2="1330" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1330" y1="826" x2="1344" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1346" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
+    <line x1="1448" y1="772" x2="1470" y2="826" stroke="var(--ink)" stroke-width="12"/>
+    <line x1="1470" y1="826" x2="1456" y2="860" stroke="var(--ink)" stroke-width="12"/>
+    <circle cx="1454" cy="864" r="8" fill="var(--bg)" stroke="var(--ink)" stroke-width="3"/>
   </g>
-  <rect x="1212" y="247" width="36" height="20" rx="4" stroke="var(--dim)" stroke-width="3"/>
-  <circle cx="1230" cy="160" r="5" fill="var(--red)" stroke="var(--red)"/>
-  <circle cx="1222" cy="200" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
-  <circle cx="1240" cy="200" r="4.2" fill="var(--ink)" stroke="var(--ink)"/>
-
-  <!-- user request pill: "write a hook" (ink = the request the AI must route) -->
-  <rect x="1040" y="226" width="210" height="48" rx="14" stroke="var(--ink)" stroke-width="3" fill="var(--bg)"/>
-
-  <!-- trunk from pill left edge to the fork point -->
-  <line x1="1040" y1="250" x2="812" y2="278" stroke="var(--ink)" stroke-width="3"/>
-
-  <!-- fork: two DASHED arrows to BOTH duplicate rows -->
-  <line x1="800" y1="278" x2="426" y2="260" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
-  <polyline points="438,253 424,260 438,267" stroke="var(--ink)" stroke-width="3"/>
-  <line x1="800" y1="278" x2="432" y2="318" stroke="var(--ink)" stroke-width="3" stroke-dasharray="9 8"/>
-  <polyline points="444,311 430,318 444,325" stroke="var(--ink)" stroke-width="3"/>
 
 </g>
 
 <!-- ===================== TEXT (all crisp, OUTSIDE #rough) ===================== -->
+<!-- claim-title -->
+<text x="800" y="84" font-size="50" font-weight="700" text-anchor="middle" fill="var(--ink)">A Messy Library Makes the AI Pick the Wrong Skill</text>
 
-<!-- claim-title + subtitle -->
-<text x="800" y="72" font-size="52" font-weight="700" text-anchor="middle" fill="var(--ink)">Skill Soup &#8212; Your Library Rots Quietly</text>
-<text x="800" y="118" font-size="27" text-anchor="middle" fill="var(--dim)">A growing skill library quietly decays &#183; and the AI starts firing the wrong skill</text>
+<!-- window title bar + column headers -->
+<text class="mono" x="192" y="177" font-size="26" font-weight="700" text-anchor="start" fill="var(--ink)">skills/</text>
+<text x="110" y="228" font-size="24" text-anchor="start" fill="var(--dim)">skill</text>
+<text x="480" y="228" font-size="24" text-anchor="start" fill="var(--dim)">what its description says</text>
 
-<!-- tree header -->
-<text x="100" y="166" font-size="20" font-weight="700" text-anchor="start" fill="var(--dim)">THE LIBRARY ON DISK TODAY</text>
+<!-- the library (the same Weekly Email library, grown messy) -->
+<text class="mono" x="110" y="298" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; weekly-email/</text>
+<text class="mono" x="110" y="355" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; pull-stats/</text>
+<text class="mono" x="110" y="412" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; what-worked/</text>
+<text class="mono" x="110" y="469" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; email-writer/</text>
+<text class="mono" x="110" y="526" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; draft-email/</text>
+<text class="mono" x="110" y="583" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9492;&#9472;&#9472;</text>
+<text class="mono" x="224.3" y="583" font-size="26" font-weight="700" text-anchor="start" fill="var(--green)">workflows/</text>
+<text class="mono" x="110" y="640" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;       &#9500;&#9472;&#9472; weekly.md</text>
+<text class="mono" x="110" y="697" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;       &#9500;&#9472;&#9472; launch.md</text>
+<text class="mono" x="110" y="754" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;       &#9492;&#9472;&#9472;</text>
+<text class="mono" x="281.4" y="754" font-size="26" font-weight="700" text-anchor="start" fill="var(--red)">old-promo.md</text>
+<text class="mono" x="110" y="811" font-size="26" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9492;&#9472;&#9472; qa-draft/</text>
 
-<!-- ===== the file tree (monospace, box-drawing) ===== -->
-<text class="mono" x="120" y="210" font-size="30" font-weight="700" text-anchor="start" fill="var(--ink)" xml:space="preserve">skills/</text>
-<text class="mono" x="120" y="266" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; write-hook/</text>
-<text class="mono" x="120" y="322" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; hook-writer/</text>
-<text class="mono" x="120" y="378" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; write-content/</text>
-<text class="mono" x="120" y="434" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;   &#9492;&#9472;&#9472; <tspan fill="var(--green)" font-weight="700">workflows/</tspan></text>
-<text class="mono" x="120" y="490" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;       &#9500;&#9472;&#9472; newsletter.md</text>
-<text class="mono" x="120" y="546" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9474;       &#9492;&#9472;&#9472; <tspan fill="var(--red)" font-weight="700">old-promo.md</tspan></text>
-<text class="mono" x="120" y="602" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; humanize/</text>
-<text class="mono" x="120" y="658" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9500;&#9472;&#9472; writing-humanize/</text>
-<text class="mono" x="120" y="714" font-size="30" text-anchor="start" fill="var(--ink)" xml:space="preserve">&#9492;&#9472;&#9472; <tspan fill="var(--green)" font-weight="700">publish-posts/</tspan></text>
+<!-- descriptions (what the AI reads to pick a skill) -->
+<text x="480" y="298" font-size="24" text-anchor="start" fill="var(--dim)">runs the whole job, start to finish</text>
+<text x="480" y="355" font-size="24" text-anchor="start" fill="var(--dim)">gets last week&#8217;s numbers</text>
+<text x="480" y="412" font-size="24" text-anchor="start" fill="var(--dim)">finds the winners</text>
+<text x="480" y="469" font-size="24" text-anchor="start" fill="var(--ink)">drafts my weekly newsletter</text>
+<text x="480" y="526" font-size="24" text-anchor="start" fill="var(--ink)">writes this week&#8217;s email &#183;</text>
+<text x="784" y="526" font-size="24" font-weight="700" text-anchor="start" fill="var(--red)">check my email</text>
+<text x="480" y="754" font-size="24" font-weight="700" text-anchor="start" fill="var(--red)">&#8592; no routing row points here</text>
+<text x="480" y="811" font-size="24" text-anchor="start" fill="var(--ink)">checks against my rules &#183;</text>
+<text x="777" y="811" font-size="24" font-weight="700" text-anchor="start" fill="var(--red)">check my email</text>
 
-<!-- healthy label -->
-<text x="504" y="722" font-size="20" font-weight="700" text-anchor="start" fill="var(--green)">healthy &#183; one clear home</text>
+<!-- badge numbers (= the signal numbers) -->
+<text x="80" y="491" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">1</text>
+<text x="80" y="746" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">5</text>
+<text x="984" y="527" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">2</text>
+<text x="984" y="812" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">2</text>
 
-<!-- ===== PROBLEM 1 · DUPLICATE (the robot scene, upper right) ===== -->
-<text x="1145" y="214" font-size="17" text-anchor="middle" fill="var(--dim)">user asks:</text>
-<text x="1145" y="257" font-size="24" font-weight="700" text-anchor="middle" fill="var(--ink)">write a hook</text>
-<text x="1145" y="322" font-size="19" font-weight="700" text-anchor="middle" fill="var(--dim)">THE AI</text>
-<!-- red "?" at the fork = which one fires? -->
-<text x="792" y="270" font-size="40" font-weight="700" text-anchor="middle" fill="var(--red)">?</text>
+<!-- the key -->
+<text x="1064" y="292" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">1</text>
+<text x="1096" y="293" font-size="28" font-weight="700" text-anchor="start" fill="var(--red)">DUPLICATE SKILLS</text>
+<text x="1096" y="327" font-size="24" text-anchor="start" fill="var(--dim)">same job, different words</text>
+<text x="1064" y="412" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">2</text>
+<text x="1096" y="413" font-size="28" font-weight="700" text-anchor="start" fill="var(--red)">COLLISIONS</text>
+<text x="1096" y="447" font-size="24" text-anchor="start" fill="var(--dim)">two jobs claim the same words</text>
+<text x="1064" y="532" font-size="24" font-weight="700" text-anchor="middle" fill="var(--red)">5</text>
+<text x="1096" y="533" font-size="28" font-weight="700" text-anchor="start" fill="var(--red)">ORPHAN WORKFLOWS</text>
+<text x="1096" y="567" font-size="24" text-anchor="start" fill="var(--dim)">a file nothing points to</text>
 
-<text x="1230" y="384" font-size="23" font-weight="700" text-anchor="middle" fill="var(--red)">PROBLEM 1 &#183; DUPLICATE</text>
-<text x="1230" y="414" font-size="21" text-anchor="middle" fill="var(--ink)">two skills, one job</text>
-<text x="1230" y="442" font-size="20" text-anchor="middle" fill="var(--dim)">the AI picks one &#8212; sometimes the wrong one</text>
+<!-- the request + the AI -->
+<text x="1050" y="640" font-size="24" text-anchor="start" fill="var(--dim)">you ask:</text>
+<text x="1146" y="688" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">check my email</text>
+<text x="1418" y="660" font-size="54" font-weight="700" text-anchor="middle" fill="var(--red)">?</text>
+<text x="1340" y="906" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">THE AI</text>
+<text x="1340" y="938" font-size="24" text-anchor="middle" fill="var(--dim)">two skills claim it &#8212; which one?</text>
 
-<!-- ===== PROBLEM 2 · ORPHAN (right of tree, mid) ===== -->
-<text x="628" y="540" font-size="23" font-weight="700" text-anchor="start" fill="var(--red)">PROBLEM 2 &#183; ORPHAN</text>
-<text x="628" y="568" font-size="20" text-anchor="start" fill="var(--dim)">on disk, never routed from SKILL.md &#8212; dead code</text>
-
-<!-- ===== PROBLEM 3 · COLLISION (right of tree, lower) ===== -->
-<text x="628" y="612" font-size="23" font-weight="700" text-anchor="start" fill="var(--red)">PROBLEM 3 &#183; COLLISION</text>
-<text x="628" y="640" font-size="20" text-anchor="start" fill="var(--dim)">both claim &#8220;humanize this&#8221;</text>
-<text x="628" y="666" font-size="20" text-anchor="start" fill="var(--dim)">which one fires? nobody decided</text>
-
-<!-- ===== one-line takeaway ===== -->
-<text x="800" y="838" font-size="28" text-anchor="middle" fill="var(--ink)">Every skill made sense the day you added it &#8212; nobody ever re-checks the whole shelf.</text>
-<text x="800" y="888" font-size="31" font-weight="700" text-anchor="middle" fill="var(--red)">Skill soup: the shelf rots quietly, and the AI fires the wrong one.</text>
+<!-- one-line takeaway -->
+<text x="800" y="1004" font-size="30" text-anchor="middle" fill="var(--ink)">Every skill made sense the day you added it. Nobody re-checked the whole library.</text>
 </svg></body></html>

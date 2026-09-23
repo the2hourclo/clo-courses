@@ -1,10 +1,10 @@
 {
-  "_comment": "Storyboard map for meta-create-skill VIDEO 7: Review + Harden (CP4 'Make it reliable', first explainer). 5 diagrams in teaching order, one column each, left to right. Arc: Pain (the quiet failure, not the loud one) -> Diagnosis (your standards exist, just not on disk) -> Mechanism (they go in the file, and they fire at the handover) -> Proof (it stops itself, with nothing else involved) -> Durability (a scorecard so the rule can never quietly lapse). THE DECK'S ONE JOB: every slide is about A STATED RULE the skill can check itself against. A slide about something the skill has no way to know belongs in v8-harness, not here. The deck deliberately closes on 'the skill now holds itself to your standards' - that is the setup v8-harness breaks open.",
+  "_comment": "Storyboard map for meta-create-skill VIDEO 7: Review + Harden (CP4 'Make it reliable', first explainer). Rebuilt 2026-09-23 on the locked running example (DESIGN-SYSTEM §9): the skill being hardened is draft-email/, which writes drafts/weekly-email.md from stats/last-week.csv; the fabricated line is '34% · our best month yet'. 5 diagrams in teaching order, one column each. Arc: Pain (a draft that is quietly wrong beats a run that breaks) -> Cause (your rules ARE in the file under ## Conventions, from the interview and your correction, but ## Self-check before handing it over is empty, so nothing checks the draft) -> Mechanism (the same file with that section filled: the AI checks the draft against every rule before it hands anything over = hardening) -> Proof (the self-check stops the 34% draft) -> Durability (the scorecard: 5 tests the AI re-runs itself after every edit; test 5 stopped Tuesday's edit). THE DECK'S ONE JOB: every slide is about A STATED RULE the skill can check itself against. What the skill cannot know about itself belongs in v8-harness. Slides 02 and 03 share one geometry so they read as a before/after swipe.",
   "columns": [
     {"label": "1 - THE LOUD FAILURE WAS NEVER THE PROBLEM", "slides": ["01-the-quiet-failure"]},
-    {"label": "2 - YOUR RULES ARE IN YOUR HEAD", "slides": ["02-your-rules-are-in-your-head"]},
-    {"label": "3 - WRITTEN INTO THE FILE, FIRED AT HANDOVER", "slides": ["03-written-into-the-file"]},
-    {"label": "4 - IT STOPS ITSELF", "slides": ["04-it-stops-itself"]},
-    {"label": "5 - A FIX THAT STAYS FIXED", "slides": ["05-a-fix-that-stays-fixed"]}
+    {"label": "2 - YOUR RULES ARE IN THE FILE. NOTHING CHECKS THE DRAFT.", "slides": ["02-your-rules-are-in-your-head"]},
+    {"label": "3 - HARDENING = A CHECK BEFORE IT HANDS YOU ANYTHING", "slides": ["03-written-into-the-file"]},
+    {"label": "4 - THE SELF-CHECK STOPS THE 34% BEFORE YOU SEE IT", "slides": ["04-it-stops-itself"]},
+    {"label": "5 - AFTER EVERY EDIT, RE-RUN THESE 5 TESTS", "slides": ["05-a-fix-that-stays-fixed"]}
   ]
 }
