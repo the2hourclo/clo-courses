@@ -453,11 +453,12 @@ function svHTML(s, last){
   if (s.body){ h += '<p>'+s.body+'</p>'; }
   if (s.command){ h += cmdHTML(s); }
   if (s.checks){ h += '<div class="sv-checks">' + s.checks.map(function(c, i){ return '<label><input type="checkbox" id="svc'+i+'" onchange="svGate()"><span>'+c+'</span></label>'; }).join('') + '</div>'; }
+  else if (s.gate){ h += '<div class="gate"><div class="gl">&#128275; Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
   h += '<button type="button" class="sv-done" id="svDone" onclick="next()"'+(s.checks?' disabled':'')+'>'+(s.doneLabel || (last ? 'Done, finish this checkpoint &#8594;' : 'Done, next step &#8594;'))+'</button>';
   var help = '';
   if (s.demo){ help += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   if (s.does){ help += '<div class="does"><div class="does-h">What this does, step by step</div><ol>' + s.does.map(function(d){ return '<li>'+d+'</li>'; }).join('') + '</ol>' + (s.doesFoot ? '<div class="does-foot">'+s.doesFoot+'</div>' : '') + '</div>'; }
-  if (s.gate){ help += '<div class="gate"><div class="gl">&#128275; Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
+  if (s.checks && s.gate){ help += '<div class="gate"><div class="gl">&#128275; Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
   if (help){ h += '<details class="sv-help"><summary>Need help with this step?</summary>'+help+'</details>'; }
   h += '<div class="nav"><button class="btn" onclick="back()">← Back</button><button class="btn primary" onclick="next()">'+(last?'Finish checkpoint →':'Next →')+'</button></div>';
   return h + '</div>';
