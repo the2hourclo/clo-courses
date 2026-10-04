@@ -653,15 +653,16 @@ function renderWelcome() {
 function renderSetup() {
   return `<h2>Set Up the Skill</h2>
   <p class="subtitle">Choose your setup method. Pick the one that matches how you use Claude.</p></div>
+  <div class="callout" style="margin:16px 0 20px"><strong>Already finished the setup page?</strong> Skip these steps. The X-Ray checkpoint on your board walks you through the one extra piece, Draw.io, and then the X-Ray itself: <a href="checkpoint-map.html">open the X-Ray checkpoint</a>. Not set up yet? <a href="get-access-aieb.html">Start with the setup page</a>.</div>
 
   <div class="setup-tabs">
-    <button class="setup-tab active" onclick="switchSetupTab('claude-code')">Claude Code</button>
-    <button class="setup-tab" onclick="switchSetupTab('web-app')">Claude Web App</button>
+    <button class="setup-tab active" onclick="switchSetupTab('web-app')">Claude</button>
+    <button class="setup-tab" onclick="switchSetupTab('claude-code')">Claude Code</button>
   </div>
 
   <!-- TAB 1: CLAUDE CODE -->
-  <div class="setup-tab-content active" id="tab-claude-code">
-    <p style="color:var(--text-muted);margin-bottom:20px">Full power \u2014 Claude builds diagrams live in your editor. <span class="setup-path-badge rec" style="margin-left:6px">Recommended</span></p>
+  <div class="setup-tab-content" id="tab-claude-code">
+    <p style="color:var(--text-muted);margin-bottom:20px">For Claude Code users \u2014 Claude builds diagrams live in your editor.</p>
 
     <div class="callout" style="margin-bottom:24px">
       <strong>New to Claude Code?</strong> Watch the video walkthrough first \u2014 it covers installing Claude Code, setting up your workspace, and running your first skill. The Business Starter Kit gives you a ready-made project folder with the <code>.claude/skills/</code> structure already set up.
@@ -701,8 +702,8 @@ function renderSetup() {
   </div>
 
   <!-- TAB 2: CLAUDE WEB APP -->
-  <div class="setup-tab-content" id="tab-web-app">
-    <p style="color:var(--text-muted);margin-bottom:20px">No coding needed \u2014 the AI Employee Builder plugin runs in the Claude app, and the Draw.io MCP gives you live diagrams.</p>
+  <div class="setup-tab-content active" id="tab-web-app">
+    <p style="color:var(--text-muted);margin-bottom:20px">No coding needed \u2014 the AI Employee Builder plugin runs in the Claude app, and the Draw.io MCP gives you live diagrams. <span class="setup-path-badge rec" style="margin-left:6px">Recommended</span></p>
 
     <div class="card" style="text-align:center;padding:28px 32px;margin-bottom:28px;border-color:var(--accent-border);background:var(--accent-dim)"><h3 style="margin-bottom:4px">Get this skill</h3><p style="color:var(--text-muted);font-size:13px;margin-bottom:16px">Delivered through the AI Employee Builder plugin &mdash; license-gated, nothing to download.</p><a href="get-access-aieb.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--accent);color:var(--bg);border-radius:var(--radius);font-size:15px;font-weight:700;text-decoration:none">Get Access &rarr;</a></div>
 
@@ -1697,6 +1698,11 @@ function renderReady() {
 function renderNextStep() {
   return `<h2 style="color:var(--accent)">Your Next Step</h2>
   <p class="subtitle">You've seen the gaps. Here's how to close them.</p></div>
+  <div style="background:var(--accent-dim);border:2px solid var(--accent);border-radius:var(--radius-lg);padding:24px 28px;margin:20px 0 8px">
+    <h3 style="margin-bottom:8px">Already a member? Build its skill next.</h3>
+    <p style="font-size:15px;line-height:1.7;margin-bottom:16px">You&rsquo;ve picked the job. Turn it into a skill that does it your way: that&rsquo;s your AI Employee&rsquo;s first job.</p>
+    <a href="checkpoint-first-skill.html" style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:12px 28px;border-radius:var(--radius);text-decoration:none;font-size:15px">Start your AI Employee&rsquo;s First Job &rarr;</a>
+  </div>
   <div class="spacer"></div>
 
   <p style="font-size:16px;line-height:1.7;margin-bottom:12px">The X-Ray diagnosed your business. You can see exactly where bottlenecks live, which processes eat your time, and where AI could take over.</p>

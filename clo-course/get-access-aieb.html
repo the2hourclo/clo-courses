@@ -668,8 +668,6 @@ Your standing rule: use the simplest path. Try terminal commands when they are a
 
 6. TEST AND CONFIRM - Tell me to type /check-setup (or say "check my setup") and confirm the plugin, connection, subscription, onboarding, and persisted workspace state all check out. If access is expired, cancelled, or for the wrong product, explain the renewal/help response instead of bypassing it. Then tell me setup is done and that the Business X-Ray is next in a NEW window inside this same project; do not start it in this session.
 
-Important: Do not use SkillStack for this AIEB install. SkillStack was the old delivery path. The current path is thin plugin shell + hosted LemonSqueezy-gated MCP.
-
 After each step, tell me whether it worked, or show the error and exactly how you're fixing it. Start now with step 1. Do not require a buyer-installed Node runtime for the AIEB connector.</pre>
     </div>
     <!-- Claude Code buyers had no way to check their own work: paste 26 lines, then
@@ -706,7 +704,7 @@ After each step, tell me whether it worked, or show the error and exactly how yo
 3. Verify that it is v0.31.0 or newer and contains `.codex-plugin/plugin.json`, `skills/setup-aieb/SKILL.md`, and `.mcp.json`. Its MCP entry must be remote HTTP at `https://api.chiefleverageofficers.com/mcp`; do not launch the legacy local proxy or require Node for the connector.
 4. Tell me to start one fresh Codex thread in this same project and paste exactly: `Set up AIEB`
 
-Stop after giving me that one fresh-thread instruction. The new thread connects AIEB first, then runs onboarding. It must check for saved Get Access intake before asking questions. If the four answers are already saved, it must not repeat them. If they are missing, it asks conversationally what my business sells, which recurring job I want to remove, how often it happens and how much time it takes, and what a good finished result looks like; then it calls `complete_aieb_onboarding` with my answers before continuing. During workspace setup, Business OS must ask whether I serve named clients, identify each tool's real account or workspace, keep shared setup in one system record, and create client-to-system backlinks that Claude and Codex read from the same canonical records. Never use SkillStack and never request or repeat my Lemon Squeezy key in chat.</pre>
+Stop after giving me that one fresh-thread instruction. The new thread connects AIEB first, then runs onboarding. It must check for saved Get Access intake before asking questions. If the four answers are already saved, it must not repeat them. If they are missing, it asks conversationally what my business sells, which recurring job I want to remove, how often it happens and how much time it takes, and what a good finished result looks like; then it calls `complete_aieb_onboarding` with my answers before continuing. During workspace setup, Business OS must ask whether I serve named clients, identify each tool's real account or workspace, keep shared setup in one system record, and create client-to-system backlinks that Claude and Codex read from the same canonical records. Never request or repeat my Lemon Squeezy key in chat.</pre>
     </div>
       <div class="callout callout-info"><strong>Stop when Codex tells you to open a fresh thread.</strong> The next course step gives you the setup command that activates the connection and builds your Business OS.</div>
       <button class="done-btn wiz-only" type="button" onclick="wizCodexInstallDone()"><span>Plugin installed &mdash; show setup command &#8594;</span></button>
@@ -1003,7 +1001,6 @@ Please help me fix it. Background on how this install works:
 - Returning members should reconnect by signing in with the purchase address. Do not ask them to delete local files or use another license activation just because the host changed.
 - Connect AIEB before onboarding. If Get Access intake is incomplete, `/setup-aieb` asks the four business-context questions and calls `complete_aieb_onboarding`; if those answers are already saved, it must not repeat them.
 - Do not look for retired local connection commands, a local device file, or a local-runtime toggle. Those belong to the older connector.
-- Do not use SkillStack for this AIEB install. That was the old delivery path.
 
 Check the installed plugin version, its remote `.mcp.json`, whether `get_skill` is visible, and whether a paid `get_skill` call produces a normal authentication challenge. Then explain the problem in plain English and give me the exact next step. Never request or repeat my license key in chat. If Claude Code needs me to type a slash command or click Connect, tell me exactly what to do and wait.</pre>
     </div>

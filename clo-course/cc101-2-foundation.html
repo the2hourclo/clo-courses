@@ -62,7 +62,7 @@
             <li><b>default</b> — asks before anything that isn't already pre-approved. The safe place to start, and where you'll spend most of your time.</li>
             <li><b>acceptEdits</b> — auto-accepts file edits so it stops asking on every little change, but still asks before running a command.</li>
             <li><b>plan</b> — read-only. It explores and proposes a plan, and changes nothing. Great for "show me what you'd do first."</li>
-            <li><b>dontAsk</b> — auto-approves everything. For trusted, repetitive work you've done many times and want to run hands-off.</li>
+            <li><b>dontAsk</b> — denies anything that would need your approval; actions you've already allowed still run. Use it for hands-off runs where anything new should stop instead of asking.</li>
             <li><b>bypassPermissions</b> — skips the checks entirely. Use with caution, only when you fully trust the task.</li>
           </ul>
           <p>You can also pre-write rules once, so the right things are approved or blocked forever. They live in <span class="cc-mono">.claude/settings.json</span>. Always allow the safe, repeated stuff and always deny the dangerous stuff.</p>

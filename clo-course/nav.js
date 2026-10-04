@@ -26,7 +26,9 @@ var CLO_CONFIG = {
   // The upgrade target for everything in the Skill Library group. Single source
   // of truth — every "Unlock with Full Access" CTA reads this, none hardcode it.
   // Matches the `community` tier's upgrade_url in the gated MCP's skills manifest.
-  checkout_url: 'https://chiefleverageofficer.lemonsqueezy.com/checkout/buy/14c15890-c46a-4ab8-ab8d-9e56cd04d38a',
+  // 2026-10-04: the old Full Access checkout returned 404. The writing skills joined the
+  // membership on 2026-09-25, so upgrades go to the membership invitation (the server's upgrade_url).
+  checkout_url: 'https://chiefleverageofficers.com/ai-employee-builders-invitation',
   // grouped left-sidebar nav. `page` matches each page's <body data-page>. hrefs are ROOT-relative.
   nav: [
     // ── Two surfaces, deliberately, and they are not the same job:

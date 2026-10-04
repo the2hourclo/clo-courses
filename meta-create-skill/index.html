@@ -1153,7 +1153,9 @@ const LESSON_CONTENT = {};
 
 LESSON_CONTENT['welcome'] = `
 <h2>Welcome &mdash; you're about to ship skills that chain</h2>
-<p class="subtitle">This course teaches you <code>meta-create-skill-standalone</code>, a production toolkit for authoring, validating, testing, and self-healing Claude skills. You'll ship a working skill by the end.</p>
+<p class="subtitle">This course teaches you <code>meta-create-skill</code>, the AI Employee Builder skill for authoring, validating, testing, and self-healing Claude skills. You'll ship a working skill by the end.</p>
+
+<div class="callout"><strong>Building your first AI Employee? Do that first.</strong> The <a href="../clo-course/checkpoint-first-skill.html">First Job checkpoint</a> on your board gets one useful skill doing a real job. Come back here when you want to improve and expand your skills: this course is an optional reference.</div>
 
 <div style="position:relative;padding-bottom:56.25%;height:0;margin:24px 0 32px;border-radius:12px;overflow:hidden;border:1px solid var(--border);"><iframe src="https://www.youtube.com/embed/E5Jc2UjX-Hg" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
 
@@ -1163,7 +1165,7 @@ LESSON_CONTENT['welcome'] = `
 </div>
 
 <div class="exploded-view-wrap">
-<svg class="exploded-view" viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" aria-label="The meta-create-skill-standalone folder with its seven workflow documents exploded outward">
+<svg class="exploded-view" viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" aria-label="The meta-create-skill folder with its seven workflow documents exploded outward">
   <defs>
     <linearGradient id="evFolderGrad" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#2D8C3C"/>
@@ -1246,8 +1248,7 @@ LESSON_CONTENT['welcome'] = `
   <g transform="translate(350, 348)">
     <path d="M 0,0 L 60,0 L 75,-16 L 175,-16 L 200,0 L 0,0 Z" fill="url(#evFolderTab)"/>
     <rect x="0" y="0" width="200" height="76" rx="4" fill="url(#evFolderGrad)"/>
-    <text x="100" y="34" text-anchor="middle" fill="#FFFFFF" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700">meta-create-skill</text>
-    <text x="100" y="54" text-anchor="middle" fill="#FFFFFF" opacity="0.78" font-family="SF Mono,Consolas,monospace" font-size="11" font-weight="600">standalone/</text>
+    <text x="100" y="43" text-anchor="middle" fill="#FFFFFF" font-family="SF Mono,Consolas,monospace" font-size="12" font-weight="700">meta-create-skill/</text>
   </g>
 </svg>
 <p class="exploded-caption">Inside the folder, <code>SKILL.md</code> reads your intent and routes you to one of seven workflow documents. You don't need to memorize them now &mdash; the next few lessons unpack what a skill is, how the folder is structured, and what each of these seven workflows does when you actually need it.</p>
@@ -1346,7 +1347,7 @@ LESSON_CONTENT['comparison'] = `
 
 <p>That's not a discipline problem. That's an architecture problem the first tool in the chain didn't address. Foundational skill creators scaffold a skill and stop there. They validate structure, check routing, run a test, ship it. That's fine for your first one or two. They don't have workflows for when the library itself starts breaking.</p>
 
-<p><code>meta-create-skill-standalone</code> adds the pieces that prevent the compounding mess before it starts, and fix it once it has. Audit the whole library. Route-fix existing skills. Self-heal after a skill misbehaves.</p>
+<p><code>meta-create-skill</code> adds the pieces that prevent the compounding mess before it starts, and fix it once it has. Audit the whole library. Route-fix existing skills. Self-heal after a skill misbehaves.</p>
 
 <div class="matrix-wrap">
 <table class="matrix-table">
@@ -1354,7 +1355,7 @@ LESSON_CONTENT['comparison'] = `
     <tr>
       <th class="capability">Capability</th>
       <th>create-skill (foundational)</th>
-      <th>meta-create-skill-standalone</th>
+      <th>meta-create-skill</th>
     </tr>
   </thead>
   <tbody>
@@ -1728,7 +1729,7 @@ LESSON_CONTENT['anatomy'] = `
 <h4>YAML frontmatter</h4>
 <p>Every SKILL.md starts with YAML between <code>---</code> fences:</p>
 <div class="code-block"><span class="kw">---</span>
-<span class="kw">name:</span> meta-create-skill-standalone
+<span class="kw">name:</span> meta-create-skill
 <span class="kw">description:</span> Create, validate, test, upgrade, and self-improve Claude skills.
   Use this when someone says 'create a skill', 'build a skill for X',
   'validate skill', 'test skill', 'audit my skill library', 'the skill got
@@ -1839,7 +1840,7 @@ LESSON_CONTENT['anatomy'] = `
 </div>
 <div class="rule">
   <div class="rule-num">3</div>
-  <div class="rule-body"><strong>Plugin-provided</strong> &mdash; installed via a plugin (e.g. from SkillStack). Lives under <code>~/.claude/plugins/</code>. Best for distributing skills to others or consuming published skill libraries.</div>
+  <div class="rule-body"><strong>Plugin-provided</strong> &mdash; installed via a plugin. Lives under <code>~/.claude/plugins/</code>. Best for distributing skills to others or consuming published skill libraries.</div>
 </div>
 <div class="rule">
   <div class="rule-num">4</div>
@@ -2944,7 +2945,7 @@ publishing).</div>
   <li>Run them through a grading loop and check whether the current description matches correctly.</li>
   <li>Edit, re-grade, iterate until accuracy is high.</li>
 </ol>
-<p>That's a whole workflow, and <code>meta-create-skill-standalone</code> has it built in.</p>
+<p>That's a whole workflow, and <code>meta-create-skill</code> has it built in.</p>
 
 <p style="margin-top:18px">A good description gets your skill loaded. But even the best-described, most-tested skill will misfire on some case you didn't see coming. The real question: what do you do when it does? That's next.</p>
 `;
@@ -3393,9 +3394,9 @@ LESSON_CONTENT['improve'] = `
   <div class="rule-body"><strong>Root-cause, don't symptom-patch.</strong> "Add an example" usually beats "add a MUST." Rules ossify. Examples teach.</div>
 </div>
 
-<h3>The Stop hook (Claude Code only)</h3>
-<p>The Stop hook in <code>meta-create-skill-standalone</code>'s frontmatter auto-detects skill friction at session boundaries. When a session ends and the hook spots patterns like "that skill got it wrong" or a correction the user made, it asks:</p>
-<div class="code-block">"I noticed some skill friction this session.
+<h3>The start-of-session nudge (Claude Code)</h3>
+<p>When you start a new session, the AI Employee Builder plugin looks back at your previous one. If it spots a correction or a &ldquo;that skill got it wrong&rdquo; moment, it opens with a nudge like:</p>
+<div class="code-block">"I noticed some skill friction last session.
 Want to run the retrospective workflow
 to patch what broke?"</div>
 <p>On Claude.ai (no hooks), you invoke retrospective manually when you notice a pattern.</p>
@@ -3555,7 +3556,7 @@ LESSON_CONTENT['pin-output'] = `
 </div>
 
 <div class="callout note">
-  <strong>The byproduct:</strong> once you walk backward through these six stops, you have a skill brief that <code>meta-create-skill-standalone</code> can build from directly. You've done the real work already &mdash; the toolkit just encodes it.
+  <strong>The byproduct:</strong> once you walk backward through these six stops, you have a skill brief that <code>meta-create-skill</code> can build from directly. You've done the real work already &mdash; the toolkit just encodes it.
 </div>
 
 <h3>Three examples of the method in action</h3>
@@ -3639,7 +3640,8 @@ LESSON_CONTENT['first-skill'] = `
 <p class="subtitle">You filled in the worksheet. You know the gold output, the qualities, the moves, the reach, the trigger, and the check. Now encode it. About 30&ndash;45 minutes end to end.</p>
 
 <div class="callout">
-  <strong>Prerequisite:</strong> <code>meta-create-skill-standalone</code> is installed (Lesson 5 for Claude Code, Lesson 6 for Claude.ai). Loop back if not.
+  <strong>Prerequisite:</strong> AI Employee Builder is connected in your Claude project. If it isn&rsquo;t, follow the <a href="../clo-course/get-access-aieb.html">setup page</a> first.<br><br>
+  <strong>For your first AI Employee, five checks are enough:</strong> it&rsquo;s saved; it finishes the job you chose; it works on a different real example; it flags missing information; and it starts again from a fresh chat. The bigger test runs and the packaging steps below are for later.
 </div>
 
 <h3>The exact steps</h3>
@@ -3815,7 +3817,7 @@ LESSON_CONTENT['ship'] = `
 </div>
 <div class="rule">
   <div class="rule-num">3</div>
-  <div class="rule-body"><strong>SkillStack / marketplace.</strong> Works for both audiences. Freemium and paid distribution, update notifications, version management.</div>
+  <div class="rule-body"><strong>A plugin marketplace.</strong> Publish the plugin to a marketplace (a git repo others add) so people install it in one step and get your updates.</div>
 </div>
 
 <h3>After shipping</h3>
@@ -3823,15 +3825,15 @@ LESSON_CONTENT['ship'] = `
 <ul>
   <li><strong><code>audit-library</code></strong> &mdash; run it quarterly. Finds duplicate standalones, bloated orchestrators, orphan workflows, and trigger collisions.</li>
   <li><strong><code>upgrade-skill</code></strong> &mdash; when a skill's internals are stale or its routing is messy, upgrade fixes it in place with per-change approval.</li>
-  <li><strong><code>retrospective</code></strong> &mdash; the self-healing workflow. Runs on demand or from the Stop hook.</li>
+  <li><strong><code>retrospective</code></strong> &mdash; the self-healing workflow. Runs on demand, or when the start-of-session nudge offers it.</li>
 </ul>
 
 <div class="callout">
-  <strong>That's the course.</strong> You now have a shipped skill, a mental model for when to build one, and the toolkit to keep the library healthy over months and years. The course file footer below is synced to <code>meta-create-skill-standalone</code> as of 2026-04-20. If the skill's internals change after that date, the concepts still hold, even if the workflow names and file paths shift.
+  <strong>That's the course.</strong> You now have a shipped skill, a mental model for when to build one, and the toolkit to keep the library healthy over months and years. The course file footer below is synced to <code>meta-create-skill</code> as of 2026-04-20. If the skill's internals change after that date, the concepts still hold, even if the workflow names and file paths shift.
 </div>
 
 <div style="text-align:center;margin-top:40px;padding:20px;background:var(--surface-2);border-radius:var(--radius-lg);color:var(--text-dim);font-size:12px">
-  Course v1 &middot; Synced to <code>meta-create-skill-standalone</code> &middot; 2026-04-20<br>
+  Course v1 &middot; Synced to <code>meta-create-skill</code> &middot; 2026-04-20<br>
   Questions? Feedback? Reach out at <code>rashid@thepeakperformer.io</code>.
 </div>
 `;
