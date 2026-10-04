@@ -546,7 +546,7 @@ body.activation-mode .container{max-width:620px;width:100%}
     <summary class="step-sum">
       <span class="step-check"><span class="num">&#128101;</span><span class="tick">&#10003;</span></span>
       <span class="step-titles"><span class="step-t">Join the community &amp; say hi</span><span class="step-sub">2 minutes &mdash; so help is one message away while you build</span></span>
-      <span class="step-meta"><span class="time">~1 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
+      <span class="step-meta"><span class="time">~2 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
       <p>You&rsquo;re connected. Now join the <strong>AI Employee Builders community</strong> (included with your membership). It&rsquo;s where members and Rashid hang out, so when you start your first build, help is one message away. Access is instant.</p>
@@ -1398,7 +1398,7 @@ function renderCW(){
     if (el) {
       el.classList.toggle('done', on);
       var lbl = el.querySelector('.dlabel');
-      if (lbl) lbl.textContent = on ? '✓ Done — tap to undo' : (i === 2 ? 'Claude verified this folder saves — continue →' : 'Mark step done');
+      if (lbl) lbl.textContent = on ? '✓ Done — tap to undo' : (i === 2 ? 'Claude says my workspace is ready — continue →' : 'Mark step done');
     }
     if (seg) seg.classList.toggle('on', on);
   }
