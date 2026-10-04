@@ -206,9 +206,12 @@ var CONFIG = {
        step was teaching each half something untrue. Verified against the docs that day:
          · Claude scheduled tasks (Scheduled in the sidebar) run remotely, so a connector-only
            task fires with the laptop asleep and the app closed. A task that uses files on the
-           computer needs the desktop app open (support.claude.com, rechecked 2026-10-04:
-           "Tasks that use files on your computer need the desktop app open"; "If a scheduled
-           task requires local files or apps, it will only run locally"). The member's AI
+           computer can reach them only while the desktop app is open and the computer awake;
+           a cloud run keeps going with the app closed but loses local-file access
+           (support.claude.com, rechecked 2026-10-04: "Tasks that use files on your computer
+           need the desktop app open"; "If a scheduled task requires local files or apps, it
+           will only run locally"; the scheduling article also contradicts itself on folders,
+           so confirm the folder field in the real app). The member's AI
            Employee lives in their business folder, so teach the folder path. Setup has an
            approval-mode field and an optional folder field.
          · Claude Code's sidebar page is "Routines", and New routine forks LOCAL vs CLOUD.
@@ -220,7 +223,7 @@ var CONFIG = {
     { type:'build', surface:'cowork', title:'Schedule it — do it',
       video:'', demoSlot:true, demoLabel:'&#127916; Demo &middot; watch me schedule one &mdash; coming soon',
       command:'Put this skill on a schedule so it runs on its own and reports back. First check it has earned it &mdash; proven on real work, hardened, harness on. Then pin the cadence, the folder it works in, where the result lands, and how I get told. Anything client-facing or costly must draft for my approval instead of sending on its own.',
-      body:'Your AI Employee works from your business folder, so its scheduled task uses that folder. A task that uses files on your computer runs only while the <strong>Claude desktop app is open</strong>.<br><br><strong>Set it up:</strong>'+
+      body:'Your AI Employee works from your business folder, so its scheduled task uses that folder. <strong>Keep your computer awake and the Claude desktop app open</strong> so the task can reach that folder.<br><br><strong>Set it up:</strong>'+
         '<ul class="sub">'+
         '<li>Click <strong>Scheduled</strong> in the left sidebar</li>'+
         '<li>Click <strong>New task</strong> in the upper right, then choose <strong>Create with Claude</strong></li>'+
@@ -231,7 +234,7 @@ var CONFIG = {
       does:[
         'It checks the skill has <strong>earned</strong> a schedule — proven on real work, hardened, harness on. If it has not, it says so and stops.',
         'You pick <strong>the cadence</strong> — hourly, daily, weekdays, or weekly.',
-        'It works in <strong>your business folder</strong>, where your AI Employee and its files live. Pick a time your computer is on, or keep it awake with the Claude app open. A task that only uses connectors (Gmail, Drive, Notion) runs even with your computer off.',
+        'It works in <strong>your business folder</strong>, where your AI Employee and its files live. It can reach that folder only while your computer is awake and the Claude app is open, so pick a time your computer is on. A task that only uses connectors (Gmail, Drive, Notion) runs even with your computer off.',
         'You set the <strong>approval mode</strong>. That is the draft-don&rsquo;t-send rail from the explainer, and it is a real setting, not a promise you have to trust.',
         'Run it once now from <strong>Scheduled</strong> and check the result before you trust the timer.'
       ],
