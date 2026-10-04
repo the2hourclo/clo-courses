@@ -56,6 +56,12 @@ export default async function middleware(request) {
   if (isAsset(pathname)) return;
   if (pathname === SIGN_IN_PATH) return;
 
+  // THE SETUP PAGES ARE THE BUYER'S DOOR. A 2026-10-04 live test purchase
+  // showed the wall sending a new buyer to Google before the setup page could
+  // bank their purchase claim. Keep both setup URLs open so a buyer with no
+  // course session still lands on setup; the page runs its own sign-in.
+  if (pathname === "/clo-course/get-access-aieb.html" || pathname === "/clo-course/get-access.html") return;
+
   // THE ACTIVATION LINK IS ITS OWN CREDENTIAL. `?activate=CODE` is a one-time,
   // short-lived code that /setup-aieb minted on a specific machine minutes ago.
   // Walling it would mean a buyer on a fresh laptop has to sign in before they
