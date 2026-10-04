@@ -451,7 +451,7 @@ body.activation-mode .container{max-width:620px;width:100%}
     <p class="activation-intro">If this is the browser you bought in, this device connects by itself&mdash;nothing to enter. Otherwise, sign in with the email you bought with and we'll find your subscription for you. Nothing goes through Claude or your chat history.</p>
     <div class="handoff-line" aria-hidden="true">
       <span class="handoff-node">Claude</span><span class="handoff-rail"></span>
-      <span class="handoff-node live">AIEB</span><span class="handoff-rail"></span>
+      <span class="handoff-node live">AI Employee Builder</span><span class="handoff-rail"></span>
       <span class="handoff-node">Skills</span>
     </div>
     <div class="activation-code" id="activation-code"></div>
@@ -635,7 +635,7 @@ Just set up my AI Employee Builder. The first thing I want to hand off: [the tas
            (#step2 is authored but not in wizSteps()). In the wizard this step IS step 2 of 3,
            so the old copy pointed the buyer at itself. Both now name the next thing they
            actually get: the paste-one-prompt card. -->
-      <div class="callout callout-tip"><strong>That's the only manual install.</strong> AIEB now connects to its hosted server directly. On the next step you paste one prompt and Claude installs the plugin, opens the secure browser connection, and verifies access.</div>
+      <div class="callout callout-tip"><strong>That's the only manual install.</strong> AI Employee Builder now connects to its hosted server directly. On the next step you paste one prompt and Claude installs the plugin, opens the secure browser connection, and verifies access.</div>
       <div class="callout callout-info"><strong>Already use Claude Code?</strong> If the extension is installed and you're signed in, tick this and go straight to the next step.</div>
       <button class="done-btn" onclick="markDone(1)"><span class="dlabel">Mark step done</span></button>
     </div>
@@ -644,7 +644,7 @@ Just set up my AI Employee Builder. The first thing I want to hand off: [the tas
   <!-- ═══════════════ AI SHORTCUT (usable once Claude Code is installed) ═══════════════ -->
   <div class="ai-card cc-only" id="shortcut">
     <div class="card-title">&#9889; Got Claude Code open? Let Claude do the rest</div>
-    <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude installs the thin plugin and verifies its hosted AIEB connector. If the host asks you to connect, finish the secure browser step with the Google address attached to your purchase. Returning members are recognized from the AIEB account already stored on the server; a license key is only a fallback on that secure page.</p>
+    <p>Now that Claude Code is installed, you barely have to lift a finger. <strong>Paste this into the Claude Code chat</strong> &mdash; Claude installs the AI Employee Builder plugin and checks its connection. If the host asks you to connect, finish the secure browser step with the Google address attached to your purchase. Returning members are recognized from the membership already stored on the server; a license key is only a fallback on that secure page.</p>
     <div class="ai-prompt">
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy prompt</button>
       <pre>You are setting up AI Employee Builder v0.31.0 or newer in my Claude Code for me. It uses a thin plugin shell plus a hosted remote OAuth MCP server. Do as much as you can yourself, verify every step, and only hand work to me when Claude Code requires a human click or slash command.
@@ -689,10 +689,10 @@ After each step, tell me whether it worked, or show the error and exactly how yo
   <!-- ═══════════════ CLAUDE TRACK (3 guided steps + 2 optional) ═══════════════ -->
   <!-- CODEX TRACK -->
   <div class="ai-card codex-only" id="codexinstall">
-    <div class="card-title">&#10095; Open Codex, then let it install AIEB</div>
+    <div class="card-title">&#10095; Open Codex, then let it install AI Employee Builder</div>
     <p><strong>First, open Codex on the project where you want your AI Employees to work.</strong> If Codex is not installed yet, use OpenAI&rsquo;s current setup guide:</p>
     <p><a class="dl-btn" href="https://developers.openai.com/codex/" target="_blank" rel="noopener">Open the Codex setup guide &#8599;</a></p>
-    <p>Then paste the prompt below into a Codex thread. Codex adds the AIEB marketplace, installs the remote-connector plugin, and tells you when to open the one fresh thread required to load it.</p>
+    <p>Then paste the prompt below into a Codex thread. Codex adds the AI Employee Builder marketplace, installs the plugin, and tells you when to open the one fresh thread it needs.</p>
     <div class="ai-prompt">
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy Codex setup prompt</button>
       <pre>You are setting up AI Employee Builder in Codex for me. It uses a free thin plugin shell plus a hosted, licensed MCP server. Do as much as you can yourself, verify every step, and never ask me to paste a license key into chat.
@@ -717,8 +717,8 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
       <button class="copy-prompt" onclick="copyPrompt(this)">Copy Codex setup command</button>
       <pre>Set up AIEB</pre>
     </div>
-    <div class="callout callout-tip"><strong>What happens next:</strong> Codex connects AIEB first. If authentication is needed, use its Connect action and sign in with the Google address you bought with; the license key on that page is only the fallback. Back in Codex, setup checks whether your four Get Access answers are already saved. It skips them when they are complete; otherwise it asks them conversationally and saves them with <code>complete_aieb_onboarding</code> before building your workspace.</div>
-    <div class="callout callout-info"><strong>Success looks like:</strong> Codex confirms <code>ai-employee-map</code> loads from the AIEB server, writes its managed block in <code>AGENTS.md</code>, and uses <code>.agents/skills/</code> for skills you author.</div>
+    <div class="callout callout-tip"><strong>What happens next:</strong> Codex connects AI Employee Builder first. If authentication is needed, use its Connect action and sign in with the Google address you bought with; the license key on that page is only the fallback. Back in Codex, setup checks whether your four Get Access answers are already saved. It skips them when they are complete; otherwise it asks them conversationally and saves them with <code>complete_aieb_onboarding</code> before building your workspace.</div>
+    <div class="callout callout-info"><strong>Success looks like:</strong> Codex confirms the AI Employee Map loads, adds its section to <code>AGENTS.md</code>, and keeps the skills you build in <code>.agents/skills/</code>.</div>
     <button class="done-btn wiz-only" type="button" onclick="wizCodexDone()"><span>Setup finished &mdash; next &#8594;</span></button>
   </div>
 
@@ -884,7 +884,7 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
     <div class="step-content">
       <p>Your workspace now knows where your <strong>files</strong> live. It also needs to know where your <strong>live business data</strong> lives &mdash; the emails you've sent, your tasks, your client records, this month's numbers. For most businesses that's in Notion, Google Drive, or an inbox, not in the workspace at all.</p>
 
-      <div class="callout callout-tip"><strong>This is separate from AIEB setup.</strong> <code>/setup-aieb</code> verifies access and the saved workspace frame; it does not automatically connect every third-party business system. Use this step to add only the tools your business actually needs.</div>
+      <div class="callout callout-tip"><strong>This is separate from the AI Employee Builder setup.</strong> <code>/setup-aieb</code> verifies access and the saved workspace frame; it does not automatically connect every third-party business system. Use this step to add only the tools your business actually needs.</div>
 
       <p><strong>Don't remember being asked?</strong> Paste this into your chat and Claude picks it up &mdash; it asks what your business runs on, goes and <em>finds</em> the real databases and folders, and confirms each one with you before writing anything down. It won't re-ask anything you've already answered:</p>
 
@@ -1025,12 +1025,12 @@ Check the installed plugin version, its remote `.mcp.json`, whether `get_skill` 
       <tbody>
         <tr><td>A new command doesn't appear</td><td>You skipped a reload. Type <code>/reload-plugins</code>, or reload the window (<span class="kbd">Ctrl/Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> &rarr; "Reload Window").</td></tr>
         <tr><td>Install or connector fails mentioning <code>node</code></td><td>You are on the legacy local connector. Update AI Employee Builder to v0.31.0 or newer, reload, and verify its MCP URL is <code>https://api.chiefleverageofficers.com/mcp</code>.</td></tr>
-        <tr><td>The MCP says <strong>401</strong> or unauthorized</td><td>Use the host's AIEB <strong>Connect</strong> action, finish the secure browser flow, then retry. Use your purchase Google address first; never paste a key into chat.</td></tr>
+        <tr><td>The MCP says <strong>401</strong> or unauthorized</td><td>Use the app's <strong>Connect</strong> action for AI Employee Builder, finish the secure sign-in page, then retry. Use your purchase Google address first; never paste a key into chat.</td></tr>
         <tr><td>"Key bound to other plugin"</td><td>That key is for a different product &mdash; each key activates one plugin. Re-check the key in your Lemon Squeezy email.</td></tr>
         <tr><td>"Expired" or "Revoked"</td><td>Your subscription lapsed. Renew at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank">My Orders</a>, then reload Claude Code and try the MCP call again.</td></tr>
         <tr><td>Skills don't show up after install</td><td>Reload Claude Code. If the plugin is installed but the MCP is missing, check the plugin's <code>.mcp.json</code> config.</td></tr>
         <tr><td>The local plugin folder looks tiny</td><td>That is expected. The local plugin is only the shell; paid skill instructions load from the hosted MCP.</td></tr>
-        <tr><td>A returning member is asked to connect again</td><td>That is normal once per host. Sign in with the purchase address; AIEB reuses the stored member entitlement and migrates the old device grant when eligible.</td></tr>
+        <tr><td>A returning member is asked to connect again</td><td>That is normal once per host. Sign in with the purchase address; AI Employee Builder finds your membership and moves your old connection over when it can.</td></tr>
         <tr><td><code>/plugin</code> not recognized</td><td>Claude Code is outdated. Update the extension (Extensions panel &rarr; Claude Code &rarr; update), reload, retry.</td></tr>
       </tbody>
     </table>
@@ -1044,11 +1044,11 @@ Check the installed plugin version, its remote `.mcp.json`, whether `get_skill` 
     <details><summary>Do I need to know how to code?</summary><div class="faq-body">No. You copy a few short commands into a chat box and click "Install." If you can copy and paste, you can do this &mdash; and the <strong>"Let Claude install it"</strong> prompt up top will walk you through it.</div></details>
     <details><summary>Why install a thin plugin plus MCP?</summary><div class="faq-body">The thin plugin gives each supported host the setup guidance and remote connector declaration. Paid instructions stay on the hosted MCP server, so your subscription is checked at runtime and content updates ship without reinstalling the library.</div></details>
     <details><summary>Does my license key work on more than one computer?</summary><div class="faq-body">Your subscription's connection limit still applies. On a new computer, use Connect and sign in with the address attached to your purchase; the secure page will tell you if it needs the license-key fallback. Never paste the key into a chat.</div></details>
-    <details><summary>Why doesn't it need Node.js anymore?</summary><div class="faq-body">AIEB v0.31.0 connects directly to the hosted HTTPS MCP and uses the app's native OAuth support. Older plugin versions used a local connector, so update before starting a new setup.</div></details>
-    <details><summary>How do updates work?</summary><div class="faq-body">Most AIEB skill updates happen on the MCP server. You get the latest instructions automatically the next time a skill runs &mdash; no reinstall, nothing to do. You only reinstall the plugin when the local shell itself changes (new setup behavior, proxy, or hooks), and the plugin will <strong>tell you</strong> when that's needed: it checks the server for the current shell version at startup and, if yours is behind, prompts you with the exact update commands.</div></details>
+    <details><summary>Why doesn't it need Node.js anymore?</summary><div class="faq-body">Since v0.31.0, AI Employee Builder connects straight to its hosted server and uses the app's own sign-in. Older plugin versions used a local connector, so update before starting a new setup.</div></details>
+    <details><summary>How do updates work?</summary><div class="faq-body">Most AI Employee Builder updates happen on the server. You get the latest instructions automatically the next time a skill runs &mdash; no reinstall, nothing to do. You only reinstall the plugin when the local shell itself changes (new setup behavior, proxy, or hooks), and the plugin will <strong>tell you</strong> when that's needed: it checks the server for the current shell version at startup and, if yours is behind, prompts you with the exact update commands.</div></details>
     <details><summary>Can I use this in Claude?</summary><div class="faq-body"><strong>Yes &mdash; no Claude Code or local-runtime toggle needed.</strong> Update and install the <strong>AI Employee Builder plugin</strong> (<em>Customize &rarr; Personal plugins &rarr; + &rarr; Add marketplace &rarr;</em> <code>the2hourclo/aieb-thin-plugin</code>). Then choose <strong>New chat &rarr; Project &rarr; Add folder</strong>, or reopen the existing Project and workspace folder, and say <code>set up my AI Employee Builder</code>. If Claude shows Connect, finish its secure browser flow and return to that same Project chat. Type <code>/check-setup</code> there if the paid tool does not retry.</div></details>
     <details><summary>What if I cancel or my subscription lapses?</summary><div class="faq-body">If you cancel during the free trial before the first payment, you avoid that charge and trial access may end immediately. Once a payment has been made, cancelling stops the next renewal and access continues through the billing period already paid for. Payments are non-refundable and are not prorated except where the law requires otherwise or a written offer expressly says so. If access has ended, renew or resume at <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener">Lemon Squeezy &rarr; My Orders</a>; the same connection works again without reinstalling.</div></details>
-    <details><summary>I already use Claude Code or Codex &mdash; can I skip ahead?</summary><div class="faq-body">Yes. Pick your app above, install or update to v0.31.0 or newer, start a fresh session, and run the setup trigger. AIEB connects first, then setup reuses your saved Get Access answers or asks the four questions once if they are missing.</div></details>
+    <details><summary>I already use Claude Code or Codex &mdash; can I skip ahead?</summary><div class="faq-body">Yes. Pick your app above, install or update to the latest version, start a fresh session, and run the setup trigger. AI Employee Builder connects first, then setup reuses your saved Get Access answers or asks the four questions once if they are missing.</div></details>
     <details><summary>Is the Terminal method different from VS Code?</summary><div class="faq-body">Same result, same commands &mdash; just a different place to type them. The <strong>VS Code</strong> way is click-based and friendly; <strong>Terminal</strong> is for command-line folks. Use the toggle at the top to switch.</div></details>
   </div>
 
