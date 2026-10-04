@@ -33,7 +33,7 @@ window.addEventListener('error', function () {
   // NOTE: nothing in the shell reads a storage key any more (the gate, the sign-out
   // button and the onboarding widget all went with the collapse). `P.storageKey` is
   // kept in nav.js only so a stale cached shell.js doesn't trip over its absence.
-  // Surface-aware nav: hide items tagged for the OTHER build surface (Cowork vs
+  // Surface-aware nav: hide items tagged for the OTHER build surface (Claude vs
   // Claude Code). Nothing carries a `surface` tag today — the merged nav shows
   // every course to everyone — but the mechanism is kept for future use.
   var curSurface = null; try { curSurface = localStorage.getItem('aieb_surface'); } catch (e) {}

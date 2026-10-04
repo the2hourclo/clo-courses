@@ -141,13 +141,13 @@
     goal:  { name: 'Your AI Employee',   short: 'Your AI Employee',   wizard: 'checkpoint-ai-employee.html', color: '#fbbf24' }
   };
 
-  /* ── SURFACE (Cowork, Claude Code, or Codex) — a global identity, swappable anytime ── */
+  /* ── SURFACE (Claude, Claude Code, or Codex) — a global identity, swappable anytime ── */
   var SURFACE_KEY = 'aieb_surface';
   var TRIAL_SETUP_KEY = 'aieb_trial_setup_complete_v1';
   var SURFACES = {
-    'cowork':      { label: 'Cowork',      blurb: 'Claude in your browser — nothing to install to start.' },
-    'claude-code': { label: 'Claude Code', blurb: 'Claude in your code editor or terminal.' },
-    'codex':       { label: 'Codex',       blurb: 'OpenAI Codex in the desktop app or terminal, working directly with your project files.' }
+    'cowork':      { label: 'Claude',      blurb: 'Claude with a project or folder attached. All point-and-click.' },
+    'codex':       { label: 'ChatGPT Codex',       blurb: 'OpenAI Codex in the desktop app or terminal, working directly with your project files.' },
+    'claude-code': { label: 'Claude Code', blurb: 'Claude in your code editor or terminal.' }
   };
   function getSurface() {
     try { var s = localStorage.getItem(SURFACE_KEY); return (s === 'cowork' || s === 'claude-code' || s === 'codex') ? s : null; }

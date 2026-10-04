@@ -13,7 +13,7 @@
   }
 
   function trackLabel() {
-    return window.wizTrackName === 'cowork' ? 'Claude Cowork'
+    return window.wizTrackName === 'cowork' ? 'Claude'
       : window.wizTrackName === 'codex' ? 'ChatGPT Codex'
       : window.wizTrackName === 'cc' ? 'Claude Code'
       : 'Choose your build app';
@@ -50,7 +50,7 @@
       var choose = document.createElement('div');
       choose.className = 'setup-rail-step active';
       choose.setAttribute('aria-current', 'step');
-      choose.innerHTML = '<span class="n">'+(window.__aiebTrialSetupComplete ? '2' : '1')+'</span><span><b>Choose where you\u2019ll build</b><small>New here? We recommend ChatGPT Codex</small></span>';
+      choose.innerHTML = '<span class="n">'+(window.__aiebTrialSetupComplete ? '2' : '1')+'</span><span><b>Choose where you\u2019ll build</b><small>New here? We recommend Claude</small></span>';
       list.appendChild(choose);
       if (progress) progress.textContent = window.__aiebTrialSetupComplete ? 'Next: choose your build app' : 'Choose your build app';
       if (mobileTitle) mobileTitle.textContent = 'Choose where you\u2019ll build';
@@ -144,7 +144,7 @@
     var win = document.createElement('section');
     win.className = 'setup-window';
     win.setAttribute('aria-label', 'Get set up checkpoint');
-    win.innerHTML = '<div class="setup-windowbar"><div class="setup-brand"><img src="assets/aieb-avatar-180.png" alt=""><span>AI Employee Builder</span></div><div class="setup-progress-label" aria-live="polite"></div></div><div class="setup-grid"><aside class="setup-rail"><span class="setup-rail-label">Your active checkpoint</span><h1>Get set up</h1><p class="setup-rail-subtitle"></p><div class="setup-mobile-summary"><div><span class="setup-mobile-count"></span><b class="setup-mobile-title"></b></div><div class="setup-mobile-dots" aria-hidden="true"></div></div><div class="setup-rail-steps" aria-label="Setup steps"></div><div class="setup-rail-note"><b>Set up once. Build from the Board.</b><span>Your progress is saved as you connect your chosen app.</span></div></aside><main class="setup-main"><label class="setup-mobile-surface"><span>Building in</span><select class="setup-mobile-surface-select" aria-label="Choose where you build"><option value="">Choose an app</option><option value="codex">ChatGPT Codex (recommended)</option><option value="cowork">Claude Cowork</option><option value="cc">Claude Code</option></select></label></main></div><nav class="setup-mobile-dock" aria-label="Setup navigation"><button type="button" class="dock-back">\u2190 Back</button><button type="button" class="dock-next">Next \u2192</button></nav>';
+    win.innerHTML = '<div class="setup-windowbar"><div class="setup-brand"><img src="assets/aieb-avatar-180.png" alt=""><span>AI Employee Builder</span></div><div class="setup-progress-label" aria-live="polite"></div></div><div class="setup-grid"><aside class="setup-rail"><span class="setup-rail-label">Your active checkpoint</span><h1>Get set up</h1><p class="setup-rail-subtitle"></p><div class="setup-mobile-summary"><div><span class="setup-mobile-count"></span><b class="setup-mobile-title"></b></div><div class="setup-mobile-dots" aria-hidden="true"></div></div><div class="setup-rail-steps" aria-label="Setup steps"></div><div class="setup-rail-note"><b>Set up once. Build from the Board.</b><span>Your progress is saved as you connect your chosen app.</span></div></aside><main class="setup-main"><label class="setup-mobile-surface"><span>Building in</span><select class="setup-mobile-surface-select" aria-label="Choose where you build"><option value="">Choose an app</option><option value="cowork">Claude (recommended)</option><option value="codex">ChatGPT Codex</option><option value="cc">Claude Code</option></select></label></main></div><nav class="setup-mobile-dock" aria-label="Setup navigation"><button type="button" class="dock-back">\u2190 Back</button><button type="button" class="dock-next">Next \u2192</button></nav>';
     var boardBack = document.createElement('a');
     boardBack.className = 'setup-back';
     boardBack.href = 'ai-employee-board.html';

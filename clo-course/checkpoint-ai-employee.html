@@ -25,7 +25,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .cp-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display);font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:5px 12px;border-radius:20px;background:color-mix(in srgb,var(--cp) 16%,transparent);color:var(--cp);border:1px solid color-mix(in srgb,var(--cp) 34%,transparent)}
 .cp-badge .cdot{width:8px;height:8px;border-radius:50%;background:var(--cp)}
 
-/* surface toggle (Cowork, Claude Code, or Codex) */
+/* surface toggle (Claude, Claude Code, or Codex) */
 .surface-row{display:flex;align-items:center;gap:10px;margin-top:12px}
 .surface-label{font-size:12px;font-weight:700;color:var(--text-dim)}
 .surface-toggle{display:inline-flex;background:var(--surface);border:1px solid var(--border-2);border-radius:20px;padding:3px;gap:3px}
@@ -144,9 +144,9 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
   <div class="surface-row rise">
     <span class="surface-label">I build in:</span>
     <div class="surface-toggle">
-      <button class="sbtn" id="sb-cowork" onclick="setSurface('cowork')">Cowork</button>
+      <button class="sbtn" id="sb-cowork" onclick="setSurface('cowork')">Claude</button>
+      <button class="sbtn" id="sb-codex" onclick="setSurface('codex')">ChatGPT Codex</button>
       <button class="sbtn" id="sb-cc" onclick="setSurface('claude-code')">Claude Code</button>
-      <button class="sbtn" id="sb-codex" onclick="setSurface('codex')">Codex</button>
     </div>
   </div>
 
@@ -200,11 +200,11 @@ var CONFIG = {
         'Same finished draft, two endings. Anything that only touches your own work just happens. Anything that leaves the building, costs money, or can&rsquo;t be undone stops at the red line and waits for your yes. <strong>It runs without you. It does not send without you.</strong>',
         'Monday, 7am, and nobody asked it to start. By 7:12 the draft is checked and confirmed saved in the folder. You show up at nine, read it, and say yes. Now look at the bottom band, because that is the whole journey: a skill that does a task, a skill system that does a function, and now <strong>an AI Employee that owns the function and starts itself</strong>.'
       ],
-      body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask. <strong>Unattended is not unsupervised</strong> — you still see everything, you just stop being the one who starts it. <em>Cowork, Claude Code, and Codex schedule differently, and the difference decides whether your Monday run actually fires — the next step gives you the right one for where you build.</em>' },
+      body:'The last piece is <strong>time</strong>. Put the system on a schedule or a trigger so it runs on its own and reports back, instead of waiting for you to ask. <strong>Unattended is not unsupervised</strong> — you still see everything, you just stop being the one who starts it. <em>Claude, Claude Code, and Codex schedule differently, and the difference decides whether your Monday run actually fires — the next step gives you the right one for where you build.</em>' },
 
     /* SURFACE-SPLIT 2026-07-29. The two products schedule differently enough that one generic
        step was teaching each half something untrue. Verified against the docs that day:
-         · Cowork scheduled tasks run REMOTELY — laptop can be asleep, app closed. But they
+         · Claude scheduled tasks run REMOTELY — laptop can be asleep, app closed. But they
            cannot be tied to a folder on your computer; input/output must be a connector or
            files in your Claude account. Setup has an approval-mode field.
          · Claude Code's sidebar page is "Routines", and New routine forks LOCAL vs CLOUD.
@@ -216,7 +216,7 @@ var CONFIG = {
     { type:'build', surface:'cowork', title:'Schedule it — do it',
       video:'', demoSlot:true, demoLabel:'&#127916; Demo &middot; watch me schedule one &mdash; coming soon',
       command:'Put this skill on a schedule so it runs on its own and reports back. First check it has earned it &mdash; proven on real work, hardened, harness on. Then pin the cadence, which connector or saved files it reads, where the result lands, and how I get told. Anything client-facing or costly must draft for my approval instead of sending on its own.',
-      body:'Cowork runs scheduled tasks <strong>on Anthropic&rsquo;s servers</strong>, so they fire whether or not your laptop is on.<br><br><strong>Set it up:</strong>'+
+      body:'Claude runs scheduled tasks <strong>on Anthropic&rsquo;s servers</strong>, so they fire whether or not your laptop is on.<br><br><strong>Set it up:</strong>'+
         '<ul class="sub">'+
         '<li>Click <strong>Scheduled</strong> in the left sidebar</li>'+
         '<li>Click <strong>New task</strong> in the upper right, then choose <strong>Create with Claude</strong></li>'+
@@ -227,7 +227,7 @@ var CONFIG = {
       does:[
         'It checks the skill has <strong>earned</strong> a schedule — proven on real work, hardened, harness on. If it has not, it says so and stops.',
         'You pick <strong>the cadence</strong> — hourly, daily, weekdays, or weekly.',
-        'You point it at <strong>where the input lives</strong>. A Cowork scheduled task <strong>cannot reach a folder on your computer</strong>, so this has to be a connector (Gmail, Drive, Notion) or files saved to your Claude account. Getting this wrong is the single most common reason a scheduled run comes back empty.',
+        'You point it at <strong>where the input lives</strong>. A Claude scheduled task <strong>cannot reach a folder on your computer</strong>, so this has to be a connector (Gmail, Drive, Notion) or files saved to your Claude account. Getting this wrong is the single most common reason a scheduled run comes back empty.',
         'You set the <strong>approval mode</strong>. That is the draft-don&rsquo;t-send rail from the explainer, and it is a real setting, not a promise you have to trust.',
         'It runs <strong>remotely</strong> — your computer can be asleep and the app closed, and Monday 7am still happens.'
       ],
@@ -297,7 +297,7 @@ document.getElementById('cpName').textContent = CONFIG.name;
 document.getElementById('backLink').href = CONFIG.board;
 document.title = CONFIG.name + ' — AI Employee Builder';
 
-/* Surface (Cowork, Claude Code, or Codex) — shared with the board via localStorage.
+/* Surface (Claude, Claude Code, or Codex) — shared with the board via localStorage.
    Steps may carry surface:'cowork'|'claude-code'|'codex'; no surface = shown on all. */
 var SURFACE_STORE = 'aieb_surface';
 var surface = 'cowork';

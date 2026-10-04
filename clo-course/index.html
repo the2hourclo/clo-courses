@@ -121,33 +121,32 @@ body{min-height:100vh;background:var(--paper);color:var(--body);font:18px/1.6 "S
 function surfBarHTML(){
   var cur = AIEB.getSurface();
   function btn(k){ return '<button class="sbtn'+(cur===k?' active':'')+'" onclick="swapSurface(\''+k+'\')">'+AIEB.SURFACES[k].label+'</button>'; }
-  return '<span class="surface-label">Building in</span><div class="surface-toggle">'+btn('cowork')+btn('claude-code')+btn('codex')+'</div>';
+  return '<span class="surface-label">Building in</span><div class="surface-toggle">'+btn('cowork')+btn('codex')+btn('claude-code')+'</div>';
 }
 function paintSurf(){ document.getElementById('surfBar').innerHTML = surfBarHTML(); }
 function swapSurface(s){ AIEB.setSurface(s); paintSurf(); renderHome(); }
 
 function gateHTML(){
   // The single surface picker (asked once, up front). Get Access reads this choice and
-  // skips its own "pick your app" step, so nobody chooses twice. ChatGPT Codex is the
+  // skips its own "pick your app" step, so nobody chooses twice. Claude is the
   // recommended default; the top-bar toggle swaps it anytime.
   return '<div class="sg-card">'+
     '<div class="eyebrow">One quick thing · switch anytime</div>'+
     '<h2>Where do you want to build?</h2>'+
-    '<p>This just sets which setup steps we show you. Not sure? Start with ChatGPT Codex — it is our recommended building path.</p>'+
+    '<p>This just sets which setup steps we show you. Not sure? Start with Claude. It\'s the simplest path, all point-and-click.</p>'+
     '<div class="sg-opts">'+
-      '<button class="sg-opt reco" onclick="pickSurface(\'codex\')">'+
-        '<span class="sg-badge">Recommended · start here</span>'+
+      '<button class="sg-opt reco" onclick="pickSurface(\'cowork\')">'+
+        '<span class="sg-badge">Recommended if you\'re new</span>'+
+        '<span class="sg-head"><img class="sg-ic" src="assets/get-access/claude-logo.png" alt="" onerror="this.style.display=\'none\'"><b>Claude</b></span>'+
+        '<span class="sg-what">Runs in the Claude app with a project or folder attached. Add our plugin, open its connection page, done. All point-and-click.</span>'+
+        '<span class="sg-if"><em>Pick this if</em> you want a guided setup with no terminal.</span>'+
+        '<span class="sg-go">Set up Claude →</span>'+
+      '</button>'+
+      '<button class="sg-opt" onclick="pickSurface(\'codex\')">'+
         '<span class="sg-head"><img class="sg-ic" src="assets/get-access/codex-mark.svg" alt="" onerror="this.style.display=\'none\'"><b>ChatGPT Codex</b></span>'+
         '<span class="sg-what">Codex works in its desktop app, IDE extension, or terminal, directly with the files in your project.</span>'+
-        '<span class="sg-if"><em>Pick this if</em> you want our recommended OpenAI workflow and a workspace that can build directly with your files.</span>'+
+        '<span class="sg-if"><em>Pick this if</em> you already work in ChatGPT and want a workspace that builds directly with your files.</span>'+
         '<span class="sg-go">Build in ChatGPT Codex →</span>'+
-      '</button>'+
-      '<button class="sg-opt" onclick="pickSurface(\'cowork\')">'+
-        '<span class="sg-badge alt">Simplest path</span>'+
-        '<span class="sg-head"><img class="sg-ic" src="assets/get-access/cowork-logo.png" alt="" onerror="this.style.display=\'none\'"><b>Claude Cowork</b></span>'+
-        '<span class="sg-what">Claude runs in your browser. Nothing to install — add one plugin, click a link, and you’re building. All point-and-click.</span>'+
-        '<span class="sg-if"><em>Pick this if</em> you prefer a guided, point-and-click experience inside Claude.</span>'+
-        '<span class="sg-go">Build in Cowork →</span>'+
       '</button>'+
       '<button class="sg-opt" onclick="pickSurface(\'claude-code\')">'+
         '<span class="sg-badge alt">Full control</span>'+
