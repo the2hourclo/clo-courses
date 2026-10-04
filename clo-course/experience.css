@@ -161,3 +161,17 @@ body.aieb-checkpoint .btn.primary{font-family:var(--font-accent);font-size:16px;
   body.aieb-board .nextbar{border-radius:0;border-left-width:4px}
 }
 @media(prefers-reduced-motion:reduce){body.aieb-redesign *,body.aieb-redesign *:before,body.aieb-redesign *:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* 2026-10-04 step view on checkpoint action steps (Rashid: "that works better"): one Done button right
+   under the action, tick boxes on the proof step, extras in one "Need help with this step?" drawer. */
+body.aieb-checkpoint .sv-done{display:block;width:100%;max-width:440px;margin:18px 0 6px;padding:14px 18px;font:400 19px/1.2 var(--font-accent);color:#fff;background:#2D8C3C;border:2px solid var(--aieb-ink);border-radius:255px 15px 225px 15px/15px 225px 15px 255px;box-shadow:3px 4px 0 rgba(33,33,30,.55);cursor:pointer}
+body.aieb-checkpoint .sv-done:hover:not(:disabled){transform:translate(-1px,-1px)}
+body.aieb-checkpoint .sv-done:disabled{background:#A9B5A6;box-shadow:none;cursor:not-allowed}
+body.aieb-checkpoint .sv-checks{display:grid;gap:10px;margin:16px 0 4px}
+body.aieb-checkpoint .sv-checks label{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1.5px dashed #2D8C3C;border-radius:10px;background:#EAF4EC;color:var(--aieb-ink);cursor:pointer;font-size:15.5px;line-height:1.45}
+body.aieb-checkpoint .sv-checks input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:#2D8C3C}
+body.aieb-checkpoint .sv-checks.sv-nudge label{border-style:solid;border-width:2px}
+body.aieb-checkpoint .sv-help{margin-top:14px;border:1.5px solid var(--aieb-line);border-radius:12px;background:#fff}
+body.aieb-checkpoint .sv-help>summary{cursor:pointer;padding:13px 16px;font-weight:600;color:var(--aieb-ink)}
+body.aieb-checkpoint .sv-help>*:not(summary){margin:0 16px 14px}
+@media (prefers-reduced-motion:reduce){body.aieb-checkpoint .sv-done:hover:not(:disabled){transform:none}}
