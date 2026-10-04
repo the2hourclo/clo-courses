@@ -393,7 +393,7 @@ function render(){
   /* 2026-10-04 step view (Rashid: "that works better"): an action step leads with the one thing to
      do and one Done button; the demo, the step-by-step explainer and the unlock rule move into one
      "Need help with this step?" drawer. Lesson steps keep their slides up front: they are the learning. */
-  if ((s.type==='build' || s.type==='gate') && !s.slides && !s.video){ h = svHTML(s, pos===n-1); stage.innerHTML = h; window.scrollTo(0,0); return; }
+  if ((s.type==='build' || s.type==='gate') && !s.slides && !s.video){ h = svHTML(s, pos===n-1); stage.innerHTML = h; document.body.classList.remove('slides-step'); window.scrollTo(0,0); return; }
   var h = '<div class="step">';
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
