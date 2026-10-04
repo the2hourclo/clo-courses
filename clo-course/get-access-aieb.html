@@ -747,30 +747,35 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
         <span class="step-meta"><span class="time">~3 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
       <div class="step-content">
-        <div class="do-now">
-          <span class="do-now-kicker">Do this now</span>
-          <strong>Install the AI Employee Builder plugin in Claude.</strong>
-          <p>Open <b>Customize &rarr; Personal plugins &rarr; + &rarr; Add marketplace</b>, then paste this marketplace name:</p>
-          <div class="cmd-line"><span class="cmd-text">the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy marketplace</button></div>
+        <div class="sv-card">
+          <span class="sv-card-label">Do this in the Claude app</span>
+          <ol class="sv-path">
+            <li><span>Open <strong>Customize</strong>.</span></li>
+            <li><span>Choose <strong>Personal plugins</strong>.</span></li>
+            <li><span>Click <strong>+</strong>, then <strong>Add marketplace</strong>.</span></li>
+            <li><span>Paste this name and click <strong>Sync</strong>:</span>
+              <div class="cmd-line"><span class="cmd-text">the2hourclo/aieb-thin-plugin</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></li>
+            <li><span>Click <strong>Install</strong> on <strong>AI Employee Builder</strong>. Claude shows a red &ldquo;make sure you trust this plugin&rdquo; notice for every plugin it didn&rsquo;t make; this one is ours.</span></li>
+          </ol>
         </div>
-        <details class="setup-watch"><summary>Prefer to watch first? Open the 3-minute walkthrough</summary><div class="video-embed"><iframe src="https://share.descript.com/embed/N9izyUOTEDE" title="Install the AI Employee Builder plugin in Claude" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div></details>
-        <p>Everything happens in the Claude <strong>desktop app</strong> (Pro, Max, or Team) &mdash; no terminal, nothing to download.</p>
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body">After you paste the marketplace name, click <strong>Sync</strong>.</div></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Install <strong>AI Employee Builder</strong>. When it appears in your plugins, this step is complete.</div></div>
-        <details class="setup-watch"><summary>Already have the AI Employee Builder plugin? Update it instead</summary><div class="stuck-body">
-          <p>Open <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin</strong>, click the <strong>three dots (&hellip;)</strong> and choose <strong>Check for updates</strong>. Then open <strong>Customize &rarr; Plugins &rarr; AI Employee Builder</strong> and click <strong>Update</strong> if you see it. Carry on below in the same Claude project and folder.</p>
-        <figure class="shot">
-          <img src="assets/get-access/cowork-aieb-check-for-updates.png" alt="The aieb-thin-plugin marketplace menu in Claude with Check for updates selected" onerror="this.closest('figure').style.display='none'">
-          <figcaption><strong>1. Refresh the marketplace:</strong> open <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin</strong>, click the <strong>three dots (&hellip;)</strong>, and choose <strong>Check for updates</strong>.</figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="assets/get-access/cowork-aieb-install-update.png" alt="The installed AI Employee Builder plugin in Claude showing the Update button" onerror="this.closest('figure').style.display='none'">
-          <figcaption><strong>2. Install the update:</strong> return to <strong>Customize &rarr; Plugins &rarr; AI Employee Builder</strong> and click <strong>Update</strong> if the button appears.</figcaption>
-        </figure>
+        <button class="done-btn sv-done" onclick="markDoneCW(1)"><span class="dlabel">Done, next step &rarr;</span></button>
+        <details class="setup-watch sv-help"><summary>Need help with this step?</summary><div class="stuck-body">
+          <ul class="sub">
+            <li><strong>Want to watch it first?</strong> The 3-minute walkthrough is below.</li>
+            <li><strong>Don&rsquo;t see Personal plugins?</strong> Plugins need a paid Claude plan (Pro, Max or Team). Update the Claude desktop app (quitting and reopening usually does it), then look again. On a managed Team or Enterprise account, an admin may have to allow personal plugins first.</li>
+            <li><strong>Already have the plugin?</strong> Update it instead: open <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin</strong>, click the <strong>three dots (&hellip;)</strong> and choose <strong>Check for updates</strong>. Then open <strong>Customize &rarr; Plugins &rarr; AI Employee Builder</strong> and click <strong>Update</strong> if you see it.</li>
+            <li><strong>Still stuck?</strong> <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the community</a> and we&rsquo;ll sort it out with you.</li>
+          </ul>
+          <div class="video-embed"><iframe src="https://share.descript.com/embed/N9izyUOTEDE" title="Install the AI Employee Builder plugin in Claude" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>
+          <figure class="shot">
+            <img src="assets/get-access/cowork-aieb-check-for-updates.png" alt="The aieb-thin-plugin marketplace menu in Claude with Check for updates selected" onerror="this.closest('figure').style.display='none'">
+            <figcaption><strong>Updating, part 1:</strong> <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin</strong>, the <strong>three dots (&hellip;)</strong>, then <strong>Check for updates</strong>.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/get-access/cowork-aieb-install-update.png" alt="The installed AI Employee Builder plugin in Claude showing the Update button" onerror="this.closest('figure').style.display='none'">
+            <figcaption><strong>Updating, part 2:</strong> <strong>Customize &rarr; Plugins &rarr; AI Employee Builder</strong>, then <strong>Update</strong> if the button appears.</figcaption>
+          </figure>
         </div></details>
-        <div class="callout callout-info"><strong>You'll see a red &ldquo;make sure you trust this plugin&rdquo; notice.</strong> That's Claude's standard warning for every non-Anthropic plugin &mdash; this one is ours.</div>
-        <div class="callout callout-tip"><strong>Don't see &ldquo;Personal plugins&rdquo; in Customize?</strong> Update the Claude desktop app first (quit and reopen usually does it), then look again. On a managed Team/Enterprise account, an admin may have to allow personal plugins first.</div>
-        <button class="done-btn" onclick="markDoneCW(1)"><span class="dlabel">Mark step done</span></button>
       </div>
     </details>
 
@@ -782,26 +787,31 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
         <span class="step-meta"><span class="time">~12 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
       <div class="step-content">
-        <div class="do-now">
-          <span class="do-now-kicker">Do this now</span>
-          <strong>Start a Claude project for your business, then run one command.</strong>
-          <p>In Claude, choose <strong>New chat &rarr; Project &rarr; Add folder</strong> and pick a folder for your business that you&rsquo;ll keep. Then type this in that project&rsquo;s chat and press <strong>Enter</strong>:</p>
-          <div class="cmd-line"><span class="cmd-text">/ai-employee-builder:setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy command</button></div>
+        <div class="sv-card">
+          <span class="sv-card-label">Do this in the Claude app</span>
+          <ol class="sv-path">
+            <li><span>Choose <strong>New chat &rarr; Project &rarr; Add folder</strong> and pick a folder for your business that you&rsquo;ll keep.</span></li>
+            <li><span>In that project&rsquo;s chat, type this command and press <strong>Enter</strong>:</span>
+              <div class="cmd-line"><span class="cmd-text">/ai-employee-builder:setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy</button></div></li>
+            <li><span>Click <strong>Connect</strong> and sign in with Google, using the email you bought with. Then go back to the same chat.</span></li>
+            <li><span>Answer Claude&rsquo;s questions about your business, one at a time. When it says your workspace is ready, you&rsquo;re done.</span></li>
+          </ol>
         </div>
-        <details class="setup-watch"><summary>Prefer to watch first? Open the 10-minute walkthrough</summary><div class="video-embed"><iframe src="https://share.descript.com/embed/3oxZO3lcgGI" title="Connect and onboard" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div></details>
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Start a project with a folder.</strong> Choose <strong>New chat &rarr; Project &rarr; Add folder</strong> and pick a folder you can find again. Coming back later? Open that same project instead of starting a new one.</div></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Run the setup.</strong> Type <code>/ai-employee-builder:setup-aieb</code>, pick it from the list and press <strong>Enter</strong>. Claude may shorten it to <code>/setup-aieb</code>, which is fine. If the command doesn&rsquo;t show up, type <em>&ldquo;set up my AI Employee Builder&rdquo;</em> instead.</div></div>
-        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Click Connect and sign in.</strong> When Claude shows <strong>Connect</strong>, click it and sign in with Google using the email you bought with. When the browser says you&rsquo;re connected, go back to the same chat.</div></div>
-        <div class="substep"><div class="substep-badge">4</div><div class="substep-body"><strong>Answer four quick questions.</strong> Claude asks what your business sells, one recurring job you&rsquo;d like to hand over, how often it comes up and how long it takes, and what a good result looks like. Then it saves your workspace in that folder and tells you it&rsquo;s ready.</div></div>
-        <details class="setup-watch"><summary>Stuck? Fixes for the usual snags</summary><div class="stuck-body">
+        <button class="done-btn sv-done" onclick="markDoneCW(2)"><span class="dlabel">Claude says my workspace is ready &mdash; continue &rarr;</span></button>
+        <details class="setup-watch sv-help"><summary>Need help with this step?</summary><div class="stuck-body">
           <ul class="sub">
+            <li><strong>Want to watch it first?</strong> The 10-minute walkthrough is below.</li>
+            <li><strong>The command doesn&rsquo;t show up?</strong> Type <em>&ldquo;set up my AI Employee Builder&rdquo;</em> instead. Claude may also shorten the command to <code>/setup-aieb</code>, which is fine.</li>
+            <li><strong>Coming back later?</strong> Open the same project instead of starting a new one.</li>
+            <li><strong>Claude asks permission to create files or folders?</strong> Click <strong>Allow</strong>. It only works inside the folder you attached.</li>
             <li><strong>Paid with an email that isn&rsquo;t a Google account?</strong> The sign-in page lets you use your license key instead. It&rsquo;s in your receipt email. Enter it on that page only, never in the Claude chat.</li>
             <li><strong>Claude says the connection expired but still shows it as Connected?</strong> Open <strong>Customize &rarr; Connectors &rarr; aieb</strong>, disconnect it, then connect again.</li>
-            <li><strong>The connection didn&rsquo;t light up?</strong> Update the plugin: <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin &rarr; &hellip; &rarr; Check for updates</strong>, then <strong>Customize &rarr; Plugins &rarr; AI Employee Builder &rarr; Update</strong>. Go back to the same project and type <code>/check-setup</code>.</li>
+            <li><strong>The connection didn&rsquo;t light up?</strong> Update the plugin (step 1&rsquo;s help has the clicks), go back to the same project and type <code>/check-setup</code>.</li>
             <li><strong>Your folder already has files in it?</strong> That&rsquo;s fine. Claude names the folder and asks before changing anything.</li>
             <li><strong>Still stuck?</strong> <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the community</a> and we&rsquo;ll sort it out with you.</li>
-          </ul></div></details>
-        <button class="done-btn" onclick="markDoneCW(2)"><span class="dlabel">Claude says my workspace is ready &mdash; continue &rarr;</span></button>
+          </ul>
+          <div class="video-embed"><iframe src="https://share.descript.com/embed/3oxZO3lcgGI" title="Connect and onboard" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>
+        </div></details>
       </div>
     </details>
 
@@ -1395,7 +1405,7 @@ function renderCW(){
     if (el) {
       el.classList.toggle('done', on);
       var lbl = el.querySelector('.dlabel');
-      if (lbl) lbl.textContent = on ? '✓ Done — tap to undo' : (i === 2 ? 'Claude says my workspace is ready — continue →' : 'Mark step done');
+      if (lbl) lbl.textContent = on ? '✓ Done — tap to undo' : (i === 2 ? 'Claude says my workspace is ready — continue →' : (i === 1 ? 'Done, next step →' : 'Mark step done'));
     }
     if (seg) seg.classList.toggle('on', on);
   }
