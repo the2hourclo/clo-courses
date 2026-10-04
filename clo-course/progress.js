@@ -132,13 +132,16 @@
   var CHAIN = ['setup', 'cp1', 'cp2', 'cp3', 'cp4', 'goal']; // every gating step — goal now gates too
   var BUILD = ['cp1', 'cp2', 'cp3', 'cp4', 'goal'];          // the five build checkpoints ("Checkpoint N of 5")
 
+  // 2026-10-04 (Rashid): cp2 is "Your AI Employee’s First Job", the early win (its first skill
+  // does a real job and works again from a fresh chat); goal is "Your AI Employee runs on its own",
+  // the full thing, aimed at day 7. Names only: ids, order and storage keys are unchanged.
   var META = {
     setup: { name: 'Get set up',         short: 'Set up',             wizard: 'get-access-aieb.html',        color: '#4ade80' },
     cp1:   { name: 'Map the business',   short: 'Map the business',   wizard: 'checkpoint-map.html',         color: '#5b9bff' },
-    cp2:   { name: 'Your first skill',   short: 'Your first skill',   wizard: 'checkpoint-first-skill.html', color: '#a78bfa' },
+    cp2:   { name: 'Your AI Employee’s First Job', short: 'First Job', wizard: 'checkpoint-first-skill.html', color: '#a78bfa' },
     cp3:   { name: 'A skill system',     short: 'A skill system',     wizard: 'checkpoint-system.html',      color: '#f5a623' },
     cp4:   { name: 'Make it reliable',   short: 'Make it reliable',   wizard: 'checkpoint-autonomy.html',    color: '#f472b6' },
-    goal:  { name: 'Your AI Employee',   short: 'Your AI Employee',   wizard: 'checkpoint-ai-employee.html', color: '#fbbf24' }
+    goal:  { name: 'Your AI Employee runs on its own', short: 'Runs on its own', wizard: 'checkpoint-ai-employee.html', color: '#fbbf24' }
   };
 
   /* ── SURFACE (Claude, Claude Code, or Codex) — a global identity, swappable anytime ── */
@@ -494,7 +497,7 @@
   // Server ladder keys → this page's spine ids. Keep both ends in step if either moves.
   //
   // ⚠ 2026-07-24 — the two ends are NO LONGER 1:1. The client split the old cp4 into
-  // cp4 "Make it reliable" (harden + harness) and goal "Your AI Employee" (schedule +
+  // cp4 "Make it reliable" (harden + harness) and goal "Your AI Employee runs on its own" (schedule +
   // runs on its own). The server ladder still has FIVE rungs and no rung for reliability.
   // '5-autonomy' means "it runs on its own", which is now GOAL's gate, so it maps there —
   // mapping it to cp4 would mark the hardening checkpoint done and leave the buyer stuck

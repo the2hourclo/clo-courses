@@ -242,7 +242,7 @@ var CONFIG = {
 
     { type:'gate', title:'It catches its own mistakes',
       body:'Make the skill fail on purpose — feed it something that should trip the self-check — and confirm it stops and tells you, instead of handing you a wrong answer quietly.',
-      gate:'Your skill <strong>checks its own work</strong> and has a harness around it holding quality when you are not watching. When the AI confirms this, <strong>Your AI Employee</strong> unlocks on your board.' }
+      gate:'Your skill <strong>checks its own work</strong> and has a harness around it holding quality when you are not watching. When the AI confirms this, the last checkpoint unlocks on your board: <strong>Your AI Employee runs on its own</strong>.' }
   ]
 };
 
@@ -332,7 +332,7 @@ function render(){
       cta  = '<a class="btn primary big-cta" style="--cp:'+nx.color+'" href="'+nx.wizard+'">Next: '+nx.name+' &#8594;</a>'+
              '<a class="board-link" href="'+CONFIG.board+'">or go to your board</a>';
     } else if (nx && nx.isGoal){ // finished the LAST checkpoint → the finale
-      lead = 'That was the last one. Your AI Employee is built — it runs the work and gets sharper every time you use it.';
+      lead = 'That was the last one. Your AI Employee runs on its own — it does the work and gets sharper every time you use it.';
       cta  = '<a class="btn primary big-cta" href="'+CONFIG.board+'">&#127881; See it on your board &#8594;</a>';
     } else {
       lead = '<strong>'+CONFIG.name+'</strong> is done.';

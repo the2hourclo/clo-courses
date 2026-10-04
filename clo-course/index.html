@@ -166,7 +166,7 @@ function maybeGate(){
 
 function overallHTML(){
   var o = AIEB.overall();
-  var label = o.complete ? 'Your AI Employee is built 🎉' : 'Progress to your AI Employee';
+  var label = o.complete ? 'Your AI Employee runs on its own 🎉' : (AIEB.isDone('cp2') ? 'First Job done ✓ · next: running on its own' : 'Progress to your AI Employee');
   var nextLine = o.complete
     ? 'All '+o.total+' steps complete &nbsp;·&nbsp; <span class="ob">open your board →</span>'
     : 'Next up: <b>'+o.nextName+'</b> &nbsp;·&nbsp; <span class="ob">open your board →</span>';

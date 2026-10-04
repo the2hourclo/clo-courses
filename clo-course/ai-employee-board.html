@@ -321,7 +321,7 @@ body.surface-gate-open{overflow:hidden}
 <div class="rise" id="linknote" hidden style="margin:0 0 16px;padding:13px 15px;border-radius:10px;background:rgba(180,105,14,.10);border:1px solid rgba(180,105,14,.28);font-size:13.5px;line-height:1.5"></div>
 <div class="rise" id="nextbar"></div>
 
-<div class="map-label rise"><strong>Your build path</strong><span>Every card is one real step</span></div>
+<div class="map-label rise"><strong>Your build path</strong><span>First win: your AI Employee&rsquo;s First Job. Aim: it runs on its own by day 7.</span></div>
 <div class="board-wrap rise"><div class="board" id="board"></div></div>
 
 <div class="rise" id="resources"></div>
@@ -343,10 +343,10 @@ body.surface-gate-open{overflow:hidden}
 
 var FOCUS_LEAD = {
   cp1:'Map how your business runs today and find the one job worth handing off first. You just answer its questions.',
-  cp2:'Take that one job and turn it into a reusable skill — the AI does it your way, every time.',
+  cp2:'Turn that one job into a skill that does it your way, then prove it works again from a fresh chat. That is your AI Employee’s first job.',
   cp3:'Chain a few skills into a system that runs a whole function from start to finish.',
   cp4:'Add the guardrails so it checks its own work and fails loudly instead of quietly.',
-  goal:'Put it on a schedule so it runs the whole function without you starting it.'
+  goal:'Put it on a schedule so it runs the whole job without you starting it. Aim to get here by day 7.'
 };
 
 /* Journey palette, paper-strength (2026-07-25). These were the dark-skin pastels
@@ -397,7 +397,7 @@ var BOARD = [
     { t:'Read &amp; share your X-Ray', type:'share', optional:true },
     { t:'Lock your first target', type:'gate' }
   ]},
-  { id:'cp2', name:'Your first skill', color:'#6B46C1', cards:[
+  { id:'cp2', name:'Your AI Employee’s First Job', color:'#6B46C1', cards:[
     { t:'What is a skill', type:'video' },
     { t:'The 3 levels of skills', type:'video' },
     { t:'How to create a skill', type:'video' },
@@ -405,7 +405,7 @@ var BOARD = [
     /* Self-improvement sits HERE, not in the goal column — it's the feedback loop that
        makes every later run better, so it has to land the moment they first run a skill. */
     { t:'It gets better every time you use it', type:'build' },
-    { t:'Skill ran once on real data', type:'gate' }
+    { t:'It did the job, then again in a fresh chat', type:'gate' }
   ]},
   { id:'cp3', name:'A skill system', color:'#B26B00', cards:[
     { t:'What a skill system is', type:'video' },
@@ -421,7 +421,7 @@ var BOARD = [
   ]},
   /* `goal` is a REAL checkpoint now (2026-07-24), not a trophy column: autonomy moved here
      from cp4, because running without you is what MAKES it an AI Employee. */
-  { id:'goal', name:'Your AI Employee', color:'#C2410C', cards:[
+  { id:'goal', name:'Your AI Employee runs on its own', color:'#C2410C', cards:[
     { t:'Schedule it / autonomy', type:'video' },
     { t:'Schedule it — do it', type:'build', surface:'cowork' },
     { t:'Schedule it — do it', type:'build', surface:'claude-code' },
@@ -472,10 +472,11 @@ function maybeGate(){
 /* ---- OVERALL PROGRESS ---- */
 function overallHTML(){
   var o = AIEB.overall();
-  var label = o.complete ? 'Your AI Employee is built 🎉' : 'Progress to your AI Employee';
+  var firstJob = AIEB.isDone('cp2');
+  var label = o.complete ? 'Your AI Employee runs on its own 🎉' : (firstJob ? 'First Job done ✓ · next: running on its own' : 'Progress to your AI Employee');
   var nextLine = o.complete
     ? 'All '+o.total+' steps complete.'
-    : 'Step '+(o.done+1)+' of '+o.total+' on the way to a finished AI Employee';
+    : 'Step '+(o.done+1)+' of '+o.total+(firstJob ? ' · aim: running on its own by day 7' : ' · first stop: its First Job');
   return '<div class="oprog-top"><span class="oprog-label">'+label+'</span><span class="oprog-pct">'+o.pct+'%</span></div>'+
     '<div class="oprog-bar"><div class="oprog-fill" style="width:'+o.pct+'%"></div></div>'+
     '<div class="oprog-next">'+nextLine+'</div>';
@@ -498,12 +499,12 @@ function nextbarHTML(){
   if (id==='goal' && AIEB.isDone('goal')){
     return '<div class="nextbar" style="--nc:#C2410C">'+
       '<div class="nb-main"><div class="nb-badge">🎉 You made it</div>'+
-      '<div class="nb-title">Your AI Employee is built</div>'+
+      '<div class="nb-title">Your AI Employee runs on its own</div>'+
       '<div class="nb-lead">Every step is complete — reopen any checkpoint below to refine it.</div></div></div>';
   }
   var isSetup = id==='setup';
   var lead = isSetup ? 'Install your chosen app + the plugin and connect — one guided flow, about 30 minutes.' : (FOCUS_LEAD[id]||'');
-  var badge = isSetup ? 'Start here · step 1' : ('Next up · checkpoint '+AIEB.buildIndex(id)+' of 5');
+  var badge = isSetup ? 'Start here · step 1' : ((id==='cp3' && AIEB.isDone('cp2') ? 'First Job done 🎉 · next up' : 'Next up')+' · checkpoint '+AIEB.buildIndex(id)+' of 5');
   var verb = isSetup ? 'Start setup' : (AIEB.stepInfo(id).pos>0 ? 'Continue' : 'Start this checkpoint');
   return '<div class="nextbar" style="--nc:'+nc+'">'+
     '<div class="nb-main"><div class="nb-badge">'+badge+'</div>'+

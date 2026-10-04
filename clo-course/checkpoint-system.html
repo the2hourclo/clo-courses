@@ -224,7 +224,7 @@ var CONFIG = {
 
     { type:'gate', title:'System runs a whole function',
       body:'Hand the system a real job from start to finish, and watch it run every step without you steering each one.',
-      gate:'Your skill system ran a <strong>complete function</strong> end to end on real work. When the AI confirms this, <strong>Make it run itself</strong> unlocks on your board.' }
+      gate:'Your skill system ran a <strong>complete function</strong> end to end on real work. When the AI confirms this, <strong>Make it reliable</strong> unlocks on your board.' }
   ]
 };
 
@@ -314,7 +314,7 @@ function render(){
       cta  = '<a class="btn primary big-cta" style="--cp:'+nx.color+'" href="'+nx.wizard+'">Next: '+nx.name+' &#8594;</a>'+
              '<a class="board-link" href="'+CONFIG.board+'">or go to your board</a>';
     } else if (nx && nx.isGoal){ // finished the LAST checkpoint → the finale
-      lead = 'That was the last one. Your AI Employee is built — it runs the work and gets sharper every time you use it.';
+      lead = 'That was the last one. Your AI Employee runs on its own — it does the work and gets sharper every time you use it.';
       cta  = '<a class="btn primary big-cta" href="'+CONFIG.board+'">&#127881; See it on your board &#8594;</a>';
     } else {
       lead = '<strong>'+CONFIG.name+'</strong> is done.';

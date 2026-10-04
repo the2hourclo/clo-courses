@@ -255,7 +255,7 @@ var CONFIG = {
 
     { type:'gate', title:'Lock your first target',
       body:'From the X-Ray, pick the <strong>one process</strong> you’ll turn into your first skill — and note what it costs you today (<em>“this eats about N hours a week”</em>). That baseline is how we’ll measure the time you get back.',
-      gate:'Your X-Ray map exists <strong>and</strong> you’ve picked a first-skill target with a “costs me N hrs/week” baseline. When Claude confirms this, <strong>Your first skill</strong> unlocks on your board.' }
+      gate:'Your X-Ray map exists <strong>and</strong> you’ve picked a first-skill target with a “costs me N hrs/week” baseline. When Claude confirms this, <strong>Your AI Employee&rsquo;s First Job</strong> unlocks on your board.' }
   ]
 };
 
@@ -345,7 +345,7 @@ function render(){
       cta  = '<a class="btn primary big-cta" style="--cp:'+nx.color+'" href="'+nx.wizard+'">Next: '+nx.name+' &#8594;</a>'+
              '<a class="board-link" href="'+CONFIG.board+'">or go to your board</a>';
     } else if (nx && nx.isGoal){ // finished the LAST checkpoint → the finale
-      lead = 'That was the last one. Your AI Employee is built — it runs the work and gets sharper every time you use it.';
+      lead = 'That was the last one. Your AI Employee runs on its own — it does the work and gets sharper every time you use it.';
       cta  = '<a class="btn primary big-cta" href="'+CONFIG.board+'">&#127881; See it on your board &#8594;</a>';
     } else {
       lead = '<strong>'+CONFIG.name+'</strong> is done.';
