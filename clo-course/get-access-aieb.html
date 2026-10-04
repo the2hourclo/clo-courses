@@ -545,17 +545,17 @@ body.activation-mode .container{max-width:620px;width:100%}
   <details class="step post-setup" id="joinstep">
     <summary class="step-sum">
       <span class="step-check"><span class="num">&#128101;</span><span class="tick">&#10003;</span></span>
-      <span class="step-titles"><span class="step-t">Join the community &amp; say hi</span><span class="step-sub">2 minutes &mdash; so help is one message away while you set up</span></span>
+      <span class="step-titles"><span class="step-t">Join the community &amp; say hi</span><span class="step-sub">2 minutes &mdash; so help is one message away while you build</span></span>
       <span class="step-meta"><span class="time">~1 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
     </summary>
     <div class="step-content">
-      <p>Before the install: join the <strong>AI Employee Builders community</strong> (included with your subscription). It's where members and Rashid hang out &mdash; if anything trips during setup, you ask there and someone's on it. Access is instant.</p>
+      <p>You&rsquo;re connected. Now join the <strong>AI Employee Builders community</strong> (included with your membership). It&rsquo;s where members and Rashid hang out, so when you start your first build, help is one message away. Access is instant.</p>
       <div class="substep community-task"><div class="substep-badge">1</div><div class="substep-body"><strong>Join using the same email you bought with.</strong><a class="community-cta" href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Open and join the community <span aria-hidden="true">&rarr;</span></a><span class="community-return">Opens in a new tab. Come back here when you&rsquo;re in.</span></div></div>
       <div class="substep community-task community-task-next"><div class="substep-badge">2</div><div class="substep-body"><strong>Post a short intro while you're there.</strong><span class="community-task-help">Copy this, fill in the blanks, then paste it into Polynet.</span></div></div>
       <div class="ai-prompt indent community-prompt" style="margin-top:12px">
         <pre>Hi, I'm [name] &mdash; I run [what your business does, in one line].
 
-Setting up my AI Employee Builder now. The first thing I want to hand off: [the task you'd love to never do manually again].</pre>
+Just set up my AI Employee Builder. The first thing I want to hand off: [the task you'd love to never do manually again].</pre>
         <button class="copy-prompt" onclick="copyPrompt(this)">Copy intro</button>
       </div>
       <div class="callout callout-tip"><strong>Why this matters:</strong> members who introduce themselves get feedback on their first skill within a day &mdash; and the first skill is where most people either take off or stall.</div>
@@ -759,7 +759,8 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
         <p>Everything happens in the Claude <strong>desktop app</strong> (Pro, Max, or Team) &mdash; no terminal, nothing to download.</p>
         <div class="substep"><div class="substep-badge">1</div><div class="substep-body">After you paste the marketplace name, click <strong>Sync</strong>.</div></div>
         <div class="substep"><div class="substep-badge">2</div><div class="substep-body">Install <strong>AI Employee Builder</strong>. When it appears in your plugins, this step is complete.</div></div>
-        <div class="callout callout-tip"><strong>Already installed AIEB?</strong> Open <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin</strong>, click the <strong>three dots (&hellip;)</strong>, then choose <strong>Check for updates</strong>. Return to <strong>Customize &rarr; Plugins &rarr; AI Employee Builder</strong> and click <strong>Update</strong> if that button appears. After the update, continue below inside the Claude project and folder where you want your workspace saved.</div>
+        <details class="setup-watch"><summary>Already have the AI Employee Builder plugin? Update it instead</summary><div class="stuck-body">
+          <p>Open <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin</strong>, click the <strong>three dots (&hellip;)</strong> and choose <strong>Check for updates</strong>. Then open <strong>Customize &rarr; Plugins &rarr; AI Employee Builder</strong> and click <strong>Update</strong> if you see it. Carry on below in the same Claude project and folder.</p>
         <figure class="shot">
           <img src="assets/get-access/cowork-aieb-check-for-updates.png" alt="The aieb-thin-plugin marketplace menu in Claude with Check for updates selected" onerror="this.closest('figure').style.display='none'">
           <figcaption><strong>1. Refresh the marketplace:</strong> open <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin</strong>, click the <strong>three dots (&hellip;)</strong>, and choose <strong>Check for updates</strong>.</figcaption>
@@ -768,6 +769,7 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
           <img src="assets/get-access/cowork-aieb-install-update.png" alt="The installed AI Employee Builder plugin in Claude showing the Update button" onerror="this.closest('figure').style.display='none'">
           <figcaption><strong>2. Install the update:</strong> return to <strong>Customize &rarr; Plugins &rarr; AI Employee Builder</strong> and click <strong>Update</strong> if the button appears.</figcaption>
         </figure>
+        </div></details>
         <div class="callout callout-info"><strong>You'll see a red &ldquo;make sure you trust this plugin&rdquo; notice.</strong> That's Claude's standard warning for every non-Anthropic plugin &mdash; this one is ours.</div>
         <div class="callout callout-tip"><strong>Don't see &ldquo;Personal plugins&rdquo; in Customize?</strong> Update the Claude desktop app first (quit and reopen usually does it), then look again. On a managed Team/Enterprise account, an admin may have to allow personal plugins first.</div>
         <button class="done-btn" onclick="markDoneCW(1)"><span class="dlabel">Mark step done</span></button>
@@ -778,49 +780,30 @@ Stop after giving me that one fresh-thread instruction. The new thread connects 
     <details class="step" id="cwstep2" data-step="2">
       <summary class="step-sum">
         <span class="step-check"><span class="num">2</span><span class="tick">&#10003;</span></span>
-        <span class="step-titles"><span class="step-t">Connect &amp; onboard</span><span class="step-sub">Start in a persistent Project, connect AIEB, then verify the workspace saved</span></span>
+        <span class="step-titles"><span class="step-t">Connect &amp; onboard</span><span class="step-sub">Start a project, run one command, sign in</span></span>
         <span class="step-meta"><span class="time">~12 min</span><span class="done-flag">Done</span><span class="chev">&#9662;</span></span>
       </summary>
       <div class="step-content">
         <div class="do-now">
           <span class="do-now-kicker">Do this now</span>
-          <strong>Open the Claude project that will hold your Business OS, then run one command.</strong>
-          <p>For a new workspace, use <strong>New chat &rarr; Project &rarr; Add folder</strong> and choose a permanent business folder. If you already have a workspace, reopen that Project with the same folder attached. Leave this page open while Claude connects AIEB, checks your saved intake, and verifies the workspace can persist there.</p>
+          <strong>Start a Claude project for your business, then run one command.</strong>
+          <p>In Claude, choose <strong>New chat &rarr; Project &rarr; Add folder</strong> and pick a folder for your business that you&rsquo;ll keep. Then type this in that project&rsquo;s chat and press <strong>Enter</strong>:</p>
           <div class="cmd-line"><span class="cmd-text">/ai-employee-builder:setup-aieb</span><button class="copy-cmd" onclick="copyCmd(this)">Copy command</button></div>
         </div>
         <details class="setup-watch"><summary>Prefer to watch first? Open the 10-minute walkthrough</summary><div class="video-embed"><iframe src="https://share.descript.com/embed/3oxZO3lcgGI" title="Connect and onboard" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div></details>
-        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Attach the folder before setup starts.</strong>
+        <div class="substep"><div class="substep-badge">1</div><div class="substep-body"><strong>Start a project with a folder.</strong> Choose <strong>New chat &rarr; Project &rarr; Add folder</strong> and pick a folder you can find again. Coming back later? Open that same project instead of starting a new one.</div></div>
+        <div class="substep"><div class="substep-badge">2</div><div class="substep-body"><strong>Run the setup.</strong> Type <code>/ai-employee-builder:setup-aieb</code>, pick it from the list and press <strong>Enter</strong>. Claude may shorten it to <code>/setup-aieb</code>, which is fine. If the command doesn&rsquo;t show up, type <em>&ldquo;set up my AI Employee Builder&rdquo;</em> instead.</div></div>
+        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>Click Connect and sign in.</strong> When Claude shows <strong>Connect</strong>, click it and sign in with Google using the email you bought with. When the browser says you&rsquo;re connected, go back to the same chat.</div></div>
+        <div class="substep"><div class="substep-badge">4</div><div class="substep-body"><strong>Answer four quick questions.</strong> Claude asks what your business sells, one recurring job you&rsquo;d like to hand over, how often it comes up and how long it takes, and what a good result looks like. Then it saves your workspace in that folder and tells you it&rsquo;s ready.</div></div>
+        <details class="setup-watch"><summary>Stuck? Fixes for the usual snags</summary><div class="stuck-body">
           <ul class="sub">
-            <li><strong>New workspace:</strong> choose <strong>New chat &rarr; Project &rarr; Add folder</strong>, then select a permanent folder you can find again.</li>
-            <li><strong>Returning workspace:</strong> open its existing Claude project and confirm the same folder is attached. Do not create a second workspace.</li>
-            <li><strong>Existing files in the folder:</strong> Claude should name the folder and ask before changing it. If the folder is read-only or the workspace lives elsewhere, reconnecting AIEB can still succeed, but workspace setup must wait until the correct writable folder is attached.</li>
-          </ul></div></div>
-        <div class="substep"><div class="substep-badge">2</div><div class="substep-body">In that <strong>Claude project chat</strong>, type <code>/ai-employee-builder:setup-aieb</code> and select that plugin skill. Then press <strong>Enter</strong> again (or click <strong>Start task</strong>) to run it. After selection, Claude may shorten the chip to <code>/setup-aieb</code> &mdash; that is normal. If slash commands are unavailable, say <em>&ldquo;Set up AIEB&rdquo;</em>.</div></div>
-        <div class="substep"><div class="substep-badge">3</div><div class="substep-body"><strong>If Claude shows an AIEB Connect action, click it.</strong>
-          <ul class="sub">
-            <li><strong>Already signed into this course?</strong> Continue with that account. The server matches the verified member and active subscription already stored in AIEB.</li>
-            <li><strong>Otherwise, continue with Google</strong> using the address attached to your purchase. A returning member reconnects without consuming a second activation merely because Claude changed runtimes.</li>
-            <li><strong>If the purchase cannot be matched,</strong> use the Lemon Squeezy key from your receipt on the secure page only. Never paste it into Claude.</li>
-            <li><strong>If Claude says the authorization expired but still shows AIEB as Connected,</strong> open <strong>Customize &rarr; Connectors &rarr; aieb</strong>, disconnect that stale entry, then reconnect. Do not disconnect a healthy connector just to update the plugin.</li>
-            <li><strong>Return to the same Claude project chat</strong> when the browser says connected. The paid tool retries with the host-managed connection.</li>
-          </ul></div></div>
-        <div class="substep"><div class="substep-badge">4</div><div class="substep-body"><strong>Back in the chat, the setup task checks your Get Access intake.</strong>
-          <ul class="sub">
-            <li><strong>Already completed it?</strong> Claude uses the four saved answers and does not ask them again.</li>
-            <li><strong>Not completed yet?</strong> Claude asks, one at a time, what your business sells, which recurring job you want to remove, how often it happens and how much time it takes, and what a good finished result looks like.</li>
-            <li>After the fourth answer, Claude calls <code>complete_aieb_onboarding</code> and confirms your onboarding is saved before continuing.</li>
-          </ul></div></div>
-        <div class="substep"><div class="substep-badge">5</div><div class="substep-body"><strong>Wait for the persistence check before calling the workspace ready.</strong> Claude should:
-          <ul class="sub">
-            <li>Name the Project folder it is using</li>
-            <li>Create only the AIEB workspace frame your access supports, after confirming a non-empty folder is the right place</li>
-            <li>Read the saved state back from that same folder and confirm it will be available in your next Project chat</li>
-          </ul></div></div>
-        <div class="callout callout-tip"><strong>Success has two separate checks:</strong> AIEB says the <strong>connector and paid access are verified</strong>, then names the attached folder and confirms the <strong>workspace state was saved and read back there</strong>. A connected connector by itself does not mean the workspace is ready. Connecting Notion, Drive, email, and other business tools is the separate next step.</div>
-        <div class="callout callout-info"><strong>Don't see the command?</strong> Saying <code>set up my AI Employee Builder</code> in the chat does exactly the same thing.</div>
-        <p>Claude manages the secure connection for you. You do not need Node, a local-runtime toggle, or any configuration files. If the secure page asks for your key, enter it there only &mdash; <strong>never paste a license key into a Claude chat.</strong></p>
-        <div class="callout callout-warning"><strong>Connector didn't light up?</strong> In <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin</strong>, use <strong>&hellip; &rarr; Check for updates</strong>. Then open <strong>Customize &rarr; Plugins &rarr; AI Employee Builder</strong>, click <strong>Update</strong> if offered, return to the same Claude project with the same folder attached, and type <code>/check-setup</code>. If an expired connector is falsely marked Connected, repair it under <strong>Customize &rarr; Connectors &rarr; aieb</strong>. A cooldown on the old connector is not a reason to keep waiting; the updated plugin uses the hosted connector instead. Still stuck? <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a>.</div>
-        <button class="done-btn" onclick="markDoneCW(2)"><span class="dlabel">Claude verified this folder saves &mdash; continue &rarr;</span></button>
+            <li><strong>Paid with an email that isn&rsquo;t a Google account?</strong> The sign-in page lets you use your license key instead. It&rsquo;s in your receipt email. Enter it on that page only, never in the Claude chat.</li>
+            <li><strong>Claude says the connection expired but still shows it as Connected?</strong> Open <strong>Customize &rarr; Connectors &rarr; aieb</strong>, disconnect it, then connect again.</li>
+            <li><strong>The connection didn&rsquo;t light up?</strong> Update the plugin: <strong>Browse plugins &rarr; Personal &rarr; aieb-thin-plugin &rarr; &hellip; &rarr; Check for updates</strong>, then <strong>Customize &rarr; Plugins &rarr; AI Employee Builder &rarr; Update</strong>. Go back to the same project and type <code>/check-setup</code>.</li>
+            <li><strong>Your folder already has files in it?</strong> That&rsquo;s fine. Claude names the folder and asks before changing anything.</li>
+            <li><strong>Still stuck?</strong> <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the community</a> and we&rsquo;ll sort it out with you.</li>
+          </ul></div></details>
+        <button class="done-btn" onclick="markDoneCW(2)"><span class="dlabel">Claude says my workspace is ready &mdash; continue &rarr;</span></button>
       </div>
     </details>
 
@@ -1531,8 +1514,6 @@ function wizConnected(){ try { return !!localStorage.getItem(CONNKEY); } catch(e
 function wizSteps(){
   var s=[];
   if (window.__aiebClaim || window.__aiebTrialSetupComplete) s.push({virtual:'claim', min:0, isDone:function(){ return true; }});
-  s.push({el:'joinstep', min:2, isDone:function(){ return wizExtra.has('join'); },
-    mark:function(){ wizExtra.add('join'); wizExtraSave(wizExtra); }});
   if (wizTrackName==='cowork'){
     s.push({el:'cwstep1', min:3, isDone:function(){ return doneCW.has(1); },
       mark:function(){ doneCW.add(1); saveDoneCW(doneCW); renderCW(); }});
@@ -1545,8 +1526,11 @@ function wizSteps(){
       mark:function(){ done.add(1); saveDone(done); render(); }});
     s.push({el:'shortcut', min:15, isDone:function(){ return wizExtra.has('shortcut'); }, connect:true});
   }
-  /* The trailing "introduce yourself" step was folded into `joinstep` (2026-07-24) —
-     joining and saying hi are one action at the top of the flow now. */
+  /* Community step comes AFTER the connect step (Rashid, 2026-10-04: "after they
+     connect"). Every step before connecting is a place a new buyer can stall, and
+     members drop before they connect. Joining and saying hi stay one action. */
+  s.push({el:'joinstep', min:2, isDone:function(){ return wizExtra.has('join'); },
+    mark:function(){ wizExtra.add('join'); wizExtraSave(wizExtra); }});
   // FINAL step for BOTH tracks: the overview video + a 2-question quiz that unlocks the
   // Business X-Ray. Watch-before-you-proceed, shared element, its own done-flag. (2026-07-25)
   // Connect the tools BEFORE the overview quiz. Must stay above the overview
@@ -1604,7 +1588,7 @@ function wizRender(){
     document.getElementById('wiz-hero').classList.add('wiz-visible');
     document.getElementById('app-chooser').classList.add('wiz-visible');
     count.textContent='Pick your app';
-    eta.textContent='~20 min total';
+    eta.textContent='~25 min total';
     fill.style.width = window.__aiebClaim ? '12%' : '4%';
     if (app) app.hidden = true;
     var navChoose=document.getElementById('wizNav'); if (navChoose) navChoose.hidden = true;
