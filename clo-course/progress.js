@@ -846,7 +846,10 @@
     for (var i = 0; i < CHAIN.length; i++) {
       var sid = CHAIN[i];
       if (isSuppressed(sid)) continue;           // reopened: local position is the truth
-      if (stepInfo(sid).pos > ((remoteSteps[sid] || {}).pos || 0)) return true;
+      var rs = remoteSteps[sid] || {};
+      // A remapped checkpoint's server copy is in the old numbering (STEP_SEND); compare in today's list.
+      var remotePos = STEP_REMAP[sid] ? remapStep(sid, rs.pos || 0, rs.total) : (rs.pos || 0);
+      if (stepInfo(sid).pos > remotePos) return true;
     }
     return false;
   }
@@ -1009,7 +1012,7 @@
     trialSetupComplete: trialSetupComplete,
     activeId: activeId, stateOf: stateOf, next: next, buildIndex: buildIndex,
     stepInfo: stepInfo, setupInfo: setupInfo, resume: resume, started: started, overall: overall,
-    _applySnapshot: applySnapshot, _snapshot: snapshot,   // tests only: the server-merge rules (tests/cp2-lessons-optional.test.mjs)
+    _applySnapshot: applySnapshot, _snapshot: snapshot, _localHasMoreThan: localHasMoreThan,   // tests only (tests/cp2-lessons-optional.test.mjs)
     syncFromServer: syncFromServer, hasViewToken: function () { return !!viewToken(); }
   };
 

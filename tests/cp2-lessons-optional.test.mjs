@@ -207,6 +207,16 @@ test('server copies of cp2 use the old six-step numbering, so every page reads t
   assert.equal(suppressed.store.get('aieb_ckpt_cp2_v7_n'), '3', 'a suppression keeps the position and its count together');
 });
 
+test('the upload decision compares cp2 in the same numbering on both sides', () => {
+  const base = { progress: {}, suppressed: {} };
+  const at = (pos) => newProgress({ aieb_ckpt_cp2_v7: String(pos), aieb_ckpt_cp2_v7_n: '3' }).AIEB;
+  assert.equal(at(2)._localHasMoreThan({ ...base, steps: { cp2: { pos: 3, total: 6 } } }), true, 'local proof step beats the server\'s build step');
+  assert.equal(at(2)._localHasMoreThan({ ...base, steps: { cp2: { pos: 5, total: 6 } } }), false, 'same step: nothing to upload');
+  assert.equal(at(2)._localHasMoreThan({ ...base, steps: { cp2: { pos: 6, total: 6 } } }), false, 'the server is ahead');
+  assert.equal(at(1)._localHasMoreThan({ ...base, steps: {} }), true, 'the server has no cp2 yet');
+  assert.equal(at(0)._localHasMoreThan({ ...base, steps: {} }), false);
+});
+
 test('a page still running the previous progress.js can no longer complete cp2', () => {
   const s = storage({ aieb_ckpt_cp2_v5: '3', aieb_ckpt_cp2_v5_n: '6' });  // member at the old build step
   const fresh = loadProgress(read('progress.js'), s.api);
