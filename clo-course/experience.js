@@ -76,7 +76,8 @@
     var mobileSurface=document.querySelector('.mobile-surface-select');
     if(mobileSurface&&typeof surface==='string')mobileSurface.value=surface;
     var dockNext=document.querySelector('.mobile-course-dock .dock-next');
-    if(dockNext)dockNext.textContent=current===steps.length-1?'Finish →':'Next →';
+    var open=window.lessonOpen,lessonCount=window.CONFIG&&CONFIG.lessons?CONFIG.lessons.length:0;
+    if(dockNext)dockNext.textContent=(typeof open==='number')?(open+1<lessonCount?'Next lesson →':'Back to step →'):(current===steps.length-1?'Finish →':'Next →');
   }
   function mountCheckpoint(){
     var wrap=document.querySelector('.wrap'),stage=document.getElementById('stage');

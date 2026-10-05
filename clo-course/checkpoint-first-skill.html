@@ -341,7 +341,7 @@ function setSurface(s){
   paintSurface(); render();
 }
 
-var STORE = 'aieb_ckpt_'+CONFIG.id+'_v6'; // bump whenever the step ORDER changes (v6, 2026-10-05: build first, the three lessons moved out of the step list; progress.js STEP_REMAP maps old positions) (v5: self-improvement step added before the gate) — resets positions saved against the old order (v4: optional "Read & share your X-Ray" step inserted before the gate)
+var STORE = 'aieb_ckpt_'+CONFIG.id+'_v7'; // bump whenever the step ORDER changes (v7, 2026-10-05: build first, the three lessons moved out of the step list; progress.js STEP_REMAP maps old positions; v7 rather than v6 because pages still running the previous progress.js probe _v6) (v5: self-improvement step added before the gate) — resets positions saved against the old order (v4: optional "Read & share your X-Ray" step inserted before the gate)
 var pos = 0; // current step index (0..steps.length). steps.length = completion screen.
 try {
   var saved = parseInt(localStorage.getItem(STORE),10);
@@ -363,7 +363,14 @@ try {
   var m = /[?&]step=(\d+)/.exec(window.location.search || '');
   if (!m) return;
   var want = parseInt(m[1], 10);
-  if (!isNaN(want) && want >= 1) { pos = Math.min(want - 1, activeSteps().length); save(); }
+  if (!isNaN(want) && want >= 1) {
+    /* A link can never open the completion screen. ?step=4..6 can only come from the board
+       before 2026-10-05, when the three lessons came first: they meant build, make it better,
+       prove it, which are steps 1..3 now. */
+    var nSteps = activeSteps().length, idx = want - 1;
+    if (idx >= nSteps) idx = Math.max(0, Math.min(idx - CONFIG.lessons.length, nSteps - 1));
+    pos = idx; save();
+  }
   try {
     var q = (window.location.search || '').replace(/([?&])step=\d+/, '$1').replace(/[?&]$/, '').replace(/\?&/, '?');
     history.replaceState({}, '', window.location.pathname + (q === '?' ? '' : q) + window.location.hash);

@@ -205,11 +205,11 @@
   // Probing newest-first keeps the board reading real progress instead of silently
   // seeing zero — which froze CP1's column on "Start" for a buyer three steps in.
   // Add new suffixes to the FRONT of this list when a wizard bumps.
-  var STEP_PREFIX = 'aieb_ckpt_', STEP_SUFFIXES = ['_v7', '_v6', '_v5', '_v4'];
+  var STEP_PREFIX = 'aieb_ckpt_', STEP_SUFFIXES = ['_v6', '_v5', '_v4'];
 
   // The suffix each wizard ACTUALLY writes, verified against its own STORE line:
   //   cp1  checkpoint-map.html         _v6
-  //   cp2  checkpoint-first-skill.html _v7   (2026-10-05: build first, lessons optional; see STEP_REMAP + SNAPSHOT_ALIAS)
+  //   cp2  checkpoint-first-skill.html _v5
   //   cp3  checkpoint-system.html      _v4
   //   cp4  checkpoint-autonomy.html    _v5
   //   goal checkpoint-ai-employee.html _v6
@@ -222,44 +222,7 @@
   // stays frozen at the restored number, and snapshot() pushes that stale value
   // back over the truth on the next write. Writing to every suffix has the same
   // shadowing failure. One key per checkpoint, the one its wizard owns.
-  var STEP_WRITE_SUFFIX = { cp1: '_v6', cp2: '_v7', cp3: '_v4', cp4: '_v5', goal: '_v6' };
-
-  /* Positions saved against an OLDER step list, keyed by the step COUNT they were saved with
-     (the `_n` key here, `total` in a server snapshot). A wizard whose list got SHORTER needs
-     this: copied verbatim, an old position lands past the end of the new list, the wizard
-     opens on its completion screen and marks a checkpoint done that was never finished.
-     2026-10-05 cp2 (Rashid: "lead with the build and make the lessons optional but clearly
-     visible"): the three lessons left the step list. Old six-step order: three lessons, build,
-     make it better, prove it (6 = complete). The five-step v4 order had no make-it-better step.
-     An old position whose count is unknown is clamped to the last step, never to complete. */
-  var STEP_REMAP = { cp2: { 6: [0, 0, 0, 0, 1, 2, 3], 5: [0, 0, 0, 0, 2, 3] } };
-  var STEP_TOTAL = { cp2: 3 };
-  // Only ever called on an OLD position (an older key, or an old page's snapshot entry), so it
-  // never passes one through: no known old count means the last step, never complete.
-  function remapStep(id, pos, total) {
-    if (!STEP_REMAP[id]) return pos;
-    var map = STEP_REMAP[id][total];
-    if (map) return map[Math.max(0, Math.min(pos | 0, map.length - 1))];
-    return Math.max(0, Math.min(pos | 0, STEP_TOTAL[id] - 1));
-  }
-  /* An already-open page keeps running the PREVIOUS progress.js until it reloads. That copy
-     must never see a cp2 position from today's list: it probes _v6 first, would pull the
-     position AND its count of 3 into its own _v5, and ticking a third card would then read as
-     finished. So today's list lives under _v7, which the previous copy never probes, and the
-     server snapshot carries it as 'cp2@3', an id the previous copy skips. A plain 'cp2' entry
-     in a snapshot always comes from an old page and is remapped like an old key.
-     (Astra review of the build-first change, 2026-10-05.) */
-  var SNAPSHOT_ALIAS = { cp2: 'cp2@3' };
-  var ALIAS_OF = { 'cp2@3': 'cp2' };
-  function snapStep(steps, id) {
-    var alias = SNAPSHOT_ALIAS[id], cur = alias && steps[alias], old = steps[id], best = null;
-    if (cur && typeof cur === 'object') best = { pos: Math.max(0, Math.min(cur.pos | 0, STEP_TOTAL[id])), total: STEP_TOTAL[id] };
-    if (old && typeof old === 'object') {
-      var mapped = { pos: remapStep(id, old.pos | 0, old.total), total: STEP_TOTAL[id] };
-      if (!best || mapped.pos > best.pos) best = mapped;
-    }
-    return best;
-  }
+  var STEP_WRITE_SUFFIX = { cp1: '_v6', cp2: '_v5', cp3: '_v4', cp4: '_v5', goal: '_v6' };
 
   /* Read a per-checkpoint step key. Reads the OWNED suffix first, then treats any
      older generation as a ONE-SHOT MIGRATION: take its value, write it under the
@@ -286,10 +249,6 @@
         var raw = localStorage.getItem(key);
         if (raw === null) continue;
         var n = parseInt(raw, 10);
-        if (!isNaN(n) && STEP_REMAP[id]) {          // an older generation of a list that changed shape
-          if (suffix === '') n = remapStep(id, n, parseInt(localStorage.getItem(STEP_PREFIX + id + STEP_SUFFIXES[i] + '_n'), 10));
-          else if (suffix === '_n') n = STEP_TOTAL[id];
-        }
         localStorage.removeItem(key);                       // one-shot: never read twice
         if (isNaN(n)) continue;
         if (owned) localStorage.setItem(STEP_PREFIX + id + owned + suffix, String(n));
@@ -347,11 +306,6 @@
     var suffix = STEP_WRITE_SUFFIX[id];
     if (!suffix) return;                       // `setup` keeps no position
     try { localStorage.setItem(STEP_PREFIX + id + suffix, String(Math.max(0, pos | 0))); } catch (e) {}
-  }
-  function setStepTotal(id, total) {
-    var suffix = STEP_WRITE_SUFFIX[id];
-    if (!suffix || !total) return;
-    try { localStorage.setItem(STEP_PREFIX + id + suffix + '_n', String(total | 0)); } catch (e) {}
   }
   function clearStepPos(id) {
     var suffix = STEP_WRITE_SUFFIX[id];
@@ -707,7 +661,7 @@
     var steps = {};
     for (var i = 0; i < CHAIN.length; i++) {
       var id = CHAIN[i], info = stepInfo(id);
-      if (info.pos || info.total) steps[SNAPSHOT_ALIAS[id] || id] = { pos: info.pos, total: info.total };
+      if (info.pos || info.total) steps[id] = { pos: info.pos, total: info.total };
     }
     return {
       progress: read(),
@@ -751,12 +705,7 @@
       for (var sup in remote.suppressed) {
         if (!remote.suppressed[sup]) continue;
         if (mine[sup]) { delete mine[sup]; changed = true; }
-        if (SNAPSHOT_ALIAS[sup]) {
-          var supStep = snapStep(remoteSteps0, sup);
-          if (!supStep) { clearStepPos(sup); }
-          else { setStepPos(sup, supStep.pos); setStepTotal(sup, supStep.total); }
-        }
-        else if (!remoteSteps0[sup]) { clearStepPos(sup); }
+        if (!remoteSteps0[sup]) { clearStepPos(sup); }
         else if (typeof remoteSteps0[sup].pos === 'number') { setStepPos(sup, remoteSteps0[sup].pos); }
       }
       write(mine);
@@ -773,9 +722,8 @@
       try { localStorage.setItem(TRIAL_SETUP_KEY, String(Date.now())); changed = true; } catch (e) {}
     }
 
-    var steps = remote.steps || {}, stepIds = {};
-    for (var sk in steps) stepIds[ALIAS_OF[sk] || sk] = true;
-    for (var sid in stepIds) {
+    var steps = remote.steps || {};
+    for (var sid in steps) {
       var suffix = STEP_WRITE_SUFFIX[sid];
       if (!suffix) continue;                     // setup keeps no position
       /* A REOPENED checkpoint owns its own position. Rule 2 (take the furthest
@@ -787,12 +735,11 @@
          A suppression arriving FROM the server is already applied above, with
          the remote position taken verbatim, so this skips that case too. */
       if (isSuppressed(sid)) continue;
-      var incoming = (SNAPSHOT_ALIAS[sid] ? snapStep(steps, sid) : steps[sid]) || {}, local = stepInfo(sid);
-      var inPos = incoming.pos || 0, inTotal = incoming.total;
-      if (inPos > local.pos) {
+      var incoming = steps[sid] || {}, local = stepInfo(sid);
+      if ((incoming.pos || 0) > local.pos) {
         try {
-          localStorage.setItem(STEP_PREFIX + sid + suffix, String(inPos));
-          if (inTotal) localStorage.setItem(STEP_PREFIX + sid + suffix + '_n', String(inTotal));
+          localStorage.setItem(STEP_PREFIX + sid + suffix, String(incoming.pos));
+          if (incoming.total) localStorage.setItem(STEP_PREFIX + sid + suffix + '_n', String(incoming.total));
           changed = true;
         } catch (e) {}
       }
@@ -1011,7 +958,6 @@
     trialSetupComplete: trialSetupComplete,
     activeId: activeId, stateOf: stateOf, next: next, buildIndex: buildIndex,
     stepInfo: stepInfo, setupInfo: setupInfo, resume: resume, started: started, overall: overall,
-    _applySnapshot: applySnapshot, _snapshot: snapshot,   // tests only: the server-merge rules (tests/cp2-lessons-optional.test.mjs)
     syncFromServer: syncFromServer, hasViewToken: function () { return !!viewToken(); }
   };
 
