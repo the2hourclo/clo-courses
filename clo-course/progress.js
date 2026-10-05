@@ -209,7 +209,7 @@
 
   // The suffix each wizard ACTUALLY writes, verified against its own STORE line:
   //   cp1  checkpoint-map.html         _v6
-  //   cp2  checkpoint-first-skill.html _v5
+  //   cp2  checkpoint-first-skill.html _v6   (2026-10-05: build first, lessons optional; see STEP_REMAP)
   //   cp3  checkpoint-system.html      _v4
   //   cp4  checkpoint-autonomy.html    _v5
   //   goal checkpoint-ai-employee.html _v6
@@ -222,7 +222,24 @@
   // stays frozen at the restored number, and snapshot() pushes that stale value
   // back over the truth on the next write. Writing to every suffix has the same
   // shadowing failure. One key per checkpoint, the one its wizard owns.
-  var STEP_WRITE_SUFFIX = { cp1: '_v6', cp2: '_v5', cp3: '_v4', cp4: '_v5', goal: '_v6' };
+  var STEP_WRITE_SUFFIX = { cp1: '_v6', cp2: '_v6', cp3: '_v4', cp4: '_v5', goal: '_v6' };
+
+  /* Positions saved against an OLDER step list, keyed by the step COUNT they were saved with
+     (the `_n` key here, `total` in a server snapshot). A wizard whose list got SHORTER needs
+     this: copied verbatim, an old position lands past the end of the new list, the wizard
+     opens on its completion screen and marks a checkpoint done that was never finished.
+     2026-10-05 cp2 (Rashid: "lead with the build and make the lessons optional but clearly
+     visible"): the three lessons left the step list. Old six-step order: three lessons, build,
+     make it better, prove it (6 = complete). The five-step v4 order had no make-it-better step.
+     An old position whose count is unknown is clamped to the last step, never to complete. */
+  var STEP_REMAP = { cp2: { 6: [0, 0, 0, 0, 1, 2, 3], 5: [0, 0, 0, 0, 2, 3] } };
+  var STEP_TOTAL = { cp2: 3 };
+  function remapStep(id, pos, total) {
+    if (!STEP_REMAP[id] || total === STEP_TOTAL[id]) return pos;
+    var map = STEP_REMAP[id][total];
+    if (map) return map[Math.max(0, Math.min(pos | 0, map.length - 1))];
+    return Math.max(0, Math.min(pos | 0, STEP_TOTAL[id] - 1));
+  }
 
   /* Read a per-checkpoint step key. Reads the OWNED suffix first, then treats any
      older generation as a ONE-SHOT MIGRATION: take its value, write it under the
@@ -249,6 +266,10 @@
         var raw = localStorage.getItem(key);
         if (raw === null) continue;
         var n = parseInt(raw, 10);
+        if (!isNaN(n) && STEP_REMAP[id]) {          // an older generation of a list that changed shape
+          if (suffix === '') n = remapStep(id, n, parseInt(localStorage.getItem(STEP_PREFIX + id + STEP_SUFFIXES[i] + '_n'), 10));
+          else if (suffix === '_n') n = STEP_TOTAL[id];
+        }
         localStorage.removeItem(key);                       // one-shot: never read twice
         if (isNaN(n)) continue;
         if (owned) localStorage.setItem(STEP_PREFIX + id + owned + suffix, String(n));
@@ -706,7 +727,7 @@
         if (!remote.suppressed[sup]) continue;
         if (mine[sup]) { delete mine[sup]; changed = true; }
         if (!remoteSteps0[sup]) { clearStepPos(sup); }
-        else if (typeof remoteSteps0[sup].pos === 'number') { setStepPos(sup, remoteSteps0[sup].pos); }
+        else if (typeof remoteSteps0[sup].pos === 'number') { setStepPos(sup, remapStep(sup, remoteSteps0[sup].pos, remoteSteps0[sup].total)); }
       }
       write(mine);
     }
@@ -736,10 +757,12 @@
          the remote position taken verbatim, so this skips that case too. */
       if (isSuppressed(sid)) continue;
       var incoming = steps[sid] || {}, local = stepInfo(sid);
-      if ((incoming.pos || 0) > local.pos) {
+      var inPos = remapStep(sid, incoming.pos || 0, incoming.total);   // an old device's position, in today's list
+      var inTotal = STEP_REMAP[sid] ? STEP_TOTAL[sid] : incoming.total;
+      if (inPos > local.pos) {
         try {
-          localStorage.setItem(STEP_PREFIX + sid + suffix, String(incoming.pos));
-          if (incoming.total) localStorage.setItem(STEP_PREFIX + sid + suffix + '_n', String(incoming.total));
+          localStorage.setItem(STEP_PREFIX + sid + suffix, String(inPos));
+          if (inTotal) localStorage.setItem(STEP_PREFIX + sid + suffix + '_n', String(inTotal));
           changed = true;
         } catch (e) {}
       }
@@ -958,6 +981,7 @@
     trialSetupComplete: trialSetupComplete,
     activeId: activeId, stateOf: stateOf, next: next, buildIndex: buildIndex,
     stepInfo: stepInfo, setupInfo: setupInfo, resume: resume, started: started, overall: overall,
+    _applySnapshot: applySnapshot,   // tests only: the server-merge rules (tests/cp2-lessons-optional.test.mjs)
     syncFromServer: syncFromServer, hasViewToken: function () { return !!viewToken(); }
   };
 

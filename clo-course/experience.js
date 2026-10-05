@@ -35,6 +35,25 @@
       list.replaceChildren();
       steps.forEach(function(step,index){list.appendChild(makeRailStep(step,index,current,steps.length))});
     }
+    /* Optional lessons (cp2, 2026-10-05): outside the step list, always visible, open in place. */
+    var lessons=window.CONFIG&&CONFIG.lessons;
+    var box=document.querySelector('.rail-lessons');
+    if(lessons&&lessons.length&&list){
+      if(!box){box=document.createElement('div');box.className='rail-lessons';box.setAttribute('aria-label','Optional lessons');list.parentNode.insertBefore(box,list.nextSibling)}
+      box.replaceChildren();
+      var label=document.createElement('span');label.className='rail-lessons-label';label.textContent='Optional lessons';box.appendChild(label);
+      lessons.forEach(function(lesson,index){
+        var b=document.createElement('button');b.type='button';
+        b.className='rail-lesson'+(window.lessonOpen===index?' active':'');
+        if(window.lessonOpen===index)b.setAttribute('aria-current','true');
+        var n=document.createElement('span');n.className='n';n.textContent=String(index+1);
+        var copy=document.createElement('div');var title=document.createElement('b');title.textContent=plainTitle(lesson.title);
+        var meta=document.createElement('small');meta.textContent='Learn · Optional'+(lesson.slides?' · '+lesson.slides.length+' slides':'');
+        copy.appendChild(title);copy.appendChild(meta);b.appendChild(n);b.appendChild(copy);
+        b.addEventListener('click',function(){if(typeof openLesson==='function')openLesson(index)});
+        box.appendChild(b);
+      });
+    }
     var label=document.querySelector('.checkpoint-progress-label');
     if(label){
       label.textContent=current>=steps.length

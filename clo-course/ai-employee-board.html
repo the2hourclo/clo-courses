@@ -151,6 +151,10 @@ a.kbody::after{content:'';position:absolute;inset:0;border-radius:9px}
 .tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .tag.type{background:var(--surface-3);color:var(--text-muted);border:1px solid var(--border-2)}
 .tag.opt{background:transparent;color:var(--text-dim);border:1px dashed var(--border-2)}
+.klessons{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:10px;padding:9px 10px;border:1px dashed var(--border-2);border-radius:9px;font-size:12.5px;line-height:1.4;color:var(--text-dim)}
+.klessons .kl-tag{width:100%;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim)}
+.klessons a{color:var(--cp);text-decoration:underline;text-underline-offset:2px}
+.klessons a+a:before,.klessons span+span:not(.kl-tag):before{content:none}
 .tag.st-doing{background:rgba(37,99,168,.12);color:#2563A8}
 .tag.st-done{background:var(--accent-dim);color:var(--accent)}
 .tag.st-doing::before{content:'◐';font-size:9px}
@@ -271,7 +275,7 @@ body.surface-gate-open{overflow:hidden}
 }
 </style>
 <link rel="stylesheet" href="excalifont.css">
-<link rel="stylesheet" href="experience.css?v=12">
+<link rel="stylesheet" href="experience.css?v=13">
 </head>
 <body>
 
@@ -333,7 +337,7 @@ body.surface-gate-open{overflow:hidden}
 <div class="surface-gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="surface-gate-title" hidden></div>
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="progress.js?v=6"></script>
+<script src="progress.js?v=7"></script>
 <script>
 /* ──────────────────────────────────────────────────────────────
    BOARD PAGE. Top: what to work on NEXT (from progress.js). Below:
@@ -397,11 +401,12 @@ var BOARD = [
     { t:'Read &amp; share your X-Ray', type:'share', optional:true },
     { t:'Lock your first target', type:'gate' }
   ]},
-  { id:'cp2', name:'Your AI Employee’s First Job', color:'#6B46C1', cards:[
-    { t:'What is a skill', type:'video' },
-    { t:'The 3 levels of skills', type:'video' },
-    { t:'How to create a skill', type:'video' },
-    { t:'Turn 1 real process into a skill', type:'build' },
+  /* 2026-10-05: build first. The three lessons are optional and sit OUTSIDE the card list
+     (the card<->step contract): they render as their own line and open with ?lesson=N. */
+  { id:'cp2', name:'Your AI Employee’s First Job', color:'#6B46C1',
+    lessons:[ { t:'What is a skill' }, { t:'The 3 levels of skills' }, { t:'How to create a skill' } ],
+    cards:[
+    { t:'Turn one real task into a skill', type:'build' },
     /* Self-improvement sits HERE, not in the goal column — it's the feedback loop that
        makes every later run better, so it has to land the moment they first run a skill. */
     { t:'It gets better every time you use it', type:'build' },
@@ -647,6 +652,12 @@ function colHTML(col){
 
   h += '<div class="col-body" id="body-'+col.id+'">';
   h += '<ul class="klist">'+cards.map(function(c,i){ return cardHTML(col, c, statuses[i], i, live); }).join('')+'</ul>';
+  if (col.lessons && col.lessons.length){
+    h += '<div class="klessons"><span class="kl-tag">Optional lessons</span>' + col.lessons.map(function(l, i){
+      var wiz = WIZARDS[col.id];
+      return live && wiz ? '<a href="'+wiz+(wiz.indexOf('?') > -1 ? '&' : '?')+'lesson='+(i+1)+'">'+l.t+'</a>' : '<span>'+l.t+'</span>';
+    }).join('') + '</div>';
+  }
 
   // Column footer — the way in, and the way back out of a finished checkpoint.
   h += '<div class="col-foot">';
@@ -913,6 +924,6 @@ window.addEventListener('aieb:progress-synced', function(){
 });
 </script>
 <script src="session-chip.js?v=3" defer></script>
-<script src="experience.js?v=6"></script>
+<script src="experience.js?v=7"></script>
 </body>
 </html>

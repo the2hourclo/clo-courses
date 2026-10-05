@@ -130,7 +130,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 .does-foot{margin-top:11px;font-size:12.5px;color:var(--text-dim);line-height:1.5}
 </style>
 <link rel="stylesheet" href="excalifont.css">
-<link rel="stylesheet" href="experience.css?v=12">
+<link rel="stylesheet" href="experience.css?v=13">
 </head>
 <body>
 <header class="site-topbar"><a class="site-brand" href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener" title="Open the AI Employee Builders community"><img src="assets/aieb-avatar-180.png" alt="" width="26" height="26">AI Employee Builders</a></header>
@@ -160,7 +160,7 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 
 </div>
 
-<script src="progress.js?v=5"></script>
+<script src="progress.js?v=7"></script>
 <script src="slides.js?v=4"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
@@ -177,12 +177,27 @@ body{min-height:100vh;background:radial-gradient(1000px 560px at 50% -240px,colo
 function canvas(dir, names){
   return names.map(function(n){ return '../meta-create-skill/canvases/' + dir + '/slides/' + n + '.png'; });
 }
+/* One step per surface tab: the base fields plus that surface's own. Order and titles are shared,
+   so every surface has the same three steps and progress.js counts three on each. */
+function perSurface(base, bySurface){
+  return ['cowork', 'claude-code', 'codex'].map(function(sf){
+    var o = { surface: sf }, k;
+    for (k in base) o[k] = base[k];
+    for (k in (bySurface[sf] || {})) o[k] = bySurface[sf][k];
+    return o;
+  });
+}
 var CONFIG = {
   id: 'cp2',
   name: 'Your AI Employee’s First Job',
   color: '#a78bfa',
   board: 'ai-employee-board.html',
-  steps: [
+  /* 2026-10-05 (Rashid: "lead with the build and make the lessons optional but clearly visible").
+     The three lessons left the step list. They open in place from the card under the build
+     step's Done button, from "Optional lessons" in the side panel, and from the board
+     (?lesson=N). Steps are now build -> make it better -> prove it; progress.js STEP_REMAP
+     carries positions saved against the old six-step list over to this one. */
+  lessons: [
     { type:'video', title:'What is a skill',
       video:'', slotLabel:'📹 Explainer — coming soon',
       /* Rebuilt 2026-09-23 on the Weekly Email example (canvases/DESIGN-SYSTEM.md §9). Order: the
@@ -232,12 +247,17 @@ var CONFIG = {
         'The part almost everyone skips. Leave the exceptions out and you end up with three near-copies of the same skill, and every fix to one leaves the other two behind. Name them once, launch week gets its own format and a holiday week is five lines, and <strong>one skill covers all three versions</strong>.',
         'Here is everything you handed over, in the one file the AI reads every week. <strong>Almost none of it came from the AI.</strong> Your steps, your framework, your gold standard, your files, your exceptions. The skill is where how you already work finally got written down, and you only have to say it once.'
       ],
-      body:'Creating a skill works like the X-Ray in reverse. The <strong>meta-create-skill</strong> skill <strong>interviews you</strong> about how you do the task, writes the playbook, and wires in your own examples so the output sounds like you. Your job is not to prompt it well. Your job is to be clear about how you already work.' },
+      body:'Creating a skill works like the X-Ray in reverse. The <strong>meta-create-skill</strong> skill <strong>interviews you</strong> about how you do the task, writes the playbook, and wires in your own examples so the output sounds like you. Your job is not to prompt it well. Your job is to be clear about how you already work.' }
+  ],
 
-    { type:'build', title:'Turn 1 real process into a skill',
+  /* 2026-10-05: one step, three wordings. Each surface tab gets the command that works there
+     (Codex runs plugin skills from plain words, not slash commands) and its own word for a fresh
+     chat, the way checkpoint-map's X-Ray step does. Titles stay the same on every surface, so the
+     board keeps one card per step and the card<->step contract holds on all three tabs. */
+  steps: [].concat(
+    perSurface({ type:'build', title:'Turn one real task into a skill',
       video:'', demoSlot:true, demoLabel:'🎬 Demo · watch me create one — coming soon',
-      command:'/ai-employee-builder:meta-create-skill',
-      body:'Pick <strong>one</strong> repetitive task from your X-Ray. Run the command below (or just say <em>&ldquo;build me a skill for this&rdquo;</em>). The AI interviews you, drafts the skill, and you refine it together until the output is right. <strong>You just answer its questions.</strong>',
+      lessonsCard:true,
       does:[
         'It <strong>interviews you</strong> about the task — the steps in the order you do them, and the rules you follow without thinking.',
         'It asks for <strong>a real example you already made</strong> — your gold standard. This is the step that does the most work.',
@@ -245,14 +265,25 @@ var CONFIG = {
         'It writes the skill file, then <strong>shows you the plan before building</strong>.',
         'You run it once on something real and correct what is off. It folds the correction in.'
       ],
-      doesFoot:'About 20–30 minutes for your first one. Pick a boring, repetitive task — not your hardest one.' },
+      doesFoot:'About 20–30 minutes for your first one. Pick a boring, repetitive task — not your hardest one. No example yet? Tell the AI what a good result must contain.'
+    }, {
+      cowork: {
+        command:'/ai-employee-builder:meta-create-skill',
+        body:'A skill saves how you want a job done, so Claude can do it again without another briefing. Pick <strong>one</strong> repetitive task from your X-Ray and have one real example of it ready. In your Project&rsquo;s chat, run the command below (or just say <em>&ldquo;build me a skill for this&rdquo;</em>). Claude interviews you and drafts the skill with you. <strong>You just answer its questions.</strong>' },
+      'claude-code': {
+        command:'/ai-employee-builder:meta-create-skill',
+        body:'A skill saves how you want a job done, so Claude can do it again without another briefing. Pick <strong>one</strong> repetitive task from your X-Ray and have one real example of it ready. In a Claude Code session in your workspace folder, run the command below (or just say <em>&ldquo;build me a skill for this&rdquo;</em>). Claude interviews you and drafts the skill with you. <strong>You just answer its questions.</strong>' },
+      codex: {
+        command:'Build me a skill for one repetitive task from my X-Ray. Interview me about how I do it, then test it on a real example I give you.',
+        body:'A skill saves how you want a job done, so Codex can do it again without another briefing. Pick <strong>one</strong> repetitive task from your X-Ray and have one real example of it ready. In a Codex thread in your Business OS project, use the prompt below. The AI Employee Builder plugin routes Codex into building the skill: it interviews you and drafts the skill with you. <strong>You just answer its questions.</strong>' }
+    }),
 
     /* Self-improvement belongs HERE — the moment the buyer first RUNS a skill — not at the
        finish line. It's the feedback loop that makes every later run better, so teaching it
        after the whole journey wastes every run in between. (Rashid, 2026-07-24.)
        2026-07-26: given its own deck + the retrospective command, so the buyer can also
        CALL the loop deliberately instead of only stumbling into it. */
-    { type:'build', title:'It gets better every time you use it',
+    perSurface({ type:'build', title:'It gets better every time you use it',
       slides: canvas('v5-retrospective', ['01-correction-dies-in-the-chat','02-it-writes-the-fix-into-the-file','03-nothing-lands-without-your-yes','04-two-ways-to-run-it','05-it-compounds']),
       slideNotes:[
         'Watch what happens to a correction. This week&rsquo;s email comes back wrong, and you type the fix into the chat. Next week starts a new chat, opens the same file, and makes <strong>the exact same mistake</strong>. Your correction lived in the chat and never reached the file, and the file is the only thing next week reads.',
@@ -261,16 +292,29 @@ var CONFIG = {
         'There are two ways to ask, and both are just things you say. Right after a bad email, say <strong>&ldquo;that was wrong, fix the skill&rdquo;</strong> and it fixes that one skill. At the end of the day, say <strong>&ldquo;review what went wrong today&rdquo;</strong> and it looks back at every skill you used and brings you all the fixes at once.',
         'Your skill starts at about 80%, a strong first draft. Each step up is one correction you made once and never had to make again. Five weeks and four small fixes later, it writes <strong>work you would put your name on</strong>. You are not repeating yourself every week. You are training it.'
       ],
-      command:'/ai-employee-builder:retrospective',
       commandIntro:'You can also call it on purpose. <strong>Run this whenever something comes back off</strong>, or at the end of a working session, and it looks back over what happened, drafts the fix, and shows it to you before anything gets written.',
-      body:'Your skill will get something wrong some week, and that is the point. When it does, <strong>say what was wrong in plain words</strong>, the way you would to a new hire, and add &ldquo;fix the skill&rdquo;. The AI writes that correction into the skill itself, so next week already has it.' },
+      body:'Your skill will get something wrong some week, and that is the point. When it does, <strong>say what was wrong in plain words</strong>, the way you would to a new hire, and add &ldquo;fix the skill&rdquo;. The AI writes that correction into the skill itself, so next week already has it.'
+    }, {
+      cowork: { command:'/ai-employee-builder:retrospective' },
+      'claude-code': { command:'/ai-employee-builder:retrospective' },
+      codex: { command:'Review what went wrong today and fix the skill.' }
+    }),
 
-    { type:'gate', title:'It did the job, then again in a fresh chat',
-      body:'Run your new skill on a <strong>real</strong> piece of work and check the result is something you would actually use. Then prove it will still work tomorrow: open a <strong>fresh chat</strong> in the same project, give it a different real example, and ask for the job in your own words. If Claude does it without you pasting the instructions again, your AI Employee just did its first job.',
-      checks:['It did the job on real work, with a result I&rsquo;d use.', 'It did it again from a fresh chat, without me pasting the instructions.'],
+    perSurface({ type:'gate', title:'It did the job, then again in a fresh chat',
       doneLabel:'Done, my AI Employee did its first job &#8594;',
-      gate:'Your skill did the job on real work with a result you would use, <strong>and</strong> did it again from a fresh chat. That is <strong>Your AI Employee&rsquo;s First Job</strong>. When the AI confirms it, <strong>A skill system</strong> unlocks on your board: the next step toward it running on its own.' }
-  ]
+      gate:'Your skill did the job on real work with a result you would use, <strong>and</strong> did it again from a fresh chat. That is <strong>Your AI Employee&rsquo;s First Job</strong>. When the AI confirms it, <strong>A skill system</strong> unlocks on your board: the next step toward it running on its own.'
+    }, {
+      cowork: {
+        body:'Run your new skill on a <strong>real</strong> piece of work and check the result is something you would actually use. Then prove it will still work tomorrow: open a <strong>fresh chat</strong> in the same Project, give it a different real example, and ask for the job in your own words. If Claude does it without you pasting the instructions again, your AI Employee just did its first job.',
+        checks:['It did the job on real work, with a result I&rsquo;d use.', 'It did it again from a fresh chat, without me pasting the instructions.'] },
+      'claude-code': {
+        body:'Run your new skill on a <strong>real</strong> piece of work and check the result is something you would actually use. Then prove it will still work tomorrow: start a <strong>fresh Claude Code session</strong> in the same folder, give it a different real example, and ask for the job in your own words. If Claude does it without you pasting the instructions again, your AI Employee just did its first job.',
+        checks:['It did the job on real work, with a result I&rsquo;d use.', 'It did it again from a fresh session, without me pasting the instructions.'] },
+      codex: {
+        body:'Run your new skill on a <strong>real</strong> piece of work and check the result is something you would actually use. Then prove it will still work tomorrow: start a <strong>fresh Codex thread</strong> in the same project, give it a different real example, and ask for the job in your own words. If Codex does it without you pasting the instructions again, your AI Employee just did its first job.',
+        checks:['It did the job on real work, with a result I&rsquo;d use.', 'It did it again from a fresh thread, without me pasting the instructions.'] }
+    })
+  )
 };
 
 document.documentElement.style.setProperty('--cp', CONFIG.color);
@@ -297,9 +341,15 @@ function setSurface(s){
   paintSurface(); render();
 }
 
-var STORE = 'aieb_ckpt_'+CONFIG.id+'_v5'; // bump whenever the step ORDER changes (v5: self-improvement step added before the gate) — resets positions saved against the old order (v4: optional "Read & share your X-Ray" step inserted before the gate)
+var STORE = 'aieb_ckpt_'+CONFIG.id+'_v6'; // bump whenever the step ORDER changes (v6, 2026-10-05: build first, the three lessons moved out of the step list; progress.js STEP_REMAP maps old positions) (v5: self-improvement step added before the gate) — resets positions saved against the old order (v4: optional "Read & share your X-Ray" step inserted before the gate)
 var pos = 0; // current step index (0..steps.length). steps.length = completion screen.
-try { var saved = parseInt(localStorage.getItem(STORE),10); if(!isNaN(saved)) pos = Math.min(saved, activeSteps().length); } catch(e){}
+try {
+  var saved = parseInt(localStorage.getItem(STORE),10);
+  // Nothing under today's key yet: let progress.js migrate a position saved against the old
+  // six-step list (STEP_REMAP maps it into this list instead of copying it past the end).
+  if (isNaN(saved) && window.AIEB && AIEB.stepInfo) saved = AIEB.stepInfo(CONFIG.id).pos;
+  if(!isNaN(saved)) pos = Math.min(saved, activeSteps().length);
+} catch(e){}
 
 /* ── DEEP LINK: ?step=N ─────────────────────────────────────────────────────
    The board links every card to its OWN step now, so arriving with ?step=3 has
@@ -344,6 +394,7 @@ function cmdHTML(s){
 }
 
 function render(){
+  lessonOpen = null;
   var steps = activeSteps();
   var n = steps.length;
   var fill = document.getElementById('wizFill'), count = document.getElementById('wizCount'), eta = document.getElementById('wizEta');
@@ -450,11 +501,13 @@ function svHTML(s, last){
   var h = '<div class="step sv">';
   h += '<span class="step-type">'+(TYPE[s.type]||'')+(s.optional?' · optional':'')+'</span>';
   h += '<h2>'+s.title+'</h2>';
+  if (s.lessonsCard && CONFIG.lessons && CONFIG.lessons.length){ h += '<a class="sv-lessons-jump" href="#svLessons">New to skills? '+CONFIG.lessons.length+' optional lessons &#8595;</a>'; }
   if (s.body){ h += '<p>'+s.body+'</p>'; }
   if (s.command){ h += cmdHTML(s); }
   if (s.checks){ h += '<div class="sv-checks">' + s.checks.map(function(c, i){ return '<label><input type="checkbox" id="svc'+i+'" onchange="svGate()"><span>'+c+'</span></label>'; }).join('') + '</div>'; }
   else if (s.gate){ h += '<div class="gate"><div class="gl">&#128275; Unlocks the next checkpoint when</div><div class="gb">'+s.gate+'</div></div>'; }
   h += '<button type="button" class="sv-done" id="svDone" onclick="next()"'+(s.checks?' disabled':'')+'>'+(s.doneLabel || (last ? 'Done, finish this checkpoint &#8594;' : 'Done, next step &#8594;'))+'</button>';
+  if (s.lessonsCard && CONFIG.lessons && CONFIG.lessons.length){ h += lessonsCardHTML(); }
   var help = '';
   if (s.demo){ help += '<div class="video"><iframe src="'+s.demo+'" title="'+s.title+' — demo" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
   if (s.does){ help += '<div class="does"><div class="does-h">What this does, step by step</div><ol>' + s.does.map(function(d){ return '<li>'+d+'</li>'; }).join('') + '</ol>' + (s.doesFoot ? '<div class="does-foot">'+s.doesFoot+'</div>' : '') + '</div>'; }
@@ -463,6 +516,44 @@ function svHTML(s, last){
   h += '<div class="nav"><button class="btn" onclick="back()">← Back</button><button class="btn primary" onclick="next()">'+(last?'Finish checkpoint →':'Next →')+'</button></div>';
   return h + '</div>';
 }
+/* Optional lessons (2026-10-05). They sit outside the step list, so opening one never moves
+   `pos`: Back, Next and the side panel all return to the step the member was on. */
+var lessonOpen = null;
+function lessonsCardHTML(){
+  return '<section class="sv-lessons" id="svLessons" aria-label="Optional lessons">' +
+    '<div class="sv-lessons-h"><span class="sv-lessons-tag">Optional</span><span>New to skills? Three short lessons show how they work. Watch them first, or come back any time.</span></div>' +
+    '<ol>' + CONFIG.lessons.map(function(l, i){
+      return '<li><button type="button" onclick="openLesson('+i+')"><span class="sv-l-n">'+(i+1)+'</span>' +
+        '<span class="sv-l-t"><b>'+l.title+'</b><small>'+(l.slides ? l.slides.length+' slides' : 'video')+'</small></span>' +
+        '<span class="sv-l-go" aria-hidden="true">&#8594;</span></button></li>';
+    }).join('') + '</ol></section>';
+}
+function openLesson(i){
+  var l = CONFIG.lessons && CONFIG.lessons[i];
+  if (!l) return;
+  lessonOpen = i;
+  var n = CONFIG.lessons.length, last = i === n - 1;
+  var narrated = !!(l.slides && l.slideNotes && window.AIEBSlides);
+  var h = '<div class="step lesson">';
+  h += '<span class="step-type">'+TYPE.video+' · optional lesson '+(i+1)+' of '+n+'</span>';
+  h += '<h2>'+l.title+'</h2>';
+  if (narrated && l.body){ h += '<p class="lead">'+l.body+'</p>'; }
+  if (l.video){ h += '<div class="video"><iframe src="'+l.video+'" title="'+l.title+'" allowfullscreen allow="fullscreen" loading="lazy"></iframe></div>'; }
+  else if (l.slides && window.AIEBSlides){ h += '<div id="svMount"></div>'; }
+  else { h += '<div class="video-slot"><span>'+(l.slotLabel||'🎬 Video coming soon')+'</span></div>'; }
+  if (l.body && !narrated){ h += '<p>'+l.body+'</p>'; }
+  h += '<div class="nav"><button class="btn" onclick="closeLesson()">&#8592; Back to your step</button>' +
+       (last ? '<button class="btn primary" onclick="closeLesson()">Back to your step &#8594;</button>'
+             : '<button class="btn primary" onclick="openLesson('+(i+1)+')">Next lesson &#8594;</button>') + '</div></div>';
+  document.getElementById('wizEta').textContent = 'optional lesson';
+  var stage = document.getElementById('stage');
+  stage.innerHTML = h;
+  document.body.classList.toggle('slides-step', !!l.slides);
+  var svm = document.getElementById('svMount');
+  if (svm){ AIEBSlides.mount(svm, { slides: l.slides, title: l.title, notes: l.slideNotes }); }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function closeLesson(){ render(); }
 function svGate(){
   var boxes = document.querySelectorAll('.sv-checks input');
   var all = Array.prototype.every.call(boxes, function(b){ return b.checked; });
@@ -471,6 +562,7 @@ function svGate(){
 }
 /* The proof step's tick boxes gate every way forward, including the bottom bar's Next. */
 function next(){
+  if (lessonOpen !== null){ if (lessonOpen + 1 < CONFIG.lessons.length) openLesson(lessonOpen + 1); else closeLesson(); return; }
   var cur = activeSteps()[pos];
   if (cur && cur.checks && !svGate()){
     var c = document.querySelector('.sv-checks');
@@ -479,10 +571,20 @@ function next(){
   }
   pos = Math.min(pos+1, activeSteps().length); save(); render();
 }
-function back(){ if (pos<=0){ window.location.href = CONFIG.board; return; } pos--; save(); render(); }
+function back(){ if (lessonOpen !== null){ closeLesson(); return; } if (pos<=0){ window.location.href = CONFIG.board; return; } pos--; save(); render(); }
 
 paintSurface();
 render();
+(function(){
+  var m = /[?&]lesson=(\d+)/.exec(window.location.search || '');
+  if (!m) return;
+  try {
+    var q = (window.location.search || '').replace(/([?&])lesson=\d+/, '$1').replace(/[?&]$/, '').replace(/\?&/, '?');
+    history.replaceState({}, '', window.location.pathname + (q === '?' ? '' : q) + window.location.hash);
+  } catch (e) {}
+  var want = parseInt(m[1], 10);
+  if (want >= 1 && CONFIG.lessons && want <= CONFIG.lessons.length) openLesson(want - 1);
+})();
 </script>
 <details class="cp-help">
     <summary>Stuck? Two ways out, fastest first.</summary>
@@ -490,6 +592,6 @@ render();
     <p><strong>2.</strong> <a href="https://www.polynet.ai/c/ai-employee-builders" target="_blank" rel="noopener">Post in the Polynet community</a> &mdash; describe what you see, a screenshot helps. The builders and Rashid are in there.</p>
   </details>
 <script src="session-chip.js?v=3" defer></script>
-<script src="experience.js?v=6"></script>
+<script src="experience.js?v=7"></script>
 </body>
 </html>

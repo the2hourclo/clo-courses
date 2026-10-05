@@ -42,6 +42,30 @@ body.aieb-checkpoint .rail-step.active .n{background:var(--cp);border-color:var(
 body.aieb-checkpoint .rail-step.complete .n{background:color-mix(in srgb,var(--cp) 14%,#fff);border-color:color-mix(in srgb,var(--cp) 42%,#C9CEC6);color:var(--cp)}
 body.aieb-checkpoint .rail-step.complete b{color:var(--aieb-soft)}
 body.aieb-checkpoint .rail-step.upcoming{opacity:.68}
+/* Optional lessons (cp2, 2026-10-05): visible, clearly optional, never in the step count. */
+body.aieb-checkpoint .rail-lessons{display:grid;gap:4px;margin-top:16px;padding-top:14px;border-top:1.5px dashed #D5D9D2}
+body.aieb-checkpoint .rail-lessons-label{display:block;margin:0 8px 6px;color:var(--aieb-soft);font:400 12px/1.2 var(--font-accent);letter-spacing:.07em;text-transform:uppercase}
+body.aieb-checkpoint .rail-lesson{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:center;width:100%;padding:9px;border:0;border-radius:11px;background:transparent;color:var(--aieb-soft);font:inherit;text-align:left;cursor:pointer}
+body.aieb-checkpoint .rail-lesson:hover{background:color-mix(in srgb,var(--cp) 7%,#fff)}
+body.aieb-checkpoint .rail-lesson:focus-visible{outline:2px solid var(--cp);outline-offset:2px}
+body.aieb-checkpoint .rail-lesson .n{display:grid;place-items:center;width:30px;height:30px;border:1.5px dashed #B9BFB5;border-radius:50%;background:#fff;font:800 10px/1 ui-monospace,SFMono-Regular,Consolas,monospace}
+body.aieb-checkpoint .rail-lesson b{display:block;color:var(--aieb-ink);font-size:13px;line-height:1.25;margin-bottom:3px}
+body.aieb-checkpoint .rail-lesson small{display:block;font-size:10.5px;line-height:1.35}
+body.aieb-checkpoint .rail-lesson.active{background:color-mix(in srgb,var(--cp) 11%,#fff);color:var(--cp)}
+body.aieb-checkpoint .rail-lesson.active .n{border-style:solid;border-color:var(--cp);color:var(--cp)}
+body.aieb-checkpoint .sv-lessons{margin:18px 0 6px;padding:14px 14px 10px;border:1.5px dashed color-mix(in srgb,var(--cp) 55%,#C9CEC6);border-radius:14px;background:color-mix(in srgb,var(--cp) 5%,#fff)}
+body.aieb-checkpoint .sv-lessons-h{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;margin-bottom:8px;color:var(--aieb-ink);font-size:14.5px;line-height:1.45}
+body.aieb-checkpoint .sv-lessons-tag{padding:1px 9px;border-radius:999px;background:#fff;border:1.5px solid color-mix(in srgb,var(--cp) 55%,#C9CEC6);color:var(--cp);font:400 13px/1.4 var(--font-accent);white-space:nowrap}
+body.aieb-checkpoint .sv-lessons ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+body.aieb-checkpoint .sv-lessons button{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;padding:9px 10px;border:1px solid #E1E4DE;border-radius:11px;background:#fff;color:var(--aieb-ink);font:inherit;text-align:left;cursor:pointer}
+body.aieb-checkpoint .sv-lessons button:hover{border-color:color-mix(in srgb,var(--cp) 50%,#C9CEC6)}
+body.aieb-checkpoint .sv-lessons button:focus-visible{outline:2px solid var(--cp);outline-offset:2px}
+body.aieb-checkpoint .sv-l-n{display:grid;place-items:center;width:28px;height:28px;border:1.5px dashed #B9BFB5;border-radius:50%;font:800 10px/1 ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--aieb-soft)}
+body.aieb-checkpoint .sv-l-t b{display:block;font-size:14px;line-height:1.3}
+body.aieb-checkpoint .sv-l-t small{display:block;color:var(--aieb-soft);font-size:12px}
+body.aieb-checkpoint .sv-l-go{color:var(--cp);font-size:16px}
+body.aieb-checkpoint .sv-lessons-jump{display:none}
+@media(max-width:580px){body.aieb-checkpoint .sv-lessons-jump{display:inline-block;margin:0 0 10px;color:var(--cp);font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px}}
 body.aieb-checkpoint .rail-note{margin:19px 8px 0;padding:12px;border:1px solid #DDE2DA;border-radius:10px;background:#fff}
 body.aieb-checkpoint .rail-note b{display:block;color:var(--aieb-ink);font-size:12px;margin-bottom:4px}
 body.aieb-checkpoint .rail-note span{display:block;color:var(--aieb-soft);font-size:11px;line-height:1.45}
@@ -125,7 +149,7 @@ body.aieb-checkpoint .btn.primary{font-family:var(--font-accent);font-size:16px;
   body.aieb-checkpoint .checkpoint-window{border:0;border-radius:0;box-shadow:none}
   body.aieb-checkpoint .checkpoint-windowbar{display:none}
   body.aieb-checkpoint .learning-rail{padding:13px 14px 14px;background:#fff}
-  body.aieb-checkpoint .learning-rail-label,body.aieb-checkpoint .learning-rail>h1,body.aieb-checkpoint .rail-steps,body.aieb-checkpoint .rail-note{display:none}
+  body.aieb-checkpoint .learning-rail-label,body.aieb-checkpoint .learning-rail>h1,body.aieb-checkpoint .rail-steps,body.aieb-checkpoint .rail-lessons,body.aieb-checkpoint .rail-note{display:none}
   body.aieb-checkpoint .mobile-step-summary{display:block}
   body.aieb-checkpoint .mobile-step-summary>div:first-child{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
   body.aieb-checkpoint .mobile-step-count{color:var(--cp);font:800 10px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
