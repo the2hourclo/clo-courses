@@ -162,16 +162,35 @@ test('old-order positions on this device are mapped, never copied', () => {
   assert.deepEqual({ ...newProgress({ aieb_ckpt_cp2_v7: '2', aieb_ckpt_cp2_v7_n: '3' }).AIEB.stepInfo('cp2') }, { pos: 2, total: 3 }, 'today\'s key is read as is');
 });
 
-test('server snapshots: today\'s list travels as cp2@3; a plain cp2 entry is an old page and is mapped', () => {
-  const mine = newProgress({ aieb_ckpt_cp2_v7: '2', aieb_ckpt_cp2_v7_n: '3' });
-  const snap = mine.AIEB._snapshot();
-  assert.deepEqual({ ...snap.steps['cp2@3'] }, { pos: 2, total: 3 });
-  assert.equal('cp2' in snap.steps, false, 'pages running the previous progress.js never receive today\'s cp2 position');
+// Mirrors normalizeCourseState's step rule (aieb-gated-mcp/api/course-progress.mjs, a pending server
+// change on 2026-10-05): only checkpoint ids survive, with integers 0 <= pos <= total <= 100.
+function serverKeeps(state) {
+  const steps = {};
+  for (const id of ['cp1', 'cp2', 'cp3', 'cp4', 'goal']) {
+    const s = state.steps && state.steps[id];
+    if (s === undefined) continue;
+    const bad = !Number.isInteger(s.pos) || !Number.isInteger(s.total) || s.pos < 0 || s.total < 0 || s.pos > 100 || s.total > 100 || (s.total === 0 ? s.pos !== 0 : s.pos > s.total);
+    if (bad) throw new Error('the server rejects ' + id + ' ' + JSON.stringify(s));
+    steps[id] = { pos: s.pos, total: s.total };
+  }
+  return { ...state, steps };
+}
+const plain = (value) => JSON.parse(JSON.stringify(value));
+
+test('server copies of cp2 use the old six-step numbering, so every page reads them right', () => {
+  const sent = [3, 4, 5, 6];
+  for (let k = 0; k <= 3; k++) {
+    const a = newProgress({ aieb_ckpt_cp2_v7: String(k), aieb_ckpt_cp2_v7_n: '3' });
+    const snap = plain(a.AIEB._snapshot());
+    assert.deepEqual(snap.steps.cp2, { pos: sent[k], total: 6 }, `today's step ${k} goes out as old step ${sent[k]}`);
+    const kept = serverKeeps(snap);                    // client -> server
+    const b = newProgress();
+    b.AIEB._applySnapshot(kept);                       // server -> another device
+    assert.equal(b.AIEB.stepInfo('cp2').pos, k, `round trip keeps step ${k}`);
+  }
   const cases = [
-    [{ 'cp2@3': { pos: 3, total: 3 } }, 3],
     [{ cp2: { pos: 5, total: 6 } }, 2], [{ cp2: { pos: 6, total: 6 } }, 3], [{ cp2: { pos: 2, total: 6 } }, 0],
-    [{ cp2: { pos: 3, total: 3 } }, 2], [{ cp2: { pos: 6 } }, 2],
-    [{ cp2: { pos: 6, total: 6 }, 'cp2@3': { pos: 1, total: 3 } }, 3]
+    [{ cp2: { pos: 3, total: 3 } }, 2], [{ cp2: { pos: 6 } }, 2]
   ];
   for (const [steps, want] of cases) {
     const { AIEB, store } = newProgress();
@@ -199,8 +218,12 @@ test('a page still running the previous progress.js can no longer complete cp2',
   assert.equal(stale.isDone('cp2'), false, 'ticking a card on the old board does not finish cp2');
   assert.equal(fresh.isDone('cp2'), false);
   assert.equal(fresh.stepInfo('cp2').pos, 0, 'the new list keeps its own position');
-  assert.match(OLD_PROGRESS, /var suffix = STEP_WRITE_SUFFIX\[sid\];\s*\n\s*if \(!suffix\) continue;/, 'the previous copy skips snapshot ids it does not own');
-  assert.doesNotMatch(OLD_PROGRESS, /cp2@3/);
+  // A new page's server copy is in the old numbering, so an old page that pulls it stores e.g. old
+  // step 5 of 6 (the proof step): its third card is nowhere near "finished".
+  const fromServer = storage({ aieb_ckpt_cp2_v5: '5', aieb_ckpt_cp2_v5_n: '6' });
+  const staleAfterSync = loadProgress(OLD_PROGRESS, fromServer.api);
+  staleAfterSync.setStep('cp2', 3);
+  assert.equal(staleAfterSync.isDone('cp2'), false, 'an old page holding a new server copy cannot finish cp2 by ticking card 3');
 });
 
 test('board links: an old ?step can never open the completion screen', () => {

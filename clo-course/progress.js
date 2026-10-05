@@ -209,7 +209,7 @@
 
   // The suffix each wizard ACTUALLY writes, verified against its own STORE line:
   //   cp1  checkpoint-map.html         _v6
-  //   cp2  checkpoint-first-skill.html _v7   (2026-10-05: build first, lessons optional; see STEP_REMAP + SNAPSHOT_ALIAS)
+  //   cp2  checkpoint-first-skill.html _v7   (2026-10-05: build first, lessons optional; see STEP_REMAP + STEP_SEND)
   //   cp3  checkpoint-system.html      _v4
   //   cp4  checkpoint-autonomy.html    _v5
   //   goal checkpoint-ai-employee.html _v6
@@ -243,22 +243,19 @@
     return Math.max(0, Math.min(pos | 0, STEP_TOTAL[id] - 1));
   }
   /* An already-open page keeps running the PREVIOUS progress.js until it reloads. That copy
-     must never see a cp2 position from today's list: it probes _v6 first, would pull the
-     position AND its count of 3 into its own _v5, and ticking a third card would then read as
-     finished. So today's list lives under _v7, which the previous copy never probes, and the
-     server snapshot carries it as 'cp2@3', an id the previous copy skips. A plain 'cp2' entry
-     in a snapshot always comes from an old page and is remapped like an old key.
+     must never see a cp2 position counted against today's list: it would store it with a count
+     of 3, and ticking its third card would then read as finished.
+       · Locally, today's list lives under _v7, which the previous copy never probes.
+       · On the server, cp2 travels in the OLD six-step numbering, which every page reads
+         correctly: today's build, make it better, prove it and done (0..3) go out as old steps
+         3..6, the same steps in the old list, and come back through STEP_REMAP. The entry keeps
+         the plain 'cp2' id, so a server that only accepts checkpoint ids keeps it too.
      (Astra review of the build-first change, 2026-10-05.) */
-  var SNAPSHOT_ALIAS = { cp2: 'cp2@3' };
-  var ALIAS_OF = { 'cp2@3': 'cp2' };
-  function snapStep(steps, id) {
-    var alias = SNAPSHOT_ALIAS[id], cur = alias && steps[alias], old = steps[id], best = null;
-    if (cur && typeof cur === 'object') best = { pos: Math.max(0, Math.min(cur.pos | 0, STEP_TOTAL[id])), total: STEP_TOTAL[id] };
-    if (old && typeof old === 'object') {
-      var mapped = { pos: remapStep(id, old.pos | 0, old.total), total: STEP_TOTAL[id] };
-      if (!best || mapped.pos > best.pos) best = mapped;
-    }
-    return best;
+  var STEP_SEND = { cp2: { total: 6, pos: [3, 4, 5, 6] } };
+  function sendStep(id, info) {
+    var s = STEP_SEND[id];
+    if (!s) return { pos: info.pos, total: info.total };
+    return { pos: s.pos[Math.max(0, Math.min(info.pos | 0, s.pos.length - 1))], total: s.total };
   }
 
   /* Read a per-checkpoint step key. Reads the OWNED suffix first, then treats any
@@ -707,7 +704,7 @@
     var steps = {};
     for (var i = 0; i < CHAIN.length; i++) {
       var id = CHAIN[i], info = stepInfo(id);
-      if (info.pos || info.total) steps[SNAPSHOT_ALIAS[id] || id] = { pos: info.pos, total: info.total };
+      if (info.pos || info.total) steps[id] = sendStep(id, info);
     }
     return {
       progress: read(),
@@ -751,13 +748,13 @@
       for (var sup in remote.suppressed) {
         if (!remote.suppressed[sup]) continue;
         if (mine[sup]) { delete mine[sup]; changed = true; }
-        if (SNAPSHOT_ALIAS[sup]) {
-          var supStep = snapStep(remoteSteps0, sup);
-          if (!supStep) { clearStepPos(sup); }
-          else { setStepPos(sup, supStep.pos); setStepTotal(sup, supStep.total); }
+        if (!remoteSteps0[sup]) { clearStepPos(sup); }
+        else if (typeof remoteSteps0[sup].pos === 'number') {
+          if (STEP_REMAP[sup]) {                // server copies use the old numbering; keep position and count together
+            setStepPos(sup, remapStep(sup, remoteSteps0[sup].pos, remoteSteps0[sup].total));
+            setStepTotal(sup, STEP_TOTAL[sup]);
+          } else { setStepPos(sup, remoteSteps0[sup].pos); }
         }
-        else if (!remoteSteps0[sup]) { clearStepPos(sup); }
-        else if (typeof remoteSteps0[sup].pos === 'number') { setStepPos(sup, remoteSteps0[sup].pos); }
       }
       write(mine);
     }
@@ -773,9 +770,8 @@
       try { localStorage.setItem(TRIAL_SETUP_KEY, String(Date.now())); changed = true; } catch (e) {}
     }
 
-    var steps = remote.steps || {}, stepIds = {};
-    for (var sk in steps) stepIds[ALIAS_OF[sk] || sk] = true;
-    for (var sid in stepIds) {
+    var steps = remote.steps || {};
+    for (var sid in steps) {
       var suffix = STEP_WRITE_SUFFIX[sid];
       if (!suffix) continue;                     // setup keeps no position
       /* A REOPENED checkpoint owns its own position. Rule 2 (take the furthest
@@ -787,8 +783,10 @@
          A suppression arriving FROM the server is already applied above, with
          the remote position taken verbatim, so this skips that case too. */
       if (isSuppressed(sid)) continue;
-      var incoming = (SNAPSHOT_ALIAS[sid] ? snapStep(steps, sid) : steps[sid]) || {}, local = stepInfo(sid);
-      var inPos = incoming.pos || 0, inTotal = incoming.total;
+      var incoming = steps[sid] || {}, local = stepInfo(sid);
+      // A remapped checkpoint's server copy is in the old numbering (STEP_SEND); bring it into today's list.
+      var inPos = STEP_REMAP[sid] ? remapStep(sid, incoming.pos || 0, incoming.total) : (incoming.pos || 0);
+      var inTotal = STEP_REMAP[sid] ? STEP_TOTAL[sid] : incoming.total;
       if (inPos > local.pos) {
         try {
           localStorage.setItem(STEP_PREFIX + sid + suffix, String(inPos));
